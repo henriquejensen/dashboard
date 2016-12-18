@@ -18,6 +18,7 @@
     height: 100%;
     z-index: 10000;
     transition: all .4s ease 0s;
+    color: white;
 }
 
 .sidebar-nav {

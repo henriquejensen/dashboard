@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
+import LocalizeData from "./reducer-localize";
+
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+  localize: LocalizeData
 });
 
 export default rootReducer;
