@@ -1,40 +1,31 @@
 import React, { Component } from "react";
+import { Link } from "react-router";
 
 
 export default class Sidebar extends Component {
+  constructor(props) {
+    super(props);
+
+  }
+
   render() {
-      return (
-        <nav className="navbar navbar-default sidebar" role="navigation">
-            <div className="container-fluid">
-            <div className="navbar-header">
-              <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-              </button>
-            </div>
-            <div className="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-              <ul className="nav navbar-nav">
-                <li className="active"><a href="#">Home<span  className="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-                <li className="dropdown">
-                  <a href="#" className="dropdown-toggle" data-toggle="dropdown">Usuarios <span className="caret"></span><span  className="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
-                  <ul className="dropdown-menu forAnimate" role="menu">
-                    <li><a href="{{URL::to('createusuario')}}">Crear</a></li>
-                    <li><a href="#">Modificar</a></li>
-                    <li><a href="#">Reportar</a></li>
-                    <li className="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                    <li className="divider"></li>
-                    <li><a href="#">Informes</a></li>
-                  </ul>
+      return (      
+          <div id="sidebar-wrapper">
+            <ul id="sidebar_menu" className="sidebar-nav">
+                <li className="sidebar-brand" onClick={this.props.onMenuClicked}>
+                  <a id="menu-toggle" href="#">
+                    Menu
+                    <span id="main_icon" className="glyphicon glyphicon-align-justify">
+                    </span>
+                  </a>
                 </li>
-                <li ><a href="#">Libros<span className="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a></li>
-                <li ><a href="#">Tags<span className="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span></a></li>
-              </ul>
-            </div>
+            </ul>
+            <ul className="sidebar-nav" id="sidebar">     
+              <li><a href="/localize">Localize<span className="sub_icon glyphicon glyphicon-link"></span></a></li>
+              <li><a>SMS<span className="sub_icon glyphicon glyphicon-link"></span></a></li>
+            </ul>
           </div>
-        </nav>
       )
+
   }
 }
