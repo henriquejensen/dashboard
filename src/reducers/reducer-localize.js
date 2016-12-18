@@ -1,8 +1,10 @@
-export default function() {
-	return [
-		{nome: "Henrique", cpf: 34168058875, mae: "Daura mendes"},
-		{nome: "Daiane", cpf: 3553410-7871, mae: "Marilda Goncalves"},
-		{nome: "Conrado", cpf: 3416875, mae: "Daura mendes"},
-		{nome: "Alice", cpf: 341680588, mae: "Daiane Alexandroni"},
-	]
+import { SEARCH_BY_CPF } from "../constants/constantsLocalize";
+
+export default function(state = [], action) {
+	switch(action.type) {
+		case SEARCH_BY_CPF:
+			return [...state, action.payload.data]
+	}
+
+	return state;
 }

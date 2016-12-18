@@ -9,7 +9,7 @@ class Localize extends Component {
 
 		this.state = {
 			documento: "",
-			tabActive: 34168058875
+			tabActive: ""
 		}
 
 		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
@@ -27,7 +27,6 @@ class Localize extends Component {
 	onChangeDocumento(evt) {
 		this.setState({
 			documento: evt.target.value,
-			tabActive: 0
 		})
 	}
 
@@ -40,9 +39,9 @@ class Localize extends Component {
 	renderTabs() {
 		return this.props.data.map((data, index) => {
 				return (
-					<li className={data.cpf == this.state.tabActive ? "active":""} key={index} data-toggle="tab" onClick={this.changeTab}>
+					<li className={data.id == this.state.tabActive ? "active": (index == 0 && this.state.tabActive == "" ? "active" : "")} key={index} data-toggle="tab" onClick={this.changeTab}>
 						<a href={"#"+index}>
-			    		{data.cpf}
+			    		{data.id}
 						</a>
 			 		</li>)}
 				)		
@@ -51,13 +50,14 @@ class Localize extends Component {
 	renderSearch() {
 		return this.props.data.map((data, index) => {
 				return (
-					<div className={data.cpf == this.state.tabActive ? "tab-pane active":"tab-pane"} id={data.cpf} key={index}>
+					<div className={data.id == this.state.tabActive ? "tab-pane active": (index == 0 && this.state.tabActive == "" ? "tab-pane active" : "tab-pane")} id={data.id} key={index}>
 						<div className="panel-group"  >
 							<div className="panel panel-default">
 						  	<div className="panel-heading text-center">Dados</div>
 						    <div className="panel-body">
-						    	{data.cpf}
-						    	<p>{data.nome}</p>
+						    	{data.id}
+						    	<p>{data.login}</p>
+						    	<p><a href={data.html_url} target="_blank">{data.html_url}</a></p>
 						    </div>
 					  	</div>
 					  </div>
