@@ -23,20 +23,20 @@ export default class Sidebar extends Component {
     return (
         <div className={this.state.tabActive == "menu" ? "tab-pane active":"tab-pane"} id="menu">
           <ul className="sidebar-nav" id="sidebar">
-            <li><Link to="/">HOME<span className="sub_icon glyphicon glyphicon-home"></span></Link></li>   
+            <li><Link to="/dashboard">HOME<span className="sub_icon glyphicon glyphicon-home"></span></Link></li>   
             
             <li>Meus Produtos</li>
-            <li><Link to="/localize">Localize<span className="sub_icon glyphicon glyphicon-screenshot"></span></Link></li>
-            <li><Link to="/">SMS<span className="sub_icon glyphicon glyphicon-envelope"></span></Link></li>
-            <li><Link to="/">Base Certa<span className="sub_icon glyphicon glyphicon-hdd"></span></Link></li>
-            <li><Link to="/">Veículos<span className="sub_icon glyphicon glyphicon-bed"></span></Link></li>
+            <li><Link to="/dashboard/localize">Localize<span className="sub_icon glyphicon glyphicon-screenshot"></span></Link></li>
+            <li><Link to="/dashboard">SMS<span className="sub_icon glyphicon glyphicon-envelope"></span></Link></li>
+            <li><Link to="/dashboard">Base Certa<span className="sub_icon glyphicon glyphicon-hdd"></span></Link></li>
+            <li><Link to="/dashboard">Veículos<span className="sub_icon glyphicon glyphicon-bed"></span></Link></li>
             
             <li>Outros Produtos</li>
-            <li><Link to="/">Foco Fiscal<span className="sub_icon glyphicon glyphicon-tag"></span></Link></li>   
-            <li><Link to="/">Venda+<span className="sub_icon glyphicon glyphicon-lock"></span></Link></li>
-            <li><Link to="/">Crédito<span className="sub_icon glyphicon glyphicon-credit-card"></span></Link></li>
-            <li><Link to="/">Consig+<span className="sub_icon glyphicon glyphicon-barcode"></span></Link></li>
-            <li><Link to="/">CRM<span className="sub_icon glyphicon glyphicon-folder-open"></span></Link></li>
+            <li><Link to="/dashboard">Foco Fiscal<span className="sub_icon glyphicon glyphicon-tag"></span></Link></li>   
+            <li><Link to="/dashboard">Venda+<span className="sub_icon glyphicon glyphicon-lock"></span></Link></li>
+            <li><Link to="/dashboard">Crédito<span className="sub_icon glyphicon glyphicon-credit-card"></span></Link></li>
+            <li><Link to="/dashboard">Consig+<span className="sub_icon glyphicon glyphicon-barcode"></span></Link></li>
+            <li><Link to="/dashboard">CRM<span className="sub_icon glyphicon glyphicon-folder-open"></span></Link></li>
           </ul>
         </div>
     )
@@ -47,12 +47,12 @@ export default class Sidebar extends Component {
         <div className={this.state.tabActive == "chat" ? "tab-pane active":"tab-pane"} id="chat">
           <ul className="sidebar-nav" id="sidebar">
             <li>Online</li>
-            <li><Link to="/localize">Jessica<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
-            <li><Link to="/localize">Roberta<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
-            <li><Link to="/localize">Nayara<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
+            <li><Link to="/dashboard/localize">Jessica<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
+            <li><Link to="/dashboard/localize">Roberta<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
+            <li><Link to="/dashboard/localize">Nayara<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
             
             <li>Offline</li>
-            <li><Link to="/localize">Bruna<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
+            <li><Link to="/dashboard/localize">Bruna<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
           </ul>
         </div>
     )
@@ -63,7 +63,7 @@ export default class Sidebar extends Component {
         <div className={this.state.tabActive == "stats" ? "tab-pane active":"tab-pane"} id="stats">
           <ul className="sidebar-nav" id="sidebar">
             <li>Outros Produtos</li>
-            <li><Link to="/">HOME<span className="sub_icon glyphicon glyphicon-link"></span></Link></li>   
+            <li><Link to="/dashboard">HOME<span className="sub_icon glyphicon glyphicon-link"></span></Link></li>   
           </ul>
         </div>
     )
