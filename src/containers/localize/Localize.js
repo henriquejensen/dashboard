@@ -15,7 +15,6 @@ class Localize extends Component {
 		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
 		this.onChangeDocumento = this.onChangeDocumento.bind(this);
 		this.renderSearch = this.renderSearch.bind(this);
-		this.changeTab = this.changeTab.bind(this);
 	}
 
 	onLocalizeSubmit(evt) {
@@ -30,16 +29,16 @@ class Localize extends Component {
 		})
 	}
 
-	changeTab(evt) {
+	_changeTab(tab) {
 		this.setState({
-			tabActive: evt.target.innerHTML
+			tabActive: tab
 		})
 	}
 
 	renderTabs() {
 		return this.props.data.map((data, index) => {
 				return (
-					<li className={data.id == this.state.tabActive ? "active": (index == 0 && this.state.tabActive == "" ? "active" : "")} key={index} data-toggle="tab" onClick={this.changeTab}>
+					<li className={data.id == this.state.tabActive ? "active": (index == 0 && this.state.tabActive == "" ? "active" : "")} key={index} onClick={() => this._changeTab(data.id)}>
 						<a href={"#"+index}>
 			    		{data.id}
 						</a>

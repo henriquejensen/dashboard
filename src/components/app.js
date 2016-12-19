@@ -18,6 +18,7 @@ export default class App extends Component {
     this.setState({
       active: !this.state.active
     })
+
   }
 
   render() {
@@ -27,7 +28,7 @@ export default class App extends Component {
 
         	<div id="wrapper" className={this.state.active ?"active":""}>
 
-	          <Sidebar onMenuClicked={this.onMenuClicked}/>
+	          <Sidebar onMenuClicked={this.onMenuClicked} activedMenu={this.state.active}/>
 
 	          <div id="page-content-wrapper">
 	          	<div className="page-content inset">
