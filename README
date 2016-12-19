@@ -1,1 +1,19 @@
 # Dashboard construido com React + Redux
+
+Executando o projeto
+--------------------
+
+Clone o projeto para seu computador:
+`git clone https://github.com/henriquejensen/dashboard.git`
+
+Entre no repositorio clonado:
+`cd dashboard`
+
+Instale as dependências para o projeto:
+`npm install`
+
+Inicie o projeto:
+`npm start`
+
+projeto estará rodando na url:
+`localhost:8080`
