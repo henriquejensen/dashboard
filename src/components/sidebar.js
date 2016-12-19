@@ -47,12 +47,12 @@ export default class Sidebar extends Component {
         <div className={this.state.tabActive == "chat" ? "tab-pane active":"tab-pane"} id="chat">
           <ul className="sidebar-nav" id="sidebar">
             <li>Online</li>
-            <li><Link to="/dashboard/localize">Jessica<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
-            <li><Link to="/dashboard/localize">Roberta<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
-            <li><Link to="/dashboard/localize">Nayara<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
+            <li><Link to="/dashboard/chat" params={{teste: "testando"}}>Jessica<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
+            <li><Link to="/dashboard/chat">Roberta<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
+            <li><Link to="/dashboard/chat">Nayara<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
             
             <li>Offline</li>
-            <li><Link to="/dashboard/localize">Bruna<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
+            <li><Link to="/dashboard/chat">Bruna<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
           </ul>
         </div>
     )

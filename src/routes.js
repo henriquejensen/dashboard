@@ -8,6 +8,7 @@ import Signin from "./components/changePassword";
 import EditUser from "./containers/user/EditUser";
 import Localize from "./containers/localize/Localize";
 import Dashboard from "./containers/dashboard/Dashboard";
+import Chat from "./containers/chat/Chat";
 
 export default (
   <Route>
@@ -19,6 +20,7 @@ export default (
       <IndexRoute component={Dashboard} />
       <Route path="localize" component={Localize}	/>
       <Route path="editar" component={EditUser}	/>
+      <Route path="chat" component={Chat}	/>
     </Route>
   </Route>
 );

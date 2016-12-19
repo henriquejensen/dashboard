@@ -13,6 +13,16 @@ export default function user() {
             tempo: true,
             noticias: true,
             economia: true
+        },
+        mensagens: {
+            friend: "Jessica",
+            friend_url: "http://www.clker.com/cliparts/b/1/f/a/1195445301811339265dagobert83_female_user_icon.svg.med.png",
+            mensagens: [
+                [1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales."],
+                [2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales."],
+                [1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales."],
+                [2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales."]
+            ]
         }
     }
 } 
