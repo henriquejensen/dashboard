@@ -41,9 +41,9 @@
 }
 
 #sidebar-wrapper {
-    margin-left: -150px;
+    margin-left: -160px;
     left: 70px;
-    width: 150px;
+    width: 160px;
     background: #5B3494;
     position: fixed;
     height: 100%;
@@ -55,7 +55,7 @@
 .sidebar-nav {
     display: block;
     float: left;
-    width: 150px;
+    width: 160px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -67,10 +67,10 @@
     height: auto;
 }
 #wrapper.active {
-    padding-left: 150px;
+    padding-left: 160px;
 }
 #wrapper.active #sidebar-wrapper {
-    left: 150px;
+    left: 160px;
 }
 
 #page-content-wrapper {
@@ -82,7 +82,7 @@
     display: block;
     float: left;
     text-decoration: none;
-    width: 150px;
+    width: 160px;
     background: #5B3494;
     /*border-top: 1px solid #373737;
     border-bottom: 1px solid #1A1A1A;*/
@@ -120,7 +120,7 @@
 }
 
 .sidebar-nav > .sidebar-brand {
-  height: 65px;
+  height: 50px;
   line-height: 60px;
   font-size: 18px;
 }
@@ -137,13 +137,13 @@
 #main_icon
 {
     float:right;
-   padding-right: 35px;
+   padding-right: 28px;
    padding-top:20px;
 }
 .sub_icon
 {
-    float:right;
-   padding-right: 35px;
+   float:right;
+   padding-right: 30px;
    padding-top:10px;
 }
 .content-header {
@@ -209,11 +209,11 @@
       left: 70px;
   }
   #wrapper.active {
-      padding-left: 150px;
+      padding-left: 160px;
   }
   #wrapper.active #sidebar-wrapper {
-      left: 150px;
-      width: 150px;
+      left: 160px;
+      width: 160px;
       transition: all .4s ease 0s;
   }
 }
