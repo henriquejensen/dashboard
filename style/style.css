@@ -44,12 +44,12 @@
     margin-left: -150px;
     left: 70px;
     width: 150px;
-    background: #222;
+    background: #5B3494;
     position: fixed;
     height: 100%;
     z-index: 10000;
     transition: all .4s ease 0s;
-    color: white;
+    color: #999999;
 }
 
 .sidebar-nav {
@@ -78,14 +78,14 @@
 }
 
 #sidebar_menu li a, .sidebar-nav li a {
-    color: #999;
+    color: white;
     display: block;
     float: left;
     text-decoration: none;
     width: 150px;
-    background: #252525;
-    border-top: 1px solid #373737;
-    border-bottom: 1px solid #1A1A1A;
+    background: #5B3494;
+    /*border-top: 1px solid #373737;
+    border-bottom: 1px solid #1A1A1A;*/
     -webkit-transition: background .5s;
     -moz-transition: background .5s;
     -o-transition: background .5s;
@@ -104,7 +104,6 @@
 }
 
 .sidebar-nav li a {
-  color: #999999;
   display: block;
   text-decoration: none;
 }

@@ -9,11 +9,14 @@ import Enderecos from "./Enderecos";
 import Ocupacoes from "./Ocupacoes";
 import Sociedades from "./Sociedades";
 import Veiculos from "./Veiculos";
+import DadosPj from "./DadosPj";
+import Socios from "./Socios";
 
 class Localize extends Component {
 	constructor(props) {
 		super(props);
 
+		
 		this.state = {
 			documento: "",
 			tabActive: ""
@@ -44,10 +47,17 @@ class Localize extends Component {
 
 	renderTabs() {
 		return this.props.data.map((data, index) => {
+				let doc = "";
+				if(data.PF) {
+					doc = data.PF.DADOS.CPF;
+				} else {
+					doc = data.PJ.DADOS.CNPJ;
+				}
+
 				return (
-					<li className={data.PF.DADOS.CPF == this.state.tabActive ? "active": (index == 0 && this.state.tabActive == "" ? "active" : "")} key={index} onClick={() => this._changeTab(data.PF.DADOS.CPF)}>
+					<li className={doc == this.state.tabActive ? "active": (index == 0 && this.state.tabActive == "" ? "active" : "")} key={index} onClick={() => this._changeTab(doc)}>
 						<a href={"#"+index}>
-			    		{data.PF.DADOS.CPF}
+			    		{doc}
 						</a>
 			 		</li>)}
 				)		
@@ -56,8 +66,14 @@ class Localize extends Component {
 	renderSearch() {
 		return this.props.data.map((data, index) => {
 				console.log(data)
+				let doc = "";
+				if(data.PF) {
+					doc = data.PF.DADOS.CPF;
+				} else {
+					doc = data.PJ.DADOS.CNPJ;
+				}
 				return (
-					<div className={data.PF.DADOS.CPF == this.state.tabActive ? "tab-pane active": (index == 0 && this.state.tabActive == "" ? "tab-pane active" : "tab-pane")} id={data.PF.DADOS.CPF} key={index}>
+					<div className={doc == this.state.tabActive ? "tab-pane active": (index == 0 && this.state.tabActive == "" ? "tab-pane active" : "tab-pane")} id={doc} key={index}>
 						<div className="panel-group"  >
 							{data.PF ?
 								(<div>
@@ -78,6 +94,18 @@ class Localize extends Component {
 									
 								 </div>) : ""}
 
+							{data.PJ ?
+								(<div>
+									<DadosPj dados={data.PJ.DADOS} searchLocalize={this.props.searchLocalize} />
+									<Telefones telefones = {data.PJ.DADOS.TELEFONES_MOVEIS.TELEFONE} />
+
+									{data.PJ.DADOS.ENDERECOS ?
+										<Enderecos enderecos = {data.PJ.DADOS.ENDERECOS.ENDERECO}/> : ""}
+
+									{data.PJ.DADOS.SOCIOS ?
+										<Socios socios = {data.PJ.DADOS.SOCIOS.SOCIEDADES} buscaCPF={this.props.searchLocalize}/> : "" }
+									
+								 </div>) : ""}
 					  	</div>
 					</div>
 					)}

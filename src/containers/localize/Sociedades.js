@@ -36,7 +36,7 @@ export default class Sociedades extends Component {
                                   <td className="text-center">{soc.PARTICIPACAO}%</td>
                                   <td>{soc.DATA_ENTRADA}</td>
                                   <td>
-                                      <div className="mapa-button" onClick={() => this.props.buscaCNPJ(soc.CNPJ)}><i className="glyphicon glyphicon-search" /></div>
+                                      <div className="mapa-button" onClick={() => this.props.buscaCNPJ(soc.CNPJ, "pj")}><i className="glyphicon glyphicon-search" /></div>
                                   </td>
                                 </tr>
                             }) : (
@@ -47,7 +47,7 @@ export default class Sociedades extends Component {
                                 <td className="text-center">{this.props.sociedades.SOCIEDADE.PARTICIPACAO}%</td>
                                 <td>{this.props.sociedades.SOCIEDADE.DATA_ENTRADA}</td>
                                 <td>
-                                    <div className="mapa-button" onClick={() => this.props.buscaCNPJ(this.props.sociedades.SOCIEDADE.CNPJ)}><i className="glyphicon glyphicon-search" /></div>
+                                    <div className="mapa-button" onClick={() => this.props.buscaCNPJ(this.props.sociedades.SOCIEDADE.CNPJ, "pj")}><i className="glyphicon glyphicon-search" /></div>
                                 </td>
                               </tr>
                             )}
