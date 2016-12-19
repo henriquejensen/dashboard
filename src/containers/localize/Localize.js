@@ -71,7 +71,7 @@ class Localize extends Component {
 			<div className="container">
 				<div className="row text-center">
 						<div className="col-md-12">
-							{this.props.data.length > 0 ? <img src="http://portal.assertivasolucoes.com.br/app/onway/imagens/logo-localize.png" />: ""}
+							{this.props.data.length == 0 ? <img src="http://portal.assertivasolucoes.com.br/app/onway/imagens/logo-localize.png" />: ""}
 			      </div>
             <div className="col-md-12">
               <form className="form-inline" onSubmit={this.onLocalizeSubmit}>
@@ -87,6 +87,7 @@ class Localize extends Component {
                 	type="text"
                 	className="form-control"
                 	placeholder="Buscar"
+                	name="nome"
                 	onChange={this.onChangeDocumento}/>
 
                 <button className="btn btn-info" type="submit">
