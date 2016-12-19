@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { Link, connect } from "react-router";
 
 import { logoTopo } from "../constants/imagensAssertiva";
 
 
-export default class App extends Component {
+class Header extends Component {
 	constructor(props) {
 		super(props);
 
@@ -50,10 +51,10 @@ export default class App extends Component {
 		                                        </p>
 		                                    </div>
 		                                    <div className="col-lg-8">
-		                                        <p className="text-left"><strong>Nombre Apellido</strong></p>
+		                                        <p className="text-left"><strong></strong></p>
 		                                        <p className="text-left small">correoElectronico@email.com</p>
 		                                        <p className="text-left">
-		                                            <a href="#" className="btn btn-primary btn-block btn-sm">Actualizar Datos</a>
+		                                            <Link to="/dashboard/editar" className="btn btn-primary btn-block btn-sm">Atualizar dados</Link>
 		                                        </p>
 		                                    </div>
 		                                </div>
@@ -65,7 +66,7 @@ export default class App extends Component {
 		                                <div className="row">
 		                                    <div className="col-lg-12">
 		                                        <p>
-		                                            <a href="#" className="btn btn-danger btn-block">Cerrar Sesion</a>
+		                                            <Link to="/" className="btn btn-danger btn-block">Sair</Link>
 		                                        </p>
 		                                    </div>
 		                                </div>
@@ -80,3 +81,5 @@ export default class App extends Component {
       )
   }
 }
+
+export default Header;
