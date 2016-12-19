@@ -159,6 +159,48 @@
   display: inline-block;
 }
 
+
+.input-localize {
+    margin: 0 10px;
+    width: 300px !important;
+}
+
+.panel-default>.panel-heading {
+    color: #89949B;
+}
+
+.panel-body {
+    padding: 5px;
+}
+
+.content-localize {
+    border: 1px solid #e4e0e0;
+    border-top: 0px;
+}
+
+.row-localize {
+    margin-bottom: 10px
+}
+
+.mapa-button {
+  background-color: #5bc0de;
+  border-radius: 55px;
+  color: white;
+  font-weight: bold;
+  width: 22px;
+  text-align: center;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.my-hr {
+  margin-top: 0;
+  margin-bottom: 0;
+  border-style: inset;
+  border-width: 1px;
+  border-top: 1px solid #ddd;
+}
+
 @media (max-width:767px) {
   #wrapper {
     padding-left: 70px;
