@@ -19,18 +19,24 @@ class Localize extends Component {
 		
 		this.state = {
 			documento: "",
-			tabActive: ""
+			tabActive: "",
+			tipo: "CPF"
 		}
 
 		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
 		this.onChangeDocumento = this.onChangeDocumento.bind(this);
 		this.renderSearch = this.renderSearch.bind(this);
+		this.onChangeTipo = this.onChangeTipo.bind(this);
 	}
 
 	onLocalizeSubmit(evt) {
 		evt.preventDefault();
 
-		this.props.searchLocalize(this.state.documento, "pf");
+		let tipo = "pf";
+		if(this.state.tipo == "CNPJ")
+			tipo = "pj";
+
+		this.props.searchLocalize(this.state.documento, tipo);
 	}
 
 	onChangeDocumento(evt) {
@@ -42,6 +48,12 @@ class Localize extends Component {
 	_changeTab(tab) {
 		this.setState({
 			tabActive: tab
+		})
+	}
+
+	onChangeTipo(evt) {
+		this.setState({
+			tipo: evt.target.value
 		})
 	}
 
@@ -120,8 +132,8 @@ class Localize extends Component {
 						{this.props.data.length == 0 ? <img src="http://portal.assertivasolucoes.com.br/app/onway/imagens/logo-localize.png" />: ""}
 					</div>
 					<div className="col-md-12">
-						<form className="form-inline" onSubmit={this.onLocalizeSubmit}>
-							<select className="form-control">
+						<form className="form-inline" onSubmit={this.onLocalizeSubmit} >
+							<select className="form-control" onChange={this.onChangeTipo} defaultValue={this.state.tipo}>
 								<option value="CPF">CPF</option>
 								<option value="CNPJ">CNPJ</option>
 								<option value="NOME">NOME</option>

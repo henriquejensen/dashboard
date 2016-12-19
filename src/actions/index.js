@@ -4,6 +4,7 @@ import ajax from "superagent";
 import { URL_SEARCH, SEARCH_BY_CPF } from "../constants/constantsLocalize";
 
 export function searchLocalize(document, tipo) {
+	console.log(tipo);
 	document = patternCPF(document);
 	const senha = tipo+"/ajax?empresa=ASSERTIVA&usuario=HENRIQUE.TEIXEIRA&senha=conexao182&documento=";
 	const request = ajax.get(URL_SEARCH+senha+document);
