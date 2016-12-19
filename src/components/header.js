@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Link, connect } from "react-router";
+import { Link } from "react-router";
+import { connect } from "react-redux";
 
 import { logoTopo } from "../constants/imagensAssertiva";
 
@@ -23,36 +24,34 @@ class Header extends Component {
 
   render() {
       return (
-				<div className="navbar navbar-default navbar-fixed-top" role="navigation">
-					<div className="menu">	
+		<div className="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div className="menu">	
 		        <div className="navbar-header">
 		            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 		                <span className="icon-bar"></span>
 		                <span className="icon-bar"></span>
 		                <span className="icon-bar"></span> 
 		            </button>
-		            <img src="../public/assertiva/assertiva-top-index.png" alt="Assertiva" height="50"/>
+		            <img src="../public/assertiva/assertiva-top-index.png" alt="Assertiva" height="45"/>
 		        </div>
 		        <div className="collapse navbar-collapse">
 		            <ul className="nav navbar-nav navbar-right">
 		                <li className={this.state.menuOpened ? "dropdown open" : "dropdown"} onClick={this.openMenu}>
 		                    <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-		                        <span className="glyphicon glyphicon-user"></span> 
+		                        <img src={this.props.user.avatar_url} width="20" /> 
 		                        <strong>HENRIQUE.TEIXEIRA</strong>
-		                        <span className="glyphicon glyphicon-chevron-down"></span>
+		                        <span className="glyphicon glyphicon-chevron-down" ></span>
 		                    </a>
 		                    <ul className="dropdown-menu">
 		                        <li>
 		                            <div className="navbar-login">
 		                                <div className="row">
 		                                    <div className="col-lg-4">
-		                                        <p className="text-center">
-		                                            <span className="glyphicon glyphicon-user icon-size"></span>
-		                                        </p>
+		                                       <img src={this.props.user.firm_url} width="100%" /> 
 		                                    </div>
 		                                    <div className="col-lg-8">
-		                                        <p className="text-left"><strong></strong></p>
-		                                        <p className="text-left small">correoElectronico@email.com</p>
+		                                        <p className="text-left"><strong>{this.props.user.empresa}</strong></p>
+		                                        <p className="text-left small">PERFIL: {this.props.user.perfil}</p>
 		                                        <p className="text-left">
 		                                            <Link to="/dashboard/editar" className="btn btn-primary btn-block btn-sm">Atualizar dados</Link>
 		                                        </p>
@@ -77,9 +76,15 @@ class Header extends Component {
 		            </ul>
 		        </div>
 		      </div>
-				</div>
+			</div>
       )
   }
 }
 
-export default Header;
+function mapStateToProps(state) {
+	return {
+		user: state.user
+	}
+}
+
+export default connect(mapStateToProps)(Header);
