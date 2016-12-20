@@ -29,12 +29,12 @@
   margin-bottom: 0px;
 }
 
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-    color: white;
-    cursor: default;
-    background-color: rgba(255,255,255,0.2);
-    border: 0px;
-    border-bottom-color: rgba(255,255,255,0.2);
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>.icon-menu-sidebar:hover {
+    color: #999999;
+}
+
+.nav-tabs>li>a {
+    border: 0px solid transparent;
 }
 
 .icon-size

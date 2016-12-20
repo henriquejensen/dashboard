@@ -10,7 +10,7 @@ const user = {
     perfil: "ADM",
     gadgets: [
         {img: "https://www.wlu.edu/images/alumni/icons/calendar.png", name: "Calendário", active: false},
-        {img: "http://blog.weecomments.com/wp-content/uploads/2016/05/clock-flat.png", name: "Relógio", active: true},
+        {img: "http://blog.weecomments.com/wp-content/uploads/2016/05/clock-flat.png", name: "Relógio", active: false},
         {img: "http://img.tuttoandroid.net/wp-content/uploads/2015/05/Wemple-Weather-icon.png", name: "Previsão do tempo", active: false},
         {img: "https://blog.agilebits.com/wp-content/uploads/2014/11/news-icon.png", name: "Últimas notícias", active: false},
         {img: "http://www.free-icons-download.net/images/nice-pie-chart-icon-32287.png", name: "Relógio", active: false},

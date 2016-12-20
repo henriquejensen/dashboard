@@ -85,19 +85,19 @@ export default class Sidebar extends Component {
             {this.props.activedMenu ? (
               <div className="nav nav-tabs">
                 <li className={this.state.tabActive == "menu" ? "active" : ""} onClick={() => this._changeTab("menu")}>
-                  <a href="#menu">
+                  <a href="#menu" style={{backgroundColor: "rgb(91, 52, 148)"}}>
                     <i className="glyphicon glyphicon-picture" />
                   </a>
                 </li>
 
                 <li className={this.state.tabActive == "chat" ? "active" : ""} onClick={() => this._changeTab("chat")}>
-                  <a href="#chat">
+                  <a href="#chat" style={{backgroundColor: "rgb(91, 52, 148)"}}>
                     <i className="glyphicon glyphicon-comment" />
                   </a>
                 </li>
 
                 <li className={this.state.tabActive == "stats" ? "active" : ""} onClick={() => this._changeTab("stats")}>
-                  <a href="#stats">
+                  <a href="#stats" style={{backgroundColor: "rgb(91, 52, 148)"}}>
                     <i className="glyphicon glyphicon-equalizer" />
                   </a>
                 </li>

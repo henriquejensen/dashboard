@@ -33,7 +33,7 @@ export default class Dados extends Component{
                     {this.props.dados.PROBABILIDADE_OBITO ? "SIM" : "NÃO"}
                   </div>
                   <div className="col-md-3" >
-                     <div className="mapa-button" style={{margin:0, borderRadius:0, width:200}}>
+                     <div className="mapa-button" style={{margin:0, borderRadius:0, width:200}} onClick={this.props.showPessoasRelacionadas}>
                        Pessoas Relacionadas <i className="glyphicon glyphicon-search" aria-hidden="true" />
                      </div>
                   </div>

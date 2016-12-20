@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import Dados from "./Dados";
+import PessoasRelacionadas from "./PessoasRelacionadas";
 import Telefones from "./Telefones";
 import Enderecos from "./Enderecos";
 import Ocupacoes from "./Ocupacoes";
@@ -20,10 +21,12 @@ class Localize extends Component {
 		this.state = {
 			documento: "",
 			tabActive: "",
-			tipo: "CPF"
+			tipo: "CPF",
+			pessoasRelacionadas: false
 		}
 
 		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
+		this._showPessoasRelacionadas = this._showPessoasRelacionadas.bind(this)
 		this.onChangeDocumento = this.onChangeDocumento.bind(this);
 		this.renderSearch = this.renderSearch.bind(this);
 		this.onChangeTipo = this.onChangeTipo.bind(this);
@@ -48,6 +51,12 @@ class Localize extends Component {
 	_changeTab(tab) {
 		this.setState({
 			tabActive: tab
+		})
+	}
+
+	_showPessoasRelacionadas() {
+		this.setState({
+			pessoasRelacionadas: !this.state.pessoasRelacionadas
 		})
 	}
 
@@ -89,8 +98,13 @@ class Localize extends Component {
 						<div className="panel-group"  >
 							{data.PF ?
 								(<div>
-									<Dados dados={data.PF.DADOS} searchLocalize={this.props.searchLocalize} />
-									<Telefones telefones = {data.PF.DADOS.TELEFONES_MOVEIS.TELEFONE} />
+									<Dados dados={data.PF.DADOS} searchLocalize={this.props.searchLocalize} showPessoasRelacionadas={this._showPessoasRelacionadas}/>
+
+									{this.state.pessoasRelacionadas ? 
+										<PessoasRelacionadas /> : ""}
+
+									{data.PF.DADOS.TELEFONES_MOVEIS ? 
+										<Telefones telefones = {data.PF.DADOS.TELEFONES_MOVEIS.TELEFONE} /> : ""}
 
 									{data.PF.DADOS.ENDERECOS ?
 										<Enderecos enderecos = {data.PF.DADOS.ENDERECOS.ENDERECO}/> : ""}

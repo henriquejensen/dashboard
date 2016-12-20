@@ -21,7 +21,7 @@ class Dashboard extends Component {
 	}
 
 	renderCharts() {
-		return	<div className="tab-content col-md-8">
+		return	<div className="tab-content">
 				{this.props.user.charts.optionsSelected.map((opt, index) => {
 					if(opt.label == "Localize"){
 						return <div className={this.state.tabActive =="" && index == 0 ? "tab-pane active" : this.state.tabActive == "#1" ? "tab-pane active" : "tab-pane"} id="#1" key={index}>
