@@ -1,4 +1,4 @@
-import { USER_EDIT_INFO } from "../constants/constantsUser";
+import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 
 const user = {
     nome: "HENRIQUE.TEIXEIRA",
@@ -8,12 +8,22 @@ const user = {
     email: "",
     empresa: "ASSERTIVA",
     perfil: "ADM",
-    dashboard: {
-        calendario: true,
-        relogio: true,
-        tempo: true,
-        noticias: true,
-        economia: true
+    gadgets: [
+        {img: "https://www.wlu.edu/images/alumni/icons/calendar.png", name: "Calendário", active: false},
+        {img: "http://blog.weecomments.com/wp-content/uploads/2016/05/clock-flat.png", name: "Relógio", active: true},
+        {img: "http://img.tuttoandroid.net/wp-content/uploads/2015/05/Wemple-Weather-icon.png", name: "Previsão do tempo", active: false},
+        {img: "https://blog.agilebits.com/wp-content/uploads/2014/11/news-icon.png", name: "Últimas notícias", active: false},
+        {img: "http://www.free-icons-download.net/images/nice-pie-chart-icon-32287.png", name: "Relógio", active: false},
+        {img: "http://download.seaicons.com/icons/graphicloads/100-flat/256/currency-icon.png", name: "Dados econômicos", active: false}
+    ],
+    charts: {
+        options: [
+            {value: "localize", label: "Localize"},
+            {value: "credito", label: "Crédito"},
+            {value: "veiculos", label: "Veículos"},
+            {value: "sms", label: "SMS"}
+        ],
+        optionsSelected: [],
     },
     mensagens: {
         friend: "Jessica",
@@ -34,6 +44,11 @@ export default function (state = null, action) {
             user.telefone = action.payload.telefone;
             user.avatar_url = action.payload.avatar_url;
             user.firm_url = action.payload.firm_url;
+            return user;
+
+        case USER_EDIT_DASHBOARD:
+            user.gadgets = action.payload.gadgets;
+            user.charts = action.payload.charts;
             return user;
     }
     return user;

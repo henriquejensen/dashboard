@@ -2,7 +2,7 @@ import axios from "axios";
 import ajax from "superagent";
 
 import { URL_SEARCH, SEARCH_BY_CPF } from "../constants/constantsLocalize";
-import { USER_EDIT_INFO } from "../constants/constantsUser";
+import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 
 export function searchLocalize(document, tipo) {
 	
@@ -43,5 +43,20 @@ export function userEditInfo(nome, telefone, avatar_url, firm_url) {
 	return {
 		type: USER_EDIT_INFO,
 		payload: info
+	}
+}
+
+export function userDashboard(gadgets, charts) {
+	const dashboardPreferences = {
+		gadgets: gadgets,
+		charts: charts
+	};
+
+	console.log(gadgets);
+	console.log(charts);
+
+	return {
+		type: USER_EDIT_DASHBOARD,
+		payload: dashboardPreferences
 	}
 }

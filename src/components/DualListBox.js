@@ -4,16 +4,6 @@ import React, { Component } from "react";
 class DualListBox extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            options: [
-                {value: "localize", label: "Localize"},
-                {value: "credito", label: "Crédito"},
-                {value: "veiculos", label: "Veículos"},
-                {value: "sms", label: "SMS"}
-            ],
-            optionsSelected: [],
-        }
     }
 
     notInArray(element, elements) {
@@ -27,7 +17,7 @@ class DualListBox extends Component {
     }
 
     sendElements() {
-        const optionsStageArea = this.state.optionsSelected;
+        const optionsStageArea = this.props.elements.optionsSelected;
         const options = [];
         const elements = this.refs.dualListSelect;
 
@@ -40,14 +30,11 @@ class DualListBox extends Component {
             }
         }
 
-        this.setState({
-            options: options,
-            optionsSelected: optionsStageArea
-        })
+        this.props.saveOptions(options, optionsStageArea);
     }
 
     backElements() {
-        const optionsStageArea = this.state.options;
+        const optionsStageArea = this.props.elements.options;
         const options = [];
         const elements = this.refs.dualListSelected;
 
@@ -60,29 +47,20 @@ class DualListBox extends Component {
             }
         }
 
-        this.setState({
-            options: optionsStageArea,
-            optionsSelected: options
-        })
+        this.props.saveOptions(optionsStageArea, options);
     }
 
     sendAll() {
-        this.setState({
-            options: [],
-            optionsSelected: this.state.optionsSelected.concat(this.state.options),
-        })
+        this.props.saveOptions([], this.props.elements.optionsSelected.concat(this.props.elements.options));
     }
 
     backAll() {
-        this.setState({
-            options: this.state.options.concat(this.state.optionsSelected),
-            optionsSelected: []
-        })
+        this.props.saveOptions(this.props.elements.options.concat(this.props.elements.optionsSelected), []);
     }
 
     render() {
-        const options = this.state.options;
-        const optionsSelected = this.state.optionsSelected;
+        const options = this.props.elements.options;
+        const optionsSelected = this.props.elements.optionsSelected;
 
         return <div>
             <div className="col-md-5">
