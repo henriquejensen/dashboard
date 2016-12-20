@@ -39,7 +39,7 @@ class Header extends Component {
 		                <li className={this.state.menuOpened ? "dropdown open" : "dropdown"} onClick={this.openMenu}>
 		                    <a href="#" className="dropdown-toggle" data-toggle="dropdown">
 		                        <img src={this.props.user.avatar_url} width="20" /> 
-		                        <strong>HENRIQUE.TEIXEIRA</strong>
+		                        <strong>{this.props.user.nome}</strong>
 		                        <span className="glyphicon glyphicon-chevron-down" ></span>
 		                    </a>
 		                    <ul className="dropdown-menu">

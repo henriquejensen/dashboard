@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
+import { userEditInfo } from "../../actions/index";
+
 import InfoUser from "./InfoUser";
 import DashboardUser from "./DashboardUser";
 
@@ -13,9 +15,8 @@ class EditUser extends Component {
     render() {
         return (
             <div>
-                <InfoUser user={this.props.user} />
+                <InfoUser user={this.props.user} userEditInfo={this.props.userEditInfo} />
                 <DashboardUser user={this.props.user} />
-                {this.props.user.nome}
             </div>
         )
     }
@@ -27,4 +28,8 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(EditUser);
+function mapDispatchToProps(dispacth) {
+    return bindActionCreators({ userEditInfo }, dispacth);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditUser);
