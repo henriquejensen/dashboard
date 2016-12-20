@@ -417,12 +417,29 @@
 
 #weather {
     background-image: url(https://image.freepik.com/free-vector/grass-and-sky_23-2147499459.jpg);
+    height: 380px;
 }
 
 .enriquecimento-basecerta {
   position: absolute;
   right: 25px;
   top: 15px;
+}
+
+.noticia-container {
+  display: flex;
+  padding: 8px;
+  cursor: pointer;
+  border: 0px solid;
+  border-top-width: 1px
+}
+
+.noticia-container > div > img {
+    width: 50px
+}
+
+.noticia-container:hover {
+  background-color: #2d3237;
 }
 
 @media (max-width:767px) {
@@ -440,5 +457,11 @@
       left: 160px;
       width: 160px;
       transition: all .4s ease 0s;
+  }
+}
+
+@media print {
+  .print {
+    display: none
   }
 }

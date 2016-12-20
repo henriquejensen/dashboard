@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Clock from "./Clock";
 import Calendar from "./Calendar";
 import Weather from "./Weather";
+import LastNews from "./LastNews";
 
 class Dashboard extends Component {
 	constructor(props){
@@ -110,7 +111,7 @@ class Dashboard extends Component {
 					if(gdt.name == "Previsão do tempo" && gdt.active)
 						return <Weather />
 					if(gdt.name == "Últimas notícias" && gdt.active)
-						return <Calendar />
+						return <LastNews />
 				})}
 				
 			</div>
