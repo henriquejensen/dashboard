@@ -29,7 +29,7 @@ export default class Sidebar extends Component {
             <li><Link to="/dashboard/localize">Localize<span className="sub_icon glyphicon glyphicon-screenshot"></span></Link></li>
             <li><Link to="/dashboard/sms">SMS<span className="sub_icon glyphicon glyphicon-envelope"></span></Link></li>
             <li><Link to="/dashboard/basecerta">Base Certa<span className="sub_icon glyphicon glyphicon-hdd"></span></Link></li>
-            <li><Link to="/dashboard/veiculos">Crédito<span className="sub_icon glyphicon glyphicon-bed"></span></Link></li>
+            <li><Link to="/dashboard/credito">Crédito<span className="sub_icon glyphicon glyphicon-bed"></span></Link></li>
             
             <li>Outros Produtos</li>
             <li><Link to="/dashboard">Foco Fiscal<span className="sub_icon glyphicon glyphicon-tag"></span></Link></li>   
@@ -86,19 +86,19 @@ export default class Sidebar extends Component {
               <div className="nav nav-tabs">
                 <li className={this.state.tabActive == "menu" ? "active" : ""} onClick={() => this._changeTab("menu")}>
                   <a href="#menu">
-                    H
+                    <i className="glyphicon glyphicon-picture" />
                   </a>
                 </li>
 
                 <li className={this.state.tabActive == "chat" ? "active" : ""} onClick={() => this._changeTab("chat")}>
                   <a href="#chat">
-                    B
+                    <i className="glyphicon glyphicon-comment" />
                   </a>
                 </li>
 
                 <li className={this.state.tabActive == "stats" ? "active" : ""} onClick={() => this._changeTab("stats")}>
                   <a href="#stats">
-                    C
+                    <i className="glyphicon glyphicon-equalizer" />
                   </a>
                 </li>
               </div>) : ""}

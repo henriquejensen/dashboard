@@ -145,7 +145,7 @@ class Localize extends Component {
 								type="text"
 								className="form-control input-localize"
 								placeholder="Buscar"
-								name="nome"
+								name="cpf"
 								onChange={this.onChangeDocumento}/>
 
 							<button className="btn btn-info" type="submit">
