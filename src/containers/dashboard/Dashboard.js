@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import {Line} from 'react-chartjs-2';
 import { connect } from "react-redux";
 
+import Clock from "./Clock";
+import Calendar from "./Calendar";
+
 class Dashboard extends Component {
 	constructor(props){
 		super(props);
@@ -52,7 +55,7 @@ class Dashboard extends Component {
 	panelChart(){
 		return (
 			<div>
-				<div className="panel-heading text-center col-md-8">
+				<div className="panel-heading text-center">
 					<ul className="nav nav-tabs">
 						{this.props.user.charts.optionsSelected.map((opt, index) => {
 							if(opt.label == "Localize"){
@@ -92,7 +95,24 @@ class Dashboard extends Component {
 
 	render() {
 		return (
-			this.panelChart()
+			<div>
+				{this.props.user.charts.optionsSelected.length > 0 ?
+					<div className="col-md-8">
+						{this.panelChart()}
+					</div> : "" }
+				
+				{this.props.user.gadgets.map((gdt) => {
+					if(gdt.name == "Calendário" && gdt.active)
+						return <Calendar />
+					if(gdt.name == "Relógio" && gdt.active)
+						return <Clock />
+					if(gdt.name == "Previsão do tempo" && gdt.active)
+						return <Calendar />
+					if(gdt.name == "Últimas notícias" && gdt.active)
+						return <Calendar />
+				})}
+				
+			</div>
 		)
 	}
 }

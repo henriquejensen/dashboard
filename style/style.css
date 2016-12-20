@@ -394,6 +394,25 @@
     background-color: #555;
 }
 
+#clock {
+  margin: 30px 0;
+}
+#clock img {
+  width: 80%
+}
+
+#calendar {
+  height: 300px;
+  text-align: center;
+  margin: 30px 0;
+}
+
+
+.enriquecimento-basecerta {
+  position: absolute;
+  right: 25px;
+  top: 15px;
+}
 
 @media (max-width:767px) {
   #wrapper {
