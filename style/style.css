@@ -415,6 +415,9 @@
   margin: 30px 0;
 }
 
+#weather {
+    background-image: url(https://image.freepik.com/free-vector/grass-and-sky_23-2147499459.jpg);
+}
 
 .enriquecimento-basecerta {
   position: absolute;
