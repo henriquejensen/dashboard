@@ -14,7 +14,7 @@ class EditUser extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <InfoUser user={this.props.user} userEditInfo={this.props.userEditInfo} />
                 <DashboardUser user={this.props.user} userDashboard={this.props.userDashboard} />
             </div>

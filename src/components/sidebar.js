@@ -21,22 +21,21 @@ export default class Sidebar extends Component {
 
   renderMenu() {
     return (
-        <div className={this.state.tabActive == "menu" ? "tab-pane active":"tab-pane"} id="menu">
-          <ul className="sidebar-nav" id="sidebar">
-            <li><Link to="/dashboard">HOME<span className="sub_icon glyphicon glyphicon-home"></span></Link></li>   
+        <div className={this.state.tabActive == "menu" ? "tab-pane active":"tab-pane"} id="sidebar">
+          <ul className="sidebar-nav">
+            <li><Link to="/dashboard">Dashboard<img src="http://noriskinvestor.com/images/stories/Icon-House-150x150.png" className="sub_icon" alt="Icone Localize"/></Link></li>   
             
-            <li>Meus Produtos</li>
-            <li><Link to="/dashboard/localize">Localize<span className="sub_icon glyphicon glyphicon-screenshot"></span></Link></li>
-            <li><Link to="/dashboard/sms">SMS<span className="sub_icon glyphicon glyphicon-envelope"></span></Link></li>
-            <li><Link to="/dashboard/basecerta">Base Certa<span className="sub_icon glyphicon glyphicon-hdd"></span></Link></li>
-            <li><Link to="/dashboard/credito">Crédito<span className="sub_icon glyphicon glyphicon-bed"></span></Link></li>
+            <li className="sidebar-items">Meus Produtos</li>
+            <li ><Link to="/dashboard/localize">Localize<img src="../public/assertiva/icon-localize.png" className="sub_icon" alt="Icone Localize"/></Link></li>
+            <li ><Link to="/dashboard/sms">SMS<img src="../public/assertiva/icon-sms.png" className="sub_icon" alt="Icone SMS"/></Link></li>
+            <li ><Link to="/dashboard/basecerta">Base Certa<img src="../public/assertiva/icon-basecerta.png" className="sub_icon" alt="Icone Base Certas"/></Link></li>
+            <li ><Link to="/dashboard/credito">Crédito<img src="../public/assertiva/icon-credito.png" className="sub_icon" alt="Icone Crédito"/></Link></li>
             
-            <li>Outros Produtos</li>
-            <li><Link to="/dashboard">Foco Fiscal<span className="sub_icon glyphicon glyphicon-tag"></span></Link></li>   
-            <li><Link to="/dashboard">Venda+<span className="sub_icon glyphicon glyphicon-lock"></span></Link></li>
-            <li><Link to="/dashboard">Veículos<span className="sub_icon glyphicon glyphicon-credit-card"></span></Link></li>
-            <li><Link to="/dashboard">Consig+<span className="sub_icon glyphicon glyphicon-barcode"></span></Link></li>
-            <li><Link to="/dashboard">CRM<span className="sub_icon glyphicon glyphicon-folder-open"></span></Link></li>
+            <li className="sidebar-items">Outros Produtos</li>
+            <li ><Link to="/dashboard">Foco Fiscal<img src="../public/assertiva/icon-localize.png" className="sub_icon" alt="Icone Localize"/></Link></li>   
+            <li ><Link to="/dashboard">Venda+<img src="../public/assertiva/icon-localize.png" className="sub_icon" alt="Icone Localize"/></Link></li>
+            <li ><Link to="/dashboard">Veículos<img src="../public/assertiva/icon-localize.png" className="sub_icon" alt="Icone Localize"/></Link></li>
+            <li ><Link to="/dashboard">Consig+<img src="../public/assertiva/icon-localize.png" className="sub_icon" alt="Icone Localize"/></Link></li>
           </ul>
         </div>
     )
@@ -44,15 +43,15 @@ export default class Sidebar extends Component {
 
   renderChat() {
     return (
-        <div className={this.state.tabActive == "chat" ? "tab-pane active":"tab-pane"} id="chat">
-          <ul className="sidebar-nav" id="sidebar">
-            <li>Online</li>
-            <li><Link to="/dashboard/chat" params={{teste: "testando"}}>Jessica<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
-            <li><Link to="/dashboard/chat">Roberta<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
-            <li><Link to="/dashboard/chat">Nayara<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
+        <div className={this.state.tabActive == "chat" ? "tab-pane active":"tab-pane"} id="sidebar">
+          <ul className="sidebar-nav">
+            <li className="sidebar-items">Online</li>
+            <li><Link to="/dashboard/chat" params={{teste: "testando"}}>Jessica<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
+            <li><Link to="/dashboard/chat">Roberta<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
+            <li><Link to="/dashboard/chat">Nayara<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
             
-            <li>Offline</li>
-            <li><Link to="/dashboard/chat">Bruna<span className="sub_icon glyphicon glyphicon-user"></span></Link></li>
+            <li className="sidebar-items">Offline</li>
+            <li><Link to="/dashboard/chat">Bruna<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
           </ul>
         </div>
     )
@@ -60,10 +59,10 @@ export default class Sidebar extends Component {
 
   renderStats() {
     return (
-        <div className={this.state.tabActive == "stats" ? "tab-pane active":"tab-pane"} id="stats">
-          <ul className="sidebar-nav" id="sidebar">
-            <li>Outros Produtos</li>
-            <li><Link to="/dashboard">HOME<span className="sub_icon glyphicon glyphicon-link"></span></Link></li>   
+        <div className={this.state.tabActive == "stats" ? "tab-pane active":"tab-pane"} id="sidebar">
+          <ul className="sidebar-nav">
+            <li className="sidebar-items">Gráficos</li>
+            <li><Link to="/dashboard">Dashboard<span className="sub_icon glyphicon glyphicon-link"></span></Link></li>   
           </ul>
         </div>
     )
@@ -74,7 +73,7 @@ export default class Sidebar extends Component {
           <div id="sidebar-wrapper">
             <ul id="sidebar_menu" className="sidebar-nav">
                 <li className="sidebar-brand" onClick={this.props.onMenuClicked}>
-                  <div id="menu-toggle">
+                  <div>
                     Menu
                     <span id="main_icon" className="glyphicon glyphicon-align-justify">
                     </span>
@@ -85,19 +84,19 @@ export default class Sidebar extends Component {
             {this.props.activedMenu ? (
               <div className="nav nav-tabs">
                 <li className={this.state.tabActive == "menu" ? "active" : ""} onClick={() => this._changeTab("menu")}>
-                  <a href="#menu" style={{backgroundColor: "rgb(91, 52, 148)"}}>
+                  <a href="#menu">
                     <i className="glyphicon glyphicon-picture" />
                   </a>
                 </li>
 
                 <li className={this.state.tabActive == "chat" ? "active" : ""} onClick={() => this._changeTab("chat")}>
-                  <a href="#chat" style={{backgroundColor: "rgb(91, 52, 148)"}}>
+                  <a href="#chat">
                     <i className="glyphicon glyphicon-comment" />
                   </a>
                 </li>
 
                 <li className={this.state.tabActive == "stats" ? "active" : ""} onClick={() => this._changeTab("stats")}>
-                  <a href="#stats" style={{backgroundColor: "rgb(91, 52, 148)"}}>
+                  <a href="#stats">
                     <i className="glyphicon glyphicon-equalizer" />
                   </a>
                 </li>

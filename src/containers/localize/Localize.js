@@ -172,13 +172,13 @@ class Localize extends Component {
 
 				{this.props.data.length == 0 ? "" : 
 					(<div>
-						<div className="panel-heading text-center">
+						<div className="panel-heading text-center" id="localize-tabs">
 							<ul className="nav nav-tabs">
 								{this.renderTabs()}
 							</ul>
 						</div>
 
-						<div className="tab-content content-localize">
+						<div className="tab-content" id="localize-content">
 							{this.renderSearch()}
 						</div>
 					</div>)}
