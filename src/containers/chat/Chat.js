@@ -6,6 +6,10 @@ class Chat extends Component {
         super(props);
     }
 
+	componentDidMount() {
+		document.title = "Assertiva > Chat";
+	}
+
     render() {
         console.log(this.props);
         return (

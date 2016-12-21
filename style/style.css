@@ -5,5 +5,24 @@ body {
 }
 
 a {
-    color: #5b3494;
+    color: #1a0dab;
+}
+
+input {
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px;
+}
+
+.input-file {
+    color: #1a0dab;
+    cursor: pointer
+}
+
+.input-file:hover {
+    text-decoration: underline
+}
+
+.btn {
+    border-radius: 0px
 }

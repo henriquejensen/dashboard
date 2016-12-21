@@ -3,7 +3,7 @@ import { Route, IndexRoute } from "react-router";
 
 import App from "./components/app";
 import Login from "./components/Login";
-import Signin from "./components/changePassword";
+import Signin from "./components/Signin";
 
 import EditUser from "./containers/user/EditUser";
 import Localize from "./containers/localize/Localize";

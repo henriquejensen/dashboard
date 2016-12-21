@@ -39,8 +39,8 @@ export default class DashboardUser extends Component {
     }
 
     render() {
-        return <div className="row">
-                <div className="col-md-12">
+        return <div>
+                <div className="col-md-7">
                    <div className="panel panel-default">
                         <div className="panel-heading text-center">
                             PREFERÊNCIAS DASHBOARD

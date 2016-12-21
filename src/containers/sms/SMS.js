@@ -7,7 +7,6 @@ export default class SMS extends Component {
   }
 
   componentDidMount() {
-    console.log("");
     document.title = "Assertiva > SMS";
   }
 

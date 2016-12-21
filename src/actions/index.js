@@ -32,12 +32,11 @@ function patternDocument(doc, len) {
 	return doc;
 }
 
-export function userEditInfo(nome, telefone, avatar_url, firm_url) {
+export function userEditInfo(nome, telefone, email) {
 	const info = {
 		nome: nome,
 		telefone: telefone,
-		avatar_url: avatar_url,
-		firm_url: firm_url
+		email: email
 	}
 
 	return {

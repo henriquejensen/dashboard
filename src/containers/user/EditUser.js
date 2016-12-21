@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { userEditInfo, userDashboard } from "../../actions/index";
 
 import InfoUser from "./InfoUser";
+import ImagesUser from "./ImagesUser";
 import DashboardUser from "./DashboardUser";
 
 class EditUser extends Component {
@@ -12,10 +13,18 @@ class EditUser extends Component {
         super(props);
     }
 
+	componentDidMount() {
+		document.title = "Assertiva > Editar Usuário";
+	}
+
     render() {
         return (
             <div className="container">
-                <InfoUser user={this.props.user} userEditInfo={this.props.userEditInfo} />
+                <div>
+                    <InfoUser user={this.props.user} userEditInfo={this.props.userEditInfo} />
+                    <ImagesUser user={this.props.user} userEditInfo={this.props.userEditInfo} />
+                </div>
+                
                 <DashboardUser user={this.props.user} userDashboard={this.props.userDashboard} />
             </div>
         )

@@ -16,6 +16,10 @@ class Dashboard extends Component {
 		}
 	}
 
+	componentDidMount() {
+		document.title = "Assertiva";
+	}
+
 	changeTab(tab){
 		this.setState({
 			tabActive: tab

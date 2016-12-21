@@ -32,6 +32,10 @@ class Localize extends Component {
 		this.onChangeTipo = this.onChangeTipo.bind(this);
 	}
 
+	componentDidMount() {
+		document.title = "Assertiva > Localize";
+	}
+
 	onLocalizeSubmit(evt) {
 		evt.preventDefault();
 

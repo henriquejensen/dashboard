@@ -2,10 +2,11 @@ import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser"
 
 const user = {
     nome: "HENRIQUE.TEIXEIRA",
+    email: "henriquejensen@hotmail.com",
     telefone: "11996997909",
     avatar_url: "http://media.cargocollective.com/1/0/789/headerimg/profile.png",
+    background_url: "http://retrapack.com.br/wp-content/uploads/2015/01/839274-landscape-sunset.jpg",
     firm_url: "http://www.goodrickes.co.za/images/icon2.png",
-    email: "",
     empresa: "ASSERTIVA",
     perfil: "ADM",
     gadgets: [
@@ -42,8 +43,7 @@ export default function (state = null, action) {
         case USER_EDIT_INFO:
             user.nome = action.payload.nome;
             user.telefone = action.payload.telefone;
-            user.avatar_url = action.payload.avatar_url;
-            user.firm_url = action.payload.firm_url;
+            user.email = action.payload.email;
             return user;
 
         case USER_EDIT_DASHBOARD:
