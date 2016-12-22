@@ -11,6 +11,7 @@ const rootReducer = combineReducers({
   chartData: ChartData,
   campanhasSMS: campanhasSMS,
   centroCustoSMS: campanhasSMS,
+  respostasSMS: campanhasSMS
 });
 
 export default rootReducer;

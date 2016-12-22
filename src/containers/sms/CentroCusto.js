@@ -15,7 +15,7 @@ class CentroCusto extends Component {
   }
 
   componentDidMount() {
-    document.title = "Assertiva > Centro de Custo";
+    document.title = "Assertiva > SMS > Centro de Custo";
 
     this.props.getCentroCustoSMS();
   }
@@ -37,7 +37,7 @@ class CentroCusto extends Component {
                   }
                 >
                   <tbody>
-                      {this.props.centroCustoSMS.lenght > 0 ? this.props.centroCustoSMS.map((datas, index) => {
+                      {this.props.centroCustoSMS.length > 0 ? this.props.centroCustoSMS.map((datas, index) => {
                         return <tr key={index}>
                           {datas.map((data, i) =>{
                               return <td key={i}>

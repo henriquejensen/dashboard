@@ -1,24 +1,24 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { getCampanhasSMS } from "../../actions/index";
+import { getRespostasSMS } from "../../actions/index";
 
 import Filtro from "../../components/Filtro";
 import Table from "../../components/Table";
 
-class SMS extends Component {
+class Respostas extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      campanhasSMS: this.props.campanhasSMS
+      respostasSMS: this.props.respostasSMS
     }
   }
 
   componentDidMount() {
-    document.title = "Assertiva > SMS";
+    document.title = "Assertiva > SMS > Respostas";
 
-    this.props.getCampanhasSMS();
+    this.props.getRespostasSMS();
   }
 
   render() {
@@ -32,14 +32,13 @@ class SMS extends Component {
               <div className="panel-body" id="filtro">
 
                 <Filtro
-                  title={"Filtro de campanhas"}
+                  title={"Filtro de respostas"}
                   titleBtn={"Filtrar"}
                   inputs={
                     [
                       {type: "text", value: "", name: "campanha", placeholder: "Campanha"},
-                      {type: "date", value: "", name: "dataInicio", placeholder: ""},
-                      {type: "date", value: "", name: "dataFim", placeholder: ""},
-                      {type: "text", value: "", name: "usuario", placeholder: "Usuário"},
+                      {type: "date", value: "", name: "dataRecebimento", placeholder: ""},
+                      {type: "number", value: "", name: "numero", placeholder: "Número"}
                     ]}
                 />
 
@@ -52,30 +51,21 @@ class SMS extends Component {
               <div className="panel-body">
 
                 <Table
-                  title={"Monitor de Envios"}
+                  title={"Monitor de Respostas"}
                   fields={
-                    ["ID", "Grupo", "Campanha", "Cadastro", "Centro de Custo", "Rota", "Status", "Ações"]
+                    ["Numero", "Data do Recebimento", "Rota", "Mensagem Enviada", "Mensagem Recebida", "Ações"]
                   }
                 >
                   <tbody>
-                      {this.props.campanhasSMS.length  > 0 ? this.props.campanhasSMS.map((datas, index) => {
+                      {this.props.respostasSMS.length  > 0 ? this.props.respostasSMS.map((datas, index) => {
                         return <tr key={index}>
                           {datas.map((data, i) =>{
-                            if(i < 6) {
+                            if(i < 5) {
                               return <td key={i}>
                                 {data}
                               </td>
-                            } else if(i == 6) {
-                              if(data == 0) {
-                                return <td key={i} className="text-center"> <i className="glyphicon glyphicon-ok" /></td>
-                              } else if(data == 1) {
-                                return <td key={i} className="text-center"> <i className="glyphicon glyphicon-remove" /></td>
-                              } else {
-                                return <td key={i} className="text-center"><i className="glyphicon glyphicon-hourglass" /></td>
-                              }
-                            } else if( i == 7) {
+                            } else {
                               return <td key={i} className="acoes">
-                                    <i className="glyphicon glyphicon-th-list" />
                                     <i className="glyphicon glyphicon-share-alt" />
                                   </td>
                             }
@@ -98,13 +88,13 @@ class SMS extends Component {
 
 function mapStateToProps(state) {
   return {
-    campanhasSMS: state.campanhasSMS
+    respostasSMS: state.respostasSMS
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getCampanhasSMS }, dispatch)
+  return bindActionCreators({ getRespostasSMS }, dispatch)
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(SMS);
+export default connect(mapStateToProps, mapDispatchToProps)(Respostas);

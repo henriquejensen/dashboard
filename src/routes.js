@@ -11,6 +11,7 @@ import Dashboard from "./containers/dashboard/Dashboard";
 import Chat from "./containers/chat/Chat";
 import SMS from "./containers/sms/SMS";
 import CentroCusto from "./containers/sms/CentroCusto";
+import Respostas from "./containers/sms/Respostas";
 import BaseCerta from "./containers/basecerta/BaseCerta";
 import Credito from "./containers/credito/Credito";
 import Veiculos from "./containers/veiculos/Veiculos";
@@ -31,6 +32,7 @@ export default (
       <Route path="basecerta" component={BaseCerta} />
       <Route path="sms" component={SMS} />
       <Route path="sms/centrocusto" component={CentroCusto} />
+      <Route path="sms/respostas" component={Respostas} />
       <Route path="credito" component={Credito} />
       <Route path="veiculos" component={Veiculos} />
       <Route path="focofiscal" component={FocoFiscal} />

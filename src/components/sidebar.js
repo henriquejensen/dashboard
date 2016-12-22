@@ -72,7 +72,7 @@ export default class Sidebar extends Component {
               <ul className={this.state.smsDropdown ? "sidebar-item-dropdown" : "display-none"}>
                 <Link to="/dashboard/sms"><li>Envio de SMS</li></Link>
                 <Link to="/dashboard/sms/centrocusto"><li>Centro de Custo</li></Link>
-                <Link to="/dashboard/sms"><li>Respostas</li></Link>
+                <Link to="/dashboard/sms/respostas"><li>Respostas</li></Link>
                 <Link to="/dashboard/sms"><li>Relatório</li></Link>
               </ul>
             </li>
