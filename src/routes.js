@@ -12,6 +12,10 @@ import Chat from "./containers/chat/Chat";
 import SMS from "./containers/sms/SMS";
 import BaseCerta from "./containers/basecerta/BaseCerta";
 import Credito from "./containers/credito/Credito";
+import Veiculos from "./containers/veiculos/Veiculos";
+import FocoFiscal from "./containers/focofiscal/FocoFiscal";
+import VendaMais from "./containers/vendamais/VendaMais";
+import ConsigMais from "./containers/consigmais/ConsigMais";
 
 export default (
   <Route>
@@ -21,10 +25,16 @@ export default (
 
     <Route path="/dashboard" component={App} >
       <IndexRoute component={Dashboard} />
+
       <Route path="localize" component={Localize}	/>
       <Route path="basecerta" component={BaseCerta} />
       <Route path="sms" component={SMS} />
       <Route path="credito" component={Credito} />
+      <Route path="veiculos" component={Veiculos} />
+      <Route path="focofiscal" component={FocoFiscal} />
+      <Route path="vendamais" component={VendaMais} />
+      <Route path="consigmais" component={ConsigMais} />
+
       <Route path="editar" component={EditUser}	/>
       <Route path="chat" component={Chat}	/>
     </Route>

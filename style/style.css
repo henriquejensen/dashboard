@@ -8,6 +8,10 @@ a {
     color: #1a0dab;
 }
 
+ul {
+    list-style: none
+}
+
 input {
     border-top-width: 0px;
     border-right-width: 0px;
@@ -25,4 +29,8 @@ input {
 
 .btn {
     border-radius: 0px
+}
+
+.display-none {
+    display: none
 }
