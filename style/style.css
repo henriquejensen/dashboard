@@ -38,3 +38,26 @@ input {
 .logo-produto {
     padding: 20px
 }
+
+.container {
+    width: 100%
+}
+
+.acoes i {
+    margin-right: 7px
+}
+
+.glyphicon-hourglass {
+    color: yellow;
+    font-size: 16px
+}
+
+.glyphicon-remove {
+    color: red;
+    font-size: 16px
+}
+
+.glyphicon-ok {
+    color: #5cb85c;
+    font-size: 16px
+}
