@@ -17,11 +17,10 @@ class Localize extends Component {
 	constructor(props) {
 		super(props);
 
-		
 		this.state = {
 			documento: "",
 			tabActive: "",
-			tipo: "CPF",
+			tipo: this.props.params.tipo.toUpperCase(),
 			pessoasRelacionadas: false
 		}
 
@@ -142,6 +141,31 @@ class Localize extends Component {
 				)		
 	}
 
+	formSearch() {
+		return  <div className="col-md-12">
+				<form className="form-inline" onSubmit={this.onLocalizeSubmit} >
+					<select className="form-control" onChange={this.onChangeTipo} defaultValue={this.props.params.tipo.toUpperCase()}>
+						<option value="CPF">CPF</option>
+						<option value="CNPJ">CNPJ</option>
+						<option value="NOME">NOME</option>
+						<option value="ENDERECO">ENDERECO</option>
+					</select>
+
+					<input
+						value={this.state.documento}
+						type="text"
+						className="form-control input-localize input-search "
+						placeholder="Buscar"
+						name="cpf"
+						onChange={this.onChangeDocumento}/>
+
+					<button className="btn btn-info" type="submit">
+						<i className="glyphicon glyphicon-search"></i>
+					</button>
+				</form>
+			</div>
+	}
+
 	render() {
 		return(
 			<div className="container">
@@ -149,28 +173,8 @@ class Localize extends Component {
 					<div className="col-md-12">
 						{this.props.data.length == 0 ? <img src="../../../public/assertiva/logo-localize.png" className="logo-produto" />: ""}
 					</div>
-					<div className="col-md-12">
-						<form className="form-inline" onSubmit={this.onLocalizeSubmit} >
-							<select className="form-control" onChange={this.onChangeTipo} defaultValue={this.state.tipo}>
-								<option value="CPF">CPF</option>
-								<option value="CNPJ">CNPJ</option>
-								<option value="NOME">NOME</option>
-								<option value="ENDERECO">ENDERECO</option>
-							</select>
 
-							<input
-								value={this.state.documento}
-								type="text"
-								className="form-control input-localize input-search "
-								placeholder="Buscar"
-								name="cpf"
-								onChange={this.onChangeDocumento}/>
-
-							<button className="btn btn-info" type="submit">
-								<i className="glyphicon glyphicon-search"></i>
-							</button>
-						</form>
-					</div>
+					{this.formSearch()}
 
 				</div>
 

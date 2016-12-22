@@ -28,7 +28,7 @@ export default (
     <Route path="/dashboard" component={App} >
       <IndexRoute component={Dashboard} />
 
-      <Route path="localize" component={Localize}	/>
+      <Route path="localize/:tipo" component={Localize}	/>
       <Route path="basecerta" component={BaseCerta} />
       <Route path="sms" component={SMS} />
       <Route path="sms/centrocusto" component={CentroCusto} />
