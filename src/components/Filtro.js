@@ -10,8 +10,9 @@ export default class Filtro extends Component {
             <div className="col-md-12">
                 <h4>{this.props.title}</h4>
 
-                {this.props.inputs.map((input) => {
+                {this.props.inputs.map((input, index) => {
                     return <input
+                        key={index}
                         type={input.type}
                         name={input.name}
                         value={input.value}
