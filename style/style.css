@@ -45,8 +45,11 @@ input {
     width: 100%
 }
 
+.acoes {
+    text-align: center
+}
 .acoes i {
-    margin-right: 7px
+    margin-right: 7px;
 }
 
 .glyphicon-hourglass {

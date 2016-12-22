@@ -38,18 +38,18 @@ const user = {
     }
 }
 
-export default function (state = null, action) {
+export default function (state = user, action) {
     switch(action.type){
         case USER_EDIT_INFO:
-            user.nome = action.payload.nome;
-            user.telefone = action.payload.telefone;
-            user.email = action.payload.email;
-            return user;
+            state.nome = action.payload.nome;
+            state.telefone = action.payload.telefone;
+            state.email = action.payload.email;
+            return state;
 
         case USER_EDIT_DASHBOARD:
-            user.gadgets = action.payload.gadgets;
-            user.charts = action.payload.charts;
-            return user;
+            state.gadgets = action.payload.gadgets;
+            state.charts = action.payload.charts;
+            return state;
     }
-    return user;
+    return state;
 } 

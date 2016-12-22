@@ -1,14 +1,24 @@
 import React, {Component} from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
+import { getCampanhasSMS } from "../../actions/index";
+
 import Filtro from "../../components/Filtro";
 import Table from "../../components/Table";
 
-export default class SMS extends Component {
+class SMS extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      campanhasSMS: this.props.campanhasSMS
+    }
   }
 
   componentDidMount() {
     document.title = "Assertiva > SMS";
+
+    this.props.getCampanhasSMS();
   }
 
   render() {
@@ -48,94 +58,31 @@ export default class SMS extends Component {
                   }
                 >
                   <tbody>
-                      <tr>
-                          <td>1077648</td>
-                          <td>
-                              <strong>Grupo: </strong>ASS_INTERNO_API_SP<br />
-                              <strong>Grupo: </strong>API_SP
-                          </td>
-                          <td>SMS Web Service</td>
-                          <td>22/12/16 12:39</td>
-                          <td>Padrão</td>
-                          <td>
-                              Curto<br />
-                              Web Service
-                          </td>
-                          <td className="text-center">
-                              <i className="glyphicon glyphicon-ok" />
-                          </td>
-                          <td className="acoes">
-                              <i className="glyphicon glyphicon-th-list" />
-                              <i className="glyphicon glyphicon-share-alt" />
-                          </td>
-                      </tr>
-
-                      <tr>
-                          <td>1077648</td>
-                          <td>
-                              <strong>Grupo: </strong>ASS_INTERNO_API_SP<br />
-                              <strong>Grupo: </strong>API_SP
-                          </td>
-                          <td>SMS Web Service</td>
-                          <td>22/12/16 12:39</td>
-                          <td>Padrão</td>
-                          <td>
-                              Curto<br />
-                              Web Service
-                          </td>
-                          <td className="text-center">
-                              <i className="glyphicon glyphicon-hourglass" />
-                          </td>
-                          <td className="acoes">
-                              <i className="glyphicon glyphicon-th-list" />
-                              <i className="glyphicon glyphicon-share-alt" />
-                          </td>
-                      </tr>
-
-                      <tr>
-                          <td>1077648</td>
-                          <td>
-                              <strong>Grupo: </strong>ASS_INTERNO_API_SP<br />
-                              <strong>Grupo: </strong>API_SP
-                          </td>
-                          <td>SMS Web Service</td>
-                          <td>22/12/16 12:39</td>
-                          <td>Padrão</td>
-                          <td>
-                              Curto<br />
-                              Web Service
-                          </td>
-                          <td className="text-center">
-                              <i className="glyphicon glyphicon-remove" />
-                          </td>
-                          <td className="acoes">
-                              <i className="glyphicon glyphicon-th-list" />
-                              <i className="glyphicon glyphicon-share-alt" />
-                          </td>
-                      </tr>
-
-                      <tr>
-                          <td>1077648</td>
-                          <td>
-                              <strong>Grupo: </strong>ASS_INTERNO_API_SP<br />
-                              <strong>Grupo: </strong>API_SP
-                          </td>
-                          <td>SMS Web Service</td>
-                          <td>22/12/16 12:39</td>
-                          <td>Padrão</td>
-                          <td>
-                              Curto<br />
-                              Web Service
-                          </td>
-                          <td className="text-center">
-                              <i className="glyphicon glyphicon-remove" />
-                          </td>
-                          <td className="acoes">
-                              <i className="glyphicon glyphicon-th-list" />
-                              <i className="glyphicon glyphicon-share-alt" />
-                          </td>
-                      </tr>
-                    </tbody>
+                      {this.props.campanhasSMS ? this.props.campanhasSMS.map((datas, index) => {
+                        return <tr key={index}>
+                          {datas.map((data, i) =>{
+                            if(i < 6) {
+                              return <td key={i}>
+                                {data}
+                              </td>
+                            } else if(i == 6) {
+                              if(data == 0) {
+                                return <td key={i} className="text-center"> <i className="glyphicon glyphicon-ok" /></td>
+                              } else if(data == 1) {
+                                return <td key={i} className="text-center"> <i className="glyphicon glyphicon-remove" /></td>
+                              } else {
+                                return <td key={i} className="text-center"><i className="glyphicon glyphicon-hourglass" /></td>
+                              }
+                            } else if( i == 7) {
+                              return <td key={i} className="acoes">
+                                    <i className="glyphicon glyphicon-th-list" />
+                                    <i className="glyphicon glyphicon-share-alt" />
+                                  </td>
+                            }
+                          })}
+                        </tr>
+                      }) : ""}
+                  </tbody>
                 </Table>
 
               </div>
@@ -147,3 +94,17 @@ export default class SMS extends Component {
    </div>)
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+    campanhasSMS: state.campanhasSMS
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getCampanhasSMS }, dispatch)
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SMS);

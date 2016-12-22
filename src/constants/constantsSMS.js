@@ -1,0 +1,1 @@
+export const GET_CAMPANHAS_SMS = "GET_CAMPANHAS_SMS";
