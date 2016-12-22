@@ -59,11 +59,11 @@ export default class Sidebar extends Component {
             <li onClick={() => this.activeMenuDropdown("localize")}>
               <Link >Localize<img src="../../public/assertiva/icon-localize.png" className="sub_icon" alt="Icone Localize"/></Link>
               <ul className={this.state.localizeDropdown ? "sidebar-item-dropdown" : "display-none"}>
-                <Link to="/dashboard/localize"><li>CPF</li></Link>
-                <Link to="/dashboard/localize"><li>CNPJ</li></Link>
-                <Link to="/dashboard/localize"><li>Telefone</li></Link>
-                <Link to="/dashboard/localize"><li>Nome</li></Link>
-                <Link to="/dashboard/localize"><li>Endereço</li></Link>
+                <Link to="/dashboard/localize/cpf"><li>CPF</li></Link>
+                <Link to="/dashboard/localize/cnpj"><li>CNPJ</li></Link>
+                <Link to="/dashboard/localize/telefone"><li>Telefone</li></Link>
+                <Link to="/dashboard/localize/nome"><li>Nome</li></Link>
+                <Link to="/dashboard/localize/endereco"><li>Endereço</li></Link>
               </ul>
             </li>
 

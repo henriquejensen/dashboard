@@ -17,11 +17,10 @@ class Localize extends Component {
 	constructor(props) {
 		super(props);
 
-		
 		this.state = {
 			documento: "",
 			tabActive: "",
-			tipo: "CPF",
+			tipo: this.props.params.tipo.toUpperCase(),
 			pessoasRelacionadas: false
 		}
 
