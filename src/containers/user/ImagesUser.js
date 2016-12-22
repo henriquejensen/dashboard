@@ -104,7 +104,7 @@ export default class ImagesUser extends Component {
                             </div>
 
                             <div className="col-md-4" id="user-edit-images-btn">
-                                <button className="btn btn-success" type="submit" onClick={this.sendInfoUser}>Salvar alterações</button>
+                                <button className="btn btn-primary pull-right" type="submit" onClick={this.sendInfoUser}>Atualizar</button>
                             </div>
                         </div>
                     </div>

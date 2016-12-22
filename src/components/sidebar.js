@@ -50,7 +50,9 @@ export default class Sidebar extends Component {
     return (
         <div className={this.state.tabActive == "menu" ? "tab-pane active":"tab-pane"} id="sidebar">
           <ul className="sidebar-nav">
-            <li><Link to="/dashboard">Dashboard<img src="../public/assertiva/icon-localize.png" className="sub_icon" alt="Página inicial"/></Link></li>   
+            <li>
+              <Link to="/dashboard">Dashboard<img src="../public/assertiva/icon-localize.png" className="sub_icon" alt="Página inicial"/></Link>
+            </li>   
             
             <li className="sidebar-items">Meus Produtos</li>
 

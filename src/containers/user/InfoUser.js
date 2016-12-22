@@ -86,7 +86,7 @@ export default class Info extends Component {
 
                         <div className="col-md-12">
                             <div className="col-md-12">
-                                <button className="btn btn-success pull-right" type="submit" onClick={this.sendInfoUser}>Salvar alterações</button>
+                                <button className="btn btn-primary pull-right" type="submit" onClick={this.sendInfoUser}>Atualizar</button>
                             </div>
                         </div>
                     </div>

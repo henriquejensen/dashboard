@@ -28,7 +28,9 @@ input {
 }
 
 .btn {
-    border-radius: 0px
+    border-radius: 0px;
+    margin: 5px 0;
+    font-size: 13px;
 }
 
 .display-none {

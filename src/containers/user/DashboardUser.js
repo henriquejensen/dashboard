@@ -55,11 +55,11 @@ export default class DashboardUser extends Component {
 
                                 <DualListBox elements={this.state.charts} saveOptions={this.saveCharts}/>
                             </div>
-                        </div>
 
-                         <div className="col-md-12">
                             <div className="col-md-12">
-                                <button className="btn btn-success pull-right" type="submit" onClick={this.sendDashboardUser}>Salvar alterações</button>
+                                <div className="col-md-12">
+                                    <button className="btn btn-primary pull-right" type="submit" onClick={this.sendDashboardUser}>Atualizar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
