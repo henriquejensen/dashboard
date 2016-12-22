@@ -7,9 +7,9 @@ export default class Table extends Component {
 
     render() {
         return (
-            <div className="col-md-12">
+            <div className="col-md-12 col-sm-12">
                 <h4>{this.props.title}</h4>
-                <table className="table table-striped table-hover">
+                <table className="table table-striped table-hover table-responsive">
                     <thead>
                         <tr>
                             {this.props.fields.map((field, index) => {

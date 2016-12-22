@@ -3,7 +3,7 @@ import ajax from "superagent";
 
 import { URL_SEARCH, SEARCH_BY_CPF } from "../constants/constantsLocalize";
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
-import { GET_CAMPANHAS_SMS } from "../constants/constantsSMS";
+import { GET_CAMPANHAS_SMS, GET_CENTRO_CUSTO_SMS } from "../constants/constantsSMS";
 
 export function searchLocalize(document, tipo) {
 	
@@ -61,6 +61,13 @@ export function userDashboard(gadgets, charts) {
 export function getCampanhasSMS() {
 	return {
 		type: GET_CAMPANHAS_SMS,
+		payload: ""
+	}
+}
+
+export function getCentroCustoSMS() {
+	return {
+		type: GET_CENTRO_CUSTO_SMS,
 		payload: ""
 	}
 }

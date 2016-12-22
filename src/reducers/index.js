@@ -9,7 +9,8 @@ const rootReducer = combineReducers({
   localize: LocalizeData,
   user: User,
   chartData: ChartData,
-  campanhasSMS: campanhasSMS
+  campanhasSMS: campanhasSMS,
+  centroCustoSMS: campanhasSMS,
 });
 
 export default rootReducer;

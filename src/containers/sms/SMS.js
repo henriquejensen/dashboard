@@ -58,7 +58,7 @@ class SMS extends Component {
                   }
                 >
                   <tbody>
-                      {this.props.campanhasSMS ? this.props.campanhasSMS.map((datas, index) => {
+                      {this.props.campanhasSMS.lenght > 0 ? this.props.campanhasSMS.map((datas, index) => {
                         return <tr key={index}>
                           {datas.map((data, i) =>{
                             if(i < 6) {
@@ -81,7 +81,7 @@ class SMS extends Component {
                             }
                           })}
                         </tr>
-                      }) : ""}
+                      }) :  <tr ><td colSpan="8" className="text-center">Nenhum registro encontrado</td></tr>}
                   </tbody>
                 </Table>
 

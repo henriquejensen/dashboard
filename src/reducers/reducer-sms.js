@@ -1,4 +1,4 @@
-import { GET_CAMPANHAS_SMS } from "../constants/constantsSMS";
+import { GET_CAMPANHAS_SMS, GET_CENTRO_CUSTO_SMS } from "../constants/constantsSMS";
 
 const campanhasSMS = [
     [1077907, "Grupo: ASS_INTERNO_API_SP,Grupo: API_SP", "SMS Web Service", "22/12/16 12:39", "Padrão", "Curto, Web Service", 0, ""],
@@ -10,10 +10,17 @@ const campanhasSMS = [
     [1077213, "Grupo: ASS_INTERNO_API_SP,Grupo: API_SP", "SMS Web Service", "22/12/16 12:39", "Padrão", "Curto, Web Service", 0, ""]
 ]
 
-export default function(state = campanhasSMS, action) {
+const centroCusto = [
+    
+]
+
+export default function(state = [], action) {
     switch(action.type) {
         case GET_CAMPANHAS_SMS:
-            return state;
+            return campanhasSMS;
+
+        case GET_CENTRO_CUSTO_SMS:
+            return centroCusto;
     }
 
     return state;

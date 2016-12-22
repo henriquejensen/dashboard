@@ -31,7 +31,7 @@ class Header extends Component {
 					<span className="icon-bar"></span>
 					<span className="icon-bar"></span> 
 				</button>
-				<img src="../public/assertiva/assertiva-top-index-inverse.png" alt="Assertiva" height="45"/>
+				<img src="../../public/assertiva/assertiva-top-index-inverse.png" alt="Assertiva" height="45"/>
 			</div>
 			<div className="collapse navbar-collapse">
 				<ul className="nav navbar-nav navbar-right">
