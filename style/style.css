@@ -34,3 +34,7 @@ input {
 .display-none {
     display: none
 }
+
+.logo-produto {
+    padding: 20px
+}

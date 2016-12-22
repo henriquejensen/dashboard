@@ -139,8 +139,11 @@
 
 
 .input-localize {
-    margin: 0 10px;
     width: 300px !important;
+}
+
+.input-search {
+    margin: 0 10px;
 }
 
 .panel {
