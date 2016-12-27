@@ -16,7 +16,7 @@ export default class Tabs extends Component {
                     return (
                         <li className={this.props.tabActive == tab.label ? "active": (index == 0 && this.props.tabActive == "" ? "active" : "")} key={index} onClick={() => this.onChangeTab(tab.label)}>
                             <a href={"#"+index}>
-                                <img src={"../../public/assertiva/"+tab.icon} width="20" style={{padding: "0px 3px"}}/>{tab.tipo + ": " + tab.label}
+                                <img src={tab.icon} width="25" style={{padding: "0px 3px"}}/>{tab.tipo + ": " + tab.label}
                             </a>
                         </li>
                     )

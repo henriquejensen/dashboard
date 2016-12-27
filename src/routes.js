@@ -6,7 +6,7 @@ import Login from "./components/Login";
 import Signin from "./components/Signin";
 
 import EditUser from "./containers/user/EditUser";
-import Localize from "./containers/localize/Localize";
+import Localize from "./containers/localize/LocalizeController";
 import Dashboard from "./containers/dashboard/Dashboard";
 import Chat from "./containers/chat/Chat";
 import SMS from "./containers/sms/SMS";

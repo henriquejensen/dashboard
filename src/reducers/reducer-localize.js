@@ -1,14 +1,13 @@
 import { SEARCH_BY_CPF, SEARCH_BY_CNPJ, ICON_LOCALIZE } from "../constants/constantsLocalize";
 
 export default function(state = [], action) {
-	console.log("RETORNO", action)
-
 	if(action.payload) {
 		let response = {
 			data: "",
 			label: "",
 			tipo: "",
-			icon: ICON_LOCALIZE
+			icon: "",
+			produto: "",
 		}
 
 		console.log("RETORNO", action.payload)
@@ -18,6 +17,8 @@ export default function(state = [], action) {
 				response.data = JSON.parse(action.payload.text).PF.DADOS;
 				response.label = response.data.CPF;
 				response.tipo = "CPF";
+				response.icon = ICON_LOCALIZE;
+				response.produto = "localize";
 				return [...state, response]
 				
 
@@ -25,6 +26,8 @@ export default function(state = [], action) {
 				response.data = JSON.parse(action.payload.text).PJ.DADOS;
 				response.label = response.data.CNPJ;
 				response.tipo = "CNPJ";
+				response.icon = ICON_LOCALIZE;
+				response.produto = "localize";
 				return [...state, response]
 				
 		}
