@@ -75,3 +75,15 @@ input {
 .modal {
     display: block
 }
+
+.destaque-ativado {
+    background: #5CB85C;
+    padding: 0px 5px;
+    color: white;
+}
+
+.destaque-desativado {
+    background: #F0AD4E;
+    padding: 0px 5px;
+    color: white;
+}

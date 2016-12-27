@@ -10,6 +10,8 @@ import Veiculos from "./Veiculos";
 import DadosPj from "./DadosPj";
 import Socios from "./Socios";
 
+import PanelGroup from "../../components/PanelGroup";
+
 export default class LocalizeView extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +20,7 @@ export default class LocalizeView extends Component {
     render() {
         return (
             this.props.tipo == "CPF" ?
-                <div>
+                <PanelGroup>
                     <Dados dados={this.props.data} searchLocalize={this.props.searchLocalize} showPessoasRelacionadas={this.props.showPessoasRelacionadas}/>
 
                     {this.props.pessoasRelacionadas ? 
@@ -38,10 +40,10 @@ export default class LocalizeView extends Component {
 
                     {this.props.data.VEICULOS ?
                         <Veiculos veiculos =  {this.props.data.VEICULOS}/> : ""}
-                </div>
+                </PanelGroup>
 
             : this.props.tipo == "CNPJ" ?
-                    <div>
+                    <PanelGroup>
                         <DadosPj dados={this.props.data} searchLocalize={this.props.searchLocalize} />
                         <Telefones telefones = {this.props.data.TELEFONES_MOVEIS.TELEFONE} />
 
@@ -51,7 +53,7 @@ export default class LocalizeView extends Component {
                         {this.props.data.SOCIOS ?
                             <Socios socios = {this.props.data.SOCIOS.SOCIEDADES} buscaCPF={this.props.searchLocalize}/> : "" }
                     
-                    </div>
+                    </PanelGroup>
             : <div></div>
         )
     }
