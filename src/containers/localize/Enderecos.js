@@ -86,7 +86,7 @@ export default class Enderecos extends Component {
                         <td>{this.props.enderecos.BAIRRO}</td>
                         <td>{this.props.enderecos.CIDADE}</td>
                         <td>{this.props.enderecos.UF}</td>
-                        <td>{cep.substring(0,cep.length-3)}-{cep.substring(cep.length-3)}</td>
+                        <td>{this.props.enderecos.CEP.toString().substring(0,this.props.enderecos.CEP.toString().length-3)}-{this.props.enderecos.CEP.toString().substring(this.props.enderecos.CEP.toString().length-3)}</td>
                         <td>
                             <div
                               className="mapa-button"

@@ -41,6 +41,10 @@ class LocalizeController extends Component {
 			tipo = "pj";
 
 		this.props.searchLocalize(this.state.documento, tipo);
+
+		this.setState({
+			documento: ""
+		})
 	}
 
 	onChangeDocumento(evt) {

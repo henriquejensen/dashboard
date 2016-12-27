@@ -60,10 +60,10 @@ export default class Dados extends Component{
               <div style={{margin:"5px 0", width:"100%", float:"left", border: "0px solid #dddddd", borderTopWidth: "1px"}}>
                 <div className="col-md-8" style={{margin:"5px 0"}}>
                   <strong>MÃE: </strong>
-                  {this.props.dados.MAE.NOME}
+                  {this.props.dados.MAE ? this.props.dados.MAE.NOME : "Nada consta"}
                 </div>
 
-                {this.props.dados.MAE.CPF ? (<div className="col-md-4" style={{marginTop:3}}>
+                {this.props.dados.MAE && this.props.dados.MAE.CPF ? (<div className="col-md-4" style={{marginTop:3}}>
                     <div className="mapa-button" style={{margin:0, borderRadius:0, width:100}} onClick={() => this.props.searchLocalize(this.props.dados.MAE.CPF, "pf")}>
                         Consultar <i className='glyphicon glyphicon-search'/>
                     </div>
