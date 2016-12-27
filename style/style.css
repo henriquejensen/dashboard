@@ -102,3 +102,37 @@ input {
 .moreInfo:hover {
     color: #5bc0de
 }
+
+.icon-tel {
+    cursor: pointer;
+    color: grey
+}
+
+.icon-tel-msg:hover {
+    color: blue
+}
+
+.icon-tel-phone:hover {
+    color: black
+}
+
+.icon-tel-hot:hover {
+    color: red
+}
+
+.qtd-panel {
+    position: absolute;
+}
+
+.qtd-panel > i {
+    font-size: 11px;
+    padding: 0px 3px;
+}
+
+.relacionados {
+    margin: 0px 6px
+}
+
+.relacionados:hover {
+    color: #EC971F;
+}
