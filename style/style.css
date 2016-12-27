@@ -87,3 +87,9 @@ input {
     padding: 0px 5px;
     color: white;
 }
+
+.arrow-panel {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+}

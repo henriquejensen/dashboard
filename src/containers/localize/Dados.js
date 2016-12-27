@@ -9,6 +9,7 @@ export default class Dados extends Component{
     this.state = {
          smShow: false,
          lgShow: false,
+         moreInfo: false
      };
   }
 
@@ -20,9 +21,13 @@ export default class Dados extends Component{
     let cpf = this.props.dados.CPF.toString();
     return (            
             <Panel title="DADOS CADASTRAIS">
-              <div className="col-md-12">
+              <div className="col-md-8">
                 <strong>Documento: </strong>
                 {cpf.substring(0,3)}.{cpf.substring(3,6)}.{cpf.substring(6,9)}-{cpf.substring(9)}
+              </div>
+              <div className="col-md-4">
+                <strong>Status CPF: </strong>
+                <span className={!this.props.dados.baseCpfFiscal ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.baseCpfFiscal ? this.props.dados.baseCpfFiscal.status : "Nada consta"}</span>
               </div>
 
               <div className="col-md-8">
@@ -65,11 +70,28 @@ export default class Dados extends Component{
                 </div>) : ""}
               </div>
 
-              <div className="col-md-3" >
+              <div className="col-md-8" style={{display: "none"}}>
                   <div className="mapa-button" style={{margin:0, borderRadius:0, width:200}} onClick={this.props.showPessoasRelacionadas}>
                     Pessoas Relacionadas <i className="glyphicon glyphicon-search" aria-hidden="true" />
                   </div>
               </div>
+
+              <div className="col-md-12" onClick={() => this.setState({moreInfo:!this.state.moreInfo})}>
+                <i className="glyphicon glyphicon-plus pull-right" />
+              </div>
+
+              {this.state.moreInfo ? 
+                <div >
+                  <div className="col-md-4">
+                    <strong>Data status CPF: </strong>
+                    {this.props.dados.baseCpfFiscal ? this.props.dados.baseCpfFiscal.data : "Nada consta"}
+                  </div>
+
+                  <div className="col-md-8" style={{marginBottom:"20px"}}>
+                    <strong>Protocolo: </strong>
+                    {this.props.dados.baseCpfFiscal ? this.props.dados.baseCpfFiscal.protocolo : "Nada consta"}
+                  </div>
+                </div> : ""}
 
           </Panel>
     )
