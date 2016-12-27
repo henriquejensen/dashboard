@@ -76,8 +76,8 @@ export default class Dados extends Component{
                   </div>
               </div>
 
-              <div className="col-md-12" onClick={() => this.setState({moreInfo:!this.state.moreInfo})}>
-                <i className="glyphicon glyphicon-plus pull-right" />
+              <div className="col-md-12 moreInfo" onClick={() => this.setState({moreInfo:!this.state.moreInfo})}>
+                <i className="glyphicon glyphicon-plus pull-right moreInfo" />
               </div>
 
               {this.state.moreInfo ? 

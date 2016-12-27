@@ -92,4 +92,13 @@ input {
     position: absolute;
     right: 20px;
     top: 12px;
+    cursor: pointer
+}
+
+.moreInfo {
+    cursor: pointer
+}
+
+.moreInfo:hover {
+    color: #5bc0de
 }
