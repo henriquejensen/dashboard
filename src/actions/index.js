@@ -1,23 +1,27 @@
 import axios from "axios";
 import ajax from "superagent";
 
-import { URL_SEARCH, SEARCH_BY_CPF } from "../constants/constantsLocalize";
+import { URL_SEARCH, SEARCH_BY_CPF, SEARCH_BY_CNPJ } from "../constants/constantsLocalize";
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 import { GET_CAMPANHAS_SMS, GET_CENTRO_CUSTO_SMS, GET_RESPOSTAS_SMS } from "../constants/constantsSMS";
 
 export function searchLocalize(document, tipo) {
-	
+	let type = "";
+
 	if(tipo == "pf") {
 		document = patternDocument(document, 11);
+		type = SEARCH_BY_CPF;
+
 	} else if(tipo == "pj") {
 		document = patternDocument(document, 14);
+		type = SEARCH_BY_CNPJ;
 	}
 	const senha = tipo+"/ajax?empresa=ASSERTIVA&usuario=HENRIQUE.TEIXEIRA&senha=conexao182&documento=";
-	const request = ajax.get(URL_SEARCH+senha+document);
+	const data = ajax.get(URL_SEARCH+senha+document);
 
 	return {
-		type: SEARCH_BY_CPF,
-		payload: request
+		type: type,
+		payload: data
 	}
 }
 

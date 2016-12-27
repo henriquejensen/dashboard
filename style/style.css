@@ -41,6 +41,11 @@ input {
     padding: 20px
 }
 
+.icon-produto-consulta {
+    padding: 0px 20px;
+    width: 65px;
+}
+
 .container {
     width: 100%
 }
@@ -65,4 +70,8 @@ input {
 .glyphicon-ok {
     color: #5cb85c;
     font-size: 16px
+}
+
+.modal {
+    display: block
 }

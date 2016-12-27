@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import {Line} from 'react-chartjs-2';
 import { connect } from "react-redux";
 
+import Modal from "../../components/Modal";
+
 import Clock from "./Clock";
 import Calendar from "./Calendar";
 import Weather from "./Weather";

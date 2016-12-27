@@ -13,6 +13,10 @@ import Veiculos from "./Veiculos";
 import DadosPj from "./DadosPj";
 import Socios from "./Socios";
 
+import Tabs from "../../components/Tabs";
+
+import { ICON_LOCALIZE } from "../../constants/constantsLocalize";
+
 class Localize extends Component {
 	constructor(props) {
 		super(props);
@@ -29,6 +33,7 @@ class Localize extends Component {
 		this.onChangeDocumento = this.onChangeDocumento.bind(this);
 		this.renderSearch = this.renderSearch.bind(this);
 		this.onChangeTipo = this.onChangeTipo.bind(this);
+		this._changeTab = this._changeTab.bind(this);
 	}
 
 	componentDidMount() {
@@ -52,6 +57,7 @@ class Localize extends Component {
 	}
 
 	_changeTab(tab) {
+		console.log(tab)
 		this.setState({
 			tabActive: tab
 		})
@@ -70,69 +76,60 @@ class Localize extends Component {
 	}
 
 	renderTabs() {
-		return this.props.data.map((data, index) => {
-				let doc = "";
-				if(data.PF) {
-					doc = data.PF.DADOS.CPF;
-				} else {
-					doc = data.PJ.DADOS.CNPJ;
-				}
+		return this.props.datas.map((data, index) => {
+				let doc = data.label;
 
 				return (
 					<li className={doc == this.state.tabActive ? "active": (index == 0 && this.state.tabActive == "" ? "active" : "")} key={index} onClick={() => this._changeTab(doc)}>
 						<a href={"#"+index}>
-			    		{doc}
+			    		{data.tipo + ": " + doc}
 						</a>
 			 		</li>)}
 				)		
 	}
 
 	renderSearch() {
-		return this.props.data.map((data, index) => {
-				console.log(data)
-				let doc = "";
-				if(data.PF) {
-					doc = data.PF.DADOS.CPF;
-				} else {
-					doc = data.PJ.DADOS.CNPJ;
-				}
+		return this.props.datas.map((data, index) => {
+				console.log("LOCALIZE", data)
+				let doc = data.label;
+
 				return (
 					<div className={doc == this.state.tabActive ? "tab-pane active": (index == 0 && this.state.tabActive == "" ? "tab-pane active" : "tab-pane")} id={doc} key={index}>
 						<div className="panel-group"  >
-							{data.PF ?
+							{data.tipo == "CPF" ?
 								(<div>
-									<Dados dados={data.PF.DADOS} searchLocalize={this.props.searchLocalize} showPessoasRelacionadas={this._showPessoasRelacionadas}/>
+									<Dados dados={data.data} searchLocalize={this.props.searchLocalize} showPessoasRelacionadas={this._showPessoasRelacionadas}/>
 
 									{this.state.pessoasRelacionadas ? 
 										<PessoasRelacionadas /> : ""}
 
-									{data.PF.DADOS.TELEFONES_MOVEIS ? 
-										<Telefones telefones = {data.PF.DADOS.TELEFONES_MOVEIS.TELEFONE} /> : ""}
+									{data.data.TELEFONES_MOVEIS ? 
+										<Telefones telefones = {data.data.TELEFONES_MOVEIS.TELEFONE} /> : ""}
 
-									{data.PF.DADOS.ENDERECOS ?
-										<Enderecos enderecos = {data.PF.DADOS.ENDERECOS.ENDERECO}/> : ""}
+									{data.data.ENDERECOS ?
+										<Enderecos enderecos = {data.data.ENDERECOS.ENDERECO}/> : ""}
 
-									{data.PF.DADOS.OCUPACOES ?
-										<Ocupacoes ocupacao = {data.PF.DADOS.OCUPACOES.OCUPACAO} buscaCNPJ = {this.props.searchLocalize} /> : ""}
+									{data.data.OCUPACOES ?
+										<Ocupacoes ocupacao = {data.data.OCUPACOES.OCUPACAO} buscaCNPJ = {this.props.searchLocalize} /> : ""}
 
-									{data.PF.DADOS.SOCIEDADES ?
-										<Sociedades sociedades = {data.PF.DADOS.SOCIEDADES} buscaCNPJ = {this.props.searchLocalize}/> : "" }
+									{data.data.SOCIEDADES ?
+										<Sociedades sociedades = {data.data.SOCIEDADES} buscaCNPJ = {this.props.searchLocalize}/> : "" }
 
-									{data.PF.DADOS.VEICULOS ?
-										<Veiculos veiculos =  {data.PF.DADOS.VEICULOS}/>  : "" }
+									{data.data.VEICULOS ?
+										<Veiculos veiculos =  {data.data.VEICULOS}/>  : "" }
 									
 								 </div>) : ""}
 
-							{data.PJ ?
+							{data.tipo == "CNPJ" ?
 								(<div>
-									<DadosPj dados={data.PJ.DADOS} searchLocalize={this.props.searchLocalize} />
-									<Telefones telefones = {data.PJ.DADOS.TELEFONES_MOVEIS.TELEFONE} />
+									<DadosPj dados={data.data} searchLocalize={this.props.searchLocalize} />
+									<Telefones telefones = {data.data.TELEFONES_MOVEIS.TELEFONE} />
 
-									{data.PJ.DADOS.ENDERECOS ?
-										<Enderecos enderecos = {data.PJ.DADOS.ENDERECOS.ENDERECO}/> : ""}
+									{data.data.ENDERECOS ?
+										<Enderecos enderecos = {data.data.ENDERECOS.ENDERECO}/> : ""}
 
-									{data.PJ.DADOS.SOCIOS ?
-										<Socios socios = {data.PJ.DADOS.SOCIOS.SOCIEDADES} buscaCPF={this.props.searchLocalize}/> : "" }
+									{data.data.SOCIOS ?
+										<Socios socios = {data.data.SOCIOS.SOCIEDADES} buscaCPF={this.props.searchLocalize}/> : "" }
 									
 								 </div>) : ""}
 					  	</div>
@@ -144,6 +141,9 @@ class Localize extends Component {
 	formSearch() {
 		return  <div className="col-md-12">
 				<form className="form-inline" onSubmit={this.onLocalizeSubmit} >
+
+					{this.props.datas.length > 0 ? <img src={"../../../public/assertiva/" + ICON_LOCALIZE} className="icon-produto-consulta" />: ""}
+
 					<select className="form-control" onChange={this.onChangeTipo} defaultValue={this.props.params.tipo.toUpperCase()}>
 						<option value="CPF">CPF</option>
 						<option value="CNPJ">CNPJ</option>
@@ -171,20 +171,19 @@ class Localize extends Component {
 			<div className="container">
 				<div className="row text-center">
 					<div className="col-md-12">
-						{this.props.data.length == 0 ? <img src="../../../public/assertiva/logo-localize.png" className="logo-produto" />: ""}
+						{this.props.datas.length == 0 ? <img src="../../../public/assertiva/logo-localize.png" className="logo-produto" />: ""}
 					</div>
 
 					{this.formSearch()}
 
-				</div>
+				</div>				
 
-				{this.props.data.length == 0 ? "" : 
+				{this.props.datas.length == 0 ? "" : 
 					(<div>
-						<div className="panel-heading text-center" id="localize-tabs">
-							<ul className="nav nav-tabs">
-								{this.renderTabs()}
-							</ul>
-						</div>
+						
+						<Tabs tabs={this.props.datas}
+							  onChangeTab={this._changeTab}
+							  tabActive={this.state.tabActive}/>
 
 						<div className="tab-content" id="localize-content">
 							{this.renderSearch()}
@@ -198,7 +197,7 @@ class Localize extends Component {
 
 function mapStateToProps(state) {
 	return {
-		data: state.localize
+		datas: state.localize
 	}
 }
 
