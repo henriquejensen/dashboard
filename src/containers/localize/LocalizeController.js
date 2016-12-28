@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { searchLocalize } from "../../actions/index";
+import { searchLocalize, searchTelefonesRelacionados } from "../../actions/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
@@ -23,7 +23,8 @@ class LocalizeController extends Component {
 		}
 
 		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
-		this._showPessoasRelacionadas = this._showPessoasRelacionadas.bind(this)
+		this._showPessoasRelacionadas = this._showPessoasRelacionadas.bind(this);
+		this._showTelefonesRelacionados = this._showTelefonesRelacionados.bind(this);
 		this.onChangeDocumento = this.onChangeDocumento.bind(this);
 		this.onChangeTipo = this.onChangeTipo.bind(this);
 		this._changeTab = this._changeTab.bind(this);
@@ -64,6 +65,10 @@ class LocalizeController extends Component {
 		this.setState({
 			pessoasRelacionadas: !this.state.pessoasRelacionadas
 		})
+	}
+
+	_showTelefonesRelacionados(doc) {
+		this.props.searchTelefonesRelacionados(doc);
 	}
 
 	onChangeTipo(evt) {
@@ -135,7 +140,9 @@ class LocalizeController extends Component {
 												tipo={data.tipo}
 												pessoasRelacionadas={this.state.pessoasRelacionadas}
 												searchLocalize={this.props.searchLocalize}
-												showPessoasRelacionadas={this._showPessoasRelacionadas}/>
+												showPessoasRelacionadas={this._showPessoasRelacionadas}
+												showTelefonesRelacionados={this._showTelefonesRelacionados}
+												telefonesRelacionados={data.telefonesRelacionados}/>
 										
 										: ""}
 
@@ -158,7 +165,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispacth) {
-	return bindActionCreators({ searchLocalize }, dispacth);
+	return bindActionCreators({ searchLocalize, searchTelefonesRelacionados }, dispacth);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalizeController);

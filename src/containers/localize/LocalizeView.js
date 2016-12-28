@@ -9,12 +9,14 @@ import Sociedades from "./Sociedades";
 import Veiculos from "./Veiculos";
 import DadosPj from "./DadosPj";
 import Socios from "./Socios";
+import TelefonesRelacionados from "./TelefonesRelacionados";
 
 import PanelGroup from "../../components/PanelGroup";
 
 export default class LocalizeView extends Component {
     constructor(props) {
         super(props);
+
     }
 
     render() {
@@ -27,7 +29,13 @@ export default class LocalizeView extends Component {
                         <PessoasRelacionadas /> : ""}
 
                     {this.props.data.TELEFONES_MOVEIS ? 
-                        <Telefones telefones = {this.props.data.TELEFONES_MOVEIS.TELEFONE} /> : ""}
+                        <Telefones telefones = {this.props.data.TELEFONES_MOVEIS.TELEFONE} showTelefonesRelacionados = {() => this.props.showTelefonesRelacionados(this.props.data.CPF)} /> : ""}
+
+                    {this.props.telefonesRelacionados ? 
+                        this.props.telefonesRelacionados.map((telefone,i) => {
+                            return <TelefonesRelacionados telefone={telefone} key={i} />
+                        })
+                    :""}
 
                     {this.props.data.ENDERECOS ?
                         <Enderecos enderecos = {this.props.data.ENDERECOS.ENDERECO}/> : ""}

@@ -1,7 +1,7 @@
 import axios from "axios";
 import ajax from "superagent";
 
-import { URL_SEARCH, SEARCH_BY_CPF, SEARCH_BY_CNPJ } from "../constants/constantsLocalize";
+import { URL_SEARCH, SEARCH_BY_CPF, SEARCH_BY_CNPJ, SEARCH_BY_TELEFONES_RELECIONADOS } from "../constants/constantsLocalize";
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 import { GET_CAMPANHAS_SMS, GET_CENTRO_CUSTO_SMS, GET_RESPOSTAS_SMS } from "../constants/constantsSMS";
 
@@ -80,5 +80,12 @@ export function getRespostasSMS() {
 	return {
 		type: GET_RESPOSTAS_SMS,
 		payload: ""
+	}
+}
+
+export function searchTelefonesRelacionados(doc) {
+	return {
+		type: SEARCH_BY_TELEFONES_RELECIONADOS,
+		payload: doc
 	}
 }

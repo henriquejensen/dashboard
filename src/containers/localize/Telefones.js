@@ -13,6 +13,8 @@ export default class Telefones extends Component{
           copiar: false,
           showMoreTel: false
       };
+
+      this.telefonesRelacionados = this.telefonesRelacionados.bind(this);
   }
 
   copiarNumero() {
@@ -20,6 +22,10 @@ export default class Telefones extends Component{
     this.setState({
       copiar: !this.state.copiar
     })
+  }
+
+  telefonesRelacionados() {
+    this.props.showTelefonesRelacionados()
   }
 
   render() {
@@ -128,7 +134,7 @@ export default class Telefones extends Component{
                     {celulares.length > 4 || this.props.telefones.length - celulares.length > 4 ?
                     <i className="glyphicon glyphicon-plus pull-right moreInfo" onClick={() => this.setState({showMoreTel:!this.state.showMoreTel})}/>: ""}
                     
-                    <i className="glyphicon glyphicon-user pull-right relacionados" />
+                    <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.telefonesRelacionados} />
                   </div>
                   
               </Panel>)
