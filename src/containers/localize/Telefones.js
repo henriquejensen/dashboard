@@ -45,7 +45,7 @@ export default class Telefones extends Component{
                         tel = tel.toString().replace("(","").replace(")","").replace(" ","").replace("-","");
                         if(tel != "") {
                           if(tel.length < 11) {
-                              return <tr key={i} className={i > 4 ? (this.state.showMoreTel ? "" : "display-none") : ""} >
+                              return <tr key={i} className={i > 3 ? (this.state.showMoreTel ? "" : "display-none") : ""} >
                                 <td>
                                   <div className="col-md-3">
                                     {tel[0]}{tel[1]} {tel.substring(2)}
@@ -92,7 +92,7 @@ export default class Telefones extends Component{
                       <tbody>
                         {celulares.map((tel,i) => {
                             tel = tel.toString();
-                            return <tr key={i} className={i > 4 ? (this.state.showMoreTel ? "" : "display-none") : ""}>
+                            return <tr key={i} className={i > 3 ? (this.state.showMoreTel ? "" : "display-none") : ""}>
                                 <td>
                                   <div className="col-md-3" style={{paddingRight: 0}}>
                                     {tel[0]}{tel[1]} {tel.substring(2)}

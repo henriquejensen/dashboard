@@ -13,8 +13,7 @@ export default class TelefonesRelacionados extends Component {
     }
 
     renderTelefones(label, telefones) {
-        return telefones.map((tel, i) => {
-            return <div className="col-md-6" key={i}>
+        return <div className="col-md-6" >
                 <table className="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -22,38 +21,38 @@ export default class TelefonesRelacionados extends Component {
                         </tr>   
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <div className="col-md-3">
-                                    {tel}
-                                </div>
+                        {telefones.map((tel, i) => {
+                            return <tr key={i}>
+                                    <td>
+                                        <div className="col-md-3">
+                                            {tel}
+                                        </div>
 
-                                <div className="col-md-2" style={{cursor:"pointer"}}>
-                                    <CopyToClipboard text={tel} onCopy={this.copiarNumero.bind(this)}>
-                                    <span >Copiar</span>
-                                    </CopyToClipboard>&nbsp;
-                                </div>
+                                        <div className="col-md-2" style={{cursor:"pointer"}}>
+                                            <CopyToClipboard text={tel} onCopy={this.copiarNumero.bind(this)}>
+                                            <span >Copiar</span>
+                                            </CopyToClipboard>&nbsp;
+                                        </div>
 
-                                <div className="col-md-2">
-                                    <img src="http://logok.org/wp-content/uploads/2015/06/Claro-logo-logotype-1024x768.png" width="25"/>
-                                </div>
+                                        <div className="col-md-2">
+                                            <img src="http://logok.org/wp-content/uploads/2015/06/Claro-logo-logotype-1024x768.png" width="25"/>
+                                        </div>
 
-                                <div className="col-md-1">
-                                    <i className="glyphicon glyphicon-comment icon-tel icon-tel-msg"/>
-                                </div>
-                                <div className="col-md-1">
-                                    <i className="glyphicon glyphicon-phone-alt icon-tel icon-tel-phone" />
-                                </div>
-                                <div className="col-md-1">
-                                    <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
-                                </div>
-                            </td>
-                        </tr>
-                        
+                                        <div className="col-md-1">
+                                            <i className="glyphicon glyphicon-comment icon-tel icon-tel-msg"/>
+                                        </div>
+                                        <div className="col-md-1">
+                                            <i className="glyphicon glyphicon-phone-alt icon-tel icon-tel-phone" />
+                                        </div>
+                                        <div className="col-md-1">
+                                            <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
+                                        </div>
+                                    </td>
+                                </tr>
+                        })}                        
                     </tbody>
                 </table>
             </div>
-        })
     }
 
     render() {        

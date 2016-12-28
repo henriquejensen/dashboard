@@ -9,21 +9,23 @@ export default class Emails extends Component {
         return (
             <Panel title="EMAILS" qtdTotal={[{qtd:this.props.emails.length,icon:"glyphicon-envelope"}]}>
                 {this.props.emails.map((email,i) => {
-                    return <div className="col-md-6">
-                            <div className="col-md-8">
-                                {email}
-                            </div>
+                    if(email) {
+                        return <div className="col-md-6" key={i}>
+                                <div className="col-md-8">
+                                    {email}
+                                </div>
 
-                            <div className="col-md-2" style={{cursor:"pointer"}}>
-                                <CopyToClipboard text={email}>
-                                    <span >Copiar</span>
-                                </CopyToClipboard>&nbsp;
-                            </div>
+                                <div className="col-md-2" style={{cursor:"pointer"}}>
+                                    <CopyToClipboard text={email}>
+                                        <span >Copiar</span>
+                                    </CopyToClipboard>&nbsp;
+                                </div>
 
-                            <div className="col-md-1">
-                                <i className="glyphicon glyphicon-envelope icon-tel icon-tel-msg"/>
+                                <div className="col-md-1">
+                                    <i className="glyphicon glyphicon-envelope icon-tel icon-tel-msg"/>
+                                </div>
                             </div>
-                        </div>
+                    }
                 })}
 
               <div className="col-md-12">

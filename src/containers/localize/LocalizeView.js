@@ -5,7 +5,9 @@ import PessoasRelacionadas from "./PessoasRelacionadas";
 import Telefones from "./Telefones";
 import Enderecos from "./Enderecos";
 import Emails from "./Emails";
+import Renda from "./Renda";
 import Ocupacoes from "./Ocupacoes";
+import BeneficiosINSS from "./BeneficiosINSS";
 import Sociedades from "./Sociedades";
 import Veiculos from "./Veiculos";
 import DadosPj from "./DadosPj";
@@ -19,8 +21,6 @@ import PanelGroup from "../../components/PanelGroup";
 export default class LocalizeView extends Component {
     constructor(props) {
         super(props);
-
-        console.log(this.props);
     }
 
     render() {
@@ -50,7 +50,7 @@ export default class LocalizeView extends Component {
                         })
                     :""}
                     
-                    {this.props.data.EMAILS?
+                    {this.props.data.EMAILS ?
                         <Emails emails = {[this.props.data.EMAILS.EMAIL1, this.props.data.EMAILS.EMAIL2, this.props.data.EMAILS.EMAIL3, this.props.data.EMAILS.EMAIL4]}
                                 showEmailsRelacionados = {() => this.props.showEmailsRelacionados(this.props.data.CPF)}/> : ""}
                     
@@ -60,8 +60,11 @@ export default class LocalizeView extends Component {
                         })
                     :""}
 
-                    {this.props.data.OCUPACOES ?
-                        <Ocupacoes ocupacao = {this.props.data.OCUPACOES.OCUPACAO} buscaCNPJ = {this.props.searchLocalize} /> : ""}
+                    {this.props.data.OCUPACOES ? 
+                        <Renda renda = {this.props.data.OCUPACOES.OCUPACAO} buscaCNPJ = {this.props.searchLocalize}/> :""}
+
+                    {this.props.data.VALOR_BENEFICIO ? 
+                        <BeneficiosINSS beneficio = {this.props.data.VALOR_BENEFICIO}/> :""}
 
                     {this.props.data.SOCIEDADES ?
                         <Sociedades sociedades = {this.props.data.SOCIEDADES} buscaCNPJ = {this.props.searchLocalize}/> : "" }
