@@ -4,6 +4,7 @@ import Dados from "./Dados";
 import PessoasRelacionadas from "./PessoasRelacionadas";
 import Telefones from "./Telefones";
 import Enderecos from "./Enderecos";
+import Emails from "./Emails";
 import Ocupacoes from "./Ocupacoes";
 import Sociedades from "./Sociedades";
 import Veiculos from "./Veiculos";
@@ -11,6 +12,7 @@ import DadosPj from "./DadosPj";
 import Socios from "./Socios";
 import TelefonesRelacionados from "./TelefonesRelacionados";
 import EnderecosRelacionados from "./EnderecosRelacionados";
+import EmailsRelacionados from "./EmailsRelacionados";
 
 import PanelGroup from "../../components/PanelGroup";
 
@@ -45,6 +47,16 @@ export default class LocalizeView extends Component {
                     {this.props.enderecosRelacionados ? 
                         this.props.enderecosRelacionados.map((enderecos,i) => {
                             return <EnderecosRelacionados enderecos={enderecos} key={i} />
+                        })
+                    :""}
+                    
+                    {this.props.data.EMAILS?
+                        <Emails emails = {[this.props.data.EMAILS.EMAIL1, this.props.data.EMAILS.EMAIL2, this.props.data.EMAILS.EMAIL3, this.props.data.EMAILS.EMAIL4]}
+                                showEmailsRelacionados = {() => this.props.showEmailsRelacionados(this.props.data.CPF)}/> : ""}
+                    
+                    {this.props.emailsRelacionados ? 
+                        this.props.emailsRelacionados.map((emails,i) => {
+                            return <EmailsRelacionados emails={emails} key={i} />
                         })
                     :""}
 

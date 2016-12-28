@@ -1,4 +1,4 @@
-import { SEARCH_BY_CPF, SEARCH_BY_CNPJ, ICON_LOCALIZE, SEARCH_BY_TELEFONES_RELECIONADOS, SEARCH_BY_ENDERECOS_RELECIONADOS } from "../constants/constantsLocalize";
+import { SEARCH_BY_CPF, SEARCH_BY_CNPJ, ICON_LOCALIZE, SEARCH_BY_TELEFONES_RELECIONADOS, SEARCH_BY_ENDERECOS_RELECIONADOS, SEARCH_BY_EMAILS_RELECIONADOS } from "../constants/constantsLocalize";
 
 const telefonesRelacionados = [
 	{relacao: "MÃE", nome: "MARIA DA SILVA", fixos: ["12345656", "98765423"], moveis: ["989876787"]},
@@ -10,6 +10,11 @@ const enderecosRelacionados = [
 	{relacao: "TIO", nome: "JOSE DA SILVA", enderecos: [{BAIRRO:"MATAO", CEP:1307070, CIDADE:"ARACA", LOGRADOURO:"MENA UM", NUMERO:12, SCORE:2, TIPO_LOGRADOURO:"R", UF:"AC"}]},
 ]
 
+const emailsRelacionados = [
+	{relacao: "MÃE", nome: "MARIA DA SILVA", emails: ["teste@teste.com.br","novo@yahoo.com.br"]},
+	{relacao: "TIO", nome: "JOSE DA SILVA", emails: ["tio@teste.com.br"]},
+]
+
 export default function(state = [], action) {
 	if(action.payload) {
 		let response = {
@@ -19,7 +24,8 @@ export default function(state = [], action) {
 			icon: "",
 			produto: "",
 			telefonesRelacionados: [],
-			enderecosRelacionados: []
+			enderecosRelacionados: [],
+			emailsRelacionados: []
 		}
 
 		console.log("RETORNO", action.payload);
@@ -51,6 +57,11 @@ export default function(state = [], action) {
 				let newEnd = state.slice();
 				newEnd[searchPessoa(state,action.payload)].enderecosRelacionados = enderecosRelacionados;
 				return newEnd;
+
+			case SEARCH_BY_EMAILS_RELECIONADOS:
+				let newEmail = state.slice();
+				newEmail[searchPessoa(state,action.payload)].emailsRelacionados = emailsRelacionados;
+				return newEmail;
 		}
 	}
 

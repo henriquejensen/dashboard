@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { searchLocalize, searchTelefonesRelacionados, searchEnderecosRelacionados } from "../../actions/index";
+import { searchLocalize, searchTelefonesRelacionados, searchEnderecosRelacionados, searchEmailsRelacionados } from "../../actions/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
@@ -26,6 +26,7 @@ class LocalizeController extends Component {
 		this._showPessoasRelacionadas = this._showPessoasRelacionadas.bind(this);
 		this._showTelefonesRelacionados = this._showTelefonesRelacionados.bind(this);
 		this._showEnderecosRelacionados = this._showEnderecosRelacionados.bind(this);
+		this._showEmailsRelacionados = this._showEmailsRelacionados.bind(this);
 		this.onChangeDocumento = this.onChangeDocumento.bind(this);
 		this.onChangeTipo = this.onChangeTipo.bind(this);
 		this._changeTab = this._changeTab.bind(this);
@@ -74,6 +75,10 @@ class LocalizeController extends Component {
 	
 	_showEnderecosRelacionados(doc) {
 		this.props.searchEnderecosRelacionados(doc);
+	}
+
+	_showEmailsRelacionados(doc) {
+		this.props.searchEmailsRelacionados(doc);
 	}
 
 	onChangeTipo(evt) {
@@ -149,7 +154,9 @@ class LocalizeController extends Component {
 												showTelefonesRelacionados={this._showTelefonesRelacionados}
 												telefonesRelacionados={data.telefonesRelacionados}
 												showEnderecosRelacionados={this._showEnderecosRelacionados}
-												enderecosRelacionados={data.enderecosRelacionados}/>
+												enderecosRelacionados={data.enderecosRelacionados}
+												showEmailsRelacionados={this._showEmailsRelacionados}
+												emailsRelacionados={data.emailsRelacionados}/>
 										
 										: ""}
 
@@ -172,7 +179,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispacth) {
-	return bindActionCreators({ searchLocalize, searchTelefonesRelacionados, searchEnderecosRelacionados }, dispacth);
+	return bindActionCreators({ searchLocalize, searchTelefonesRelacionados, searchEnderecosRelacionados, searchEmailsRelacionados }, dispacth);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalizeController);
