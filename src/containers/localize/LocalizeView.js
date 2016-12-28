@@ -10,6 +10,7 @@ import Veiculos from "./Veiculos";
 import DadosPj from "./DadosPj";
 import Socios from "./Socios";
 import TelefonesRelacionados from "./TelefonesRelacionados";
+import EnderecosRelacionados from "./EnderecosRelacionados";
 
 import PanelGroup from "../../components/PanelGroup";
 
@@ -17,6 +18,7 @@ export default class LocalizeView extends Component {
     constructor(props) {
         super(props);
 
+        console.log(this.props);
     }
 
     render() {
@@ -38,7 +40,13 @@ export default class LocalizeView extends Component {
                     :""}
 
                     {this.props.data.ENDERECOS ?
-                        <Enderecos enderecos = {this.props.data.ENDERECOS.ENDERECO}/> : ""}
+                        <Enderecos enderecos = {this.props.data.ENDERECOS.ENDERECO} showEnderecosRelacionados={() => this.props.showEnderecosRelacionados(this.props.data.CPF)}/> : ""}
+
+                    {this.props.enderecosRelacionados ? 
+                        this.props.enderecosRelacionados.map((enderecos,i) => {
+                            return <EnderecosRelacionados enderecos={enderecos} key={i} />
+                        })
+                    :""}
 
                     {this.props.data.OCUPACOES ?
                         <Ocupacoes ocupacao = {this.props.data.OCUPACOES.OCUPACAO} buscaCNPJ = {this.props.searchLocalize} /> : ""}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { searchLocalize, searchTelefonesRelacionados } from "../../actions/index";
+import { searchLocalize, searchTelefonesRelacionados, searchEnderecosRelacionados } from "../../actions/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
@@ -25,6 +25,7 @@ class LocalizeController extends Component {
 		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
 		this._showPessoasRelacionadas = this._showPessoasRelacionadas.bind(this);
 		this._showTelefonesRelacionados = this._showTelefonesRelacionados.bind(this);
+		this._showEnderecosRelacionados = this._showEnderecosRelacionados.bind(this);
 		this.onChangeDocumento = this.onChangeDocumento.bind(this);
 		this.onChangeTipo = this.onChangeTipo.bind(this);
 		this._changeTab = this._changeTab.bind(this);
@@ -69,6 +70,10 @@ class LocalizeController extends Component {
 
 	_showTelefonesRelacionados(doc) {
 		this.props.searchTelefonesRelacionados(doc);
+	}
+	
+	_showEnderecosRelacionados(doc) {
+		this.props.searchEnderecosRelacionados(doc);
 	}
 
 	onChangeTipo(evt) {
@@ -142,7 +147,9 @@ class LocalizeController extends Component {
 												searchLocalize={this.props.searchLocalize}
 												showPessoasRelacionadas={this._showPessoasRelacionadas}
 												showTelefonesRelacionados={this._showTelefonesRelacionados}
-												telefonesRelacionados={data.telefonesRelacionados}/>
+												telefonesRelacionados={data.telefonesRelacionados}
+												showEnderecosRelacionados={this._showEnderecosRelacionados}
+												enderecosRelacionados={data.enderecosRelacionados}/>
 										
 										: ""}
 
@@ -165,7 +172,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispacth) {
-	return bindActionCreators({ searchLocalize, searchTelefonesRelacionados }, dispacth);
+	return bindActionCreators({ searchLocalize, searchTelefonesRelacionados, searchEnderecosRelacionados }, dispacth);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalizeController);

@@ -13,6 +13,8 @@ export default class Enderecos extends Component {
       cep: "",
       mapa: false,
     }
+
+    this.enderecosRelacionados = this.enderecosRelacionados.bind(this);
   }
 
   componentWillMount() {
@@ -41,9 +43,13 @@ export default class Enderecos extends Component {
     })},1000);
   }
 
+  enderecosRelacionados() {
+    this.props.showEnderecosRelacionados();
+  }
+
   render() {
     return (
-            <Panel title="ENDEREÇOS">
+            <Panel title="ENDEREÇOS" qtdTotal={[{qtd:this.props.enderecos.length,icon:"glyphicon-home"}]}>
               <div className="col-md-12">
                 <table className="table table-striped table-hover">
                   <thead>
@@ -102,6 +108,11 @@ export default class Enderecos extends Component {
                   <i className="glyphicon-remove-sign" className="fechar-mapa" onClick={this.fecharMapa.bind(this)}/>
                   <MapPanel rua={this.state.rua} cidade={this.state.cidade} cep={this.state.cep}/>
                 </div>) : ""}
+              </div>
+
+
+              <div className="col-md-12">
+                <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.enderecosRelacionados} />
               </div>
             </Panel>)
   }
