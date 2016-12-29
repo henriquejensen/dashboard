@@ -6,23 +6,44 @@ import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser"
 import { GET_CAMPANHAS_SMS, GET_CENTRO_CUSTO_SMS, GET_RESPOSTAS_SMS } from "../constants/constantsSMS";
 
 export function searchLocalize(document, tipo) {
-	let type = "";
+	const senha = tipo+"/ajax?empresa=ASSERTIVA&usuario=HENRIQUE.TEIXEIRA&senha=conexao182&documento=";
 
 	if(tipo == "pf") {
 		document = patternDocument(document, 11);
-		type = SEARCH_BY_CPF;
+
+		return (dispatch) => {
+			ajax.get(URL_SEARCH+senha+document)
+				.then((response) => {
+					console.log("REQUEST PF", response);
+					let data = JSON.parse(response.text);
+					if(data.ERRORS) {
+						dispatch({type: "REQUEST_ERROR", payload: data})
+					} else {
+						dispatch({type: SEARCH_BY_CPF, payload: data.PF.DADOS})
+					}
+				})
+		}
 
 	} else if(tipo == "pj") {
 		document = patternDocument(document, 14);
-		type = SEARCH_BY_CNPJ;
-	}
-	const senha = tipo+"/ajax?empresa=ASSERTIVA&usuario=HENRIQUE.TEIXEIRA&senha=conexao182&documento=";
-	const data = ajax.get(URL_SEARCH+senha+document);
 
-	return {
-		type: type,
-		payload: data
+		return (dispatch) => {
+			ajax.get(URL_SEARCH+senha+document)
+				.then((response) => {
+					console.log("REQUEST PJ", response);
+					let data = JSON.parse(response.text);
+					if(data.ERRORS) {
+						dispatch({type: "REQUEST_ERROR", payload: data})
+					} else {
+						dispatch({type: SEARCH_BY_CNPJ, payload: data.PJ.DADOS})
+					}
+				})
+		}
 	}
+	
+	
+	
+
 }
 
 function patternDocument(doc, len) {

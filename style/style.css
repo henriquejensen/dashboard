@@ -42,8 +42,8 @@ input {
 }
 
 .icon-produto-consulta {
-    padding: 0px 20px;
-    width: 65px;
+    padding-right: 10px;
+    width: 40px;
 }
 
 .container {
@@ -140,4 +140,15 @@ input {
 .breadcrumbs {
     padding: 5px 0px 20px 15px;
     color: #ec870e;
+}
+
+.error-message {
+    position: absolute;
+    right: 25px;
+    top: 5px;
+    cursor: pointer
+}
+
+.alert {
+    padding: 10px
 }

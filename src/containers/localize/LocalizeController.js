@@ -22,8 +22,6 @@ class LocalizeController extends Component {
 			pessoasRelacionadas: false
 		}
 
-		console.log("LOCAL",this.props.datas)
-
 		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
 		this._showPessoasRelacionadas = this._showPessoasRelacionadas.bind(this);
 		this._showTelefonesRelacionados = this._showTelefonesRelacionados.bind(this);
@@ -49,7 +47,8 @@ class LocalizeController extends Component {
 
 		this.setState({
 			documento: ""
-		})
+		});
+
 	}
 
 	onChangeDocumento(evt) {
@@ -114,6 +113,15 @@ class LocalizeController extends Component {
 						<i className="glyphicon glyphicon-search"></i>
 					</button>
 				</form>
+
+				{this.props.status == "error" ?
+					<div className="col-md-offset-3 col-md-6">
+						<div className="alert alert-danger">
+							{this.props.message}
+							{/*<i className="glyphicon glyphicon-remove error-message" width="100%"/>*/}
+						</div>
+					</div>
+				: ""}
 			</div>
 	}
 
@@ -175,8 +183,11 @@ class LocalizeController extends Component {
 }
 
 function mapStateToProps(state) {
+	console.log(state);
 	return {
-		datas: state.localize
+		datas: state.localize.response,
+		status: state.localize.status,
+		message: state.localize.message
 	}
 }
 

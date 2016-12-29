@@ -1,4 +1,5 @@
 import { SEARCH_BY_CPF, SEARCH_BY_CNPJ, ICON_LOCALIZE, SEARCH_BY_TELEFONES_RELECIONADOS, SEARCH_BY_ENDERECOS_RELECIONADOS, SEARCH_BY_EMAILS_RELECIONADOS } from "../constants/constantsLocalize";
+import { REQUEST_ERROR } from "../constants/utils";
 
 const telefonesRelacionados = [
 	{relacao: "MÃE", nome: "MARIA DA SILVA", fixos: ["12345656", "98765423"], moveis: ["989876787"]},
@@ -15,7 +16,13 @@ const emailsRelacionados = [
 	{relacao: "TIO", nome: "JOSE DA SILVA", emails: ["tio@teste.com.br"]},
 ]
 
-export default function(state = [], action) {
+const initialState = {
+	status: "",
+	message: "",
+	response: []
+}
+
+export default function(state = initialState, action) {
 	if(action.payload) {
 		let response = {
 			data: "",
@@ -32,21 +39,28 @@ export default function(state = [], action) {
 		
 		switch(action.type) {
 			case SEARCH_BY_CPF:
-				response.data = JSON.parse(action.payload.text).PF.DADOS;
+				response.data = action.payload;
 				response.label = response.data.CPF;
 				response.tipo = "CPF";
 				response.icon = ICON_LOCALIZE;
 				response.produto = "localize";
-				return [...state, response];
-				
+				return {
+					status: "success",
+					message: "",
+					response: [...state.response, response]
+				};
 
 			case SEARCH_BY_CNPJ:
-				response.data = JSON.parse(action.payload.text).PJ.DADOS;
+				response.data = action.payload;
 				response.label = response.data.CNPJ;
 				response.tipo = "CNPJ";
 				response.icon = ICON_LOCALIZE;
 				response.produto = "localize";
-				return [...state, response];
+				return {
+					status: "success",
+					message: "",
+					response: [...state.response, response]
+				};
 
 			case SEARCH_BY_TELEFONES_RELECIONADOS:
 				let newTel = state.slice();
@@ -62,6 +76,14 @@ export default function(state = [], action) {
 				let newEmail = state.slice();
 				newEmail[searchPessoa(state,action.payload)].emailsRelacionados = emailsRelacionados;
 				return newEmail;
+
+			case REQUEST_ERROR:
+				console.log("ERRO", action.payload);
+				return {
+					status: "error",
+					message: action.payload.ERRORS.ERROR.content,
+					response: state.response
+				};
 		}
 	}
 
