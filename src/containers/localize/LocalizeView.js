@@ -15,6 +15,7 @@ import Socios from "./Socios";
 import TelefonesRelacionados from "./TelefonesRelacionados";
 import EnderecosRelacionados from "./EnderecosRelacionados";
 import EmailsRelacionados from "./EmailsRelacionados";
+import Protocolo from "./Protocolo";
 
 import PanelGroup from "../../components/PanelGroup";
 
@@ -71,6 +72,10 @@ export default class LocalizeView extends Component {
 
                     {this.props.data.VEICULOS ?
                         <Veiculos veiculos =  {this.props.data.VEICULOS}/> : ""}
+
+                    {this.props.data.PROTOCOLO ? 
+                        <Protocolo protocolo={this.props.data.PROTOCOLO} /> :""}
+
                 </PanelGroup>
 
             : this.props.tipo == "CNPJ" ?

@@ -22,6 +22,8 @@ class LocalizeController extends Component {
 			pessoasRelacionadas: false
 		}
 
+		console.log("LOCAL",this.props.datas)
+
 		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
 		this._showPessoasRelacionadas = this._showPessoasRelacionadas.bind(this);
 		this._showTelefonesRelacionados = this._showTelefonesRelacionados.bind(this);

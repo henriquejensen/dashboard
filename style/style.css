@@ -136,3 +136,8 @@ input {
 .relacionados:hover {
     color: #EC971F;
 }
+
+.breadcrumbs {
+    padding: 5px 0px 20px 15px;
+    color: #ec870e;
+}

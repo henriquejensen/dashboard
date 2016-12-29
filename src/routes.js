@@ -25,22 +25,24 @@ export default (
     <Route path='/' component={Login} />
     <Route path='/signin' component={Signin} />
 
-    <Route path="/dashboard" component={App} >
+    <Route name="Dashboard" path="/dashboard" component={App} >
       <IndexRoute component={Dashboard} />
 
-      <Route path="localize/:tipo" component={Localize}	/>
-      <Route path="basecerta" component={BaseCerta} />
-      <Route path="sms" component={SMS} />
-      <Route path="sms/centrocusto" component={CentroCusto} />
-      <Route path="sms/respostas" component={Respostas} />
-      <Route path="credito" component={Credito} />
-      <Route path="veiculos" component={Veiculos} />
-      <Route path="focofiscal" component={FocoFiscal} />
-      <Route path="vendamais" component={VendaMais} />
-      <Route path="consigmais" component={ConsigMais} />
+      <Route name="Localize" path="localize/:tipo" component={Localize}	/>
+      <Route name="Base Certa" path="basecerta" component={BaseCerta} />
+      <Route name="SMS" path="sms" component={SMS} />
+      <Route name="SMS" path="sms/centrocusto" component={CentroCusto} />
+      <Route name="SMS" path="sms/respostas" component={Respostas} />
+      <Route name="Credito" path="credito" component={Credito} />
+      <Route name="Veiculos" path="veiculos" component={Veiculos} />
+      <Route name="Foco Fiscal" path="focofiscal" component={FocoFiscal} />
+      <Route name="Venda+" path="vendamais" component={VendaMais} />
+      <Route name="Consig+" path="consigmais" component={ConsigMais} />
 
-      <Route path="editar" component={EditUser}	/>
-      <Route path="chat" component={Chat}	/>
+      <Route name="Editar" path="editar" component={EditUser}	/>
+      <Route name="Chat" path="chat" component={Chat}	/>
     </Route>
+
+    <Route path='*' component={App} />
   </Route>
 );

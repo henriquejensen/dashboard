@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 import Panel from "../../components/Panel";
+import Table from "../../components/Table";
 
 export default class Telefones extends Component{
   constructor(props) {

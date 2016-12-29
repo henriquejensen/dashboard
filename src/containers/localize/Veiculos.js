@@ -1,22 +1,17 @@
 import React, { Component } from "react";
 
 import Panel from "../../components/Panel";
+import Table from "../../components/Table";
 
 export default class Veiculos extends Component {
   render() {
     return (
             <Panel title="VEÍCULOS">
-              <div className="col-md-12">
-                <table className="table table-striped table-hover">
-                  <thead>
-                    <tr>
-                      <th>Placa</th>
-                      <th>Marca/Modelo</th>
-                      <th>Ano modelo</th>
-                      <th>Ano fabricação</th>
-                      <th className="text-center">Ação</th>
-                    </tr>
-                  </thead>
+              <Table
+                  fields={
+                      ["PLACA", "MARCA/MODELO", "ANO MODELO", "ANO FABRICAÇÃO", "AÇÃO"]
+                  }
+              >
                   <tbody>
                     {this.props.veiculos.VEICULO.length ?
                       this.props.veiculos.VEICULO.map((vec,i) => {
@@ -41,8 +36,7 @@ export default class Veiculos extends Component {
                         </tr>
                       )}
                   </tbody>
-                </table>
-              </div>
+                </Table>
             </Panel>)
   }
 }
