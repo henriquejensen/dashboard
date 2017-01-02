@@ -1,10 +1,39 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
+import { connect } from "react-redux";
 
-export default class Login extends Component {
+import { authUser } from "../actions/index";
+
+
+class Login extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            empresa: "",
+            user: "",
+            senha: ""
+        }
+
+        this.onChange = this.onChange.bind(this);
+        this.onFormSubmit = this.onFormSubmit.bind(this);
+    }
+
 	componentDidMount() {
 		document.title = "Assertiva";
 	}
+
+    onFormSubmit(evt) {
+        evt.preventDefault();
+
+        this.props.authUser(this.state.empresa, this.state.user, this.state.senha);
+    }
+
+    onChange(evt) {
+        this.setState({
+            [evt.target.name]: evt.target.value
+        })
+    }
 
     render() {
         return (
@@ -17,13 +46,12 @@ export default class Login extends Component {
                         </h3>
                         <div className="account-wall text-center">
                             <img src="../public/assertiva/assertiva-top-index.png" alt="Assertiva" height="50"/>
-                            <form className="form-signin">
-                                <input type="text" className="form-control" placeholder="Empresa" required />
-                                <input type="text" className="form-control" placeholder="Usuário" required autofocus />
-                                <input type="password" className="form-control" placeholder="Senha" required />
-                                <Link to="/dashboard" className="btn btn-lg btn-primary btn-block" type="submit">
-                                    Entrar
-                                </Link>
+                            <form className="form-signin" onSubmit={this.onFormSubmit}>
+                                <input type="text" className="form-control" placeholder="Empresa" value={this.state.empresa} name="empresa" required onChange={this.onChange}/>
+                                <input type="text" className="form-control" placeholder="Usuário" value={this.state.user} name="user" required onChange={this.onChange} />
+                                <input type="password" className="form-control" placeholder="Senha" value={this.state.senha} name="senha" required onChange={this.onChange}/>
+                                <button className="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+                                
                                 <label className="checkbox pull-left">
                                     <input type="checkbox" value="remember-me" />
                                     Lembre-me
@@ -38,3 +66,5 @@ export default class Login extends Component {
         )
     }
 }
+
+export default connect(null, {authUser})(Login);

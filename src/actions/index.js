@@ -4,6 +4,7 @@ import ajax from "superagent";
 import { URL_SEARCH, SEARCH_BY_CPF, SEARCH_BY_CNPJ, SEARCH_BY_EMAILS_RELECIONADOS, SEARCH_BY_TELEFONES_RELECIONADOS, SEARCH_BY_ENDERECOS_RELECIONADOS } from "../constants/constantsLocalize";
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 import { GET_CAMPANHAS_SMS, GET_CENTRO_CUSTO_SMS, GET_RESPOSTAS_SMS } from "../constants/constantsSMS";
+import { LOGIN_SUCCESS, LOGIN_ERROR, AUTH_URL, AUTHENTICATION } from "../constants/utils";
 
 export function searchLocalize(document, tipo) {
 	const senha = tipo+"/ajax?empresa=ASSERTIVA&usuario=HENRIQUE.TEIXEIRA&senha=conexao182&documento=";
@@ -122,5 +123,22 @@ export function searchEmailsRelacionados(doc) {
 	return {
 		type: SEARCH_BY_EMAILS_RELECIONADOS,
 		payload: doc
+	}
+}
+
+export function authUser(empresa, user, senha) {
+	let url = AUTH_URL;
+	
+	return (dispatch) => {
+		ajax.post(url+"?empresa="+empresa+"&usuario="+user+"&senha="+senha)
+			.send({empresa: empresa, usuario: user, senha: senha})
+			.then((response) => {
+				console.log("RESPONSE", response.body.response);
+				localStorage.setItem(AUTHENTICATION, response.body.response);
+				dispatch({type: LOGIN_SUCCESS, payload: response})
+			})
+			.catch((error) => {
+				dispatch({type: LOGIN_ERROR, payload: response})
+			})
 	}
 }
