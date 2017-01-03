@@ -1,7 +1,7 @@
 import axios from "axios";
 import ajax from "superagent";
 
-import { URL_SEARCH, SEARCH_BY_CPF, SEARCH_BY_CNPJ, SEARCH_BY_EMAILS_RELECIONADOS, SEARCH_BY_TELEFONES_RELECIONADOS, SEARCH_BY_ENDERECOS_RELECIONADOS } from "../constants/constantsLocalize";
+import { URL_SEARCH, SEARCH_BY_CPF, SEARCH_BY_CNPJ, SEARCH_BY_EMAILS_RELACIONADOS, SEARCH_BY_TELEFONES_RELACIONADOS, SEARCH_BY_ENDERECOS_RELACIONADOS } from "../constants/constantsLocalize";
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 import { GET_CAMPANHAS_SMS, GET_CENTRO_CUSTO_SMS, GET_RESPOSTAS_SMS } from "../constants/constantsSMS";
 import { LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT, AUTH_URL, AUTHENTICATION } from "../constants/utils";
@@ -105,21 +105,21 @@ export function getRespostasSMS() {
 
 export function searchTelefonesRelacionados(doc) {
 	return {
-		type: SEARCH_BY_TELEFONES_RELECIONADOS,
+		type: SEARCH_BY_TELEFONES_RELACIONADOS,
 		payload: doc
 	}
 }
 
 export function searchEnderecosRelacionados(doc) {
 	return {
-		type: SEARCH_BY_ENDERECOS_RELECIONADOS,
+		type: SEARCH_BY_ENDERECOS_RELACIONADOS,
 		payload: doc
 	}
 }
 
 export function searchEmailsRelacionados(doc) {
 	return {
-		type: SEARCH_BY_EMAILS_RELECIONADOS,
+		type: SEARCH_BY_EMAILS_RELACIONADOS,
 		payload: doc
 	}
 }

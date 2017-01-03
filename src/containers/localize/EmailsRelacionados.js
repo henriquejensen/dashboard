@@ -17,7 +17,7 @@ export default class Emails extends Component {
                     </div>
                 </div>
                 {this.props.emails.emails.map((email,i) => {
-                    return <div className="col-md-6">
+                    return <div className="col-md-6" key={i}>
                             <div className="col-md-8">
                                 {email}
                             </div>
@@ -29,7 +29,9 @@ export default class Emails extends Component {
                             </div>
 
                             <div className="col-md-1">
-                                <i className="glyphicon glyphicon-envelope icon-tel icon-tel-msg"/>
+                                <a data-tip data-for="tooltipEmail">
+                                    <i className="glyphicon glyphicon-envelope icon-tel icon-tel-msg"/>
+                                </a>
                             </div>
                         </div>
                 })}

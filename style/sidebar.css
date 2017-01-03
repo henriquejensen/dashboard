@@ -1,7 +1,8 @@
 #wrapper {
     padding-left: 70px;
     transition: all .4s ease 0s;
-    height: 100%
+    height: 100%;
+    display: flex;
 }
 
 #sidebar-wrapper {
@@ -9,7 +10,6 @@
     left: 70px;
     width: 220px;
     background: white;
-    position: fixed;
     height: 100%;
     z-index: 10000;
     transition: all .4s ease 0s;

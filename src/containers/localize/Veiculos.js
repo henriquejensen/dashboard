@@ -21,7 +21,11 @@ export default class Veiculos extends Component {
                             <td>{vec.ANO_MODELO}</td>
                             <td>{vec.ANO_FABRICACAO}</td>
                             <td>
-                              <div className="mapa-button"><i className="glyphicon glyphicon-search" /></div>
+                              <a data-tip data-for='tooltipConsultar'>
+                                <div className="mapa-button">
+                                  <i className="glyphicon glyphicon-search" />
+                                </div>
+                              </a>
                             </td>
                           </tr>
                       }) : (
@@ -31,7 +35,11 @@ export default class Veiculos extends Component {
                           <td>{this.props.veiculos.VEICULO.ANO_MODELO}</td>
                           <td>{this.props.veiculos.VEICULO.ANO_FABRICACAO}</td>
                           <td>
-                            <div className="mapa-button"><i className="glyphicon glyphicon-search" /></div>
+                            <a data-tip data-for='tooltipConsultar'>
+                              <div className="mapa-button">
+                                <i className="glyphicon glyphicon-search" />
+                              </div>
+                            </a>
                           </td>
                         </tr>
                       )}

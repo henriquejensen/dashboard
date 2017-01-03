@@ -26,6 +26,10 @@
 
 }
 
+.navbar-right {
+    margin: 0;
+}
+
 .navbar-default {
   border-color: #5b3494;
 }

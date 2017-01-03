@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { searchLocalize, searchTelefonesRelacionados, searchEnderecosRelacionados, searchEmailsRelacionados } from "../../actions/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import Tooltip from 'react-tooltip';
 
 import LocalizeView from "./LocalizeView";
 
@@ -94,7 +95,8 @@ class LocalizeController extends Component {
 
 					{this.props.datas.length > 0 ? <img src={ICON_LOCALIZE} className="icon-produto-consulta" />: ""}
 
-					<select className="form-control" onChange={this.onChangeTipo} defaultValue={this.props.params.tipo.toUpperCase()}>
+					<select className="form-control" onChange={this.onChangeTipo} required>
+						<option value="">Selecione</option>
 						<option value="CPF">CPF</option>
 						<option value="CNPJ">CNPJ</option>
 						<option value="NOME">NOME</option>
@@ -107,11 +109,19 @@ class LocalizeController extends Component {
 						className="form-control input-localize input-search "
 						placeholder="Buscar"
 						name="cpf"
+						required
 						onChange={this.onChangeDocumento}/>
+					
+					<a data-tip data-for='tooltipConsultar'>
+						<button className="btn btn-info" type="submit">
+							<i className="glyphicon glyphicon-search"></i>
+						</button>
+					</a>
 
-					<button className="btn btn-info" type="submit">
-						<i className="glyphicon glyphicon-search"></i>
-					</button>
+					<Tooltip id='tooltipConsultar'>
+						<span>Consultar</span>
+					</Tooltip>
+					
 				</form>
 
 				{this.props.status == "error" ?
@@ -183,7 +193,7 @@ class LocalizeController extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log(state);
+	console.log("MAP STATE",state);
 	return {
 		datas: state.localize.response,
 		status: state.localize.status,

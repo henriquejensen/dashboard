@@ -1,4 +1,4 @@
-import { SEARCH_BY_CPF, SEARCH_BY_CNPJ, ICON_LOCALIZE, SEARCH_BY_TELEFONES_RELECIONADOS, SEARCH_BY_ENDERECOS_RELECIONADOS, SEARCH_BY_EMAILS_RELECIONADOS } from "../constants/constantsLocalize";
+import { SEARCH_BY_CPF, SEARCH_BY_CNPJ, ICON_LOCALIZE, SEARCH_BY_TELEFONES_RELACIONADOS, SEARCH_BY_ENDERECOS_RELACIONADOS, SEARCH_BY_EMAILS_RELACIONADOS } from "../constants/constantsLocalize";
 import { REQUEST_ERROR } from "../constants/utils";
 
 const telefonesRelacionados = [
@@ -34,8 +34,6 @@ export default function(state = initialState, action) {
 			enderecosRelacionados: [],
 			emailsRelacionados: []
 		}
-
-		console.log("RETORNO", action.payload);
 		
 		switch(action.type) {
 			case SEARCH_BY_CPF:
@@ -62,20 +60,29 @@ export default function(state = initialState, action) {
 					response: [...state.response, response]
 				};
 
-			case SEARCH_BY_TELEFONES_RELECIONADOS:
-				let newTel = state.slice();
-				newTel[searchPessoa(state,action.payload)].telefonesRelacionados = telefonesRelacionados;
-				return newTel;
+			case SEARCH_BY_TELEFONES_RELACIONADOS:
+				state.response[searchPessoa(state.response,action.payload)].telefonesRelacionados = telefonesRelacionados;
+				return {
+					status: "telefones",
+					message: "",
+					response: state.response
+				};
 
-			case SEARCH_BY_ENDERECOS_RELECIONADOS:
-				let newEnd = state.slice();
-				newEnd[searchPessoa(state,action.payload)].enderecosRelacionados = enderecosRelacionados;
-				return newEnd;
+			case SEARCH_BY_ENDERECOS_RELACIONADOS:
+				state.response[searchPessoa(state.response,action.payload)].enderecosRelacionados = enderecosRelacionados;
+				return {
+					status: "enderecos",
+					message: "",
+					response: state.response
+				};
 
-			case SEARCH_BY_EMAILS_RELECIONADOS:
-				let newEmail = state.slice();
-				newEmail[searchPessoa(state,action.payload)].emailsRelacionados = emailsRelacionados;
-				return newEmail;
+			case SEARCH_BY_EMAILS_RELACIONADOS:
+				state.response[searchPessoa(state.response,action.payload)].emailsRelacionados = emailsRelacionados;
+				return {
+					status: "emails",
+					message: "",
+					response: state.response
+				};
 
 			case REQUEST_ERROR:
 				console.log("ERRO", action.payload);

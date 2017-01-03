@@ -20,15 +20,15 @@ export default class Renda extends Component {
                             <td>{this.props.renda.CODIGO + " - " + this.props.renda.DESCRICAO}</td>
                             <td>{this.props.renda.SALARIO}</td>
                             <td>
-                                <div className="mapa-button" onClick={() => this.props.buscaCNPJ(this.props.renda.CNPJ, "pj")}>
-                                <i className="glyphicon glyphicon-search" />
-                                </div>
+                                <a data-tip data-for="tooltipConsultar">                                
+                                    <div className="mapa-button" onClick={() => this.props.buscaCNPJ(this.props.renda.CNPJ, "pj")}>
+                                        <i className="glyphicon glyphicon-search" />
+                                    </div>
+                                </a>
                             </td>
                         </tr>
-                    </tbody>
-                    
+                    </tbody>                    
                 </Table>
-
             </Panel>
         )
     }

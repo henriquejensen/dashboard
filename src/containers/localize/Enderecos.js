@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Tooltip from "react-tooltip";
 
 import MapPanel from "../../components/mapPanel";
 import Panel from "../../components/Panel";
@@ -78,11 +79,13 @@ export default class Enderecos extends Component {
                               <td>{end.UF}</td>
                               <td>{cep.substring(0,cep.length-3)}-{cep.substring(cep.length-3)}</td>
                               <td>
-                                  <div
-                                    className="mapa-button"
-                                    onClick={this.mostrarMapa.bind(this,end.LOGRADOURO, end.CIDADE, end.CEP)}>
-                                    <i className="glyphicon glyphicon-globe" />
-                                  </div>
+                                  <a data-tip data-for="tooltipMap">
+                                    <div
+                                      className="mapa-button"
+                                      onClick={this.mostrarMapa.bind(this,end.LOGRADOURO, end.CIDADE, end.CEP)}>
+                                      <i className="glyphicon glyphicon-globe" />
+                                    </div>
+                                  </a>
                               </td>
                             </tr>) : <tr></tr>
                       }) : <tr>
@@ -94,11 +97,13 @@ export default class Enderecos extends Component {
                         <td>{this.props.enderecos.UF}</td>
                         <td>{this.props.enderecos.CEP.toString().substring(0,this.props.enderecos.CEP.toString().length-3)}-{this.props.enderecos.CEP.toString().substring(this.props.enderecos.CEP.toString().length-3)}</td>
                         <td>
-                            <div
-                              className="mapa-button"
-                              onClick={this.mostrarMapa.bind(this,this.props.enderecos.LOGRADOURO, this.props.enderecos.CIDADE, this.props.enderecos.CEP)}>
-                              <i className="glyphicon glyphicon-globe" />
-                            </div>
+                            <a data-tip data-for="tooltipMap">
+                              <div
+                                className="mapa-button"
+                                onClick={this.mostrarMapa.bind(this,this.props.enderecos.LOGRADOURO, this.props.enderecos.CIDADE, this.props.enderecos.CEP)}>
+                                <i className="glyphicon glyphicon-globe" />
+                              </div>
+                            </a>
                         </td>
                       </tr>}
                   </tbody>
@@ -109,11 +114,17 @@ export default class Enderecos extends Component {
                   <MapPanel rua={this.state.rua} cidade={this.state.cidade} cep={this.state.cep}/>
                 </div>) : ""}
               </div>
-
-
+              
               <div className="col-md-12">
-                <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.enderecosRelacionados} />
+                <a data-tip data-for="usersRelated">
+                  <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.enderecosRelacionados} />
+                </a>
               </div>
+
+              <Tooltip id="tooltipMap">
+                <span>Visualizar endereço</span>
+              </Tooltip>
+              
             </Panel>)
   }
 }

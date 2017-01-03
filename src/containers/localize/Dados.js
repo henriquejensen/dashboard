@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Tooltip from 'react-tooltip'
 
 import Panel from "../../components/Panel";
 
@@ -64,21 +65,29 @@ export default class Dados extends Component{
                 </div>
 
                 {this.props.dados.MAE && this.props.dados.MAE.CPF ? (<div className="col-md-4" style={{marginTop:3}}>
-                    <div className="mapa-button" style={{margin:0, borderRadius:0, width:100}} onClick={() => this.props.searchLocalize(this.props.dados.MAE.CPF, "pf")}>
-                        Consultar <i className='glyphicon glyphicon-search'/>
-                    </div>
+                    <a data-tip data-for='tooltipConsultar'>
+                      <div className="mapa-button" style={{margin:0, borderRadius:0, width:100}} onClick={() => this.props.searchLocalize(this.props.dados.MAE.CPF, "pf")}>
+                          Consultar
+                          <i className='glyphicon glyphicon-search'/>
+                      </div>
+                    </a>
                 </div>) : ""}
               </div>
-
-              <div className="col-md-8" style={{display: "none"}}>
-                  <div className="mapa-button" style={{margin:0, borderRadius:0, width:200}} onClick={this.props.showPessoasRelacionadas}>
-                    Pessoas Relacionadas <i className="glyphicon glyphicon-search" aria-hidden="true" />
-                  </div>
-              </div>
-
+              
+              
               <div className="col-md-12 moreInfo" onClick={() => this.setState({moreInfo:!this.state.moreInfo})}>
-                <i className="glyphicon glyphicon-plus pull-right moreInfo" />
+                <a data-tip data-for="moreInfo">
+                  <i className="glyphicon glyphicon-plus pull-right moreInfo" />
+                </a>
               </div>
+              
+              <Tooltip id="moreInfo">
+                <span>Mais informações</span>
+              </Tooltip>
+              <Tooltip id="tooltipConsultar">
+                <span>Consultar</span>
+              </Tooltip>
+
 
               {this.state.moreInfo ? 
                 <div >

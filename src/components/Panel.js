@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Tooltip from 'react-tooltip';
 
 export default class PanelGroup extends Component {
     constructor(props) {
@@ -22,7 +23,16 @@ export default class PanelGroup extends Component {
                                            </span>
                                 }) : ""}
                             
-                            <i className={this.state.show ? "glyphicon glyphicon-triangle-top arrow-panel" : "glyphicon glyphicon-triangle-bottom arrow-panel"} onClick={() => this.setState({show:!this.state.show})} />
+                            <a data-tip data-for="arrowPanel">
+                                <i className={this.state.show ? "glyphicon glyphicon-triangle-top arrow-panel" : "glyphicon glyphicon-triangle-bottom arrow-panel"} onClick={() => this.setState({show:!this.state.show})} />
+                            </a>
+                            
+                            <Tooltip
+                                id="arrowPanel"
+                            >
+                                <span>Esconder/Mostrar Informações</span>
+                            </Tooltip>
+
                             {this.props.title}
                         </div>
 

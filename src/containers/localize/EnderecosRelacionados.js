@@ -86,11 +86,13 @@ export default class Enderecos extends Component {
                                     <td>{end.UF}</td>
                                     <td>{cep.substring(0,cep.length-3)}-{cep.substring(cep.length-3)}</td>
                                     <td>
-                                        <div
-                                            className="mapa-button"
-                                            onClick={this.mostrarMapa.bind(this,end.LOGRADOURO, end.CIDADE, end.CEP)}>
-                                            <i className="glyphicon glyphicon-globe" />
-                                        </div>
+                                        <a data-tip data-for="tooltipMap">
+                                          <div
+                                              className="mapa-button"
+                                              onClick={this.mostrarMapa.bind(this,end.LOGRADOURO, end.CIDADE, end.CEP)}>
+                                              <i className="glyphicon glyphicon-globe" />
+                                          </div>
+                                        </a>
                                     </td>
                                     </tr>) : <tr></tr>
                             })}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CopyToClipboard from 'react-copy-to-clipboard';
+import Tooltip from "react-tooltip";
 
 import Panel from "../../components/Panel";
 import Table from "../../components/Table";
@@ -19,7 +20,6 @@ export default class Telefones extends Component{
   }
 
   copiarNumero() {
-    console.log("Copiando...")
     this.setState({
       copiar: !this.state.copiar
     })
@@ -52,25 +52,37 @@ export default class Telefones extends Component{
                                     {tel[0]}{tel[1]} {tel.substring(2)}
                                   </div>
 
-                                  <div className="col-md-2" style={{cursor:"pointer"}}>
-                                    <CopyToClipboard text={tel} onCopy={this.copiarNumero.bind(this)}>
-                                      <span >Copiar</span>
-                                    </CopyToClipboard>&nbsp;
-                                  </div>
+                                  <a data-tip data-for="tooltipCopy">
+                                    <div className="col-md-1">
+                                      <CopyToClipboard text={tel} onCopy={this.copiarNumero.bind(this)}>
+                                        <i className="glyphicon glyphicon-copy icon-tel" />
+                                      </CopyToClipboard>
+                                    </div>
+                                  </a>
 
-                                  <div className="col-md-2">
-                                      <img src="http://logok.org/wp-content/uploads/2015/06/Claro-logo-logotype-1024x768.png" width="25"/>
-                                  </div>
+                                  <a data-tip data-for="tooltipSMS">
+                                    <div className="col-md-1">
+                                      <i className="glyphicon glyphicon-comment icon-tel icon-tel-msg" onClick={()=>this.setState({ lgShow: true })}/>
+                                    </div>
+                                  </a>
 
-                                  <div className="col-md-1">
-                                    <i className="glyphicon glyphicon-comment icon-tel icon-tel-msg" onClick={()=>this.setState({ lgShow: true })}/>
-                                  </div>
-                                  <div className="col-md-1">
-                                    <i className="glyphicon glyphicon-phone-alt icon-tel icon-tel-phone" />
-                                  </div>
-                                  <div className="col-md-1">
-                                    <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
-                                  </div>
+                                  <a data-tip data-for="tooltipCall">
+                                    <div className="col-md-1">
+                                      <i className="glyphicon glyphicon-phone-alt icon-tel icon-tel-phone" />
+                                    </div>
+                                  </a>
+
+                                  <a data-tip data-for="tooltipHot">
+                                    <div className="col-md-1">
+                                      <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
+                                    </div>
+                                  </a>
+
+                                  <a data-tip data-for="tooltipOperadora">
+                                    <div className="col-md-3">
+                                        <img src="http://logok.org/wp-content/uploads/2015/06/Claro-logo-logotype-1024x768.png" width="25"/>
+                                    </div>
+                                  </a>
                                 </td>
                               </tr>
                             } else {
@@ -99,33 +111,73 @@ export default class Telefones extends Component{
                                     {tel[0]}{tel[1]} {tel.substring(2)}
                                   </div>
 
-                                  <div className="col-md-2" style={{cursor:"pointer"}}>
-                                    <CopyToClipboard text={tel} onCopy={this.copiarNumero.bind(this)}>
-                                      <span >Copiar</span>
-                                    </CopyToClipboard>&nbsp;
-                                  </div>
-
-                                    <div className="col-md-2">
-                                        <img src="http://2.bp.blogspot.com/-2iz4nnxuSu8/TyHGVjiLdDI/AAAAAAAABbw/wJWY-ugjozI/s1600/logotipo+oi.jpg" width="20" className="like-button"/>
+                                  <a data-tip data-for="tooltipCopy">
+                                    <div className="col-md-1">
+                                      <CopyToClipboard text={tel} onCopy={this.copiarNumero.bind(this)}>
+                                        <i className="glyphicon glyphicon-copy icon-tel" />
+                                      </CopyToClipboard>
                                     </div>
+                                  </a>
 
+                                  <a data-tip data-for="tooltipSMS">
                                     <div className="col-md-1">
                                       <i className="glyphicon glyphicon-comment icon-tel icon-tel-msg" onClick={()=>this.setState({ lgShow: true })}/>
                                     </div>
+                                  </a>
+
+                                  <a data-tip data-for="tooltipCall">
                                     <div className="col-md-1">
                                       <i className="glyphicon glyphicon-phone-alt icon-tel icon-tel-phone" />
                                     </div>
+                                  </a>
+
+                                  <a data-tip data-for="tooltipHot">
                                     <div className="col-md-1">
                                       <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
                                     </div>
+                                  </a>
+
+                                  <a data-tip data-for="tooltipWhats">
                                     <div className="col-md-1">
                                         <img src="https://whatsapp.com/favicon.png" width="15"/>
                                     </div>
+                                  </a>
+
+                                  <a data-tip data-for="tooltipOperadora">
+                                    <div className="col-md-3">
+                                        <img src="http://2.bp.blogspot.com/-2iz4nnxuSu8/TyHGVjiLdDI/AAAAAAAABbw/wJWY-ugjozI/s1600/logotipo+oi.jpg" width="20" className="like-button"/>
+                                    </div>
+                                  </a>
                                 </td>
                             </tr>
                         })}
                       </tbody>
                     </table>
+
+                    <Tooltip id="tooltipCopy">
+                      <span>Copiar número</span>
+                    </Tooltip>
+
+                    <Tooltip id="tooltipOperadora">
+                      <span>Operadora</span>
+                    </Tooltip>
+
+                    <Tooltip id="tooltipSMS">
+                      <span>Enviar SMS</span>
+                    </Tooltip>
+
+                    <Tooltip id="tooltipCall">
+                      <span>Ligar</span>
+                    </Tooltip>
+
+                    <Tooltip id="tooltipHot">
+                      <span>Número importante</span>
+                    </Tooltip>
+
+                    <Tooltip id="tooltipWhats">
+                      <span>Enviar mensagem por Whatsapp</span>
+                    </Tooltip>
+
                   </div>: "" }
 
                   
@@ -133,9 +185,12 @@ export default class Telefones extends Component{
                   
                   <div className="col-md-12">
                     {celulares.length > 4 || this.props.telefones.length - celulares.length > 4 ?
-                    <i className="glyphicon glyphicon-plus pull-right moreInfo" onClick={() => this.setState({showMoreTel:!this.state.showMoreTel})}/>: ""}
-                    
-                    <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.telefonesRelacionados} />
+                    <a data-tip data-for="moreInfo">
+                      <i className="glyphicon glyphicon-plus pull-right moreInfo" onClick={() => this.setState({showMoreTel:!this.state.showMoreTel})}/>
+                    </a>: ""}
+                    <a data-tip data-for="usersRelated">
+                      <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.telefonesRelacionados} />
+                    </a>
                   </div>
                   
               </Panel>)

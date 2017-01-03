@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CopyToClipboard from 'react-copy-to-clipboard';
+import Tooltip from "react-tooltip";
 
 import Panel from "../../components/Panel";
 
@@ -22,15 +23,28 @@ export default class Emails extends Component {
                                 </div>
 
                                 <div className="col-md-1">
-                                    <i className="glyphicon glyphicon-envelope icon-tel icon-tel-msg"/>
+                                    <a data-tip data-for="tooltipEmail">
+                                        <i className="glyphicon glyphicon-envelope icon-tel icon-tel-msg"/>
+                                    </a>
                                 </div>
                             </div>
                     }
                 })}
 
-              <div className="col-md-12">
-                <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.props.showEmailsRelacionados} />
-              </div>
+              
+                <div className="col-md-12">
+                    <a data-tip data-for="usersRelated">
+                        <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.props.showEmailsRelacionados} />
+                    </a>
+                </div>
+                <Tooltip id="usersRelated">
+                    <span>Informações relacionadas</span>
+                </Tooltip>
+
+                <Tooltip id="tooltipEmail">
+                    <span>Enviar email</span>
+                </Tooltip>
+
             </Panel>
         )
     }
