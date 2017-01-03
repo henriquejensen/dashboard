@@ -25,7 +25,7 @@ export default (
     <Route path='/' component={Login} />
     <Route path='/signin' component={Signin} />
 
-    <Route name="Dashboard" path="/dashboard" component={App} >
+    <Route name="Dashboard" path="/dashboard" onEnter={requireAuth} component={App} >
       <IndexRoute component={Dashboard} />
 
       <Route name="Localize" path="localize/:tipo" component={Localize}	/>
@@ -43,6 +43,14 @@ export default (
       <Route name="Chat" path="chat" component={Chat}	/>
     </Route>
 
-    <Route path='*' component={App} />
   </Route>
 );
+
+function requireAuth(nextState, replace) {  
+  if (!localStorage.token) {
+    replace({
+      pathname: '/',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}

@@ -1,13 +1,13 @@
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 
 const user = {
-    nome: "HENRIQUE.TEIXEIRA",
+    nome: localStorage.getItem("user"),
     email: "henriquejensen@hotmail.com",
     telefone: "11996997909",
     avatar_url: "http://media.cargocollective.com/1/0/789/headerimg/profile.png",
     background_url: "http://retrapack.com.br/wp-content/uploads/2015/01/839274-landscape-sunset.jpg",
     firm_url: "http://www.goodrickes.co.za/images/icon2.png",
-    empresa: "ASSERTIVA",
+    empresa: localStorage.getItem("empresa"),
     perfil: "ADM",
     gadgets: [
         {img: "https://www.wlu.edu/images/alumni/icons/calendar.png", name: "Calendário", active: false},

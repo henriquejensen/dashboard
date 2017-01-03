@@ -44,6 +44,10 @@ class Login extends Component {
                             <strong>Bem-vindo</strong><br/>
                             Identifique-se para acessar nossos serviços
                         </h3>
+
+                        {this.props.auth.error ? 
+                            <div className="alert alert-danger text-center" role="alert">{this.props.auth.msgn}</div> : ""}
+
                         <div className="account-wall text-center">
                             <img src="../public/assertiva/assertiva-top-index.png" alt="Assertiva" height="50"/>
                             <form className="form-signin" onSubmit={this.onFormSubmit}>
@@ -67,4 +71,10 @@ class Login extends Component {
     }
 }
 
-export default connect(null, {authUser})(Login);
+function mapStateToProps(state) {
+    return {
+        auth: state.auth
+    }
+}
+
+export default connect(mapStateToProps, { authUser })(Login);

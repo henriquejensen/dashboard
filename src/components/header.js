@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { connect } from "react-redux";
 
 import { logoTopo } from "../constants/imagensAssertiva";
+import { logOut } from "../actions/index";
 
 
 class Header extends Component {
@@ -64,7 +65,7 @@ class Header extends Component {
 									<div className="row">
 										<div className="col-lg-12">
 											<p>
-												<Link to="/" className="btn btn-danger btn-block">Sair</Link>
+												<Link to="/" onClick={this.props.logOut} className="btn btn-danger btn-block">Sair</Link>
 											</p>
 										</div>
 									</div>
@@ -85,4 +86,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { logOut })(Header);
