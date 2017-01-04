@@ -21,6 +21,10 @@
   position: relative;
 }
 
+.navbar-fixed-bottom, .navbar-fixed-top {
+    z-index: 0
+}
+
 .navbar {
   margin-bottom: 0px;
 

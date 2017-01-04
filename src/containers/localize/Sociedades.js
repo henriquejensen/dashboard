@@ -9,7 +9,7 @@ export default class Sociedades extends Component {
 
   render() {
     return (
-            <Panel title="SOCIEDADES">
+            <Panel title="PARTICIPAÇÕES EM EMPRESAS">
               <div className="col-md-12">
                 <table className="table table-striped table-hover">
                   <thead>

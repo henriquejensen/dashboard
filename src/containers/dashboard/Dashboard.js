@@ -14,7 +14,8 @@ class Dashboard extends Component {
 		super(props);
 
 		this.state = {
-			tabActive: ""
+			tabActive: "",
+			IsModalOpen: false
 		}
 	}
 
@@ -25,6 +26,12 @@ class Dashboard extends Component {
 	changeTab(tab){
 		this.setState({
 			tabActive: tab
+		})
+	}
+
+	closeModal() {
+		this.setState({
+			IsModalOpen: false
 		})
 	}
 
@@ -104,6 +111,15 @@ class Dashboard extends Component {
 	render() {
 		return (
 			<div>
+				<button type="button" className="btn btn-info btn-lg" onClick={() => this.setState({IsModalOpen: !this.state.IsModalOpen})}>Open Modal</button>
+
+				<Modal
+					IsModalOpen={this.state.IsModalOpen}
+					closeModal={this.closeModal.bind(this)}>
+					Testando meu Modal
+					<button onClick={this.closeModal.bind(this)}>close</button>
+				</Modal>
+
 				{this.props.user.charts.optionsSelected.length > 0 ?
 					<div className="col-md-8">
 						{this.panelChart()}

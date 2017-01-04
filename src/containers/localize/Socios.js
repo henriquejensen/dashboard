@@ -9,7 +9,7 @@ export default class Socios extends Component {
 
   render() {
     return (
-          <Panel title="SÓCIOS">
+          <Panel title="QUADRO SOCIAL">
             <div className="col-md-12">
               <table className="table table-striped table-hover">
                 <thead>
