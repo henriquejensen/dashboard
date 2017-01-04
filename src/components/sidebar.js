@@ -17,6 +17,12 @@ export default class Sidebar extends Component {
     }
   }
 
+  componentDidMount() {
+    console.log(location);
+    console.log(location.pathname.split("/")[2]);
+    this.activeMenuDropdown(location.pathname.split("/")[2])
+  }
+
   _changeTab(tab) {
     this.setState({
       tabActive: tab
@@ -25,7 +31,6 @@ export default class Sidebar extends Component {
   }
   
   activeMenuDropdown(menu) {
-    console.log("Ativando menu ", menu)
     if(menu == "localize") {
       this.setState({
         localizeDropdown: !this.state.localizeDropdown
@@ -38,7 +43,7 @@ export default class Sidebar extends Component {
       this.setState({
         veiculosDropdown: !this.state.veiculosDropdown
       })
-    } else if(menu == "focoFiscal") {
+    } else if(menu == "focofiscal") {
       this.setState({
         focoFiscalDropdown: !this.state.focoFiscalDropdown
       })
@@ -56,8 +61,8 @@ export default class Sidebar extends Component {
             
             <li className="sidebar-items">Meus Produtos</li>
 
-            <li onClick={() => this.activeMenuDropdown("localize")}>
-              <Link >Localize<img src="../../public/assertiva/icon-localize.png" className="sub_icon" alt="Icone Localize"/></Link>
+            <li >
+              <Link onClick={() => this.activeMenuDropdown("localize")}>Localize<img src="../../public/assertiva/icon-localize.png" className="sub_icon" alt="Icone Localize"/></Link>
               <ul className={this.state.localizeDropdown ? "sidebar-item-dropdown" : "display-none"}>
                 <Link to="/dashboard/localize/cpf"><li>CPF</li></Link>
                 <Link to="/dashboard/localize/cnpj"><li>CNPJ</li></Link>
@@ -67,8 +72,8 @@ export default class Sidebar extends Component {
               </ul>
             </li>
 
-            <li onClick={() => this.activeMenuDropdown("sms")}>
-              <Link >SMS<img src="../../public/assertiva/icon-sms.png" className="sub_icon" alt="Icone SMS"/></Link>
+            <li>
+              <Link onClick={() => this.activeMenuDropdown("sms")}>SMS<img src="../../public/assertiva/icon-sms.png" className="sub_icon" alt="Icone SMS"/></Link>
               <ul className={this.state.smsDropdown ? "sidebar-item-dropdown" : "display-none"}>
                 <Link to="/dashboard/sms"><li>Envio de SMS</li></Link>
                 <Link to="/dashboard/sms/centrocusto"><li>Centro de Custo</li></Link>
@@ -83,8 +88,8 @@ export default class Sidebar extends Component {
 
             <li ><Link to="/dashboard/vendamais">Venda+<img src="../../public/assertiva/icon-vendamais.png" className="sub_icon" alt="Icone Venda+"/></Link></li>
 
-            <li onClick={() => this.activeMenuDropdown("veiculos")}>
-              <Link>Veículos<img src="../../public/assertiva/icon-veiculos.png" className="sub_icon" alt="Icone Veiculos"/></Link>
+            <li >
+              <Link onClick={() => this.activeMenuDropdown("veiculos")}>Veículos<img src="../../public/assertiva/icon-veiculos.png" className="sub_icon" alt="Icone Veiculos"/></Link>
               <ul className={this.state.veiculosDropdown ? "sidebar-item-dropdown" : "display-none"}>
                 <Link to="/dashboard/veiculos"><li>Agregados</li></Link>
                 <Link to="/dashboard/veiculos"><li>BDV Estadual</li></Link>
@@ -97,8 +102,9 @@ export default class Sidebar extends Component {
             </li>  
             
             <li className="sidebar-items">Outros Produtos</li>
-            <li onClick={() => this.activeMenuDropdown("focoFiscal")}>
-              <Link >Foco Fiscal<img src="../../public/assertiva/icon-focofiscal.png" className="sub_icon" alt="Icone Foco Fiscal"/></Link>
+
+            <li >
+              <Link onClick={() => this.activeMenuDropdown("focofiscal")}>Foco Fiscal<img src="../../public/assertiva/icon-focofiscal.png" className="sub_icon" alt="Icone Foco Fiscal"/></Link>
               <ul className={this.state.focoFiscalDropdown ? "sidebar-item-dropdown" : "display-none"}>
                 <Link to="/dashboard/focofiscal"><li>Receita PF</li></Link>
                 <Link to="/dashboard/focofiscal"><li>Receita PJ</li></Link>

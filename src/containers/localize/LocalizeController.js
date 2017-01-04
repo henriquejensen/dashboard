@@ -55,7 +55,6 @@ class LocalizeController extends Component {
 		if(this.state.tipo == "CNPJ")
 			tipo = "pj";
 
-		this.props.closeModelo();
 		this.props.searchLocalize(this.state.documento, tipo);
 
 		pesquisa = true;
@@ -230,7 +229,6 @@ class LocalizeController extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log("MAP STATE",state);
 	pesquisa = false;
 	return {
 		datas: state.localize.response,

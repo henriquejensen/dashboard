@@ -31,8 +31,8 @@ export default (
       <Route name="Localize" path="localize/:tipo" component={Localize}	/>
       <Route name="Base Certa" path="basecerta" component={BaseCerta} />
       <Route name="SMS" path="sms" component={SMS} />
-      <Route name="SMS" path="sms/centrocusto" component={CentroCusto} />
-      <Route name="SMS" path="sms/respostas" component={Respostas} />
+      <Route name="centro de custo" path="sms/centrocusto" component={CentroCusto} />
+      <Route name="respostas" path="sms/respostas" component={Respostas} />
       <Route name="Credito" path="credito" component={Credito} />
       <Route name="Veiculos" path="veiculos" component={Veiculos} />
       <Route name="Foco Fiscal" path="focofiscal" component={FocoFiscal} />
