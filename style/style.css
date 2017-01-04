@@ -152,3 +152,11 @@ input {
 .alert {
     padding: 10px
 }
+
+.imgSearching > img {
+    height: 350px;
+    position: absolute;
+    z-index: 2;
+    left: 600px;
+    top: 290px;
+}

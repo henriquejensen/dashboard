@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { CreditoDescription } from "../../components/ProductDescription";
+
 export default class Credito extends Component {
 
 	componentDidMount() {
@@ -35,6 +37,8 @@ export default class Credito extends Component {
 							</button>
 						</form>
 					</div>
+
+					<CreditoDescription />
 
 				</div>
 			</div>

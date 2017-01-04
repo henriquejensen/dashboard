@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { searchLocalize, searchTelefonesRelacionados, searchEnderecosRelacionados, searchEmailsRelacionados } from "../../actions/index";
+import { searchLocalize, searchTelefonesRelacionados, searchEnderecosRelacionados, searchEmailsRelacionados, seeModel, closeModelo } from "../../actions/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Tooltip from 'react-tooltip';
@@ -9,8 +9,11 @@ import LocalizeView from "./LocalizeView";
 import Tabs from "../../components/Tabs";
 import TabContent from "../../components/TabContent";
 import TabPane from "../../components/TabPane";
+import { LocalizeDescription } from "../../components/ProductDescription";
 
 import { LOGO_LOCALIZE, ICON_LOCALIZE } from "../../constants/constantsLocalize";
+
+var pesquisa = false;
 
 class LocalizeController extends Component {
 	constructor(props) {
@@ -20,10 +23,11 @@ class LocalizeController extends Component {
 			documento: "",
 			tabActive: "",
 			tipo: this.props.params.tipo.toUpperCase(),
-			pessoasRelacionadas: false
+			pessoasRelacionadas: false,
 		}
 
 		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
+		this.searchLocalize = this.searchLocalize.bind(this);
 		this._showPessoasRelacionadas = this._showPessoasRelacionadas.bind(this);
 		this._showTelefonesRelacionados = this._showTelefonesRelacionados.bind(this);
 		this._showEnderecosRelacionados = this._showEnderecosRelacionados.bind(this);
@@ -31,10 +35,17 @@ class LocalizeController extends Component {
 		this.onChangeDocumento = this.onChangeDocumento.bind(this);
 		this.onChangeTipo = this.onChangeTipo.bind(this);
 		this._changeTab = this._changeTab.bind(this);
+		this._seeModelo = this._seeModelo.bind(this);
+		this._closeModelo = this._closeModelo.bind(this);
 	}
 
 	componentDidMount() {
 		document.title = "Assertiva > Localize";
+	}
+
+	searchLocalize(doc, tipo) {
+		pesquisa = true;
+		this.props.searchLocalize(doc, tipo);
 	}
 
 	onLocalizeSubmit(evt) {
@@ -44,10 +55,13 @@ class LocalizeController extends Component {
 		if(this.state.tipo == "CNPJ")
 			tipo = "pj";
 
+		this.props.closeModelo();
 		this.props.searchLocalize(this.state.documento, tipo);
 
+		pesquisa = true;
+
 		this.setState({
-			documento: ""
+			documento: "",
 		});
 
 	}
@@ -66,20 +80,24 @@ class LocalizeController extends Component {
 	}
 
 	_showPessoasRelacionadas() {
+		pesquisa = true;
 		this.setState({
 			pessoasRelacionadas: !this.state.pessoasRelacionadas
 		})
 	}
 
 	_showTelefonesRelacionados(doc) {
+		pesquisa = true;
 		this.props.searchTelefonesRelacionados(doc);
 	}
 	
 	_showEnderecosRelacionados(doc) {
+		pesquisa = true;
 		this.props.searchEnderecosRelacionados(doc);
 	}
 
 	_showEmailsRelacionados(doc) {
+		pesquisa = true;
 		this.props.searchEmailsRelacionados(doc);
 	}
 
@@ -87,6 +105,18 @@ class LocalizeController extends Component {
 		this.setState({
 			tipo: evt.target.value
 		})
+	}
+
+	_seeModelo(evt) {
+		evt.preventDefault();
+
+		this.props.seeModel();
+	}
+
+	_closeModelo(evt) {
+		evt.preventDefault();
+
+		this.props.closeModelo();
 	}
 
 	formSearch() {
@@ -99,6 +129,7 @@ class LocalizeController extends Component {
 						<option value="">Selecione</option>
 						<option value="CPF">CPF</option>
 						<option value="CNPJ">CNPJ</option>
+						<option value="TELEFONE">TELEFONE</option>
 						<option value="NOME">NOME</option>
 						<option value="ENDERECO">ENDERECO</option>
 					</select>
@@ -145,6 +176,12 @@ class LocalizeController extends Component {
 
 					{this.formSearch()}
 
+					{pesquisa ? <div className="imgSearching"><img src="https://apps.nea.gov/grantsearch/images/ajaxSpinner.gif" /></div> : ""}
+
+					{this.props.datas.length > 0 ? (this.props.status == "model" ? <a href="#" onClick={this._closeModelo}>Fechar Modelo</a> : "") : <a href="#" onClick={this._seeModelo}>Veja Modelo</a>}
+					{this.props.datas.length > 0 ? "" : <LocalizeDescription />}
+					
+
 				</div>				
 
 				{this.props.datas.length == 0 ? "" : 
@@ -169,7 +206,7 @@ class LocalizeController extends Component {
 												data={data.data}
 												tipo={data.tipo}
 												pessoasRelacionadas={this.state.pessoasRelacionadas}
-												searchLocalize={this.props.searchLocalize}
+												searchLocalize={this.searchLocalize}
 												showPessoasRelacionadas={this._showPessoasRelacionadas}
 												showTelefonesRelacionados={this._showTelefonesRelacionados}
 												telefonesRelacionados={data.telefonesRelacionados}
@@ -194,15 +231,24 @@ class LocalizeController extends Component {
 
 function mapStateToProps(state) {
 	console.log("MAP STATE",state);
+	pesquisa = false;
 	return {
 		datas: state.localize.response,
 		status: state.localize.status,
-		message: state.localize.message
+		message: state.localize.message,
 	}
 }
 
 function mapDispatchToProps(dispacth) {
-	return bindActionCreators({ searchLocalize, searchTelefonesRelacionados, searchEnderecosRelacionados, searchEmailsRelacionados }, dispacth);
+	return bindActionCreators({ 
+			searchLocalize,
+			searchTelefonesRelacionados,
+			searchEnderecosRelacionados,
+			searchEmailsRelacionados,
+			seeModel,
+			closeModelo
+		},
+		dispacth);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalizeController);

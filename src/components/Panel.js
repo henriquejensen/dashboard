@@ -15,7 +15,7 @@ export default class PanelGroup extends Component {
             <div className="row row-localize">
                 <div className="col-md-12">
                     <div className="panel panel-default">
-                        <div className="panel-heading text-center" style={{position: "relative"}}>
+                        {this.props.title ? <div className="panel-heading text-center" style={{position: "relative"}}>
                             {this.props.qtdTotal ? 
                                 this.props.qtdTotal.map((total,i) => {
                                     return <span className="qtd-panel" key={i} style={{right: 10 + i*3 + 10 + "%"}}>
@@ -34,7 +34,7 @@ export default class PanelGroup extends Component {
                             </Tooltip>
 
                             {this.props.title}
-                        </div>
+                        </div> : ""}
 
                         <div className={this.state.show ? "panel-body" : "display-none "}>
                             

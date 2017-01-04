@@ -1,0 +1,105 @@
+{  
+   "PF":{  
+      "DADOS":{  
+         "SIGNO":"LIBRA",
+         "RG":22222222,
+         "PROBABILIDADE_OBITO":0,
+         "MAE":{  
+            "TELEFONES":{  
+               "TELEFONE":[  
+                  1133335555,
+                  1133335555
+               ]
+            },
+            "CPF":1419131813,
+            "NOME":"XXXX XXXXX"
+         },
+         "PROTOCOLO":"da758c2a-e689-4759-b7d1-009e15b1f302",
+         "IDADE":37,
+         "ENDERECOS":{  
+            "ENDERECO":[  
+               {  
+                  "BAIRRO":"JARDIM CHAPADÃO",
+                  "TIPO_LOGRADOURO":"R",
+                  "COMPLEMENTO":"AP 12 B 2 A",
+                  "SCORE":10,
+                  "CEP":13070070,
+                  "NUMERO":364,
+                  "LOGRADOURO":"JOAO ERBOLATO",
+                  "UF":"SP",
+                  "CIDADE":"CAMPINAS"
+               }
+            ]
+         },
+         "RENDA_ESTIMADA":1000,
+         "EMAILS":{  
+            "EMAIL2":"teste@teste.com.br",
+            "EMAIL1":"exemplo@exemplo.com.br"
+         },
+         "TELEFONES_MOVEIS":{  
+            "TELEFONE":[  
+               1933243324,
+               1933243324,
+               11998989898,
+               11998989898
+            ]
+         },
+         "SITUACAO_RECEITA_FEDERAL":{  
+            "SITUACAO":"REGULAR",
+            "DATACONSULTA":""
+         },
+         "VEICULOS":{  
+            "VEICULO":[  
+               {  
+                  "MARCA_MODELO":"XXXX XXXX XXXX",
+                  "PLACA":"XXXXXXX",
+                  "ANO_FABRICACAO":2000,
+                  "ANO_MODELO":2000
+               }
+            ]
+         },
+         "OCUPACOES":{  
+            "OCUPACAO":{  
+               "TELEFONES":"",
+               "DESCRICAO":"XXXXXX XXXXX",
+               "CODIGO":111111,
+               "PORTE":"GRANDE EMPRESA",
+               "DESCRICAO_CNAE":"XXXXXXX XXXXXX XXXX",
+               "SALARIO":"Entre 2 e 4 SM",
+               "RAZAO_SOCIAL":"XXXXX XXXXX",
+               "FAIXA_SALARIO":"D",
+               "CNAE":1111111,
+               "CNPJ":11111111111111
+            }
+         },
+         "NOME":"XXXXXX XXXXX XXXXXX",
+         "CCF":"NAO",
+         "FAIXA_RENDA_ESTIMADA":"D",
+         "DATA_NASC":"1980-01-01",
+         "CPF":11111111110,
+         "SEXO":"M",
+         "SOCIEDADES":{  
+            "SOCIEDADE":{  
+               "TELEFONES":{  
+                  "TELEFONE":119889889
+               },
+               "PORTE":"XXXXX XXXXX",
+               "DESCRICAO_CNAE":"XXXXX XXXXXX XXX",
+               "RAZAO_SOCIAL":"XXXXXXXX XXXXXXX XXXXXX",
+               "SOCIOS":{  
+                  "TELEFONES":{  
+                     "TELEFONE":119889889
+                  },
+                  "CPF":11111111111,
+                  "NOME":"XXXXX XXXX XXXXX"
+               },
+               "CNAE":11111111,
+               "DATA_ENTRADA":"DD/MM/AAA",
+               "PARTICIPACAO":50,
+               "CNPJ":11111111111111
+            }
+         },
+         "UFRG":"SP"
+      }
+   }
+}

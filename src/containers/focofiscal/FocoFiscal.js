@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { FocoFiscalDescription } from "../../components/ProductDescription";
+
 export default class FocoFiscal extends Component {
 
 	componentDidMount() {
@@ -34,6 +36,8 @@ export default class FocoFiscal extends Component {
 							</button>
 						</form>
 					</div>
+
+					<FocoFiscalDescription />
 
 				</div>
 			</div>

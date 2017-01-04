@@ -66,7 +66,7 @@ export default class Enderecos extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.props.enderecos.length > 1 ?
+                    {this.props.enderecos.length > 0 ?
                       this.props.enderecos.map((end,i) => {
                           let cep = end.CEP.toString()
                           return this.state.cep == end.CEP || this.state.cep == null ?

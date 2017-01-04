@@ -1,5 +1,6 @@
-import { SEARCH_BY_CPF, SEARCH_BY_CNPJ, ICON_LOCALIZE, SEARCH_BY_TELEFONES_RELACIONADOS, SEARCH_BY_ENDERECOS_RELACIONADOS, SEARCH_BY_EMAILS_RELACIONADOS } from "../constants/constantsLocalize";
+import { SEARCH_BY_CPF, SEARCH_BY_CNPJ, ICON_LOCALIZE, SEARCH_BY_TELEFONES_RELACIONADOS, SEARCH_BY_ENDERECOS_RELACIONADOS, SEARCH_BY_EMAILS_RELACIONADOS, SEE_LOCALIZE_MODEL, CLOSE_LOCALIZE_MODEL } from "../constants/constantsLocalize";
 import { REQUEST_ERROR } from "../constants/utils";
+import model from "./data/modelLocalize.json";
 
 const telefonesRelacionados = [
 	{relacao: "MÃE", nome: "MARIA DA SILVA", fixos: ["12345656", "98765423"], moveis: ["989876787"]},
@@ -19,7 +20,7 @@ const emailsRelacionados = [
 const initialState = {
 	status: "",
 	message: "",
-	response: []
+	response: [],
 }
 
 export default function(state = initialState, action) {
@@ -36,6 +37,21 @@ export default function(state = initialState, action) {
 		}
 		
 		switch(action.type) {
+			case SEE_LOCALIZE_MODEL:
+				response.data = model.PF.DADOS;
+				response.label = model.PF.DADOS.CPF;
+				response.tipo = "CPF";
+				response.icon = ICON_LOCALIZE;
+				response.produto = "localize";
+				return {
+					status: "model",
+					message: "",
+					response: [response]
+				}
+
+			case CLOSE_LOCALIZE_MODEL:
+				return initialState;
+				
 			case SEARCH_BY_CPF:
 				response.data = action.payload;
 				response.label = response.data.CPF;
@@ -45,7 +61,7 @@ export default function(state = initialState, action) {
 				return {
 					status: "success",
 					message: "",
-					response: [...state.response, response]
+					response: state.status == "model" ? [response] : [...state.response, response]
 				};
 
 			case SEARCH_BY_CNPJ:
@@ -57,7 +73,7 @@ export default function(state = initialState, action) {
 				return {
 					status: "success",
 					message: "",
-					response: [...state.response, response]
+					response: state.status == "model" ? [response] : [...state.response, response]
 				};
 
 			case SEARCH_BY_TELEFONES_RELACIONADOS:
