@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Tooltip from "react-tooltip";
 
+import SMSRapido from "../sms/SMSRapido";
+
 import Panel from "../../components/Panel";
 import Table from "../../components/Table";
+import Modal from "../../components/Modal";
 
 export default class Telefones extends Component{
   constructor(props) {
@@ -11,7 +14,7 @@ export default class Telefones extends Component{
 
      this.state = {
           smShow: false,
-          lgShow: false,
+          IsModalOpen: false,
           copiar: false,
           showMoreTel: false
       };
@@ -25,12 +28,17 @@ export default class Telefones extends Component{
     })
   }
 
+	closeModal() {
+		this.setState({
+			IsModalOpen: false
+		})
+	}
+
   telefonesRelacionados() {
     this.props.showTelefonesRelacionados()
   }
 
   render() {
-    let lgClose = () => this.setState({ lgShow: false });
     let celulares = [];
     return (
               <Panel title="TELEFONES" qtdTotal={[{qtd:this.props.telefones.length,icon:"glyphicon-phone-alt"}]}>
@@ -62,7 +70,7 @@ export default class Telefones extends Component{
 
                                   <a data-tip data-for="tooltipSMS">
                                     <div className="col-md-1">
-                                      <i className="glyphicon glyphicon-comment icon-tel icon-tel-msg" onClick={()=>this.setState({ lgShow: true })}/>
+                                      <i className="glyphicon glyphicon-comment icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                     </div>
                                   </a>
 
@@ -121,7 +129,7 @@ export default class Telefones extends Component{
 
                                   <a data-tip data-for="tooltipSMS">
                                     <div className="col-md-1">
-                                      <i className="glyphicon glyphicon-comment icon-tel icon-tel-msg" onClick={()=>this.setState({ lgShow: true })}/>
+                                      <i className="glyphicon glyphicon-comment icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                     </div>
                                   </a>
 
@@ -153,34 +161,40 @@ export default class Telefones extends Component{
                         })}
                       </tbody>
                     </table>
-
-                    <Tooltip id="tooltipCopy">
-                      <span>Copiar número</span>
-                    </Tooltip>
-
-                    <Tooltip id="tooltipOperadora">
-                      <span>Operadora</span>
-                    </Tooltip>
-
-                    <Tooltip id="tooltipSMS">
-                      <span>Enviar SMS</span>
-                    </Tooltip>
-
-                    <Tooltip id="tooltipCall">
-                      <span>Ligar</span>
-                    </Tooltip>
-
-                    <Tooltip id="tooltipHot">
-                      <span>Número importante</span>
-                    </Tooltip>
-
-                    <Tooltip id="tooltipWhats">
-                      <span>Enviar mensagem por Whatsapp</span>
-                    </Tooltip>
-
                   </div>: "" }
 
-                  
+                  <Tooltip id="tooltipCopy">
+                    <span>Copiar número</span>
+                  </Tooltip>
+
+                  <Tooltip id="tooltipOperadora">
+                    <span>Operadora</span>
+                  </Tooltip>
+
+                  <Tooltip id="tooltipSMS">
+                    <span>Enviar SMS</span>
+                  </Tooltip>
+
+                  <Tooltip id="tooltipCall">
+                    <span>Ligar</span>
+                  </Tooltip>
+
+                  <Tooltip id="tooltipHot">
+                    <span>Número importante</span>
+                  </Tooltip>
+
+                  <Tooltip id="tooltipWhats">
+                    <span>Enviar mensagem por Whatsapp</span>
+                  </Tooltip>
+
+                  <Modal
+                    IsModalOpen={this.state.IsModalOpen}
+                    closeModal={this.closeModal.bind(this)}>
+
+                    <SMSRapido />
+
+                    <button onClick={this.closeModal.bind(this)}>close</button>
+                  </Modal>
 
                   
                   <div className="col-md-12">

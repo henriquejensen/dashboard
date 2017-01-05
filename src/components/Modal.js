@@ -11,19 +11,15 @@ const customStyle = {
     backgroundColor   : 'rgba(0, 0, 0, 0.6)'
   },
   content : {
-    position                   : 'absolute',
-    top                        : '40px',
-    left                       : '40px',
-    right                      : '40px',
-    bottom                     : '40px',
     border                     : '1px solid #ccc',
     background                 : '#fff',
     overflow                   : 'auto',
     WebkitOverflowScrolling    : 'touch',
     borderRadius               : '4px',
     outline                    : 'none',
-    padding                    : '20px'
-
+    padding                    : '20px',
+    width                      : '600px',
+    margin                     : "30px auto"
   }
 }
 

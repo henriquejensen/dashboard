@@ -7,7 +7,7 @@ export class LocalizeDescription extends Component {
             <div style={{margin:"0 auto", width:"50%", textAlign:"left"}}>
                 <Panel>
                     <div className="col-md-6">
-                        <strong>Pessoa Física:</strong>
+                        <strong>Pessoa Jurídica:</strong>
                         <ul style={{padding:"5px 25px", listStyle:"disc"}}>
                             <li>Síntese cadastral</li>
                             <li>Participações em empresas</li>
@@ -45,7 +45,7 @@ export class CreditoDescription extends Component {
             <div style={{margin:"0 auto", width:"50%", textAlign:"left"}}>
                 <Panel>
                     <div className="col-md-6">
-                        <strong>Pessoa Física:</strong>
+                        <strong>Pessoa Jurídica:</strong>
                         <ul style={{padding:"5px 25px", listStyle:"disc"}}>
                             <li>Síntese cadastral</li>
                             <li>Participações em empresas</li>
@@ -83,7 +83,7 @@ export class FocoFiscalDescription extends Component {
             <div style={{margin:"0 auto", width:"50%", textAlign:"left"}}>
                 <Panel>
                     <div className="col-md-6">
-                        <strong>Pessoa Física:</strong>
+                        <strong>Pessoa Jurídica:</strong>
                         <ul style={{padding:"5px 25px", listStyle:"disc"}}>
                             <li>Síntese cadastral</li>
                             <li>Participações em empresas</li>
