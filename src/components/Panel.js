@@ -15,10 +15,10 @@ export default class PanelGroup extends Component {
             <div className="row row-localize">
                 <div className="col-md-12">
                     <div className="panel panel-default">
-                        {this.props.title ? <div className="panel-heading text-center" style={{position: "relative"}}>
+                        {this.props.title ? <div className="panel-heading" style={{position: "relative"}}>
                             {this.props.qtdTotal ? 
                                 this.props.qtdTotal.map((total,i) => {
-                                    return <span className="qtd-panel" key={i} style={{right: 10 + i*3 + 10 + "%"}}>
+                                    return <span className="qtd-panel" key={i} style={{right: 39 - i*3 + 10 + "%"}}>
                                             {total.qtd + "  "} <i className={"glyphicon "+ total.icon}/>
                                            </span>
                                 }) : ""}

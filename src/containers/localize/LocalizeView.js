@@ -14,7 +14,6 @@ import DadosPj from "./DadosPj";
 import Socios from "./Socios";
 import TelefonesRelacionados from "./TelefonesRelacionados";
 import EnderecosRelacionados from "./EnderecosRelacionados";
-import EmailsRelacionados from "./EmailsRelacionados";
 import Protocolo from "./Protocolo";
 
 import PanelGroup from "../../components/PanelGroup";
@@ -52,14 +51,7 @@ export default class LocalizeView extends Component {
                     :""}
                     
                     {this.props.data.EMAILS ?
-                        <Emails emails = {[this.props.data.EMAILS.EMAIL1, this.props.data.EMAILS.EMAIL2, this.props.data.EMAILS.EMAIL3, this.props.data.EMAILS.EMAIL4]}
-                                showEmailsRelacionados = {() => this.props.showEmailsRelacionados(this.props.data.CPF)}/> : ""}
-                    
-                    {this.props.emailsRelacionados ? 
-                        this.props.emailsRelacionados.map((emails,i) => {
-                            return <EmailsRelacionados emails={emails} key={i} />
-                        })
-                    :""}
+                        <Emails emails = {[this.props.data.EMAILS.EMAIL1, this.props.data.EMAILS.EMAIL2, this.props.data.EMAILS.EMAIL3, this.props.data.EMAILS.EMAIL4]} /> : ""}
 
                     {this.props.data.OCUPACOES ? 
                         <Renda renda = {this.props.data.OCUPACOES.OCUPACAO} buscaCNPJ = {this.props.searchLocalize}/> :""}
@@ -88,6 +80,9 @@ export default class LocalizeView extends Component {
 
                         {this.props.data.SOCIOS ?
                             <Socios socios = {this.props.data.SOCIOS.SOCIEDADES} buscaCPF={this.props.searchLocalize}/> : "" }
+
+                        {this.props.data.PROTOCOLO ? 
+                            <Protocolo protocolo={this.props.data.PROTOCOLO} /> :""}
                     
                     </PanelGroup>
             : <div></div>

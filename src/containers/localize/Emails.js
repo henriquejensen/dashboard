@@ -31,12 +31,6 @@ export default class Emails extends Component {
                     }
                 })}
 
-              
-                <div className="col-md-12">
-                    <a data-tip data-for="usersRelated">
-                        <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.props.showEmailsRelacionados} />
-                    </a>
-                </div>
                 <Tooltip id="usersRelated">
                     <span>Informações relacionadas</span>
                 </Tooltip>

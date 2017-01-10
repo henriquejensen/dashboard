@@ -45,8 +45,10 @@ input {
 }
 
 .icon-produto-consulta {
-    padding-right: 10px;
     width: 40px;
+    position: absolute;
+    top: 0;
+    left: 230px;
 }
 
 .container {

@@ -44,11 +44,6 @@ export default class Telefones extends Component{
               <Panel title="TELEFONES" qtdTotal={[{qtd:this.props.telefones.length,icon:"glyphicon-phone-alt"}]}>
                 <div className="col-md-6">
                   <table className="table table-striped table-hover">
-                    <thead>
-                      <tr>
-                        <th>Fixos</th>
-                      </tr>
-                    </thead>
                     <tbody>
                       {this.props.telefones.map((tel,i) => {
                         tel = tel.toString().replace("(","").replace(")","").replace(" ","").replace("-","");
@@ -57,26 +52,26 @@ export default class Telefones extends Component{
                               return <tr key={i} className={i > 3 ? (this.state.showMoreTel ? "" : "display-none") : ""} >
                                 <td>
                                   <div className="col-md-3">
-                                    {tel[0]}{tel[1]} {tel.substring(2)}
+                                    <i className="fa fa-phone" /> {tel[0]}{tel[1]} {tel.substring(2)}
                                   </div>
 
                                   <a data-tip data-for="tooltipCopy">
                                     <div className="col-md-1">
                                       <CopyToClipboard text={tel} onCopy={this.copiarNumero.bind(this)}>
-                                        <i className="glyphicon glyphicon-copy icon-tel" />
+                                        <i className="fa fa-clipboard icon-tel" />
                                       </CopyToClipboard>
                                     </div>
                                   </a>
 
-                                  <a data-tip data-for="tooltipSMS">
+                                  <a data-tip data-for="tooltipMessageVoice">
                                     <div className="col-md-1">
-                                      <i className="glyphicon glyphicon-comment icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
+                                      <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                     </div>
                                   </a>
 
                                   <a data-tip data-for="tooltipCall">
                                     <div className="col-md-1">
-                                      <i className="glyphicon glyphicon-phone-alt icon-tel icon-tel-phone" />
+                                      <i className="fa fa-phone icon-tel icon-tel-phone" />
                                     </div>
                                   </a>
 
@@ -105,37 +100,32 @@ export default class Telefones extends Component{
                 {celulares.length > 0 ?
                   <div className="col-md-6" xs={6}>
                     <table className="table table-striped table-hover">
-                      <thead>
-                        <tr>
-                          <th>Celulares</th>
-                        </tr>
-                      </thead>
                       <tbody>
                         {celulares.map((tel,i) => {
                             tel = tel.toString();
                             return <tr key={i} className={i > 3 ? (this.state.showMoreTel ? "" : "display-none") : ""}>
                                 <td>
                                   <div className="col-md-3" style={{paddingRight: 0}}>
-                                    {tel[0]}{tel[1]} {tel.substring(2)}
+                                    <i className="fa fa-mobile" /> {tel[0]}{tel[1]} {tel.substring(2)}
                                   </div>
 
                                   <a data-tip data-for="tooltipCopy">
                                     <div className="col-md-1">
                                       <CopyToClipboard text={tel} onCopy={this.copiarNumero.bind(this)}>
-                                        <i className="glyphicon glyphicon-copy icon-tel" />
+                                        <i className="fa fa-clipboard icon-tel" />
                                       </CopyToClipboard>
                                     </div>
                                   </a>
 
                                   <a data-tip data-for="tooltipSMS">
                                     <div className="col-md-1">
-                                      <i className="glyphicon glyphicon-comment icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
+                                      <i className="fa fa-comments icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                     </div>
                                   </a>
 
                                   <a data-tip data-for="tooltipCall">
                                     <div className="col-md-1">
-                                      <i className="glyphicon glyphicon-phone-alt icon-tel icon-tel-phone" />
+                                      <i className="fa fa-mobile icon-tel icon-tel-phone" />
                                     </div>
                                   </a>
 
@@ -169,6 +159,10 @@ export default class Telefones extends Component{
 
                   <Tooltip id="tooltipOperadora">
                     <span>Operadora</span>
+                  </Tooltip>
+
+                  <Tooltip id="tooltipMessageVoice">
+                    <span>Enviar mensagem de voz</span>
                   </Tooltip>
 
                   <Tooltip id="tooltipSMS">

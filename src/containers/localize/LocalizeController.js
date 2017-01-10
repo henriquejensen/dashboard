@@ -69,11 +69,11 @@ class LocalizeController extends Component {
 		let tipo = this.state.tipo ? this.state.tipo :  location.pathname.split("/")[3].toUpperCase();
 
 		if(tipo == "CPF" || tipo == "CNPJ") {
-			let tipo = "pf";
+			let searchBy = "pf";
 			if(tipo == "CNPJ")
-				tipo = "pj";
+				searchBy = "pj";
 			
-			this.props.searchLocalize(this.state.documento, tipo);
+			this.props.searchLocalize(this.state.documento, searchBy);
 		} else if(tipo == "TELEFONE") {
 			console.log("TELEFONE", this.state.telefone)
 		} else if(tipo == "NOME") {
@@ -198,7 +198,6 @@ class LocalizeController extends Component {
 	}
 
 	renderFormNomeEndereco(formType) {
-		console.log(this.props)
 		return (
 			<Form
 				options = {["CPF", "CNPJ", "TELEFONE", "NOME", "ENDERECO"]}
@@ -322,9 +321,7 @@ class LocalizeController extends Component {
 												showTelefonesRelacionados={this._showTelefonesRelacionados}
 												telefonesRelacionados={data.telefonesRelacionados}
 												showEnderecosRelacionados={this._showEnderecosRelacionados}
-												enderecosRelacionados={data.enderecosRelacionados}
-												showEmailsRelacionados={this._showEmailsRelacionados}
-												emailsRelacionados={data.emailsRelacionados}/>
+												enderecosRelacionados={data.enderecosRelacionados}/>
 										
 										: ""}
 
