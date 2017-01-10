@@ -1,9 +1,17 @@
-import { SEARCH_BY_CPF, SEARCH_BY_CNPJ, ICON_LOCALIZE, SEARCH_BY_TELEFONES_RELACIONADOS, SEARCH_BY_ENDERECOS_RELACIONADOS, SEARCH_BY_EMAILS_RELACIONADOS, SEE_LOCALIZE_MODEL, CLOSE_LOCALIZE_MODEL } from "../constants/constantsLocalize";
-import { REQUEST_ERROR } from "../constants/utils";
+import { SEARCH_BY_CPF,
+		SEARCH_BY_CNPJ,
+		ICON_LOCALIZE,
+		SEARCH_BY_TELEFONES_RELACIONADOS,
+		SEARCH_BY_ENDERECOS_RELACIONADOS,
+		SEARCH_BY_EMAILS_RELACIONADOS,
+		SEE_LOCALIZE_MODEL,
+		CLOSE_LOCALIZE_MODEL } from "../constants/constantsLocalize";
+import { REQUEST_ERROR, ERR_CONNECTION_REFUSED } from "../constants/utils";
 import model from "./data/modelLocalize.json";
 
 const telefonesRelacionados = [
-	{relacao: "MÃE", nome: "MARIA DA SILVA", fixos: ["12345656", "98765423"], moveis: ["989876787"]},
+	{relacao: "MÃE",
+	nome: "MARIA DA SILVA", fixos: ["12345656", "98765423"], moveis: ["989876787"]},
 	{relacao: "TIO", nome: "JOSÉ DA SILVA", fixos: ["55545656", "22265423"], moveis: ["456876787","997069496"]},
 ]
 
@@ -101,10 +109,16 @@ export default function(state = initialState, action) {
 				};
 
 			case REQUEST_ERROR:
-				console.log("ERRO", action.payload);
 				return {
 					status: "error",
 					message: action.payload.ERRORS.ERROR.content,
+					response: state.response
+				};
+
+			case ERR_CONNECTION_REFUSED:
+				return {
+					status: "error",
+					message: "Serviço temporariamente indisponível, tente novamente mais tarde",
 					response: state.response
 				};
 		}

@@ -68,8 +68,6 @@ class LocalizeController extends Component {
 
 		let tipo = this.state.tipo ? this.state.tipo :  location.pathname.split("/")[3].toUpperCase();
 
-		console.log("TIPO", tipo);
-
 		if(tipo == "CPF" || tipo == "CNPJ") {
 			let tipo = "pf";
 			if(tipo == "CNPJ")
