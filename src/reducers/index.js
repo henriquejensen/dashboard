@@ -5,6 +5,7 @@ import LocalizeData from "./reducer-localize";
 import campanhasSMS from "./reducer-sms";
 import ChartData from "./reducer-chart-data";
 import auth from "./reducer-application";
+import estados from "./reducer-states";
 
 const rootReducer = combineReducers({
   localize: LocalizeData,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   campanhasSMS: campanhasSMS,
   centroCustoSMS: campanhasSMS,
   respostasSMS: campanhasSMS,
-  auth
+  auth,
+  estados
 });
 
 export default rootReducer;

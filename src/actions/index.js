@@ -4,7 +4,7 @@ import ajax from "superagent";
 import { URL_SEARCH, SEARCH_BY_CPF, SEARCH_BY_CNPJ, SEARCH_BY_EMAILS_RELACIONADOS, SEARCH_BY_TELEFONES_RELACIONADOS, SEARCH_BY_ENDERECOS_RELACIONADOS, SEE_LOCALIZE_MODEL, CLOSE_LOCALIZE_MODEL } from "../constants/constantsLocalize";
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 import { GET_CAMPANHAS_SMS, GET_CENTRO_CUSTO_SMS, GET_RESPOSTAS_SMS } from "../constants/constantsSMS";
-import { LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT, AUTH_URL, AUTHENTICATION } from "../constants/utils";
+import { LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT, AUTH_URL, AUTHENTICATION, LOAD_STATES } from "../constants/utils";
 
 export function searchLocalize(document, tipo) {
 	const senha = tipo+"/ajax?empresa="+localStorage.empresa+"&usuario="+localStorage.user+"&senha="+localStorage.senha+"&documento=";
@@ -161,5 +161,12 @@ export function logOut() {
 	localStorage.removeItem("senha");
 	return {
 		type: LOG_OUT,
+	}
+}
+
+export function getEstados() {
+	return {
+		type: LOAD_STATES,
+		payload: ""
 	}
 }

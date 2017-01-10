@@ -4,7 +4,6 @@ import { Link } from "react-router";
 
 export default class Sidebar extends Component {
   constructor(props) {
-    console.log("construindo Sidebar");
     super(props);
 
     this.state = {
@@ -18,8 +17,6 @@ export default class Sidebar extends Component {
   }
 
   componentDidMount() {
-    console.log(location);
-    console.log(location.pathname.split("/")[2]);
     this.activeMenuDropdown(location.pathname.split("/")[2])
   }
 

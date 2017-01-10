@@ -29,8 +29,11 @@ input {
 
 .btn {
     border-radius: 0px;
-    margin: 5px 0;
     font-size: 13px;
+}
+
+.my-btn-form {
+    width: 40px;
 }
 
 .display-none {
@@ -154,9 +157,18 @@ input {
 }
 
 .imgSearching > img {
-    height: 350px;
+    height: 150px;
     position: absolute;
     z-index: 2;
-    left: 600px;
+    left: 709px;
     top: 290px;
+}
+
+.my-form {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.my-form > select {
+    display: inline-block;
 }

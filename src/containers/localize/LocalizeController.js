@@ -1,15 +1,20 @@
 import React, { Component } from "react";
-import { searchLocalize, searchTelefonesRelacionados, searchEnderecosRelacionados, searchEmailsRelacionados, seeModel, closeModelo } from "../../actions/index";
+import { searchLocalize,
+		 searchTelefonesRelacionados,
+		 searchEnderecosRelacionados,
+		 searchEmailsRelacionados,
+		 seeModel,
+		 closeModelo,
+		 getEstados } from "../../actions/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import Tooltip from 'react-tooltip';
 
 import LocalizeView from "./LocalizeView";
 
+import Form from "../../components/Form";
 import Tabs from "../../components/Tabs";
 import TabContent from "../../components/TabContent";
 import TabPane from "../../components/TabPane";
-import { LocalizeDescription } from "../../components/ProductDescription";
 
 import { LOGO_LOCALIZE, ICON_LOCALIZE } from "../../constants/constantsLocalize";
 
@@ -21,8 +26,14 @@ class LocalizeController extends Component {
 
 		this.state = {
 			documento: "",
+			telefone: "",
+			nome: "",
+			endereco: "",
+			estado: "",
+			cidade: "",
+			bairro: "",
 			tabActive: "",
-			tipo: this.props.params.tipo.toUpperCase(),
+			tipo: "",
 			pessoasRelacionadas: false,
 		}
 
@@ -32,11 +43,15 @@ class LocalizeController extends Component {
 		this._showTelefonesRelacionados = this._showTelefonesRelacionados.bind(this);
 		this._showEnderecosRelacionados = this._showEnderecosRelacionados.bind(this);
 		this._showEmailsRelacionados = this._showEmailsRelacionados.bind(this);
-		this.onChangeDocumento = this.onChangeDocumento.bind(this);
-		this.onChangeTipo = this.onChangeTipo.bind(this);
+		this.onChange = this.onChange.bind(this);
 		this._changeTab = this._changeTab.bind(this);
 		this._seeModelo = this._seeModelo.bind(this);
 		this._closeModelo = this._closeModelo.bind(this);
+		this.form = this.form.bind(this);
+	}
+
+	componentWillMount() {
+		this.props.getEstados()
 	}
 
 	componentDidMount() {
@@ -51,11 +66,23 @@ class LocalizeController extends Component {
 	onLocalizeSubmit(evt) {
 		evt.preventDefault();
 
-		let tipo = "pf";
-		if(this.state.tipo == "CNPJ")
-			tipo = "pj";
+		let tipo = this.state.tipo ? this.state.tipo :  location.pathname.split("/")[3].toUpperCase();
 
-		this.props.searchLocalize(this.state.documento, tipo);
+		console.log("TIPO", tipo);
+
+		if(tipo == "CPF" || tipo == "CNPJ") {
+			let tipo = "pf";
+			if(tipo == "CNPJ")
+				tipo = "pj";
+			
+			this.props.searchLocalize(this.state.documento, tipo);
+		} else if(tipo == "TELEFONE") {
+			console.log("TELEFONE", this.state.telefone)
+		} else if(tipo == "NOME") {
+			console.log("NOME", this.state.nome, "ESTADO", this.state.estado, "CIDADE", this.state.cidade, "BAIRRO", this.state.bairro, "ENDERECO", this.state.endereco)
+		} else if(tipo == "ENDERECO") {
+			console.log("ENDEREÇO", this.state.nome, "ESTADO", this.state.estado, "CIDADE", this.state.cidade, "BAIRRO", this.state.bairro, "ENDERECO", this.state.endereco)
+		}
 
 		pesquisa = true;
 
@@ -65,14 +92,7 @@ class LocalizeController extends Component {
 
 	}
 
-	onChangeDocumento(evt) {
-		this.setState({
-			documento: evt.target.value,
-		})
-	}
-
 	_changeTab(tab) {
-		console.log(tab)
 		this.setState({
 			tabActive: tab
 		})
@@ -100,9 +120,9 @@ class LocalizeController extends Component {
 		this.props.searchEmailsRelacionados(doc);
 	}
 
-	onChangeTipo(evt) {
+	onChange(evt) {
 		this.setState({
-			tipo: evt.target.value
+			[evt.target.name]: evt.target.value
 		})
 	}
 
@@ -118,70 +138,164 @@ class LocalizeController extends Component {
 		this.props.closeModelo();
 	}
 
-	formSearch() {
-		return  <div className="col-md-12">
-				<form className="form-inline" onSubmit={this.onLocalizeSubmit} >
+	renderForm() {
+		return (
+			<Form
+				options = {["CPF", "CNPJ", "TELEFONE", "NOME", "ENDERECO"]}
+				optionSelected = {location.pathname.split("/")[3].toUpperCase()}
+				tipo = {this.state.tipo}
+				icon = {ICON_LOCALIZE}
+				logo = {LOGO_LOCALIZE}
+				datas = {this.props.datas}
+				onChange = {this.onChange}
+				onformSubmit = {this.onLocalizeSubmit}
+				seeModelo = {this._seeModelo}
+				closeModelo = {this._closeModelo}
+				status = {this.props.status}
+				message = {this.props.message} >
+				
+				<input
+					value={this.state.documento}
+					type="text"
+					className="form-control input-search "
+					placeholder="Digite o documento"
+					name="documento"
+					required
+					style={{width:320, display:"inline-block"}}
+					onChange={this.onChange} />
 
-					{this.props.datas.length > 0 ? <img src={ICON_LOCALIZE} className="icon-produto-consulta" />: ""}
+			</Form>
+		)
+	}
 
-					<select className="form-control" onChange={this.onChangeTipo} required>
-						<option value="">Selecione</option>
-						<option value="CPF">CPF</option>
-						<option value="CNPJ">CNPJ</option>
-						<option value="TELEFONE">TELEFONE</option>
-						<option value="NOME">NOME</option>
-						<option value="ENDERECO">ENDERECO</option>
-					</select>
+	renderFormTelefone() {
+		return (
+			<Form
+				options = {["CPF", "CNPJ", "TELEFONE", "NOME", "ENDERECO"]}
+				optionSelected = {location.pathname.split("/")[3].toUpperCase()}
+				tipo = {this.state.tipo}
+				icon = {ICON_LOCALIZE}
+				logo = {LOGO_LOCALIZE}
+				datas = {this.props.datas}
+				onChange = {this.onChange}
+				onformSubmit = {this.onLocalizeSubmit}
+				seeModelo = {this._seeModelo}
+				closeModelo = {this._closeModelo}
+				status = {this.props.status}
+				message = {this.props.message} >
+				
+				<input
+					value={this.state.telefone}
+					type="number"
+					className="form-control input-search "
+					placeholder="Digite o DD e o número"
+					name="telefone"
+					size="10"
+					required
+					style={{width:320, display:"inline-block"}}
+					onChange={this.onChange} />
 
-					<input
-						value={this.state.documento}
-						type="text"
-						className="form-control input-localize input-search "
-						placeholder="Buscar"
-						name="cpf"
-						required
-						onChange={this.onChangeDocumento}/>
-					
-					<a data-tip data-for='tooltipConsultar'>
-						<button className="btn btn-info" type="submit">
-							<i className="glyphicon glyphicon-search"></i>
-						</button>
-					</a>
+			</Form>
+		)
+	}
 
-					<Tooltip id='tooltipConsultar'>
-						<span>Consultar</span>
-					</Tooltip>
-					
-				</form>
+	renderFormNomeEndereco(formType) {
+		console.log(this.props)
+		return (
+			<Form
+				options = {["CPF", "CNPJ", "TELEFONE", "NOME", "ENDERECO"]}
+				optionSelected = {location.pathname.split("/")[3].toUpperCase()}
+				tipo = {this.state.tipo}
+				icon = {ICON_LOCALIZE}
+				logo = {LOGO_LOCALIZE}
+				datas = {this.props.datas}
+				onChange = {this.onChange}
+				onformSubmit = {this.onLocalizeSubmit}
+				seeModelo = {this._seeModelo}
+				closeModelo = {this._closeModelo}
+				status = {this.props.status}
+				message = {this.props.message} >
+				
+				<input
+					value={formType == "nome" ? this.state.nome : this.state.endereco}
+					type="text"
+					className="form-control"
+					placeholder={"Digite o " + formType}
+					name={formType}
+					size="10"
+					required
+					style={{width:445, display:"inline-block"}}
+					onChange={this.onChange} />
 
-				{this.props.status == "error" ?
-					<div className="col-md-offset-3 col-md-6">
-						<div className="alert alert-danger">
-							{this.props.message}
-							{/*<i className="glyphicon glyphicon-remove error-message" width="100%"/>*/}
-						</div>
-					</div>
-				: ""}
-			</div>
+				<select
+					className="form-control  input-search"
+					name="estado"
+					value={this.state.estado}
+					onChange={this.onChange}
+					style={{width:120}}>
+					{this.props.estados.map((estado, index) => {
+						return <option value={estado.sigla} key={index}>{estado.nome}</option>
+					})}
+				</select>
+
+				<input
+					value={this.state.cidade}
+					type="text"
+					className="form-control input-search"
+					placeholder="Cidade"
+					name="cidade"
+					style={{width:220, display:"inline-block"}}
+					onChange={this.onChange} />
+
+				<input
+					value={this.state.bairro}
+					type="text"
+					className="form-control"
+					placeholder="Bairro"
+					name="bairro"
+					style={{width:215, display:"inline-block"}}
+					onChange={this.onChange} />
+
+				<input
+					value={formType == "nome" ? this.state.endereco : this.state.nome}
+					type="text"
+					className="form-control input-search"
+					placeholder={formType == "nome" ? "Endereço": "Nome"}
+					name={formType == "nome" ? "endereco": "nome"}
+					style={{width:425, display:"inline-block"}}
+					onChange={this.onChange} />
+
+			</Form>
+		)
+	}
+
+	form() {
+		let pathTipo = location.pathname.split("/")[3].toUpperCase();
+		let tipo = this.state.tipo;
+
+		if(!tipo) {
+			tipo = pathTipo;
+		}
+
+		return (
+			pathTipo || tipo ?
+				tipo == "CPF" || tipo == "CNPJ" ? 
+					this.renderForm()
+				: tipo == "NOME" ? 
+					this.renderFormNomeEndereco("nome")
+					: tipo == "TELEFONE" ?
+					this.renderFormTelefone()
+					: this.renderFormNomeEndereco("endereco")
+			: this.renderForm()
+		)
 	}
 
 	render() {
 		return(
 			<div className="container">
-				<div className="row text-center">
-					<div className="col-md-12">
-						{this.props.datas.length == 0 ? <img src={LOGO_LOCALIZE} className="logo-produto" />: ""}
-					</div>
+				{this.form()}
 
-					{this.formSearch()}
-
-					{pesquisa ? <div className="imgSearching"><img src="https://apps.nea.gov/grantsearch/images/ajaxSpinner.gif" /></div> : ""}
-
-					{this.props.datas.length > 0 ? (this.props.status == "model" ? <a href="#" onClick={this._closeModelo}>Fechar Modelo</a> : "") : <a href="#" onClick={this._seeModelo}>Veja Modelo</a>}
-					{this.props.datas.length > 0 ? "" : <LocalizeDescription />}
-					
-
-				</div>				
+				{pesquisa ? <div className="imgSearching"><img src="https://apps.nea.gov/grantsearch/images/ajaxSpinner.gif" /></div> : ""}
 
 				{this.props.datas.length == 0 ? "" : 
 					(<div>
@@ -234,6 +348,7 @@ function mapStateToProps(state) {
 		datas: state.localize.response,
 		status: state.localize.status,
 		message: state.localize.message,
+		estados: state.estados
 	}
 }
 
@@ -244,7 +359,8 @@ function mapDispatchToProps(dispacth) {
 			searchEnderecosRelacionados,
 			searchEmailsRelacionados,
 			seeModel,
-			closeModelo
+			closeModelo,
+			getEstados
 		},
 		dispacth);
 }
