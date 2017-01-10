@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { searchLocalize,
 		 searchTelefonesRelacionados,
+		 searchPessoasRelacionadas,
 		 searchEnderecosRelacionados,
 		 searchEmailsRelacionados,
 		 seeModel,
@@ -33,13 +34,11 @@ class LocalizeController extends Component {
 			cidade: "",
 			bairro: "",
 			tabActive: "",
-			tipo: "",
-			pessoasRelacionadas: false,
+			tipo: ""
 		}
 
 		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
 		this.searchLocalize = this.searchLocalize.bind(this);
-		this._showPessoasRelacionadas = this._showPessoasRelacionadas.bind(this);
 		this._showTelefonesRelacionados = this._showTelefonesRelacionados.bind(this);
 		this._showEnderecosRelacionados = this._showEnderecosRelacionados.bind(this);
 		this._showEmailsRelacionados = this._showEmailsRelacionados.bind(this);
@@ -96,25 +95,15 @@ class LocalizeController extends Component {
 		})
 	}
 
-	_showPessoasRelacionadas() {
-		pesquisa = true;
-		this.setState({
-			pessoasRelacionadas: !this.state.pessoasRelacionadas
-		})
-	}
-
-	_showTelefonesRelacionados(doc) {
-		pesquisa = true;
-		this.props.searchTelefonesRelacionados(doc);
+	_showTelefonesRelacionados(doc, docTelefone) {
+		this.props.searchTelefonesRelacionados(doc, docTelefone);
 	}
 	
 	_showEnderecosRelacionados(doc) {
-		pesquisa = true;
 		this.props.searchEnderecosRelacionados(doc);
 	}
 
 	_showEmailsRelacionados(doc) {
-		pesquisa = true;
 		this.props.searchEmailsRelacionados(doc);
 	}
 
@@ -313,15 +302,12 @@ class LocalizeController extends Component {
 
 										{data.produto == "localize" ?
 											<LocalizeView
-												data={data.data}
-												tipo={data.tipo}
-												pessoasRelacionadas={this.state.pessoasRelacionadas}
+												data={data}
 												searchLocalize={this.searchLocalize}
 												showPessoasRelacionadas={this._showPessoasRelacionadas}
 												showTelefonesRelacionados={this._showTelefonesRelacionados}
-												telefonesRelacionados={data.telefonesRelacionados}
-												showEnderecosRelacionados={this._showEnderecosRelacionados}
-												enderecosRelacionados={data.enderecosRelacionados}/>
+												pessoasRelacionadas={this.props.searchPessoasRelacionadas}
+												showEnderecosRelacionados={this._showEnderecosRelacionados}/>
 										
 										: ""}
 
@@ -343,13 +329,14 @@ function mapStateToProps(state) {
 		datas: state.localize.response,
 		status: state.localize.status,
 		message: state.localize.message,
-		estados: state.estados
+		estados: state.estados,
 	}
 }
 
 function mapDispatchToProps(dispacth) {
 	return bindActionCreators({ 
 			searchLocalize,
+			searchPessoasRelacionadas,
 			searchTelefonesRelacionados,
 			searchEnderecosRelacionados,
 			searchEmailsRelacionados,

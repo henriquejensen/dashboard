@@ -2,6 +2,7 @@ import React,  { Component } from "react";
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 import Panel from "../../components/Panel";
+import Table from "../../components/Table";
 
 export default class TelefonesRelacionados extends Component {
     constructor(props) {
@@ -13,46 +14,60 @@ export default class TelefonesRelacionados extends Component {
     }
 
     renderTelefones(label, telefones) {
-        return <div className="col-md-6" >
-                <table className="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>{label}</th>
-                        </tr>   
-                    </thead>
+        return (
+            <div className="col-md-6" >
+                <Table>
                     <tbody>
                         {telefones.map((tel, i) => {
                             return <tr key={i}>
                                     <td>
                                         <div className="col-md-3">
-                                            {tel}
+                                            <i className={"fa fa-"+label} /> {tel}
                                         </div>
 
-                                        <div className="col-md-2" style={{cursor:"pointer"}}>
+                                        <a data-tip data-for="tooltipCopy">
+                                            <div className="col-md-1">
                                             <CopyToClipboard text={tel} onCopy={this.copiarNumero.bind(this)}>
-                                            <span >Copiar</span>
-                                            </CopyToClipboard>&nbsp;
-                                        </div>
+                                                <i className="fa fa-clipboard icon-tel" />
+                                            </CopyToClipboard>
+                                            </div>
+                                        </a>
 
-                                        <div className="col-md-2">
-                                            <img src="http://logok.org/wp-content/uploads/2015/06/Claro-logo-logotype-1024x768.png" width="25"/>
-                                        </div>
+                                        <a data-tip data-for="tooltipSMS">
+                                            <div className="col-md-1">
+                                            <i className="fa fa-comments icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
+                                            </div>
+                                        </a>
 
-                                        <div className="col-md-1">
-                                            <i className="glyphicon glyphicon-comment icon-tel icon-tel-msg"/>
-                                        </div>
-                                        <div className="col-md-1">
-                                            <i className="glyphicon glyphicon-phone-alt icon-tel icon-tel-phone" />
-                                        </div>
-                                        <div className="col-md-1">
+                                        <a data-tip data-for="tooltipCall">
+                                            <div className="col-md-1">
+                                            <i className="fa fa-mobile icon-tel icon-tel-phone" />
+                                            </div>
+                                        </a>
+
+                                        <a data-tip data-for="tooltipHot">
+                                            <div className="col-md-1">
                                             <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
-                                        </div>
+                                            </div>
+                                        </a>
+
+                                        <a data-tip data-for="tooltipWhats">
+                                            <div className="col-md-1">
+                                                <img src="https://whatsapp.com/favicon.png" width="15"/>
+                                            </div>
+                                        </a>
+
+                                        <a data-tip data-for="tooltipOperadora">
+                                            <div className="col-md-3">
+                                                <img src="http://2.bp.blogspot.com/-2iz4nnxuSu8/TyHGVjiLdDI/AAAAAAAABbw/wJWY-ugjozI/s1600/logotipo+oi.jpg" width="20" className="like-button"/>
+                                            </div>
+                                        </a>
                                     </td>
                                 </tr>
                         })}                        
                     </tbody>
-                </table>
-            </div>
+                </Table>
+            </div> )
     }
 
     render() {        
@@ -65,9 +80,9 @@ export default class TelefonesRelacionados extends Component {
                     <strong>Nome:</strong> {this.props.telefone.nome}
                 </div>
 
-                {this.renderTelefones("Fixos", this.props.telefone.fixos)}
+                {this.renderTelefones("phone", this.props.telefone.fixos)}
 
-                {this.renderTelefones("Móveis", this.props.telefone.moveis)}  
+                {this.renderTelefones("mobile", this.props.telefone.moveis)}  
                 
             </Panel>
         )

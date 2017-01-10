@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Panel from "../../components/Panel";
+import Table from "../../components/Table";
 
 export default class Ocupacoes extends Component {
   constructor(props) {
@@ -11,16 +12,11 @@ export default class Ocupacoes extends Component {
     return (
           <Panel title="PROFISSÃO">
             <div className="col-md-12">
-              <table className="table table-striped table-hover">
-                <thead>
-                  <tr>
-                    <th>Provável Profissão</th>
-                    <th>Empresa Relacionada</th>
-                    <th>Renda</th>
-                    <th>Porte</th>
-                    <th>Ação</th>
-                  </tr>
-                </thead>
+              <Table
+                  fields={
+                      ["Provável Profissão", "Empresa Relacionada", "Renda", "Porte", "Ação"]
+                  }
+              >
                 <tbody>
                   <tr>
                     <td>{this.props.ocupacao.DESCRICAO}</td>
@@ -34,7 +30,7 @@ export default class Ocupacoes extends Component {
                     </td>
                   </tr>
                 </tbody>
-              </table>
+              </Table>
             </div>
           </Panel>)
   }

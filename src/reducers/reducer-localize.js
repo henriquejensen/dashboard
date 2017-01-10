@@ -1,6 +1,7 @@
 import { SEARCH_BY_CPF,
 		SEARCH_BY_CNPJ,
 		ICON_LOCALIZE,
+		SEARCH_BY_PESSOAS_RELACIONADOS,
 		SEARCH_BY_TELEFONES_RELACIONADOS,
 		SEARCH_BY_ENDERECOS_RELACIONADOS,
 		SEARCH_BY_EMAILS_RELACIONADOS,
@@ -9,10 +10,14 @@ import { SEARCH_BY_CPF,
 import { REQUEST_ERROR, ERR_CONNECTION_REFUSED } from "../constants/utils";
 import model from "./data/modelLocalize.json";
 
+const pessoasRelacionadas = [
+	{documento: 5366214700, relacao: "MÃE", nome: "MARIA DA SILVA", dataNasc: "11/10/2000", cidade: "Campinas", uf: "SP", telefones: {fixos:[], moveis:[]}},
+	{documento: 26675175807, relacao: "TIO", nome: "JOSÉ DA SILVA", dataNasc: "11/05/1900", cidade: "Campinas", uf: "SP", telefones: {fixos:[], moveis:[]}},
+]
+
 const telefonesRelacionados = [
-	{relacao: "MÃE",
-	nome: "MARIA DA SILVA", fixos: ["12345656", "98765423"], moveis: ["989876787"]},
-	{relacao: "TIO", nome: "JOSÉ DA SILVA", fixos: ["55545656", "22265423"], moveis: ["456876787","997069496"]},
+	{documento: 5366214700, fixos: ["12345656", "98765423"], moveis: ["989876787"]},
+	{documento: 26675175807, fixos: ["55545656", "22265423"], moveis: ["456876787","997069496"]},
 ]
 
 const enderecosRelacionados = [
@@ -39,7 +44,7 @@ export default function(state = initialState, action) {
 			tipo: "",
 			icon: "",
 			produto: "",
-			telefonesRelacionados: [],
+			pessoasRelacionadas: [],
 			enderecosRelacionados: [],
 			emailsRelacionados: []
 		}
@@ -84,10 +89,21 @@ export default function(state = initialState, action) {
 					response: state.status == "model" ? [response] : [...state.response, response]
 				};
 
-			case SEARCH_BY_TELEFONES_RELACIONADOS:
-				state.response[searchPessoa(state.response,action.payload)].telefonesRelacionados = telefonesRelacionados;
+			case SEARCH_BY_PESSOAS_RELACIONADOS:
+				state.response[searchPessoa(state.response,action.payload)].pessoasRelacionadas = pessoasRelacionadas;
 				return {
-					status: "telefones",
+					status: "pessoas",
+					message: "",
+					response: state.response
+				};
+
+			case SEARCH_BY_TELEFONES_RELACIONADOS:
+				//busca nas pesquisas realizadas o documento que sera inserido os telefones relacionados
+				let posBuscas = searchPessoa(state.response,action.payload.documento);
+				let posPessoas = searchPosPessoa(state.response[posBuscas].pessoasRelacionadas, action.payload.documentoTelefone)
+				state.response[posBuscas].pessoasRelacionadas[posPessoas].telefones = searchTelefonesRelacionados(telefonesRelacionados, action.payload.documentoTelefone);
+				return {
+					status: "telefones "+posPessoas,
 					message: "",
 					response: state.response
 				};
@@ -127,9 +143,9 @@ export default function(state = initialState, action) {
 	return state;
 }
 
+//Busca no array de pessoas pesquisadas o documento passado
 function searchPessoa(list, doc) {
-	console.log(list, doc)
-
+	console.log("1", list, doc)
 	for(let i=0; i<list.length; i++) {
 		if(doc == list[i].data.CPF) {
 			return i;
@@ -137,4 +153,27 @@ function searchPessoa(list, doc) {
 	}
 
 	return -1;
+}
+
+function searchPosPessoa(listPeople, doc) {
+	console.log("2", listPeople, doc)
+	for(let i=0; i<listPeople.length; i++) {
+		if(doc == listPeople[i].documento) {
+			return i;
+		}
+	}
+}
+
+//funcao recebe a lista das pessoas pesquisadas, a lista de telefones de todos os telefones e o documento que esta solicitando os telefones
+// retorna um objeto dos telefones fixos e moveis da lista de telefones
+function searchTelefonesRelacionados(listPhones, doc) {
+	console.log("3", listPhones, doc)
+	for(let j=0; j<listPhones.length; j++) {
+		if(doc == listPhones[j].documento) {
+			return {
+				fixos: listPhones[j].fixos,
+				moveis: listPhones[j].moveis
+			}
+		}
+	}
 }

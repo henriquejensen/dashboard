@@ -174,3 +174,7 @@ input {
 .my-form > select {
     display: inline-block;
 }
+
+.table {
+    margin-bottom: 0px;
+}

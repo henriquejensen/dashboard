@@ -168,14 +168,14 @@
 }
 
 .mapa-button {
-  background-color: #5bc0de;
-  border-radius: 55px;
-  color: white;
-  font-weight: bold;
-  width: 22px;
-  text-align: center;
-  margin: 0 auto;
-  cursor: pointer;
+    background-color: #5bc0de;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    width: 30px;
+    font-size: 11px;
+    padding: 3px;
 }
 
 .my-hr {

@@ -4,6 +4,7 @@ import ajax from "superagent";
 import { URL_SEARCH,
 		 SEARCH_BY_CPF,
 		 SEARCH_BY_CNPJ,
+		 SEARCH_BY_PESSOAS_RELACIONADOS,
 		 SEARCH_BY_EMAILS_RELACIONADOS,
 		 SEARCH_BY_TELEFONES_RELACIONADOS,
 		 SEARCH_BY_ENDERECOS_RELACIONADOS,
@@ -127,10 +128,20 @@ export function getRespostasSMS() {
 	}
 }
 
-export function searchTelefonesRelacionados(doc) {
+export function searchPessoasRelacionadas(doc) {
+	return {
+		type: SEARCH_BY_PESSOAS_RELACIONADOS,
+		payload: doc
+	}
+}
+
+export function searchTelefonesRelacionados(doc, docTelefone) {
 	return {
 		type: SEARCH_BY_TELEFONES_RELACIONADOS,
-		payload: doc
+		payload: {
+			documento: doc,
+			documentoTelefone: docTelefone
+		}
 	}
 }
 

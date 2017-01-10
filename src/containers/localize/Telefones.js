@@ -19,7 +19,6 @@ export default class Telefones extends Component{
           showMoreTel: false
       };
 
-      this.telefonesRelacionados = this.telefonesRelacionados.bind(this);
   }
 
   copiarNumero() {
@@ -33,10 +32,6 @@ export default class Telefones extends Component{
 			IsModalOpen: false
 		})
 	}
-
-  telefonesRelacionados() {
-    this.props.showTelefonesRelacionados()
-  }
 
   render() {
     let celulares = [];
@@ -197,7 +192,7 @@ export default class Telefones extends Component{
                       <i className="glyphicon glyphicon-plus pull-right moreInfo" onClick={() => this.setState({showMoreTel:!this.state.showMoreTel})}/>
                     </a>: ""}
                     <a data-tip data-for="usersRelated">
-                      <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.telefonesRelacionados} />
+                      <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.props.relacionados} />
                     </a>
                   </div>
                   

@@ -66,9 +66,8 @@ export default class Dados extends Component{
 
                 {this.props.dados.MAE && this.props.dados.MAE.CPF ? (<div className="col-md-6" style={{marginTop:3}}>
                     <a data-tip data-for='tooltipConsultar'>
-                      <div className="mapa-button" style={{margin:0, borderRadius:0, width:100}} onClick={() => this.props.searchLocalize(this.props.dados.MAE.CPF, "pf")}>
-                          Consultar
-                          <i className='glyphicon glyphicon-search'/>
+                      <div className="mapa-button" onClick={() => this.props.searchLocalize(this.props.dados.MAE.CPF, "pf")}>
+                          <i className='fa fa-search'/>
                       </div>
                     </a>
                 </div>) : ""}
