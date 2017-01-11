@@ -34,11 +34,11 @@ export default class Relacionados extends Component {
                                         </tr>
                                         
                                         <tr >
-                                            <td colSpan={7} style={{padding:"5px 0"}}>
-                                                {pessoa.telefones.fixos.length > 0 ? 
+                                            {pessoa.telefones.fixos.length > 0 ?
+                                                <td colSpan={7} style={{padding:"5px 0"}}>
                                                     <TelefoneLayout fixos = {pessoa.telefones.fixos} moveis = {pessoa.telefones.moveis} />
-                                                : ""}
-                                            </td>
+                                                </td>
+                                            : ""}
                                         </tr>
                                     </tbody>
                                 )

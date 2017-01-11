@@ -60,20 +60,20 @@ export default class Enderecos extends Component {
                                 <td>
                                     <a data-tip data-for="tooltipMap">
                                       <div
-                                        className={this.state.mapa ? "mapa-button mapa-button-close" : "mapa-button"}
+                                        className={this.state.mapa && this.state.cep == end.CEP ? "mapa-button mapa-button-close" : "mapa-button"}
                                         onClick={() => this.mostrarMapa(end.CEP)}>
-                                        <i className={this.state.mapa ? "fa fa-times-circle": "fa fa-map-o"} />
+                                        <i className={this.state.mapa && this.state.cep == end.CEP ? "fa fa-times-circle": "fa fa-map-o"} />
                                       </div>
                                     </a>
                                 </td>
                               </tr>
 
                               <tr>
-                                <td colSpan="8" style={{position:"relative"}}>
                                   {this.state.mapa && this.state.cep == end.CEP ?
-                                    <MapPanel endereco={end.TIPO_LOGRADOURO + "." + end.LOGRADOURO + "," + end.CIDADE}/>
+                                    <td colSpan="8" style={{position:"relative"}}>
+                                      <MapPanel endereco={end.TIPO_LOGRADOURO + "." + end.LOGRADOURO + "," + end.CIDADE}/>
+                                    </td>
                                   : ""}
-                                </td>
                               </tr>
 
                             </tbody>
