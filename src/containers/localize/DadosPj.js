@@ -17,8 +17,9 @@ export default class Cadastro extends Component{
 
               <div className="col-md-6">
                 <strong>Ativa Comercialmente: </strong>
-                {console.log("ATIVA", )}
-                <span className={this.props.dados.ATIVA_COMERCIALENTE == "SIM" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.ATIVA_COMERCIALENTE}</span>
+                {this.props.dados.ATIVA_COMERCIALENTE ? 
+                  <span className={this.props.dados.ATIVA_COMERCIALENTE == "SIM" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.ATIVA_COMERCIALENTE}</span>
+                : <span>Nada consta</span>}
               </div>
 
               <div className="col-md-6">
@@ -28,7 +29,9 @@ export default class Cadastro extends Component{
 
               <div className="col-md-6">
                 <strong>Inscrição Estadual: </strong>
-                <span className={this.props.dados.SITUACAO_CADASTRAL == "ATIVA" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.SITUACAO_CADASTRAL}</span>
+                {this.props.dados.SITUACAO_CADASTRAL ? 
+                  <span className={this.props.dados.SITUACAO_CADASTRAL == "ATIVA" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.SITUACAO_CADASTRAL}</span>
+                : <span>Nada consta</span>}
               </div>
 
               <div className="col-md-6">

@@ -1,5 +1,8 @@
-import { SEARCH_BY_CPF,
+import {
+		LOADING,
+		SEARCH_BY_CPF,
 		SEARCH_BY_CNPJ,
+		SEARCH_BY_TELEFONE,
 		ICON_LOCALIZE,
 		SEARCH_BY_PESSOAS_RELACIONADOS,
 		SEARCH_BY_TELEFONES_RELACIONADOS,
@@ -9,11 +12,9 @@ import { SEARCH_BY_CPF,
 		CLOSE_LOCALIZE_MODEL } from "../constants/constantsLocalize";
 import { REQUEST_ERROR, ERR_CONNECTION_REFUSED } from "../constants/utils";
 import model from "./data/modelLocalize.json";
+import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
+import telefones from "./data/telefones.json";
 
-const pessoasRelacionadas = [
-	{documento: 5366214700, relacao: "MÃE", nome: "MARIA DA SILVA", dataNasc: "11/10/2000", cidade: "Campinas", uf: "SP", telefones: {fixos:[], moveis:[]}},
-	{documento: 26675175807, relacao: "TIO", nome: "JOSÉ DA SILVA", dataNasc: "11/05/1900", cidade: "Campinas", uf: "SP", telefones: {fixos:[], moveis:[]}},
-]
 
 const telefonesRelacionados = [
 	{documento: 5366214700, fixos: ["12345656", "98765423"], moveis: ["989876787"]},
@@ -34,7 +35,10 @@ const initialState = {
 	status: "",
 	message: "",
 	response: [],
+	loading: false,
 }
+
+let cont = 0;
 
 export default function(state = initialState, action) {
 	if(action.payload) {
@@ -46,10 +50,17 @@ export default function(state = initialState, action) {
 			produto: "",
 			pessoasRelacionadas: [],
 			enderecosRelacionados: [],
-			emailsRelacionados: []
+			emailsRelacionados: [],
 		}
-		
+
 		switch(action.type) {
+			case LOADING:
+				return {
+					status: "loading",
+					message: "",
+					loading: true,
+					response: state.response
+				}
 			case SEE_LOCALIZE_MODEL:
 				response.data = model.PF.DADOS;
 				response.label = model.PF.DADOS.CPF;
@@ -59,6 +70,7 @@ export default function(state = initialState, action) {
 				return {
 					status: "model",
 					message: "",
+					loading: false,
 					response: [response]
 				}
 
@@ -74,6 +86,7 @@ export default function(state = initialState, action) {
 				return {
 					status: "success",
 					message: "",
+					loading: false,
 					response: state.status == "model" ? [response] : [...state.response, response]
 				};
 
@@ -86,14 +99,29 @@ export default function(state = initialState, action) {
 				return {
 					status: "success",
 					message: "",
+					loading: false,
+					response: state.status == "model" ? [response] : [...state.response, response]
+				};
+
+			case SEARCH_BY_TELEFONE:
+				response.data = telefones;
+				response.label = cont++;
+				response.tipo = "TELEFONE";
+				response.icon = ICON_LOCALIZE;
+				response.produto = "localize";
+				return {
+					status: "success",
+					message: "",
+					loading: false,
 					response: state.status == "model" ? [response] : [...state.response, response]
 				};
 
 			case SEARCH_BY_PESSOAS_RELACIONADOS:
-				state.response[searchPessoa(state.response,action.payload)].pessoasRelacionadas = pessoasRelacionadas;
+				state.response[searchPessoa(state.response,action.payload)].pessoasRelacionadas = pessoasRelacionadas.pessoasRelacionadas;
 				return {
 					status: "pessoas",
 					message: "",
+					loading: false,
 					response: state.response
 				};
 
@@ -105,6 +133,7 @@ export default function(state = initialState, action) {
 				return {
 					status: "telefones "+posPessoas,
 					message: "",
+					loading: false,
 					response: state.response
 				};
 
@@ -113,6 +142,7 @@ export default function(state = initialState, action) {
 				return {
 					status: "enderecos",
 					message: "",
+					loading: false,
 					response: state.response
 				};
 
@@ -121,20 +151,23 @@ export default function(state = initialState, action) {
 				return {
 					status: "emails",
 					message: "",
+					loading: false,
 					response: state.response
 				};
 
 			case REQUEST_ERROR:
 				return {
-					status: "error",
+					status: "error request",
 					message: action.payload.ERRORS.ERROR.content,
+					loading: false,
 					response: state.response
 				};
 
 			case ERR_CONNECTION_REFUSED:
 				return {
-					status: "error",
+					status: "error connection",
 					message: "Serviço temporariamente indisponível, tente novamente mais tarde",
+					loading: false,
 					response: state.response
 				};
 		}

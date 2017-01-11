@@ -1,0 +1,28 @@
+{
+    "pessoasRelacionadas": [
+	    {
+            "documento": 5366214700,
+            "relacao": "MÃE",
+            "nome": "MARIA DA SILVA",
+            "dataNasc": "11/10/2000",
+            "cidade": "Campinas",
+            "uf": "SP",
+            "telefones": {
+                "fixos":[],
+                "moveis":[]
+            }
+        },
+	    {
+            "documento": 26675175807,
+            "relacao": "TIO",
+            "nome": "JOSÉ DA SILVA",
+            "dataNasc": "11/05/1900",
+            "cidade": "Campinas",
+            "uf": "SP",
+            "telefones": {
+                "fixos":[],
+                "moveis":[]
+            }
+        }
+    ]
+}

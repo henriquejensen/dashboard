@@ -17,6 +17,7 @@ import TelefonesRelacionados from "./TelefonesRelacionados";
 import EnderecosRelacionados from "./EnderecosRelacionados";
 import Protocolo from "./Protocolo";
 
+import Table from "../../components/Table";
 import PanelGroup from "../../components/PanelGroup";
 
 export default class LocalizeView extends Component {
@@ -39,7 +40,6 @@ export default class LocalizeView extends Component {
                     {this.props.data.pessoasRelacionadas.length > 0 ?
                         <Relacionados title="TELEFONES RELACIONADOS" qtdTotal={[{qtd:this.props.data.pessoasRelacionadas.length,icon:"fa fa-users"}]}>
                             {this.props.data.pessoasRelacionadas.map((pessoa, index) => {
-                                console.log("PESSOAS", pessoa)
                                 return (
                                     <tbody key={index}>
                                         <tr>
@@ -117,7 +117,31 @@ export default class LocalizeView extends Component {
                             <Protocolo protocolo={this.props.data.data.PROTOCOLO} /> :""}
                     
                     </PanelGroup>
+            : this.props.data.tipo == "TELEFONE" ? 
+                    <PanelGroup>
+                        <Table 
+                            fields = {[
+                                "Nome", "Data nasc.", "Pessoa Relacionada", "Cidade", "UF"
+                            ]}
+                        >
+                            <tbody>
+                                {this.props.data.data.telefones.map((telefone,index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{telefone.nome}</td>
+                                            <td>{telefone.dataNasc}</td>
+                                            <td>{telefone.pessoaRelacionada}</td>
+                                            <td>{telefone.cidade}</td>
+                                            <td>{telefone.uf}</td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </Table>
+                    </PanelGroup>
             : <div></div>
+
+
         )
     }
 }

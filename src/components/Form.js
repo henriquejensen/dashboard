@@ -65,7 +65,7 @@ export default class Form extends Component {
                         <span>Veja Detalhes do Produto</span>
                     </Tooltip>
 
-                    {this.props.status == "error" ?
+                    {this.props.status == "error request" || this.props.status == "error connection" ?
                         <div className="col-md-offset-3 col-md-6">
                             <div className="alert alert-danger">
                                 {this.props.message}

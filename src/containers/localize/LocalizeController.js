@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import { searchLocalize,
-		 searchTelefonesRelacionados,
-		 searchPessoasRelacionadas,
-		 searchEnderecosRelacionados,
-		 searchEmailsRelacionados,
-		 seeModel,
-		 closeModelo,
-		 getEstados } from "../../actions/index";
+import {
+		loadingLocalize,
+		searchLocalize,
+		searchLocalizeTelefone,
+		searchTelefonesRelacionados,
+		searchPessoasRelacionadas,
+		searchEnderecosRelacionados,
+		searchEmailsRelacionados,
+		seeModel,
+		closeModelo,
+		getEstados } from "../../actions/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
@@ -18,8 +21,6 @@ import TabContent from "../../components/TabContent";
 import TabPane from "../../components/TabPane";
 
 import { LOGO_LOCALIZE, ICON_LOCALIZE } from "../../constants/constantsLocalize";
-
-var pesquisa = false;
 
 class LocalizeController extends Component {
 	constructor(props) {
@@ -39,6 +40,7 @@ class LocalizeController extends Component {
 
 		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
 		this.searchLocalize = this.searchLocalize.bind(this);
+		this.searchPessoasRelacionadas = this.searchPessoasRelacionadas.bind(this);
 		this._showTelefonesRelacionados = this._showTelefonesRelacionados.bind(this);
 		this._showEnderecosRelacionados = this._showEnderecosRelacionados.bind(this);
 		this._showEmailsRelacionados = this._showEmailsRelacionados.bind(this);
@@ -57,13 +59,20 @@ class LocalizeController extends Component {
 		document.title = "Assertiva > Localize";
 	}
 
+	searchPessoasRelacionadas(doc) {
+		this.props.loadingLocalize();
+		this.props.searchPessoasRelacionadas(doc);
+	}
+
 	searchLocalize(doc, tipo) {
-		pesquisa = true;
+		this.props.loadingLocalize();
 		this.props.searchLocalize(doc, tipo);
 	}
 
 	onLocalizeSubmit(evt) {
 		evt.preventDefault();
+
+		this.props.loadingLocalize();
 
 		let tipo = this.state.tipo ? this.state.tipo :  location.pathname.split("/")[3].toUpperCase();
 
@@ -74,14 +83,12 @@ class LocalizeController extends Component {
 			
 			this.props.searchLocalize(this.state.documento, searchBy);
 		} else if(tipo == "TELEFONE") {
-			console.log("TELEFONE", this.state.telefone)
+			this.props.searchLocalizeTelefone(this.state.telefone)
 		} else if(tipo == "NOME") {
 			console.log("NOME", this.state.nome, "ESTADO", this.state.estado, "CIDADE", this.state.cidade, "BAIRRO", this.state.bairro, "ENDERECO", this.state.endereco)
 		} else if(tipo == "ENDERECO") {
 			console.log("ENDEREÇO", this.state.nome, "ESTADO", this.state.estado, "CIDADE", this.state.cidade, "BAIRRO", this.state.bairro, "ENDERECO", this.state.endereco)
 		}
-
-		pesquisa = true;
 
 		this.setState({
 			documento: "",
@@ -281,7 +288,7 @@ class LocalizeController extends Component {
 			<div className="container">
 				{this.form()}
 
-				{pesquisa ? <div className="imgSearching"><img src="https://apps.nea.gov/grantsearch/images/ajaxSpinner.gif" /></div> : ""}
+				{this.props.loading ? <div className="imgSearching"><img src="../../../public/loading.gif" /></div> : ""}
 
 				{this.props.datas.length == 0 ? "" : 
 					(<div>
@@ -306,7 +313,7 @@ class LocalizeController extends Component {
 												searchLocalize={this.searchLocalize}
 												showPessoasRelacionadas={this._showPessoasRelacionadas}
 												showTelefonesRelacionados={this._showTelefonesRelacionados}
-												pessoasRelacionadas={this.props.searchPessoasRelacionadas}
+												pessoasRelacionadas={this.searchPessoasRelacionadas}
 												showEnderecosRelacionados={this._showEnderecosRelacionados}/>
 										
 										: ""}
@@ -324,18 +331,20 @@ class LocalizeController extends Component {
 }
 
 function mapStateToProps(state) {
-	pesquisa = false;
 	return {
 		datas: state.localize.response,
 		status: state.localize.status,
 		message: state.localize.message,
 		estados: state.estados,
+		loading: state.localize.loading
 	}
 }
 
 function mapDispatchToProps(dispacth) {
-	return bindActionCreators({ 
+	return bindActionCreators({
+			loadingLocalize,
 			searchLocalize,
+			searchLocalizeTelefone,
 			searchPessoasRelacionadas,
 			searchTelefonesRelacionados,
 			searchEnderecosRelacionados,
