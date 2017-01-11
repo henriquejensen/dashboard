@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {
 		loadingLocalize,
 		searchLocalize,
-		searchLocalizeTelefone,
+		searchLocalizeByParams,
 		searchTelefonesRelacionados,
 		searchPessoasRelacionadas,
 		searchEnderecosRelacionados,
@@ -82,16 +82,29 @@ class LocalizeController extends Component {
 				searchBy = "pj";
 			
 			this.props.searchLocalize(this.state.documento, searchBy);
-		} else if(tipo == "TELEFONE") {
-			this.props.searchLocalizeTelefone(this.state.telefone)
-		} else if(tipo == "NOME") {
-			console.log("NOME", this.state.nome, "ESTADO", this.state.estado, "CIDADE", this.state.cidade, "BAIRRO", this.state.bairro, "ENDERECO", this.state.endereco)
-		} else if(tipo == "ENDERECO") {
-			console.log("ENDEREÇO", this.state.nome, "ESTADO", this.state.estado, "CIDADE", this.state.cidade, "BAIRRO", this.state.bairro, "ENDERECO", this.state.endereco)
+		} else {
+			const params = {
+				telefone: this.state.telefone,
+				nome: this.state.nome,
+				endereco: this.state.endereco,
+				estado: this.state.estado,
+				cidade: this.state.cidade,
+				bairro: this.state.bairro,
+				
+			}
+			this.props.searchLocalizeByParams(params, tipo);
 		}
 
 		this.setState({
 			documento: "",
+			telefone: "",
+			nome: "",
+			endereco: "",
+			estado: "",
+			cidade: "",
+			bairro: "",
+			tabActive: "",
+			tipo: ""
 		});
 
 	}
@@ -226,6 +239,7 @@ class LocalizeController extends Component {
 					value={this.state.estado}
 					onChange={this.onChange}
 					style={{width:120}}>
+					<option value="">Selecione</option>
 					{this.props.estados.map((estado, index) => {
 						return <option value={estado.sigla} key={index}>{estado.nome}</option>
 					})}
@@ -344,7 +358,7 @@ function mapDispatchToProps(dispacth) {
 	return bindActionCreators({
 			loadingLocalize,
 			searchLocalize,
-			searchLocalizeTelefone,
+			searchLocalizeByParams,
 			searchPessoasRelacionadas,
 			searchTelefonesRelacionados,
 			searchEnderecosRelacionados,

@@ -6,7 +6,7 @@ import {
 		LOADING,
 		SEARCH_BY_CPF,
 		SEARCH_BY_CNPJ,
-		SEARCH_BY_TELEFONE,
+		SEARCH_BY_PARAMS,
 		SEARCH_BY_PESSOAS_RELACIONADOS,
 		SEARCH_BY_EMAILS_RELACIONADOS,
 		SEARCH_BY_TELEFONES_RELACIONADOS,
@@ -66,10 +66,13 @@ export function searchLocalize(document, tipo) {
 
 }
 
-export function searchLocalizeTelefone(telefone) {
+export function searchLocalizeByParams(inputLocalize, tipo) {
 	return {
-		type: SEARCH_BY_TELEFONE,
-		payload: telefone
+		type: SEARCH_BY_PARAMS,
+		payload: {
+			input: inputLocalize,
+			tipo: tipo
+		}
 	}
 }
 

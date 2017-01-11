@@ -2,7 +2,7 @@ import {
 		LOADING,
 		SEARCH_BY_CPF,
 		SEARCH_BY_CNPJ,
-		SEARCH_BY_TELEFONE,
+		SEARCH_BY_PARAMS,
 		ICON_LOCALIZE,
 		SEARCH_BY_PESSOAS_RELACIONADOS,
 		SEARCH_BY_TELEFONES_RELACIONADOS,
@@ -38,7 +38,7 @@ const initialState = {
 	loading: false,
 }
 
-let cont = 0;
+let cont = 1;
 
 export default function(state = initialState, action) {
 	if(action.payload) {
@@ -103,10 +103,10 @@ export default function(state = initialState, action) {
 					response: state.status == "model" ? [response] : [...state.response, response]
 				};
 
-			case SEARCH_BY_TELEFONE:
+			case SEARCH_BY_PARAMS:
 				response.data = telefones;
 				response.label = cont++;
-				response.tipo = "TELEFONE";
+				response.tipo = action.payload.tipo;
 				response.icon = ICON_LOCALIZE;
 				response.produto = "localize";
 				return {

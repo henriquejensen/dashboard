@@ -16,6 +16,7 @@ import Relacionados from "./Relacionados";
 import TelefonesRelacionados from "./TelefonesRelacionados";
 import EnderecosRelacionados from "./EnderecosRelacionados";
 import Protocolo from "./Protocolo";
+import BuscaPorRelacionados from "./BuscaPorRelacionados";
 
 import Table from "../../components/Table";
 import PanelGroup from "../../components/PanelGroup";
@@ -104,7 +105,7 @@ export default class LocalizeView extends Component {
 
             : this.props.data.tipo == "CNPJ" ?
                     <PanelGroup>
-                        <DadosPj dados={this.props.data} searchLocalize={this.props.searchLocalize} />
+                        <DadosPj dados={this.props.data.data} searchLocalize={this.props.searchLocalize} />
                         <Telefones telefones = {this.props.data.data.TELEFONES_MOVEIS.TELEFONE} />
 
                         {this.props.data.data.ENDERECOS ?
@@ -117,28 +118,14 @@ export default class LocalizeView extends Component {
                             <Protocolo protocolo={this.props.data.data.PROTOCOLO} /> :""}
                     
                     </PanelGroup>
-            : this.props.data.tipo == "TELEFONE" ? 
+            : this.props.data.tipo == "TELEFONE" ||
+                this.props.data.tipo == "ENDERECO" ||
+                    this.props.data.tipo == "NOME" ?
+
                     <PanelGroup>
-                        <Table 
-                            fields = {[
-                                "Nome", "Data nasc.", "Pessoa Relacionada", "Cidade", "UF"
-                            ]}
-                        >
-                            <tbody>
-                                {this.props.data.data.telefones.map((telefone,index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td>{telefone.nome}</td>
-                                            <td>{telefone.dataNasc}</td>
-                                            <td>{telefone.pessoaRelacionada}</td>
-                                            <td>{telefone.cidade}</td>
-                                            <td>{telefone.uf}</td>
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </Table>
+                        <BuscaPorRelacionados relacionados={this.props.data.data.telefones} />
                     </PanelGroup>
+                    
             : <div></div>
 
 
