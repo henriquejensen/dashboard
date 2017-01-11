@@ -1,47 +1,34 @@
 import React, { Component } from "react";
 import Tooltip from "react-tooltip";
 
-import MapPanel from "../../components/mapPanel";
+import MapPanel from "../../components/MapPanel";
 import Panel from "../../components/Panel";
+import Table from "../../components/Table";
 
 export default class Enderecos extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      rua: "",
-      cidade: "",
-      cep: "",
       mapa: false,
+      cep: ""
     }
 
     this.enderecosRelacionados = this.enderecosRelacionados.bind(this);
-  }
-
-  componentWillMount() {
-    this.state = {
-      mapa: false,
-    }
+    this.mostrarMapa = this.mostrarMapa.bind(this);
   }
 
   fecharMapa() {
     this.setState({
       mapa: false,
-      cep: null
     })
   }
 
-  mostrarMapa(rua,cidade,cep) {
+  mostrarMapa(cep) {
     this.setState({
-      mapa: false,
+      mapa: !this.state.mapa,
       cep: cep
     })
-    console.log("MAPA");
-    setTimeout(()=> {this.setState({
-      rua: rua,
-      cidade: cidade,
-      mapa: true
-    })},1000);
   }
 
   enderecosRelacionados() {
@@ -52,42 +39,45 @@ export default class Enderecos extends Component {
     return (
             <Panel title="ENDEREÇOS" qtdTotal={[{qtd:this.props.enderecos.length,icon:"glyphicon-home"}]}>
               <div className="col-md-12">
-                <table className="table table-striped table-hover">
-                  <thead>
-                    <tr>
-                      <th>Logradouro</th>
-                      <th>Número</th>
-                      <th>Complemento</th>
-                      <th>Bairro</th>
-                      <th>Cidade</th>
-                      <th>UF</th>
-                      <th>CEP</th>
-                      <th className="text-center">Ação</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <Table
+                  fields={
+                    ["Logradouro", "Número", "Complemento", "Bairro", "Cidade", "UF", "CEP", ""]
+                  }
+                >
                     {this.props.enderecos.length > 0 ?
                       this.props.enderecos.map((end,i) => {
-                          let cep = end.CEP.toString()
-                          return this.state.cep == end.CEP || this.state.cep == null ?
-                            (<tr key={i}>
-                              <td>{end.TIPO_LOGRADOURO}. {end.LOGRADOURO}</td>
-                              <td>{end.NUMERO}</td>
-                              <td>{end.COMPLEMENTO}</td>
-                              <td>{end.BAIRRO}</td>
-                              <td>{end.CIDADE}</td>
-                              <td>{end.UF}</td>
-                              <td>{cep.substring(0,cep.length-3)}-{cep.substring(cep.length-3)}</td>
-                              <td>
-                                  <a data-tip data-for="tooltipMap">
-                                    <div
-                                      className="mapa-button"
-                                      onClick={this.mostrarMapa.bind(this,end.LOGRADOURO, end.CIDADE, end.CEP)}>
-                                      <i className="glyphicon glyphicon-globe" />
-                                    </div>
-                                  </a>
-                              </td>
-                            </tr>) : <tr></tr>
+                          let cep = end.CEP.toString();
+                          return (
+                            <tbody key={i}>
+                              <tr>
+                                <td>{end.TIPO_LOGRADOURO}. {end.LOGRADOURO}</td>
+                                <td>{end.NUMERO}</td>
+                                <td>{end.COMPLEMENTO}</td>
+                                <td>{end.BAIRRO}</td>
+                                <td>{end.CIDADE}</td>
+                                <td>{end.UF}</td>
+                                <td>{cep.substring(0,cep.length-3)}-{cep.substring(cep.length-3)}</td>
+                                <td>
+                                    <a data-tip data-for="tooltipMap">
+                                      <div
+                                        className={this.state.mapa ? "mapa-button mapa-button-close" : "mapa-button"}
+                                        onClick={() => this.mostrarMapa(end.CEP)}>
+                                        <i className={this.state.mapa ? "fa fa-times-circle": "fa fa-map-o"} />
+                                      </div>
+                                    </a>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td colSpan="8" style={{position:"relative"}}>
+                                  {this.state.mapa && this.state.cep == end.CEP ?
+                                    <MapPanel endereco={end.TIPO_LOGRADOURO + "." + end.LOGRADOURO + "," + end.CIDADE}/>
+                                  : ""}
+                                </td>
+                              </tr>
+
+                            </tbody>
+                          )
                       }) : <tr>
                         <td>{this.props.enderecos.TIPO_LOGRADOURO}. {this.props.enderecos.LOGRADOURO}</td>
                         <td>{this.props.enderecos.NUMERO}</td>
@@ -100,19 +90,16 @@ export default class Enderecos extends Component {
                             <a data-tip data-for="tooltipMap">
                               <div
                                 className="mapa-button"
-                                onClick={this.mostrarMapa.bind(this,this.props.enderecos.LOGRADOURO, this.props.enderecos.CIDADE, this.props.enderecos.CEP)}>
+                                onClick={this.mostrarMapa}>
                                 <i className="glyphicon glyphicon-globe" />
                               </div>
                             </a>
                         </td>
-                      </tr>}
-                  </tbody>
-                </table>
+                      </tr>
+                    }
 
-                {this.state.mapa ? (<div style={{position:"relative"}}>
-                  <i className="glyphicon-remove-sign" className="fechar-mapa" onClick={this.fecharMapa.bind(this)}/>
-                  <MapPanel rua={this.state.rua} cidade={this.state.cidade} cep={this.state.cep}/>
-                </div>) : ""}
+                </Table>
+
               </div>
               
               <div className="col-md-12">

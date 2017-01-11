@@ -178,6 +178,10 @@
     padding: 3px;
 }
 
+.mapa-button-close {
+    background-color: red;
+}
+
 .my-hr {
   margin-top: 0;
   margin-bottom: 0;

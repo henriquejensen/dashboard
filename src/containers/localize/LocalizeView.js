@@ -2,11 +2,9 @@ import React, { Component } from "react";
 
 import Dados from "./Dados";
 import Telefones from "./Telefones";
-import TelefoneLayout from "./TelefoneLayout";
 import Enderecos from "./Enderecos";
 import Emails from "./Emails";
 import Renda from "./Renda";
-import Ocupacoes from "./Ocupacoes";
 import BeneficiosINSS from "./BeneficiosINSS";
 import Sociedades from "./Sociedades";
 import Veiculos from "./Veiculos";
@@ -18,7 +16,6 @@ import EnderecosRelacionados from "./EnderecosRelacionados";
 import Protocolo from "./Protocolo";
 import BuscaPorRelacionados from "./BuscaPorRelacionados";
 
-import Table from "../../components/Table";
 import PanelGroup from "../../components/PanelGroup";
 
 export default class LocalizeView extends Component {
@@ -39,39 +36,12 @@ export default class LocalizeView extends Component {
                         <Telefones telefones = {this.props.data.data.TELEFONES_MOVEIS.TELEFONE} relacionados = {() => this.props.pessoasRelacionadas(this.props.data.data.CPF)} /> : ""}
 
                     {this.props.data.pessoasRelacionadas.length > 0 ?
-                        <Relacionados title="TELEFONES RELACIONADOS" qtdTotal={[{qtd:this.props.data.pessoasRelacionadas.length,icon:"fa fa-users"}]}>
-                            {this.props.data.pessoasRelacionadas.map((pessoa, index) => {
-                                return (
-                                    <tbody key={index}>
-                                        <tr>
-                                            <td>
-                                                <div className="mapa-button" onClick={() => this.props.searchLocalize(pessoa.documento, "pf")}>
-                                                    <i className='fa fa-search'/>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                {pessoa.relacao}
-                                            </td>
-                                            <td>{pessoa.nome}</td>
-                                            <td>{pessoa.dataNasc}</td>
-                                            <td>{pessoa.cidade}</td>
-                                            <td>{pessoa.uf}</td>
-                                            <td>
-                                                <a onClick={() => this.props.showTelefonesRelacionados(this.props.data.data.CPF, pessoa.documento)}>Pesquisar Telefones</a>
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr >
-                                            <td colSpan={7} style={{padding:"5px 0"}}>
-                                                {pessoa.telefones.fixos.length > 0 ? 
-                                                <TelefoneLayout fixos = {pessoa.telefones.fixos} moveis = {pessoa.telefones.moveis} />
-                                                : ""}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                )
-                            })}
-                        </Relacionados>
+                        <Relacionados
+                            title="TELEFONES RELACIONADOS"
+                            documento={this.props.data.data.CPF}
+                            relacionados={this.props.data.pessoasRelacionadas}
+                            searchLocalize={this.props.searchLocalize}
+                            showTelefonesRelacionados={this.props.showTelefonesRelacionados}/>
                     :""}
 
                     {this.props.data.data.ENDERECOS ?
@@ -123,12 +93,10 @@ export default class LocalizeView extends Component {
                     this.props.data.tipo == "NOME" ?
 
                     <PanelGroup>
-                        <BuscaPorRelacionados relacionados={this.props.data.data.telefones} />
+                        <BuscaPorRelacionados relacionados={this.props.data.data.relacionados} />
                     </PanelGroup>
                     
             : <div></div>
-
-
         )
     }
 }

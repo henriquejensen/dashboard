@@ -13,7 +13,7 @@ import {
 import { REQUEST_ERROR, ERR_CONNECTION_REFUSED } from "../constants/utils";
 import model from "./data/modelLocalize.json";
 import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
-import telefones from "./data/telefones.json";
+import relacionados from "./data/relacionados.json";
 
 
 const telefonesRelacionados = [
@@ -104,7 +104,7 @@ export default function(state = initialState, action) {
 				};
 
 			case SEARCH_BY_PARAMS:
-				response.data = telefones;
+				response.data = relacionados;
 				response.label = cont++;
 				response.tipo = action.payload.tipo;
 				response.icon = ICON_LOCALIZE;

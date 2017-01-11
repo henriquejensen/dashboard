@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import MapPanel from "../../components/mapPanel";
+import MapPanel from "../../components/MapPanel";
 import Panel from "../../components/Panel";
 
 export default class Enderecos extends Component {
@@ -99,10 +99,12 @@ export default class Enderecos extends Component {
                         </tbody>
                     </table>
 
-                    {this.state.mapa ? (<div style={{position:"relative"}}>
-                    <i className="glyphicon-remove-sign" className="fechar-mapa" onClick={this.fecharMapa.bind(this)}/>
-                    <MapPanel rua={this.state.rua} cidade={this.state.cidade} cep={this.state.cep}/>
-                    </div>) : ""}
+                    {this.state.mapa ? (
+                      <div style={{position:"relative"}}>
+                        <i className="glyphicon-remove-sign" className="fechar-mapa" onClick={this.fecharMapa.bind(this)}/>
+                        <MapPanel rua={this.state.rua} cidade={this.state.cidade} cep={this.state.cep}/>
+                      </div>)
+                    : ""}
                 </div>
 
             </Panel>)
