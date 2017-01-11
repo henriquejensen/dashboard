@@ -23,14 +23,12 @@ export default class MapPanel extends Component {
     ajax.get(url)
       .then((response) => {
         const results = JSON.parse(response.text);
-        console.log("asdfa", results, results.results.length, url)
         if(results.results.length > 0) {
             coords.lat = results.results[0].geometry.location.lat;
             coords.lng = results.results[0].geometry.location.lng;
             this.setState({
               esperar: false,
             })
-            console.log("result", coords);
         } else {
             this.setState({
               esperar: true,
@@ -55,7 +53,6 @@ export default class MapPanel extends Component {
   }
 
   render() {
-    console.log("C",coords, this.state.esperar)
     return (
       !this.state.esperar ? <Gmaps
         height={'300px'}

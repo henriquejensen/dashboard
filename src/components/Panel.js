@@ -5,8 +5,10 @@ export default class PanelGroup extends Component {
     constructor(props) {
         super(props);
 
+        console.log(this.props)
+
         this.state = {
-            show: true
+            show: this.props.showPanel == false ? false : true
         }
     }
 

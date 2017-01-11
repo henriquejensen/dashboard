@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Tooltip from 'react-tooltip';
 
 import { LocalizeDescription } from "./ProductDescription";
+import UltimasConsultas from "./UltimasConsultas";
 
 export default class Form extends Component {
     render() {
@@ -76,7 +77,20 @@ export default class Form extends Component {
                 </div>
 
                 {this.props.datas.length > 0 ? (this.props.status == "model" ? <a href="#" onClick={this.props.closeModelo}>Fechar Modelo</a> : "") : ""}
-				{this.props.datas.length > 0 ? "" : <LocalizeDescription />}
+
+                
+				{this.props.datas.length == 0 ? 
+                    <div style={{margin:"0 auto", width:"50%", textAlign:"left"}}>
+                        <LocalizeDescription />
+                        <UltimasConsultas consultas={[
+                            {tipo:"CPF", pesquisa:34168058875, data:"12/12/2017"},
+                            {tipo:"CNPJ", pesquisa:15724796000100, data:"12/12/2017"},
+                            {tipo:"CPF", pesquisa:5348371823, data:"12/12/2017"},
+                            {tipo:"CPF", pesquisa:22430907836, data:"12/12/2017"},
+                            {tipo:"CPF", pesquisa:22430907836, data:"12/12/2017"}
+                        ]} />
+                    </div>
+                : "" }
 
             </div>)
     }
