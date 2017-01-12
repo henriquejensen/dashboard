@@ -7,11 +7,10 @@ import { Router, browserHistory } from "react-router";
 import rootReducer from './reducers';
 import routes from "./routes";
 import thunk from "redux-thunk";
-import logger from "redux-logger";
 
 const store = createStore(rootReducer,
   {},
-  applyMiddleware(thunk, logger())
+  applyMiddleware(thunk)
 );
 
 ReactDOM.render(
