@@ -1,9 +1,7 @@
 const webpack = require('webpack');
 
 module.exports = {
-  devtool: "eval",
   entry: [
-    'webpack-dev-server/client?http://localhost:8080',
     './src/index.js'
   ],
   output: {
@@ -47,9 +45,5 @@ module.exports = {
   ],
   resolve: {
     extensions: ['', '.js', '.jsx']
-  },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: './'
   }
 };
