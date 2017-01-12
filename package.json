@@ -31,8 +31,7 @@
     "react-addons-test-utils": "^0.14.7",
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.1.0",
-    "sass-loader": "^4.1.1",
-    "webpack-dev-server": "^1.14.0"
+    "sass-loader": "^4.1.1"
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -53,6 +52,7 @@
     "redux": "^3.0.4",
     "redux-promise": "^0.5.3",
     "superagent": "^3.3.1",
-    "webpack": "^1.12.9"
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0"
   }
 }
