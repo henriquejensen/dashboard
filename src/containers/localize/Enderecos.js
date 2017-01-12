@@ -11,7 +11,7 @@ export default class Enderecos extends Component {
 
     this.state = {
       mapa: false,
-      cep: ""
+      idCep: ""
     }
 
     this.enderecosRelacionados = this.enderecosRelacionados.bind(this);
@@ -24,10 +24,10 @@ export default class Enderecos extends Component {
     })
   }
 
-  mostrarMapa(cep) {
+  mostrarMapa(idCep) {
     this.setState({
       mapa: !this.state.mapa,
-      cep: cep
+      idCep: idCep
     })
   }
 
@@ -60,16 +60,16 @@ export default class Enderecos extends Component {
                                 <td>
                                     <a data-tip data-for="tooltipMap">
                                       <div
-                                        className={this.state.mapa && this.state.cep == end.CEP ? "mapa-button mapa-button-close" : "mapa-button"}
-                                        onClick={() => this.mostrarMapa(end.CEP)}>
-                                        <i className={this.state.mapa && this.state.cep == end.CEP ? "fa fa-times-circle": "fa fa-map-o"} />
+                                        className={this.state.mapa && this.state.idCep == i+end.CEP ? "mapa-button mapa-button-close" : "mapa-button"}
+                                        onClick={() => this.mostrarMapa(i+end.CEP)}>
+                                        <i className={this.state.mapa && this.state.idCep == i+end.CEP ? "fa fa-times-circle": "fa fa-map-o"} />
                                       </div>
                                     </a>
                                 </td>
                               </tr>
 
                               <tr>
-                                  {this.state.mapa && this.state.cep == end.CEP ?
+                                  {this.state.mapa && this.state.idCep == i+end.CEP ?
                                     <td colSpan="8" style={{position:"relative"}}>
                                       <MapPanel endereco={end.TIPO_LOGRADOURO + "." + end.LOGRADOURO + "," + end.CIDADE}/>
                                     </td>

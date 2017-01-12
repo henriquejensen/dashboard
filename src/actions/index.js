@@ -83,7 +83,7 @@ export function seeModel() {
 	}
 }
 
-export function closeModelo() {
+export function closeModel() {
 	return {
 		type: CLOSE_LOCALIZE_MODEL,
 		payload: "closeModel"

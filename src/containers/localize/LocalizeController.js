@@ -8,7 +8,7 @@ import {
 		searchEnderecosRelacionados,
 		searchEmailsRelacionados,
 		seeModel,
-		closeModelo,
+		closeModel,
 		getEstados } from "../../actions/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -46,8 +46,6 @@ class LocalizeController extends Component {
 		this._showEmailsRelacionados = this._showEmailsRelacionados.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this._changeTab = this._changeTab.bind(this);
-		this._seeModelo = this._seeModelo.bind(this);
-		this._closeModelo = this._closeModelo.bind(this);
 		this.form = this.form.bind(this);
 	}
 
@@ -133,18 +131,6 @@ class LocalizeController extends Component {
 		})
 	}
 
-	_seeModelo(evt) {
-		evt.preventDefault();
-
-		this.props.seeModel();
-	}
-
-	_closeModelo(evt) {
-		evt.preventDefault();
-
-		this.props.closeModelo();
-	}
-
 	renderForm() {
 		return (
 			<Form
@@ -156,8 +142,8 @@ class LocalizeController extends Component {
 				datas = {this.props.datas}
 				onChange = {this.onChange}
 				onformSubmit = {this.onLocalizeSubmit}
-				seeModelo = {this._seeModelo}
-				closeModelo = {this._closeModelo}
+				seeModelo = {this.props.seeModel}
+				closeModelo = {this.props.closeModel}
 				status = {this.props.status}
 				message = {this.props.message} >
 				
@@ -186,8 +172,8 @@ class LocalizeController extends Component {
 				datas = {this.props.datas}
 				onChange = {this.onChange}
 				onformSubmit = {this.onLocalizeSubmit}
-				seeModelo = {this._seeModelo}
-				closeModelo = {this._closeModelo}
+				seeModelo = {this.props.seeModel}
+				closeModelo = {this.props.closeModel}
 				status = {this.props.status}
 				message = {this.props.message} >
 				
@@ -217,8 +203,8 @@ class LocalizeController extends Component {
 				datas = {this.props.datas}
 				onChange = {this.onChange}
 				onformSubmit = {this.onLocalizeSubmit}
-				seeModelo = {this._seeModelo}
-				closeModelo = {this._closeModelo}
+				seeModelo = {this.props.seeModel}
+				closeModelo = {this.props.closeModel}
 				status = {this.props.status}
 				message = {this.props.message} >
 				
@@ -321,6 +307,7 @@ class LocalizeController extends Component {
 										index={index}
 										key={index} >
 
+										{/*Verifica se o produto pesquisado é localize, pois pode ser gerado abas de outros produtos no Localize*/}
 										{data.produto == "localize" ?
 											<LocalizeView
 												data={data}
@@ -364,7 +351,7 @@ function mapDispatchToProps(dispacth) {
 			searchEnderecosRelacionados,
 			searchEmailsRelacionados,
 			seeModel,
-			closeModelo,
+			closeModel,
 			getEstados
 		},
 		dispacth);

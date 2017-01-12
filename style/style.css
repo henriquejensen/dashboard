@@ -160,10 +160,10 @@ input {
 
 .imgSearching > img {
     height: 150px;
-    position: absolute;
+    position: fixed;
     z-index: 2;
-    left: 709px;
-    top: 290px;
+    left: 700px;
+    top: 210px;
 }
 
 .my-form {

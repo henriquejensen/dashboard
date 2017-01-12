@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip';
 
-import { LocalizeDescription } from "./ProductDescription";
+import { LocalizeDescription, CreditoDescription, FocoFiscalDescription } from "./ProductDescription";
 import UltimasConsultas from "./UltimasConsultas";
 
 export default class Form extends Component {
