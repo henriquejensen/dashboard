@@ -39,9 +39,7 @@ export default class MapPanel extends Component {
   }
 
   onMapCreated(map) {
-    map.setOptions({
-      disableDefaultUI: true
-    });
+    console.log("MAP",map);
   }
 
   onDragEnd(e) {

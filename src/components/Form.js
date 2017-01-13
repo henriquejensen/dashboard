@@ -76,11 +76,8 @@ export default class Form extends Component {
                     : ""}
                 </div>
 
-                {console.log("TESTE", this.props.datas, this.props.status)}
-
                 {this.props.datas.length == 1 ? (this.props.datas[0].data.CPF == 11111111111 ? <a href="#" onClick={this.props.closeModelo}>Fechar Modelo</a> : "") : ""}
 
-                
 				{this.props.datas.length == 0 ? 
                     <div style={{margin:"0 auto", width:"50%", textAlign:"left"}}>
                         <LocalizeDescription />
