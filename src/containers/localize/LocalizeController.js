@@ -9,6 +9,7 @@ import {
 		searchEmailsRelacionados,
 		seeModel,
 		closeModel,
+		changeTab,
 		getEstados } from "../../actions/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -34,7 +35,6 @@ class LocalizeController extends Component {
 			estado: "",
 			cidade: "",
 			bairro: "",
-			tabActive: "",
 			tipo: ""
 		}
 
@@ -45,7 +45,6 @@ class LocalizeController extends Component {
 		this._showEnderecosRelacionados = this._showEnderecosRelacionados.bind(this);
 		this._showEmailsRelacionados = this._showEmailsRelacionados.bind(this);
 		this.onChange = this.onChange.bind(this);
-		this._changeTab = this._changeTab.bind(this);
 		this.form = this.form.bind(this);
 	}
 
@@ -105,12 +104,6 @@ class LocalizeController extends Component {
 			tipo: ""
 		});
 
-	}
-
-	_changeTab(tab) {
-		this.setState({
-			tabActive: tab
-		})
 	}
 
 	_showTelefonesRelacionados(doc, docTelefone) {
@@ -294,15 +287,15 @@ class LocalizeController extends Component {
 					(<div>
 						
 						<Tabs tabs={this.props.datas}
-							  onChangeTab={this._changeTab}
-							  tabActive={this.state.tabActive} />
+							  onChangeTab={this.props.changeTab}
+							  tabActive={this.props.tabActive} />
 							
 						<TabContent>
 							{this.props.datas.map((data, index) => {
-								console.log("LOCALIZE", data);
+								console.log("LOCALIZE 2", data);
 								return (
 									<TabPane 
-										tabActive={this.state.tabActive}
+										tabActive={this.props.tabActive}
 										label={data.label}
 										index={index}
 										key={index} >
@@ -337,7 +330,8 @@ function mapStateToProps(state) {
 		status: state.localize.status,
 		message: state.localize.message,
 		estados: state.estados,
-		loading: state.localize.loading
+		loading: state.localize.loading,
+		tabActive: state.localize.tabActive
 	}
 }
 
@@ -352,6 +346,7 @@ function mapDispatchToProps(dispacth) {
 			searchEmailsRelacionados,
 			seeModel,
 			closeModel,
+			changeTab,
 			getEstados
 		},
 		dispacth);

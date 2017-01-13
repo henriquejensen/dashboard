@@ -1,7 +1,9 @@
 const webpack = require('webpack');
 
 module.exports = {
+  devtool: 'cheap-module-eval-source-map',
   entry: [
+    'webpack-dev-server/client?http://localhost:8080',
     './src/index.js'
   ],
   output: {
@@ -33,7 +35,7 @@ module.exports = {
         }
     ]
   },
-  plugins: [
+  /*plugins: [
       new webpack.optimize.UglifyJsPlugin({
           compress: {
               warnings: false,
@@ -42,8 +44,12 @@ module.exports = {
               comments: false,
           },
       }),
-  ],
+  ],*/
   resolve: {
     extensions: ['', '.js', '.jsx']
-  }
+  },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './'
+  },
 };

@@ -10,7 +10,7 @@ import {
 		SEARCH_BY_EMAILS_RELACIONADOS,
 		SEE_LOCALIZE_MODEL,
 		CLOSE_LOCALIZE_MODEL } from "../constants/constantsLocalize";
-import { REQUEST_ERROR, ERR_CONNECTION_REFUSED } from "../constants/utils";
+import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB } from "../constants/utils";
 import model from "./data/modelLocalize.json";
 import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
 import relacionados from "./data/relacionados.json";
@@ -36,9 +36,10 @@ const initialState = {
 	message: "",
 	response: [],
 	loading: false,
+	tabActive: ""
 }
 
-let cont = 1;
+let cont = 0;
 
 export default function(state = initialState, action) {
 	if(action.payload) {
@@ -59,7 +60,8 @@ export default function(state = initialState, action) {
 					status: "loading",
 					message: "",
 					loading: true,
-					response: state.response
+					response: state.response,
+					tabActive: state.tabActive
 				}
 			case SEE_LOCALIZE_MODEL:
 				response.data = model.PF.DADOS;
@@ -71,11 +73,21 @@ export default function(state = initialState, action) {
 					status: "model",
 					message: "",
 					loading: false,
-					response: [response]
+					response: [response],
+					tabActive: model.PF.DADOS.CPF
 				}
 
 			case CLOSE_LOCALIZE_MODEL:
 				return initialState;
+
+			case CHANGE_TAB:
+				return {
+					status: "tab",
+					message: "",
+					loading: false,
+					response: state.response,
+					tabActive: action.payload
+				}
 				
 			case SEARCH_BY_CPF:
 				response.data = action.payload;
@@ -87,7 +99,8 @@ export default function(state = initialState, action) {
 					status: "success",
 					message: "",
 					loading: false,
-					response: state.status == "model" ? [response] : [...state.response, response]
+					response: state.status == "model" ? [response] : [...state.response, response],
+					tabActive: response.data.CPF
 				};
 
 			case SEARCH_BY_CNPJ:
@@ -100,12 +113,14 @@ export default function(state = initialState, action) {
 					status: "success",
 					message: "",
 					loading: false,
-					response: state.status == "model" ? [response] : [...state.response, response]
+					response: state.status == "model" ? [response] : [...state.response, response],
+					tabActive: response.data.CNPJ
 				};
 
 			case SEARCH_BY_PARAMS:
+				cont++;
 				response.data = relacionados;
-				response.label = cont++;
+				response.label = cont;
 				response.tipo = action.payload.tipo;
 				response.icon = ICON_LOCALIZE;
 				response.produto = "localize";
@@ -113,7 +128,8 @@ export default function(state = initialState, action) {
 					status: "success",
 					message: "",
 					loading: false,
-					response: state.status == "model" ? [response] : [...state.response, response]
+					response: state.status == "model" ? [response] : [...state.response, response],
+					tabActive: cont
 				};
 
 			case SEARCH_BY_PESSOAS_RELACIONADOS:
@@ -122,7 +138,8 @@ export default function(state = initialState, action) {
 					status: "pessoas",
 					message: "",
 					loading: false,
-					response: state.response
+					response: state.response,
+					tabActive: state.tabActive
 				};
 
 			case SEARCH_BY_TELEFONES_RELACIONADOS:
@@ -134,7 +151,8 @@ export default function(state = initialState, action) {
 					status: "telefones "+posPessoas,
 					message: "",
 					loading: false,
-					response: state.response
+					response: state.response,
+					tabActive: state.tabActive
 				};
 
 			case SEARCH_BY_ENDERECOS_RELACIONADOS:
@@ -143,7 +161,8 @@ export default function(state = initialState, action) {
 					status: "enderecos",
 					message: "",
 					loading: false,
-					response: state.response
+					response: state.response,
+					tabActive: state.tabActive
 				};
 
 			case SEARCH_BY_EMAILS_RELACIONADOS:
@@ -152,7 +171,8 @@ export default function(state = initialState, action) {
 					status: "emails",
 					message: "",
 					loading: false,
-					response: state.response
+					response: state.response,
+					tabActive: state.tabActive
 				};
 
 			case REQUEST_ERROR:
@@ -160,7 +180,8 @@ export default function(state = initialState, action) {
 					status: "error request",
 					message: action.payload.ERRORS.ERROR.content,
 					loading: false,
-					response: state.response
+					response: state.response,
+					tabActive: state.tabActive
 				};
 
 			case ERR_CONNECTION_REFUSED:
@@ -168,7 +189,8 @@ export default function(state = initialState, action) {
 					status: "error connection",
 					message: "Serviço temporariamente indisponível, tente novamente mais tarde",
 					loading: false,
-					response: state.response
+					response: state.response,
+					tabActive: state.tabActive
 				};
 		}
 	}

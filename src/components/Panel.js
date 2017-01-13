@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip';
 
-export default class PanelGroup extends Component {
+export default class Panel extends Component {
     constructor(props) {
         super(props);
-
-        console.log(this.props)
 
         this.state = {
             show: this.props.showPanel == false ? false : true
