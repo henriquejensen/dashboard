@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import TelefoneLayout from "../../components/telefone/layoutTelefone";
-import EnderecoLayout from "../../components/endereco/layoutEndereco";
-import Panel from "../../components/Panel";
-import Table from "../../components/Table";
+import TelefoneLayout from "../telefone/layoutTelefone";
+import EnderecoLayout from "../endereco/layoutEndereco";
+import Panel from "../Panel";
+import Table from "../Table";
 
 export default class Relacionados extends Component {
     state = {
@@ -51,7 +51,6 @@ export default class Relacionados extends Component {
                     <Table 
                         fields= {["", "Relação", "Nome", "Data nasc", "Cidade", "UF", "Ação"]}
                     >
-                            {console.log("RELACIONADOS", this.props.relacionados)}
                             {this.props.relacionados.map((pessoa, index) => {
                                 return (
                                     <tbody key={index}>

@@ -1,4 +1,5 @@
 import React,  { Component } from "react";
+import Tooltip from 'react-tooltip'
 
 import Panel from "../../components/Panel";
 import Table from "../../components/Table";
@@ -30,6 +31,11 @@ export default class Renda extends Component {
                         </tbody>                    
                     </Table>
                 </div>
+
+                <Tooltip id="tooltipConsultar">
+                    <span>Consultar</span>
+                </Tooltip>
+
             </Panel>
         )
     }

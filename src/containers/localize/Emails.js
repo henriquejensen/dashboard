@@ -2,13 +2,23 @@ import React, { Component } from "react";
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Tooltip from "react-tooltip";
 
+import EnviarEmail from "../../components/forms/EnviarEmail";
+import Modal from "../../components/Modal";
 import Panel from "../../components/Panel";
 
 export default class Emails extends Component {
 
     state = {
-        copiar: false
+        copiar: false,
+        isModalOpen: false
     }
+
+	closeModal() {
+		this.setState({
+			isModalOpen: false,
+            emailEnviar: ""
+		})
+	}
 
     render() {
         return (
@@ -30,12 +40,21 @@ export default class Emails extends Component {
 
                                 <div className="col-md-1">
                                     <a data-tip data-for="tooltipEmail">
-                                        <i className="glyphicon glyphicon-envelope icon-tel icon-tel-msg"/>
+                                        <i className="glyphicon glyphicon-envelope icon-tel icon-tel-msg" onClick={() => this.setState({isModalOpen: true, emailEnviar: email})}/>
                                     </a>
                                 </div>
                             </div>
                     }
                 })}
+
+                <Modal
+                    IsModalOpen={this.state.isModalOpen}
+                    closeModal={this.closeModal.bind(this)}>
+
+                    <EnviarEmail email={this.state.emailEnviar} />
+
+                </Modal>
+
 
                 <Tooltip id="tooltipCopy">
                     <span>Copiar número</span>

@@ -37,6 +37,8 @@ class MyModal extends Component {
                 style={customStyle}
                 contentLabel="Modal">
 
+                <i className="fa fa-times close-modal" onClick={this.props.closeModal} />
+
                 {this.props.children}
                 
             </Modal>

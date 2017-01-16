@@ -10,12 +10,10 @@ import Sociedades from "./Sociedades";
 import Veiculos from "./Veiculos";
 import DadosPj from "./DadosPj";
 import Socios from "./Socios";
-import Relacionados from "./Relacionados";
-import TelefonesRelacionados from "./TelefonesRelacionados";
-import EnderecosRelacionados from "./EnderecosRelacionados";
 import Protocolo from "./Protocolo";
 import BuscaPorRelacionados from "./BuscaPorRelacionados";
 
+import Relacionados from "../../components/relacionados/Relacionados";
 import PanelGroup from "../../components/PanelGroup";
 
 export default class LocalizeView extends Component {
