@@ -3,10 +3,8 @@ import {
 		loadingLocalize,
 		searchLocalize,
 		searchLocalizeByParams,
-		searchTelefonesRelacionados,
 		searchPessoasRelacionadas,
-		searchEnderecosRelacionados,
-		searchEmailsRelacionados,
+		showRelacionados,
 		seeModel,
 		closeModel,
 		changeTab,
@@ -41,9 +39,7 @@ class LocalizeController extends Component {
 		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
 		this.searchLocalize = this.searchLocalize.bind(this);
 		this.searchPessoasRelacionadas = this.searchPessoasRelacionadas.bind(this);
-		this._showTelefonesRelacionados = this._showTelefonesRelacionados.bind(this);
-		this._showEnderecosRelacionados = this._showEnderecosRelacionados.bind(this);
-		this._showEmailsRelacionados = this._showEmailsRelacionados.bind(this);
+		this._showRelacionados = this._showRelacionados.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.form = this.form.bind(this);
 	}
@@ -56,9 +52,16 @@ class LocalizeController extends Component {
 		document.title = "Assertiva > Localize";
 	}
 
-	searchPessoasRelacionadas(doc) {
+	searchPessoasRelacionadas(doc, tipo) {
 		this.props.loadingLocalize();
-		this.props.searchPessoasRelacionadas(doc);
+		this.props.searchPessoasRelacionadas(doc, tipo);
+	}
+
+	//recebe o documento da pessoa e da pessoa relacionada a esta.
+	_showRelacionados(doc, docPessoaRelacionado, tipo) {
+		console.log("PESQUISANDO", doc, docPessoaRelacionado, tipo);
+		this.props.loadingLocalize();
+		this.props.showRelacionados(doc, docPessoaRelacionado, tipo);
 	}
 
 	searchLocalize(doc, tipo) {
@@ -104,18 +107,6 @@ class LocalizeController extends Component {
 			tipo: ""
 		});
 
-	}
-
-	_showTelefonesRelacionados(doc, docTelefone) {
-		this.props.searchTelefonesRelacionados(doc, docTelefone);
-	}
-	
-	_showEnderecosRelacionados(doc) {
-		this.props.searchEnderecosRelacionados(doc);
-	}
-
-	_showEmailsRelacionados(doc) {
-		this.props.searchEmailsRelacionados(doc);
 	}
 
 	onChange(evt) {
@@ -306,9 +297,8 @@ class LocalizeController extends Component {
 												data={data}
 												searchLocalize={this.searchLocalize}
 												showPessoasRelacionadas={this._showPessoasRelacionadas}
-												showTelefonesRelacionados={this._showTelefonesRelacionados}
-												pessoasRelacionadas={this.searchPessoasRelacionadas}
-												showEnderecosRelacionados={this._showEnderecosRelacionados}/>
+												showRelacionados={this._showRelacionados}
+												pessoasRelacionadas={this.searchPessoasRelacionadas}/>
 										
 										: ""}
 
@@ -341,9 +331,7 @@ function mapDispatchToProps(dispacth) {
 			searchLocalize,
 			searchLocalizeByParams,
 			searchPessoasRelacionadas,
-			searchTelefonesRelacionados,
-			searchEnderecosRelacionados,
-			searchEmailsRelacionados,
+			showRelacionados,
 			seeModel,
 			closeModel,
 			changeTab,

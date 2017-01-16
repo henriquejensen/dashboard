@@ -20,12 +20,6 @@ export default class Telefones extends Component{
 
     }
 
-    copiarNumero() {
-        this.setState({
-        copiar: !this.state.copiar
-        })
-    }
-
     closeModal() {
         this.setState({
             IsModalOpen: false
@@ -50,7 +44,7 @@ export default class Telefones extends Component{
 
                                                 <a data-tip data-for="tooltipCopy">
                                                     <div className="col-md-1">
-                                                        <CopyToClipboard text={tel} onCopy={this.copiarNumero.bind(this)}>
+                                                        <CopyToClipboard text={tel} onCopy={() => this.setState({copiar:!this.state.copiar})}>
                                                             <i className="fa fa-clipboard icon-tel" />
                                                         </CopyToClipboard>
                                                     </div>
@@ -101,7 +95,7 @@ export default class Telefones extends Component{
 
                                                 <a data-tip data-for="tooltipCopy">
                                                     <div className="col-md-1">
-                                                        <CopyToClipboard text={tel} onCopy={this.copiarNumero.bind(this)}>
+                                                        <CopyToClipboard text={tel} onCopy={() => this.setState({copiar:!this.state.copiar})}>
                                                             <i className="fa fa-clipboard icon-tel" />
                                                         </CopyToClipboard>
                                                     </div>

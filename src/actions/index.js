@@ -7,7 +7,6 @@ import {
 		SEARCH_BY_CNPJ,
 		SEARCH_BY_PARAMS,
 		SEARCH_BY_PESSOAS_RELACIONADOS,
-		SEARCH_BY_EMAILS_RELACIONADOS,
 		SEARCH_BY_TELEFONES_RELACIONADOS,
 		SEARCH_BY_ENDERECOS_RELACIONADOS,
 		SEE_LOCALIZE_MODEL,
@@ -163,34 +162,34 @@ export function getRespostasSMS() {
 	}
 }
 
-export function searchPessoasRelacionadas(doc) {
+export function searchPessoasRelacionadas(doc, tipo) {
 	return {
 		type: SEARCH_BY_PESSOAS_RELACIONADOS,
-		payload: doc
-	}
-}
-
-export function searchTelefonesRelacionados(doc, docTelefone) {
-	return {
-		type: SEARCH_BY_TELEFONES_RELACIONADOS,
 		payload: {
 			documento: doc,
-			documentoTelefone: docTelefone
+			tipo: tipo
 		}
 	}
 }
 
-export function searchEnderecosRelacionados(doc) {
-	return {
-		type: SEARCH_BY_ENDERECOS_RELACIONADOS,
-		payload: doc
-	}
-}
-
-export function searchEmailsRelacionados(doc) {
-	return {
-		type: SEARCH_BY_EMAILS_RELACIONADOS,
-		payload: doc
+export function showRelacionados(doc, docRelacionado, tipo) {
+	console.log(tipo, doc, docRelacionado);
+	if( tipo == "telefone") {
+		return {
+			type: SEARCH_BY_TELEFONES_RELACIONADOS,
+			payload: {
+				documento: doc,
+				documentoRelacionado: docRelacionado
+			}
+		}
+	} else if( tipo == "endereco") {
+		return {
+			type: SEARCH_BY_ENDERECOS_RELACIONADOS,
+			payload: {
+				documento: doc,
+				documentoRelacionado: docRelacionado
+			}
+		}
 	}
 }
 

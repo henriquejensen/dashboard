@@ -6,6 +6,10 @@ import Panel from "../../components/Panel";
 
 export default class Emails extends Component {
 
+    state = {
+        copiar: false
+    }
+
     render() {
         return (
             <Panel title="EMAILS" qtdTotal={[{qtd:this.props.emails.length,icon:"glyphicon-envelope"}]}>
@@ -16,11 +20,13 @@ export default class Emails extends Component {
                                     {email}
                                 </div>
 
-                                <div className="col-md-2" style={{cursor:"pointer"}}>
-                                    <CopyToClipboard text={email}>
-                                        <span >Copiar</span>
-                                    </CopyToClipboard>&nbsp;
-                                </div>
+                                <a data-tip data-for="tooltipCopy">
+                                    <div className="col-md-1">
+                                        <CopyToClipboard text={email} onCopy={() => this.setState({copiar:!this.state.copiar})}>
+                                            <i className="fa fa-clipboard icon-tel" />
+                                        </CopyToClipboard>
+                                    </div>
+                                </a>
 
                                 <div className="col-md-1">
                                     <a data-tip data-for="tooltipEmail">
@@ -30,6 +36,10 @@ export default class Emails extends Component {
                             </div>
                     }
                 })}
+
+                <Tooltip id="tooltipCopy">
+                    <span>Copiar número</span>
+                </Tooltip>
 
                 <Tooltip id="usersRelated">
                     <span>Informações relacionadas</span>

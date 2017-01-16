@@ -33,24 +33,29 @@ export default class LocalizeView extends Component {
                         <PessoasRelacionadas /> : ""}
 
                     {this.props.data.data.TELEFONES_MOVEIS ? 
-                        <Telefones telefones = {this.props.data.data.TELEFONES_MOVEIS.TELEFONE} relacionados = {() => this.props.pessoasRelacionadas(this.props.data.data.CPF)} /> : ""}
+                        <Telefones telefones = {this.props.data.data.TELEFONES_MOVEIS.TELEFONE} relacionados = {() => this.props.pessoasRelacionadas(this.props.data.data.CPF, "telefone")} /> : ""}
 
-                    {this.props.data.pessoasRelacionadas.length > 0 ?
+                    {this.props.data.pessoasRelacionadas.pessoasTelefones.length > 0 ?
                         <Relacionados
                             title="TELEFONES RELACIONADOS"
+                            tipo="telefone"
                             documento={this.props.data.data.CPF}
-                            relacionados={this.props.data.pessoasRelacionadas}
+                            relacionados={this.props.data.pessoasRelacionadas.pessoasTelefones}
                             searchLocalize={this.props.searchLocalize}
-                            showTelefonesRelacionados={this.props.showTelefonesRelacionados}/>
+                            searchRelacionados={this.props.showRelacionados}/>
                     :""}
 
                     {this.props.data.data.ENDERECOS ?
-                        <Enderecos enderecos = {this.props.data.data.ENDERECOS.ENDERECO} showEnderecosRelacionados={() => this.props.showEnderecosRelacionados(this.props.data.data.CPF)}/> : ""}
+                        <Enderecos enderecos = {this.props.data.data.ENDERECOS.ENDERECO}  relacionados = {() => this.props.pessoasRelacionadas(this.props.data.data.CPF, "endereco")}/> : ""}
 
-                    {this.props.data.enderecosRelacionados ? 
-                        this.props.data.enderecosRelacionados.map((enderecos,i) => {
-                            return <EnderecosRelacionados enderecos={enderecos} key={i} />
-                        })
+                    {this.props.data.pessoasRelacionadas.pessoasEnderecos.length > 0 ?                        
+                        <Relacionados
+                            title="ENDEREÇOS RELACIONADOS"
+                            tipo="endereco"
+                            documento={this.props.data.data.CPF}
+                            relacionados={this.props.data.pessoasRelacionadas.pessoasEnderecos}
+                            searchLocalize={this.props.searchLocalize}
+                            searchRelacionados={this.props.showRelacionados}/>
                     :""}
                     
                     {this.props.data.data.EMAILS ?

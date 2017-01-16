@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import Tooltip from "react-tooltip";
 
-import MapPanel from "../../components/MapPanel";
-import Panel from "../../components/Panel";
-import Table from "../../components/Table";
+import MapPanel from "../MapPanel";
+import Table from "../Table";
 
 export default class Enderecos extends Component {
   constructor(props) {
@@ -32,8 +31,7 @@ export default class Enderecos extends Component {
 
   render() {
     return (
-            <Panel title="ENDEREÇOS" qtdTotal={[{qtd:this.props.enderecos.length,icon:"glyphicon-home"}]}>
-              <div className="col-md-12">
+            <div className="col-md-12">
                 <Table
                   fields={
                     ["Logradouro", "Número", "Complemento", "Bairro", "Cidade", "UF", "CEP", ""]
@@ -95,18 +93,15 @@ export default class Enderecos extends Component {
 
                 </Table>
 
-              </div>
               
-              <div className="col-md-12">
-                <a data-tip data-for="usersRelated">
-                  <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.props.relacionados} />
-                </a>
-              </div>
+              <a data-tip data-for="usersRelated">
+                <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.props.relacionados} />
+              </a>
 
               <Tooltip id="tooltipMap">
                 <span>Visualizar endereço</span>
               </Tooltip>
               
-            </Panel>)
+            </div>)
   }
 }

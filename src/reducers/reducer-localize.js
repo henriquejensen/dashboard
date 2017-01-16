@@ -22,13 +22,8 @@ const telefonesRelacionados = [
 ]
 
 const enderecosRelacionados = [
-	{relacao: "MÃE", nome: "MARIA DA SILVA", enderecos: [{BAIRRO:"VILA", CEP:1307070, CIDADE:"CAMPINAS", LOGRADOURO:"MENA DOIS", NUMERO:12, SCORE:2, TIPO_LOGRADOURO:"R", UF:"SP"}]},
-	{relacao: "TIO", nome: "JOSE DA SILVA", enderecos: [{BAIRRO:"MATAO", CEP:1307070, CIDADE:"ARACA", LOGRADOURO:"MENA UM", NUMERO:12, SCORE:2, TIPO_LOGRADOURO:"R", UF:"AC"}]},
-]
-
-const emailsRelacionados = [
-	{relacao: "MÃE", nome: "MARIA DA SILVA", emails: ["teste@teste.com.br","novo@yahoo.com.br"]},
-	{relacao: "TIO", nome: "JOSE DA SILVA", emails: ["tio@teste.com.br"]},
+	{documento: 5366214700, enderecos: [{BAIRRO:"BONFIM", CEP:1307070, CIDADE:"CAMPINAS", LOGRADOURO:"GOVENADOR PEDRO DE TOLEDO", NUMERO:12, SCORE:2, TIPO_LOGRADOURO:"AV", UF:"SP"}]},
+	{documento: 26675175807, enderecos: [{BAIRRO:"CAMBUI", CEP:1307070, CIDADE:"CAMPINAS", LOGRADOURO:"ANDRADE NEVES", NUMERO:12, SCORE:2, TIPO_LOGRADOURO:"AV", UF:"SP"}]},
 ]
 
 const initialState = {
@@ -49,9 +44,10 @@ export default function(state = initialState, action) {
 			tipo: "",
 			icon: "",
 			produto: "",
-			pessoasRelacionadas: [],
-			enderecosRelacionados: [],
-			emailsRelacionados: [],
+			pessoasRelacionadas: {
+				pessoasTelefones: [],
+				pessoasEnderecos: []
+			}
 		}
 
 		switch(action.type) {
@@ -133,9 +129,14 @@ export default function(state = initialState, action) {
 				};
 
 			case SEARCH_BY_PESSOAS_RELACIONADOS:
-				state.response[searchPessoa(state.response,action.payload)].pessoasRelacionadas = pessoasRelacionadas.pessoasRelacionadas;
+				if(action.payload.tipo == "telefone") {
+					state.response[searchPessoa(state.response,action.payload.documento)].pessoasRelacionadas.pessoasTelefones = pessoasRelacionadas.pessoasRelacionadas;
+				} else if(action.payload.tipo == "endereco") {
+					state.response[searchPessoa(state.response,action.payload.documento)].pessoasRelacionadas.pessoasEnderecos = pessoasRelacionadas.pessoasRelacionadas;
+				}
+				
 				return {
-					status: "pessoas",
+					status: "pessoas "+action.payload.tipo,
 					message: "",
 					loading: false,
 					response: state.response,
@@ -143,12 +144,17 @@ export default function(state = initialState, action) {
 				};
 
 			case SEARCH_BY_TELEFONES_RELACIONADOS:
-				//busca nas pesquisas realizadas o documento que sera inserido os telefones relacionados
-				let posBuscas = searchPessoa(state.response,action.payload.documento);
-				let posPessoas = searchPosPessoa(state.response[posBuscas].pessoasRelacionadas, action.payload.documentoTelefone)
-				state.response[posBuscas].pessoasRelacionadas[posPessoas].telefones = searchTelefonesRelacionados(telefonesRelacionados, action.payload.documentoTelefone);
+				//busca nas documentos pesquisados no localize o documento que sera inserido os telefones relacionados
+				let posPessoaTelefone = searchPessoa(state.response,action.payload.documento);
+
+				//busca a pessoa relacionado que foi clicada para mostrar os telefones
+				let posPessoaRelacionadaTelefones = searchPosPessoa(state.response[posPessoaTelefone].pessoasRelacionadas.pessoasTelefones, action.payload.documentoRelacionado);
+
+				//adciona na pessoa relacionada os telefones encontrados
+				state.response[posPessoaTelefone].pessoasRelacionadas.pessoasTelefones[posPessoaRelacionadaTelefones].telefones = searchTelefonesRelacionados(telefonesRelacionados, action.payload.documentoRelacionado);
+				
 				return {
-					status: "telefones "+posPessoas,
+					status: "telefones",
 					message: "",
 					loading: false,
 					response: state.response,
@@ -156,19 +162,11 @@ export default function(state = initialState, action) {
 				};
 
 			case SEARCH_BY_ENDERECOS_RELACIONADOS:
-				state.response[searchPessoa(state.response,action.payload)].enderecosRelacionados = enderecosRelacionados;
+				let posPessoaEndereco = searchPessoa(state.response,action.payload.documento);
+				let posPessoaRelacionadaEndereco = searchPosPessoa(state.response[posPessoaEndereco].pessoasRelacionadas.pessoasEnderecos, action.payload.documentoRelacionado)
+				state.response[posPessoaEndereco].pessoasRelacionadas.pessoasEnderecos[posPessoaRelacionadaEndereco].enderecos = searchEnderecosRelacionados(enderecosRelacionados, action.payload.documentoRelacionado);
 				return {
 					status: "enderecos",
-					message: "",
-					loading: false,
-					response: state.response,
-					tabActive: state.tabActive
-				};
-
-			case SEARCH_BY_EMAILS_RELACIONADOS:
-				state.response[searchPessoa(state.response,action.payload)].emailsRelacionados = emailsRelacionados;
-				return {
-					status: "emails",
 					message: "",
 					loading: false,
 					response: state.response,
@@ -200,7 +198,6 @@ export default function(state = initialState, action) {
 
 //Busca no array de pessoas pesquisadas o documento passado
 function searchPessoa(list, doc) {
-	console.log("1", list, doc)
 	for(let i=0; i<list.length; i++) {
 		if(doc == list[i].data.CPF) {
 			return i;
@@ -211,7 +208,6 @@ function searchPessoa(list, doc) {
 }
 
 function searchPosPessoa(listPeople, doc) {
-	console.log("2", listPeople, doc)
 	for(let i=0; i<listPeople.length; i++) {
 		if(doc == listPeople[i].documento) {
 			return i;
@@ -222,13 +218,22 @@ function searchPosPessoa(listPeople, doc) {
 //funcao recebe a lista das pessoas pesquisadas, a lista de telefones de todos os telefones e o documento que esta solicitando os telefones
 // retorna um objeto dos telefones fixos e moveis da lista de telefones
 function searchTelefonesRelacionados(listPhones, doc) {
-	console.log("3", listPhones, doc)
 	for(let j=0; j<listPhones.length; j++) {
 		if(doc == listPhones[j].documento) {
 			return {
 				fixos: listPhones[j].fixos,
 				moveis: listPhones[j].moveis
 			}
+		}
+	}
+}
+
+//funcao recebe a lista das pessoas pesquisadas, a lista de telefones de todos os telefones e o documento que esta solicitando os telefones
+// retorna um objeto dos telefones fixos e moveis da lista de telefones
+function searchEnderecosRelacionados(listAddress, doc) {
+	for(let j=0; j<listAddress.length; j++) {
+		if(doc == listAddress[j].documento) {
+			return listAddress[j].enderecos
 		}
 	}
 }
