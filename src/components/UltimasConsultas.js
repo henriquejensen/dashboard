@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Tooltip from 'react-tooltip'
 
 import Panel from "./Panel";
 import Table from "./Table";
@@ -18,15 +19,21 @@ export default class UltimasConsultas extends Component {
                                     <td>{consulta.pesquisa}</td>
                                     <td>{consulta.data}</td>
                                     <td>
-                                        <div className="mapa-button">
-                                            <i className='fa fa-search'/>
-                                        </div>
+                                        <a data-tip data-for="tooltipConsultar">
+                                            <div className="mapa-button">
+                                                <i className='fa fa-search'/>
+                                            </div>
+                                        </a>
                                     </td>
                                 </tr>
                             )
                         })}
                     </tbody>
                 </Table>
+
+                <Tooltip id="tooltipConsultar">
+                    <span>Consultar</span>
+                </Tooltip>
             </Panel>
         )
     }

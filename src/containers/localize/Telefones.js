@@ -92,11 +92,13 @@ export default class Telefones extends Component{
                   </table>
                 </div>
 
-                {celulares.length > 0 ?
-                  <div className="col-md-6" xs={6}>
-                    <table className="table table-striped table-hover">
-                      <tbody>
-                        {celulares.map((tel,i) => {
+                
+                <div className="col-md-6" xs={6}>
+                  <table className="table table-striped table-hover">
+                    <tbody>
+                      {celulares.length == 0 ?
+                        <div className="text-center">Nenhum telefone móvel encontrado</div>
+                      : celulares.map((tel,i) => {
                             tel = tel.toString();
                             return <tr key={i} className={i > 3 ? (this.state.showMoreTel ? "" : "display-none") : ""}>
                                 <td>
@@ -144,57 +146,57 @@ export default class Telefones extends Component{
                                 </td>
                             </tr>
                         })}
-                      </tbody>
-                    </table>
-                  </div>: "" }
+                    </tbody>
+                  </table>
+                </div>
 
-                  <Tooltip id="tooltipCopy">
-                    <span>Copiar número</span>
-                  </Tooltip>
+                <Tooltip id="tooltipCopy">
+                  <span>Copiar número</span>
+                </Tooltip>
 
-                  <Tooltip id="tooltipOperadora">
-                    <span>Operadora</span>
-                  </Tooltip>
+                <Tooltip id="tooltipOperadora">
+                  <span>Operadora</span>
+                </Tooltip>
 
-                  <Tooltip id="tooltipMessageVoice">
-                    <span>Enviar mensagem de voz</span>
-                  </Tooltip>
+                <Tooltip id="tooltipMessageVoice">
+                  <span>Enviar mensagem de voz</span>
+                </Tooltip>
 
-                  <Tooltip id="tooltipSMS">
-                    <span>Enviar SMS</span>
-                  </Tooltip>
+                <Tooltip id="tooltipSMS">
+                  <span>Enviar SMS</span>
+                </Tooltip>
 
-                  <Tooltip id="tooltipCall">
-                    <span>Ligar</span>
-                  </Tooltip>
+                <Tooltip id="tooltipCall">
+                  <span>Ligar</span>
+                </Tooltip>
 
-                  <Tooltip id="tooltipHot">
-                    <span>Número importante</span>
-                  </Tooltip>
+                <Tooltip id="tooltipHot">
+                  <span>Número importante</span>
+                </Tooltip>
 
-                  <Tooltip id="tooltipWhats">
-                    <span>Enviar mensagem por Whatsapp</span>
-                  </Tooltip>
+                <Tooltip id="tooltipWhats">
+                  <span>Enviar mensagem por Whatsapp</span>
+                </Tooltip>
 
-                  <Modal
-                    IsModalOpen={this.state.IsModalOpen}
-                    closeModal={this.closeModal.bind(this)}>
+                <Modal
+                  IsModalOpen={this.state.IsModalOpen}
+                  closeModal={this.closeModal.bind(this)}>
 
-                    <SMSRapido />
+                  <SMSRapido />
 
-                    <button onClick={this.closeModal.bind(this)}>close</button>
-                  </Modal>
+                  <button onClick={this.closeModal.bind(this)}>close</button>
+                </Modal>
 
-                  
-                  <div className="col-md-12">
-                    {celulares.length > 4 || this.props.telefones.length - celulares.length > 4 ?
-                    <a data-tip data-for="moreInfo">
-                      <i className="glyphicon glyphicon-plus pull-right moreInfo" onClick={() => this.setState({showMoreTel:!this.state.showMoreTel})}/>
-                    </a>: ""}
-                    <a data-tip data-for="usersRelated">
-                      <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.props.relacionados} />
-                    </a>
-                  </div>
+                
+                <div className="col-md-12">
+                  {celulares.length > 4 || this.props.telefones.length - celulares.length > 4 ?
+                  <a data-tip data-for="moreInfo">
+                    <i className={this.state.showMoreTel ? "fa fa-minus pull-right moreInfo" : "fa fa-plus pull-right moreInfo"} onClick={() => this.setState({showMoreTel:!this.state.showMoreTel})}/>
+                  </a>: ""}
+                  <a data-tip data-for="usersRelated">
+                    <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.props.relacionados} />
+                  </a>
+                </div>
                   
               </Panel>)
   }

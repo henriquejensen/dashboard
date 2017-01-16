@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Tooltip from 'react-tooltip'
 
 import Panel from "../../components/Panel";
 import Table from "../../components/Table";
@@ -22,15 +23,21 @@ export default class BuscaPorRelacionados extends Component {
                                     <td>{relacionado.cidade}</td>
                                     <td>{relacionado.uf}</td>
                                     <td>
-                                        <div className="mapa-button" onClick={() => this.props.searchLocalize(relacionado.documento, "pf")}>
-                                            <i className='fa fa-search'/>
-                                        </div>
+                                        <a data-tip data-for="tooltipConsultar">
+                                            <div className="mapa-button" onClick={() => this.props.searchLocalize(relacionado.documento, "pf")}>
+                                                <i className='fa fa-search'/>
+                                            </div>
+                                        </a>
                                     </td>
                                 </tr>
                             )
                         })}
                     </tbody>
                 </Table>
+
+              <Tooltip id="tooltipConsultar">
+                <span>Consultar</span>
+              </Tooltip>
             </Panel>
         )
     }

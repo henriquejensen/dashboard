@@ -66,6 +66,7 @@ export default class Sidebar extends Component {
                 <Link to="/dashboard/localize/telefone"><li>Telefone</li></Link>
                 <Link to="/dashboard/localize/nome"><li>Nome</li></Link>
                 <Link to="/dashboard/localize/endereco"><li>Endereço</li></Link>
+                <Link to="/dashboard/localize/email"><li>Email</li></Link>
               </ul>
             </li>
 

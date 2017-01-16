@@ -87,7 +87,7 @@ export default function(state = initialState, action) {
 
 			case CLOSE_TAB:
 				let newResponse = state.response.concat();
-				newResponse.pop(action.payload);
+				let closed = newResponse.splice(action.payload, 1);
 
 				return {
 					status: "tabclosed",

@@ -29,6 +29,7 @@ class LocalizeController extends Component {
 		this.state = {
 			documento: "",
 			telefone: "",
+			email: "",
 			nome: "",
 			endereco: "",
 			estado: "",
@@ -99,6 +100,7 @@ class LocalizeController extends Component {
 		this.setState({
 			documento: "",
 			telefone: "",
+			email: "",
 			nome: "",
 			endereco: "",
 			estado: "",
@@ -116,10 +118,10 @@ class LocalizeController extends Component {
 		})
 	}
 
-	renderForm() {
+	renderForm(formType, options) {
 		return (
 			<Form
-				options = {["CPF", "CNPJ", "TELEFONE", "NOME", "ENDERECO"]}
+				options = {options}
 				optionSelected = {location.pathname.split("/")[3].toUpperCase()}
 				tipo = {this.state.tipo}
 				icon = {ICON_LOCALIZE}
@@ -132,55 +134,49 @@ class LocalizeController extends Component {
 				status = {this.props.status}
 				message = {this.props.message} >
 				
-				<input
-					value={this.state.documento}
-					type="text"
-					className="form-control input-search "
-					placeholder="Digite o documento"
-					name="documento"
-					required
-					style={{width:320, display:"inline-block"}}
-					onChange={this.onChange} />
+				{formType == "cpf" || formType == "cnpj"?
+					<input
+						value={this.state.documento}
+						type="text"
+						className="form-control input-search "
+						placeholder="Digite o documento"
+						name="documento"
+						required
+						style={{width:320, display:"inline-block"}}
+						onChange={this.onChange} />
+				: formType == "telefone" ?
+					<input
+						value={this.state.telefone}
+						type="number"
+						className="form-control input-search "
+						placeholder="Digite o DD e o número"
+						name="telefone"
+						size="10"
+						required
+						style={{width:320, display:"inline-block"}}
+						onChange={this.onChange} />
+				  : formType == "email" ?
+					<input
+						value={this.state.email}
+						type="email"
+						className="form-control input-search "
+						placeholder="Digite o email"
+						name="email"
+						size="10"
+						required
+						style={{width:320, display:"inline-block"}}
+						onChange={this.onChange} />
+				  : ""
+				}
 
 			</Form>
 		)
 	}
 
-	renderFormTelefone() {
+	renderFormNomeEndereco(formType, options) {
 		return (
 			<Form
-				options = {["CPF", "CNPJ", "TELEFONE", "NOME", "ENDERECO"]}
-				optionSelected = {location.pathname.split("/")[3].toUpperCase()}
-				tipo = {this.state.tipo}
-				icon = {ICON_LOCALIZE}
-				logo = {LOGO_LOCALIZE}
-				datas = {this.props.datas}
-				onChange = {this.onChange}
-				onformSubmit = {this.onLocalizeSubmit}
-				seeModelo = {this.props.seeModel}
-				closeModelo = {this.props.closeModel}
-				status = {this.props.status}
-				message = {this.props.message} >
-				
-				<input
-					value={this.state.telefone}
-					type="number"
-					className="form-control input-search "
-					placeholder="Digite o DD e o número"
-					name="telefone"
-					size="10"
-					required
-					style={{width:320, display:"inline-block"}}
-					onChange={this.onChange} />
-
-			</Form>
-		)
-	}
-
-	renderFormNomeEndereco(formType) {
-		return (
-			<Form
-				options = {["CPF", "CNPJ", "TELEFONE", "NOME", "ENDERECO"]}
+				options = {options}
 				optionSelected = {location.pathname.split("/")[3].toUpperCase()}
 				tipo = {this.state.tipo}
 				icon = {ICON_LOCALIZE}
@@ -250,6 +246,7 @@ class LocalizeController extends Component {
 	form() {
 		let pathTipo = location.pathname.split("/")[3].toUpperCase();
 		let tipo = this.state.tipo;
+		let options = ["CPF", "CNPJ", "TELEFONE", "NOME", "ENDERECO", "EMAIL"];
 
 		if(!tipo) {
 			tipo = pathTipo;
@@ -258,13 +255,15 @@ class LocalizeController extends Component {
 		return (
 			pathTipo || tipo ?
 				tipo == "CPF" || tipo == "CNPJ" ? 
-					this.renderForm()
+					this.renderForm(tipo.toLowerCase(), options)
 				: tipo == "NOME" ? 
-					this.renderFormNomeEndereco("nome")
+					this.renderFormNomeEndereco(tipo.toLowerCase(), options)
 					: tipo == "TELEFONE" ?
-					this.renderFormTelefone()
-					: this.renderFormNomeEndereco("endereco")
-			: this.renderForm()
+						this.renderForm(tipo.toLowerCase(), options)
+					: tipo == "EMAIL" ?
+						this.renderForm(tipo.toLowerCase(), options)
+					: this.renderFormNomeEndereco(tipo.toLowerCase(), options)
+			: ""
 		)
 	}
 

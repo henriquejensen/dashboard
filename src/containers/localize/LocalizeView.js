@@ -93,7 +93,8 @@ export default class LocalizeView extends Component {
                     </PanelGroup>
             : this.props.data.tipo == "TELEFONE" ||
                 this.props.data.tipo == "ENDERECO" ||
-                    this.props.data.tipo == "NOME" ?
+                    this.props.data.tipo == "NOME" ||
+                        this.props.data.tipo == "EMAIL" ?
 
                     <PanelGroup>
                         <BuscaPorRelacionados relacionados={this.props.data.data.relacionados} />
