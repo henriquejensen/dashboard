@@ -48,7 +48,7 @@ input {
     width: 40px;
     position: absolute;
     top: 0;
-    left: 230px;
+    left: 0px;
 }
 
 .container {
@@ -167,7 +167,8 @@ input {
 }
 
 .my-form {
-    width: 600px;
+    position: relative;
+    width: 650px;
     margin: 0 auto;
 }
 
@@ -187,4 +188,13 @@ input {
     color: white;
     padding: 2px;
     border-radius: 8px;
+}
+
+.close-tab {
+    position: absolute;
+    z-index: 1;
+    color: #5b3494;
+    right: 5px;
+    top: 2px;
+    cursor: pointer;
 }

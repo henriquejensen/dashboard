@@ -73,24 +73,27 @@ export default class Enderecos extends Component {
 
                             </tbody>
                           )
-                      }) : <tr>
-                        <td>{this.props.enderecos.TIPO_LOGRADOURO}. {this.props.enderecos.LOGRADOURO}</td>
-                        <td>{this.props.enderecos.NUMERO}</td>
-                        <td>{this.props.enderecos.COMPLEMENTO}</td>
-                        <td>{this.props.enderecos.BAIRRO}</td>
-                        <td>{this.props.enderecos.CIDADE}</td>
-                        <td>{this.props.enderecos.UF}</td>
-                        <td>{this.props.enderecos.CEP.toString().substring(0,this.props.enderecos.CEP.toString().length-3)}-{this.props.enderecos.CEP.toString().substring(this.props.enderecos.CEP.toString().length-3)}</td>
-                        <td>
-                            <a data-tip data-for="tooltipMap">
-                              <div
-                                className="mapa-button"
-                                onClick={this.mostrarMapa}>
-                                <i className="glyphicon glyphicon-globe" />
-                              </div>
-                            </a>
-                        </td>
-                      </tr>
+                      }) : 
+                        <tbody>
+                          <tr>
+                            <td>{this.props.enderecos.TIPO_LOGRADOURO}. {this.props.enderecos.LOGRADOURO}</td>
+                            <td>{this.props.enderecos.NUMERO}</td>
+                            <td>{this.props.enderecos.COMPLEMENTO}</td>
+                            <td>{this.props.enderecos.BAIRRO}</td>
+                            <td>{this.props.enderecos.CIDADE}</td>
+                            <td>{this.props.enderecos.UF}</td>
+                            <td>{this.props.enderecos.CEP.toString().substring(0,this.props.enderecos.CEP.toString().length-3)}-{this.props.enderecos.CEP.toString().substring(this.props.enderecos.CEP.toString().length-3)}</td>
+                            <td>
+                                <a data-tip data-for="tooltipMap">
+                                  <div
+                                    className="mapa-button"
+                                    onClick={this.mostrarMapa}>
+                                    <i className="glyphicon glyphicon-globe" />
+                                  </div>
+                                </a>
+                            </td>
+                          </tr>
+                        </tbody>
                     }
 
                 </Table>

@@ -10,7 +10,7 @@ import {
 		SEARCH_BY_EMAILS_RELACIONADOS,
 		SEE_LOCALIZE_MODEL,
 		CLOSE_LOCALIZE_MODEL } from "../constants/constantsLocalize";
-import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB } from "../constants/utils";
+import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB } from "../constants/utils";
 import model from "./data/modelLocalize.json";
 import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
 import relacionados from "./data/relacionados.json";
@@ -78,11 +78,23 @@ export default function(state = initialState, action) {
 
 			case CHANGE_TAB:
 				return {
-					status: "tab",
+					status: "tabchanged",
 					message: "",
 					loading: false,
 					response: state.response,
 					tabActive: action.payload
+				}
+
+			case CLOSE_TAB:
+				let newResponse = state.response.concat();
+				newResponse.pop(action.payload);
+
+				return {
+					status: "tabclosed",
+					message: "",
+					loading: false,
+					response: newResponse,
+					tabActive: ""
 				}
 				
 			case SEARCH_BY_CPF:

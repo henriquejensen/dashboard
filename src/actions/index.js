@@ -18,11 +18,19 @@ import {
 		LOGIN_ERROR,
 		LOG_OUT,
 		CHANGE_TAB,
+		CLOSE_TAB,
 		AUTH_URL,
 		AUTHENTICATION,
 		LOAD_STATES,
 		REQUEST_ERROR,
 		ERR_CONNECTION_REFUSED } from "../constants/utils";
+
+export function closeTab(index) {
+	return {
+		type: CLOSE_TAB,
+		payload: index
+	}
+}
 
 export function changeTab(tab) {
 	return {
@@ -173,7 +181,6 @@ export function searchPessoasRelacionadas(doc, tipo) {
 }
 
 export function showRelacionados(doc, docRelacionado, tipo) {
-	console.log(tipo, doc, docRelacionado);
 	if( tipo == "telefone") {
 		return {
 			type: SEARCH_BY_TELEFONES_RELACIONADOS,

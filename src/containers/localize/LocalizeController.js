@@ -8,6 +8,7 @@ import {
 		seeModel,
 		closeModel,
 		changeTab,
+		closeTab,
 		getEstados } from "../../actions/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -15,9 +16,9 @@ import { connect } from "react-redux";
 import LocalizeView from "./LocalizeView";
 
 import Form from "../../components/Form";
-import Tabs from "../../components/Tabs";
-import TabContent from "../../components/TabContent";
-import TabPane from "../../components/TabPane";
+import Tabs from "../../components/tabs/Tabs";
+import TabContent from "../../components/tabs/TabContent";
+import TabPane from "../../components/tabs/TabPane";
 
 import { LOGO_LOCALIZE, ICON_LOCALIZE } from "../../constants/constantsLocalize";
 
@@ -279,6 +280,7 @@ class LocalizeController extends Component {
 						
 						<Tabs tabs={this.props.datas}
 							  onChangeTab={this.props.changeTab}
+							  onClose={this.props.closeTab}
 							  tabActive={this.props.tabActive} />
 							
 						<TabContent>
@@ -335,6 +337,7 @@ function mapDispatchToProps(dispacth) {
 			seeModel,
 			closeModel,
 			changeTab,
+			closeTab,
 			getEstados
 		},
 		dispacth);

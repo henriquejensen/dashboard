@@ -7,3 +7,4 @@ export const LOGIN_ERROR = "LOGIN_ERROR";
 export const LOG_OUT = "LOG_OUT";
 export const LOAD_STATES = "LOAD_STATES";
 export const CHANGE_TAB = "CHANGE_TAB";
+export const CLOSE_TAB = "CLOSE_TAB";
