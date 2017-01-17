@@ -122,6 +122,7 @@ class FocoFiscal extends Component {
 }
 
 function mapStateToProps(state) {
+	console.log(state);
 	return {
 		datas: state.focofiscal.response,
 		status: state.focofiscal.status,

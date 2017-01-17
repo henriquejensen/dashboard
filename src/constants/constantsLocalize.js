@@ -10,3 +10,6 @@ export const SEARCH_BY_ENDERECOS_RELACIONADOS = "SEARCH_BY_ENDERECOS_RELACIONADO
 export const SEARCH_BY_EMAILS_RELACIONADOS = "SEARCH_BY_EMAILS_RELACIONADOS";
 export const LOGO_LOCALIZE = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/logo-localize.png";
 export const ICON_LOCALIZE = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/icone-localize.png";
+export const LOADING_LOCALIZE = "LOADING_LOCALIZE";
+export const CHANGE_TAB_LOCALIZE = "CHANGE_TAB_LOCALIZE";
+export const CLOSE_TAB_LOCALIZE = "CLOSE_TAB_LOCALIZE";

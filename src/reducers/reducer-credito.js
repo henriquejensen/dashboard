@@ -1,10 +1,11 @@
 import {
     SEE_CREDITO_MODEL,
     CLOSE_CREDITO_MODEL,
-    ICON_CREDITO
+    ICON_CREDITO,
+    LOADING_CREDITO
 } from "../constants/constantsCredito";
 
-import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB, LOADING } from "../constants/utils";
+import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB } from "../constants/utils";
 
 import model from "./data/jsonPadrao.json";
 
@@ -26,7 +27,7 @@ export default function(state=getInitialState, action) {
     }
 
     switch(action.type) {
-        case LOADING: {
+        case LOADING_CREDITO: {
             return {
                 loading: true,
                 status: "loading",

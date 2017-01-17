@@ -1,10 +1,11 @@
 import {
     SEE_FOCOFISCAL_MODEL,
     CLOSE_FOCOFISCAL_MODEL,
-    ICON_FOCOFISCAL
+    ICON_FOCOFISCAL,
+    LOADING_FOCOFISCAL
 } from "../constants/constantsFocoFiscal";
 
-import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB, LOADING } from "../constants/utils";
+import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB } from "../constants/utils";
 
 import model from "./data/jsonPadrao.json";
 
@@ -26,7 +27,7 @@ export default function(state=getInitialState, action) {
     }
 
     switch(action.type) {
-        case LOADING: {
+        case LOADING_FOCOFISCAL: {
             return {
                 loading: true,
                 status: "loading",

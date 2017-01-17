@@ -99,10 +99,12 @@
     position: relative
 }
 
+.sidebar-item-dropdown > a {
+    color: #7f7f7f;
+}
+
 .sidebar-item-dropdown > a > li {
     padding: 7px 0px;
-    color: #7f7f7f;
-    font-weight: 500;
 }
 
 .sidebar-item-dropdown > a > li:hover {

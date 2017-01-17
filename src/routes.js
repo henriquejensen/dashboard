@@ -28,14 +28,23 @@ export default (
     <Route name="Dashboard" path="/dashboard" onEnter={requireAuth} component={App} >
       <IndexRoute component={Dashboard} />
 
-      <Route name="Localize" path="localize/:tipo" component={Localize}	/>
+      <Route name="Localize" path="localize" component={Localize}	>
+        <Route name="Localize" path=":tipo" component={Localize}	/>
+      </Route>
+
+      <Route name="Credito" path="credito" component={Credito}	>
+        <Route name="Credito" path=":tipo" component={Credito}	/>
+      </Route>
+
+      <Route name="FocoFiscal" path="focofiscal" component={FocoFiscal}	>
+        <Route name="FocoFiscal" path=":tipo" component={FocoFiscal}	/>
+      </Route>
+      
       <Route name="Base Certa" path="basecerta" component={BaseCerta} />
       <Route name="SMS" path="sms" component={SMS} />
       <Route name="centro de custo" path="sms/centrocusto" component={CentroCusto} />
       <Route name="respostas" path="sms/respostas" component={Respostas} />
-      <Route name="Credito" path="credito" component={Credito} />
       <Route name="Veiculos" path="veiculos" component={Veiculos} />
-      <Route name="Foco Fiscal" path="focofiscal" component={FocoFiscal} />
       <Route name="Venda+" path="vendamais" component={VendaMais} />
       <Route name="Consig+" path="consigmais" component={ConsigMais} />
 

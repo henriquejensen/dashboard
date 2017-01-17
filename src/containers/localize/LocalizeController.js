@@ -61,12 +61,12 @@ class LocalizeController extends Component {
 
 	//recebe o documento da pessoa e da pessoa relacionada a esta.
 	_showRelacionados(doc, docPessoaRelacionado, tipo) {
-		console.log("PESQUISANDO", doc, docPessoaRelacionado, tipo);
 		this.props.loadingLocalize();
 		this.props.showRelacionados(doc, docPessoaRelacionado, tipo);
 	}
 
 	searchLocalize(doc, tipo) {
+
 		this.props.loadingLocalize();
 		this.props.searchLocalize(doc, tipo);
 	}
@@ -118,11 +118,11 @@ class LocalizeController extends Component {
 		})
 	}
 
-	renderForm(formType, options) {
+	renderForm(formType, options, optionSelected) {
 		return (
 			<Form
 				options = {options}
-				optionSelected = {location.pathname.split("/")[3].toUpperCase()}
+				optionSelected = {optionSelected}
 				tipo = {this.state.tipo}
 				icon = {ICON_LOCALIZE}
 				logo = {LOGO_LOCALIZE}
@@ -134,7 +134,7 @@ class LocalizeController extends Component {
 				status = {this.props.status}
 				message = {this.props.message} >
 				
-				{formType == "cpf" || formType == "cnpj"?
+				{formType == "cpf" || formType == "cnpj" || formType == "" ?
 					<input
 						value={this.state.documento}
 						type="text"
@@ -173,11 +173,11 @@ class LocalizeController extends Component {
 		)
 	}
 
-	renderFormNomeEndereco(formType, options) {
+	renderFormNomeEndereco(formType, options, optionSelected) {
 		return (
 			<Form
 				options = {options}
-				optionSelected = {location.pathname.split("/")[3].toUpperCase()}
+				optionSelected = {optionSelected}
 				tipo = {this.state.tipo}
 				icon = {ICON_LOCALIZE}
 				logo = {LOGO_LOCALIZE}
@@ -244,7 +244,7 @@ class LocalizeController extends Component {
 	}
 
 	form() {
-		let pathTipo = location.pathname.split("/")[3].toUpperCase();
+		let pathTipo = location.pathname.split("/")[3] ? location.pathname.split("/")[3].toUpperCase() : "";
 		let tipo = this.state.tipo;
 		let options = ["CPF", "CNPJ", "TELEFONE", "NOME", "ENDERECO", "EMAIL"];
 
@@ -255,15 +255,15 @@ class LocalizeController extends Component {
 		return (
 			pathTipo || tipo ?
 				tipo == "CPF" || tipo == "CNPJ" ? 
-					this.renderForm(tipo.toLowerCase(), options)
+					this.renderForm(tipo.toLowerCase(), options, pathTipo)
 				: tipo == "NOME" ? 
-					this.renderFormNomeEndereco(tipo.toLowerCase(), options)
+					this.renderFormNomeEndereco(tipo.toLowerCase(), options, pathTipo)
 					: tipo == "TELEFONE" ?
-						this.renderForm(tipo.toLowerCase(), options)
+						this.renderForm(tipo.toLowerCase(), options, pathTipo)
 					: tipo == "EMAIL" ?
-						this.renderForm(tipo.toLowerCase(), options)
-					: this.renderFormNomeEndereco(tipo.toLowerCase(), options)
-			: ""
+						this.renderForm(tipo.toLowerCase(), options, pathTipo)
+					: this.renderFormNomeEndereco(tipo.toLowerCase(), options, pathTipo)
+			: this.renderForm(tipo.toLowerCase(), options, pathTipo)
 		)
 	}
 

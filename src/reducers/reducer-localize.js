@@ -8,8 +8,11 @@ import {
 		SEARCH_BY_ENDERECOS_RELACIONADOS,
 		SEARCH_BY_EMAILS_RELACIONADOS,
 		SEE_LOCALIZE_MODEL,
-		CLOSE_LOCALIZE_MODEL } from "../constants/constantsLocalize";
-import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB, LOADING } from "../constants/utils";
+		CLOSE_LOCALIZE_MODEL,
+		LOADING_LOCALIZE,
+		CHANGE_TAB_LOCALIZE,
+		CLOSE_TAB_LOCALIZE  } from "../constants/constantsLocalize";
+import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB } from "../constants/utils";
 import model from "./data/modelLocalize.json";
 import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
 import relacionados from "./data/relacionados.json";
@@ -50,7 +53,7 @@ export default function(state = initialState, action) {
 		}
 
 		switch(action.type) {
-			case LOADING:
+			case LOADING_LOCALIZE:
 				return {
 					status: "loading",
 					message: "",
@@ -75,7 +78,7 @@ export default function(state = initialState, action) {
 			case CLOSE_LOCALIZE_MODEL:
 				return initialState;
 
-			case CHANGE_TAB:
+			case CHANGE_TAB_LOCALIZE:
 				return {
 					status: "tabchanged",
 					message: "",
@@ -84,7 +87,7 @@ export default function(state = initialState, action) {
 					tabActive: action.payload
 				}
 
-			case CLOSE_TAB:
+			case CLOSE_TAB_LOCALIZE:
 				let newResponse = state.response.concat();
 				let closed = newResponse.splice(action.payload, 1);
 

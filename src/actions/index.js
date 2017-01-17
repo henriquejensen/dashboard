@@ -2,7 +2,6 @@ import ajax from "superagent";
 
 import {
 		URL_SEARCH,
-		LOADING,
 		SEARCH_BY_CPF,
 		SEARCH_BY_CNPJ,
 		SEARCH_BY_PARAMS,
@@ -10,7 +9,10 @@ import {
 		SEARCH_BY_TELEFONES_RELACIONADOS,
 		SEARCH_BY_ENDERECOS_RELACIONADOS,
 		SEE_LOCALIZE_MODEL,
-		CLOSE_LOCALIZE_MODEL } from "../constants/constantsLocalize";
+		CLOSE_LOCALIZE_MODEL,
+		LOADING_LOCALIZE,
+		CHANGE_TAB_LOCALIZE,
+		CLOSE_TAB_LOCALIZE } from "../constants/constantsLocalize";
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 import { GET_CAMPANHAS_SMS, GET_CENTRO_CUSTO_SMS, GET_RESPOSTAS_SMS } from "../constants/constantsSMS";
 import {
@@ -27,26 +29,27 @@ import {
 
 export function closeTab(index) {
 	return {
-		type: CLOSE_TAB,
+		type: CLOSE_TAB_LOCALIZE,
 		payload: index
 	}
 }
 
 export function changeTab(tab) {
 	return {
-		type: CHANGE_TAB,
+		type: CHANGE_TAB_LOCALIZE,
 		payload: tab
 	}
 }
 
 export function loadingLocalize() {
 	return {
-		type: LOADING,
-		payload: "loadingLocalize"
+		type: LOADING_LOCALIZE,
+		payload: "loading"
 	}
 }
 
 export function searchLocalize(document, tipo) {
+	console.log("SEARCH", document, tipo, SEARCH_BY_CPF)
 	const senha = tipo+"/ajax?empresa="+localStorage.empresa+"&usuario="+localStorage.user+"&senha="+localStorage.senha+"&documento=";
 
 	if(tipo == "pf") {

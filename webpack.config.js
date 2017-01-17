@@ -1,10 +1,10 @@
 const webpack = require('webpack');
 
 module.exports = {
-  //devtool: 'cheap-module-eval-source-map',
-  devtool: 'cheap-module-source-map',
+  devtool: 'cheap-module-eval-source-map',
+  //devtool: 'cheap-module-source-map',
   entry: [
-    //'webpack-dev-server/client?http://localhost:8080',
+    'webpack-dev-server/client?http://localhost:8080',
     './src/index.js'
   ],
   output: {
@@ -36,7 +36,7 @@ module.exports = {
         }
     ]
   },
-  plugins: [
+  /*plugins: [
     new webpack.DefinePlugin({
       'process.env': {
         // This has effect on the react lib size
@@ -61,7 +61,7 @@ module.exports = {
       exclude: [/\.min\.js$/gi] // skip pre-minified libs
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
-  ],
+  ],*/
   resolve: {
     extensions: ['', '.js', '.jsx']
   },

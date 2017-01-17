@@ -8,11 +8,7 @@ export default class Sidebar extends Component {
 
     this.state = {
       tabActive: "menu",
-
-      localizeDropdown: false,
-      smsDropdown: false,
-      veiculosDropdown: false,
-      focoFiscalDropdown: false,
+      menuOpened: []
     }
   }
 
@@ -28,23 +24,17 @@ export default class Sidebar extends Component {
   }
   
   activeMenuDropdown(menu) {
-    if(menu == "localize") {
-      this.setState({
-        localizeDropdown: !this.state.localizeDropdown
-      })
-    } else if(menu == "sms") {
-      this.setState({
-        smsDropdown: !this.state.smsDropdown
-      })
-    } else if(menu == "veiculos") {
-      this.setState({
-        veiculosDropdown: !this.state.veiculosDropdown
-      })
-    } else if(menu == "focofiscal") {
-      this.setState({
-        focoFiscalDropdown: !this.state.focoFiscalDropdown
-      })
+    let newMenuOpened = this.state.menuOpened.concat();
+
+    if(newMenuOpened.includes(menu)) {
+      newMenuOpened.splice(newMenuOpened.indexOf(menu), 1);
+    } else {
+      newMenuOpened.push(menu);
     }
+    
+    this.setState({
+      menuOpened: newMenuOpened
+    })
     
   }
 
@@ -60,19 +50,19 @@ export default class Sidebar extends Component {
 
             <li >
               <Link onClick={() => this.activeMenuDropdown("localize")}>Localize<img src="../../public/assertiva/icon-localize.png" className="sub_icon" alt="Icone Localize"/></Link>
-              <ul className={this.state.localizeDropdown ? "sidebar-item-dropdown" : "display-none"}>
-                <Link to="/dashboard/localize/cpf"><li>CPF</li></Link>
-                <Link to="/dashboard/localize/cnpj"><li>CNPJ</li></Link>
-                <Link to="/dashboard/localize/telefone"><li>Telefone</li></Link>
-                <Link to="/dashboard/localize/nome"><li>Nome</li></Link>
-                <Link to="/dashboard/localize/endereco"><li>Endereço</li></Link>
-                <Link to="/dashboard/localize/email"><li>Email</li></Link>
+              <ul className={this.state.menuOpened.includes("localize") ? "sidebar-item-dropdown" : "display-none"}>
+                <Link to="/dashboard/localize/cpf" activeStyle={{ color: 'black', backgroundColor: "#edecec", fontWeight: "bold" }}><li>CPF</li></Link>
+                <Link to="/dashboard/localize/cnpj" activeStyle={{ color: 'black', backgroundColor: "#edecec", fontWeight: "bold" }}><li>CNPJ</li></Link>
+                <Link to="/dashboard/localize/telefone" activeStyle={{ color: 'black', backgroundColor: "#edecec", fontWeight: "bold" }}><li>Telefone</li></Link>
+                <Link to="/dashboard/localize/nome" activeStyle={{ color: 'black', backgroundColor: "#edecec", fontWeight: "bold" }}><li>Nome</li></Link>
+                <Link to="/dashboard/localize/endereco" activeStyle={{ color: 'black', backgroundColor: "#edecec", fontWeight: "bold" }}><li>Endereço</li></Link>
+                <Link to="/dashboard/localize/email" activeStyle={{ color: 'black', backgroundColor: "#edecec", fontWeight: "bold" }}><li>Email</li></Link>
               </ul>
             </li>
 
             <li>
               <Link onClick={() => this.activeMenuDropdown("sms")}>SMS<img src="../../public/assertiva/icon-sms.png" className="sub_icon" alt="Icone SMS"/></Link>
-              <ul className={this.state.smsDropdown ? "sidebar-item-dropdown" : "display-none"}>
+              <ul className={this.state.menuOpened.includes("sms") ? "sidebar-item-dropdown" : "display-none"}>
                 <Link to="/dashboard/sms"><li>Envio de SMS</li></Link>
                 <Link to="/dashboard/sms/centrocusto"><li>Centro de Custo</li></Link>
                 <Link to="/dashboard/sms/respostas"><li>Respostas</li></Link>
@@ -82,13 +72,23 @@ export default class Sidebar extends Component {
 
             <li ><Link to="/dashboard/basecerta">Base Certa<img src="../../public/assertiva/icon-basecerta.png" className="sub_icon" alt="Icone Base Certas"/></Link></li>
 
-            <li ><Link to="/dashboard/credito">Crédito<img src="../../public/assertiva/icon-credito.png" className="sub_icon" alt="Icone Crédito"/></Link></li>
+            <li >
+              <Link onClick={() => this.activeMenuDropdown("credito")}>Crédito<img src="../../public/assertiva/icon-credito.png" className="sub_icon" alt="Icone Crédito"/></Link>
+              <ul className={this.state.menuOpened.includes("credito") ? "sidebar-item-dropdown" : "display-none"}>
+                <Link to="/dashboard/credito/completa"><li>Consulta Completa</li></Link>
+                <Link to="/dashboard/credito/intermediária"><li>Consulta Intermediária</li></Link>
+                <Link to="/dashboard/credito/intermediáriaPlus"><li>Intermediária Plus/Pessoal Plus</li></Link>
+                <Link to="/dashboard/credito/simples"><li>Consulta Simples</li></Link>
+                <Link to="/dashboard/credito/cheque"><li>Consulta Cheque</li></Link>
+                <Link to="/dashboard/credito/express"><li>Consulta Express</li></Link>
+              </ul>
+            </li>
 
             <li ><Link to="/dashboard/vendamais">Venda+<img src="../../public/assertiva/icon-vendamais.png" className="sub_icon" alt="Icone Venda+"/></Link></li>
 
             <li >
               <Link onClick={() => this.activeMenuDropdown("veiculos")}>Veículos<img src="../../public/assertiva/icon-veiculos.png" className="sub_icon" alt="Icone Veiculos"/></Link>
-              <ul className={this.state.veiculosDropdown ? "sidebar-item-dropdown" : "display-none"}>
+              <ul className={this.state.menuOpened.includes("veiculos") ? "sidebar-item-dropdown" : "display-none"}>
                 <Link to="/dashboard/veiculos"><li>Agregados</li></Link>
                 <Link to="/dashboard/veiculos"><li>BDV Estadual</li></Link>
                 <Link to="/dashboard/veiculos"><li>Decodificador</li></Link>
@@ -103,12 +103,12 @@ export default class Sidebar extends Component {
 
             <li >
               <Link onClick={() => this.activeMenuDropdown("focofiscal")}>Foco Fiscal<img src="../../public/assertiva/icon-focofiscal.png" className="sub_icon" alt="Icone Foco Fiscal"/></Link>
-              <ul className={this.state.focoFiscalDropdown ? "sidebar-item-dropdown" : "display-none"}>
-                <Link to="/dashboard/focofiscal"><li>Receita PF</li></Link>
-                <Link to="/dashboard/focofiscal"><li>Receita PJ</li></Link>
-                <Link to="/dashboard/focofiscal"><li>Receita PJ Sintegra</li></Link>
-                <Link to="/dashboard/focofiscal"><li>Sintegra Unificada</li></Link>
-                <Link to="/dashboard/focofiscal"><li>Simples Nacional</li></Link>
+              <ul className={this.state.menuOpened.includes("focofiscal") ? "sidebar-item-dropdown" : "display-none"}>
+                <Link to="/dashboard/focofiscal/receitaPf"><li>Receita PF</li></Link>
+                <Link to="/dashboard/focofiscal/receitaPj"><li>Receita PJ</li></Link>
+                <Link to="/dashboard/focofiscal/receitaSintegra"><li>Receita PJ Sintegra</li></Link>
+                <Link to="/dashboard/focofiscal/sintegraUnificada"><li>Sintegra Unificada</li></Link>
+                <Link to="/dashboard/focofiscal/simplesNacional"><li>Simples Nacional</li></Link>
               </ul>
             </li>   
             <li ><Link to="/dashboard/consigmais">Consig+<img src="../../public/assertiva/icon-consigmais.png" className="sub_icon" alt="Icone Consig+"/></Link></li>
