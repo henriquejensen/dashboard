@@ -1,0 +1,100 @@
+{
+    "options": [
+        {
+            "label": "Dashboard",
+            "link": "/dashboard",
+            "image": "../../public/assertiva/icon-localize.png",
+            "alt": "Página inicial",
+            "subItems": []
+        },
+        {
+            "label": "Localize",
+            "link": "/dashboard/localize",
+            "image": "../../public/assertiva/icon-localize.png",
+            "alt": "Icone Localize",
+            "subItems": [
+                {"label": "CPF", "link": "/dashboard/localize/cpf"},
+                {"label": "CNPJ", "link": "/dashboard/localize/cnpj"},
+                {"label": "Telefone", "link": "/dashboard/localize/telefone"},
+                {"label": "Nome", "link": "/dashboard/localize/nome"},
+                {"label": "Endereço", "link": "/dashboard/localize/endereco"},
+                {"label": "Email", "link": "/dashboard/localize/email"}
+            ]
+        },
+        {
+            "label": "SMS",
+            "link": "/dashboard/sms",
+            "image": "../../public/assertiva/icon-sms.png",
+            "alt": "Icone SMS",
+            "subItems": [
+                {"label": "Envio de SMS", "link": "/dashboard/sms"},
+                {"label": "Centro de Custo", "link": "/dashboard/sms/centrocusto"},
+                {"label": "Respostas", "link": "/dashboard/sms/respostas"},
+                {"label": "Relatório", "link": "/dashboard/sms"}
+            ]
+        },
+        {
+            "label": "Base Certa",
+            "link": "/dashboard/basecerta",
+            "image": "../../public/assertiva/icon-basecerta.png",
+            "alt": "Icone Base Certa",
+            "subItems": []
+        },
+        {
+            "label": "Venda+",
+            "link": "/dashboard/vendamais",
+            "image": "../../public/assertiva/icon-vendamais.png",
+            "alt": "Icone Venda+",
+            "subItems": []
+        },
+        {
+            "label": "Crédito",
+            "link": "/dashboard/credito",
+            "image": "../../public/assertiva/icon-credito.png",
+            "alt": "Icone Crédito",
+            "subItems": [
+                {"label": "Consulta Completa", "link": "/dashboard/credito/completa"},
+                {"label": "Consulta Intermediária", "link": "/dashboard/credito/intermediaria"},
+                {"label": "Intermediária Plus/Pessoal Plus", "link": "/dashboard/credito/intermediariaPlus"},
+                {"label": "Consulta Simples", "link": "/dashboard/credito/simples"},
+                {"label": "Consulta Cheque", "link": "/dashboard/credito/cheque"},
+                {"label": "Consulta Express", "link": "/dashboard/credito/express"}
+            ]
+        },
+        {
+            "label": "Veículos",
+            "link": "/dashboard/veiculos",
+            "image": "../../public/assertiva/icon-veiculos.png",
+            "alt": "Icone Veiculos",
+            "subItems": [
+                {"label": "Agregados", "link": "/dashboard/veiculos"},
+                {"label": "BDV Estadual", "link": "/dashboard/veiculos"},
+                {"label": "Decodificador", "link": "/dashboard/veiculos"},
+                {"label": "Localização", "link": "/dashboard/veiculos"},
+                {"label": "Proprietários", "link": "/dashboard/veiculos"},
+                {"label": "Leilão", "link": "/dashboard/veiculos"},
+                {"label": "Sinistro", "link": "/dashboard/veiculos"}
+            ]
+        },
+        {
+            "label": "Foco Fiscal",
+            "link": "/dashboard/focofiscal",
+            "image": "../../public/assertiva/icon-focofiscal.png",
+            "alt": "Icone Foco Fiscal",
+            "subItems": [
+                {"label": "Receita PF", "link": "/dashboard/focofiscal/receitaPf"},
+                {"label": "Receita PJ", "link": "/dashboard/focofiscal/receitaPj"},
+                {"label": "Receita PJ Sintegra", "link": "/dashboard/focofiscal/receitaSintegra"},
+                {"label": "Sintegra Unificada", "link": "/dashboard/focofiscal/sintegraUnificada"},
+                {"label": "Simples Nacional", "link": "/dashboard/focofiscal/simplesNacional"}
+            ]
+        },
+        {
+            "label": "Consig+",
+            "link": "/dashboard/consigmais",
+            "image": "../../public/assertiva/icon-consigmais.png",
+            "alt": "Icone Consig+",
+            "subItems": []
+        }
+    ]
+}
