@@ -1,5 +1,4 @@
 import {
-		LOADING,
 		SEARCH_BY_CPF,
 		SEARCH_BY_CNPJ,
 		SEARCH_BY_PARAMS,
@@ -10,7 +9,7 @@ import {
 		SEARCH_BY_EMAILS_RELACIONADOS,
 		SEE_LOCALIZE_MODEL,
 		CLOSE_LOCALIZE_MODEL } from "../constants/constantsLocalize";
-import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB } from "../constants/utils";
+import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB, LOADING } from "../constants/utils";
 import model from "./data/modelLocalize.json";
 import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
 import relacionados from "./data/relacionados.json";

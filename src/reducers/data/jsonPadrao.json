@@ -1,0 +1,24 @@
+{
+    
+    "baseCpfCadastral": {
+        "documento": 11111111111,
+        "nome": "XXXXXX XXXXXX XXXXXX",
+        "sexo": "M",
+        "rg": 111111111,
+        "rgUF": "SSP-SP",
+        "dataNascimento": "XX/XX/XXXX",
+        "idade": 30,
+        "obitoProvavel": false,
+        "signo": "XXXXXXXXX",
+        "tituloEleitor": 33333333333,
+        "nacionalidade": "brasileiro",
+        "estadoCivil": "casado",
+        "mae": "XXXXXXX XXXXXX XXXXXX",
+        "maeCpf": 22222222222,
+        "receita": {
+            "status": "ATIVO",
+            "data": "XX/XX/XXXX",
+            "protocolo": "da758c2a-e689-4759-b7d1-009e15b1f302"
+        }
+    }
+}

@@ -326,7 +326,7 @@ function mapStateToProps(state) {
 	}
 }
 
-function mapDispatchToProps(dispacth) {
+function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 			loadingLocalize,
 			searchLocalize,
@@ -339,7 +339,7 @@ function mapDispatchToProps(dispacth) {
 			closeTab,
 			getEstados
 		},
-		dispacth);
+		dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalizeController);

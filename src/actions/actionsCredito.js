@@ -4,6 +4,7 @@ import {
 } from "../constants/constantsCredito";
 
 export function seeModel() {
+    console.log("SEEE MODEL")
     return {
         type: SEE_CREDITO_MODEL,
         payload: ""

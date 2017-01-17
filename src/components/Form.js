@@ -76,7 +76,8 @@ export default class Form extends Component {
                     : ""}
                 </div>
 
-                {this.props.datas.length == 1 ? (this.props.datas[0].data.CPF == 11111111111 ? <a href="#" onClick={this.props.closeModelo}>Fechar Modelo</a> : "") : ""}
+                {this.props.datas.length == 1 && this.props.datas[0].produto == "localize" ? (this.props.datas[0].data.CPF == 11111111111 ? <a href="#" onClick={this.props.closeModelo}>Fechar Modelo</a> : "") : ""}
+                {this.props.datas.length == 1 && this.props.datas[0].produto != "localize" ? (this.props.datas[0].data.baseCpfCadastral.documento == 11111111111 ? <a href="#" onClick={this.props.closeModelo}>Fechar Modelo</a> : "") : ""}
 
 				{this.props.datas.length == 0 ? 
                     <div style={{margin:"0 auto", width:"50%", textAlign:"left"}}>
