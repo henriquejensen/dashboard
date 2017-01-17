@@ -50,7 +50,7 @@ class FocoFiscal extends Component {
 		return (
 			<Form
 				options = {options}
-				optionSelected = {location.pathname.split("/")[2].toUpperCase()}
+				optionSelected = {location.pathname.split("/")[1].toUpperCase()}
 				tipo = {this.state.tipo}
 				icon = {ICON_FOCOFISCAL}
 				logo = {LOGO_FOCOFISCAL}

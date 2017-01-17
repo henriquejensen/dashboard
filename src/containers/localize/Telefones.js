@@ -93,7 +93,7 @@ export default class Telefones extends Component{
                 </div>
 
                 
-                <div className="col-md-6" xs={6}>
+                <div className="col-md-6">
                   <table className="table table-striped table-hover">
                     <tbody>
                       {celulares.length == 0 ?

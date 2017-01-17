@@ -14,7 +14,7 @@ export default class Sidebar extends Component {
   }
 
   componentDidMount() {
-    this.activeMenuDropdown(location.pathname.split("/")[2])
+    this.activeMenuDropdown(location.pathname.split("/")[1])
   }
 
   _changeTab(tab) {
@@ -40,7 +40,6 @@ export default class Sidebar extends Component {
   }
 
   renderMenu() {
-    console.log("MENU", menu)
     return (
         <div className={this.state.tabActive == "menu" ? "tab-pane active":"tab-pane"} id="sidebar">
           <ul className="sidebar-nav">
@@ -48,7 +47,7 @@ export default class Sidebar extends Component {
 
             {menu.options.map((opt, index) => {
               return (
-                <li>
+                <li key={index}>
                   <Link to={opt.link} onClick={() => this.activeMenuDropdown(opt.label.toLowerCase())}>
                     {opt.label}
                     <img src={opt.image} className="sub_icon" alt={opt.alt}/>
@@ -56,7 +55,7 @@ export default class Sidebar extends Component {
                   <ul className={this.state.menuOpened.includes(opt.label.toLowerCase()) ? "sidebar-item-dropdown" : "display-none"}>
                     {opt.subItems.map((subOpt, j) => {
                       return (
-                        <Link to={subOpt.link} activeStyle={{ color: 'black', backgroundColor: "#edecec", fontWeight: "bold" }}>
+                        <Link to={subOpt.link} key={j} activeStyle={{ color: 'black', backgroundColor: "#edecec", fontWeight: "bold" }}>
                           <li>{subOpt.label}</li>
                         </Link>
                       )
@@ -76,7 +75,7 @@ export default class Sidebar extends Component {
         <div className={this.state.tabActive == "chat" ? "tab-pane active":"tab-pane"} id="sidebar">
           <ul className="sidebar-nav">
             <li className="sidebar-items">Online</li>
-            <li><Link to="/dashboard/chat" params={{teste: "testando"}}>Jessica<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
+            <li><Link to="/dashboard/chat" >Jessica<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
             <li><Link to="/dashboard/chat">Roberta<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
             <li><Link to="/dashboard/chat">Nayara<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
             

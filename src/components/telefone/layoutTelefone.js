@@ -81,7 +81,7 @@ export default class Telefones extends Component{
                         </Table>
                     </div>
 
-                    <div className="col-md-6" xs={6}>
+                    <div className="col-md-6">
                         <Table>
                             <tbody>
                                 {this.props.moveis.map((tel,i) => {

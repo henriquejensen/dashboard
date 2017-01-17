@@ -76,7 +76,7 @@ class LocalizeController extends Component {
 
 		this.props.loadingLocalize();
 
-		let tipo = this.state.tipo ? this.state.tipo :  location.pathname.split("/")[3].toUpperCase();
+		let tipo = this.state.tipo ? this.state.tipo :  location.pathname.split("/")[2].toUpperCase();
 
 		if(tipo == "CPF" || tipo == "CNPJ") {
 			let searchBy = "pf";
@@ -244,7 +244,7 @@ class LocalizeController extends Component {
 	}
 
 	form() {
-		let pathTipo = location.pathname.split("/")[3] ? location.pathname.split("/")[3].toUpperCase() : "";
+		let pathTipo = location.pathname.split("/")[2] ? location.pathname.split("/")[2].toUpperCase() : "";
 		let tipo = this.state.tipo;
 		let options = ["CPF", "CNPJ", "TELEFONE", "NOME", "ENDERECO", "EMAIL"];
 
@@ -302,14 +302,11 @@ class LocalizeController extends Component {
 												pessoasRelacionadas={this.searchPessoasRelacionadas}/>
 										
 										: ""}
-
 									</TabPane>
 								)
 							})}
 						</TabContent>
-						
 					</div>)}
-
 			</div>
 		)
 	}
