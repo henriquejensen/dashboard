@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { authUser } from "../actions/index";
 
@@ -77,4 +78,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { authUser })(Login);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ 
+        authUser
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

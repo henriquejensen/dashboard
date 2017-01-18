@@ -21,10 +21,10 @@ export default class Signin extends Component {
                                 <input type="text" className="form-control" placeholder="Empresa" required autofocus />
                                 <input type="text" className="form-control" placeholder="Usuário" required autofocus />
                                 <div className="btn-group btn-password">
-                                    <Link to="/" className="btn btn-default">
+                                    <Link to="/login" className="btn btn-default">
                                         Cancelar
                                     </Link>
-                                    <Link to="/" className="btn btn-primary pull-right">
+                                    <Link to="/login" className="btn btn-primary pull-right">
                                         Entrar
                                     </Link>
                                 </div>

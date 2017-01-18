@@ -23,11 +23,12 @@ import ConsigMais from "./containers/consigmais/ConsigMais";
 export default (
   <Route>
 
-    <Route path="/" name="Assertiva" component={App} >
+    <Route path="/" name="Assertiva" component={Welcome} >
+      <IndexRoute component={App} />
       <Route path='/login' component={Login} />
       <Route path='/signin' component={Signin} />
 
-      <Route onEnter={requireAuth} component={Welcome}>
+      <Route onEnter={requireAuth} component={App}>
         <Route path='/dashboard' name="Dashboard" component={Dashboard} />
 
         <Route name="Localize" path="localize" component={Localize}	>

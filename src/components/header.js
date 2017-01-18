@@ -11,10 +11,10 @@ class MenuSuperior extends Component {
 
   render() {
       return (
-		<Navbar style={{backgroundColor:"#5B3494"}} inverse collapseOnSelect>
+		<Navbar style={{backgroundColor:"#5B3494", borderRadius: 0}} inverse collapseOnSelect>
 			<Navbar.Header>
 				<Navbar.Brand>
-					<img src="../../public/assertiva/assertiva-top-index-inverse.png" alt="Assertiva" />
+					<img src="../../public/assertiva/assertiva-top-index-inverse.png" alt="Logo da Assertiva" style={{padding: 2}} />
 				</Navbar.Brand>
 				<Navbar.Toggle />
 			</Navbar.Header>
@@ -38,7 +38,7 @@ class MenuSuperior extends Component {
 							<Link to="/editar">Outros</Link>
 						</MenuItem>
 					</NavDropdown>
-					<NavDropdown title="Dropdown" id="basic-nav-dropdown">
+					<NavDropdown title={this.props.user.nome} id="basic-nav-dropdown">
 						<MenuItem>
 							<Link to="/editar">Ajuda</Link>
 						</MenuItem>
@@ -53,6 +53,7 @@ class MenuSuperior extends Component {
 							<Link to="/login" onClick={this.props.logOut}>Sair</Link>
 						</MenuItem>
 					</NavDropdown>
+					<img src={this.props.user.avatar_url} alt="Assertiva" style={{width:"30", position:"absolute", right:4, top:8}} />
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
