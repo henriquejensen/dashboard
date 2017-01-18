@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { Nav, NavItem, NavDropdown, MenuItem, Navbar, Header, Collapse} from "react-bootstrap"
 
 import { logoTopo } from "../constants/imagensAssertiva";
@@ -22,20 +23,20 @@ class MenuSuperior extends Component {
 				<Nav pullRight>
 					<NavDropdown title="Relatórios" id="basic-nav-dropdown">
 						<MenuItem>
-							<Link to="/editar">Consultas</Link>
+							<Link to="/relatorios/consultas">Consultas</Link>
 						</MenuItem>
 						<MenuItem>
-							<Link to="/editar">Venda+</Link>
+							<Link to="/relatorios/vendamais">Venda+</Link>
 						</MenuItem>
 						<MenuItem>
-							<Link to="/editar">Base Certa</Link>
+							<Link to="/relatorios/basecerta">Base Certa</Link>
 						</MenuItem>
 						<MenuItem>
-							<Link to="/editar">SMS</Link>
+							<Link to="/relatorios/sms">SMS</Link>
 						</MenuItem>
 						<MenuItem divider />
 						<MenuItem>
-							<Link to="/editar">Outros</Link>
+							<Link to="/relatorios">Relatórios</Link>
 						</MenuItem>
 					</NavDropdown>
 					<NavDropdown title={this.props.user.nome} id="basic-nav-dropdown">
@@ -67,4 +68,10 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps, { logOut })(MenuSuperior);
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({
+		logOut
+	}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuSuperior);

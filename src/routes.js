@@ -20,6 +20,8 @@ import FocoFiscal from "./containers/focofiscal/FocoFiscalController";
 import VendaMais from "./containers/vendamais/VendaMais";
 import ConsigMais from "./containers/consigmais/ConsigMais";
 
+import Relatorios from "./containers/relatorios/Relatorios";
+
 export default (
   <Route>
 
@@ -50,6 +52,10 @@ export default (
         <Route name="Veiculos" path="veiculos" component={Veiculos} />
         <Route name="Venda+" path="vendamais" component={VendaMais} />
         <Route name="Consig+" path="consigmais" component={ConsigMais} />
+
+        <Route name="Relatórios" path="relatorios" component={Relatorios}>
+          <Route name="Consultas" path=":tipo" component={Relatorios} />
+        </Route>
 
         <Route name="Editar" path="editar" component={EditUser}	/>
         <Route name="Chat" path="chat" component={Chat}	/>
