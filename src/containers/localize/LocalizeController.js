@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 
 import LocalizeView from "./LocalizeView";
 
-import Form from "../../components/Form";
+import Form from "../../components/forms/Form";
 import Tabs from "../../components/tabs/Tabs";
 import TabContent from "../../components/tabs/TabContent";
 import TabPane from "../../components/tabs/TabPane";
@@ -126,7 +126,8 @@ class LocalizeController extends Component {
 				tipo = {this.state.tipo}
 				icon = {ICON_LOCALIZE}
 				logo = {LOGO_LOCALIZE}
-				datas = {this.props.datas}
+				showModel = {this.props.datas.length == 1 && this.props.datas[0].data.CPF == 11111111111 ? true : false}
+				showLogo = {this.props.datas.length == 0 ? true : false}
 				onChange = {this.onChange}
 				onformSubmit = {this.onLocalizeSubmit}
 				seeModelo = {this.props.seeModel}
@@ -174,6 +175,7 @@ class LocalizeController extends Component {
 	}
 
 	renderFormNomeEndereco(formType, options, optionSelected) {
+		console.log("STATUS", this.props)
 		return (
 			<Form
 				options = {options}
@@ -181,7 +183,8 @@ class LocalizeController extends Component {
 				tipo = {this.state.tipo}
 				icon = {ICON_LOCALIZE}
 				logo = {LOGO_LOCALIZE}
-				datas = {this.props.datas}
+				showModel = {this.props.datas.length == 1 && this.props.status=="model" ? true : false}
+				showLogo = {this.props.datas.length == 0 ? true : false}
 				onChange = {this.onChange}
 				onformSubmit = {this.onLocalizeSubmit}
 				seeModelo = {this.props.seeModel}

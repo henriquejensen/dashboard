@@ -38,13 +38,13 @@ export default function(state=getInitialState, action) {
         }
         case SEE_FOCOFISCAL_MODEL:
             response.data = model;
-            response.label = model.baseCpfCadastral.documento;
+            response.label = model.cadastroPf.Cpf;
             response.tipo = "CPF";
             response.icon = ICON_FOCOFISCAL;
             response.produto = "focofiscal";
             return {
                 loading: false,
-                status: "seeModel",
+                status: "model",
                 message: "",
                 response: [response],
                 tabActive: ""

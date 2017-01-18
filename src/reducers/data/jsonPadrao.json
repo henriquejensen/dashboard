@@ -1,23 +1,195 @@
 {
-    "baseCpfCadastral": {
-        "documento": 11111111111,
-        "nome": "XXXXXX XXXXXX XXXXXX",
-        "sexo": "M",
-        "rg": 111111111,
-        "rgUF": "SSP-SP",
-        "dataNascimento": "XX/XX/XXXX",
-        "idade": 30,
-        "obitoProvavel": false,
-        "signo": "XXXXXXXXX",
-        "tituloEleitor": 33333333333,
-        "nacionalidade": "brasileiro",
-        "estadoCivil": "casado",
-        "mae": "XXXXXXX XXXXXX XXXXXX",
-        "maeCpf": 22222222222,
-        "receita": {
-            "status": "ATIVO",
-            "data": "XX/XX/XXXX",
-            "protocolo": "da758c2a-e689-4759-b7d1-009e15b1f302"
-        }
+  "cadastroPf": {
+    "cpf": 11111111111,
+    "nome": "XXXXXX XXXXXX XXXXXX",
+    "sexo": "M",
+    "dataNascimento": "XX/XX/XXXX",
+    "idade": 30,
+    "faixaIdade": null,
+    "signo": "XXXXXXXXX",
+    "rg": 111111111,
+    "ufRg": "SSP-SP",
+    "status": "ATIVO",
+    "statusData": "XX/XX/XXXX",
+    "statusProtocolo": "da758c2a-e689-4759-b7d1-009e15b1f302",
+    "maeNome": "XXXXXXX XXXXXX XXXXXX",
+    "maeCpf": 22222222222,
+    "obitoProvavel": false,
+    "tituloEleitor": 33333333333,
+    "grauInstrucao": null,
+    "dependentes": null,
+    "estadoCivil": "casado",
+    "nacionalidade": "brasileiro",
+    "tags": [
+      "whats", "viber"
+    ]
+  },
+  "cadastroPj": {
+    "cnpj": null,
+    "razaoSocial": null,
+    "nomeFantasia": null,
+    "dataAbertura": null,
+    "idadeEmpresa": null,
+    "faixaIdade": null,
+    "qtdeFuncionarios": null,
+    "faixaFuncionarios": null,
+    "porteEmpresa": null,
+    "receitaStatus": null,
+    "dataReceitaStatus": null,
+    "cnae": null,
+    "cnaeDescricao": null,
+    "cnaeGrupo": null,
+    "cnaeSubgrupo": null,
+    "tipoEmpresa": null,
+    "naturezaJuridica": null,
+    "nire": null,
+    "site": null,
+    "regimeTributario": null,
+    "tags": [
+      null
+    ]
+  },
+  "cadastroCnpjCnaes": {
+    "posicao": null,
+    "cnae": null,
+    "descricao": null,
+    "grupo": null,
+    "subgrupo": null
+  },
+  "quadroSocialParticipacoes": {
+    "relacao": null,
+    "documentoConsultado": null,
+    "nomeConsultado": null,
+    "posicao": null,
+    "documento": null,
+    "nome": null,
+    "participacao": null,
+    "qualificacaoSocio": null,
+    "dataEntrada": null,
+    "dataSaida": null,
+    "valorParticipacao": null,
+    "tags": [
+      null
+    ]
+  },
+  "rendaEmpregador": {
+    "cpf": null,
+    "posicao": null,
+    "empregador": null,
+    "documentoEmpregador": null,
+    "setorEmpregador": null,
+    "cboCodigo": null,
+    "cboDescricao": null,
+    "cboSetor": null,
+    "cboSinonimos": null,
+    "rendaEstimada": null,
+    "faixaRenda": null,
+    "rendaDataRef": null,
+    "tags": [
+      null
+    ]
+  },
+  "rendaBeneficioAssistencial": {
+    "cpf": null,
+    "posicao": null,
+    "numeroBeneficio": null,
+    "codigoBeneficio": null,
+    "descricaoBeneficio": null,
+    "valorBeneficio": null,
+    "faixaBeneficio": null,
+    "tipoBeneficio": null,
+    "statusBeneficio": null,
+    "beneficioDataRef": null,
+    "tags": [
+      null
+    ]
+  },
+  "rendaEntidadeClasseLiberal": {
+    "cpf": null,
+    "posicao": null,
+    "associacao": null,
+    "profissao": null,
+    "identidadeProfissional": null,
+    "rendaMinima": null,
+    "rendaMedia": null
+  },
+  "rendaEstimada": {
+    "cpf": null,
+    "rendaBeneficio": null,
+    "rendaEmpregador": null,
+    "participacoesEmpresas": null,
+    "quantidadeEmpresas": null,
+    "quantidadeFuncionarios": null,
+    "quantidadeVeiculos": null,
+    "veiculoMaisNovo": null,
+    "rendaMediaEndereco": null,
+    "rendaMediaEntidade": null,
+    "rendaEstimada": null,
+    "rendaEstimadaFaixa": null
+  },
+  "telefones": [
+    {
+      "documento": null,
+      "tipoLinha": null,
+      "posicao": null,
+      "telefone": null,
+      "descricao": null,
+      "pontuacao": null,
+      "grupo": null,
+      "relacao": null,
+      "tags": [
+        null
+      ]
     }
+  ],
+  "pessoasRelacionadas": [
+    {
+      "cpf": null,
+      "relacao": null,
+      "grupo": null,
+      "documento": null,
+      "nome": null,
+      "dataNascimento": null
+    }
+  ],
+  "enderecos": [
+    {
+      "posicao": null,
+      "tipoLogradouro": null,
+      "logradouro": null,
+      "numero": null,
+      "complemento": null,
+      "bairro": null,
+      "cidade": null,
+      "cep": null,
+      "latitude": null,
+      "longitude": null,
+      "pontuacao": null,
+      "grupo": null,
+      "tags": [
+        null
+      ]
+    }
+  ],
+  "emails": [
+    {
+      "posicao": null,
+      "email": null,
+      "pontuacao": null,
+      "grupo": null,
+      "relacao": null,
+      "tags": [
+        null
+      ]
+    }
+  ],
+  "veiculos": [
+    {
+      "posicao": null,
+      "placa": null,
+      "marcaModelo": null,
+      "anoFabricacao": null,
+      "anoModelo": null
+    }
+  ]
 }

@@ -10,7 +10,7 @@ import {
 } from "../../actions/actionsCredito";
 
 import CreditoView from "./CreditoView";
-import Form from "../../components/Form";
+import Form from "../../components/forms/Form";
 import Tabs from "../../components/tabs/Tabs";
 import TabContent from "../../components/tabs/TabContent";
 import TabPane from "../../components/tabs/TabPane";
@@ -54,7 +54,8 @@ class Credito extends Component {
 				tipo = {this.state.tipo}
 				icon = {ICON_CREDITO}
 				logo = {LOGO_CREDITO}
-				datas = {this.props.datas}
+				showModel = {this.props.datas.length == 1 && this.props.status=="model" ? true : false}
+				showLogo = {this.props.datas.length == 0 ? true : false}
 				onChange = {this.onChange}
 				onformSubmit = {this.onFormSubmit}
 				seeModelo = {this.props.seeModel}

@@ -38,13 +38,13 @@ export default function(state=getInitialState, action) {
         }
         case SEE_CREDITO_MODEL:
             response.data = model;
-            response.label = model.baseCpfCadastral.documento;
+            response.label = model.cadastroPf.cpf;
             response.tipo = "CPF";
             response.icon = ICON_CREDITO;
             response.produto = "credito";
             return {
                 loading: false,
-                status: "seeModel",
+                status: "model",
                 message: "",
                 response: [response],
                 tabActive: ""

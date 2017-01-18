@@ -6,7 +6,7 @@ export default class CreditoView extends Component {
     render(){
         return (
             <div>
-                <Dados dados={this.props.data.baseCpfCadastral} />
+                <Dados dados={this.props.data.cadastroPf} />
             </div>
         )
     }

@@ -10,7 +10,7 @@ export default class Dados extends Component{
   }
 
   render() {
-    let documento = this.props.dados.documento.toString();
+    let documento = this.props.dados.cpf.toString();
     return (            
             <Panel title="DADOS CADASTRAIS">
               <div className="col-md-6">
@@ -19,7 +19,7 @@ export default class Dados extends Component{
               </div>
               <div className="col-md-6">
                 <strong>Status CPF: </strong>
-                <span className={this.props.dados.receita.status == "ATIVO" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.receita.status}</span>
+                <span className={this.props.dados.status == "ATIVO" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.status}</span>
               </div>
 
               <div className="col-md-6">
@@ -42,7 +42,7 @@ export default class Dados extends Component{
 
               <div className="col-md-6">
                 <strong>RG: </strong>
-                {this.props.dados.rg ? this.props.dados.rg + "-" + this.props.dados.rgUF : "Nada consta"}
+                {this.props.dados.rg ? this.props.dados.rg + "-" + this.props.dados.ufRg : "Nada consta"}
               </div>
               <div className="col-md-6">
                 <strong>Signo: </strong>
@@ -52,10 +52,10 @@ export default class Dados extends Component{
               <div style={{margin:"5px 0", width:"100%", float:"left", border: "0px solid #dddddd", borderTopWidth: "1px"}}>
                 <div className="col-md-6" style={{margin:"5px 0"}}>
                   <strong>MÃE: </strong>
-                  {this.props.dados.mae ? this.props.dados.mae : "Nada consta"}
+                  {this.props.dados.maeNome ? this.props.dados.maeNome : "Nada consta"}
                 </div>
 
-                {this.props.dados.mae && this.props.dados.maeCpf ? (<div className="col-md-6" style={{marginTop:3}}>
+                {this.props.dados.maeNome && this.props.dados.maeCpf ? (<div className="col-md-6" style={{marginTop:3}}>
                     <a data-tip data-for='tooltipConsultar'>
                       <div className="mapa-button" onClick={() => this.props.searchCredito(this.props.dados.maeCpf)}>
                           <i className='fa fa-search'/>
@@ -83,12 +83,12 @@ export default class Dados extends Component{
                 <div >
                   <div className="col-md-6">
                     <strong>Data status CPF: </strong>
-                    {this.props.dados.receita ? this.props.dados.receita.data : "Nada consta"}
+                    {this.props.dados.statusData ? this.props.dados.statusData : "Nada consta"}
                   </div>
 
                   <div className="col-md-6" style={{marginBottom:"20px"}}>
                     <strong>Protocolo: </strong>
-                    {this.props.dados.receita ? this.props.dados.receita.protocolo : "Nada consta"}
+                    {this.props.dados.statusProtocolo ? this.props.dados.statusProtocolo : "Nada consta"}
                   </div>
 
                   <div className="col-md-4" style={{marginBottom:"20px"}}>

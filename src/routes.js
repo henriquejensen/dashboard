@@ -56,10 +56,13 @@ export default (
         <Route name="Relatórios" path="relatorios" component={Relatorios}>
           <Route name="Consultas" path=":tipo" component={Relatorios} />
         </Route>
-
+        
         <Route name="Editar" path="editar" component={EditUser}	/>
         <Route name="Chat" path="chat" component={Chat}	/>
       </Route>
+
+      <Route name="Erro" path="*" component={Login} />
+
     </Route>
 
   </Route>

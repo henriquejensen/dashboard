@@ -10,7 +10,7 @@ import {
 } from "../../actions/actionsFocoFiscal";
 
 import FocoFiscalView from "./FocoFiscalView";
-import Form from "../../components/Form";
+import Form from "../../components/forms/Form";
 import Tabs from "../../components/tabs/Tabs";
 import TabContent from "../../components/tabs/TabContent";
 import TabPane from "../../components/tabs/TabPane";
@@ -54,7 +54,8 @@ class FocoFiscal extends Component {
 				tipo = {this.state.tipo}
 				icon = {ICON_FOCOFISCAL}
 				logo = {LOGO_FOCOFISCAL}
-				datas = {this.props.datas}
+				showModel = {this.props.datas.length == 1 && this.props.status=="model" ? true : false}
+				showLogo = {this.props.datas.length == 0 ? true : false}
 				onChange = {this.onChange}
 				onformSubmit = {this.onFormSubmit}
 				seeModelo = {this.props.seeModel}
