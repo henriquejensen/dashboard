@@ -1,4 +1,10 @@
 {
+  "info": {
+    "produto": null,
+    "consulta": null,
+    "protocoloTransacao": null,
+    "dataHora": null
+  },
   "cadastroPf": {
     "cpf": 11111111111,
     "nome": "XXXXXX XXXXXX XXXXXX",
@@ -21,7 +27,7 @@
     "estadoCivil": "casado",
     "nacionalidade": "brasileiro",
     "tags": [
-      "whats", "viber"
+      null
     ]
   },
   "cadastroPj": {
@@ -130,10 +136,23 @@
   "telefones": {
     "fixos": [
         {
-            "documento": null,
+            "documento": 11111111111,
             "tipoLinha": null,
             "posicao": null,
-            "telefone": null,
+            "telefone": "1935536256",
+            "descricao": null,
+            "pontuacao": null,
+            "grupo": null,
+            "relacao": null,
+            "tags": [
+                null
+            ]
+        },
+        {
+            "documento": 11111111111,
+            "tipoLinha": null,
+            "posicao": null,
+            "telefone": "1948484848",
             "descricao": null,
             "pontuacao": null,
             "grupo": null,
@@ -145,16 +164,29 @@
     ],
     "moveis": [
         {
-            "documento": null,
+            "documento": 11111111111,
             "tipoLinha": null,
             "posicao": null,
-            "telefone": null,
+            "telefone": "119989898984",
             "descricao": null,
             "pontuacao": null,
             "grupo": null,
             "relacao": null,
             "tags": [
-                null
+                "whats", "viber"
+            ]
+        },
+        {
+            "documento": 11111111111,
+            "tipoLinha": null,
+            "posicao": null,
+            "telefone": "11887879898",
+            "descricao": null,
+            "pontuacao": null,
+            "grupo": null,
+            "relacao": null,
+            "tags": [
+                "whats"
             ]
         }
     ]
@@ -172,13 +204,14 @@
   "enderecos": [
     {
       "posicao": null,
-      "tipoLogradouro": null,
-      "logradouro": null,
-      "numero": null,
-      "complemento": null,
-      "bairro": null,
-      "cidade": null,
-      "cep": null,
+      "tipoLogradouro": "AV",
+      "logradouro": "JOAO ERBOLATO",
+      "numero": "364",
+      "complemento": "C",
+      "bairro": "JARDIM CHAPADAO",
+      "cidade": "CAMPINAS",
+      "cep": 13070070,
+      "uf": "SP",
       "latitude": null,
       "longitude": null,
       "pontuacao": null,

@@ -18,13 +18,13 @@ const user = {
         {img: "http://download.seaicons.com/icons/graphicloads/100-flat/256/currency-icon.png", name: "Dados econômicos", active: false}
     ],
     charts: {
-        options: [
+        optionsSelected: [
             {value: "localize", label: "Localize"},
             {value: "credito", label: "Crédito"},
             {value: "veiculos", label: "Veículos"},
             {value: "sms", label: "SMS"}
         ],
-        optionsSelected: [],
+        options: [],
     },
     mensagens: {
         friend: "Jessica",

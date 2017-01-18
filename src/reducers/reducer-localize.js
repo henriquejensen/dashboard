@@ -24,8 +24,8 @@ const telefonesRelacionados = [
 ]
 
 const enderecosRelacionados = [
-	{documento: 5366214700, enderecos: [{BAIRRO:"BONFIM", CEP:1307070, CIDADE:"CAMPINAS", LOGRADOURO:"GOVENADOR PEDRO DE TOLEDO", NUMERO:12, SCORE:2, TIPO_LOGRADOURO:"AV", UF:"SP"}]},
-	{documento: 26675175807, enderecos: [{BAIRRO:"CAMBUI", CEP:1307070, CIDADE:"CAMPINAS", LOGRADOURO:"ANDRADE NEVES", NUMERO:12, SCORE:2, TIPO_LOGRADOURO:"AV", UF:"SP"}]},
+	{documento: 5366214700, enderecos: [{bairro:"BONFIM", cep:1307070, cidade:"CAMPINAS", logradouro:"GOVENADOR PEDRO DE TOLEDO", numero:12, tipoLogradouro:"AV", uf:"SP"}]},
+	{documento: 26675175807, enderecos: [{bairro:"CAMBUI", cep:1307070, cidade:"CAMPINAS", logradouro:"ANDRADE NEVES", numero:12, tipoLogradouro:"AV", uf:"SP"}]},
 ]
 
 const initialState = {

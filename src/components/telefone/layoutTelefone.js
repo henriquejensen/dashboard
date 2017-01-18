@@ -44,7 +44,7 @@ export default class Telefones extends Component{
                         <Table>
                             <tbody>
                                 {this.props.fixos.map((tel,i) => {
-                                    tel = tel.toString().replace("(","").replace(")","").replace(" ","").replace("-","");
+                                    tel = tel.telefone.toString().replace("(","").replace(")","").replace(" ","").replace("-","");
                                     if(tel != "") {
                                         return (
                                         <tr key={i} className={i > 3 ? (this.state.showMoreTel ? "" : "display-none") : ""} >
@@ -96,7 +96,7 @@ export default class Telefones extends Component{
                         <Table>
                             <tbody>
                                 {this.props.moveis.map((tel,i) => {
-                                    tel = tel.toString();
+                                    tel = tel.telefone.toString();
                                     return (
                                         <tr key={i} className={i > 3 ? (this.state.showMoreTel ? "" : "display-none") : ""}>
                                             <td>

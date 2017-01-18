@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {Line} from 'react-chartjs-2';
 import { connect } from "react-redux";
 
-import Modal from "../../components/Modal";
+import Panel from "../../components/panel/Panel";
 
 import Clock from "./Clock";
 import Calendar from "./Calendar";
@@ -14,8 +14,7 @@ class Dashboard extends Component {
 		super(props);
 
 		this.state = {
-			tabActive: "",
-			IsModalOpen: false
+			tabActive: ""
 		}
 	}
 
@@ -26,12 +25,6 @@ class Dashboard extends Component {
 	changeTab(tab){
 		this.setState({
 			tabActive: tab
-		})
-	}
-
-	closeModal() {
-		this.setState({
-			IsModalOpen: false
 		})
 	}
 
@@ -69,57 +62,45 @@ class Dashboard extends Component {
 
 	panelChart(){
 		return (
-			<div>
-				<div className="panel-heading text-center">
-					<ul className="nav nav-tabs">
-						{this.props.user.charts.optionsSelected.map((opt, index) => {
-							if(opt.label == "Localize"){
-								return <li className={this.state.tabActive =="" && index == 0 ? "active" : this.state.tabActive == "#1" ? "active" : ""} onClick={() => this.changeTab("#1")} key={index}>
-										<a href={"#1"}>
-							    		{opt.label}
-										</a>
-							 		</li>
-							} else if(opt.label == "Crédito"){
-								return <li className={this.state.tabActive =="" && index == 0 ? "active" : this.state.tabActive == "#2" ? "active" : ""} onClick={() => this.changeTab("#2")} key={index}>
-										<a href={"#2"} onClick={() => this.changeTab("#2")}>
-							    		{opt.label}
-										</a>
-							 		</li>
-							} else if(opt.label == "Veículos"){
-								return <li className={this.state.tabActive =="" && index == 0 ? "active" : this.state.tabActive == "#3" ? "active" : ""} onClick={() => this.changeTab("#3")} key={index}>
-										<a href={"#3"} onClick={() => this.changeTab("#3")}>
-							    		{opt.label}
-										</a>
-							 		</li>
-							} else if(opt.label == "SMS"){
-								return <li className={this.state.tabActive =="" && index == 0 ? "active" : this.state.tabActive == "#4" ? "active" : ""} onClick={() => this.changeTab("#4")} key={index}>
-										<a href={"#4"} onClick={() => this.changeTab("#4")}>
-							    		{opt.label}
-										</a>
-							 		</li>
-							}
-						})}
-					</ul>
-				</div>
-
+			<Panel>
+				<ul className="nav nav-tabs">
+					{this.props.user.charts.optionsSelected.map((opt, index) => {
+						if(opt.label == "Localize"){
+							return <li className={this.state.tabActive =="" && index == 0 ? "active" : this.state.tabActive == "#1" ? "active" : ""} onClick={() => this.changeTab("#1")} key={index}>
+									<a href={"#1"}>
+									{opt.label}
+									</a>
+								</li>
+						} else if(opt.label == "Crédito"){
+							return <li className={this.state.tabActive =="" && index == 0 ? "active" : this.state.tabActive == "#2" ? "active" : ""} onClick={() => this.changeTab("#2")} key={index}>
+									<a href={"#2"} onClick={() => this.changeTab("#2")}>
+									{opt.label}
+									</a>
+								</li>
+						} else if(opt.label == "Veículos"){
+							return <li className={this.state.tabActive =="" && index == 0 ? "active" : this.state.tabActive == "#3" ? "active" : ""} onClick={() => this.changeTab("#3")} key={index}>
+									<a href={"#3"} onClick={() => this.changeTab("#3")}>
+									{opt.label}
+									</a>
+								</li>
+						} else if(opt.label == "SMS"){
+							return <li className={this.state.tabActive =="" && index == 0 ? "active" : this.state.tabActive == "#4" ? "active" : ""} onClick={() => this.changeTab("#4")} key={index}>
+									<a href={"#4"} onClick={() => this.changeTab("#4")}>
+									{opt.label}
+									</a>
+								</li>
+						}
+					})}
+				</ul>
+			
 				{this.renderCharts()}
-
-			</div>
+			</Panel>
 		)
 	}
 
 	render() {
 		return (
 			<div>
-				<button type="button" className="btn btn-info btn-lg" onClick={() => this.setState({IsModalOpen: !this.state.IsModalOpen})}>Open Modal</button>
-
-				<Modal
-					IsModalOpen={this.state.IsModalOpen}
-					closeModal={this.closeModal.bind(this)}>
-					Testando meu Modal
-					<button onClick={this.closeModal.bind(this)}>close</button>
-				</Modal>
-
 				{this.props.user.charts.optionsSelected.length > 0 ?
 					<div className="col-md-8">
 						{this.panelChart()}

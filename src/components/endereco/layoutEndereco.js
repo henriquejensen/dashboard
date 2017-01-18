@@ -37,66 +37,47 @@ export default class Enderecos extends Component {
                     ["Logradouro", "Número", "Complemento", "Bairro", "Cidade", "UF", "CEP", ""]
                   }
                 >
-                    {this.props.enderecos.length > 0 ?
-                      this.props.enderecos.map((end,i) => {
-                          let cep = end.CEP.toString();
-                          return (
-                            <tbody key={i}>
-                              <tr>
-                                <td>{end.TIPO_LOGRADOURO}. {end.LOGRADOURO}</td>
-                                <td>{end.NUMERO}</td>
-                                <td>{end.COMPLEMENTO}</td>
-                                <td>{end.BAIRRO}</td>
-                                <td>{end.CIDADE}</td>
-                                <td>{end.UF}</td>
-                                <td>{cep.substring(0,cep.length-3)}-{cep.substring(cep.length-3)}</td>
-                                <td>
-                                    <a data-tip data-for="tooltipMap">
-                                      <div
-                                        className={this.state.mapa && this.state.idCep == i+end.CEP ? "mapa-button mapa-button-close" : "mapa-button"}
-                                        onClick={() => this.mostrarMapa(i+end.CEP)}>
-                                        <i className={this.state.mapa && this.state.idCep == i+end.CEP ? "fa fa-times-circle": "fa fa-map-o"} />
-                                      </div>
-                                    </a>
-                                </td>
-                              </tr>
+                    {this.props.enderecos.map((end,i) => {
+                        let cep = end.cep.toString();
+                        return (
+                          <tbody key={i}>
+                            <tr>
+                              <td>{end.tipoLogradouro}. {end.logradouro}</td>
+                              <td>{end.numero}</td>
+                              <td>{end.complemento}</td>
+                              <td>{end.bairro}</td>
+                              <td>{end.cidade}</td>
+                              <td>{end.uf}</td>
+                              <td>{cep.substring(0,cep.length-3)}-{cep.substring(cep.length-3)}</td>
+                              <td>
+                                  <a data-tip data-for="tooltipMap">
+                                    <div
+                                      className={this.state.mapa && this.state.idCep == i+end.cep ? "mapa-button mapa-button-close" : "mapa-button"}
+                                      onClick={() => this.mostrarMapa(i+end.cep)}>
+                                      <i className={this.state.mapa && this.state.idCep == i+end.cep ? "fa fa-times-circle": "fa fa-map-o"} />
+                                    </div>
+                                  </a>
+                              </td>
+                            </tr>
 
-                              <tr>
-                                  {this.state.mapa && this.state.idCep == i+end.CEP ?
-                                    <td colSpan="8" style={{position:"relative"}}>
-                                      <MapPanel endereco={end.TIPO_LOGRADOURO + "." + end.LOGRADOURO + "," + end.CIDADE}/>
-                                    </td>
-                                  : ""}
-                              </tr>
-
-                            </tbody>
-                          )
-                      }) : <tr>
-                        <td>{this.props.enderecos.TIPO_LOGRADOURO}. {this.props.enderecos.LOGRADOURO}</td>
-                        <td>{this.props.enderecos.NUMERO}</td>
-                        <td>{this.props.enderecos.COMPLEMENTO}</td>
-                        <td>{this.props.enderecos.BAIRRO}</td>
-                        <td>{this.props.enderecos.CIDADE}</td>
-                        <td>{this.props.enderecos.UF}</td>
-                        <td>{this.props.enderecos.CEP.toString().substring(0,this.props.enderecos.CEP.toString().length-3)}-{this.props.enderecos.CEP.toString().substring(this.props.enderecos.CEP.toString().length-3)}</td>
-                        <td>
-                            <a data-tip data-for="tooltipMap">
-                              <div
-                                className="mapa-button"
-                                onClick={this.mostrarMapa}>
-                                <i className="glyphicon glyphicon-globe" />
-                              </div>
-                            </a>
-                        </td>
-                      </tr>
-                    }
-
+                            <tr>
+                                {this.state.mapa && this.state.idCep == i+end.cep ?
+                                  <td colSpan="8" style={{position:"relative"}}>
+                                    <MapPanel endereco={end.tipoLogradouro + "." + end.logradouro + "," + end.cidade}/>
+                                  </td>
+                                : ""}
+                            </tr>
+                          </tbody>
+                        )
+                    })}
                 </Table>
 
               
-              <a data-tip data-for="usersRelated">
-                <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.props.relacionados} />
-              </a>
+              {this.props.relacionados ?
+                <a data-tip data-for="usersRelated">
+                  <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.props.relacionados} />
+                </a>
+              : ""}
 
               <Tooltip id="tooltipMap">
                 <span>Visualizar endereço</span>
