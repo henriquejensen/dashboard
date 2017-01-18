@@ -4,9 +4,12 @@ import Dados from "../../components/dadosBasicos/Dados";
 
 export default class CreditoView extends Component {
     render(){
+        console.log("DFAD", this.props.data)
         return (
             <div>
-                <Dados dados={this.props.data.cadastroPf} />
+                {this.props.tipo == "CPF" ? 
+                    <Dados dados={this.props.data.cadastroPf} />
+                : ""}
             </div>
         )
     }

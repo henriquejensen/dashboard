@@ -43,7 +43,7 @@ export default class Sidebar extends Component {
     return (
         <div className={this.state.tabActive == "menu" ? "tab-pane active":"tab-pane"} id="sidebar">
           <ul className="sidebar-nav">
-            <li className="sidebar-items">Meus Produtos</li>
+            {this.props.activedMenu ? <li className="sidebar-items">Meus Produtos</li> : ""}
 
             {menu.options.map((opt, index) => {
               return (
@@ -100,15 +100,7 @@ export default class Sidebar extends Component {
   render() {
       return (      
           <div id="sidebar-wrapper">
-            <ul id="sidebar_menu" className="sidebar-nav">
-                <li className="sidebar-brand" onClick={this.props.onMenuClicked}>
-                  <div>
-                    Menu
-                    <span id="main_icon" className="glyphicon glyphicon-align-justify">
-                    </span>
-                  </div>
-                </li>
-            </ul>
+            <i className="glyphicon glyphicon-align-justify pull-right" style={{margin: "10px 22px"}} onClick={this.props.onMenuClicked} />
 
             {this.props.activedMenu ? (
               <div className="nav nav-tabs">

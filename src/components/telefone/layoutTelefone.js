@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Tooltip from "react-tooltip";
+import Notification from "react-notification-system";
 
 import SMSRapido from "../../containers/sms/SMSRapido";
 
@@ -14,10 +15,20 @@ export default class Telefones extends Component{
         this.state = {
             smShow: false,
             IsModalOpen: false,
-            copiar: false,
             showMoreTel: false
         };
 
+        this._notificationSystem = null;
+
+    }
+
+    _addNotification(message) {
+        if (this._notificationSystem) {
+                this._notificationSystem.addNotification({
+                message: message,
+                level: 'success'
+            });
+        }
     }
 
     closeModal() {
@@ -29,7 +40,7 @@ export default class Telefones extends Component{
     render() {
         return (
                 <div>
-                    <div className="col-md-6">
+                    <div className="col-md-6 col-xs-12">
                         <Table>
                             <tbody>
                                 {this.props.fixos.map((tel,i) => {
@@ -38,38 +49,38 @@ export default class Telefones extends Component{
                                         return (
                                         <tr key={i} className={i > 3 ? (this.state.showMoreTel ? "" : "display-none") : ""} >
                                             <td>
-                                                <div className="col-md-3">
+                                                <div className="col-md-3 col-sm-3">
                                                     <i className="fa fa-phone" /> {tel[0]}{tel[1]} {tel.substring(2)}
                                                 </div>
 
                                                 <a data-tip data-for="tooltipCopy">
-                                                    <div className="col-md-1">
-                                                        <CopyToClipboard text={tel} onCopy={() => this.setState({copiar:!this.state.copiar})}>
+                                                    <div className="col-md-1 col-sm-1">
+                                                        <CopyToClipboard text={tel} onCopy={() => this._addNotification("Número copiado com sucesso")}>
                                                             <i className="fa fa-clipboard icon-tel" />
                                                         </CopyToClipboard>
                                                     </div>
                                                 </a>
 
                                                 <a data-tip data-for="tooltipMessageVoice">
-                                                    <div className="col-md-1">
+                                                    <div className="col-md-1 col-sm-1">
                                                         <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                                     </div>
                                                 </a>
 
                                                 <a data-tip data-for="tooltipCall">
-                                                    <div className="col-md-1">
+                                                    <div className="col-md-1 col-sm-1">
                                                         <i className="fa fa-phone icon-tel icon-tel-phone" />
                                                     </div>
                                                 </a>
 
                                                 <a data-tip data-for="tooltipHot">
-                                                    <div className="col-md-1">
+                                                    <div className="col-md-1 col-sm-1">
                                                         <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
                                                     </div>
                                                 </a>
 
                                                 <a data-tip data-for="tooltipOperadora">
-                                                    <div className="col-md-3">
+                                                    <div className="col-md-3 col-sm-3">
                                                         <img src="http://logok.org/wp-content/uploads/2015/06/Claro-logo-logotype-1024x768.png" width="25"/>
                                                     </div>
                                                 </a>
@@ -81,7 +92,7 @@ export default class Telefones extends Component{
                         </Table>
                     </div>
 
-                    <div className="col-md-6">
+                    <div className="col-md-6 col-sm-12">
                         <Table>
                             <tbody>
                                 {this.props.moveis.map((tel,i) => {
@@ -89,50 +100,50 @@ export default class Telefones extends Component{
                                     return (
                                         <tr key={i} className={i > 3 ? (this.state.showMoreTel ? "" : "display-none") : ""}>
                                             <td>
-                                                <div className="col-md-3" style={{paddingRight: 0}}>
+                                                <div className="col-md-3 col-sm-3" style={{paddingRight: 0}}>
                                                     <i className="fa fa-mobile" /> {tel[0]}{tel[1]} {tel.substring(2)}
                                                 </div>
 
                                                 <a data-tip data-for="tooltipCopy">
-                                                    <div className="col-md-1">
-                                                        <CopyToClipboard text={tel} onCopy={() => this.setState({copiar:!this.state.copiar})}>
+                                                    <div className="col-md-1 col-sm-1">
+                                                        <CopyToClipboard text={tel} onCopy={() => this._addNotification("Número copiado com sucesso")}>
                                                             <i className="fa fa-clipboard icon-tel" />
                                                         </CopyToClipboard>
                                                     </div>
                                                 </a>
 
                                                 <a data-tip data-for="tooltipSMS">
-                                                    <div className="col-md-1">
+                                                    <div className="col-md-1 col-sm-1">
                                                         <i className="fa fa-comments icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                                     </div>
                                                 </a>
 
                                                 <a data-tip data-for="tooltipMessageVoice">
-                                                    <div className="col-md-1">
+                                                    <div className="col-md-1 col-sm-1">
                                                         <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                                     </div>
                                                 </a>
 
                                                 <a data-tip data-for="tooltipCall">
-                                                    <div className="col-md-1">
+                                                    <div className="col-md-1 col-sm-1">
                                                         <i className="fa fa-mobile icon-tel icon-tel-phone" />
                                                     </div>
                                                 </a>
 
                                                 <a data-tip data-for="tooltipHot">
-                                                    <div className="col-md-1">
+                                                    <div className="col-md-1 col-sm-1">
                                                         <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
                                                     </div>
                                                 </a>
 
                                                 <a data-tip data-for="tooltipWhats">
-                                                    <div className="col-md-1">
+                                                    <div className="col-md-1 col-sm-1">
                                                         <img src="../../../public/images/whatsapp.png" width="15"/>
                                                     </div>
                                                 </a>
 
                                                 <a data-tip data-for="tooltipViber">
-                                                    <div className="col-md-1">
+                                                    <div className="col-md-1 col-sm-1">
                                                         <img src="../../../public/images/viber.png" width="15"/>
                                                     </div>
                                                 </a>
@@ -188,6 +199,8 @@ export default class Telefones extends Component{
                         <SMSRapido />
                         <button onClick={this.closeModal.bind(this)}>close</button>
                     </Modal>
+
+                    <Notification ref={n => this._notificationSystem = n} />
                     
                 </div>)
     }

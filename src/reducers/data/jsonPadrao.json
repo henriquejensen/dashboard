@@ -127,21 +127,38 @@
     "rendaEstimada": null,
     "rendaEstimadaFaixa": null
   },
-  "telefones": [
-    {
-      "documento": null,
-      "tipoLinha": null,
-      "posicao": null,
-      "telefone": null,
-      "descricao": null,
-      "pontuacao": null,
-      "grupo": null,
-      "relacao": null,
-      "tags": [
-        null
-      ]
-    }
-  ],
+  "telefones": {
+    "fixos": [
+        {
+            "documento": null,
+            "tipoLinha": null,
+            "posicao": null,
+            "telefone": null,
+            "descricao": null,
+            "pontuacao": null,
+            "grupo": null,
+            "relacao": null,
+            "tags": [
+                null
+            ]
+        }
+    ],
+    "moveis": [
+        {
+            "documento": null,
+            "tipoLinha": null,
+            "posicao": null,
+            "telefone": null,
+            "descricao": null,
+            "pontuacao": null,
+            "grupo": null,
+            "relacao": null,
+            "tags": [
+                null
+            ]
+        }
+    ]
+  },
   "pessoasRelacionadas": [
     {
       "cpf": null,
