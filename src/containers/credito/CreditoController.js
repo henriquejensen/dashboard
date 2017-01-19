@@ -66,7 +66,7 @@ class Credito extends Component {
 				<input
 					value={this.state.documento}
 					type="text"
-					className="form-control input-search input-form-single"
+					className="form-control input-search input-form input-form-single"
 					placeholder="Digite o documento"
 					name="documento"
 					required

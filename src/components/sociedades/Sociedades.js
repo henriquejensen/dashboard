@@ -7,20 +7,42 @@ import Table from "../table/Table";
 export default class Sociedades extends Component {
   render() {
     return (
-            <Panel title="PARTICIPAÇÕES EM EMPRESAS">
-              <div className="col-md-12">
-                <Table
-                    fields={
-                        ["CNPJ", "Razão social", "Área de atuação", "Participação", "Entrada", "Ação"]
-                    }
-                >
+          <Panel title="PARTICIPAÇÕES EM EMPRESAS" qtdTotal={[{icon:"fa fa-building-o", qtd:this.props.participacoes.length}]}>
+            <a name="Participações em empresas"></a>
+            <div className="col-md-12">
+              <Table
+                  fields={
+                      ["Documento", "Nome", "Cargo", "Participação", "Entrada", "Relacionamento", ""]
+                  }
+              >
+                <tbody>
+                  {this.props.participacoes.map((participacao, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{participacao.documento}</td>
+                        <td>{participacao.nome}</td>
+                        <td>{participacao.qualificacaoSocio}</td>
+                        <td>{participacao.participacao}</td>
+                        <td>{participacao.dataEntrada}</td>
+                        <td>{participacao.relacao}</td>
+                        <td>
+                          <a data-tip data-for='tooltipConsultar'>
+                            <div className="mapa-button">
+                                <i className='fa fa-search'/>
+                            </div>
+                          </a>
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </Table>
+            </div>
 
-                  </Table>
-                </div>
-
-                <Tooltip id="tooltipConsultar">
-                    <span>Consultar</span>
-                </Tooltip>
-            </Panel>)
+            <Tooltip id="tooltipConsultar">
+                <span>Consultar</span>
+            </Tooltip>
+          </Panel>
+      )
   }
 }

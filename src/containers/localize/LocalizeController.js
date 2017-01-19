@@ -139,7 +139,7 @@ class LocalizeController extends Component {
 					<input
 						value={this.state.documento}
 						type="text"
-						className="form-control input-search input-form-single "
+						className="form-control input-search input-form input-form-single "
 						placeholder="Digite o documento"
 						name="documento"
 						required
@@ -148,7 +148,7 @@ class LocalizeController extends Component {
 					<input
 						value={this.state.telefone}
 						type="number"
-						className="form-control input-search input-form-single "
+						className="form-control input-search input-form input-form-single "
 						placeholder="Digite o DD e o número"
 						name="telefone"
 						size="10"
@@ -158,7 +158,7 @@ class LocalizeController extends Component {
 					<input
 						value={this.state.email}
 						type="email"
-						className="form-control input-search input-form-single "
+						className="form-control input-search input-form input-form-single "
 						placeholder="Digite o email"
 						name="email"
 						size="10"
@@ -192,20 +192,18 @@ class LocalizeController extends Component {
 				<input
 					value={formType == "nome" ? this.state.nome : this.state.endereco}
 					type="text"
-					className="form-control"
+					className="form-control input-form input-form-many-large"
 					placeholder={"Digite o " + formType}
 					name={formType}
 					size="10"
 					required
-					style={{width:445, display:"inline-block"}}
 					onChange={this.onChange} />
 
 				<select
-					className="form-control  input-search"
+					className="form-control input-search select-form"
 					name="estado"
 					value={this.state.estado}
-					onChange={this.onChange}
-					style={{width:120}}>
+					onChange={this.onChange}>
 					<option value="">Selecione</option>
 					{this.props.estados.map((estado, index) => {
 						return <option value={estado.sigla} key={index}>{estado.nome}</option>
@@ -215,28 +213,25 @@ class LocalizeController extends Component {
 				<input
 					value={this.state.cidade}
 					type="text"
-					className="form-control input-search"
+					className="form-control input-search input-form input-form-many-medium"
 					placeholder="Cidade"
 					name="cidade"
-					style={{width:220, display:"inline-block"}}
 					onChange={this.onChange} />
 
 				<input
 					value={this.state.bairro}
 					type="text"
-					className="form-control"
+					className="form-control input-form input-form-many-small"
 					placeholder="Bairro"
 					name="bairro"
-					style={{width:215, display:"inline-block"}}
 					onChange={this.onChange} />
 
 				<input
 					value={formType == "nome" ? this.state.endereco : this.state.nome}
 					type="text"
-					className="form-control input-search"
+					className="form-control input-search input-form input-form-many-big"
 					placeholder={formType == "nome" ? "Endereço": "Nome"}
 					name={formType == "nome" ? "endereco": "nome"}
-					style={{width:425, display:"inline-block"}}
 					onChange={this.onChange} />
 
 			</Form>

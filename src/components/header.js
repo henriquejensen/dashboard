@@ -60,7 +60,7 @@ class MenuSuperior extends Component {
 					</NavDropdown>
 
 					<NavDropdown title={this.props.user.nome} id="basic-nav-dropdown">
-						{menu.header.relatorios.map((opt, index) => {
+						{menu.header.user.map((opt, index) => {
 							if(opt.label != "Sair") {
 								return (
 									<MenuItem key={index} onClick={() => this.changeRoute(opt.link)}>

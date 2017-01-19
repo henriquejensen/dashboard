@@ -7,7 +7,7 @@ import {
 
 import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB } from "../constants/utils";
 
-import model from "./data/jsonPadrao.json";
+import model from "./data/jsonPadraoCredito.json";
 
 const getInitialState = {
     loading: false,

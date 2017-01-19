@@ -48,9 +48,28 @@ input {
     margin: 5px 10px 5px 0;
 }
 
-.input-form-single {
-    width:320;
+.input-form {
     display: inline-block;
+}
+
+.input-form-single {
+    width:320px;
+}
+
+.input-form-many-large {
+    width: 445px;
+}
+
+.input-form-many-big {
+    width: 425px;
+}
+
+.input-form-many-medium {
+    width: 220px;
+}
+
+.input-form-many-small {
+    width: 215px;
 }
 
 .logo-produto {
@@ -240,5 +259,25 @@ input {
 
     .input-form-single {
         width: 100%;
+    }
+
+    .input-form-single {
+        width:100%
+    }
+
+    .input-form-many-large {
+        width:100%;
+    }
+
+    .input-form-many-big {
+        width:100%;
+    }
+
+    .input-form-many-medium {
+        width:100%;
+    }
+
+    .input-form-many-small {
+        width:100%;
     }
 }

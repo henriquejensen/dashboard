@@ -66,7 +66,7 @@ class FocoFiscal extends Component {
 				<input
 					value={this.state.documento}
 					type="text"
-					className="form-control input-search input-form-single "
+					className="form-control input-search input-form input-form-single "
 					placeholder="Digite o documento"
 					name="documento"
 					required
@@ -122,7 +122,6 @@ class FocoFiscal extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log(state);
 	return {
 		datas: state.focofiscal.response,
 		status: state.focofiscal.status,

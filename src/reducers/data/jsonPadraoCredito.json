@@ -1,0 +1,509 @@
+{
+  "info": {
+    "produto": "credito",
+    "consulta": "completa",
+    "protocoloTransacao": "da758c2a-e689-4759-b7d1-009e15b1f302",
+    "dataHora": "DD/MM/AAAA HH:MM:SS",
+    "tempoResposta": null
+  },
+  "cadastroPf": {
+    "cpf": 11111111111,
+    "nome": "XXXXXX XXXXXX XXXXXX",
+    "sexo": "M",
+    "dataNascimento": "XX/XX/XXXX",
+    "idade": 30,
+    "faixaIdade": null,
+    "signo": "XXXXXXXXX",
+    "rg": 111111111,
+    "ufRg": "SSP-SP",
+    "status": "ATIVO",
+    "statusData": "XX/XX/XXXX",
+    "statusProtocolo": "da758c2a-e689-4759-b7d1-009e15b1f302",
+    "maeNome": "XXXXXXX XXXXXX XXXXXX",
+    "maeCpf": 22222222222,
+    "obitoProvavel": false,
+    "tituloEleitor": 33333333333,
+    "grauInstrucao": null,
+    "dependentes": null,
+    "estadoCivil": "casado",
+    "nacionalidade": "brasileiro",
+    "tags": [
+      null
+    ]
+  },
+  "cadastroPj": {
+    "cnpj": 12345678901234,
+    "razaoSocial": "XXXXX XXXXXX",
+    "nomeFantasia": "YYYY YYYYYY YYYYY",
+    "dataAbertura": "DD/MM/AAAA",
+    "idadeEmpresa": 5,
+    "faixaIdade": null,
+    "quantidadeFuncionarios": 100,
+    "faixaFuncionarios": null,
+    "porteEmpresa": "GRANDE",
+    "receitaStatus": "ATIVO",
+    "dataReceitaStatus": "DD/MM/AAAA",
+    "cnae": null,
+    "cnaeDescricao": null,
+    "cnaeGrupo": null,
+    "cnaeSubgrupo": null,
+    "tipoEmpresa": null,
+    "naturezaJuridica": null,
+    "nire": null,
+    "site": "http://assertivasolucoes.com.br/",
+    "regimeTributario": null,
+    "tags": [
+      null
+    ]
+  },
+  "cadastroCnpjCnaes": [
+    {
+      "posicao": null,
+      "cnae": null,
+      "descricao": null,
+      "grupo": null,
+      "subgrupo": null
+    }
+  ],
+  "quadroSocietario": [
+    {
+      "relacao": null,
+      "documentoConsultado": null,
+      "nomeConsultado": null,
+      "posicao": null,
+      "documento": null,
+      "nome": null,
+      "participacao": null,
+      "qualificacaoSocio": null,
+      "dataEntrada": null,
+      "dataSaida": null,
+      "valorParticipacao": null,
+      "tags": [
+        null
+      ]
+    }
+  ],
+  "participacoesEmpresas": [
+    {
+      "relacao": "SOCIO",
+      "documentoConsultado": 111111122222,
+      "nomeConsultado": "XXXXXXX XXXXXXX",
+      "posicao": null,
+      "documento": 33333333333,
+      "nome": "YYYYYYY YYYYYYYY",
+      "participacao": 50,
+      "qualificacaoSocio": "ADMINISTR",
+      "dataEntrada": "DD/MM/AAAA",
+      "dataSaida": "DD/MM/AAAA",
+      "valorParticipacao": null,
+      "tags": [
+        null
+      ]
+    }
+  ],
+  "telefones": {
+    "fixos": [
+        {
+            "documento": 11111111111,
+            "posicao": null,
+            "telefone": "1935536256",
+            "descricao": null,
+            "pontuacao": null,
+            "grupo": null,
+            "relacao": null,
+            "tags": [
+                null
+            ]
+        },
+        {
+            "documento": 11111111111,
+            "posicao": null,
+            "telefone": "1948484848",
+            "descricao": null,
+            "pontuacao": null,
+            "grupo": null,
+            "relacao": null,
+            "tags": [
+                null
+            ]
+        }
+    ],
+    "moveis": [
+        {
+            "documento": 11111111111,
+            "posicao": null,
+            "telefone": "119989898984",
+            "descricao": null,
+            "pontuacao": null,
+            "grupo": null,
+            "relacao": null,
+            "tags": [
+                "whats", "viber"
+            ]
+        },
+        {
+            "documento": 11111111111,
+            "posicao": null,
+            "telefone": "11887879898",
+            "descricao": null,
+            "pontuacao": null,
+            "grupo": null,
+            "relacao": null,
+            "tags": [
+                "whats"
+            ]
+        }
+    ]
+  },
+  "enderecos": [
+    {
+      "posicao": null,
+      "tipoLogradouro": "AV",
+      "logradouro": "JOAO ERBOLATO",
+      "numero": "364",
+      "complemento": "C",
+      "bairro": "JARDIM CHAPADAO",
+      "cidade": "CAMPINAS",
+      "cep": 13070070,
+      "uf": "SP",
+      "latitude": null,
+      "longitude": null,
+      "pontuacao": null,
+      "grupo": null,
+      "tags": [
+        null
+      ]
+    }
+  ],
+  "emails": [
+    {
+      "posicao": 0,
+      "email": "exemplo@exemplo.com",
+      "pontuacao": 8,
+      "grupo": null,
+      "relacao": null,
+      "tags": [
+        null
+      ]
+    }
+  ],
+  "registrosDebitos": {
+    "documento": null,
+    "registrosDebitos": null,
+    "ocorrenciaMaisRecente": null,
+    "ocorrenciaMaisAntiga": null,
+    "quantidadeRegistros": null,
+    "valorTotal": null
+  },
+  "protestosSimples": {
+    "documento": null,
+    "protestosSimples": null,
+    "quantidadeRegistros": null
+  },
+  "protestosDetalhados": {
+    "documento": 11111111111,
+    "protestosDetalhados": [
+      {
+        "data": "DD/MM/AAAA",
+        "valor": "500.00",
+        "cartorio": "XXXXXXX",
+        "cidade": "CCCCCCCC",
+        "uf": "UF"
+      },
+      {
+        "data": "DD/MM/AAAA",
+        "valor": "500.00",
+        "cartorio": "XXXXXXX",
+        "cidade": "CCCCCCCC",
+        "uf": "UF"
+      }
+    ],
+    "ocorrenciaMaisRecente": "DD/MM/AAAA",
+    "ocorrenciaMaisAntiga": "DD/MM/AAAA",
+    "quantidadeRegistros": 2,
+    "valorTotal": "1.000"
+  },
+  "scores": {
+    "documento": null,
+    "scores": 0,
+    "resumo": "F",
+    "quantidadeUltimoMes": null,
+    "quantidadeUltimo3Meses": null,
+    "quantidadeUltimo6Meses": null,
+    "quantidadeTotal": null
+  },
+  "consultasAnteriores": {
+    "documento": 11111111111,
+    "consultasAnteriores": [
+        {
+            "posicao": null,
+            "tipo": null,
+            "data": "DD/MM/AAAA",
+            "consultante": "XXXXXX XXXXXX",
+            "grupo": "GGGGGG G",
+            "segmento": "SSSSSS SSS",
+            "quantidade": 10,
+            "cidade": "CCCCCCCC",
+            "uf": "UF",
+            "tags": []
+        },
+        {
+            "posicao": null,
+            "tipo": null,
+            "data": "DD/MM/AAAA",
+            "consultante": "MMMMMM MMMMM",
+            "grupo": "TTTTTT TTT",
+            "segmento": "AAAAAA AAAAA",
+            "quantidade": 5,
+            "cidade": "EEEEEEEEE",
+            "uf": "UF",
+            "tags": []
+        }
+    ],
+    "resumo": null,
+    "quantidadeUltimoMes": null,
+    "quantidadeUltimo3Meses": null,
+    "quantidadeUltimo6Meses": null,
+    "quantidadeTotal": 15
+  },
+  "limiteSugerido": {
+    "limiteCreditoSugerido": "0,00",
+    "interpretacao": null,
+    "maisInformacoes": null
+  },
+  "rendasPresumidas": [
+    {
+      "posicao": 0,
+      "faixa": "até R$440,00",
+      "probabilidade": "1,13"
+    },
+    {
+      "posicao": 0,
+      "faixa": "De R$440,00 até R$880,00",
+      "probabilidade": "19,03"
+    },
+    {
+      "posicao": 0,
+      "faixa": "De R$880,00 até R$1.760,00",
+      "probabilidade": "41,93"
+    },
+    {
+      "posicao": 0,
+      "faixa": "De R$1.760,00 até R$2.640,00",
+      "probabilidade": "15,54"
+    },
+    {
+      "posicao": 0,
+      "faixa": "De R$2.640,00 até R$4.400,00",
+      "probabilidade": "10,89"
+    },
+    {
+      "posicao": 0,
+      "faixa": "De R$4.400,00 até R$8.800,00",
+      "probabilidade": "7,42"
+    },
+    {
+      "posicao": 0,
+      "faixa": "De R$8.800,00 até R$13.200,00",
+      "probabilidade": "1,13"
+    },
+    {
+      "posicao": 0,
+      "faixa": "De R$13.200,00 até R$17.600,00",
+      "probabilidade": "1,13"
+    },
+    {
+      "posicao": 0,
+      "faixa": "Acima de R$17.600,00",
+      "probabilidade": "1,31"
+    }
+  ],
+  "acoes": {
+    "acoes": null,
+    "ocorrenciaMaisRecente": null,
+    "ocorrenciaMaisAntiga": null,
+    "valorTotal": null,
+    "quantidadeAcoes": null
+  },
+  "quadroResumo": [
+    {
+      "descricao": "Participações em empresas",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Registros de Débitos",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Protestos",
+      "quantidade": 2,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Ações",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Cheques sem fundo",
+      "quantidade": 2,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Informações do poder judiciário",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Renda presumida",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Registro de cheque de lojista",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Consultas Realizadas",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Limite de crédito sugerido",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Cheque contra ordem outras ocorrências",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+
+    {
+      "descricao": "Contra ordem",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Contra Ordem Documento Diferente Consultado",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Recuperações Falências Ações Judiciais",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Consultas Por Segumento",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Consultas",
+      "quantidade": 15,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    }
+  ],
+  "concedidos": [
+    {
+      "posicao": null,
+      "mesAnoVencimento": null,
+      "quantidade": null,
+      "valor": null
+    }
+  ],
+  "cheques": {
+    "cheques": [
+      {
+        "ultimocheque": "DD/MM/AAAA",
+        "origem": "BBBBB BBBBB",
+        "quantidade": 1,
+        "motivo": "MMMMMMM MMM",
+        "agencia": 1500,
+        "banco": "ZZZZZZZ"
+      },
+      {
+        "ultimocheque": "DD/MM/AAAA",
+        "origem": "CCCCCCCCC",
+        "quantidade": 1,
+        "motivo": "MMMMMMM MMM",
+        "agencia": 900,
+        "banco": "QQQQQQQQQ"
+      }
+    ],
+    "total": 2
+  },
+  "faturamentoPresumido": {
+    "anual": null,
+    "interpretacao": null,
+    "maisInformacoes": null
+  },
+  "riscoSetor": {
+    "pontuacao": null,
+    "probabilidadeMediaInadimplencia": null,
+    "interpretacao": null,
+    "maisInformacoes": null
+  },
+  "quadroAdministrativo": [
+    {
+      "posicao": null,
+      "documento": null,
+      "administracao": null,
+      "cargo": null,
+      "nacionalidade": null
+    }
+  ],
+  "outrasGrafias": [
+    {
+      "posicao": null,
+      "nome": null,
+      "documento": null,
+      "endereco": null,
+      "bairro": null,
+      "cidade": null,
+      "uf": null,
+      "cep": null,
+      "telefone": null,
+      "informacoesAdicionais": null,
+      "tags": [
+        null
+      ]
+    }
+  ]
+}

@@ -1,9 +1,10 @@
 {
   "info": {
-    "produto": null,
-    "consulta": null,
-    "protocoloTransacao": null,
-    "dataHora": null
+    "produto": "localize",
+    "consulta": "CPF",
+    "protocoloTransacao": "da758c2a-e689-4759-b7d1-009e15b1f302",
+    "dataHora": "DD/MM/AAAA HH:MM:SS",
+    "tempoResposta": null
   },
   "cadastroPf": {
     "cpf": 11111111111,
@@ -37,7 +38,7 @@
     "dataAbertura": null,
     "idadeEmpresa": null,
     "faixaIdade": null,
-    "qtdeFuncionarios": null,
+    "quantidadeFuncionarios": null,
     "faixaFuncionarios": null,
     "porteEmpresa": null,
     "receitaStatus": null,
@@ -62,7 +63,7 @@
     "grupo": null,
     "subgrupo": null
   },
-  "quadroSocialParticipacoes": {
+  "quadroSocietario": {
     "relacao": null,
     "documentoConsultado": null,
     "nomeConsultado": null,
@@ -78,6 +79,24 @@
       null
     ]
   },
+  "participacoesEmpresas": [			
+    {			
+      "relacao": null,			
+      "documentoConsultado": null,			
+      "nomeConsultado": null,			
+      "posicao": null,			
+      "documento": null,			
+      "nome": null,			
+      "participacao": null,			
+      "qualificacaoSocio": null,			
+      "dataEntrada": null,			
+      "dataSaida": null,			
+      "valorParticipacao": null,			
+      "tags": [			
+        null			
+      ]			
+    }			
+  ],
   "rendaEmpregador": {
     "cpf": null,
     "posicao": null,
@@ -137,7 +156,6 @@
     "fixos": [
         {
             "documento": 11111111111,
-            "tipoLinha": null,
             "posicao": null,
             "telefone": "1935536256",
             "descricao": null,
@@ -150,7 +168,6 @@
         },
         {
             "documento": 11111111111,
-            "tipoLinha": null,
             "posicao": null,
             "telefone": "1948484848",
             "descricao": null,
@@ -165,7 +182,6 @@
     "moveis": [
         {
             "documento": 11111111111,
-            "tipoLinha": null,
             "posicao": null,
             "telefone": "119989898984",
             "descricao": null,
@@ -178,7 +194,6 @@
         },
         {
             "documento": 11111111111,
-            "tipoLinha": null,
             "posicao": null,
             "telefone": "11887879898",
             "descricao": null,
