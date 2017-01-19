@@ -1,5 +1,5 @@
 {
-    "options": [
+    "sidebar": [
         {
             "label": "Dashboard",
             "link": "/dashboard",
@@ -96,5 +96,45 @@
             "alt": "Icone Consig+",
             "subItems": []
         }
-    ]
+    ],
+
+    "header":
+        {
+            "relatorios": [
+                {
+                    "label": "Relatórios",
+                    "link": "/relatorios"
+                },
+                {
+                    "label": "Consultas",
+                    "link": "/relatorios/consultas"
+                },
+                {
+                    "label": "Venda+",
+                    "link": "/relatorios/vendamais"
+                },
+                {
+                    "label": "SMS",
+                    "link": "/relatorios/sms"
+                }
+            ],
+            "user": [
+                {
+                    "label": "Ajuda",
+                    "link": "/editar"
+                },
+                {
+                    "label": "Atualizar dados",
+                    "link": "/editar"
+                },
+                {
+                    "label": "Contato",
+                    "link": "/editar"
+                },
+                {
+                    "label": "Sair",
+                    "link": "/login"
+                }
+            ]
+        }
 }

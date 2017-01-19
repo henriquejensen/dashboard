@@ -66,11 +66,10 @@ class FocoFiscal extends Component {
 				<input
 					value={this.state.documento}
 					type="text"
-					className="form-control input-search "
+					className="form-control input-search input-form-single "
 					placeholder="Digite o documento"
 					name="documento"
 					required
-					style={{width:320, display:"inline-block"}}
 					onChange={this.onChange} />
 
 			</Form>

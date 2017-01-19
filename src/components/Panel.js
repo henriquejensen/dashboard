@@ -13,7 +13,7 @@ export default class Panel extends Component {
     render() {
         return (
             <div className="row row-localize">
-                <div className="col-md-12">
+                <div className="col-md-12 col-sm-12">
                     <div className="panel panel-default">
                         {this.props.title ? <div className="panel-heading" style={{position: "relative"}}>
                             {this.props.qtdTotal ? 

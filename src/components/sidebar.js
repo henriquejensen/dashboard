@@ -45,7 +45,7 @@ export default class Sidebar extends Component {
           <ul className="sidebar-nav">
             {this.props.activedMenu ? <li className="sidebar-items">Meus Produtos</li> : ""}
 
-            {menu.options.map((opt, index) => {
+            {menu.sidebar.map((opt, index) => {
               return (
                 <li key={index}>
                   <Link to={opt.link} onClick={() => this.activeMenuDropdown(opt.label.toLowerCase())}>

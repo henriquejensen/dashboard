@@ -8,20 +8,19 @@ export default class Form extends Component {
     render() {
 		return (
             <div className="row text-center">
-                <div className="col-md-12">
+                <div className="col-md-12 col-sm-12">
                     {this.props.showLogo ? <img src={this.props.logo} className="logo-produto" />: ""}
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-12 col-sm-12">
                     <form onSubmit={this.props.onformSubmit} className="my-form">
 
                         {!this.props.showLogo ? <img src={this.props.icon} className="icon-produto-consulta" />: ""}
 
                             <select
-                                className="form-control input-search"
+                                className="form-control input-search select-form"
                                 name="tipo"
                                 onChange={this.props.onChange}
                                 value={this.props.tipo ? this.props.tipo : this.props.optionSelected}
-                                style={{width:120}}
                                 required>
                                 <option value="">Selecione</option>
                                 {this.props.options.map((opt,i) => {
@@ -79,7 +78,7 @@ export default class Form extends Component {
                 {this.props.showModel ? <a href="#" onClick={this.props.closeModelo}>Fechar Modelo</a> : ""}
 
 				{this.props.showLogo ? 
-                    <div style={{margin:"0 auto", width:"50%", textAlign:"left"}}>
+                    <div className="container-form">
                         <LocalizeDescription />
                         <UltimasConsultas consultas={[
                             {tipo:"CPF", pesquisa:34168058875, data:"12/12/2017"},

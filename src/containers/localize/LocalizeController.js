@@ -139,33 +139,30 @@ class LocalizeController extends Component {
 					<input
 						value={this.state.documento}
 						type="text"
-						className="form-control input-search "
+						className="form-control input-search input-form-single "
 						placeholder="Digite o documento"
 						name="documento"
 						required
-						style={{width:320, display:"inline-block"}}
 						onChange={this.onChange} />
 				: formType == "telefone" ?
 					<input
 						value={this.state.telefone}
 						type="number"
-						className="form-control input-search "
+						className="form-control input-search input-form-single "
 						placeholder="Digite o DD e o número"
 						name="telefone"
 						size="10"
 						required
-						style={{width:320, display:"inline-block"}}
 						onChange={this.onChange} />
 				  : formType == "email" ?
 					<input
 						value={this.state.email}
 						type="email"
-						className="form-control input-search "
+						className="form-control input-search input-form-single "
 						placeholder="Digite o email"
 						name="email"
 						size="10"
 						required
-						style={{width:320, display:"inline-block"}}
 						onChange={this.onChange} />
 				  : ""
 				}

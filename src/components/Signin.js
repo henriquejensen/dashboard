@@ -18,8 +18,8 @@ export default class Signin extends Component {
                         <div className="account-wall text-center">
                             <img src="../public/assertiva/assertiva-top-index.png" alt="Assertiva" height="50"/>
                             <form className="form-signin">
-                                <input type="text" className="form-control" placeholder="Empresa" required autofocus />
-                                <input type="text" className="form-control" placeholder="Usuário" required autofocus />
+                                <input type="text" className="form-control" placeholder="Empresa" required />
+                                <input type="text" className="form-control" placeholder="Usuário" required />
                                 <div className="btn-group btn-password">
                                     <Link to="/login" className="btn btn-default">
                                         Cancelar

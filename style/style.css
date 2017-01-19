@@ -40,6 +40,19 @@ input {
     display: none
 }
 
+.select-form {
+    width: 120px;
+}
+
+.input-search {
+    margin: 5px 10px 5px 0;
+}
+
+.input-form-single {
+    width:320;
+    display: inline-block;
+}
+
 .logo-produto {
     padding: 20px
 }
@@ -197,4 +210,35 @@ input {
     right: 5px;
     top: 2px;
     cursor: pointer;
+}
+
+.container-form {
+    margin: 0 auto;
+    width: 50%;
+    text-align: left;
+}
+
+@media print {
+    .noPrint {
+        display: none;
+    }
+}
+
+@media(max-width: 992px) {
+    .my-form {
+        width: 100%;
+    }
+
+    .container-form {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .select-form {
+        width: 100%;
+    }
+
+    .input-form-single {
+        width: 100%;
+    }
 }

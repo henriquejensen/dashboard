@@ -3,6 +3,10 @@
   padding: 0px 10px;
 }
 
+#menu-header-produtos {
+    display: none;
+}
+
 .navbar-login
 {
     width: 305px;
@@ -31,7 +35,7 @@
 }
 
 .navbar-right {
-    margin: 0;
+    margin-right: 10px;
 }
 
 .navbar-default {
@@ -51,4 +55,9 @@
     font-size: 87px;
 }
 
+@media(max-width: 768px) {
+    #menu-header-produtos {
+        display: block
+    }
+}
 

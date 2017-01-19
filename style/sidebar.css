@@ -36,10 +36,6 @@
     left: 220px;
 }
 
-#page-content-wrapper {
-  width: 100%;
-}
-
 .sidebar_name {
     padding-top: 25px;
     color: #fff;
@@ -136,10 +132,6 @@
   margin-left: 20px;
   line-height: 65px;
   display: inline-block;
-}
-
-.input-search {
-    margin: 5px 10px 5px 0;
 }
 
 .panel {
@@ -426,26 +418,12 @@
   background-color: #2d3237;
 }
 
-@media (max-width:767px) {
-  #wrapper {
-    padding-left: 70px;
-    transition: all .4s ease 0s;
-  }
-  #sidebar-wrapper {
-      left: 70px;
-  }
-  #wrapper.active {
-      padding-left: 160px;
-  }
-  #wrapper.active #sidebar-wrapper {
-      left: 160px;
-      width: 160px;
-      transition: all .4s ease 0s;
-  }
-}
+@media(max-width: 768px) {
+    #sidebar-wrapper {
+        display: none;
+    }
 
-@media print {
-  .print {
-    display: none
-  }
+    #wrapper.active {
+        padding-left: 0;
+    }
 }
