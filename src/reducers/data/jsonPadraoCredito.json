@@ -426,13 +426,6 @@
       "valor": ""
     },
     {
-      "descricao": "Informações do poder judiciário",
-      "quantidade": 1,
-      "primeiraOcorrencia": "DD/MM/AAAA",
-      "ultimaOcorrencia": "DD/MM/AAAA",
-      "valor": ""
-    },
-    {
       "descricao": "Renda presumida",
       "quantidade": 1,
       "primeiraOcorrencia": "DD/MM/AAAA",
@@ -440,15 +433,8 @@
       "valor": ""
     },
     {
-      "descricao": "Registro de cheque de lojista",
-      "quantidade": 1,
-      "primeiraOcorrencia": "DD/MM/AAAA",
-      "ultimaOcorrencia": "DD/MM/AAAA",
-      "valor": ""
-    },
-    {
-      "descricao": "Limite de crédito sugerido",
-      "quantidade": 1,
+      "descricao": "Consultas",
+      "quantidade": 15,
       "primeiraOcorrencia": "DD/MM/AAAA",
       "ultimaOcorrencia": "DD/MM/AAAA",
       "valor": ""
@@ -460,7 +446,6 @@
       "ultimaOcorrencia": "DD/MM/AAAA",
       "valor": ""
     },
-
     {
       "descricao": "Contra ordem",
       "quantidade": 1,
@@ -483,8 +468,15 @@
       "valor": ""
     },
     {
-      "descricao": "Consultas",
-      "quantidade": 15,
+      "descricao": "Informações do poder judiciário",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Registro de cheque de lojista",
+      "quantidade": 1,
       "primeiraOcorrencia": "DD/MM/AAAA",
       "ultimaOcorrencia": "DD/MM/AAAA",
       "valor": ""

@@ -10,23 +10,23 @@
     "cpf": null,
     "nome": null,
     "sexo": null,
-    "dataNascimento": "XX/XX/XXXX",
-    "idade": 30,
+    "dataNascimento": null,
+    "idade": null,
     "faixaIdade": null,
-    "signo": "XXXXXXXXX",
-    "rg": 111111111,
-    "ufRg": "SSP-SP",
-    "status": "ATIVO",
-    "statusData": "XX/XX/XXXX",
-    "statusProtocolo": "da758c2a-e689-4759-b7d1-009e15b1f302",
-    "maeNome": "XXXXXXX XXXXXX XXXXXX",
-    "maeCpf": 22222222222,
+    "signo": null,
+    "rg": null,
+    "ufRg": null,
+    "status": null,
+    "statusData": null,
+    "statusProtocolo": null,
+    "maeNome": null,
+    "maeCpf": null,
     "obitoProvavel": false,
-    "tituloEleitor": 33333333333,
+    "tituloEleitor": null,
     "grauInstrucao": null,
     "dependentes": null,
-    "estadoCivil": "casado",
-    "nacionalidade": "brasileiro",
+    "estadoCivil": null,
+    "nacionalidade": null,
     "tags": [
       null
     ]
@@ -426,13 +426,6 @@
       "valor": ""
     },
     {
-      "descricao": "Informações do poder judiciário",
-      "quantidade": 1,
-      "primeiraOcorrencia": "DD/MM/AAAA",
-      "ultimaOcorrencia": "DD/MM/AAAA",
-      "valor": ""
-    },
-    {
       "descricao": "Renda presumida",
       "quantidade": 1,
       "primeiraOcorrencia": "DD/MM/AAAA",
@@ -440,15 +433,8 @@
       "valor": ""
     },
     {
-      "descricao": "Registro de cheque de lojista",
-      "quantidade": 1,
-      "primeiraOcorrencia": "DD/MM/AAAA",
-      "ultimaOcorrencia": "DD/MM/AAAA",
-      "valor": ""
-    },
-    {
-      "descricao": "Limite de crédito sugerido",
-      "quantidade": 1,
+      "descricao": "Consultas",
+      "quantidade": 15,
       "primeiraOcorrencia": "DD/MM/AAAA",
       "ultimaOcorrencia": "DD/MM/AAAA",
       "valor": ""
@@ -460,7 +446,6 @@
       "ultimaOcorrencia": "DD/MM/AAAA",
       "valor": ""
     },
-
     {
       "descricao": "Contra ordem",
       "quantidade": 1,
@@ -483,8 +468,15 @@
       "valor": ""
     },
     {
-      "descricao": "Consultas",
-      "quantidade": 15,
+      "descricao": "Informações do poder judiciário",
+      "quantidade": 1,
+      "primeiraOcorrencia": "DD/MM/AAAA",
+      "ultimaOcorrencia": "DD/MM/AAAA",
+      "valor": ""
+    },
+    {
+      "descricao": "Registro de cheque de lojista",
+      "quantidade": 1,
       "primeiraOcorrencia": "DD/MM/AAAA",
       "ultimaOcorrencia": "DD/MM/AAAA",
       "valor": ""

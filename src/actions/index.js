@@ -209,7 +209,9 @@ export function authUser(empresa, user, senha) {
 	return (dispatch) => {
 		ajax.post(url+"?empresa="+empresa+"&usuario="+user+"&senha="+senha)
 			.send({empresa: empresa, usuario: user, senha: senha})
-			.then((response) => {
+			.ok(res => res.status < 500)
+			.then((response, failure) => {
+				console.log("1165156", response, failure)
 				localStorage.setItem(AUTHENTICATION, response.body.response);
 				localStorage.setItem("empresa", empresa);
 				localStorage.setItem("user", user);
@@ -217,6 +219,7 @@ export function authUser(empresa, user, senha) {
 				dispatch({type: LOGIN_SUCCESS, payload: response})
 			})
 			.catch((error) => {
+				console.log("ASDFASDF0", error)
 				dispatch({type: LOGIN_ERROR, payload: error})
 			})
 	}

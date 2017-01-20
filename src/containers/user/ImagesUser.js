@@ -63,7 +63,7 @@ export default class ImagesUser extends Component {
                         <div>
                             <img src={this.props.user.background_url} id="user-edit-background" width="100%"/>
                         </div>
-                        <div className="col-md-12">
+                        <div className="col-md-12 col-xs-12">
                             <form method="post" encType="multipart/form-data" onSubmit={this.onSubmitUser} ref="imageUpload" name="avatar">
                                 <label className="input-file pull-right" >
                                     Alterar imagem
@@ -73,12 +73,12 @@ export default class ImagesUser extends Component {
                             </form>
                         </div>
 
-                        <div className="col-md-12">
-                            <div className="col-md-4 text-center">
-                                <div className="col-md-12">
+                        <div className="col-md-12 col-xs-12">
+                            <div className="col-md-4 col-xs-6 text-center">
+                                <div className="col-md-12 col-xs-12">
                                     <img src={this.props.user.avatar_url} className="img-uploaded" />
                                 </div>
-                                <div className="col-md-12">
+                                <div className="col-md-12 col-xs-12">
                                     <form method="post" encType="multipart/form-data" onSubmit={this.onSubmitUser} ref="imageUpload" name="avatar">
                                         <label className="input-file" >
                                             Alterar imagem
@@ -89,11 +89,11 @@ export default class ImagesUser extends Component {
                                 </div>
                             </div>
 
-                            <div className="col-md-4 text-center">
-                                <div className="col-md-12">
+                            <div className="col-md-4 col-xs-6 text-center">
+                                <div className="col-md-12 col-xs-12">
                                     <img src={this.props.user.firm_url} className="img-uploaded" />
                                 </div>
-                                <div className="col-md-12">
+                                <div className="col-md-12 col-xs-12">
                                     <form method="post" encType="multipart/form-data" onSubmit={this.onSubmitFirm.bind(this)} ref="imageUpload" name="avatar">
                                         <label className="input-file" >
                                             Alterar imagem
@@ -103,7 +103,7 @@ export default class ImagesUser extends Component {
                                 </div>
                             </div>
 
-                            <div className="col-md-4" id="user-edit-images-btn">
+                            <div className="col-md-4 col-xs-12" id="user-edit-images-btn">
                                 <button className="btn btn-primary pull-right" type="submit" onClick={this.sendInfoUser}>Atualizar</button>
                             </div>
                         </div>

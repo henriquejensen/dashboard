@@ -55,9 +55,25 @@
     font-size: 87px;
 }
 
+.menu-image-logo {
+    padding: 2px
+}
+
+.menu-image-user {
+    width:30px;
+    position: absolute;
+    right:10px;
+    top:8px;
+    z-index: 1
+}
+
 @media(max-width: 768px) {
     #menu-header-produtos {
         display: block
+    }
+
+    .menu-image-user {
+        display: none
     }
 }
 

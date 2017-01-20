@@ -25,7 +25,7 @@ export default class Gadgets extends Component {
             </h4>
 
             {this.props.options.map((opt, i) => {
-                return <div className="col-md-2" key={i}>
+                return <div className="col-md-2 col-xs-6" key={i}>
                     <div onClick={this.activateGadget.bind(this, i)} className={opt.active ? "gadget-active" : ""}>
                         <img src={opt.img} className="gadgets-img"/>
                         {opt.name}
