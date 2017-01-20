@@ -7,7 +7,7 @@ export default class OutrasGrafias extends Component {
     render() {
         return(
             <Panel title="OUTRAS GRAFIAS" qtdTotal={[{icon:"fa fa-pencil", qtd:this.props.grafias.length}]}>
-                <a name="Outras grafias"></a>
+                <a name={"Outras grafias"+this.props.index}></a>
                 <div className="col-md-12">
                     {this.props.grafias.map((grafia, index) => {
                         return (

@@ -14,7 +14,7 @@ export default class PainelControle extends Component {
                                 return (
                                     <tr key={index}>
                                         <td>
-                                            <a href={"#"+ocorrencia.descricao}>
+                                            <a href={"#"+ocorrencia.descricao+this.props.index}>
                                                 {ocorrencia.descricao}
                                             </a>
                                         </td>

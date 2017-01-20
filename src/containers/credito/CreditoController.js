@@ -106,7 +106,8 @@ class Credito extends Component {
 											{data.produto == "credito" ?
 												<CreditoView
 													data={data.data}
-													tipo={data.tipo}/>
+													tipo={data.tipo}
+													index={index}/>
 											
 											: ""}
 

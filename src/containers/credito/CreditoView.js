@@ -26,16 +26,16 @@ export default class CreditoView extends Component {
                 : <DadosPj dados={this.props.data.cadastroPj} />}
                 <Telefones fixos={this.props.data.telefones.fixos} moveis={this.props.data.telefones.moveis} />
                 <Enderecos enderecos={this.props.data.enderecos} />
-                <QuadroResumo ocorrencias={this.props.data.quadroResumo} />
-                <RendaPresumida rendas={this.props.data.rendasPresumidas} limiteSugerido={this.props.data.limiteSugerido}/>
-                <Sociedades participacoes={this.props.data.participacoesEmpresas}/>
+                <QuadroResumo ocorrencias={this.props.data.quadroResumo} index={this.props.index} />
+                <RendaPresumida rendas={this.props.data.rendasPresumidas} limiteSugerido={this.props.data.limiteSugerido} index={this.props.index}/>
+                <Sociedades participacoes={this.props.data.participacoesEmpresas} index={this.props.index}/>
                 <Score scores={this.props.data.scores} />
-                <Protestos protestos={this.props.data.protestosDetalhados} />
-                <ChequesSemFundo cheques={this.props.data.cheques} />
-                <RegistroDebito registros={this.props.data.registrosDebitos} />
-                <Acoes acoes={this.props.data.acoes} />
-                <OutrasGrafias grafias={this.props.data.outrasGrafias} />
-                <Consultas consultas={this.props.data.consultasAnteriores} />
+                <Protestos protestos={this.props.data.protestosDetalhados} index={this.props.index}/>
+                <ChequesSemFundo cheques={this.props.data.cheques} index={this.props.index}/>
+                <RegistroDebito registros={this.props.data.registrosDebitos} index={this.props.index} />
+                <Acoes acoes={this.props.data.acoes} index={this.props.index} />
+                <OutrasGrafias grafias={this.props.data.outrasGrafias} index={this.props.index} />
+                <Consultas consultas={this.props.data.consultasAnteriores} index={this.props.index} />
                 <Protocolo info={this.props.data.info} />
             </PanelGroup>
         )
