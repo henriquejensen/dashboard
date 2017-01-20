@@ -1,7 +1,7 @@
 import {
     CHANGE_TAB_CREDITO,
-    CLOSE_CREDITO_MODEL,
     CLOSE_TAB_CREDITO,
+    CLOSE_CREDITO_MODEL,
     LOADING_CREDITO,
     SEE_CREDITO_MODEL,
 } from "../constants/constantsCredito";
@@ -25,5 +25,19 @@ export function closeModel() {
     return {
         type: CLOSE_CREDITO_MODEL,
         payload: ""
+    }
+}
+
+export function changeTab(tab) {
+    return {
+        type: CHANGE_TAB_CREDITO,
+        payload: tab
+    }
+}
+
+export function closeTab(tab) {
+    return {
+        type: CLOSE_TAB_CREDITO,
+        payload: tab
     }
 }

@@ -54,7 +54,7 @@ class Credito extends Component {
 				tipo = {this.state.tipo}
 				icon = {ICON_CREDITO}
 				logo = {LOGO_CREDITO}
-				showModel = {this.props.datas.length == 1 && this.props.status=="model" ? true : false}
+				showModel = {this.props.datas.length >= 1 ? (this.props.datas[0].data.cadastroPf.cpf == 11111111111 ? true: false) : false}
 				showLogo = {this.props.datas.length == 0 ? true : false}
 				onChange = {this.onChange}
 				onformSubmit = {this.onFormSubmit}

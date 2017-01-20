@@ -80,7 +80,7 @@ export default function(state = initialState, action) {
 
 			case CHANGE_TAB_LOCALIZE:
 				return {
-					status: "tabchanged",
+					status: "changeTab",
 					message: "",
 					loading: false,
 					response: state.response,
@@ -92,7 +92,7 @@ export default function(state = initialState, action) {
 				let closed = newResponse.splice(action.payload, 1);
 
 				return {
-					status: "tabclosed",
+					status: "closeTab",
 					message: "",
 					loading: false,
 					response: newResponse,

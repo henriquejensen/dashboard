@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router";
 
 import Panel from "../../components/panel/Panel";
 import Table from "../../components/table/Table";
@@ -15,9 +14,9 @@ export default class PainelControle extends Component {
                                 return (
                                     <tr key={index}>
                                         <td>
-                                            <Link to={"#"+ocorrencia.descricao}>
+                                            <a href={"#"+ocorrencia.descricao}>
                                                 {ocorrencia.descricao}
-                                            </Link>
+                                            </a>
                                         </td>
                                         <td>{ocorrencia.quantidade}</td>
                                         <td>{ocorrencia.primeiraOcorrencia}</td>

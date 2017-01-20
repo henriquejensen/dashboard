@@ -31,7 +31,7 @@ export default class Enderecos extends Component {
 
   render() {
     return (
-            <div className="col-md-12">
+            <div>
                 <Table
                   fields={
                     ["Logradouro", "Número", "Complemento", "Bairro", "Cidade", "UF", "CEP", ""]

@@ -244,6 +244,10 @@ input {
 }
 
 @media(max-width: 992px) {
+    .table {
+        display: block;
+    }
+    
     .my-form {
         width: 100%;
     }

@@ -6,7 +6,7 @@ import Table from "../table/Table";
 export default class RendaPresumida extends Component {
     render(){
         return (
-            <Panel title="RENDA PRESUMIDA" qtdTotal={[{icon:"fa fa-money", qtd:this.props.rendas.length}]}>
+            <Panel title="RENDA PRESUMIDA">
                 <a name="Renda presumida"></a>
                 <div className="col-md-12">
                     <Table
