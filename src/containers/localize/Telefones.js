@@ -56,7 +56,7 @@ export default class Telefones extends Component{
                                 </div>
 
                                 <a data-tip data-for="tooltipCopy">
-                                  <div className="col-md-1 col-sm-1">
+                                  <div className="col-md-1 col-sm-1 col-xs-1">
                                     <CopyToClipboard text={tel} onCopy={() => this._addNotification("Número copiado com sucesso")}>
                                       <i className="fa fa-clipboard icon-tel" />
                                     </CopyToClipboard>
@@ -64,19 +64,19 @@ export default class Telefones extends Component{
                                 </a>
 
                                 <a data-tip data-for="tooltipMessageVoice">
-                                  <div className="col-md-1 col-sm-1">
+                                  <div className="col-md-1 col-sm-1 col-xs-1">
                                     <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                   </div>
                                 </a>
 
                                 <a data-tip data-for="tooltipCall">
-                                  <div className="col-md-1 col-sm-1">
+                                  <div className="col-md-1 col-sm-1 col-xs-1">
                                     <i className="fa fa-phone icon-tel icon-tel-phone" />
                                   </div>
                                 </a>
 
                                 <a data-tip data-for="tooltipHot">
-                                  <div className="col-md-1 col-sm-1">
+                                  <div className="col-md-1 col-sm-1 col-xs-1">
                                     <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
                                   </div>
                                 </a>
@@ -111,7 +111,7 @@ export default class Telefones extends Component{
                                 </div>
 
                                 <a data-tip data-for="tooltipCopy">
-                                  <div className="col-md-1 col-sm-1">
+                                  <div className="col-md-1 col-sm-1 col-xs-1">
                                     <CopyToClipboard text={tel} onCopy={() => this._addNotification("Número copiado com sucesso")}>
                                       <i className="fa fa-clipboard icon-tel" />
                                     </CopyToClipboard>
@@ -119,25 +119,25 @@ export default class Telefones extends Component{
                                 </a>
 
                                 <a data-tip data-for="tooltipSMS">
-                                  <div className="col-md-1 col-sm-1">
+                                  <div className="col-md-1 col-sm-1 col-xs-1">
                                     <i className="fa fa-comments icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                   </div>
                                 </a>
 
                                 <a data-tip data-for="tooltipCall">
-                                  <div className="col-md-1 col-sm-1">
+                                  <div className="col-md-1 col-sm-1 col-xs-1">
                                     <i className="fa fa-mobile icon-tel icon-tel-phone" />
                                   </div>
                                 </a>
 
                                 <a data-tip data-for="tooltipHot">
-                                  <div className="col-md-1 col-sm-1">
+                                  <div className="col-md-1 col-sm-1 col-xs-1">
                                     <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
                                   </div>
                                 </a>
 
                                 <a data-tip data-for="tooltipWhats">
-                                  <div className="col-md-1 col-sm-1">
+                                  <div className="col-md-1 col-sm-1 col-xs-1">
                                       <img src="https://whatsapp.com/favicon.png" width="15"/>
                                   </div>
                                 </a>

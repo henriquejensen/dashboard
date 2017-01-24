@@ -5,8 +5,10 @@ const app = express();
 
 app.use(express.static(__dirname));
 
-app.get("*",(req, res) => {
-    res.sendFile(path.resolve(__dirname, "index.html"));
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
 });
 
 app.listen(port);

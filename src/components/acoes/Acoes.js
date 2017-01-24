@@ -7,8 +7,9 @@ export default class Acoes extends Component {
   render() {
     return (
         <div>
+            <a name={"Recuperações, Falências e Ações Judiciais"+this.props.index}></a>
             <a name={"Ações"+this.props.index}></a>
-            <Panel title="AÇÕES" qtdTotal={[{icon:"fa fa-line-chart", qtd:this.props.acoes.quantidadeAcoes}]}>
+            <Panel title="RECUPERAÇÕES, FALÊNCIAS E AÇÕES JUDICIAIS" qtdTotal={[{icon:"fa fa-line-chart", qtd:this.props.acoes.quantidadeAcoes}]}>
               <div className="col-md-12">
                 <div className="col-md-4"><strong>Ocorrência mais Antiga:</strong> {this.props.acoes.ocorrenciaMaisAntiga}</div>
                 <div className="col-md-4"><strong>Ocorrência mais Recente:</strong> {this.props.acoes.ocorrenciaMaisRecente}</div>

@@ -461,7 +461,7 @@
       "valor": ""
     },
     {
-      "descricao": "Recuperações Falências Ações Judiciais",
+      "descricao": "Recuperações, Falências e Ações Judiciais",
       "quantidade": 1,
       "primeiraOcorrencia": "DD/MM/AAAA",
       "ultimaOcorrencia": "DD/MM/AAAA",
@@ -524,11 +524,18 @@
   },
   "quadroAdministrativo": [
     {
-      "posicao": null,
-      "documento": null,
-      "administracao": null,
-      "cargo": null,
-      "nacionalidade": null
+      "posicao": 0,
+      "documento": 55555555555,
+      "administracao": "SIM",
+      "cargo": "ADMIN",
+      "nacionalidade": "BRASILEIRO"
+    },
+    {
+      "posicao": 1,
+      "documento": 66666666666,
+      "administracao": "NAO",
+      "cargo": "DESENVOLVEDOR",
+      "nacionalidade": "BRASILEIRO"
     }
   ],
   "outrasGrafias": [

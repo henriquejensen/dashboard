@@ -5,7 +5,7 @@ import { getCampanhasSMS } from "../../actions/index";
 
 import Table from "../../components/Table";
 
-class SMS extends Component {
+class BaseCerta extends Component {
   constructor(props) {
     super(props);
 
@@ -25,8 +25,6 @@ class SMS extends Component {
     <div className="container">
       <div className="row">
         <div className="col-md-12">
-
-
 
           <div className="col-md-12">
             <div className="panel panel-default">
@@ -88,4 +86,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(SMS);
+export default connect(mapStateToProps, mapDispatchToProps)(BaseCerta);
