@@ -9,7 +9,7 @@ export default class Sidebar extends Component {
 
     this.state = {
       tabActive: "menu",
-      menuOpened: []
+      menuOpened: ""
     }
   }
 
@@ -25,16 +25,8 @@ export default class Sidebar extends Component {
   }
   
   activeMenuDropdown(menu) {
-    let newMenuOpened = this.state.menuOpened.concat();
-
-    if(newMenuOpened.includes(menu)) {
-      newMenuOpened.splice(newMenuOpened.indexOf(menu), 1);
-    } else {
-      newMenuOpened.push(menu);
-    }
-    
     this.setState({
-      menuOpened: newMenuOpened
+      menuOpened: menu
     })
     
   }
@@ -48,14 +40,14 @@ export default class Sidebar extends Component {
             {menu.sidebar.map((opt, index) => {
               return (
                 <li key={index}>
-                  <Link to={opt.link} onClick={() => this.activeMenuDropdown(opt.label.toLowerCase())}>
+                  <Link to={opt.link} onClick={() => this.activeMenuDropdown(opt.label.toLowerCase())} activeStyle={{ color: 'white', backgroundColor: "#b59adc"}}>
                     {opt.label}
                     <img src={opt.image} className="sub_icon" alt={opt.alt}/>
                   </Link>
-                  <ul className={this.state.menuOpened.includes(opt.label.toLowerCase()) ? "sidebar-item-dropdown" : "display-none"}>
+                  <ul className={this.state.menuOpened == opt.label.toLowerCase() && this.props.activedMenu ? "sidebar-item-dropdown" : "display-none"}>
                     {opt.subItems.map((subOpt, j) => {
                       return (
-                        <Link to={subOpt.link} key={j} activeStyle={{ color: 'black', backgroundColor: "#edecec", fontWeight: "bold" }}>
+                        <Link to={subOpt.link} key={j} activeStyle={{ color: '#b59adc', fontWeight: "bold"}}>
                           <li>{subOpt.label}</li>
                         </Link>
                       )
@@ -75,12 +67,12 @@ export default class Sidebar extends Component {
         <div className={this.state.tabActive == "chat" ? "tab-pane active":"tab-pane"} id="sidebar">
           <ul className="sidebar-nav">
             <li className="sidebar-items">Online</li>
-            <li><Link to="/dashboard/chat" >Jessica<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
-            <li><Link to="/dashboard/chat">Roberta<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
-            <li><Link to="/dashboard/chat">Nayara<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
+            <li><Link to="/chat" >Jessica<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
+            <li><Link to="/chat">Roberta<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
+            <li><Link to="/chat">Nayara<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
             
             <li className="sidebar-items">Offline</li>
-            <li><Link to="/dashboard/chat">Bruna<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
+            <li><Link to="/chat">Bruna<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
           </ul>
         </div>
     )
@@ -100,7 +92,7 @@ export default class Sidebar extends Component {
   render() {
       return (      
           <div id="sidebar-wrapper">
-            <i className="glyphicon glyphicon-align-justify pull-right" style={{margin: "10px 22px"}} onClick={this.props.onMenuClicked} />
+            <i className="glyphicon glyphicon-align-justify pull-right" style={{margin: "10px 10px"}} onClick={this.props.onMenuClicked} />
 
             {this.props.activedMenu ? (
               <div className="nav nav-tabs">

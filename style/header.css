@@ -30,8 +30,10 @@
 }
 
 .navbar {
-  margin-bottom: 0px;
-
+    margin-bottom: 0px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
 }
 
 .navbar-right {
@@ -61,10 +63,10 @@
 
 .menu-image-user {
     width:30px;
-    position: absolute;
+    position: fixed;
     right:10px;
     top:8px;
-    z-index: 1
+    z-index: 2
 }
 
 @media(max-width: 768px) {

@@ -1,8 +1,8 @@
 {
     "sidebar": [
         {
-            "label": "Dashboard",
-            "link": "/dashboard",
+            "label": "Home",
+            "link": "/home",
             "image": "../../public/assertiva/icon-localize.png",
             "alt": "Página inicial",
             "subItems": []

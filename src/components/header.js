@@ -31,7 +31,7 @@ class MenuSuperior extends Component {
 		<img src={this.props.user.avatar_url} alt="Imagem do usuário" className="menu-image-user" />
 		<Navbar style={{backgroundColor:"#5B3494", borderRadius: 0}} inverse collapseOnSelect>
 			<Navbar.Header>
-				<Link to="/dashboard">
+				<Link to="/home">
 					<Navbar.Brand>
 						<img src="../../public/assertiva/assertiva-top-index-inverse.png" alt="Logo da Assertiva" className="menu-image-logo" />
 					</Navbar.Brand>
