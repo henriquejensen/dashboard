@@ -10,10 +10,16 @@ const style = {
         fontSize: '30px',
         fontWeight: 'bold',
         color: '#73879C',
-        textAlign: 'center'
+        textAlign: 'center',
     },
     text: {
         textAlign: 'center'
+    },
+    graph: {
+        padding: "10px"
+    },
+    graphText: {
+        marginLeft: "33px"
     }
 }
 
@@ -29,40 +35,12 @@ export default class CardInfo extends Component {
     render() {
         return (
                 <Panel title={this.props.title ? this.props.title : <div>outro</div>}>
-                    <Row>
-                        {this.props.info.slice(0,quantidadeElementos).map((info,index) => {
-                            return (
-                                    <Col md={tamanhoCard} sm={tamanhoCard} key={index}>
-                                        {info.datasets !== undefined ?
-                                            <div>
-                                                <Pie
-                                                    data={info}
-                                                    options={{
-                                                        responsive:true,
-                                                        legend:{
-                                                            position: "right",
-                                                            usePointStyle: false
-                                                        }
-                                                    }}/>
-                                                <p style={style.text}>{info.descricao}</p>
-                                            </div>
-                                        : 
-                                            <div>
-                                                <h2 style={style.card}>{info.quantidade}</h2>
-                                                <p style={style.text}>{info.label}</p>
-                                            </div>}
-                                    </Col>
-                            )
-                        })}
-                    </Row>
-
-                    <Row>
-                        {this.state.showMore ?
-                            this.props.info.slice(quantidadeElementos,this.props.info.length).map((info,index) => {
+                    <table>
+                        <tr>
+                            {this.props.info.slice(0,quantidadeElementos).map((info,index) => {
                                 return (
-                                    <Col md={tamanhoCard} sm={tamanhoCard} key={index}>
-                                        {info.datasets !== undefined ?
-                                            <div>
+                                        info.datasets !== undefined ?
+                                            <td key={index} style={style.graph}>
                                                 <Pie
                                                     data={info}
                                                     options={{
@@ -72,19 +50,44 @@ export default class CardInfo extends Component {
                                                             usePointStyle: false
                                                         }
                                                     }}/>
-                                                <p style={style.text}>{info.descricao}</p>
-                                            </div>
+                                                <p style={style.graphText}>{info.descricao}</p>
+                                            </td>
                                         : 
-                                            <div>
+                                            <td key={index}>
                                                 <h2 style={style.card}>{info.quantidade}</h2>
                                                 <p style={style.text}>{info.label}</p>
-                                            </div>}
-                                        
-                                    </Col>
+                                            </td>
                                 )
-                            })
-                        : ""}
-                    </Row>
+                            })}
+                        </tr>
+
+                        <tbody>
+                            {this.state.showMore ?
+                                this.props.info.slice(quantidadeElementos,this.props.info.length).map((info,index) => {
+                                    return (
+                                            info.datasets !== undefined ?
+                                                <td key={index} style={style.graph}>
+                                                    <Pie
+                                                        data={info}
+                                                        options={{
+                                                            responsive:true,
+                                                            legend:{
+                                                                position: "right",
+                                                                usePointStyle: false
+                                                            }
+                                                        }}/>
+                                                    <p style={style.graphText}>{info.descricao}</p>
+                                                </td>
+                                            : 
+                                                <td key={index}>
+                                                    <h2 style={style.card}>{info.quantidade}</h2>
+                                                    <p style={style.text}>{info.label}</p>
+                                                </td>
+                                    )
+                                })
+                            : ""}
+                        </tbody>
+                    </table>
 
                     {this.props.info.length > quantidadeElementos ? (
                         <div className="col-md-12 moreInfo" onClick={() => this.setState({showMore:!this.state.showMore})}>

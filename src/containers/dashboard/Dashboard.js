@@ -50,29 +50,37 @@ class Dashboard extends Component {
 				{this.props.user.charts.optionsSelected.map((opt, index) => {
 					if(opt.label == "Localize"){
 						return <div className={this.state.tabActive =="" && index == 0 ? "tab-pane active" : this.state.tabActive == "#1" ? "tab-pane active" : "tab-pane"} id="#1" key={index}>
-							<div className="col-md-12">
+							<div className="col-md-12" >
 								<Line
 									data={this.props.data.localize}
 									options={{
 										responsive:true,
+										scales: {
+											xAxes: [{
+												ticks: {
+													min: 0,
+													max: 25
+												}
+											}]
+										}
 									}}/>
 							</div>
 						</div>
 					} else if(opt.label == "Crédito"){
 						return <div className={this.state.tabActive =="" && index == 0 ? "tab-pane active" : this.state.tabActive == "#2" ? "tab-pane active" : "tab-pane"} id="#2" key={index}>
-							<div className="col-md-12">
+							<div className="col-md-12" >
 								<Line data={this.props.data.credito} options={{responsive:true}}/>
 							</div>
 						</div>
 					} else if(opt.label == "Veículos"){
 						return <div className={this.state.tabActive =="" && index == 0 ? "tab-pane active" : this.state.tabActive == "#3" ? "tab-pane active" : "tab-pane"} id="#3" key={index}>
-							<div className="col-md-12">
+							<div className="col-md-12" >
 								<Line data={this.props.data.veiculos} options={{responsive:true}}/>
 							</div>
 						</div>
 					} else if(opt.label == "SMS"){
 						return <div className={this.state.tabActive =="" && index == 0 ? "tab-pane active" : this.state.tabActive == "#4" ? "tab-pane active" : "tab-pane"} id="#4" key={index}>
-							<div className="col-md-12">
+							<div className="col-md-12" >
 								<Line data={this.props.data.sms} options={{responsive:true}}/>
 							</div>
 						</div>
@@ -228,41 +236,53 @@ class Dashboard extends Component {
 
 					<CardWithTable title="ÚLTIMAS NOTÍCIAS">
 						<Col sm={12}>
-							<Media>
+							<Media style={{padding:"7px"}}>
 								<Media.Left>
 									<img width={64} height={64} src="http://www.pd4pic.com/images/newspaper-news-journal-headline-article-paper.png" alt="Image"/>
 								</Media.Left>
 								<Media.Body>
-									<a href="http://assertivasolucoes.com.br/quem-somos" target="_blank">
-										<Media.Heading>USE O ASSERTIVA LOCALIZE PARA VALIDAR DADOS DE PESSOAS</Media.Heading>
+									
+										<Media.Heading>
+											<a href="http://assertivasolucoes.com.br/quem-somos" target="_blank">
+												Use o Assertiva Localize para validar dados de pessoas
+											</a>
+										</Media.Heading>
 										<p>Além de ser uma ótima forma de localizar pessoas e empresas de todo o Brasil, o Assertiva Localize...</p>
-									</a>
+									
 								</Media.Body>
 							</Media>
 						</Col>
 						<Col sm={12}>
-							<Media>
+							<Media style={{padding:"7px"}}>
 								<Media.Left>
 									<img width={64} height={64} src="http://www.pd4pic.com/images/newspaper-news-journal-headline-article-paper.png" alt="Image"/>
 								</Media.Left>
 								<Media.Body>
-									<a href="http://assertivasolucoes.com.br/quem-somos" target="_blank">
-										<Media.Heading>PERDEU A 1ª VIA DO SEU BOLETO DA ASSERTIVA?</Media.Heading>
+									
+										<Media.Heading>
+											<a href="http://assertivasolucoes.com.br/quem-somos" target="_blank">
+												Perdeu a 1ª via do seu boleto da Assertiva?
+											</a>
+										</Media.Heading>
 										<p>Caso você tenha perdido a primeira via do seu boleto de pagamento da Assertiva, não se preocupe...</p>
-									</a>
+									
 								</Media.Body>
 							</Media>
 						</Col>
 						<Col sm={12}>
-							<Media>
+							<Media style={{padding:"7px"}}>
 								<Media.Left>
 									<img width={64} height={64} src="http://www.pd4pic.com/images/newspaper-news-journal-headline-article-paper.png" alt="Image"/>
 								</Media.Left>
 								<Media.Body>
-									<a href="http://assertivasolucoes.com.br/quem-somos" target="_blank">
-										<Media.Heading>Media Heading</Media.Heading>
+									
+										<Media.Heading>
+											<a href="http://assertivasolucoes.com.br/quem-somos" target="_blank">
+												Media Heading
+											</a>
+										</Media.Heading>
 										<p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque</p>
-									</a>
+									
 								</Media.Body>
 							</Media>
 						</Col>

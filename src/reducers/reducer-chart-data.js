@@ -22,7 +22,7 @@ export default function chartData() {
 		      pointHoverBorderWidth: 2,
 		      pointRadius: 1,
 		      pointHitRadius: 10,
-					data: [65, 59, 80, 81, 56, 55, 40]
+					data: [15, 10, 9, 13, 5, 10, 12]
 		    }
 		  ]
 		},
@@ -100,7 +100,7 @@ export default function chartData() {
 		      pointHoverBorderWidth: 2,
 		      pointRadius: 1,
 		      pointHitRadius: 10,
-		      data: [100, 150, 130, 150, 100, 300, 250]
+		      data: [10, 15, 13, 15, 10, 8, 7]
 		    }
 		  ]
 		},				
