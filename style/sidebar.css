@@ -10,13 +10,12 @@
     margin-left: -220px;
     left: 70px;
     width: 220px;
-    background: white;
-    height: 100%;
     transition: all .4s ease 0s;
     color: #999999;
-    position: fixed;
+    position: absolute;
     top: 52px;
-    overflow-y: scroll;
+    height: 100%;
+    background: white;
 }
 
 .sidebar-nav {
@@ -26,6 +25,8 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    height: 100%;
+    background: white;
 }
 #page-content-wrapper {
     padding-left: 0;
@@ -123,7 +124,7 @@
 .sub_icon {
     float: right;
     margin-right: 15px;
-    width: 26px;
+    width: 22px;
     position: absolute;
     right: 0;
     top: 11px;
@@ -150,7 +151,7 @@
 }
 
 .panel-body {
-    padding: 5px;
+    padding: 0px;
 }
 
 #localize-tabs {

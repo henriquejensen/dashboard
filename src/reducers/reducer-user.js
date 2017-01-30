@@ -1,4 +1,5 @@
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
+import { ICON_LOCALIZE, ICON_CREDITO } from "../constants/utils";
 
 const user = {
     nome: localStorage.getItem("user"),
@@ -9,6 +10,119 @@ const user = {
     firm_url: "http://www.goodrickes.co.za/images/icon2.png",
     empresa: localStorage.getItem("empresa"),
     perfil: "ADM",
+    produto: {
+        localize: [
+            {quantidade: 1000, label: "Total consultas"},
+            {quantidade: 600, label: "CPF"},
+            {quantidade: 300, label: "CNPJ"},
+            {quantidade: 50, label: "Nome"},
+            {quantidade: 30, label: "Endereço"},
+            {quantidade: 15, label: "Telefone"},
+            {quantidade: 5, label: "Email"},
+        ],
+        credito: [
+            {quantidade: 500, label: "Total consultas"},
+            {quantidade: 150, label: "CPF"},
+            {quantidade: 300, label: "CNPJ"},
+            {quantidade: 50, label: "Cheque"},
+            {quantidade: 200, label: "Consulta Simples"},
+            {quantidade: 250, label: "Consulta Completa"},
+            {quantidade: 0, label: "Consulta Express"},
+            {quantidade: 50, label: "Consulta Intermediária"},
+            {quantidade: 0, label: "Intermediária Plus/Pessoal Plus"},
+        ],
+        totalConsultas: [
+            {quantidade: 1200, label: "Total"},
+            {
+                descricao: "Distribuição por Produto",
+                labels: [
+                    'Localize',
+                    'Crédito',
+                    'FocoFiscal'
+                ],
+                datasets: [{
+                    data: [300, 50, 100],
+                    backgroundColor: [
+                    '#FE9900',
+                    '#4684ED',
+                    '#DB3912'
+                    ],
+                    hoverBackgroundColor: [
+                    '#FE9900',
+                    '#4684ED',
+                    '#DB3912'
+                    ],
+                }]
+            },
+            {
+                descricao: "Distribuição por tipo de busca",
+                labels: [
+                    'CPF',
+                    'CNPJ',
+                    'Outros'
+                ],
+                datasets: [{
+                    data: [300, 50, 100],
+                    backgroundColor: [
+                    '#2E3192',
+                    '#00FF00',
+                    '#993399'
+                    ],
+                    hoverBackgroundColor: [
+                    '#2E3192',
+                    '#00FF00',
+                    '#993399'
+                    ],
+                }]
+            }
+        ],
+        acessoSeguranca: [
+            {quantidade: 1200, label: "Usuários"},
+            {
+                descricao: "Status dos usuários",
+                labels: [
+                    'Ativo',
+                    'Inativo',
+                    'Bloqueado'
+                ],
+                datasets: [{
+                    data: [300, 50, 100],
+                    backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56'
+                    ],
+                    hoverBackgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    ],
+                }]
+            },
+            {
+                descricao: "Tentativas de acesso",
+                labels: [
+                    'Erro',
+                    'Hora',
+                    'Sucesso',
+                ],
+                datasets: [{
+                    data: [300, 50, 100],
+                    backgroundColor: [
+                    '#000',
+                    '#4F81BC',
+                    '#FFCE56',
+                    ],
+                    hoverBackgroundColor: [
+                    '#000',
+                    '#4F81BC',
+                    '#FFCE56',
+                    ],
+                }]
+            },
+            {quantidade: 4, label: "Grupos"},
+        ],
+    },
     gadgets: [
         {img: "https://www.wlu.edu/images/alumni/icons/calendar.png", name: "Calendário", active: false},
         {img: "http://blog.weecomments.com/wp-content/uploads/2016/05/clock-flat.png", name: "Relógio", active: false},
@@ -35,7 +149,28 @@ const user = {
             [1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales."],
             [2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales."]
         ]
-    }
+    },
+    ultimasConsultas: [
+        {produto: "localize", logo: ICON_LOCALIZE, tipoDocumento: "CPF", tipo: "pf", documento: 22430907836},
+        {produto: "localize", logo: ICON_LOCALIZE, tipoDocumento: "CNPJ", tipo: "pj", documento: 15724796000100},
+        {produto: "localize", logo: ICON_LOCALIZE, tipoDocumento: "CPF", tipo: "pf", documento: 11111111100},
+        {produto: "localize", logo: ICON_LOCALIZE, tipoDocumento: "CPF", tipo: "pf", documento: 11111111100},
+        {produto: "localize", logo: ICON_LOCALIZE, tipoDocumento: "CPF", tipo: "pf", documento: 11111111100},
+    ],
+    ultimosAcessos: [
+        {dataHora: "29/01/2017 10:30", ip: "177.103.153.183, 54.239.182.121"},
+        {dataHora: "29/01/2017 14:00", ip: "177.103.153.183, 54.239.182.121"},
+        {dataHora: "29/01/2017 17:05", ip: "177.103.153.183, 54.239.182.121"},
+        {dataHora: "30/01/2017 09:20", ip: "177.103.153.183, 54.239.182.121"},
+        {dataHora: "30/01/2017 10:30", ip: "177.103.153.183, 54.239.182.121"}
+    ],
+    produtosMaisUtilizados: [
+        {produto: "localize", logo: ICON_LOCALIZE, tipoDocumento: "CPF"},
+        {produto: "localize", logo: ICON_LOCALIZE, tipoDocumento: "CNPJ"},
+        {produto: "credito", logo: ICON_CREDITO, tipoDocumento: "COMPLETA"},
+        {produto: "credito", logo: ICON_CREDITO, tipoDocumento: "INTERMEDIARIA"},
+        {produto: "localize", logo: ICON_LOCALIZE, tipoDocumento: "NOME"},
+    ]
 }
 
 export default function (state = user, action) {

@@ -6,3 +6,7 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const LOG_OUT = "LOG_OUT";
 export const LOAD_STATES = "LOAD_STATES";
+export const LOGO_LOCALIZE = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/logo-localize.png";
+export const ICON_LOCALIZE = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/icone-localize.png";
+export const LOGO_CREDITO = "../../../public/assertiva/logo-credito.png";
+export const ICON_CREDITO = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/icone-localize.png";

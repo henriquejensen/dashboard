@@ -29,7 +29,7 @@ class MenuSuperior extends Component {
 		return (
 		<div>
 		<img src={this.props.user.avatar_url} alt="Imagem do usuário" className="menu-image-user" />
-		<Navbar style={{backgroundColor:"#5B3494", borderRadius: 0}} inverse collapseOnSelect>
+		<Navbar style={{backgroundColor:"#5E147F", borderRadius: 0}} inverse collapseOnSelect>
 			<Navbar.Header>
 				<Link to="/home">
 					<Navbar.Brand>

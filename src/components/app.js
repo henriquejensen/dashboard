@@ -9,7 +9,7 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      active: false
+      active: true
     }
 
     this.onMenuClicked = this.onMenuClicked.bind(this);

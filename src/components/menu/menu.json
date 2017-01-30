@@ -3,14 +3,14 @@
         {
             "label": "Home",
             "link": "/home",
-            "image": "../../public/assertiva/icon-localize.png",
+            "image": "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/%C3%ADndice.ico",
             "alt": "Página inicial",
             "subItems": []
         },
         {
             "label": "Localize",
             "link": "/localize",
-            "image": "../../public/assertiva/icon-localize.png",
+            "image": "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/icone-localize.png",
             "alt": "Icone Localize",
             "subItems": [
                 {"label": "CPF", "link": "/localize/cpf"},
@@ -24,7 +24,7 @@
         {
             "label": "SMS",
             "link": "/sms",
-            "image": "../../public/assertiva/icon-sms.png",
+            "image": "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/sms.png",
             "alt": "Icone SMS",
             "subItems": [
                 {"label": "Envio de SMS", "link": "/sms"},
@@ -36,21 +36,21 @@
         {
             "label": "Base Certa",
             "link": "/basecerta",
-            "image": "../../public/assertiva/icon-basecerta.png",
+            "image": "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/basecerta.png",
             "alt": "Icone Base Certa",
             "subItems": []
         },
         {
             "label": "Venda+",
             "link": "/vendamais",
-            "image": "../../public/assertiva/icon-vendamais.png",
+            "image": "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/vendamais.png",
             "alt": "Icone Venda+",
             "subItems": []
         },
         {
             "label": "Crédito",
             "link": "/credito",
-            "image": "../../public/assertiva/icon-credito.png",
+            "image": "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/credito.png",
             "alt": "Icone Crédito",
             "subItems": [
                 {"label": "Consulta Completa", "link": "/credito/completa"},
@@ -79,7 +79,7 @@
         {
             "label": "Foco Fiscal",
             "link": "/focofiscal",
-            "image": "../../public/assertiva/icon-focofiscal.png",
+            "image": "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/focofiscal.png",
             "alt": "Icone Foco Fiscal",
             "subItems": [
                 {"label": "Receita PF", "link": "/focofiscal/receitaPf"},

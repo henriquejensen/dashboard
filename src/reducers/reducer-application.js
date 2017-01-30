@@ -10,7 +10,7 @@ const getInitialState = {
 export default function(state=getInitialState, action) {
     switch(action.type) {
         case LOGIN_SUCCESS:
-            browserHistory.push("/dashboard");
+            browserHistory.push("/");
             let newState = {
                 error: false,
                 msgn: ""

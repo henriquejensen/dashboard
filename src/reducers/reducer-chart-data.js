@@ -4,7 +4,7 @@ export default function chartData() {
 	  	labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Junho'],
 		  datasets: [
 		    {
-		      label: 'Localize',
+					label: 'Localize',
 		      fill: false,
 		      lineTension: 0.1,
 		      backgroundColor: 'rgba(75,192,192,0.4)',
@@ -22,7 +22,7 @@ export default function chartData() {
 		      pointHoverBorderWidth: 2,
 		      pointRadius: 1,
 		      pointHitRadius: 10,
-		      data: [65, 59, 80, 81, 56, 55, 40]
+					data: [65, 59, 80, 81, 56, 55, 40]
 		    }
 		  ]
 		},

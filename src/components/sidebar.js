@@ -14,7 +14,7 @@ export default class Sidebar extends Component {
   }
 
   componentDidMount() {
-    this.activeMenuDropdown(location.pathname.split("/")[1])
+    this.activeMenuDropdown(location.pathname.split("/")[1]);
   }
 
   _changeTab(tab) {
@@ -35,8 +35,6 @@ export default class Sidebar extends Component {
     return (
         <div className={this.state.tabActive == "menu" ? "tab-pane active":"tab-pane"} id="sidebar">
           <ul className="sidebar-nav">
-            {this.props.activedMenu ? <li className="sidebar-items">Meus Produtos</li> : ""}
-
             {menu.sidebar.map((opt, index) => {
               return (
                 <li key={index}>
@@ -91,7 +89,7 @@ export default class Sidebar extends Component {
 
   render() {
       return (      
-          <div id="sidebar-wrapper">
+          <aside id="sidebar-wrapper">
             <i className="glyphicon glyphicon-align-justify pull-right" style={{margin: "10px 10px"}} onClick={this.props.onMenuClicked} />
 
             {this.props.activedMenu ? (
@@ -120,7 +118,7 @@ export default class Sidebar extends Component {
               {this.renderChat()}
               {this.renderStats()}
             </div>
-          </div>
+          </aside>
       )
 
   }
