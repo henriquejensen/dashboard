@@ -13,7 +13,7 @@ export default class App extends Component {
     }
 
     this.larguraMenu = {
-      marginLeft:"200px"
+      marginLeft:"210px"
     };
 
     this.larguraMenuFechado = {

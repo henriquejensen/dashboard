@@ -3,7 +3,6 @@
   background-color: #f5f5f5;
 }
 
-
 .sidebar {
     position: fixed;
     width: 200px;
@@ -17,9 +16,6 @@
     background-color: #f5f5f5;
     transition: .5s;
 }
-
-
-
 
 .menu-hamburguer {
     position: absolute;

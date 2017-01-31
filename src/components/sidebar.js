@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router";
 
 import menu from "./menu/menu.json";
+import CardInfoMenuUser from "./utils/CardInfoMenuUser";
 
 export default class Sidebar extends Component {
   constructor(props) {
@@ -91,25 +92,28 @@ export default class Sidebar extends Component {
       return (      
           <aside>            
             {this.props.activedMenu ? (
-              <div className="nav nav-tabs">
-                <li className={this.state.tabActive == "menu" ? "active" : ""} onClick={() => this._changeTab("menu")}>
-                  <a href="#menu">
-                    <i className="glyphicon glyphicon-picture" />
-                  </a>
-                </li>
+              <div>
+                <CardInfoMenuUser />
+                  <div className="nav nav-tabs">
+                    <li className={this.state.tabActive == "menu" ? "active" : ""} onClick={() => this._changeTab("menu")}>
+                      <a href="#menu">
+                        <i className="fa fa-picture-o" />
+                      </a>
+                    </li>
 
-                <li className={this.state.tabActive == "chat" ? "active" : ""} onClick={() => this._changeTab("chat")}>
-                  <a href="#chat">
-                    <i className="glyphicon glyphicon-comment" />
-                  </a>
-                </li>
+                    <li className={this.state.tabActive == "chat" ? "active" : ""} onClick={() => this._changeTab("chat")}>
+                      <a href="#chat">
+                        <i className="fa fa-comments-o" />
+                      </a>
+                    </li>
 
-                <li className={this.state.tabActive == "stats" ? "active" : ""} onClick={() => this._changeTab("stats")}>
-                  <a href="#stats">
-                    <i className="glyphicon glyphicon-equalizer" />
-                  </a>
-                </li>
-              </div>) : ""}
+                    <li className={this.state.tabActive == "stats" ? "active" : ""} onClick={() => this._changeTab("stats")}>
+                      <a href="#stats">
+                        <i className="fa fa-line-chart" />
+                      </a>
+                    </li>
+                  </div>
+                </div>) : ""}
 
             <div className="tab-content">
               {this.renderMenu()}
