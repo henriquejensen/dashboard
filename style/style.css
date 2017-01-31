@@ -27,11 +27,6 @@ input {
     text-decoration: underline
 }
 
-.btn {
-    border-radius: 0px;
-    font-size: 13px;
-}
-
 .my-btn-form {
     width: 40px;
 }
@@ -235,6 +230,19 @@ input {
     margin: 0 auto;
     width: 50%;
     text-align: left;
+}
+
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
 }
 
 @media print {

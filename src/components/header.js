@@ -2,7 +2,18 @@ import React, { Component } from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Nav, NavItem, NavDropdown, MenuItem, Navbar, Header, Collapse} from "react-bootstrap";
+import {
+		Nav,
+		NavItem,
+		NavDropdown,
+		MenuItem,
+		Navbar,
+		Header,
+		Collapse,
+		FormGroup,
+		FormControl,
+		Button
+} from "react-bootstrap";
 
 import menu from "./menu/menu.json";
 import { browserHistory } from 'react-router';
@@ -38,9 +49,22 @@ class MenuSuperior extends Component {
 				</Link>
 				<Navbar.Toggle />
 			</Navbar.Header>
-			<Navbar.Collapse>
-				<Nav pullRight>
 
+			<Navbar.Collapse>
+				<form>
+					<Navbar.Form pullLeft>
+						<div className="input-group stylish-input-group">
+							<input type="number" className="form-control" placeholder="Digite o CPF ou CNPJ" />
+							<span className="input-group-addon">
+								<button type="submit">
+									<span className="fa fa-search"></span>
+								</button>  
+							</span>
+						</div>
+					</Navbar.Form>
+				</form>
+
+				<Nav pullRight>
 					<NavDropdown title="Produtos" id="menu-header-produtos">
 						{menu.sidebar.map((opt, index) => {
 							return (
