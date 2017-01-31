@@ -12,10 +12,19 @@ export default class App extends Component {
       active: true
     }
 
+    this.larguraMenu = {
+      marginLeft:"200px"
+    };
+
+    this.larguraMenuFechado = {
+      marginLeft:"-150px"
+    };
+
     this.onMenuClicked = this.onMenuClicked.bind(this);
   }
 
 	onMenuClicked() {
+    console.log("clicou")
     this.setState({
       active: !this.state.active
     })
@@ -25,23 +34,24 @@ export default class App extends Component {
   render() {
       return (
         <div>
-          <Header />
+            <Header onMenuClicked={this.onMenuClicked} />
+            <div className="row">
+              <div className="sidebar" style={this.state.active ? {} : this.larguraMenuFechado}>
+                <Sidebar onMenuClicked={this.onMenuClicked} activedMenu={this.state.active}/>
+              </div>
 
-        	<div id="wrapper" className={this.state.active ?"active":""}>
+              <div className="container-fluid main" style={this.state.active ? this.larguraMenu : {}}>
+                  <Breadcrumbs
+                    routes={this.props.routes}
+                    params={this.props.params}
+                  />
+                  {this.props.children}
+              </div>
 
-	          <Sidebar onMenuClicked={this.onMenuClicked} activedMenu={this.state.active}/>
-
-	          <div id="page-content-wrapper">
-	          	<div className="page-content inset">
-                <Breadcrumbs
-                  routes={this.props.routes}
-                  params={this.props.params}
-                />
-	          		{this.props.children}
-	          	</div>
-	          </div>
-	        </div>
+            </div>
         </div>
+
+
       )
   }
 }

@@ -89,9 +89,7 @@ export default class Sidebar extends Component {
 
   render() {
       return (      
-          <aside id="sidebar-wrapper">
-            <i className="glyphicon glyphicon-align-justify pull-right" style={{margin: "10px 10px"}} onClick={this.props.onMenuClicked} />
-
+          <aside>            
             {this.props.activedMenu ? (
               <div className="nav nav-tabs">
                 <li className={this.state.tabActive == "menu" ? "active" : ""} onClick={() => this._changeTab("menu")}>

@@ -39,70 +39,69 @@ class MenuSuperior extends Component {
 	render() {
 		return (
 		<div>
-		<img src={this.props.user.avatar_url} alt="Imagem do usuário" className="menu-image-user" />
-		<Navbar style={{backgroundColor:"#5E147F", borderRadius: 0}} inverse collapseOnSelect>
-			<Navbar.Header>
-				<Link to="/home">
+			<img src={this.props.user.avatar_url} alt="Imagem do usuário" className="menu-image-user" />
+			<Navbar style={{backgroundColor:"#5E147F", borderRadius: 0}} inverse collapseOnSelect>
+				<i className="fa fa-bars menu-hamburguer" onClick={this.props.onMenuClicked} />
+				<Navbar.Header style={{marginLeft:"45px"}}>
 					<Navbar.Brand>
 						<img src="../../public/assertiva/assertiva-top-index-inverse.png" alt="Logo da Assertiva" className="menu-image-logo" />
 					</Navbar.Brand>
-				</Link>
-				<Navbar.Toggle />
-			</Navbar.Header>
+					<Navbar.Toggle />
+				</Navbar.Header>
 
-			<Navbar.Collapse>
-				<form>
+				<Navbar.Collapse>
 					<Navbar.Form pullLeft>
-						<div className="input-group stylish-input-group">
-							<input type="number" className="form-control" placeholder="Digite o CPF ou CNPJ" />
-							<span className="input-group-addon">
-								<button type="submit">
-									<span className="fa fa-search"></span>
-								</button>  
-							</span>
-						</div>
+						<form>
+							<div className="input-group stylish-input-group">
+								<input type="number" className="form-control" placeholder="Digite o CPF ou CNPJ" />
+								<span className="input-group-addon">
+									<button type="submit">
+										<span className="fa fa-search"></span>
+									</button>  
+								</span>
+							</div>
+						</form>
 					</Navbar.Form>
-				</form>
 
-				<Nav pullRight>
-					<NavDropdown title="Produtos" id="menu-header-produtos">
-						{menu.sidebar.map((opt, index) => {
-							return (
-								<MenuItem key={index} onClick={() => this.changeRoute(opt.link)}>
-									{opt.label}
-								</MenuItem>
-							)
-						})}
-					</NavDropdown>
-
-					<NavDropdown title="Relatórios" id="basic-nav-dropdown">
-						{menu.header.relatorios.map((opt, index) => {
-							return (
-								<MenuItem key={index} onClick={() => this.changeRoute(opt.link)}>
-									{opt.label}
-								</MenuItem>
-							)
-						})}
-					</NavDropdown>
-
-					<NavDropdown title={this.props.user.nome} id="basic-nav-dropdown">
-						{menu.header.user.map((opt, index) => {
-							if(opt.label != "Sair") {
+					<Nav pullRight>
+						<NavDropdown title="Produtos" id="menu-header-produtos">
+							{menu.sidebar.map((opt, index) => {
 								return (
 									<MenuItem key={index} onClick={() => this.changeRoute(opt.link)}>
 										{opt.label}
 									</MenuItem>
 								)
-							}
-						})}
-						<MenuItem divider />
-						<MenuItem onClick={() => this.changeRoute("/login")}>
-							Sair
-						</MenuItem>
-					</NavDropdown>
-				</Nav>
-			</Navbar.Collapse>
-		</Navbar>
+							})}
+						</NavDropdown>
+
+						<NavDropdown title="Relatórios" id="basic-nav-dropdown">
+							{menu.header.relatorios.map((opt, index) => {
+								return (
+									<MenuItem key={index} onClick={() => this.changeRoute(opt.link)}>
+										{opt.label}
+									</MenuItem>
+								)
+							})}
+						</NavDropdown>
+
+						<NavDropdown title={this.props.user.nome} id="basic-nav-dropdown">
+							{menu.header.user.map((opt, index) => {
+								if(opt.label != "Sair") {
+									return (
+										<MenuItem key={index} onClick={() => this.changeRoute(opt.link)}>
+											{opt.label}
+										</MenuItem>
+									)
+								}
+							})}
+							<MenuItem divider />
+							<MenuItem onClick={() => this.changeRoute("/login")}>
+								Sair
+							</MenuItem>
+						</NavDropdown>
+					</Nav>
+				</Navbar.Collapse>
+			</Navbar>
 		</div>
 		)
 	}

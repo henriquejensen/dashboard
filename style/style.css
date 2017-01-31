@@ -18,6 +18,11 @@ input {
     border-left-width: 0px;
 }
 
+.main {
+    margin-left: 50px;
+    transition: .5s;
+}
+
 .input-file {
     color: #1a0dab;
     cursor: pointer
@@ -170,8 +175,9 @@ input {
 }
 
 .breadcrumbs {
-    padding: 5px 0px 20px 15px;
+    padding: 5px 0px 7px 15px;
     color: #ec870e;
+    margin-top: 52px;
 }
 
 .error-message {

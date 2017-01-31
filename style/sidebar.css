@@ -1,3 +1,35 @@
+ 
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #f5f5f5;
+}
+
+
+.sidebar {
+    position: fixed;
+    width: 200px;
+    top: 52px;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    padding: 0px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #f5f5f5;
+    transition: .5s;
+}
+
+
+
+
+.menu-hamburguer {
+    position: absolute;
+    color: white;
+    z-index: 4;
+    top: 14px;
+    left: 10px;
+    font-size: 24px;
+}
+
 #wrapper {
     padding-left: 70px;
     transition: all .4s ease 0s;
@@ -21,13 +53,13 @@
 .sidebar-nav {
     display: block;
     float: left;
-    width: 220px;
+    width: 100%;
     list-style: none;
     margin: 0;
     padding: 0;
     height: 100%;
-    background: white;
 }
+
 #page-content-wrapper {
     padding-left: 0;
     margin-left: 0;

@@ -4,6 +4,7 @@ import { Col, Row } from "react-bootstrap";
 import {Pie} from 'react-chartjs-2';
 
 import Panel from "../../components/Panel";
+import Table from "../../components/Table";
 
 const style = {
     card: {
@@ -35,7 +36,7 @@ export default class CardInfo extends Component {
     render() {
         return (
                 <Panel title={this.props.title ? this.props.title : <div>outro</div>}>
-                    <table>
+                    <Table>
                         <tr>
                             {this.props.info.slice(0,quantidadeElementos).map((info,index) => {
                                 return (
@@ -87,7 +88,7 @@ export default class CardInfo extends Component {
                                 })
                             : ""}
                         </tbody>
-                    </table>
+                    </Table>
 
                     {this.props.info.length > quantidadeElementos ? (
                         <div className="col-md-12 moreInfo" onClick={() => this.setState({showMore:!this.state.showMore})}>
