@@ -8,7 +8,7 @@ export default class CardInfoMenuUser extends Component {
                 <Col md={4} style={{position:"absolute", top:"20%", width:"45%"}}>
                     <Image src="https://pickaface.net/assets/images/slides/slide2.png" circle width="100%"/>
                 </Col>
-                <Col md={8} style={{position:"absolute", top:"35%", right:"0"}}>
+                <Col md={8} style={{position:"absolute", top:"35%", right:"0", fontWeight:"bold"}}>
                     NOME.USUARIO
                     PERFIL: ADMN
                 </Col>

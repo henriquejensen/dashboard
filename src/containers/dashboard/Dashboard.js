@@ -5,7 +5,7 @@ import { Col, Media } from "react-bootstrap";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router";
 
-import { searchLocalize } from "../../actions/index";
+import { searchLocalize, loadingLocalize } from "../../actions/index";
 
 import Panel from "../../components/panel/Panel";
 
@@ -304,6 +304,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 			searchLocalize,
+			loadingLocalize
 		},
 		dispatch);
 }

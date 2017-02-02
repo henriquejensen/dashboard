@@ -12,13 +12,12 @@ import {
 		getEstados } from "../../actions/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { Tabs, Tab} from "react-bootstrap";
 
 import LocalizeView from "./LocalizeView";
 
 import Form from "../../components/forms/Form";
-import Tabs from "../../components/tabs/Tabs";
-import TabContent from "../../components/tabs/TabContent";
-import TabPane from "../../components/tabs/TabPane";
+import Titletab from "../../components/utils/Titletab";
 
 import { LOGO_LOCALIZE, ICON_LOCALIZE } from "../../constants/constantsLocalize";
 
@@ -269,24 +268,16 @@ class LocalizeController extends Component {
 
 				{this.props.loading ? <div className="imgSearching"><img src="../../../public/loading.gif" /></div> : ""}
 
-				{this.props.datas.length == 0 ? "" : 
-					(<div>
-						
-						<Tabs tabs={this.props.datas}
-							  onChangeTab={this.props.changeTab}
-							  onClose={this.props.closeTab}
-							  tabActive={this.props.tabActive} />
-							
-						<TabContent>
+				{this.props.datas.length > 0 ? 
+					(
+						<Tabs
+							defaultActiveKey={this.props.datas[0].label}
+							animation={false}
+							id="uncontrolled-tab-example"
+						>
 							{this.props.datas.map((data, index) => {
-								console.log("LOCALIZE 2", data);
 								return (
-									<TabPane 
-										tabActive={this.props.tabActive}
-										label={data.label}
-										index={index}
-										key={index} >
-
+									<Tab eventKey={data.label} title={<Titletab icon={data.icon} label={data.label} close={this.props.closeTab}/>} key={index}>
 										{/*Verifica se o produto pesquisado é localize, pois pode ser gerado abas de outros produtos no Localize*/}
 										{data.produto == "localize" ?
 											<LocalizeView
@@ -297,11 +288,12 @@ class LocalizeController extends Component {
 												pessoasRelacionadas={this.searchPessoasRelacionadas}/>
 										
 										: ""}
-									</TabPane>
+									</Tab>
 								)
 							})}
-						</TabContent>
-					</div>)}
+						</Tabs>
+					)
+				: ""}
 			</div>
 		)
 	}

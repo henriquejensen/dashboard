@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { Tabs, Tab} from "react-bootstrap";
 
 import {
 		seeModel,
@@ -11,9 +12,7 @@ import {
 
 import CreditoView from "./CreditoView";
 import Form from "../../components/forms/Form";
-import Tabs from "../../components/tabs/Tabs";
-import TabContent from "../../components/tabs/TabContent";
-import TabPane from "../../components/tabs/TabPane";
+import Titletab from "../../components/utils/Titletab";
 
 import { LOGO_CREDITO, ICON_CREDITO } from "../../constants/constantsCredito";
 
@@ -86,36 +85,24 @@ class Credito extends Component {
 
 				{this.props.datas.length > 0 ? 
 					(
-						<div>
-							<Tabs tabs={this.props.datas}
-								onChangeTab={this.props.changeTab}
-								onClose={this.props.closeTab}
-								tabActive={this.props.tabActive} />
-
-
-							<TabContent>
-								{this.props.datas.map((data, index) => {
-									console.log("CREDITO", data);
-									return (
-										<TabPane 
-											tabActive={this.props.tabActive}
-											label={data.label}
-											index={index}
-											key={index} >
-
-											{data.produto == "credito" ?
-												<CreditoView
-													data={data.data}
-													tipo={data.tipo}
-													index={index}/>
-											
-											: ""}
-
-										</TabPane>
-									)
-								})}
-							</TabContent>
-						</div>
+						<Tabs
+							defaultActiveKey={this.props.datas[0].label}
+							animation={false}
+							id="uncontrolled-tab-example"
+						>
+							{this.props.datas.map((data, index) => {
+								return (
+									<Tab eventKey={data.label} title={<Titletab icon={data.icon} label={data.label} close={this.props.closeTab}/>} key={index}>
+										{data.produto == "credito" ?
+											<CreditoView
+												data={data.data}
+												tipo={data.tipo}
+												index={index}/>
+										: ""}
+									</Tab>
+								)
+							})}
+						</Tabs>
 					)
 				: ""}
 			</div>

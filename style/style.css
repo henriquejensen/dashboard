@@ -230,6 +230,7 @@ input {
     right: 5px;
     top: 2px;
     cursor: pointer;
+    font-size: 12px;
 }
 
 .container-form {

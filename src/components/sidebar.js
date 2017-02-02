@@ -92,8 +92,8 @@ export default class Sidebar extends Component {
       return (      
           <aside>            
             {this.props.activedMenu ? (
-              <div>
-                <CardInfoMenuUser />
+                <div>
+                  <CardInfoMenuUser />
                   <div className="nav nav-tabs">
                     <li className={this.state.tabActive == "menu" ? "active" : ""} onClick={() => this._changeTab("menu")}>
                       <a href="#menu">
@@ -113,7 +113,8 @@ export default class Sidebar extends Component {
                       </a>
                     </li>
                   </div>
-                </div>) : ""}
+                </div>
+              ) : ""}
 
             <div className="tab-content">
               {this.renderMenu()}

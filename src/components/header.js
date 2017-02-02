@@ -21,10 +21,15 @@ import { browserHistory } from 'react-router';
 import { logoTopo } from "../constants/imagensAssertiva";
 import { logOut } from "../actions/index";
 
+import BarraBuscaRapida from "./utils/BarraBuscaRapida";
 
 class MenuSuperior extends Component {
 	constructor(props) {
 		super();
+
+		this.state = {
+			IsModalOpen: false,
+		}
 
 		this.changeRoute = this.changeRoute.bind(this);
 	}
@@ -51,16 +56,7 @@ class MenuSuperior extends Component {
 
 				<Navbar.Collapse>
 					<Navbar.Form pullLeft>
-						<form>
-							<div className="input-group stylish-input-group">
-								<input type="number" className="form-control" placeholder="Digite o CPF ou CNPJ" />
-								<span className="input-group-addon">
-									<button type="submit">
-										<span className="fa fa-search"></span>
-									</button>  
-								</span>
-							</div>
-						</form>
+						<BarraBuscaRapida />
 					</Navbar.Form>
 
 					<Nav pullRight>

@@ -24,7 +24,6 @@ export default class App extends Component {
   }
 
 	onMenuClicked() {
-    console.log("clicou")
     this.setState({
       active: !this.state.active
     })
