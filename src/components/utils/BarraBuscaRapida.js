@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FormGroup, FormControl, InputGroup, Button } from "react-bootstrap";
 
 import Modal from "../Modal";
 import GridProdutos from "./GridProdutos";
@@ -41,21 +42,23 @@ export default class BarraBuscaRapida extends Component {
         return (
             <div>
                 <form onSubmit={this.onClickBuscaRapida}>
-                    <div className="input-group stylish-input-group">
-                        <input
-                            type="number"
-                            name="documento"
-                            className="form-control"
-                            value={this.state.documento}
-                            placeholder="Digite o CPF ou CNPJ"
-                            onChange={this.onChange}
-                        />
-                        <span className="input-group-addon">
-                            <button type="submit">
-                                <span className="fa fa-search"></span>
-                            </button>  
-                        </span>
-                    </div>
+                    <FormGroup bsSize="small">
+                        <InputGroup>
+                            <FormControl
+                                style={{minWidth:"500px"}}
+                                placeholder="Digite o CPF ou CNPJ"
+                                type="number"
+                                name="documento"
+                                defaultValue={this.state.documento}
+                                onChange={this.onChange} />
+                            <InputGroup.Button>
+                                <Button
+                                    type="submit"
+                                    bsSize="small"
+                                    bsStyle="info">Consultar</Button>
+                            </InputGroup.Button>
+                      </InputGroup>
+                    </FormGroup>
                 </form>
 
                 <Modal

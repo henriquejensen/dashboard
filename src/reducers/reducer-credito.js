@@ -1,5 +1,4 @@
 import {
-    CHANGE_TAB_CREDITO,
     CLOSE_TAB_CREDITO,
     CLOSE_CREDITO_MODEL,
     ICON_CREDITO,
@@ -69,15 +68,6 @@ export default function(state=getInitialState, action) {
 
         case CLOSE_CREDITO_MODEL:
             return getInitialState;
-
-        case CHANGE_TAB_CREDITO:
-            return {
-                loading: false,
-                status: "changeTab",
-                message: "",
-                response: state.response,
-                tabActive: action.payload
-            }
 
         case CLOSE_TAB_CREDITO:
             let newResponse = state.response.concat();

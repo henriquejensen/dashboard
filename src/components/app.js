@@ -27,7 +27,6 @@ export default class App extends Component {
     this.setState({
       active: !this.state.active
     })
-
   }
 
   render() {

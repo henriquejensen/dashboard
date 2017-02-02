@@ -11,7 +11,6 @@ import {
 		SEE_LOCALIZE_MODEL,
 		CLOSE_LOCALIZE_MODEL,
 		LOADING_LOCALIZE,
-		CHANGE_TAB_LOCALIZE,
 		CLOSE_TAB_LOCALIZE } from "../constants/constantsLocalize";
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 import { GET_CAMPANHAS_SMS, GET_CENTRO_CUSTO_SMS, GET_RESPOSTAS_SMS } from "../constants/constantsSMS";
@@ -31,13 +30,6 @@ export function closeTab(index) {
 	return {
 		type: CLOSE_TAB_LOCALIZE,
 		payload: index
-	}
-}
-
-export function changeTab(tab) {
-	return {
-		type: CHANGE_TAB_LOCALIZE,
-		payload: tab
 	}
 }
 

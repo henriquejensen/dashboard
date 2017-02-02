@@ -17,15 +17,6 @@
     transition: .5s;
 }
 
-.menu-hamburguer {
-    position: absolute;
-    color: white;
-    z-index: 4;
-    top: 14px;
-    left: 10px;
-    font-size: 24px;
-}
-
 #wrapper {
     padding-left: 70px;
     transition: all .4s ease 0s;
@@ -112,7 +103,7 @@
 #sidebar > ul > li > a {
     -webkit-transition-delay: 4s;
     transition: .4s;
-    padding: 14px 10px 14px 25px;
+    padding: 14px 10px 14px 15px;
     position: relative;
     font-weight: 600;
     color: #4c4c4c
@@ -128,7 +119,7 @@
 }
 
 .sidebar-item-dropdown {
-    background-color: #f4f0fa
+    background-color: rgba(0,0,0,.03)
 }
 
 .sidebar-item-dropdown > a {
@@ -140,7 +131,6 @@
 }
 
 .sidebar-item-dropdown > a > li:hover {
-    color: #b59adc;
     font-weight: bold;
 }
 
@@ -149,10 +139,14 @@
     right: 19px;
     top: 18px;
 }
-.sub_icon {
-    float: right;
-    margin-right: 15px;
+
+.sub-icon {
     width: 22px;
+    margin-right: 15px;
+}
+
+.sub-icon-open-menu {
+    float: right;
     position: absolute;
     right: 0;
     top: 11px;

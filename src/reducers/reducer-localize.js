@@ -10,13 +10,12 @@ import {
 		SEE_LOCALIZE_MODEL,
 		CLOSE_LOCALIZE_MODEL,
 		LOADING_LOCALIZE,
-		CHANGE_TAB_LOCALIZE,
-		CLOSE_TAB_LOCALIZE  } from "../constants/constantsLocalize";
+		CLOSE_TAB_LOCALIZE 
+} from "../constants/constantsLocalize";
 import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB } from "../constants/utils";
 import model from "./data/modelLocalize.json";
 import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
 import relacionados from "./data/relacionados.json";
-
 
 const telefonesRelacionados = [
 	{documento: 5366214700, fixos: ["12345656", "98765423"], moveis: ["989876787"]},
@@ -52,14 +51,20 @@ export default function(state = initialState, action) {
 			}
 		}
 
+		let newState = Object.assign({},state);
+
+		if(state.response.length > 6) {
+			newState.response.shift();
+		}
+
 		switch(action.type) {
 			case LOADING_LOCALIZE:
 				return {
 					status: "loading",
 					message: "",
 					loading: true,
-					response: state.response,
-					tabActive: state.tabActive
+					response: newState.response,
+					tabActive: newState.tabActive
 				}
 			case SEE_LOCALIZE_MODEL:
 				response.data = model.PF.DADOS;
@@ -78,17 +83,8 @@ export default function(state = initialState, action) {
 			case CLOSE_LOCALIZE_MODEL:
 				return initialState;
 
-			case CHANGE_TAB_LOCALIZE:
-				return {
-					status: "changeTab",
-					message: "",
-					loading: false,
-					response: state.response,
-					tabActive: action.payload
-				}
-
 			case CLOSE_TAB_LOCALIZE:
-				let newResponse = state.response.concat();
+				let newResponse = newState.response.concat();
 				let closed = newResponse.splice(action.payload, 1);
 
 				return {
@@ -109,7 +105,7 @@ export default function(state = initialState, action) {
 					status: "success",
 					message: "",
 					loading: false,
-					response: state.status == "model" ? [response] : [...state.response, response],
+					response: newState.status == "model" ? [response] : [...newState.response, response],
 					tabActive: response.data.CPF
 				};
 
@@ -123,7 +119,7 @@ export default function(state = initialState, action) {
 					status: "success",
 					message: "",
 					loading: false,
-					response: state.status == "model" ? [response] : [...state.response, response],
+					response: newState.status == "model" ? [response] : [...newState.response, response],
 					tabActive: response.data.CNPJ
 				};
 
@@ -138,53 +134,54 @@ export default function(state = initialState, action) {
 					status: "success",
 					message: "",
 					loading: false,
-					response: state.status == "model" ? [response] : [...state.response, response],
+					response: newState.status == "model" ? [response] : [...newState.response, response],
 					tabActive: cont
 				};
 
 			case SEARCH_BY_PESSOAS_RELACIONADOS:
 				if(action.payload.tipo == "telefone") {
-					state.response[searchPessoa(state.response,action.payload.documento)].pessoasRelacionadas.pessoasTelefones = pessoasRelacionadas.pessoasRelacionadas;
+					newState.response[searchPessoa(newState.response,action.payload.documento)].pessoasRelacionadas.pessoasTelefones = pessoasRelacionadas.pessoasRelacionadas;
 				} else if(action.payload.tipo == "endereco") {
-					state.response[searchPessoa(state.response,action.payload.documento)].pessoasRelacionadas.pessoasEnderecos = pessoasRelacionadas.pessoasRelacionadas;
+					newState.response[searchPessoa(newState.response,action.payload.documento)].pessoasRelacionadas.pessoasEnderecos = pessoasRelacionadas.pessoasRelacionadas;
 				}
 				
 				return {
 					status: "pessoas "+action.payload.tipo,
 					message: "",
 					loading: false,
-					response: state.response,
-					tabActive: state.tabActive
+					response: newState.response,
+					tabActive: newState.tabActive
 				};
 
 			case SEARCH_BY_TELEFONES_RELACIONADOS:
 				//busca nas documentos pesquisados no localize o documento que sera inserido os telefones relacionados
-				let posPessoaTelefone = searchPessoa(state.response,action.payload.documento);
+				let posPessoaTelefone = searchPessoa(newState.response,action.payload.documento);
 
 				//busca a pessoa relacionado que foi clicada para mostrar os telefones
-				let posPessoaRelacionadaTelefones = searchPosPessoa(state.response[posPessoaTelefone].pessoasRelacionadas.pessoasTelefones, action.payload.documentoRelacionado);
+				let posPessoaRelacionadaTelefones = searchPosPessoa(newState.response[posPessoaTelefone].pessoasRelacionadas.pessoasTelefones, action.payload.documentoRelacionado);
 
 				//adciona na pessoa relacionada os telefones encontrados
-				state.response[posPessoaTelefone].pessoasRelacionadas.pessoasTelefones[posPessoaRelacionadaTelefones].telefones = searchTelefonesRelacionados(telefonesRelacionados, action.payload.documentoRelacionado);
+				newState.response[posPessoaTelefone].pessoasRelacionadas.pessoasTelefones[posPessoaRelacionadaTelefones].telefones = searchTelefonesRelacionados(telefonesRelacionados, action.payload.documentoRelacionado);
 				
 				return {
 					status: "telefones",
 					message: "",
 					loading: false,
-					response: state.response,
-					tabActive: state.tabActive
+					response: newState.response,
+					tabActive: newState.tabActive
 				};
 
 			case SEARCH_BY_ENDERECOS_RELACIONADOS:
-				let posPessoaEndereco = searchPessoa(state.response,action.payload.documento);
-				let posPessoaRelacionadaEndereco = searchPosPessoa(state.response[posPessoaEndereco].pessoasRelacionadas.pessoasEnderecos, action.payload.documentoRelacionado)
-				state.response[posPessoaEndereco].pessoasRelacionadas.pessoasEnderecos[posPessoaRelacionadaEndereco].enderecos = searchEnderecosRelacionados(enderecosRelacionados, action.payload.documentoRelacionado);
+				let posPessoaEndereco = searchPessoa(newState.response,action.payload.documento);
+				let posPessoaRelacionadaEndereco = searchPosPessoa(newState.response[posPessoaEndereco].pessoasRelacionadas.pessoasEnderecos, action.payload.documentoRelacionado);
+
+				newState.response[posPessoaEndereco].pessoasRelacionadas.pessoasEnderecos[posPessoaRelacionadaEndereco].enderecos = searchEnderecosRelacionados(enderecosRelacionados, action.payload.documentoRelacionado);
 				return {
 					status: "enderecos",
 					message: "",
 					loading: false,
-					response: state.response,
-					tabActive: state.tabActive
+					response: newState.response,
+					tabActive: newState.tabActive
 				};
 
 			case REQUEST_ERROR:
@@ -192,8 +189,8 @@ export default function(state = initialState, action) {
 					status: "error request",
 					message: action.payload.ERRORS.ERROR.content,
 					loading: false,
-					response: state.response,
-					tabActive: state.tabActive
+					response: newState.response,
+					tabActive: newState.tabActive
 				};
 
 			case ERR_CONNECTION_REFUSED:
@@ -201,8 +198,8 @@ export default function(state = initialState, action) {
 					status: "error connection",
 					message: "Serviço temporariamente indisponível, tente novamente mais tarde",
 					loading: false,
-					response: state.response,
-					tabActive: state.tabActive
+					response: newState.response,
+					tabActive: newState.tabActive
 				};
 		}
 	}

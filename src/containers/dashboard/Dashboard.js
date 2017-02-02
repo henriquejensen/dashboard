@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Col, Media } from "react-bootstrap";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router";
+import { Tabs, Tab} from "react-bootstrap";
 
 import { searchLocalize, loadingLocalize } from "../../actions/index";
 

@@ -57,8 +57,20 @@
     font-size: 87px;
 }
 
+.menu-hamburguer {
+    position: absolute;
+    color: white;
+    z-index: 4;
+    top: 17px;
+    left: 17px;
+    font-size: 17px;
+}
+
 .menu-image-logo {
-    padding: 2px;
+    width: 63%;
+    padding-left: 0;
+    height: 100%;
+    margin-top: 4px;
 }
 
 .menu-image-user {

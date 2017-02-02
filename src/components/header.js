@@ -49,7 +49,7 @@ class MenuSuperior extends Component {
 				<i className="fa fa-bars menu-hamburguer" onClick={this.props.onMenuClicked} />
 				<Navbar.Header style={{marginLeft:"45px"}}>
 					<Navbar.Brand>
-						<img src="../../public/assertiva/assertiva-top-index-inverse.png" alt="Logo da Assertiva" className="menu-image-logo" />
+						<img src="../../public/assertiva/assertiva-top-index-inverse-2.png" alt="Logo da Assertiva" className="menu-image-logo" />
 					</Navbar.Brand>
 					<Navbar.Toggle />
 				</Navbar.Header>

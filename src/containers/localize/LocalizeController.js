@@ -7,9 +7,9 @@ import {
 		showRelacionados,
 		seeModel,
 		closeModel,
-		changeTab,
 		closeTab,
-		getEstados } from "../../actions/index";
+		getEstados
+} from "../../actions/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Tabs, Tab} from "react-bootstrap";
@@ -34,7 +34,9 @@ class LocalizeController extends Component {
 			estado: "",
 			cidade: "",
 			bairro: "",
-			tipo: ""
+			tipo: "",
+			nextTab: "",
+			changeTab: false
 		}
 
 		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
@@ -65,7 +67,9 @@ class LocalizeController extends Component {
 	}
 
 	searchLocalize(doc, tipo) {
-
+		this.setState({
+			changeTab: false
+		})
 		this.props.loadingLocalize();
 		this.props.searchLocalize(doc, tipo);
 	}
@@ -106,9 +110,9 @@ class LocalizeController extends Component {
 			cidade: "",
 			bairro: "",
 			tabActive: "",
-			tipo: ""
+			tipo: "",
+			changeTab: false
 		});
-
 	}
 
 	onChange(evt) {
@@ -271,7 +275,8 @@ class LocalizeController extends Component {
 				{this.props.datas.length > 0 ? 
 					(
 						<Tabs
-							defaultActiveKey={this.props.datas[0].label}
+							activeKey={this.state.changeTab ? this.state.nextTab : this.props.tabActive}
+							onSelect={(key) => {this.setState({nextTab:key, changeTab: true})}}
 							animation={false}
 							id="uncontrolled-tab-example"
 						>
@@ -286,7 +291,6 @@ class LocalizeController extends Component {
 												showPessoasRelacionadas={this._showPessoasRelacionadas}
 												showRelacionados={this._showRelacionados}
 												pessoasRelacionadas={this.searchPessoasRelacionadas}/>
-										
 										: ""}
 									</Tab>
 								)
@@ -319,7 +323,6 @@ function mapDispatchToProps(dispatch) {
 			showRelacionados,
 			seeModel,
 			closeModel,
-			changeTab,
 			closeTab,
 			getEstados
 		},

@@ -39,14 +39,19 @@ export default class Sidebar extends Component {
             {menu.sidebar.map((opt, index) => {
               return (
                 <li key={index}>
-                  <Link to={opt.link} onClick={() => this.activeMenuDropdown(opt.label.toLowerCase())} activeStyle={{ color: 'white', backgroundColor: "#b59adc"}}>
+                  <Link to={opt.link} onClick={() => this.activeMenuDropdown(opt.label.toLowerCase())} activeStyle={{backgroundColor: "rgba(0,0,0,0.06)"}}>
+                    {this.props.activedMenu ?
+                      <img src={opt.image} className="sub-icon" alt={opt.alt}/>
+                    : ""}
                     {opt.label}
-                    <img src={opt.image} className="sub_icon" alt={opt.alt}/>
+                    {!this.props.activedMenu ?
+                      <img src={opt.image} className="sub-icon sub-icon-open-menu" alt={opt.alt}/>
+                    : ""}
                   </Link>
                   <ul className={this.state.menuOpened == opt.label.toLowerCase() && this.props.activedMenu ? "sidebar-item-dropdown" : "display-none"}>
                     {opt.subItems.map((subOpt, j) => {
                       return (
-                        <Link to={subOpt.link} key={j} activeStyle={{ color: '#b59adc', fontWeight: "bold"}}>
+                        <Link to={subOpt.link} key={j} activeStyle={{fontWeight: "bold"}}>
                           <li>{subOpt.label}</li>
                         </Link>
                       )
