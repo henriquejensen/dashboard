@@ -20,6 +20,7 @@ import { browserHistory } from 'react-router';
 
 import { logoTopo } from "../constants/imagensAssertiva";
 import { logOut } from "../actions/index";
+import { changeColorMenu } from "../actions/actionsCommon";
 
 import BarraBuscaRapida from "./utils/BarraBuscaRapida";
 
@@ -45,7 +46,7 @@ class MenuSuperior extends Component {
 		return (
 		<div>
 			<img src={this.props.user.avatar_url} alt="Imagem do usuário" className="menu-image-user" />
-			<Navbar style={{backgroundColor:"#5E147F", borderRadius: 0}} inverse collapseOnSelect>
+			<Navbar style={{backgroundColor: this.props.color, borderRadius: 0}} collapseOnSelect>
 				<i className="fa fa-bars menu-hamburguer" onClick={this.props.onMenuClicked} />
 				<Navbar.Header style={{marginLeft:"45px"}}>
 					<Navbar.Brand>
@@ -105,13 +106,15 @@ class MenuSuperior extends Component {
 
 function mapStateToProps(state) {
 	return {
+		color: state.auth.colorMenu,
 		user: state.user
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-		logOut
+		logOut,
+		changeColorMenu
 	}, dispatch)
 }
 

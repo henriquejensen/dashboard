@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+
+import { changeColorMenu } from "../actions/actionsCommon";
 
 import menu from "./menu/menu.json";
 import CardInfoMenuUser from "./utils/CardInfoMenuUser";
 
-export default class Sidebar extends Component {
+class Sidebar extends Component {
   constructor(props) {
     super(props);
 
@@ -38,7 +42,7 @@ export default class Sidebar extends Component {
           <ul className="sidebar-nav">
             {menu.sidebar.map((opt, index) => {
               return (
-                <li key={index}>
+                <li key={index} onClick={(evt) => {evt.preventDefault();this.props.changeColorMenu(opt.color)}}>
                   <Link to={opt.link} onClick={() => this.activeMenuDropdown(opt.label.toLowerCase())} activeStyle={{backgroundColor: "rgba(0,0,0,0.06)"}}>
                     {this.props.activedMenu ?
                       <img src={opt.image} className="sub-icon" alt={opt.alt}/>
@@ -71,12 +75,12 @@ export default class Sidebar extends Component {
         <div className={this.state.tabActive == "chat" ? "tab-pane active":"tab-pane"} id="sidebar">
           <ul className="sidebar-nav">
             <li className="sidebar-items">Online</li>
-            <li><Link to="/chat" >Jessica<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
-            <li><Link to="/chat">Roberta<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
-            <li><Link to="/chat">Nayara<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
+            <li><Link to="/chat" >Jessica<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub-icon sub-icon-open-menu" alt="Icone Localize"/></Link></li>
+            <li><Link to="/chat">Roberta<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub-icon sub-icon-open-menu" alt="Icone Localize"/></Link></li>
+            <li><Link to="/chat">Nayara<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub-icon sub-icon-open-menu" alt="Icone Localize"/></Link></li>
             
             <li className="sidebar-items">Offline</li>
-            <li><Link to="/chat">Bruna<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub_icon" alt="Icone Localize"/></Link></li>
+            <li><Link to="/chat">Bruna<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub-icon sub-icon-open-menu" alt="Icone Localize"/></Link></li>
           </ul>
         </div>
     )
@@ -131,3 +135,13 @@ export default class Sidebar extends Component {
 
   }
 }
+
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({
+			changeColorMenu
+		},
+		dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(Sidebar);

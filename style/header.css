@@ -36,12 +36,20 @@
     z-index: 3;
 }
 
+.navbar-inverse .navbar-nav>li>a {
+    color: white;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #9d9d9d;
+}
+
 .navbar-right {
     margin-right: 10px;
 }
 
 .navbar-default {
-  border-color: #5b3494;
+  border-color: transparent;
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>.icon-menu-sidebar:hover {
@@ -50,6 +58,10 @@
 
 .nav-tabs>li>a {
     border: 0px solid transparent;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white
 }
 
 .icon-size

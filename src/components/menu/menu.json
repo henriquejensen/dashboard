@@ -2,15 +2,17 @@
     "sidebar": [
         {
             "label": "Home",
+            "color": "#836cb8",
             "link": "/home",
-            "image": "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/%C3%ADndice.ico",
+            "image": "../../public/assertiva/icon-assertiva.png",
             "alt": "Página inicial",
             "subItems": []
         },
         {
             "label": "Localize",
+            "color": "#4285f4",
             "link": "/localize",
-            "image": "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/icone-localize.png",
+            "image": "../../public/assertiva/icon-localize-new.png",
             "alt": "Icone Localize",
             "subItems": [
                 {"label": "CPF", "link": "/localize/cpf"},
@@ -23,8 +25,9 @@
         },
         {
             "label": "SMS",
+            "color": "#34a853",
             "link": "/sms",
-            "image": "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/sms.png",
+            "image": "../../public/assertiva/icon-sms-new.png",
             "alt": "Icone SMS",
             "subItems": [
                 {"label": "Envio de SMS", "link": "/sms"},
@@ -35,22 +38,25 @@
         },
         {
             "label": "Base Certa",
+            "color": "#836cb8",
             "link": "/basecerta",
-            "image": "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/basecerta.png",
+            "image": "../../public/assertiva/icon-focofiscal-new.png",
             "alt": "Icone Base Certa",
             "subItems": []
         },
         {
             "label": "Venda+",
+            "color": "#ff5729",
             "link": "/vendamais",
-            "image": "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/vendamais.png",
+            "image": "../../public/assertiva/icon-consigmais-new.png",
             "alt": "Icone Venda+",
             "subItems": []
         },
         {
             "label": "Crédito",
+            "color": "#fba02f",
             "link": "/credito",
-            "image": "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/credito.png",
+            "image": "../../public/assertiva/icon-credito-new.png",
             "alt": "Icone Crédito",
             "subItems": [
                 {"label": "Consulta Completa", "link": "/credito/completa"},
@@ -63,8 +69,9 @@
         },
         {
             "label": "Veículos",
+            "color": "#4285f4",
             "link": "/veiculos",
-            "image": "../../public/assertiva/icon-veiculos.png",
+            "image": "../../public/assertiva/icon-localize-new.png",
             "alt": "Icone Veiculos",
             "subItems": [
                 {"label": "Agregados", "link": "/veiculos"},
@@ -79,7 +86,8 @@
         {
             "label": "Foco Fiscal",
             "link": "/focofiscal",
-            "image": "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/focofiscal.png",
+            "color": "#836cb8",
+            "image": "../../public/assertiva/icon-focofiscal-new.png",
             "alt": "Icone Foco Fiscal",
             "subItems": [
                 {"label": "Receita PF", "link": "/focofiscal/receitaPf"},
@@ -92,7 +100,8 @@
         {
             "label": "Consig+",
             "link": "/consigmais",
-            "image": "../../public/assertiva/icon-consigmais.png",
+            "color": "#ff5729",
+            "image": "../../public/assertiva/icon-consigmais-new.png",
             "alt": "Icone Consig+",
             "subItems": []
         }

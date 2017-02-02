@@ -36,42 +36,17 @@ export default class CardInfo extends Component {
     render() {
         return (
                 <Panel title={this.props.title ? this.props.title : <div>outro</div>}>
-                    <Table>
-                        <tr>
-                            {this.props.info.slice(0,quantidadeElementos).map((info,index) => {
-                                return (
-                                        info.datasets !== undefined ?
-                                            <td key={index} style={style.graph}>
-                                                <Pie
-                                                    data={info}
-                                                    options={{
-                                                        responsive:true,
-                                                        legend:{
-                                                            position: "right",
-                                                            usePointStyle: false
-                                                        }
-                                                    }}/>
-                                                <p style={style.graphText}>{info.descricao}</p>
-                                            </td>
-                                        : 
-                                            <td key={index}>
-                                                <h2 style={style.card}>{info.quantidade}</h2>
-                                                <p style={style.text}>{info.label}</p>
-                                            </td>
-                                )
-                            })}
-                        </tr>
-
-                        <tbody>
-                            {this.state.showMore ?
-                                this.props.info.slice(quantidadeElementos,this.props.info.length).map((info,index) => {
+                    <Col md={12}>
+                        <Table>
+                            <tr>
+                                {this.props.info.slice(0,quantidadeElementos).map((info,index) => {
                                     return (
                                             info.datasets !== undefined ?
                                                 <td key={index} style={style.graph}>
                                                     <Pie
+                                                        height={80}
                                                         data={info}
                                                         options={{
-                                                            responsive:true,
                                                             legend:{
                                                                 position: "right",
                                                                 usePointStyle: false
@@ -85,10 +60,36 @@ export default class CardInfo extends Component {
                                                     <p style={style.text}>{info.label}</p>
                                                 </td>
                                     )
-                                })
-                            : ""}
-                        </tbody>
-                    </Table>
+                                })}
+                            </tr>
+
+                            <tbody>
+                                {this.state.showMore ?
+                                    this.props.info.slice(quantidadeElementos,this.props.info.length).map((info,index) => {
+                                        return (
+                                                info.datasets !== undefined ?
+                                                    <td key={index} style={style.graph}>
+                                                        <Pie
+                                                            data={info}
+                                                            options={{
+                                                                legend:{
+                                                                    position: "right",
+                                                                    usePointStyle: false
+                                                                }
+                                                            }}/>
+                                                        <p style={style.graphText}>{info.descricao}</p>
+                                                    </td>
+                                                : 
+                                                    <td key={index}>
+                                                        <h2 style={style.card}>{info.quantidade}</h2>
+                                                        <p style={style.text}>{info.label}</p>
+                                                    </td>
+                                        )
+                                    })
+                                : ""}
+                            </tbody>
+                        </Table>
+                    </Col>
 
                     {this.props.info.length > quantidadeElementos ? (
                         <div className="col-md-12 moreInfo" onClick={() => this.setState({showMore:!this.state.showMore})}>

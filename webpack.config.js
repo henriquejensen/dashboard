@@ -29,7 +29,7 @@ module.exports = {
         },
         {
           test: /\.css$/,
-          loader: "style-loader!css-loader!autoprefixer-loader"
+          loader: "style-loader!css-loader"
         },
         {
           test: /\.scss$/,
@@ -70,7 +70,7 @@ module.exports = {
     new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
   ],*/
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.css']
   },
   devServer: {
     historyApiFallback: true,

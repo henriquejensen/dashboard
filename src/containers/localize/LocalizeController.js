@@ -10,6 +10,7 @@ import {
 		closeTab,
 		getEstados
 } from "../../actions/index";
+
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Tabs, Tab} from "react-bootstrap";
@@ -48,7 +49,8 @@ class LocalizeController extends Component {
 	}
 
 	componentWillMount() {
-		this.props.getEstados()
+		this.props.getEstados();
+		
 	}
 
 	componentDidMount() {
@@ -324,7 +326,7 @@ function mapDispatchToProps(dispatch) {
 			seeModel,
 			closeModel,
 			closeTab,
-			getEstados
+			getEstados,
 		},
 		dispatch);
 }

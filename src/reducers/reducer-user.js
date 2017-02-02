@@ -43,14 +43,14 @@ const user = {
                 datasets: [{
                     data: [300, 50, 100],
                     backgroundColor: [
-                    '#FE9900',
-                    '#4684ED',
-                    '#DB3912'
+                    '#5E147F',
+                    '#BF63E7',
+                    '#E3BDF4'
                     ],
                     hoverBackgroundColor: [
-                    '#FE9900',
-                    '#4684ED',
-                    '#DB3912'
+                    '#5E147F',
+                    '#BF63E7',
+                    '#E3BDF4'
                     ],
                 }]
             },
@@ -64,14 +64,14 @@ const user = {
                 datasets: [{
                     data: [300, 50, 100],
                     backgroundColor: [
-                    '#2E3192',
-                    '#00FF00',
-                    '#993399'
+                    '#5E147F',
+                    '#BF63E7',
+                    '#E3BDF4'
                     ],
                     hoverBackgroundColor: [
-                    '#2E3192',
-                    '#00FF00',
-                    '#993399'
+                    '#5E147F',
+                    '#BF63E7',
+                    '#E3BDF4'
                     ],
                 }]
             }
@@ -88,14 +88,14 @@ const user = {
                 datasets: [{
                     data: [300, 50, 100],
                     backgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56'
+                    '#5E147F',
+                    '#BF63E7',
+                    '#E3BDF4'
                     ],
                     hoverBackgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56',
+                    '#5E147F',
+                    '#BF63E7',
+                    '#E3BDF4',
                     ],
                 }]
             },
@@ -109,14 +109,14 @@ const user = {
                 datasets: [{
                     data: [300, 50, 100],
                     backgroundColor: [
-                    '#000',
-                    '#4F81BC',
-                    '#FFCE56',
+                    '#5E147F',
+                    '#BF63E7',
+                    '#E3BDF4'
                     ],
                     hoverBackgroundColor: [
-                    '#000',
-                    '#4F81BC',
-                    '#FFCE56',
+                    '#5E147F',
+                    '#BF63E7',
+                    '#E3BDF4'
                     ],
                 }]
             },
