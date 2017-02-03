@@ -34,6 +34,7 @@
     position: fixed;
     width: 100%;
     z-index: 3;
+    box-shadow: rgba(0, 0, 0, 0.137255) 0px 0px 4px, rgba(0, 0, 0, 0.278431) 0px 2px 8px
 }
 
 .navbar-inverse .navbar-nav>li>a {
@@ -79,7 +80,7 @@
 }
 
 .menu-image-logo {
-    width: 63%;
+    width: 195px;
     padding-left: 0;
     height: 100%;
     margin-top: 4px;

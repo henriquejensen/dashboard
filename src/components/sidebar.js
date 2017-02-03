@@ -102,7 +102,7 @@ class Sidebar extends Component {
           <aside>            
             {this.props.activedMenu ? (
                 <div>
-                  <CardInfoMenuUser />
+                  <CardInfoMenuUser color={this.props.color}/>
                   <div className="nav nav-tabs">
                     <li className={this.state.tabActive == "menu" ? "active" : ""} onClick={() => this._changeTab("menu")}>
                       <a href="#menu">
@@ -136,6 +136,11 @@ class Sidebar extends Component {
   }
 }
 
+function mapStateToProps(state) {
+	return {
+		color: state.auth.colorMenu,
+	}
+}
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
@@ -144,4 +149,4 @@ function mapDispatchToProps(dispatch) {
 		dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(Sidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

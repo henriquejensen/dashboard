@@ -53,7 +53,7 @@ input {
 }
 
 .input-form-single {
-    width:320px;
+    width:400px;
 }
 
 .input-form-many-large {
@@ -201,12 +201,27 @@ input {
 
 .my-form {
     position: relative;
-    width: 650px;
     margin: 0 auto;
+}
+
+.my-form div {
+    padding: 3px
 }
 
 .my-form > select {
     display: inline-block;
+}
+
+.busca-avancada {
+    position: absolute;
+    right:0;
+    bottom:22px;
+    color:#1a0dab;
+    cursor:pointer;
+}
+
+.busca-avancada:hover {
+    text-decoration: underline
 }
 
 .table {
@@ -235,7 +250,6 @@ input {
 
 .container-form {
     margin: 0 auto;
-    width: 50%;
     text-align: left;
 }
 

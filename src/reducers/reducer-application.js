@@ -3,7 +3,7 @@ import { browserHistory } from "react-router";
 import { LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT } from "../constants/utils";
 
 const getInitialState = {
-    colorMenu: "#5E147F",
+    colorMenu: "#7a5ec0",
     error: false,
     msgn: ""
 }

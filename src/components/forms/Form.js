@@ -7,29 +7,15 @@ import UltimasConsultas from "../UltimasConsultas";
 export default class Form extends Component {
     render() {
 		return (
-            <div className="row text-center">
+            <div className="text-center">
                 <div className="col-md-12 col-sm-12">
-                    {this.props.showLogo ? <img src={this.props.logo} className="logo-produto" />: ""}
+                    {this.props.showLogo ? <img src={this.props.logo} className="logo-produto" />: <img src={this.props.icon} />}
                 </div>
                 <div className="col-md-12 col-sm-12">
                     <form onSubmit={this.props.onformSubmit} className="my-form">
 
-                        {!this.props.showLogo ? <img src={this.props.icon} className="icon-produto-consulta" />: ""}
-
-                            <select
-                                className="form-control input-search select-form"
-                                name="tipo"
-                                onChange={this.props.onChange}
-                                value={this.props.tipo ? this.props.tipo : this.props.optionSelected}
-                                required>
-                                <option value="">Selecione</option>
-                                {this.props.options.map((opt,i) => {
-                                    return <option value={opt} key={i}>{opt}</option>
-                                })}
-                            </select>
-
                             {this.props.children}
-                            
+
                             <a data-tip data-for='tooltipConsultar'>
                                 <button className="btn btn-info my-btn-form input-search" type="submit">
                                     <i className="glyphicon glyphicon-search"></i>
@@ -38,16 +24,16 @@ export default class Form extends Component {
                             
                             {this.props.showLogo ?
                                 <a data-tip data-for='tooltipVejaModelo'>
-                                    <div className="btn btn-default my-btn-form input-search" onClick={this.props.seeModelo}>
+                                    <span className="btn btn-default my-btn-form input-search" onClick={this.props.seeModelo}>
                                         <i className="fa fa-list-ul" aria-hidden="true"></i>
-                                    </div>
+                                    </span>
                                 </a>
                             : ""}
 
                             <a data-tip data-for='tooltipVejaDetalhesProduto' href="http://assertivasolucoes.com.br/servicos/localize" target="_blank">
-                                <div className="btn btn-warning my-btn-form">
+                                <span className="btn btn-warning my-btn-form">
                                     <i className="fa fa-question" aria-hidden="true"></i>
-                                </div>
+                                </span>
                             </a>
 
                     </form>

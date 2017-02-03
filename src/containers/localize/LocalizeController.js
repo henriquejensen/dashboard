@@ -13,14 +13,14 @@ import {
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Tabs, Tab} from "react-bootstrap";
+import { Tabs, Tab, Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
 
 import LocalizeView from "./LocalizeView";
 
-import Form from "../../components/forms/Form";
+import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
 
-import { LOGO_LOCALIZE, ICON_LOCALIZE } from "../../constants/constantsLocalize";
+import { LOGO_LOCALIZE, ICON_LOCALIZE } from "../../constants/utils";
 
 class LocalizeController extends Component {
 	constructor(props) {
@@ -37,7 +37,8 @@ class LocalizeController extends Component {
 			bairro: "",
 			tipo: "",
 			nextTab: "",
-			changeTab: false
+			changeTab: false,
+			buscaAvancada: false
 		}
 
 		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
@@ -125,10 +126,7 @@ class LocalizeController extends Component {
 
 	renderForm(formType, options, optionSelected) {
 		return (
-			<Form
-				options = {options}
-				optionSelected = {optionSelected}
-				tipo = {this.state.tipo}
+			<MyForm
 				icon = {ICON_LOCALIZE}
 				logo = {LOGO_LOCALIZE}
 				showModel = {this.props.datas.length == 1 && this.props.datas[0].data.CPF == 11111111111 ? true : false}
@@ -139,107 +137,224 @@ class LocalizeController extends Component {
 				closeModelo = {this.props.closeModel}
 				status = {this.props.status}
 				message = {this.props.message} >
-				
-				{formType == "cpf" || formType == "cnpj" || formType == "" ?
-					<input
-						value={this.state.documento}
-						type="text"
-						className="form-control input-search input-form input-form-single "
-						placeholder="Digite o documento"
-						name="documento"
-						required
-						onChange={this.onChange} />
-				: formType == "telefone" ?
-					<input
-						value={this.state.telefone}
-						type="number"
-						className="form-control input-search input-form input-form-single "
-						placeholder="Digite o DD e o número"
-						name="telefone"
-						size="10"
-						required
-						onChange={this.onChange} />
-				  : formType == "email" ?
-					<input
-						value={this.state.email}
-						type="email"
-						className="form-control input-search input-form input-form-single "
-						placeholder="Digite o email"
-						name="email"
-						size="10"
-						required
-						onChange={this.onChange} />
-				  : ""
-				}
-
-			</Form>
+					
+					<Col md={2}>
+						<select
+							className="form-control"
+							name="tipo"
+							onChange={this.onChange}
+							value={this.state.tipo ? this.state.tipo : optionSelected}
+							required>
+							<option value="">Selecione</option>
+							{options.map((opt,i) => {
+								return <option value={opt} key={i}>{opt}</option>
+							})}
+						</select>
+					</Col>
+					<Col md={10}>
+						<input
+							className="form-control"
+							type={
+								formType == "telefone" ?
+									"number"
+									: formType == "email" ?
+										"email"
+								: "text"
+							}
+							placeholder={
+								formType == "telefone" ?
+									"Digite o telefone"
+									: formType == "email" ?
+										"Digite o email"
+								: "Digite o documento"
+							}
+							value={
+								formType == "telefone" ?
+									this.state.telefone
+									: formType == "email" ?
+										this.state.email
+								: this.state.documento
+							}
+							name={
+								formType == "telefone" ?
+									"telefone"
+									: formType == "email" ?
+										"email"
+								: "documento"
+							}
+							onChange={this.onChange}
+							style={{width:'100%'}}/>
+					</Col>
+			</MyForm>
 		)
 	}
 
-	renderFormNomeEndereco(formType, options, optionSelected) {
-		console.log("STATUS", this.props)
+	renderFormEndereco(formType, options, optionSelected) {
 		return (
-			<Form
-				options = {options}
-				optionSelected = {optionSelected}
-				tipo = {this.state.tipo}
+			<MyForm
 				icon = {ICON_LOCALIZE}
 				logo = {LOGO_LOCALIZE}
 				showModel = {this.props.datas.length == 1 && this.props.status=="model" ? true : false}
 				showLogo = {this.props.datas.length == 0 ? true : false}
-				onChange = {this.onChange}
 				onformSubmit = {this.onLocalizeSubmit}
 				seeModelo = {this.props.seeModel}
 				closeModelo = {this.props.closeModel}
 				status = {this.props.status}
 				message = {this.props.message} >
 				
-				<input
-					value={formType == "nome" ? this.state.nome : this.state.endereco}
-					type="text"
-					className="form-control input-form input-form-many-large"
-					placeholder={"Digite o " + formType}
-					name={formType}
-					size="10"
-					required
-					onChange={this.onChange} />
+					<Col md={2}>
+						<select
+							className="form-control"
+							name="tipo"
+							onChange={this.onChange}
+							value={this.state.tipo ? this.state.tipo : optionSelected}
+							required>
+							<option value="">Selecione</option>
+							{options.map((opt,i) => {
+								return <option value={opt} key={i}>{opt}</option>
+							})}
+						</select>
+					</Col>
+					<Col md={4}>
+						<input className="form-control" type="text" placeholder="Endereço ou CEP" style={{width:'100%'}}/>
+					</Col>
+					<Col md={2}>
+						<input className="form-control" type="text" placeholder="Complemento" style={{width:'100%'}}/>
+					</Col>
+					<Col md={2}>
+						<input className="form-control" type="number" placeholder="Nº inicial" style={{width:'100%'}}/>
+					</Col>
+					<Col md={2}>
+						<input className="form-control" type="number" placeholder="Nº final" style={{width:'100%'}}/>
+					</Col>
 
-				<select
-					className="form-control input-search select-form"
-					name="estado"
-					value={this.state.estado}
-					onChange={this.onChange}>
-					<option value="">Selecione</option>
-					{this.props.estados.map((estado, index) => {
-						return <option value={estado.sigla} key={index}>{estado.nome}</option>
-					})}
-				</select>
+					<Col md={2}>
+						<FormControl componentClass="select" style={{width:'100%'}}>
+							{this.props.estados.map((estado,index) => {
+								return (
+									<option value={estado.sigla} key={index}>{estado.sigla}</option>
+								)
+							})}
+						</FormControl>
+					</Col>
+					<Col md={6}>
+						<input className="form-control"  type="text" placeholder="Digite o nome da cidade" style={{width:'100%'}}/>
+					</Col>
+					<Col md={4}>
+						<input className="form-control"  type="text" placeholder="Digite o nome do bairro" style={{width:'100%'}}/>
+					</Col>
 
-				<input
-					value={this.state.cidade}
-					type="text"
-					className="form-control input-search input-form input-form-many-medium"
-					placeholder="Cidade"
-					name="cidade"
-					onChange={this.onChange} />
+					{/*Input da busca avançada*/}
+					{this.state.buscaAvancada ?
+						<Col md={8}>
+							<input className="form-control"  type="text" placeholder="Digite o Nome" />
+						</Col>
+					: ""}
 
-				<input
-					value={this.state.bairro}
-					type="text"
-					className="form-control input-form input-form-many-small"
-					placeholder="Bairro"
-					name="bairro"
-					onChange={this.onChange} />
+					{this.state.buscaAvancada ?
+						<Col md={2}>
+							<input className="form-control" type="date" placeholder="Data nascimento" style={{width:'100%'}}/>
+						</Col>
+					: ""}
 
-				<input
-					value={formType == "nome" ? this.state.endereco : this.state.nome}
-					type="text"
-					className="form-control input-search input-form input-form-many-big"
-					placeholder={formType == "nome" ? "Endereço": "Nome"}
-					name={formType == "nome" ? "endereco": "nome"}
-					onChange={this.onChange} />
+					{this.state.buscaAvancada ?
+						<Col md={2}>
+							<FormControl componentClass="select" style={{width:'100%'}}>
+								<option>Sexo</option>
+								<option value="M">M</option>
+								<option value="F">F</option>
+							</FormControl>
+						</Col>
+					: ""}
+					
+					{!this.state.buscaAvancada ? <div href="#" className="busca-avancada" onClick={() => {this.setState({buscaAvancada: true})}}>Busca avancada</div> : ""}
 
-			</Form>
+			</MyForm>
+		)
+	}
+
+	renderFormNome(formType, options, optionSelected) {
+		return (
+			<MyForm
+				icon = {ICON_LOCALIZE}
+				logo = {LOGO_LOCALIZE}
+				showModel = {this.props.datas.length == 1 && this.props.status=="model" ? true : false}
+				showLogo = {this.props.datas.length == 0 ? true : false}
+				onformSubmit = {this.onLocalizeSubmit}
+				seeModelo = {this.props.seeModel}
+				closeModelo = {this.props.closeModel}
+				status = {this.props.status}
+				message = {this.props.message} >
+				
+					<Col md={2}>
+						<select
+							className="form-control"
+							name="tipo"
+							onChange={this.onChange}
+							value={this.state.tipo ? this.state.tipo : optionSelected}
+							required>
+							<option value="">Selecione</option>
+							{options.map((opt,i) => {
+								return <option value={opt} key={i}>{opt}</option>
+							})}
+						</select>
+					</Col>
+					<Col md={6}>
+						<input className="form-control" type="text" placeholder="Digite o Nome" style={{width:'100%'}}/>
+					</Col>
+					<Col md={2}>
+						<input className="form-control" type="date" placeholder="Data nascimento" style={{width:'100%'}}/>
+					</Col>
+					<Col md={2}>
+						<FormControl componentClass="select" style={{width:'100%'}}>
+							<option>Sexo</option>
+							<option value="M">M</option>
+							<option value="F">F</option>
+						</FormControl>
+					</Col>
+
+					<Col md={2}>
+						<FormControl componentClass="select" style={{width:'100%'}}>
+							{this.props.estados.map((estado,index) => {
+								return (
+									<option value={estado.sigla} key={index}>{estado.sigla}</option>
+								)
+							})}
+						</FormControl>
+					</Col>
+					<Col md={6}>
+						<input className="form-control"  type="text" placeholder="Digite o nome da cidade" style={{width:'100%'}}/>
+					</Col>
+					<Col md={4}>
+						<input className="form-control"  type="text" placeholder="Digite o nome do bairro" style={{width:'100%'}}/>
+					</Col>
+
+					{/*Input da busca avançada*/}
+					{this.state.buscaAvancada ?
+						<Col md={2}>
+							<input className="form-control"  type="text" placeholder="Complemento" />
+						</Col>
+					: ""}
+
+					{this.state.buscaAvancada ?
+						<Col md={6}>
+							<input className="form-control"  type="text" placeholder="Endereço ou CEP" />
+						</Col>
+					: ""}
+
+					{this.state.buscaAvancada ?
+						<Col md={2}>
+							<input className="form-control"  type="number" placeholder="Nº inicial" />
+						</Col>
+					: ""}
+						
+					{this.state.buscaAvancada ?
+						<Col md={2}>
+							<input className="form-control"  type="number" placeholder="Nº final" />
+						</Col>
+					: ""}
+					
+			</MyForm>
 		)
 	}
 
@@ -257,12 +372,12 @@ class LocalizeController extends Component {
 				tipo == "CPF" || tipo == "CNPJ" ? 
 					this.renderForm(tipo.toLowerCase(), options, pathTipo)
 				: tipo == "NOME" ? 
-					this.renderFormNomeEndereco(tipo.toLowerCase(), options, pathTipo)
+					this.renderFormNome(tipo.toLowerCase(), options, pathTipo)
 					: tipo == "TELEFONE" ?
 						this.renderForm(tipo.toLowerCase(), options, pathTipo)
 					: tipo == "EMAIL" ?
 						this.renderForm(tipo.toLowerCase(), options, pathTipo)
-					: this.renderFormNomeEndereco(tipo.toLowerCase(), options, pathTipo)
+					: this.renderFormEndereco(tipo.toLowerCase(), options, pathTipo)
 			: this.renderForm(tipo.toLowerCase(), options, pathTipo)
 		)
 	}

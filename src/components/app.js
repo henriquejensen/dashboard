@@ -13,7 +13,7 @@ export default class App extends Component {
     }
 
     this.larguraMenu = {
-      marginLeft:"210px"
+      marginLeft:"200px"
     };
 
     this.larguraMenuFechado = {
@@ -33,19 +33,16 @@ export default class App extends Component {
       return (
         <div>
             <Header onMenuClicked={this.onMenuClicked} />
-            <div className="row">
-              <div className="sidebar" style={this.state.active ? {} : this.larguraMenuFechado}>
-                <Sidebar onMenuClicked={this.onMenuClicked} activedMenu={this.state.active}/>
-              </div>
+            <div className="sidebar" style={this.state.active ? {} : this.larguraMenuFechado}>
+              <Sidebar onMenuClicked={this.onMenuClicked} activedMenu={this.state.active}/>
+            </div>
 
-              <div className="container-fluid main" style={this.state.active ? this.larguraMenu : {}}>
-                  <Breadcrumbs
-                    routes={this.props.routes}
-                    params={this.props.params}
-                  />
-                  {this.props.children}
-              </div>
-
+            <div className="container-fluid main" style={this.state.active ? this.larguraMenu : {}}>
+                <Breadcrumbs
+                  routes={this.props.routes}
+                  params={this.props.params}
+                />
+                {this.props.children}
             </div>
         </div>
 

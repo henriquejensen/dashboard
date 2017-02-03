@@ -2,7 +2,7 @@
     "sidebar": [
         {
             "label": "Home",
-            "color": "#836cb8",
+            "color": "#7a5ec0",
             "link": "/home",
             "image": "../../public/assertiva/icon-assertiva.png",
             "alt": "Página inicial",
@@ -38,7 +38,7 @@
         },
         {
             "label": "Base Certa",
-            "color": "#836cb8",
+            "color": "#7a5ec0",
             "link": "/basecerta",
             "image": "../../public/assertiva/icon-focofiscal-new.png",
             "alt": "Icone Base Certa",
@@ -46,7 +46,7 @@
         },
         {
             "label": "Venda+",
-            "color": "#ff5729",
+            "color": "#ff5d31",
             "link": "/vendamais",
             "image": "../../public/assertiva/icon-consigmais-new.png",
             "alt": "Icone Venda+",
@@ -54,7 +54,7 @@
         },
         {
             "label": "Crédito",
-            "color": "#fba02f",
+            "color": "#ffa02e",
             "link": "/credito",
             "image": "../../public/assertiva/icon-credito-new.png",
             "alt": "Icone Crédito",
@@ -86,7 +86,7 @@
         {
             "label": "Foco Fiscal",
             "link": "/focofiscal",
-            "color": "#836cb8",
+            "color": "#7a5ec0",
             "image": "../../public/assertiva/icon-focofiscal-new.png",
             "alt": "Icone Foco Fiscal",
             "subItems": [
@@ -100,7 +100,7 @@
         {
             "label": "Consig+",
             "link": "/consigmais",
-            "color": "#ff5729",
+            "color": "#ffa02e",
             "image": "../../public/assertiva/icon-consigmais-new.png",
             "alt": "Icone Consig+",
             "subItems": []
