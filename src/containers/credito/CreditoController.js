@@ -11,8 +11,10 @@ import {
 } from "../../actions/actionsCredito";
 
 import CreditoView from "./CreditoView";
-import Form from "../../components/forms/Form";
+import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
+
+import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
 
 import { LOGO_CREDITO, ICON_CREDITO } from "../../constants/constantsCredito";
 
@@ -45,12 +47,9 @@ class Credito extends Component {
 		console.log("SUBMIT", this.state.tipo);
 	}
 
-	renderForm(options) {
+	renderForm(formType, options, optionSelected) {
 		return (
-			<Form
-				options = {options}
-				optionSelected = {location.pathname.split("/")[1].toUpperCase()}
-				tipo = {this.state.tipo}
+			<MyForm
 				icon = {ICON_CREDITO}
 				logo = {LOGO_CREDITO}
 				showModel = {this.props.datas.length >= 1 ? (this.props.datas[0].data.cadastroPf.cpf == 11111111111 ? true: false) : false}
@@ -61,25 +60,56 @@ class Credito extends Component {
 				closeModelo = {this.props.closeModel}
 				status = {this.props.status}
 				message = {this.props.message} >
-				
-				<input
-					value={this.state.documento}
-					type="text"
-					className="form-control input-search input-form input-form-single"
-					placeholder="Digite o documento"
-					name="documento"
-					required
-					onChange={this.onChange} />
+					
+					<Col md={2}>
+						<select
+							className="form-control"
+							name="tipo"
+							onChange={this.onChange}
+							value={this.state.tipo ? this.state.tipo : optionSelected}
+							required>
+							<option value="">Selecione</option>
+							{options.map((opt,i) => {
+								return <option value={opt} key={i}>{opt}</option>
+							})}
+						</select>
+					</Col>
+					<Col md={10}>
+						<input
+							className="form-control"
+							type="text"
+							placeholder={
+								formType == "consulta simples" ?
+									"CPF"
+								: "CPF ou CNPJ"
+							}
+							value={this.state.documento}
+							name="documento"
+							onChange={this.onChange}
+							style={{width:'100%'}}/>
+					</Col>
+			</MyForm>
+		)
+	}
 
-			</Form>
+	form = () => {
+		let pathTipo = location.pathname.split("/")[2] ? location.pathname.split("/")[2].toUpperCase() : "";
+		let tipo = this.state.tipo;
+		let options = ["Consulta Completa", "Consulta Intermediária", "Intermediária Plus/Pessoal Plus", "Consulta Simples", "Consulta Cheque", "Consulta Express"];
+
+		if(!tipo) {
+			tipo = pathTipo;
+		}
+
+		return (
+			this.renderForm(tipo.toLowerCase(),options,pathTipo)
 		)
 	}
 
 	render() {
-		let options = ["Consulta Completa", "Consulta Intermediária", "Intermediária Plus/Pessoal Plus", "Consulta Simples", "Consulta Cheque", "Consulta Express"];
 		return (
 			<div className="container">
-				{this.renderForm(options)}
+				{this.form()}
 
 				{this.props.loading ? <div className="imgSearching"><img src="../../../public/loading.gif" /></div> : ""}
 

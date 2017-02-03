@@ -267,8 +267,11 @@ class LocalizeController extends Component {
 						</Col>
 					: ""}
 					
-					{!this.state.buscaAvancada ? <div href="#" className="busca-avancada" onClick={() => {this.setState({buscaAvancada: true})}}>Busca avancada</div> : ""}
-
+					{!this.state.buscaAvancada ?
+						<div href="#" className="busca-avancada" onClick={() => {this.setState({buscaAvancada: true})}}>Busca avancada</div>
+					:
+						<div href="#" className="busca-avancada" onClick={() => {this.setState({buscaAvancada: false})}}>Fechar busca avancada</div>}
+			
 			</MyForm>
 		)
 	}
@@ -353,6 +356,11 @@ class LocalizeController extends Component {
 							<input className="form-control"  type="number" placeholder="Nº final" />
 						</Col>
 					: ""}
+
+					{!this.state.buscaAvancada ?
+						<div href="#" className="busca-avancada" onClick={() => {this.setState({buscaAvancada: true})}}>Busca avancada</div>
+					:
+						<div href="#" className="busca-avancada" onClick={() => {this.setState({buscaAvancada: false})}}>Fechar busca avancada</div>}
 					
 			</MyForm>
 		)
