@@ -113,7 +113,6 @@ class LocalizeController extends Component {
 			cidade: "",
 			bairro: "",
 			tabActive: "",
-			tipo: "",
 			changeTab: false
 		});
 	}
@@ -216,7 +215,14 @@ class LocalizeController extends Component {
 						</select>
 					</Col>
 					<Col md={4}>
-						<input className="form-control" type="text" placeholder="Endereço ou CEP" style={{width:'100%'}}/>
+						<input
+							className="form-control"
+							type="text"
+							name="endereco"
+							onChange={this.onChange}
+							value={this.props.endereco}
+							placeholder="Endereço ou CEP"
+							style={{width:'100%'}}/>
 					</Col>
 					<Col md={2}>
 						<input className="form-control" type="text" placeholder="Complemento" style={{width:'100%'}}/>
@@ -270,7 +276,7 @@ class LocalizeController extends Component {
 					{!this.state.buscaAvancada ?
 						<div href="#" className="busca-avancada" onClick={() => {this.setState({buscaAvancada: true})}}>Busca avancada</div>
 					:
-						<div href="#" className="busca-avancada" onClick={() => {this.setState({buscaAvancada: false})}}>Fechar busca avancada</div>}
+						<div href="#" className="busca-avancada" onClick={() => {this.setState({buscaAvancada: false})}}>Fechar busca</div>}
 			
 			</MyForm>
 		)
@@ -303,7 +309,14 @@ class LocalizeController extends Component {
 						</select>
 					</Col>
 					<Col md={6}>
-						<input className="form-control" type="text" placeholder="Digite o Nome" style={{width:'100%'}}/>
+						<input
+							className="form-control"
+							name="nome"
+							value={this.props.nome}
+							onChange={this.onChange}
+							type="text"
+							placeholder="Digite o Nome"
+							style={{width:'100%'}}/>
 					</Col>
 					<Col md={2}>
 						<input className="form-control" type="date" placeholder="Data nascimento" style={{width:'100%'}}/>

@@ -43,7 +43,7 @@ class Sidebar extends Component {
             {menu.sidebar.map((opt, index) => {
               return (
                 <li key={index} onClick={(evt) => {evt.preventDefault();this.props.changeColorMenu(opt.color)}}>
-                  <Link to={opt.link} onClick={() => this.activeMenuDropdown(opt.label.toLowerCase())} activeStyle={{backgroundColor: "rgba(0,0,0,0.06)"}}>
+                  <Link to={opt.link} onClick={() => this.activeMenuDropdown(opt.label.toLowerCase())} activeStyle={{backgroundColor: "#E7E7E7"}}>
                     {this.props.activedMenu ?
                       <img src={opt.image} className="sub-icon" alt={opt.alt}/>
                     : ""}
