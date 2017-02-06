@@ -13,7 +13,6 @@ export function loading() {
 }
 
 export function seeModel() {
-    console.log("SEEE MODEL")
     return {
         type: SEE_CREDITO_MODEL,
         payload: ""

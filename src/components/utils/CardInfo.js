@@ -28,7 +28,6 @@ export default class CardInfo extends Component {
         return (
                 <Panel title={this.props.title ? this.props.title : <div>outro</div>}>
                     {this.props.info.slice(0,4).map((info,index) => {
-                        this.props.withGraph ? console.log(info) : ""
                         return (
                             <Col md={3} sm={3} key={index}>
                                 <h2 style={style.card}>{info.quantidade}</h2>

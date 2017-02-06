@@ -71,7 +71,6 @@ class MenuSuperior extends Component {
 					<Nav pullRight>
 						<NavDropdown title={<Notification />} id="menu-notification">
 							{this.props.notifications.map((notification, index) => {
-								console.log(notification)
 								return (
 									<Navbar.Text key={index} className="notication">
 										<a href={notification.link} target="_blank">
