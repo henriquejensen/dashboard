@@ -196,7 +196,7 @@ export default class Telefones extends Component{
 
 
               
-              <div className="col-md-1 col-sm-12 pull-right">
+              <div className="col-md-12 col-sm-12 pull-right">
                 {celulares.length > 4 || this.props.telefones.length - celulares.length > 4 ?
                 <a data-tip data-for="moreInfo">
                   <i className={this.state.showMoreTel ? "fa fa-minus pull-right moreInfo" : "fa fa-plus pull-right moreInfo"} onClick={() => this.setState({showMoreTel:!this.state.showMoreTel})}/>

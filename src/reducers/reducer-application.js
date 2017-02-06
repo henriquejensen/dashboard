@@ -1,6 +1,6 @@
 import { browserHistory } from "react-router";
 
-import { LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT } from "../constants/utils";
+import { LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT, CHANGE_COLOR_MENU } from "../constants/utils";
 
 const getInitialState = {
     colorMenu: "#7a5ec0",
@@ -27,13 +27,14 @@ export default function(state=getInitialState, action) {
             }
             return newStateError;
 
-        case "CHANGE_COLOR_MENU":
+        case CHANGE_COLOR_MENU:
             let newStateColor = {
                 colorMenu: action.payload,
                 error: false,
                 msgn: state.msgn
             }
             return newStateColor;
+
     }
 
     return state;

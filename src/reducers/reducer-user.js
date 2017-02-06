@@ -1,5 +1,7 @@
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
-import { ICON_LOCALIZE, ICON_CREDITO } from "../constants/utils";
+import { ICON_LOCALIZE, ICON_CREDITO, GET_NOTIFICATIONS } from "../constants/utils";
+
+import notifications from "./data/notifications.json";
 
 const user = {
     nome: localStorage.getItem("user"),
@@ -170,7 +172,8 @@ const user = {
         {produto: "credito", logo: ICON_CREDITO, tipoDocumento: "COMPLETA"},
         {produto: "credito", logo: ICON_CREDITO, tipoDocumento: "INTERMEDIARIA"},
         {produto: "localize", logo: ICON_LOCALIZE, tipoDocumento: "NOME"},
-    ]
+    ],
+    notifications: []
 }
 
 export default function (state = user, action) {
@@ -185,6 +188,11 @@ export default function (state = user, action) {
             state.gadgets = action.payload.gadgets;
             state.charts = action.payload.charts;
             return state;
+
+        case GET_NOTIFICATIONS:
+            let newState = Object.assign({}, state);
+            newState.notifications = notifications.notifications;
+            return newState
     }
     return state;
 } 

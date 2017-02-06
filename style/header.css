@@ -81,7 +81,7 @@
 }
 
 .menu-image-logo {
-    width: 195px;
+    width: 168px;
     padding-left: 0;
     height: 100%;
     margin-top: 4px;
@@ -93,6 +93,21 @@
     right:10px;
     top:8px;
     z-index: 2
+}
+
+.notication {
+    width: 325px;
+    margin: 5px
+}
+
+.notication h4 {
+    font-size: 12px;
+    margin-top: 0;
+    font-weight: bold
+}
+
+.notication p {
+    font-size: 11px
 }
 
 @media(max-width: 768px) {

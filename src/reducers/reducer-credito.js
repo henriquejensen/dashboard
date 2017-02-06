@@ -1,10 +1,12 @@
 import {
     CLOSE_TAB_CREDITO,
     CLOSE_CREDITO_MODEL,
-    ICON_CREDITO,
     LOADING_CREDITO,
     SEE_CREDITO_MODEL
 } from "../constants/constantsCredito";
+import {
+    ICON_CREDITO,
+} from "../constants/utils";
 
 import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB } from "../constants/utils";
 

@@ -1,0 +1,44 @@
+{
+    "notifications": [
+        {
+            "remetente": "Beatriz Souza Correia",
+            "image_url": "https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Farmer_Woman-128.png",
+            "dataHora": "01/02/2017 10:30",
+            "assunto": "Mudanças no Localize",
+            "mensagem": "O Localize passou por mudanças nos últimos dias para se adpatar as novas regras do governo",
+            "link": "http://assertivasolucoes.com.br/servicos"
+        },
+        {
+            "remetente": "Sarah Souza Castro",
+            "image_url": "https://cdn3.iconfinder.com/data/icons/business-round-flat-vol-1-1/36/user_account_profile_avatar_person_student_female-128.png",
+            "dataHora": "01/02/2017 11:30",
+            "assunto": "Novo produto",
+            "mensagem": "A Assertiva acaba de lançar um novo produto na plataforma",
+            "link": "http://assertivasolucoes.com.br/servicos"
+        },
+        {
+            "remetente": "Sarah Souza Castro",
+            "image_url": "https://cdn3.iconfinder.com/data/icons/business-round-flat-vol-1-1/36/user_account_profile_avatar_person_student_female-128.png",
+            "dataHora": "01/02/2017 11:30",
+            "assunto": "Limite do Localize",
+            "mensagem": "O seu limite do Localize acabou se de ser alterado para XXX consultas",
+            "link": "http://assertivasolucoes.com.br/servicos"
+        },
+        {
+            "remetente": "Carlos Castro Sousa",
+            "image_url": "https://cdn0.iconfinder.com/data/icons/avatars-8/128/avatar-41-2-128.png",
+            "dataHora": "01/02/2017 11:30",
+            "assunto": "Novo produto",
+            "mensagem": "O Localize passou por mudanças",
+            "link": "http://assertivasolucoes.com.br/servicos"
+        },
+        {
+            "remetente": "Carlos Castro Sousa",
+            "image_url": "https://cdn0.iconfinder.com/data/icons/avatars-8/128/avatar-41-2-128.png",
+            "dataHora": "01/02/2017 11:30",
+            "assunto": "Novo produto",
+            "mensagem": "O Localize passou por mudanças",
+            "link": "http://assertivasolucoes.com.br/servicos"
+        }
+    ]
+}

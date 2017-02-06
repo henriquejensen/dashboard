@@ -16,7 +16,7 @@ import Titletab from "../../components/utils/Titletab";
 
 import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
 
-import { LOGO_CREDITO, ICON_CREDITO } from "../../constants/constantsCredito";
+import { LOGO_CREDITO, ICON_CREDITO } from "../../constants/utils";
 
 class Credito extends Component {
 	constructor(props) {

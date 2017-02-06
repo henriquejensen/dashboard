@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
+		Col,
 		Nav,
 		NavItem,
 		NavDropdown,
@@ -12,7 +13,8 @@ import {
 		Collapse,
 		FormGroup,
 		FormControl,
-		Button
+		Button,
+		Badge
 } from "react-bootstrap";
 
 import menu from "./menu/menu.json";
@@ -20,7 +22,9 @@ import { browserHistory } from 'react-router';
 
 import { logoTopo } from "../constants/imagensAssertiva";
 import { logOut } from "../actions/index";
-import { changeColorMenu } from "../actions/actionsCommon";
+import {
+		getNotifications
+} from "../actions/actionsCommon";
 
 import BarraBuscaRapida from "./utils/BarraBuscaRapida";
 
@@ -42,6 +46,10 @@ class MenuSuperior extends Component {
 		browserHistory.push(route);
 	}
 
+	componentWillMount() {
+		this.props.getNotifications()
+	}
+
 	render() {
 		return (
 		<div>
@@ -61,6 +69,25 @@ class MenuSuperior extends Component {
 					</Navbar.Form>
 
 					<Nav pullRight>
+						<NavDropdown title={<Notification />} id="menu-notification">
+							{this.props.notifications.map((notification, index) => {
+								console.log(notification)
+								return (
+									<Navbar.Text key={index} className="notication">
+										<a href={notification.link} target="_blank">
+											<Col md={2}>
+												<img src={notification.image_url} width="30px" />
+											</Col>
+											<Col md={10}>
+												<h4>{notification.assunto} </h4>
+												<p>{notification.mensagem}</p>
+											</Col>
+										</a>
+									</Navbar.Text>
+								)
+							})}
+						</NavDropdown>
+
 						<NavDropdown title="Produtos" id="menu-header-produtos">
 							{menu.sidebar.map((opt, index) => {
 								return (
@@ -107,15 +134,24 @@ class MenuSuperior extends Component {
 function mapStateToProps(state) {
 	return {
 		color: state.auth.colorMenu,
-		user: state.user
+		user: state.user,
+		notifications: state.user.notifications
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		logOut,
-		changeColorMenu
+		getNotifications
 	}, dispatch)
+}
+
+const Notification = () => {
+	return (
+		<i className="fa fa-bell">
+			<Badge style={{backgroundColor: "#ff5d31"}}>5</Badge>
+		</i>
+	)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuSuperior);
