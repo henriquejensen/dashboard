@@ -167,11 +167,13 @@ input {
 }
 
 .relacionados {
-    margin: 0px 6px
+    padding-bottom: 5px;
+    padding-right: 21px;
 }
 
-.relacionados:hover {
+.relacionados i:hover {
     color: #EC971F;
+    cursor: pointer;
 }
 
 .breadcrumbs {
@@ -185,10 +187,6 @@ input {
     right: 25px;
     top: 5px;
     cursor: pointer
-}
-
-.alert {
-    padding: 10px
 }
 
 .imgSearching > img {

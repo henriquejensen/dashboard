@@ -13,7 +13,6 @@ export default class Emails extends Component {
         super(props);
 
         this.state = {
-            copiar: false,
             isModalOpen: false,
             emailEnviar: ""
         }

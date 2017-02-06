@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 import { Tabs, Tab, Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
 
 import LocalizeView from "./LocalizeView";
+import CreditoView from "../credito/CreditoView";
 
 import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
@@ -47,6 +48,7 @@ class LocalizeController extends Component {
 		this._showRelacionados = this._showRelacionados.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.form = this.form.bind(this);
+		this.closeTab = this.closeTab.bind(this);
 	}
 
 	componentWillMount() {
@@ -121,6 +123,14 @@ class LocalizeController extends Component {
 		this.setState({
 			[evt.target.name]: evt.target.value
 		})
+	}
+
+	closeTab(index) {
+		if(this.props.datas.length > 1) {
+			this.props.closeTab(index);
+		} else {
+			this.props.closeModel();
+		}
 	}
 
 	renderForm(formType, options, optionSelected) {
@@ -253,7 +263,13 @@ class LocalizeController extends Component {
 					{/*Input da busca avançada*/}
 					{this.state.buscaAvancada ?
 						<Col md={8}>
-							<input className="form-control"  type="text" placeholder="Digite o Nome" />
+							<input
+								className="form-control"
+								name="nome"
+								value={this.props.nome}
+								onChange={this.onChange}
+								type="text"
+								placeholder="Digite o Nome" />
 						</Col>
 					: ""}
 
@@ -348,13 +364,22 @@ class LocalizeController extends Component {
 					{/*Input da busca avançada*/}
 					{this.state.buscaAvancada ?
 						<Col md={2}>
-							<input className="form-control"  type="text" placeholder="Complemento" />
+							<input
+								className="form-control"
+								type="text"
+								placeholder="Complemento" />
 						</Col>
 					: ""}
 
 					{this.state.buscaAvancada ?
 						<Col md={6}>
-							<input className="form-control"  type="text" placeholder="Endereço ou CEP" />
+							<input
+								className="form-control"
+								name="endereco"
+								onChange={this.onChange}
+								value={this.props.endereco}
+								type="text"
+								placeholder="Endereço ou CEP" />
 						</Col>
 					: ""}
 
@@ -420,7 +445,7 @@ class LocalizeController extends Component {
 						>
 							{this.props.datas.map((data, index) => {
 								return (
-									<Tab eventKey={data.label} title={<Titletab icon={data.icon} label={data.label} close={this.props.closeTab}/>} key={index}>
+									<Tab eventKey={data.label} title={<Titletab icon={data.icon} label={data.label} close={() => this.closeTab(index)}/>} key={index}>
 										{/*Verifica se o produto pesquisado é localize, pois pode ser gerado abas de outros produtos no Localize*/}
 										{data.produto == "localize" ?
 											<LocalizeView
@@ -429,6 +454,12 @@ class LocalizeController extends Component {
 												showPessoasRelacionadas={this._showPessoasRelacionadas}
 												showRelacionados={this._showRelacionados}
 												pessoasRelacionadas={this.searchPessoasRelacionadas}/>
+										:
+										data.produto == "credito" ?
+											<CreditoView
+												data={data.data}
+												tipo={data.tipo}
+												index={index}/>
 										: ""}
 									</Tab>
 								)

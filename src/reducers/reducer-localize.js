@@ -7,15 +7,20 @@ import {
 		SEARCH_BY_TELEFONES_RELACIONADOS,
 		SEARCH_BY_ENDERECOS_RELACIONADOS,
 		SEARCH_BY_EMAILS_RELACIONADOS,
+		SEARCH_BY_CREDITO_PF,
+		SEARCH_BY_CREDITO_PJ,
 		SEE_LOCALIZE_MODEL,
 		CLOSE_LOCALIZE_MODEL,
 		LOADING_LOCALIZE,
-		CLOSE_TAB_LOCALIZE 
+		CLOSE_TAB_LOCALIZE,
 } from "../constants/constantsLocalize";
-import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB } from "../constants/utils";
+import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB, ICON_CREDITO } from "../constants/utils";
 import model from "./data/modelLocalize.json";
 import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
 import relacionados from "./data/relacionados.json";
+
+import modelCredito from "./data/jsonPadraoCredito.json";
+import modelCreditoCNPJ from "./data/jsonPadraoCreditoCNPJ.json";
 
 const telefonesRelacionados = [
 	{documento: 5366214700, fixos: ["12345656", "98765423"], moveis: ["989876787"]},
@@ -80,19 +85,50 @@ export default function(state = initialState, action) {
 					tabActive: model.PF.DADOS.CPF
 				}
 
+			case SEARCH_BY_CREDITO_PF:
+				
+				response.data = modelCredito;
+				response.label = modelCredito.cadastroPf.cpf;
+				response.tipo = "CPF";
+				response.icon = ICON_CREDITO;
+				response.produto = "credito";
+
+				return {
+					loading: false,
+					status: "success",
+					message: "",
+					response: [...newState.response, response],
+					tabActive: modelCredito.cadastroPf.cpf
+				}
+
+			case SEARCH_BY_CREDITO_PJ:
+				response.data = modelCreditoCNPJ;
+				response.label = modelCreditoCNPJ.cadastroPj.cnpj;
+				response.tipo = "CNPJ";
+				response.icon = ICON_CREDITO;
+				response.produto = "credito";
+
+				return {
+					loading: false,
+					status: "success",
+					message: "",
+					response: [...newState.response, response],
+					tabActive: modelCreditoCNPJ.cadastroPj.cnpj
+				}
+
 			case CLOSE_LOCALIZE_MODEL:
 				return initialState;
 
 			case CLOSE_TAB_LOCALIZE:
 				let newResponse = newState.response.concat();
-				let closed = newResponse.splice(action.payload, 1);
+				newResponse.splice(action.payload, 1);
 
 				return {
 					status: "closeTab",
 					message: "",
 					loading: false,
 					response: newResponse,
-					tabActive: ""
+					tabActive: newResponse ? newResponse[0].label : ""
 				}
 				
 			case SEARCH_BY_CPF:

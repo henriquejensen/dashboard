@@ -39,7 +39,6 @@ export default class Info extends Component {
     }
 
     sendInfoUser(e) {
-        console.log(this.props)
         this.props.userEditInfo(this.state.nome, this.state.telefone, this.state.email);
     }
 

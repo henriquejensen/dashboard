@@ -11,7 +11,10 @@ import {
 		SEE_LOCALIZE_MODEL,
 		CLOSE_LOCALIZE_MODEL,
 		LOADING_LOCALIZE,
-		CLOSE_TAB_LOCALIZE } from "../constants/constantsLocalize";
+		CLOSE_TAB_LOCALIZE,
+		SEARCH_BY_CREDITO_PF,
+		SEARCH_BY_CREDITO_PJ
+} from "../constants/constantsLocalize";
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 import { GET_CAMPANHAS_SMS, GET_CENTRO_CUSTO_SMS, GET_RESPOSTAS_SMS } from "../constants/constantsSMS";
 import {
@@ -24,7 +27,8 @@ import {
 		AUTHENTICATION,
 		LOAD_STATES,
 		REQUEST_ERROR,
-		ERR_CONNECTION_REFUSED } from "../constants/utils";
+		ERR_CONNECTION_REFUSED
+} from "../constants/utils";
 
 export function closeTab(index) {
 	return {
@@ -40,8 +44,20 @@ export function loadingLocalize() {
 	}
 }
 
+export function searchCredito(document, tipo) {
+	if(tipo == "pf") {
+		return {
+			type: SEARCH_BY_CREDITO_PF,
+			payload: "credito"
+		}
+	}
+	return {
+		type: SEARCH_BY_CREDITO_PJ,
+		payload: "credito"
+	}
+}
+
 export function searchLocalize(document, tipo) {
-	console.log("SEARCH", document, tipo, SEARCH_BY_CPF)
 	const senha = tipo+"/ajax?empresa="+localStorage.empresa+"&usuario="+localStorage.user+"&senha="+localStorage.senha+"&documento=";
 
 	if(tipo == "pf") {
@@ -80,7 +96,6 @@ export function searchLocalize(document, tipo) {
 				})
 		}
 	}
-
 }
 
 export function searchLocalizeByParams(inputLocalize, tipo) {
@@ -203,7 +218,6 @@ export function authUser(empresa, user, senha) {
 			.send({empresa: empresa, usuario: user, senha: senha})
 			.ok(res => res.status < 500)
 			.then((response, failure) => {
-				console.log("1165156", response, failure)
 				localStorage.setItem(AUTHENTICATION, response.body.response);
 				localStorage.setItem("empresa", empresa);
 				localStorage.setItem("user", user);
@@ -211,7 +225,6 @@ export function authUser(empresa, user, senha) {
 				dispatch({type: LOGIN_SUCCESS, payload: response})
 			})
 			.catch((error) => {
-				console.log("ASDFASDF0", error)
 				dispatch({type: LOGIN_ERROR, payload: error})
 			})
 	}

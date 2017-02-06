@@ -21,7 +21,6 @@ import Protocolo from "../../components/protocolo/Protocolo";
 
 export default class CreditoView extends Component {
     render(){
-        console.log(this.props.data)
         return (
             <PanelGroup>
                 {this.props.tipo == "CPF" ?

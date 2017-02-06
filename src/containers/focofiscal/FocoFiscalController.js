@@ -95,7 +95,6 @@ class FocoFiscal extends Component {
 
 							<TabContent>
 								{this.props.datas.map((data, index) => {
-									console.log("FOCO FISCAL", data);
 									return (
 										<TabPane 
 											tabActive={this.props.tabActive}

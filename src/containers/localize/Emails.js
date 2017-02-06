@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Tooltip from "react-tooltip";
+import Notification from "react-notification-system";
 
 import EnviarEmail from "../../components/forms/EnviarEmail";
 import Modal from "../../components/Modal";
@@ -8,9 +9,24 @@ import Panel from "../../components/Panel";
 
 export default class Emails extends Component {
 
-    state = {
-        copiar: false,
-        isModalOpen: false
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isModalOpen: false
+        }
+
+        this._notificationSystem = null;
+
+    }
+
+    _addNotification(message) {
+        if (this._notificationSystem) {
+                this._notificationSystem.addNotification({
+                message: message,
+                level: 'success'
+            });
+        }
     }
 
 	closeModal() {
@@ -32,7 +48,7 @@ export default class Emails extends Component {
 
                                 <a data-tip data-for="tooltipCopy">
                                     <div className="col-md-1">
-                                        <CopyToClipboard text={email} onCopy={() => this.setState({copiar:!this.state.copiar})}>
+                                        <CopyToClipboard text={email} onCopy={() => this._addNotification("Email copiado com sucesso")}>
                                             <i className="fa fa-clipboard icon-tel" />
                                         </CopyToClipboard>
                                     </div>
@@ -67,6 +83,8 @@ export default class Emails extends Component {
                 <Tooltip id="tooltipEmail">
                     <span>Enviar email</span>
                 </Tooltip>
+
+                <Notification ref={n => this._notificationSystem = n} />
 
             </Panel>
         )

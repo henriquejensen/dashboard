@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-import { Col, FormGroup, Checkbox, Image, Button } from "react-bootstrap";
+import { Col, FormGroup, Checkbox, Image, Button, Alert } from "react-bootstrap";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { browserHistory } from "react-router";
 
-import { searchLocalize, loadingLocalize } from "../../actions/index";
+import {
+        searchCredito,
+        searchLocalize,
+        loadingLocalize
+} from "../../actions/index";
 
 import { ICON_LOCALIZE, ICON_CREDITO, ICON_FOCOFISCAL } from "../../constants/utils";
 
@@ -29,17 +33,71 @@ const produtos = [
 ];
 
 class GridProdutos extends Component {
-    search = () => {
-        this.props.closeModal();
-        browserHistory.push("/localize");
+    constructor(props) {
+        super(props);
 
-        this.props.loadingLocalize();
-        this.props.searchLocalize(this.props.documento, "pf");
+        this.state = {
+            optionsSelected: {}
+        }
+
+        this.onChecked = this.onChecked.bind(this);
+        this.search = this.search.bind(this);
+        this.handleAlertDismiss = this.handleAlertDismiss.bind(this);
+    }
+
+    onChecked(produto, opt) {
+        let newOptions = Object.assign({}, this.state.optionsSelected);
+        if(newOptions[produto] == undefined) {
+            newOptions[produto] = [opt];
+        } else {
+            newOptions[produto] = newOptions[produto].concat(opt);
+        }
+        
+        this.setState({
+            optionsSelected: newOptions,
+            showMessage: false
+        })
+    }
+
+    search() {
+        if(Object.keys(this.state.optionsSelected).length > 0) {
+            this.props.closeModal();
+            browserHistory.push("/localize");
+
+            this.props.loadingLocalize();
+
+            let tipo;
+
+            this.props.isCPF ?
+                tipo = "pf"
+            :
+                tipo = "pj"
+
+            this.state.optionsSelected['Localize'] ?
+                this.props.searchLocalize(this.props.documento, tipo)
+            : ""
+            this.state.optionsSelected['Crédito'] ?
+                this.props.searchCredito(this.props.documento, tipo)
+            : ""
+        } else {
+            this.setState({
+                showMessage: true
+            })
+        }
+    }
+
+    handleAlertDismiss() {
+        this.setState({showMessage: false})
     }
 
     render() {
         return (
             <div>
+                {this.state.showMessage ? 
+                    <Alert bsStyle="warning" className="text-center" onDismiss={this.handleAlertDismiss}>
+                        Selecione pelo menos 1 opção
+                    </Alert>
+                : ""}
                 {produtos.map((produto, index) => {
                     return (
                         <Col md={4} key={index}>
@@ -52,7 +110,7 @@ class GridProdutos extends Component {
                                     {this.props.isCPF ? 
                                         produto.options.cpf.map((opt,j) => {
                                             return (
-                                                <Checkbox key={j} inputRef={ref => { this.input = ref; }}>
+                                                <Checkbox key={j} onClick={evt => this.onChecked(produto.label, opt)}>
                                                     {opt}
                                                 </Checkbox>
                                             )
@@ -60,7 +118,7 @@ class GridProdutos extends Component {
                                     :
                                         produto.options.cnpj.map((opt,j) => {
                                             return (
-                                                <Checkbox key={j}>
+                                                <Checkbox key={j} onClick={evt => this.onChecked(produto.label, opt)}>
                                                     {opt}
                                                 </Checkbox>
                                             )
@@ -74,7 +132,7 @@ class GridProdutos extends Component {
 
                 <div>
                     <Col md={6}>
-                        <Button bsStyle="default" block>Cancelar</Button>
+                        <Button bsStyle="default" onClick={this.props.closeModal} block>Cancelar</Button>
                     </Col>
 
                     <Col md={6}>
@@ -88,6 +146,7 @@ class GridProdutos extends Component {
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
+            searchCredito,
 			searchLocalize,
             loadingLocalize
 		},

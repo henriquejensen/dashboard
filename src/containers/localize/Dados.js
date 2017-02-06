@@ -74,7 +74,7 @@ export default class Dados extends Component{
               </div>
               
               
-              <div className="col-md-12 moreInfo" onClick={() => this.setState({moreInfo:!this.state.moreInfo})}>
+              <div className="col-md-12 moreInfo relacionados" onClick={() => this.setState({moreInfo:!this.state.moreInfo})}>
                 <a data-tip data-for="moreInfo">
                   <i className={this.state.moreInfo ? "fa fa-minus pull-right moreInfo" : "fa fa-plus pull-right moreInfo"} />
                 </a>
