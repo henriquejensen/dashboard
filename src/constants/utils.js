@@ -5,7 +5,6 @@ export const ERR_CONNECTION_REFUSED = "ERR_CONNECTION_REFUSED";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const LOG_OUT = "LOG_OUT";
-export const LOAD_STATES = "LOAD_STATES";
 export const LOGO_LOCALIZE = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/localize-logopagina.png";
 export const ICON_LOCALIZE = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/icon-localize.png";
 export const LOGO_CREDITO = "../../../public/assertiva/logo-credito.png";

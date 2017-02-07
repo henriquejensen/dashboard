@@ -1,0 +1,6 @@
+{
+    "tiposLogradouro": [
+        {"name": "Rua", "sigla": "R"},
+        {"name": "Avenida", "sigla": "Av"}
+    ]
+}

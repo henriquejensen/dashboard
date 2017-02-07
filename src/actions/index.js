@@ -25,7 +25,6 @@ import {
 		CLOSE_TAB,
 		AUTH_URL,
 		AUTHENTICATION,
-		LOAD_STATES,
 		REQUEST_ERROR,
 		ERR_CONNECTION_REFUSED
 } from "../constants/utils";
@@ -237,12 +236,5 @@ export function logOut() {
 	localStorage.removeItem("senha");
 	return {
 		type: LOG_OUT,
-	}
-}
-
-export function getEstados() {
-	return {
-		type: LOAD_STATES,
-		payload: ""
 	}
 }

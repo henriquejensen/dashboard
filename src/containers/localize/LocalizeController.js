@@ -8,7 +8,6 @@ import {
 		seeModel,
 		closeModel,
 		closeTab,
-		getEstados
 } from "../../actions/index";
 
 import { bindActionCreators } from "redux";
@@ -22,6 +21,9 @@ import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
 
 import { LOGO_LOCALIZE, ICON_LOCALIZE } from "../../constants/utils";
+
+import estados from "../../components/utils/common/estados.json";
+import tiposLogradouro from "../../components/utils/common/tiposLogradouro.json";
 
 class LocalizeController extends Component {
 	constructor(props) {
@@ -38,6 +40,7 @@ class LocalizeController extends Component {
 			bairro: "",
 			tipo: "",
 			nextTab: "",
+			tipoLogradouro: "",
 			changeTab: false,
 			buscaAvancada: false
 		}
@@ -49,11 +52,7 @@ class LocalizeController extends Component {
 		this.onChange = this.onChange.bind(this);
 		this.form = this.form.bind(this);
 		this.closeTab = this.closeTab.bind(this);
-	}
-
-	componentWillMount() {
-		this.props.getEstados();
-		
+		this.hiddenBuscaAvancada = this.hiddenBuscaAvancada.bind(this);
 	}
 
 	componentDidMount() {
@@ -125,6 +124,12 @@ class LocalizeController extends Component {
 		})
 	}
 
+	hiddenBuscaAvancada() {
+		this.setState({
+			buscaAvancada: !this.state.buscaAvancada
+		})
+	}
+
 	closeTab(index) {
 		if(this.props.datas.length > 1) {
 			this.props.closeTab(index);
@@ -160,7 +165,7 @@ class LocalizeController extends Component {
 							})}
 						</select>
 					</Col>
-					<Col md={10}>
+					<Col md={8}>
 						<input
 							className="form-control"
 							type={
@@ -207,6 +212,8 @@ class LocalizeController extends Component {
 				showLogo = {this.props.datas.length == 0 ? true : false}
 				onformSubmit = {this.onLocalizeSubmit}
 				seeModelo = {this.props.seeModel}
+				buscaAvancada = {this.state.buscaAvancada}
+				hiddenBuscaAvancada = {this.hiddenBuscaAvancada}
 				closeModelo = {this.props.closeModel}
 				status = {this.props.status}
 				message = {this.props.message} >
@@ -224,7 +231,7 @@ class LocalizeController extends Component {
 							})}
 						</select>
 					</Col>
-					<Col md={4}>
+					<Col md={10}>
 						<input
 							className="form-control"
 							type="text"
@@ -234,10 +241,25 @@ class LocalizeController extends Component {
 							placeholder="Endereço ou CEP"
 							style={{width:'100%'}}/>
 					</Col>
+
 					<Col md={2}>
+						<select
+							className="form-control"
+							name="tipoLogradouro"
+							onChange={this.onChange}
+							value={this.state.tipoLogradouro ? this.state.tipoLogradouro : optionSelected}
+							required>
+							<option value="">Tipo Logradouro</option>
+							{tiposLogradouro.tiposLogradouro.map((tipo,i) => {
+								return <option value={tipo.sigla} key={i}>{tipo.name}</option>
+							})}
+						</select>
+					</Col>
+
+					<Col md={5}>
 						<input className="form-control" type="text" placeholder="Complemento" style={{width:'100%'}}/>
 					</Col>
-					<Col md={2}>
+					<Col md={3}>
 						<input className="form-control" type="number" placeholder="Nº inicial" style={{width:'100%'}}/>
 					</Col>
 					<Col md={2}>
@@ -245,24 +267,28 @@ class LocalizeController extends Component {
 					</Col>
 
 					<Col md={2}>
-						<FormControl componentClass="select" style={{width:'100%'}}>
-							{this.props.estados.map((estado,index) => {
-								return (
-									<option value={estado.sigla} key={index}>{estado.sigla}</option>
-								)
+						<select
+							className="form-control"
+							name="estado"
+							onChange={this.onChange}
+							value={this.state.estado ? this.state.estado : optionSelected}
+							required>
+							<option value="">Selecione UF</option>
+							{estados.estados.map((estado,i) => {
+								return <option value={estado.sigla} key={i}>{estado.sigla}</option>
 							})}
-						</FormControl>
+						</select>
 					</Col>
-					<Col md={6}>
+					<Col md={5}>
 						<input className="form-control"  type="text" placeholder="Digite o nome da cidade" style={{width:'100%'}}/>
 					</Col>
-					<Col md={4}>
+					<Col md={this.state.buscaAvancada ? 5 : 3}>
 						<input className="form-control"  type="text" placeholder="Digite o nome do bairro" style={{width:'100%'}}/>
 					</Col>
 
 					{/*Input da busca avançada*/}
 					{this.state.buscaAvancada ?
-						<Col md={8}>
+						<Col md={7}>
 							<input
 								className="form-control"
 								name="nome"
@@ -280,7 +306,7 @@ class LocalizeController extends Component {
 					: ""}
 
 					{this.state.buscaAvancada ?
-						<Col md={2}>
+						<Col md={1}>
 							<FormControl componentClass="select" style={{width:'100%'}}>
 								<option>Sexo</option>
 								<option value="M">M</option>
@@ -288,11 +314,6 @@ class LocalizeController extends Component {
 							</FormControl>
 						</Col>
 					: ""}
-					
-					{!this.state.buscaAvancada ?
-						<div href="#" className="busca-avancada" onClick={() => {this.setState({buscaAvancada: true})}}>Busca avancada</div>
-					:
-						<div href="#" className="busca-avancada" onClick={() => {this.setState({buscaAvancada: false})}}>Fechar busca</div>}
 			
 			</MyForm>
 		)
@@ -306,6 +327,8 @@ class LocalizeController extends Component {
 				showModel = {this.props.datas.length == 1 && this.props.status=="model" ? true : false}
 				showLogo = {this.props.datas.length == 0 ? true : false}
 				onformSubmit = {this.onLocalizeSubmit}
+				buscaAvancada = {this.state.buscaAvancada}
+				hiddenBuscaAvancada = {this.hiddenBuscaAvancada}
 				seeModelo = {this.props.seeModel}
 				closeModelo = {this.props.closeModel}
 				status = {this.props.status}
@@ -346,18 +369,22 @@ class LocalizeController extends Component {
 					</Col>
 
 					<Col md={2}>
-						<FormControl componentClass="select" style={{width:'100%'}}>
-							{this.props.estados.map((estado,index) => {
-								return (
-									<option value={estado.sigla} key={index}>{estado.sigla}</option>
-								)
+						<select
+							className="form-control"
+							name="estado"
+							onChange={this.onChange}
+							value={this.state.estado ? this.state.estado : optionSelected}
+							required>
+							<option value="">Selecione UF</option>
+							{estados.estados.map((estado,i) => {
+								return <option value={estado.sigla} key={i}>{estado.sigla}</option>
 							})}
-						</FormControl>
+						</select>
 					</Col>
-					<Col md={6}>
+					<Col md={this.state.buscaAvancada ? 6 : 5}>
 						<input className="form-control"  type="text" placeholder="Digite o nome da cidade" style={{width:'100%'}}/>
 					</Col>
-					<Col md={4}>
+					<Col md={this.state.buscaAvancada ? 4 : 3}>
 						<input className="form-control"  type="text" placeholder="Digite o nome do bairro" style={{width:'100%'}}/>
 					</Col>
 
@@ -372,7 +399,7 @@ class LocalizeController extends Component {
 					: ""}
 
 					{this.state.buscaAvancada ?
-						<Col md={6}>
+						<Col md={4}>
 							<input
 								className="form-control"
 								name="endereco"
@@ -395,11 +422,6 @@ class LocalizeController extends Component {
 						</Col>
 					: ""}
 
-					{!this.state.buscaAvancada ?
-						<div href="#" className="busca-avancada" onClick={() => {this.setState({buscaAvancada: true})}}>Busca avancada</div>
-					:
-						<div href="#" className="busca-avancada" onClick={() => {this.setState({buscaAvancada: false})}}>Fechar busca avancada</div>}
-					
 			</MyForm>
 		)
 	}
@@ -477,7 +499,6 @@ function mapStateToProps(state) {
 		datas: state.localize.response,
 		status: state.localize.status,
 		message: state.localize.message,
-		estados: state.estados,
 		loading: state.localize.loading,
 		tabActive: state.localize.tabActive
 	}
@@ -493,7 +514,6 @@ function mapDispatchToProps(dispatch) {
 			seeModel,
 			closeModel,
 			closeTab,
-			getEstados,
 		},
 		dispatch);
 }
