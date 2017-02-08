@@ -17,3 +17,4 @@ export const LOGO_LOCALIZE = "https://s3-us-west-2.amazonaws.com/assportal/IMAGE
 export const ICON_LOCALIZE = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/icone-localize.png";
 export const LOADING_LOCALIZE = "LOADING_LOCALIZE";
 export const CLOSE_TAB_LOCALIZE = "CLOSE_TAB_LOCALIZE";
+export const CLOSE_MESSAGE_ERROR_LOCALIZE = "CLOSE_MESSAGE_ERROR_LOCALIZE";

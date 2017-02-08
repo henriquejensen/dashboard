@@ -4,7 +4,7 @@
             "label": "Home",
             "id": "home",
             "color": "#7a5ec0",
-            "link": "/home",
+            "link": "/",
             "image": "../../public/assertiva/icon-assertiva.png",
             "alt": "Página inicial",
             "subItems": []

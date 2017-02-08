@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, IndexRoute } from "react-router";
 
 import App from "./components/app";
-import Welcome from "./components/welcome";
 import Login from "./components/Login";
 import Signin from "./components/Signin";
 
@@ -24,46 +23,41 @@ import Relatorios from "./containers/relatorios/Relatorios";
 
 export default (
   <Route>
+    <Route path='/login' component={Login} />
+    <Route path='/signin' component={Signin} />
 
-    <Route path="/" name="Assertiva" component={Welcome} >
-      <IndexRoute component={App} />
-      <Route path='/login' component={Login} />
-      <Route path='/signin' component={Signin} />
+    <Route onEnter={requireAuth} component={App}>
+      <Route path='/' name="Home" component={Dashboard} />
 
-      <Route onEnter={requireAuth} component={App}>
-        <Route path='/home' name="Home" component={Dashboard} />
-
-        <Route name="Localize" path="localize" component={Localize}	>
-          <Route name="Localize" path=":tipo" component={Localize}	/>
-        </Route>
-
-        <Route name="Crédito" path="credito" component={Credito}	>
-          <Route name="Crédito" path=":tipo" component={Credito}	/>
-        </Route>
-
-        <Route name="Foco Fiscal" path="focofiscal" component={FocoFiscal}	>
-          <Route name="Foco Fiscal" path=":tipo" component={FocoFiscal}	/>
-        </Route>
-        
-        <Route name="Base Certa" path="basecerta" component={BaseCerta} />
-        <Route name="SMS" path="sms" component={SMS} />
-        <Route name="centro de custo" path="sms/centrocusto" component={CentroCusto} />
-        <Route name="respostas" path="sms/respostas" component={Respostas} />
-        <Route name="Veiculos" path="veiculos" component={Veiculos} />
-        <Route name="Venda+" path="vendamais" component={VendaMais} />
-        <Route name="Consig+" path="consigmais" component={ConsigMais} />
-
-        <Route name="Relatórios" path="relatorios" component={Relatorios}>
-          <Route name="Consultas" path=":tipo" component={Relatorios} />
-        </Route>
-        
-        <Route name="Editar" path="editar" component={EditUser}	/>
-        <Route name="Chat" path="chat" component={Chat}	/>
+      <Route name="Localize" path="localize" component={Localize}	>
+        <Route name="Localize" path=":tipo" component={Localize}	/>
       </Route>
 
-      <Route name="Erro" path="*" component={Login} />
+      <Route name="Crédito" path="credito" component={Credito}	>
+        <Route name="Crédito" path=":tipo" component={Credito}	/>
+      </Route>
 
+      <Route name="Foco Fiscal" path="focofiscal" component={FocoFiscal}	>
+        <Route name="Foco Fiscal" path=":tipo" component={FocoFiscal}	/>
+      </Route>
+      
+      <Route name="Base Certa" path="basecerta" component={BaseCerta} />
+      <Route name="SMS" path="sms" component={SMS} />
+      <Route name="centro de custo" path="sms/centrocusto" component={CentroCusto} />
+      <Route name="respostas" path="sms/respostas" component={Respostas} />
+      <Route name="Veiculos" path="veiculos" component={Veiculos} />
+      <Route name="Venda+" path="vendamais" component={VendaMais} />
+      <Route name="Consig+" path="consigmais" component={ConsigMais} />
+
+      <Route name="Relatórios" path="relatorios" component={Relatorios}>
+        <Route name="Consultas" path=":tipo" component={Relatorios} />
+      </Route>
+      
+      <Route name="Editar" path="editar" component={EditUser}	/>
+      <Route name="Chat" path="chat" component={Chat}	/>
     </Route>
+
+    <Route name="Erro" path="*" component={Login} />
 
   </Route>
 );

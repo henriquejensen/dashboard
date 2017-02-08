@@ -8,6 +8,7 @@ import {
 		seeModel,
 		closeModel,
 		closeTab,
+		closeMessageErrorLocalize
 } from "../../actions/index";
 
 import { bindActionCreators } from "redux";
@@ -160,6 +161,7 @@ class LocalizeController extends Component {
 				logo = {LOGO_LOCALIZE}
 				showLogo = {this.props.datas.length == 0 ? true : false}
 				onformSubmit = {this.onFormSubmit}
+				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
 				seeModelo = {this.props.seeModel}
 				status = {this.props.status}
 				message = {this.props.message} >
@@ -614,6 +616,7 @@ function mapDispatchToProps(dispatch) {
 			seeModel,
 			closeModel,
 			closeTab,
+			closeMessageErrorLocalize
 		},
 		dispatch);
 }

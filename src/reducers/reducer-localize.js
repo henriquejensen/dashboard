@@ -13,6 +13,7 @@ import {
 		CLOSE_LOCALIZE_MODEL,
 		LOADING_LOCALIZE,
 		CLOSE_TAB_LOCALIZE,
+		CLOSE_MESSAGE_ERROR_LOCALIZE
 } from "../constants/constantsLocalize";
 import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB, ICON_CREDITO } from "../constants/utils";
 import model from "./data/modelLocalize.json";
@@ -237,6 +238,15 @@ export default function(state = initialState, action) {
 					response: newState.response,
 					tabActive: newState.tabActive
 				};
+
+			case CLOSE_MESSAGE_ERROR_LOCALIZE:
+				return {
+					status: "",
+					message: "",
+					loading: false,
+					response: newState.response,
+					tabActive: newState.tabActive
+				}
 		}
 	}
 

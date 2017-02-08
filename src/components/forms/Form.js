@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip';
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Alert } from "react-bootstrap";
 
 import { LocalizeDescription, CreditoDescription, FocoFiscalDescription } from "../ProductDescription";
 import UltimasConsultas from "../UltimasConsultas";
@@ -65,12 +65,11 @@ export default class Form extends Component {
                     </Tooltip>
 
                     {this.props.status == "error request" || this.props.status == "error connection" ?
-                        <div className="col-md-offset-3 col-md-6">
-                            <div className="alert alert-danger">
+                        <Col md={12} sm={12}> 
+                            <Alert bsStyle="danger" className="text-center" onDismiss={this.props.closeMessageErrorLocalize}>
                                 {this.props.message}
-                                {/*<i className="glyphicon glyphicon-remove error-message" width="100%"/>*/}
-                            </div>
-                        </div>
+                            </Alert>
+                        </Col>
                     : ""}
                     
                     {this.props.showLogo ? 

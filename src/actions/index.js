@@ -13,7 +13,8 @@ import {
 		LOADING_LOCALIZE,
 		CLOSE_TAB_LOCALIZE,
 		SEARCH_BY_CREDITO_PF,
-		SEARCH_BY_CREDITO_PJ
+		SEARCH_BY_CREDITO_PJ,
+		CLOSE_MESSAGE_ERROR_LOCALIZE
 } from "../constants/constantsLocalize";
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 import { GET_CAMPANHAS_SMS, GET_CENTRO_CUSTO_SMS, GET_RESPOSTAS_SMS } from "../constants/constantsSMS";
@@ -28,6 +29,13 @@ import {
 		REQUEST_ERROR,
 		ERR_CONNECTION_REFUSED
 } from "../constants/utils";
+
+export function closeMessageErrorLocalize() {
+	return {
+		type: CLOSE_MESSAGE_ERROR_LOCALIZE,
+		payload: "close"
+	}
+}
 
 export function closeTab(index) {
 	return {
