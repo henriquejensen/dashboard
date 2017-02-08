@@ -30,16 +30,38 @@ class Credito extends Component {
 
 		this.state = {
 			tipo: "Intermediária Plus/Pessoal Plus",
-			documento: "",
-			estado: ""
+			expressTipo: "CPF",
+			tipoCheque: "Apenas Cadastro",
+			cheque: {
+				documento: "",
+				uf: "",
+				banco: "",
+				agência: "",
+				conta: "",
+				digitoConta: "",
+				chequeInicial: "",
+				digitoChequeInicial: "",
+				CMC7: "",
+				folhas: "",
+				servico: []
+			}
 		}
 
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 		this.onChange = this.onChange.bind(this);
+		this.onChangeInput = this.onChangeInput.bind(this);
 	}
 
 	componentDidMount() {
 		document.title = "Assertiva > Crédito";
+	}
+
+	onChangeInput(evt) {
+		let newStateCheque = this.state.cheque;
+		newStateCheque[evt.target.name] = evt.target.value
+		this.setState({
+			cheque: newStateCheque
+		})
 	}
 
 	onChange(evt) {
@@ -51,7 +73,7 @@ class Credito extends Component {
 	onFormSubmit(evt) {
 		evt.preventDefault();
 
-		console.log("SUBMIT", this.state.tipo);
+		console.log("SUBMIT", this.state.tipo, this.state.cheque);
 	}
 
 	renderForm(formType, options, optionSelected, showUF) {
@@ -61,7 +83,6 @@ class Credito extends Component {
 				logo = {LOGO_CREDITO}
 				showModel = {this.props.datas.length >= 1 ? (this.props.datas[0].data.cadastroPf.cpf == 11111111111 ? true: false) : false}
 				showLogo = {this.props.datas.length == 0 ? true : false}
-				onChange = {this.onChange}
 				onformSubmit = {this.onFormSubmit}
 				seeModelo = {this.props.seeModel}
 				closeModelo = {this.props.closeModel}
@@ -90,9 +111,9 @@ class Credito extends Component {
 									"CPF"
 								: "CPF ou CNPJ"
 							}
-							value={this.state.documento}
+							value={this.state.cheque.documento}
 							name="documento"
-							onChange={this.onChange}
+							onChange={this.onChangeInput}
 							style={{width:'100%'}}/>
 					</Col>
 
@@ -101,8 +122,8 @@ class Credito extends Component {
 							<select
 								className="form-control"
 								name="estado"
-								onChange={this.onChange}
-								value={this.state.estado ? this.state.estado : optionSelected}
+								onChange={this.onChangeInput}
+								value={this.state.cheque.estado}
 								required>
 								<option value="">Selecione UF</option>
 								{estados.estados.map((estado,i) => {
@@ -154,15 +175,103 @@ class Credito extends Component {
 							})}
 						</select>
 					</Col>
-					<Col md={6}>
+					<Col md={this.state.tipoCheque != "Apenas Cadastro" ? 8 : 6}>
 						<input
 							className="form-control"
 							type="text"
-							placeholder={ "CPF ou CNPJ" }
-							value={this.state.documento}
+							placeholder="CPF ou CNPJ"
+							value={this.state.cheque.documento}
 							name="documento"
-							onChange={this.onChange}/>
+							onChange={this.onChangeInput}/>
 					</Col>
+
+					{this.state.tipoCheque != "Apenas Cadastro" ?
+						<span>
+							{this.state.tipoCheque != "Por Código de Barras (CMC-7)" ?
+								<span>
+									<Col md={2}>
+										<input
+											className="form-control"
+											type="text"
+											placeholder="Banco"
+											value={this.state.cheque.banco}
+											name="banco"
+											onChange={this.onChangeInput}/>
+									</Col>
+
+									<Col md={2}>
+										<input
+											className="form-control"
+											type="text"
+											placeholder="Agência"
+											value={this.state.cheque.agencia}
+											name="agencia"
+											onChange={this.onChangeInput}/>
+									</Col>
+
+									<Col md={2}>
+										<input
+											className="form-control"
+											type="text"
+											placeholder="conta"
+											value={this.state.cheque.conta}
+											name="conta"
+											onChange={this.onChangeInput}/>
+									</Col>
+
+									<Col md={2}>
+										<input
+											className="form-control"
+											type="text"
+											placeholder="Conta"
+											value={this.state.cheque.digitoConta}
+											name="digitoConta"
+											onChange={this.onChangeInput}/>
+									</Col>
+
+									<Col md={2}>
+										<input
+											className="form-control"
+											type="text"
+											placeholder="Cheque Inicial"
+											value={this.state.cheque.chequeInicial}
+											name="chequeInicial"
+											onChange={this.onChangeInput}/>
+									</Col>
+
+									<Col md={2}>
+										<input
+											className="form-control"
+											type="text"
+											placeholder="Dígito Cheque Inicial"
+											value={this.state.cheque.digitoChequeInicial}
+											name="digitoChequeInicial"
+											onChange={this.onChangeInput}/>
+									</Col>
+								</span>
+							: ""}
+
+							<Col md={6}>
+								<input
+									className="form-control"
+									type="text"
+									placeholder="CMC7"
+									value={this.state.cheque.CMC7}
+									name="CMC7"
+									onChange={this.onChangeInput}/>
+							</Col>
+
+							<Col md={4}>
+								<input
+									className="form-control"
+									type="text"
+									placeholder="Folhas"
+									value={this.state.cheque.folhas}
+									name="folhas"
+									onChange={this.onChangeInput}/>
+							</Col>
+						</span>
+					: ""}
 						
 			</MyForm>
 		)
@@ -198,7 +307,7 @@ class Credito extends Component {
 					<Col md={2}>
 						<select
 							className="form-control"
-							name="tipoCheque"
+							name="expressTipo"
 							onChange={this.onChange}
 							value={this.state.expressTipo}
 							required>
@@ -210,10 +319,10 @@ class Credito extends Component {
 						<input
 							className="form-control"
 							type="text"
-							placeholder={ "CPF ou CNPJ" }
-							value={this.state.documento}
+							placeholder="CPF ou CNPJ"
+							value={this.state.cheque.documento}
 							name="documento"
-							onChange={this.onChange}/>
+							onChange={this.onChangeInput}/>
 					</Col>
 
 					<Col md={10} className="text-center">
@@ -227,14 +336,16 @@ class Credito extends Component {
 							</Checkbox>
 							{' '}
 							<Checkbox inline>
-								Sintegra 
+								Sintegra
 							</Checkbox>
 							<Checkbox inline>
 								CCF
 							</Checkbox>
-							<Checkbox inline>
-								Protesto Público 
-							</Checkbox>
+							{this.state.expressTipo == "CNPJ" ?
+								<Checkbox inline>
+									Protesto Público 
+								</Checkbox>
+							: ""}
 						</FormGroup>
 					</Col>
 						
