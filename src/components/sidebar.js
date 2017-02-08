@@ -30,6 +30,7 @@ class Sidebar extends Component {
   }
   
   activeMenuDropdown(menu) {
+    console.log(menu)
     this.setState({
       menuOpened: menu
     })
@@ -43,7 +44,7 @@ class Sidebar extends Component {
             {menu.sidebar.map((opt, index) => {
               return (
                 <li key={index} onClick={(evt) => {evt.preventDefault();this.props.changeColorMenu(opt.color)}}>
-                  <Link to={opt.link} onClick={() => this.activeMenuDropdown(opt.label.toLowerCase())} activeStyle={{backgroundColor: "#E7E7E7"}}>
+                  <Link to={opt.link} onClick={() => this.activeMenuDropdown(opt.id)} activeStyle={{backgroundColor: "#E7E7E7"}}>
                     {this.props.activedMenu ?
                       <img src={opt.image} className="sub-icon" alt={opt.alt}/>
                     : ""}
@@ -52,10 +53,10 @@ class Sidebar extends Component {
                       <img src={opt.image} className="sub-icon sub-icon-open-menu" alt={opt.alt}/>
                     : ""}
                   </Link>
-                  <ul className={this.state.menuOpened == opt.label.toLowerCase() && this.props.activedMenu ? "sidebar-item-dropdown" : "display-none"}>
+                  <ul className={this.state.menuOpened == opt.id && this.props.activedMenu ? "sidebar-item-dropdown" : "display-none"}>
                     {opt.subItems.map((subOpt, j) => {
                       return (
-                        <Link to={subOpt.link} key={j} activeStyle={{fontWeight: "bold"}}>
+                        <Link to={subOpt.link} key={j}>
                           <li>{subOpt.label}</li>
                         </Link>
                       )

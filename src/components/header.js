@@ -14,7 +14,8 @@ import {
 		FormGroup,
 		FormControl,
 		Button,
-		Badge
+		Badge,
+		Row
 } from "react-bootstrap";
 
 import menu from "./menu/menu.json";
@@ -72,17 +73,15 @@ class MenuSuperior extends Component {
 						<NavDropdown title={<Notification />} id="menu-notification">
 							{this.props.notifications.map((notification, index) => {
 								return (
-									<Navbar.Text key={index} className="notication">
-										<a href={notification.link} target="_blank">
-											<Col md={2}>
-												<img src={notification.image_url} width="30px" />
-											</Col>
-											<Col md={10}>
-												<h4>{notification.assunto} </h4>
-												<p>{notification.mensagem}</p>
-											</Col>
-										</a>
-									</Navbar.Text>
+									<MenuItem key={index} href={notification.link} target="_blank"  className="notication">
+										<Col md={2}>
+											<img src={notification.image_url} width="30px" />
+										</Col>
+										<Col md={10}>
+											<h4>{notification.assunto} </h4>
+											<p style={{overflow:"hidden"}}>{notification.mensagem} </p>
+										</Col>
+									</MenuItem>
 								)
 							})}
 						</NavDropdown>

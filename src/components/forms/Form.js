@@ -73,8 +73,6 @@ export default class Form extends Component {
                         </div>
                     : ""}
                     
-                    {this.props.showModel ? <a href="#" onClick={this.props.closeModelo}>Fechar Modelo</a> : ""}
-
                     {this.props.showLogo ? 
                         <div>
                             <LocalizeDescription />

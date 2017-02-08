@@ -37,12 +37,12 @@ export default (
           <Route name="Localize" path=":tipo" component={Localize}	/>
         </Route>
 
-        <Route name="Credito" path="credito" component={Credito}	>
-          <Route name="Credito" path=":tipo" component={Credito}	/>
+        <Route name="Crédito" path="credito" component={Credito}	>
+          <Route name="Crédito" path=":tipo" component={Credito}	/>
         </Route>
 
-        <Route name="FocoFiscal" path="focofiscal" component={FocoFiscal}	>
-          <Route name="FocoFiscal" path=":tipo" component={FocoFiscal}	/>
+        <Route name="Foco Fiscal" path="focofiscal" component={FocoFiscal}	>
+          <Route name="Foco Fiscal" path=":tipo" component={FocoFiscal}	/>
         </Route>
         
         <Route name="Base Certa" path="basecerta" component={BaseCerta} />

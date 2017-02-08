@@ -30,14 +30,21 @@ class LocalizeController extends Component {
 		super(props);
 
 		this.state = {
-			documento: "",
-			telefone: "",
-			email: "",
-			nome: "",
-			endereco: "",
-			estado: "",
-			cidade: "",
-			bairro: "",
+			localizeInput: {
+				documento: "",
+				telefone: "",
+				email: "",
+				nome: "",
+				dataNascimento: "",
+				sexo: "",
+				estado: "",
+				cidade: "",
+				bairro: "",
+				complemento: "",
+				enderecoCep: "",
+				numeroInicial: "",
+				numeroFinal: "",
+			},
 			tipo: "",
 			nextTab: "",
 			tipoLogradouro: "",
@@ -45,11 +52,12 @@ class LocalizeController extends Component {
 			buscaAvancada: false
 		}
 
-		this.onLocalizeSubmit = this.onLocalizeSubmit.bind(this);
+		this.onFormSubmit = this.onFormSubmit.bind(this);
 		this.searchLocalize = this.searchLocalize.bind(this);
 		this.searchPessoasRelacionadas = this.searchPessoasRelacionadas.bind(this);
 		this._showRelacionados = this._showRelacionados.bind(this);
 		this.onChange = this.onChange.bind(this);
+		this.onChangeInput = this.onChangeInput.bind(this);
 		this.form = this.form.bind(this);
 		this.closeTab = this.closeTab.bind(this);
 		this.hiddenBuscaAvancada = this.hiddenBuscaAvancada.bind(this);
@@ -78,49 +86,55 @@ class LocalizeController extends Component {
 		this.props.searchLocalize(doc, tipo);
 	}
 
-	onLocalizeSubmit(evt) {
+	onFormSubmit(evt) {
 		evt.preventDefault();
 
 		this.props.loadingLocalize();
 
-		let tipo = this.state.tipo ? this.state.tipo :  location.pathname.split("/")[2].toUpperCase();
+		let tipo = this.state.tipo ? this.state.tipo : location.pathname.split("/")[2].toUpperCase();
 
 		if(tipo == "CPF" || tipo == "CNPJ") {
 			let searchBy = "pf";
 			if(tipo == "CNPJ")
 				searchBy = "pj";
 			
-			this.props.searchLocalize(this.state.documento, searchBy);
+			this.props.searchLocalize(this.state.localizeInput.documento, searchBy);
 		} else {
-			const params = {
-				telefone: this.state.telefone,
-				nome: this.state.nome,
-				endereco: this.state.endereco,
-				estado: this.state.estado,
-				cidade: this.state.cidade,
-				bairro: this.state.bairro,
-				
-			}
-			this.props.searchLocalizeByParams(params, tipo);
+			this.props.searchLocalizeByParams(this.state.localizeInput, tipo);
 		}
 
+		console.log("SUBMIT", this.state.localizeInput);
+
 		this.setState({
-			documento: "",
-			telefone: "",
-			email: "",
-			nome: "",
-			endereco: "",
-			estado: "",
-			cidade: "",
-			bairro: "",
-			tabActive: "",
-			changeTab: false
+			localizeInput: {
+				documento: "",
+				telefone: "",
+				email: "",
+				nome: "",
+				dataNascimento: "",
+				sexo: "",
+				estado: "",
+				cidade: "",
+				bairro: "",
+				complemento: "",
+				enderecoCep: "",
+				numeroInicial: "",
+				numeroFinal: "",
+			},
 		});
 	}
 
 	onChange(evt) {
 		this.setState({
 			[evt.target.name]: evt.target.value
+		})
+	}
+
+	onChangeInput(evt) {
+		let newStateLocalize = this.state.localizeInput;
+		newStateLocalize[evt.target.name] = evt.target.value
+		this.setState({
+			localize: newStateLocalize
 		})
 	}
 
@@ -131,6 +145,7 @@ class LocalizeController extends Component {
 	}
 
 	closeTab(index) {
+		{/*Fecha as abas, quando sobrar um chama a funcao para fechar tudo (closeModel)*/}
 		if(this.props.datas.length > 1) {
 			this.props.closeTab(index);
 		} else {
@@ -143,12 +158,9 @@ class LocalizeController extends Component {
 			<MyForm
 				icon = {ICON_LOCALIZE}
 				logo = {LOGO_LOCALIZE}
-				showModel = {this.props.datas.length == 1 && this.props.datas[0].data.CPF == 11111111111 ? true : false}
 				showLogo = {this.props.datas.length == 0 ? true : false}
-				onChange = {this.onChange}
-				onformSubmit = {this.onLocalizeSubmit}
+				onformSubmit = {this.onFormSubmit}
 				seeModelo = {this.props.seeModel}
-				closeModelo = {this.props.closeModel}
 				status = {this.props.status}
 				message = {this.props.message} >
 					
@@ -184,10 +196,10 @@ class LocalizeController extends Component {
 							}
 							value={
 								formType == "telefone" ?
-									this.state.telefone
+									this.state.localizeInput.telefone
 									: formType == "email" ?
-										this.state.email
-								: this.state.documento
+										this.state.localizeInput.email
+								: this.state.localizeInput.documento
 							}
 							name={
 								formType == "telefone" ?
@@ -196,8 +208,8 @@ class LocalizeController extends Component {
 										"email"
 								: "documento"
 							}
-							onChange={this.onChange}
-							style={{width:'100%'}}/>
+							onChange={this.onChangeInput}
+						/>
 					</Col>
 			</MyForm>
 		)
@@ -208,13 +220,11 @@ class LocalizeController extends Component {
 			<MyForm
 				icon = {ICON_LOCALIZE}
 				logo = {LOGO_LOCALIZE}
-				showModel = {this.props.datas.length == 1 && this.props.status=="model" ? true : false}
 				showLogo = {this.props.datas.length == 0 ? true : false}
-				onformSubmit = {this.onLocalizeSubmit}
+				onformSubmit = {this.onFormSubmit}
 				seeModelo = {this.props.seeModel}
 				buscaAvancada = {this.state.buscaAvancada}
 				hiddenBuscaAvancada = {this.hiddenBuscaAvancada}
-				closeModelo = {this.props.closeModel}
 				status = {this.props.status}
 				message = {this.props.message} >
 				
@@ -235,20 +245,21 @@ class LocalizeController extends Component {
 						<input
 							className="form-control"
 							type="text"
-							name="endereco"
-							onChange={this.onChange}
-							value={this.props.endereco}
+							name="enderecoCep"
+							onChange={this.onChangeInput}
+							value={this.state.localizeInput.enderecoCep}
 							placeholder="Endereço ou CEP"
-							style={{width:'100%'}}/>
+							required
+						/>
 					</Col>
 
 					<Col md={2}>
 						<select
 							className="form-control"
 							name="tipoLogradouro"
-							onChange={this.onChange}
-							value={this.state.tipoLogradouro ? this.state.tipoLogradouro : optionSelected}
-							required>
+							onChange={this.onChangeInput}
+							value={this.state.localizeInput.tipoLogradouro}
+						>
 							<option value="">Tipo Logradouro</option>
 							{tiposLogradouro.tiposLogradouro.map((tipo,i) => {
 								return <option value={tipo.sigla} key={i}>{tipo.name}</option>
@@ -257,22 +268,43 @@ class LocalizeController extends Component {
 					</Col>
 
 					<Col md={5}>
-						<input className="form-control" type="text" placeholder="Complemento" style={{width:'100%'}}/>
+						<input
+							className="form-control"
+							type="text"
+							name="complemento"
+							onChange={this.onChangeInput}
+							value={this.state.localizeInput.complemento}
+							placeholder="Complemento"
+						/>
 					</Col>
 					<Col md={3}>
-						<input className="form-control" type="number" placeholder="Nº inicial" style={{width:'100%'}}/>
+						<input
+							className="form-control"
+							type="number"
+							name="numeroInicial"
+							onChange={this.onChangeInput}
+							value={this.state.localizeInput.numeroInicial}
+							placeholder="Nº inicial"
+						/>
 					</Col>
 					<Col md={2}>
-						<input className="form-control" type="number" placeholder="Nº final" style={{width:'100%'}}/>
+						<input
+							className="form-control"
+							type="number"
+							name="numeroFinal"
+							onChange={this.onChangeInput}
+							value={this.state.localizeInput.numeroFinal}
+							placeholder="Nº final"
+						/>
 					</Col>
 
 					<Col md={2}>
 						<select
 							className="form-control"
 							name="estado"
-							onChange={this.onChange}
-							value={this.state.estado ? this.state.estado : optionSelected}
-							required>
+							onChange={this.onChangeInput}
+							value={this.state.localizeInput.estado}
+						>
 							<option value="">Selecione UF</option>
 							{estados.estados.map((estado,i) => {
 								return <option value={estado.sigla} key={i}>{estado.sigla}</option>
@@ -280,10 +312,24 @@ class LocalizeController extends Component {
 						</select>
 					</Col>
 					<Col md={5}>
-						<input className="form-control"  type="text" placeholder="Digite o nome da cidade" style={{width:'100%'}}/>
+						<input
+							className="form-control"
+							type="text"
+							name="cidade"
+							value={this.state.localizeInput.cidade}
+							onChange={this.onChangeInput}
+							placeholder="Digite o nome da cidade"
+						/>
 					</Col>
 					<Col md={this.state.buscaAvancada ? 5 : 3}>
-						<input className="form-control"  type="text" placeholder="Digite o nome do bairro" style={{width:'100%'}}/>
+						<input
+							className="form-control"
+							type="text"
+							name="bairro"
+							value={this.state.localizeInput.bairro}
+							onChange={this.onChangeInput}
+							placeholder="Digite o nome do bairro"
+						/>
 					</Col>
 
 					{/*Input da busca avançada*/}
@@ -292,8 +338,8 @@ class LocalizeController extends Component {
 							<input
 								className="form-control"
 								name="nome"
-								value={this.props.nome}
-								onChange={this.onChange}
+								value={this.state.localizeInput.nome}
+								onChange={this.onChangeInput}
 								type="text"
 								placeholder="Digite o Nome" />
 						</Col>
@@ -301,17 +347,28 @@ class LocalizeController extends Component {
 
 					{this.state.buscaAvancada ?
 						<Col md={2}>
-							<input className="form-control" type="date" placeholder="Data nascimento" style={{width:'100%'}}/>
+							<input
+								className="form-control"
+								type="date"
+								name="dataNascimento"
+								value={this.state.localizeInput.dataNascimento}
+								onChange={this.onChangeInput}
+							/>
 						</Col>
 					: ""}
 
 					{this.state.buscaAvancada ?
 						<Col md={1}>
-							<FormControl componentClass="select" style={{width:'100%'}}>
-								<option>Sexo</option>
+							<select
+								className="form-control"
+								name="sexo"
+								onChange={this.onChangeInput}
+								value={this.state.localizeInput.sexo}
+							>
+								<option value="">Sexo</option>
 								<option value="M">M</option>
 								<option value="F">F</option>
-							</FormControl>
+							</select>
 						</Col>
 					: ""}
 			
@@ -324,13 +381,11 @@ class LocalizeController extends Component {
 			<MyForm
 				icon = {ICON_LOCALIZE}
 				logo = {LOGO_LOCALIZE}
-				showModel = {this.props.datas.length == 1 && this.props.status=="model" ? true : false}
 				showLogo = {this.props.datas.length == 0 ? true : false}
-				onformSubmit = {this.onLocalizeSubmit}
+				onformSubmit = {this.onFormSubmit}
 				buscaAvancada = {this.state.buscaAvancada}
 				hiddenBuscaAvancada = {this.hiddenBuscaAvancada}
 				seeModelo = {this.props.seeModel}
-				closeModelo = {this.props.closeModel}
 				status = {this.props.status}
 				message = {this.props.message} >
 				
@@ -340,7 +395,8 @@ class LocalizeController extends Component {
 							name="tipo"
 							onChange={this.onChange}
 							value={this.state.tipo ? this.state.tipo : optionSelected}
-							required>
+							required
+						>
 							<option value="">Selecione</option>
 							{options.map((opt,i) => {
 								return <option value={opt} key={i}>{opt}</option>
@@ -351,30 +407,42 @@ class LocalizeController extends Component {
 						<input
 							className="form-control"
 							name="nome"
-							value={this.props.nome}
-							onChange={this.onChange}
+							value={this.state.localizeInput.nome}
+							onChange={this.onChangeInput}
 							type="text"
 							placeholder="Digite o Nome"
-							style={{width:'100%'}}/>
+							required
+						/>
 					</Col>
 					<Col md={2}>
-						<input className="form-control" type="date" placeholder="Data nascimento" style={{width:'100%'}}/>
+						<input
+							className="form-control"
+							type="date"
+							name="dataNascimento"
+							value={this.state.localizeInput.dataNascimento}
+							onChange={this.onChangeInput}
+						/>
 					</Col>
 					<Col md={2}>
-						<FormControl componentClass="select" style={{width:'100%'}}>
-							<option>Sexo</option>
+						<select
+							className="form-control"
+							name="sexo"
+							onChange={this.onChangeInput}
+							value={this.state.localizeInput.sexo}
+						>
+							<option value="">Sexo</option>
 							<option value="M">M</option>
 							<option value="F">F</option>
-						</FormControl>
+						</select>
 					</Col>
 
 					<Col md={2}>
 						<select
 							className="form-control"
 							name="estado"
-							onChange={this.onChange}
-							value={this.state.estado ? this.state.estado : optionSelected}
-							required>
+							onChange={this.onChangeInput}
+							value={this.state.localizeInput.estado}
+						>
 							<option value="">Selecione UF</option>
 							{estados.estados.map((estado,i) => {
 								return <option value={estado.sigla} key={i}>{estado.sigla}</option>
@@ -382,10 +450,25 @@ class LocalizeController extends Component {
 						</select>
 					</Col>
 					<Col md={this.state.buscaAvancada ? 6 : 5}>
-						<input className="form-control"  type="text" placeholder="Digite o nome da cidade" style={{width:'100%'}}/>
+						<input 
+							className="form-control"
+							type="text"
+							name="cidade"
+							onChange={this.onChangeInput}
+							value={this.state.localizeInput.cidade}
+							placeholder="Digite o nome da cidade"
+						
+						/>
 					</Col>
 					<Col md={this.state.buscaAvancada ? 4 : 3}>
-						<input className="form-control"  type="text" placeholder="Digite o nome do bairro" style={{width:'100%'}}/>
+						<input
+							className="form-control"
+							type="text"
+							name="bairro"
+							onChange={this.onChangeInput}
+							value={this.state.localizeInput.bairro}
+							placeholder="Digite o nome do bairro"
+						/>
 					</Col>
 
 					{/*Input da busca avançada*/}
@@ -394,7 +477,11 @@ class LocalizeController extends Component {
 							<input
 								className="form-control"
 								type="text"
-								placeholder="Complemento" />
+								name="complemento"
+								onChange={this.onChangeInput}
+								value={this.state.localizeInput.complemento}
+								placeholder="Complemento"
+							/>
 						</Col>
 					: ""}
 
@@ -402,9 +489,9 @@ class LocalizeController extends Component {
 						<Col md={4}>
 							<input
 								className="form-control"
-								name="endereco"
-								onChange={this.onChange}
-								value={this.props.endereco}
+								name="enderecoCep"
+								onChange={this.onChangeInput}
+								value={this.state.localizeInput.enderecoCep}
 								type="text"
 								placeholder="Endereço ou CEP" />
 						</Col>
@@ -412,13 +499,26 @@ class LocalizeController extends Component {
 
 					{this.state.buscaAvancada ?
 						<Col md={2}>
-							<input className="form-control"  type="number" placeholder="Nº inicial" />
+							<input
+								className="form-control"
+								type="number"
+								name="numeroInicial"
+								onChange={this.onChangeInput}
+								value={this.state.localizeInput.numeroInicial}
+								placeholder="Nº inicial" />
 						</Col>
 					: ""}
 						
 					{this.state.buscaAvancada ?
 						<Col md={2}>
-							<input className="form-control"  type="number" placeholder="Nº final" />
+							<input
+								className="form-control"
+								type="number"
+								name="numeroFinal"
+								onChange={this.onChangeInput}
+								value={this.state.localizeInput.numeroFinal}
+								placeholder="Nº final"
+							/>
 						</Col>
 					: ""}
 

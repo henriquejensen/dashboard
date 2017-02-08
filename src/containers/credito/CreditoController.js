@@ -9,6 +9,9 @@ import {
 		closeTab,
 		changeTab
 } from "../../actions/actionsCredito";
+import {
+		changeMenu
+} from "../../actions/actionsCommon";
 
 import CreditoView from "./CreditoView";
 import MyForm from "../../components/forms/Form";
@@ -29,10 +32,10 @@ class Credito extends Component {
 		super(props);
 
 		this.state = {
-			tipo: "Intermediária Plus/Pessoal Plus",
+			tipo: "",
 			expressTipo: "CPF",
 			tipoCheque: "Apenas Cadastro",
-			cheque: {
+			creditoInput: {
 				documento: "",
 				uf: "",
 				banco: "",
@@ -50,17 +53,27 @@ class Credito extends Component {
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.onChangeInput = this.onChangeInput.bind(this);
+		this.closeTab = this.closeTab.bind(this);
 	}
 
 	componentDidMount() {
 		document.title = "Assertiva > Crédito";
 	}
 
+	closeTab(index) {
+		{/*Fecha as abas, quando sobrar um chama a funcao para fechar tudo (closeModel)*/}
+		if(this.props.datas.length > 1) {
+			this.props.closeTab(index);
+		} else {
+			this.props.closeModel();
+		}
+	}
+
 	onChangeInput(evt) {
-		let newStateCheque = this.state.cheque;
-		newStateCheque[evt.target.name] = evt.target.value
+		let newStateCredito = this.state.creditoInput;
+		newStateCredito[evt.target.name] = evt.target.value
 		this.setState({
-			cheque: newStateCheque
+			creditoInput: newStateCredito
 		})
 	}
 
@@ -73,19 +86,17 @@ class Credito extends Component {
 	onFormSubmit(evt) {
 		evt.preventDefault();
 
-		console.log("SUBMIT", this.state.tipo, this.state.cheque);
+		console.log("SUBMIT", this.state.tipo, this.state.creditoInput);
 	}
 
-	renderForm(formType, options, optionSelected, showUF) {
+	renderForm(options, optionSelected, showUF) {
 		return (
 			<MyForm
 				icon = {ICON_CREDITO}
 				logo = {LOGO_CREDITO}
-				showModel = {this.props.datas.length >= 1 ? (this.props.datas[0].data.cadastroPf.cpf == 11111111111 ? true: false) : false}
 				showLogo = {this.props.datas.length == 0 ? true : false}
 				onformSubmit = {this.onFormSubmit}
 				seeModelo = {this.props.seeModel}
-				closeModelo = {this.props.closeModel}
 				status = {this.props.status}
 				message = {this.props.message} >
 					
@@ -98,7 +109,7 @@ class Credito extends Component {
 							required>
 							<option value="">Selecione</option>
 							{options.map((opt,i) => {
-								return <option value={opt} key={i}>{opt}</option>
+								return <option value={opt.name} key={i}>{opt.label}</option>
 							})}
 						</select>
 					</Col>
@@ -107,11 +118,11 @@ class Credito extends Component {
 							className="form-control"
 							type="text"
 							placeholder={
-								formType == "consulta simples" ?
+								optionSelected == "simples" ?
 									"CPF"
 								: "CPF ou CNPJ"
 							}
-							value={this.state.cheque.documento}
+							value={this.state.creditoInput.documento}
 							name="documento"
 							onChange={this.onChangeInput}
 							style={{width:'100%'}}/>
@@ -123,7 +134,7 @@ class Credito extends Component {
 								className="form-control"
 								name="estado"
 								onChange={this.onChangeInput}
-								value={this.state.cheque.estado}
+								value={this.state.creditoInput.estado}
 								required>
 								<option value="">Selecione UF</option>
 								{estados.estados.map((estado,i) => {
@@ -141,12 +152,9 @@ class Credito extends Component {
 			<MyForm
 				icon = {ICON_CREDITO}
 				logo = {LOGO_CREDITO}
-				showModel = {this.props.datas.length >= 1 ? (this.props.datas[0].data.cadastroPf.cpf == 11111111111 ? true: false) : false}
 				showLogo = {this.props.datas.length == 0 ? true : false}
-				onChange = {this.onChange}
 				onformSubmit = {this.onFormSubmit}
 				seeModelo = {this.props.seeModel}
-				closeModelo = {this.props.closeModel}
 				status = {this.props.status}
 				message = {this.props.message} >
 					
@@ -159,7 +167,7 @@ class Credito extends Component {
 							required>
 							<option value="">Selecione</option>
 							{options.map((opt,i) => {
-								return <option value={opt} key={i}>{opt}</option>
+								return <option value={opt.name} key={i}>{opt.label}</option>
 							})}
 						</select>
 					</Col>
@@ -180,7 +188,7 @@ class Credito extends Component {
 							className="form-control"
 							type="text"
 							placeholder="CPF ou CNPJ"
-							value={this.state.cheque.documento}
+							value={this.state.creditoInput.documento}
 							name="documento"
 							onChange={this.onChangeInput}/>
 					</Col>
@@ -194,7 +202,7 @@ class Credito extends Component {
 											className="form-control"
 											type="text"
 											placeholder="Banco"
-											value={this.state.cheque.banco}
+											value={this.state.creditoInput.banco}
 											name="banco"
 											onChange={this.onChangeInput}/>
 									</Col>
@@ -204,7 +212,7 @@ class Credito extends Component {
 											className="form-control"
 											type="text"
 											placeholder="Agência"
-											value={this.state.cheque.agencia}
+											value={this.state.creditoInput.agencia}
 											name="agencia"
 											onChange={this.onChangeInput}/>
 									</Col>
@@ -214,7 +222,7 @@ class Credito extends Component {
 											className="form-control"
 											type="text"
 											placeholder="conta"
-											value={this.state.cheque.conta}
+											value={this.state.creditoInput.conta}
 											name="conta"
 											onChange={this.onChangeInput}/>
 									</Col>
@@ -224,7 +232,7 @@ class Credito extends Component {
 											className="form-control"
 											type="text"
 											placeholder="Conta"
-											value={this.state.cheque.digitoConta}
+											value={this.state.creditoInput.digitoConta}
 											name="digitoConta"
 											onChange={this.onChangeInput}/>
 									</Col>
@@ -234,7 +242,7 @@ class Credito extends Component {
 											className="form-control"
 											type="text"
 											placeholder="Cheque Inicial"
-											value={this.state.cheque.chequeInicial}
+											value={this.state.creditoInput.chequeInicial}
 											name="chequeInicial"
 											onChange={this.onChangeInput}/>
 									</Col>
@@ -244,7 +252,7 @@ class Credito extends Component {
 											className="form-control"
 											type="text"
 											placeholder="Dígito Cheque Inicial"
-											value={this.state.cheque.digitoChequeInicial}
+											value={this.state.creditoInput.digitoChequeInicial}
 											name="digitoChequeInicial"
 											onChange={this.onChangeInput}/>
 									</Col>
@@ -256,7 +264,7 @@ class Credito extends Component {
 									className="form-control"
 									type="text"
 									placeholder="CMC7"
-									value={this.state.cheque.CMC7}
+									value={this.state.creditoInput.CMC7}
 									name="CMC7"
 									onChange={this.onChangeInput}/>
 							</Col>
@@ -266,7 +274,7 @@ class Credito extends Component {
 									className="form-control"
 									type="text"
 									placeholder="Folhas"
-									value={this.state.cheque.folhas}
+									value={this.state.creditoInput.folhas}
 									name="folhas"
 									onChange={this.onChangeInput}/>
 							</Col>
@@ -282,12 +290,9 @@ class Credito extends Component {
 			<MyForm
 				icon = {ICON_CREDITO}
 				logo = {LOGO_CREDITO}
-				showModel = {this.props.datas.length >= 1 ? (this.props.datas[0].data.cadastroPf.cpf == 11111111111 ? true: false) : false}
 				showLogo = {this.props.datas.length == 0 ? true : false}
-				onChange = {this.onChange}
 				onformSubmit = {this.onFormSubmit}
 				seeModelo = {this.props.seeModel}
-				closeModelo = {this.props.closeModel}
 				status = {this.props.status}
 				message = {this.props.message} >
 					
@@ -300,7 +305,7 @@ class Credito extends Component {
 							required>
 							<option value="">Selecione</option>
 							{options.map((opt,i) => {
-								return <option value={opt} key={i}>{opt}</option>
+								return <option value={opt.name} key={i}>{opt.label}</option>
 							})}
 						</select>
 					</Col>
@@ -320,7 +325,7 @@ class Credito extends Component {
 							className="form-control"
 							type="text"
 							placeholder="CPF ou CNPJ"
-							value={this.state.cheque.documento}
+							value={this.state.creditoInput.documento}
 							name="documento"
 							onChange={this.onChangeInput}/>
 					</Col>
@@ -354,26 +359,35 @@ class Credito extends Component {
 	}
 
 	form = () => {
-		let pathTipo = location.pathname.split("/")[2] ? location.pathname.split("/")[2].toUpperCase() : "";
-		let tipo = this.state.tipo.toLowerCase();
-		let options = ["Consulta Completa", "Consulta Intermediária", "Intermediária Plus/Pessoal Plus", "Consulta Simples", "Consulta Cheque", "Consulta Express"];
+		let pathTipo = location.pathname.split("/")[2] ? location.pathname.split("/")[2] : "";
+		let tipo = this.state.tipo;
+		let options = [
+			{label:"Consulta Completa", name:"completa"},
+			{label:"Consulta Intermediária", name:"intermediaria"},
+			{label:"Intermediária Plus/Pessoal Plus", name:"intermediariaPlus"},
+			{label:"Consulta Simples", name:"simples"},
+			{label:"Consulta Cheque", name:"cheque"},
+			{label:"Consulta Express", name:"express"}
+		]
 
 		if(!tipo) {
 			tipo = pathTipo;
 		}
 
+		console.log("SHOW", tipo, " //", pathTipo)
+
 		return (
 			pathTipo || tipo ?
-				tipo == "consulta intermediária" || tipo == "intermediária plus/pessoal plus" ?
-					this.renderForm(tipo,options,pathTipo, true)
+				tipo == "intermediaria" || tipo == "intermediariaPlus" ?
+					this.renderForm(options,tipo, false)
 				: 
-					tipo == "consulta cheque" ?
-						this.renderFormCheque(options,pathTipo)
+					tipo == "cheque" ?
+						this.renderFormCheque(options,tipo)
 					:
-						tipo == "consulta express" ?
-							this.renderFormExpress(options,pathTipo)
-						: this.renderForm(tipo,options,pathTipo, false)
-			: this.renderForm(tipo,options,pathTipo, false)
+						tipo == "express" ?
+							this.renderFormExpress(options,tipo)
+						: this.renderForm(options,tipo, false)
+			: this.renderForm(options,tipo, false)
 		)
 
 	}
@@ -394,7 +408,7 @@ class Credito extends Component {
 						>
 							{this.props.datas.map((data, index) => {
 								return (
-									<Tab eventKey={data.label} title={<Titletab icon={data.icon} label={data.label} close={this.props.closeTab}/>} key={index}>
+									<Tab eventKey={data.label} title={<Titletab icon={data.icon} label={data.label} close={this.closeTab}/>} key={index}>
 										{data.produto == "credito" ?
 											<CreditoView
 												data={data.data}

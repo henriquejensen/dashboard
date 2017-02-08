@@ -2,6 +2,7 @@
     "sidebar": [
         {
             "label": "Home",
+            "id": "home",
             "color": "#7a5ec0",
             "link": "/home",
             "image": "../../public/assertiva/icon-assertiva.png",
@@ -10,6 +11,7 @@
         },
         {
             "label": "Localize",
+            "id": "localize",
             "color": "#4285f4",
             "link": "/localize",
             "image": "../../public/assertiva/icon-localize-new.png",
@@ -25,6 +27,7 @@
         },
         {
             "label": "SMS",
+            "id": "sms",
             "color": "#34a853",
             "link": "/sms",
             "image": "../../public/assertiva/icon-sms-new.png",
@@ -38,6 +41,7 @@
         },
         {
             "label": "Base Certa",
+            "id": "basecerta",
             "color": "#7a5ec0",
             "link": "/basecerta",
             "image": "../../public/assertiva/icon-focofiscal-new.png",
@@ -46,6 +50,7 @@
         },
         {
             "label": "Venda+",
+            "id": "vendamais",
             "color": "#ff5d31",
             "link": "/vendamais",
             "image": "../../public/assertiva/icon-consigmais-new.png",
@@ -54,6 +59,7 @@
         },
         {
             "label": "Crédito",
+            "id": "credito",
             "color": "#ffa02e",
             "link": "/credito",
             "image": "../../public/assertiva/icon-credito-new.png",
@@ -69,6 +75,7 @@
         },
         {
             "label": "Veículos",
+            "id": "veiculos",
             "color": "#4285f4",
             "link": "/veiculos",
             "image": "../../public/assertiva/icon-localize-new.png",
@@ -85,6 +92,7 @@
         },
         {
             "label": "Foco Fiscal",
+            "id": "focofiscal",
             "link": "/focofiscal",
             "color": "#7a5ec0",
             "image": "../../public/assertiva/icon-focofiscal-new.png",
@@ -99,6 +107,7 @@
         },
         {
             "label": "Consig+",
+            "id": "consigmais",
             "link": "/consigmais",
             "color": "#ffa02e",
             "image": "../../public/assertiva/icon-consigmais-new.png",

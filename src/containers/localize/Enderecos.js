@@ -100,7 +100,7 @@ export default class Enderecos extends Component {
 
               </div>
               
-              <div div className="col-md-12 col-sm-12 pull-right relacionados">
+              <div className="col-md-12 col-sm-12 pull-right relacionados">
                 <a data-tip data-for="usersRelated">
                   <i className="fa fa-users pull-right" onClick={this.props.relacionados} />
                 </a>
