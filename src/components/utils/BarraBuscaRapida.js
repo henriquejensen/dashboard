@@ -11,18 +11,21 @@ export default class BarraBuscaRapida extends Component {
 
         this.state = {
             IsModalOpen: false,
+            isCPF: true,
             documento: ""
         }
 
         this.onChange = this.onChange.bind(this);
 		this.onClickBuscaRapida = this.onClickBuscaRapida.bind(this);
+        this.changeDocumentType = this.changeDocumentType.bind(this);
     }
 
 	onClickBuscaRapida(evt) {
 		evt.preventDefault();
 
 		this.setState({
-			IsModalOpen: true
+			IsModalOpen: true,
+            isCPF: this.state.documento.length <= 11,
 		})
 	}
 
@@ -34,7 +37,13 @@ export default class BarraBuscaRapida extends Component {
 
     closeModal() {
         this.setState({
-            IsModalOpen: false
+            IsModalOpen: false,
+        })
+    }
+
+    changeDocumentType() {
+        this.setState({
+            isCPF: !this.state.isCPF
         })
     }
 
@@ -50,7 +59,8 @@ export default class BarraBuscaRapida extends Component {
                                 type="number"
                                 name="documento"
                                 defaultValue={this.state.documento}
-                                onChange={this.onChange} />
+                                onChange={this.onChange}
+                                required />
                             <InputGroup.Button>
                                 <Button
                                     type="submit"
@@ -64,12 +74,13 @@ export default class BarraBuscaRapida extends Component {
                 <Modal
                     IsModalOpen={this.state.IsModalOpen}
                     closeModal={this.closeModal.bind(this)}
-                    title={"Busca pelo "+ (this.state.documento.length <= 11 ? "CPF" : "CNPJ") + ": "+format(this.state.documento)}
+                    title={"Busca pelo "+ (this.state.isCPF? "CPF" : "CNPJ") + ": "+format(this.state.documento)}
                 >
                     <GridProdutos
+                        changeDocumentType={this.changeDocumentType}
                         closeModal={this.closeModal.bind(this)}
                         documento={this.state.documento}
-                        isCPF={this.state.documento.length <= 11 ? true : false} />
+                        isCPF={this.state.isCPF} />
                 </Modal>
             </div>
         )

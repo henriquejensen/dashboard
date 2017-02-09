@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, FormGroup, Checkbox, Image, Button, Alert } from "react-bootstrap";
+import { Col, FormGroup, Checkbox, Image, Button, Alert, Radio } from "react-bootstrap";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { browserHistory } from "react-router";
@@ -93,6 +93,14 @@ class GridProdutos extends Component {
     render() {
         return (
             <div>
+                <form className="text-center" style={{paddingBottom:15}}>
+                    <Radio onClick={this.props.isCPF ? "" : () => this.props.changeDocumentType()} inline checked={this.props.isCPF ? true : false}>
+                        CPF
+                    </Radio>
+                    <Radio onClick={!this.props.isCPF ? "" : () => this.props.changeDocumentType()} inline checked={this.props.isCPF ? false : true}>
+                        CNPJ
+                    </Radio>
+                </form>
                 {this.state.showMessage ? 
                     <Alert bsStyle="warning" className="text-center" onDismiss={this.handleAlertDismiss}>
                         Selecione pelo menos 1 opção
