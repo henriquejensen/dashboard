@@ -27,6 +27,7 @@ import {
 		getNotifications
 } from "../actions/actionsCommon";
 
+import Modal from "./Modal";
 import BarraBuscaRapida from "./utils/BarraBuscaRapida";
 
 class MenuSuperior extends Component {
@@ -35,9 +36,11 @@ class MenuSuperior extends Component {
 
 		this.state = {
 			IsModalOpen: false,
+			indexNotification: 0
 		}
 
 		this.changeRoute = this.changeRoute.bind(this);
+		this.onOpenNotification = this.onOpenNotification.bind(this);
 	}
 
 	changeRoute(route){
@@ -50,6 +53,21 @@ class MenuSuperior extends Component {
 	componentWillMount() {
 		this.props.getNotifications()
 	}
+
+	onOpenNotification(evt, index) {
+		evt.preventDefault();
+
+		this.setState({
+			IsModalOpen: true,
+			indexNotification: index
+		})
+	}
+
+    closeModal() {
+        this.setState({
+            IsModalOpen: false
+        })
+    }
 
 	render() {
 		return (
@@ -73,24 +91,13 @@ class MenuSuperior extends Component {
 						<NavDropdown title={<Notification />} id="menu-notification">
 							{this.props.notifications.map((notification, index) => {
 								return (
-									<MenuItem key={index} href={notification.link} target="_blank"  className="notication">
-										<Col md={2}>
-											<img src={notification.image_url} width="30px" />
-										</Col>
-										<Col md={10}>
+									<MenuItem
+										onClick={(evt) => this.onOpenNotification(evt,index)}
+										key={index}
+										className="notication">
+											<p >{notification.dataHora} </p>
 											<h4>{notification.assunto} </h4>
 											<p style={{overflow:"hidden"}}>{notification.mensagem} </p>
-										</Col>
-									</MenuItem>
-								)
-							})}
-						</NavDropdown>
-
-						<NavDropdown title="Produtos" id="menu-header-produtos">
-							{menu.sidebar.map((opt, index) => {
-								return (
-									<MenuItem key={index} onClick={() => this.changeRoute(opt.link)}>
-										{opt.label}
 									</MenuItem>
 								)
 							})}
@@ -124,6 +131,17 @@ class MenuSuperior extends Component {
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>
+
+			{this.state.IsModalOpen ?
+				<Modal
+					IsModalOpen={this.state.IsModalOpen}
+					closeModal={this.closeModal.bind(this)}
+					title={this.props.notifications[this.state.indexNotification].assunto}
+				>
+					<Col md={12}>{this.props.notifications[this.state.indexNotification].mensagem}</Col>
+				</Modal>
+			: ""}
+				
 		</div>
 		)
 	}
