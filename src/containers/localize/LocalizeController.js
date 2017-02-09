@@ -81,6 +81,7 @@ class LocalizeController extends Component {
 	}
 
 	searchLocalize(doc, tipo) {
+		console.log("SEARCH LOCALIZE", doc, tipo);
 		this.setState({
 			changeTab: false
 		})

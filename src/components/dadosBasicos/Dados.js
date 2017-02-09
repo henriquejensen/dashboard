@@ -57,7 +57,7 @@ export default class Dados extends Component{
 
                 {this.props.dados.maeNome && this.props.dados.maeCpf ? (<div className="col-md-6" style={{marginTop:3}}>
                     <a data-tip data-for='tooltipConsultar'>
-                      <div className="mapa-button" onClick={() => this.props.searchCredito(this.props.dados.maeCpf)}>
+                      <div className="mapa-button" onClick={() => this.props.searchPerson(this.props.dados.maeCpf, "pf")}>
                           <i className='fa fa-search'/>
                       </div>
                     </a>

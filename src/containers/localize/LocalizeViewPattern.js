@@ -15,9 +15,11 @@ export default class LocalizeView extends Component {
         return (
             <PanelGroup>
                 {this.props.tipo == "CPF" ?
-                    <Dados dados={this.props.data.cadastroPf} searchLocalize={this.props.searchLocalize} showPessoasRelacionadas={this.props.showPessoasRelacionadas}/>
-                : <DadosPj dados={this.props.data.cadastroPj} searchLocalize={this.props.searchLocalize} />}
-
+                    <Dados dados={this.props.data.cadastroPf} searchPerson={this.props.searchLocalize} showPessoasRelacionadas={this.props.showPessoasRelacionadas}/>
+                : <DadosPj dados={this.props.data.cadastroPj} searchPerson={this.props.searchLocalize} />}
+                <Telefones fixos={this.props.data.telefones.fixos} moveis={this.props.data.telefones.moveis} />
+                <Enderecos enderecos={this.props.data.enderecos} />
+                <Emails emails={this.props.data.emails} />
 
                 <Protocolo info={this.props.data.info} />
             </PanelGroup>

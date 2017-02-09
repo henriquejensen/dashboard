@@ -57,7 +57,10 @@ export default function(state = initialState, action) {
 			}
 		}
 
+
+
 		let newState = Object.assign({},state);
+
 
 		if(state.response.length > 6) {
 			newState.response.shift();
@@ -73,8 +76,8 @@ export default function(state = initialState, action) {
 					tabActive: newState.tabActive
 				}
 			case SEE_LOCALIZE_MODEL:
-				response.data = action.payload;
-				response.label = action.payload.cadastroPf.cpf;
+				response.data = model;
+				response.label = model.cadastroPf.cpf;
 				response.tipo = "CPF";
 				response.icon = ICON_LOCALIZE;
 				response.produto = "modelLocalize";
@@ -84,11 +87,10 @@ export default function(state = initialState, action) {
 					message: "",
 					loading: false,
 					response: [response],
-					tabActive: action.payload.cadastroPf.cpf
+					tabActive: model.cadastroPf.cpf
 				}
 
 			case SEARCH_BY_CREDITO_PF:
-				
 				response.data = modelCredito;
 				response.label = modelCredito.cadastroPf.cpf;
 				response.tipo = "CPF";
@@ -143,7 +145,7 @@ export default function(state = initialState, action) {
 					status: "success",
 					message: "",
 					loading: false,
-					response: newState.status == "model" ? [response] : [...newState.response, response],
+					response: [...newState.response, response],
 					tabActive: response.data.CPF
 				};
 
@@ -157,7 +159,7 @@ export default function(state = initialState, action) {
 					status: "success",
 					message: "",
 					loading: false,
-					response: newState.status == "model" ? [response] : [...newState.response, response],
+					response: [...newState.response, response],
 					tabActive: response.data.CNPJ
 				};
 
