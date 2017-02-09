@@ -116,9 +116,15 @@ export function searchLocalizeByParams(inputLocalize, tipo) {
 }
 
 export function seeModel() {
-	return {
-		type: SEE_LOCALIZE_MODEL,
-		payload: "seeModel"
+	return (dispatch) => {
+		ajax.post("http://www.mocky.io/v2/589cabe7250000610e805678")
+			.withCredentials()
+			.then((response) => {
+				dispatch({type: SEE_LOCALIZE_MODEL, payload: JSON.parse(response)})
+			})
+			.catch((error) => {
+				dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+			})
 	}
 }
 

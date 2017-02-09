@@ -374,8 +374,6 @@ class Credito extends Component {
 			tipo = pathTipo;
 		}
 
-		console.log("SHOW", tipo, " //", pathTipo)
-
 		return (
 			pathTipo || tipo ?
 				tipo == "intermediaria" || tipo == "intermediariaPlus" ?

@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 import { Tabs, Tab, Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
 
 import LocalizeView from "./LocalizeView";
+import LocalizeViewPattern from "./LocalizeViewPattern";
 import CreditoView from "../credito/CreditoView";
 
 import MyForm from "../../components/forms/Form";
@@ -574,6 +575,16 @@ class LocalizeController extends Component {
 										{data.produto == "localize" ?
 											<LocalizeView
 												data={data}
+												searchLocalize={this.searchLocalize}
+												showPessoasRelacionadas={this._showPessoasRelacionadas}
+												showRelacionados={this._showRelacionados}
+												pessoasRelacionadas={this.searchPessoasRelacionadas}/>
+										:
+										data.produto == "modelLocalize" ?
+											<LocalizeViewPattern
+												data={data.data}
+												tipo={data.tipo}
+												index={index}
 												searchLocalize={this.searchLocalize}
 												showPessoasRelacionadas={this._showPessoasRelacionadas}
 												showRelacionados={this._showRelacionados}

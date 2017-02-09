@@ -73,17 +73,18 @@ export default function(state = initialState, action) {
 					tabActive: newState.tabActive
 				}
 			case SEE_LOCALIZE_MODEL:
-				response.data = model.PF.DADOS;
-				response.label = model.PF.DADOS.CPF;
+				response.data = action.payload;
+				response.label = action.payload.cadastroPf.cpf;
 				response.tipo = "CPF";
 				response.icon = ICON_LOCALIZE;
-				response.produto = "localize";
+				response.produto = "modelLocalize";
+
 				return {
 					status: "model",
 					message: "",
 					loading: false,
 					response: [response],
-					tabActive: model.PF.DADOS.CPF
+					tabActive: action.payload.cadastroPf.cpf
 				}
 
 			case SEARCH_BY_CREDITO_PF:

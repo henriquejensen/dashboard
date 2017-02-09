@@ -1,0 +1,235 @@
+{
+  "cadastroPf": {
+    "cpf": 222222222222,
+    "nome": "XXXXXX XXXXXX XXXXXX",
+    "sexo": "M",
+    "dataNascimento": "XX/XX/XXXX",
+    "idade": 30,
+    "faixaIdade": "20 à 30",
+    "signo": "XXXXXXXXX",
+    "rg": 111111111,
+    "ufRg": "SSP-SP",
+    "status": "ATIVO",
+    "statusData": "XX/XX/XXXX",
+    "statusProtocolo": "da758c2a-e689-4759-b7d1-009e15b1f302",
+    "maeNome": "XXXXXXX XXXXXX XXXXXX",
+    "maeCpf": 22222222222,
+    "obitoProvavel": false,
+    "tituloEleitor": 33333333333,
+    "grauInstrucao": "",
+    "dependentes": "",
+    "estadoCivil": "casado",
+    "nacionalidade": "brasileiro",
+    "tags": [
+      null
+    ]
+  },
+  "cadastroPj": {
+    "cnpj": 99999911111166,
+    "razaoSocial": "XXXXX XXXXXX",
+    "nomeFantasia": "YYYY YYYYYY YYYYY",
+    "dataAbertura": "DD/MM/AAAA",
+    "idadeEmpresa": 5,
+    "faixaIdade": "2 a 3 anos",
+    "quantidadeFuncionarios": 100,
+    "faixaFuncionarios": "50 a 100",
+    "porteEmpresa": "GRANDE",
+    "receitaStatus": "Ativa",
+    "dataReceitaStatus": "DD/MM/AAAA",
+    "cnae": 200,
+    "cnaeDescricao": "DDDDD DAAAAA BBBBBB",
+    "cnaeGrupo": "GGGG GGGGG",
+    "cnaeSubgrupo": "SSSSS BBGGG",
+    "tipoEmpresa": "GGGGGG",
+    "naturezaJuridica": "NNNNNN NNNNNNN",
+    "nire": 10000,
+    "site": "http://assertivasolucoes.com.br/",
+    "regimeTributario": "RRRR RRRRR",
+    "tags": [
+      null
+    ]
+  },
+  "cadastroCnpjCnaes": {
+    "posicao": 0,
+    "cnae": 123456,
+    "descricao": "",
+    "grupo": "",
+    "subgrupo": ""
+  },
+  "quadroSocialParticipacoes": {
+    "relacao": "",
+    "documentoConsultado": 11111111111,
+    "nomeConsultado": "XXXXXX XXXXXX XXXXXX",
+    "posicao": 0,
+    "documento": 22222222222,
+    "nome": "AAAAAA AAAAA AAA",
+    "participacao": "",
+    "qualificacaoSocio": "",
+    "dataEntrada": "DD/MM/AAAA",
+    "dataSaida": "DD/MM/AAAA",
+    "valorParticipacao": "",
+    "tags": [
+      null
+    ]
+  },
+  "rendaEmpregador": {
+    "cpf": 11111111111,
+    "posicao": 0,
+    "empregador": "XXXX XXXXX XXXX",
+    "documentoEmpregador": 22222222222,
+    "setorEmpregador": "",
+    "cboCodigo": 1111,
+    "cboDescricao": "CBO DESCRICAO",
+    "cboSetor": "CBO SETOR",
+    "cboSinonimos": "",
+    "rendaEstimada": 10000,
+    "faixaRenda": "500 à 1500",
+    "rendaDataRef": "DD/MM/AAAA",
+    "tags": [
+      null
+    ]
+  },
+  "rendaBeneficioAssistencial": {
+    "cpf": 11111111111,
+    "posicao": 1,
+    "numeroBeneficio": 22222,
+    "codigoBeneficio": 1000,
+    "descricaoBeneficio": "XXXXXX",
+    "valorBeneficio": 2000,
+    "faixaBeneficio": "1500 à 2500",
+    "tipoBeneficio": "TIPO BENEFÍCIO",
+    "statusBeneficio": "STATUS",
+    "beneficioDataRef": "DD/MM/AAAA",
+    "tags": [
+      null
+    ]
+  },
+  "rendaEntidadeClasseLiberal": {
+    "cpf": 11111111111,
+    "posicao": 0,
+    "associacao": "XXXXXXXXX XXXX",
+    "profissao": "AAAAA AAAAAA",
+    "identidadeProfissional": "",
+    "rendaMinima": 2000,
+    "rendaMedia": 1500
+  },
+  "rendaEstimada": {
+    "cpf": 11111111111,
+    "rendaBeneficio": 1000,
+    "rendaEmpregador": 2000,
+    "participacoesEmpresas": "XXXXXXXXX",
+    "quantidadeEmpresas": "XXXXXXXXX",
+    "quantidadeFuncionarios": "XXXXXXXXX",
+    "quantidadeVeiculos": "XXXXXXXXX",
+    "veiculoMaisNovo": "XXXXXXXXX",
+    "rendaMediaEndereco": "XXXXXXXXX",
+    "rendaMediaEntidade": "XXXXXXXXX",
+    "rendaEstimada": "XXXXXXXXX",
+    "rendaEstimadaFaixa": "XXXXXXXXX"
+  },
+  "telefones": {
+    "fixos": [
+        {
+            "documento": 11111111111,
+            "posicao": 0,
+            "telefone": "1935536256",
+            "descricao": "",
+            "pontuacao": "",
+            "grupo": "",
+            "relacao": "",
+            "tags": [
+                "hot"
+            ]
+        },
+        {
+            "documento": 11111111111,
+            "posicao": 1,
+            "telefone": "1948484848",
+            "descricao": "",
+            "pontuacao": "",
+            "grupo": "",
+            "relacao": "",
+            "tags": [
+                null
+            ]
+        }
+    ],
+    "moveis": [
+        {
+            "documento": 11111111111,
+            "posicao": 2,
+            "telefone": "119989898984",
+            "descricao": "",
+            "pontuacao": "",
+            "grupo": "",
+            "relacao": "",
+            "tags": [
+                "whats", "viber"
+            ]
+        },
+        {
+            "documento": 11111111111,
+            "posicao": 3,
+            "telefone": "11887879898",
+            "descricao": "",
+            "pontuacao": "",
+            "grupo": "",
+            "relacao": "",
+            "tags": [
+                "whats"
+            ]
+        }
+    ]
+  },
+  "pessoasRelacionadas": [
+    {
+      "cpf": 11111111111,
+      "relacao": "",
+      "grupo": "",
+      "documento": "11111111111",
+      "nome": "XXXXXX XXXXXX XXXXXX",
+      "dataNascimento": "DD/MM/AAAA"
+    }
+  ],
+  "enderecos": [
+    {
+      "posicao": 0,
+      "tipoLogradouro": "AV",
+      "logradouro": "JOAO ERBOLATO",
+      "numero": "364",
+      "complemento": "C",
+      "bairro": "JARDIM CHAPADAO",
+      "cidade": "CAMPINAS",
+      "cep": 13070070,
+      "uf": "SP",
+      "latitude": "",
+      "longitude": "",
+      "pontuacao": "",
+      "grupo": "",
+      "tags": [
+        null
+      ]
+    }
+  ],
+  "emails": [
+    {
+      "posicao": 0,
+      "email": "exemplo@exemplo.com",
+      "pontuacao": 8,
+      "grupo": "",
+      "relacao": "",
+      "tags": [
+        null
+      ]
+    }
+  ],
+  "veiculos": [
+    {
+      "posicao": 0,
+      "placa": "XXX123",
+      "marcaModelo": "MMMMM/GG",
+      "anoFabricacao": 2000,
+      "anoModelo": 2000
+    }
+  ]
+}
