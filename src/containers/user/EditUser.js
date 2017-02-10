@@ -59,6 +59,7 @@ class EditUser extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log("STATE", state)
     return {
         user: state.user
     }

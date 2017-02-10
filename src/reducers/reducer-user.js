@@ -1,17 +1,22 @@
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
-import { ICON_LOCALIZE, ICON_CREDITO, GET_NOTIFICATIONS } from "../constants/utils";
+import { 
+        ICON_LOCALIZE,
+        ICON_CREDITO,
+        GET_NOTIFICATIONS,
+        INFO_ERROR,
+        INFO_SUCCESS
+} from "../constants/utils";
 
 import notifications from "./data/notifications.json";
 
 const user = {
-    nome: localStorage.getItem("user"),
     email: "henriquejensen@hotmail.com",
     telefone: "11996997909",
     avatar_url: "http://media.cargocollective.com/1/0/789/headerimg/profile.png",
     background_url: "http://retrapack.com.br/wp-content/uploads/2015/01/839274-landscape-sunset.jpg",
     firm_url: "http://www.goodrickes.co.za/images/icon2.png",
-    empresa: localStorage.getItem("empresa"),
-    perfil: "ADM",
+    empresa: "",
+    perfil: "",
     produto: {
         localize: [
             {quantidade: 1000, label: "Total consultas"},
@@ -189,9 +194,22 @@ export default function (state = user, action) {
             state.charts = action.payload.charts;
             return state;
 
-        case GET_NOTIFICATIONS:
+        case INFO_SUCCESS:
+            let response = action.payload.response;
             let newState = Object.assign({}, state);
             newState.notifications = notifications.notifications;
+            newState.grupoDescricao = response.grupoDescricao;
+            newState.grupoId = response.grupoId;
+            newState.mapParametros = response.mapParametros;
+            newState.mapProdutos = response.mapProdutos;
+            newState.perfilDescricao = response.perfilDescricao;
+            newState.perfilOrdem = response.perfilOrdem;
+            newState.pessoaDescricao = response.pessoaDescricao;
+            newState.pessoaId = response.pessoaId;
+            newState.pessoaStatus = response.pessoaStatus;
+            newState.pessoaStatusWs = response.pessoaStatusWs;
+            newState.usuarioId = response.usuarioId;
+            newState.usuarioNome = response.usuarioNome;
             return newState
     }
     return state;

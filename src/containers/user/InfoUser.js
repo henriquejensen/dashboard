@@ -5,7 +5,7 @@ export default class Info extends Component {
         super(props);
 
         this.state = {
-            nome: this.props.user.nome,
+            nome: this.props.user.usuarioNome,
             telefone: this.props.user.telefone,
             email: this.props.user.email
         }

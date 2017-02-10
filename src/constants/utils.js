@@ -1,7 +1,10 @@
 export const AUTH_URL = "https://auth.assertivasolucoes.com.br/auth/get-key-session";
+export const INFO_URL = "https://auth.assertivasolucoes.com.br/info/get-info-user";
 export const AUTHENTICATION = "token";
 export const REQUEST_ERROR = "REQUEST_ERROR";
 export const ERR_CONNECTION_REFUSED = "ERR_CONNECTION_REFUSED";
+export const INFO_SUCCESS = "INFO_SUCCESS";
+export const INFO_ERROR = "INFO_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const LOADING = "LOADING";
@@ -12,5 +15,4 @@ export const LOGO_CREDITO = "../../../public/assertiva/logo-credito.png";
 export const ICON_CREDITO = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/icon-credito.png";
 export const LOGO_FOCOFISCAL = "../../../public/assertiva/logo-focofiscal.png";
 export const ICON_FOCOFISCAL = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/icon-focofiscal.png";
-export const GET_NOTIFICATIONS = "GET_NOTIFICATIONS";
 export const CHANGE_COLOR_MENU = "CHANGE_COLOR_MENU";

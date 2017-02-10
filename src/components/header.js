@@ -24,7 +24,7 @@ import { browserHistory } from 'react-router';
 import { logoTopo } from "../constants/imagensAssertiva";
 import { logOut } from "../actions/index";
 import {
-		getNotifications
+		getUserData
 } from "../actions/actionsCommon";
 
 import Modal from "./Modal";
@@ -51,7 +51,7 @@ class MenuSuperior extends Component {
 	}
 
 	componentWillMount() {
-		this.props.getNotifications()
+		this.props.getUserData()
 	}
 
 	onOpenNotification(evt, index) {
@@ -113,7 +113,7 @@ class MenuSuperior extends Component {
 							})}
 						</NavDropdown>
 
-						<NavDropdown title={this.props.user.nome} id="basic-nav-dropdown">
+						<NavDropdown title={this.props.user.usuarioNome} id="basic-nav-dropdown">
 							{menu.header.user.map((opt, index) => {
 								if(opt.label != "Sair") {
 									return (
@@ -158,7 +158,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		logOut,
-		getNotifications
+		getUserData
 	}, dispatch)
 }
 
