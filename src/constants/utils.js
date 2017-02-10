@@ -4,6 +4,7 @@ export const REQUEST_ERROR = "REQUEST_ERROR";
 export const ERR_CONNECTION_REFUSED = "ERR_CONNECTION_REFUSED";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
+export const LOADING = "LOADING";
 export const LOG_OUT = "LOG_OUT";
 export const LOGO_LOCALIZE = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/localize-logopagina.png";
 export const ICON_LOCALIZE = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/icon-localize.png";

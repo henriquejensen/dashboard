@@ -33,9 +33,6 @@ export default class LocalizeView extends Component {
                 <BeneficioINSS beneficio={this.props.data.rendaBeneficioAssistencial} />
                 <RendaEntidadeClasseLiberal renda={this.props.data.rendaEntidadeClasseLiberal} />
                 <Veiculos veiculos={this.props.data.veiculos} />
-
-
-
                 <Protocolo info={this.props.data.info} />
             </PanelGroup>
         )

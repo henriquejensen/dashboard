@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router";
+import { Link, browserHistory } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { authUser } from "../actions/index";
+import { authUser, loading } from "../actions/index";
 
 
 class Login extends Component {
@@ -18,6 +18,7 @@ class Login extends Component {
 
         this.onChange = this.onChange.bind(this);
         this.onFormSubmit = this.onFormSubmit.bind(this);
+        this.changeroute = this.changeroute.bind(this);
     }
 
 	componentDidMount() {
@@ -27,6 +28,7 @@ class Login extends Component {
     onFormSubmit(evt) {
         evt.preventDefault();
 
+        this.props.loading();
         this.props.authUser(this.state.empresa, this.state.user, this.state.senha);
     }
 
@@ -36,7 +38,16 @@ class Login extends Component {
         })
     }
 
+    changeroute() {
+        browserHistory.push("/");
+    }
+
     render() {
+        if(this.props.auth.logado) {
+            return (
+                <div>{this.changeroute()}</div>
+            )
+        }
         return (
             <div className="container">
                 <div className="row">
@@ -45,6 +56,8 @@ class Login extends Component {
                             <strong>Bem-vindo</strong><br/>
                             Identifique-se para acessar nossos serviços
                         </h3>
+
+                        {this.props.auth.loading ? <div className="imgSearching"><img src="../../public/loading.gif" /></div> : ""}
 
                         {this.props.auth.error ? 
                             <div className="alert alert-danger text-center" role="alert">{this.props.auth.msgn}</div> : ""}
@@ -80,7 +93,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ 
-        authUser
+        authUser,
+        loading
     }, dispatch)
 }
 

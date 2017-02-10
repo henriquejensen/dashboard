@@ -22,6 +22,7 @@ import {
 		LOGIN_SUCCESS,
 		LOGIN_ERROR,
 		LOG_OUT,
+		LOADING,
 		CHANGE_TAB,
 		CLOSE_TAB,
 		AUTH_URL,
@@ -218,21 +219,18 @@ export function showRelacionados(doc, docRelacionado, tipo) {
 }
 
 export function authUser(empresa, user, senha) {
-	let url = AUTH_URL;
-	
 	return (dispatch) => {
-		ajax.post(url+"?empresa="+empresa+"&usuario="+user+"&senha="+senha)
-			.send({empresa: empresa, usuario: user, senha: senha})
-			.ok(res => res.status < 500)
-			.then((response, failure) => {
-				localStorage.setItem(AUTHENTICATION, response.body.response);
-				localStorage.setItem("empresa", empresa);
-				localStorage.setItem("user", user);
-				localStorage.setItem("senha",senha);
-				dispatch({type: LOGIN_SUCCESS, payload: response})
-			})
-			.catch((error) => {
-				dispatch({type: LOGIN_ERROR, payload: error})
+		ajax.get(AUTH_URL+"?empresa="+empresa+"&usuario="+user+"&senha="+senha)
+			.end(function(err, res) {
+				if (err || !res.ok) {
+					dispatch({type: LOGIN_ERROR, payload: res.body})
+				} else {
+					localStorage.setItem(AUTHENTICATION, res.body.response);
+					localStorage.setItem("empresa", empresa);
+					localStorage.setItem("user", user);
+					localStorage.setItem("senha",senha);
+					dispatch({type: LOGIN_SUCCESS, payload: res.body})
+				}
 			})
 	}
 }
@@ -244,5 +242,13 @@ export function logOut() {
 	localStorage.removeItem("senha");
 	return {
 		type: LOG_OUT,
+		payload: "logout"
+	}
+}
+
+export function loading() {
+	return {
+		type: LOADING,
+		payload: "loadingAuth"
 	}
 }
