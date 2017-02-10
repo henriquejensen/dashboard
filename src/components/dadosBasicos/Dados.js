@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip'
+import { Col, Button} from "react-bootstrap";
 
 import Panel from "../panel/Panel";
 
@@ -49,19 +50,20 @@ export default class Dados extends Component{
                 {this.props.dados.signo}
               </div>
 
-              <div style={{margin:"5px 0", width:"100%", float:"left", border: "0px solid #dddddd", borderTopWidth: "1px"}}>
-                <div className="col-md-6" style={{margin:"5px 0"}}>
-                  <strong>MÃE: </strong>
-                  {this.props.dados.maeNome ? this.props.dados.maeNome : "Nada consta"}
-                </div>
-
-                {this.props.dados.maeNome && this.props.dados.maeCpf ? (<div className="col-md-6" style={{marginTop:3}}>
-                    <a data-tip data-for='tooltipConsultar'>
-                      <div className="mapa-button" onClick={() => this.props.searchPerson(this.props.dados.maeCpf, "pf")}>
-                          <i className='fa fa-search'/>
-                      </div>
-                    </a>
-                </div>) : ""}
+              <div className="col-md-12" style={{paddingTop:"5px", width:"100%", border: "0px solid #dddddd", borderTopWidth: "1px"}}>
+                <strong>MÃE: </strong>
+                {this.props.dados.maeNome ?
+                  <span>
+                    {this.props.dados.maeNome}
+                    {this.props.dados.maeCpf ?
+                      <a data-tip data-for='tooltipConsultar'>
+                        <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(this.props.dados.maeCpf, "pf")}>
+                            <i className='fa fa-search'/>
+                        </Button>
+                      </a>
+                    :""}
+                  </span>
+                : <div>Nada consta</div>}
               </div>
               
               

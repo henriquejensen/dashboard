@@ -65,12 +65,12 @@
   },
   "quadroSocialParticipacoes": {
     "relacao": "",
-    "documentoConsultado": 11111111111,
+    "documentoConsultado": 12345678901,
     "nomeConsultado": "XXXXXX XXXXXX XXXXXX",
     "posicao": 0,
     "documento": 22222222222,
     "nome": "AAAAAA AAAAA AAA",
-    "participacao": "",
+    "participacao": [],
     "qualificacaoSocio": "",
     "dataEntrada": "DD/MM/AAAA",
     "dataSaida": "DD/MM/AAAA",
@@ -80,15 +80,15 @@
     ]
   },
   "rendaEmpregador": {
-    "cpf": 11111111111,
+    "cpf": 12345678901,
     "posicao": 0,
     "empregador": "XXXX XXXXX XXXX",
-    "documentoEmpregador": 22222222222,
-    "setorEmpregador": "",
+    "documentoEmpregador": 12345678901,
+    "setorEmpregador": "SETOR EMPREGADOR",
     "cboCodigo": 1111,
     "cboDescricao": "CBO DESCRICAO",
     "cboSetor": "CBO SETOR",
-    "cboSinonimos": "",
+    "cboSinonimos": "CBO SINONIMOS",
     "rendaEstimada": 10000,
     "faixaRenda": "500 à 1500",
     "rendaDataRef": "DD/MM/AAAA",
@@ -97,7 +97,7 @@
     ]
   },
   "rendaBeneficioAssistencial": {
-    "cpf": 11111111111,
+    "cpf": 12345678901,
     "posicao": 1,
     "numeroBeneficio": 22222,
     "codigoBeneficio": 1000,
@@ -112,7 +112,7 @@
     ]
   },
   "rendaEntidadeClasseLiberal": {
-    "cpf": 11111111111,
+    "cpf": 12345678901,
     "posicao": 0,
     "associacao": "XXXXXXXXX XXXX",
     "profissao": "AAAAA AAAAAA",
@@ -121,7 +121,7 @@
     "rendaMedia": 1500
   },
   "rendaEstimada": {
-    "cpf": 11111111111,
+    "cpf": 12345678901,
     "rendaBeneficio": 1000,
     "rendaEmpregador": 2000,
     "participacoesEmpresas": "XXXXXXXXX",
@@ -137,7 +137,7 @@
   "telefones": {
     "fixos": [
         {
-            "documento": 11111111111,
+            "documento": 12345678901,
             "posicao": 0,
             "telefone": "1935536256",
             "descricao": "",
@@ -149,7 +149,7 @@
             ]
         },
         {
-            "documento": 11111111111,
+            "documento": 12345678901,
             "posicao": 1,
             "telefone": "1948484848",
             "descricao": "",
@@ -163,7 +163,7 @@
     ],
     "moveis": [
         {
-            "documento": 11111111111,
+            "documento": 12345678901,
             "posicao": 2,
             "telefone": "119989898984",
             "descricao": "",
@@ -175,7 +175,7 @@
             ]
         },
         {
-            "documento": 11111111111,
+            "documento": 12345678901,
             "posicao": 3,
             "telefone": "11887879898",
             "descricao": "",
@@ -190,10 +190,10 @@
   },
   "pessoasRelacionadas": [
     {
-      "cpf": 11111111111,
+      "cpf": 12345678901,
       "relacao": "",
       "grupo": "",
-      "documento": "11111111111",
+      "documento": "12345678901",
       "nome": "XXXXXX XXXXXX XXXXXX",
       "dataNascimento": "DD/MM/AAAA"
     }

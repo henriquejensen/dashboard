@@ -3,8 +3,6 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import Tooltip from "react-tooltip";
 import Notification from "react-notification-system";
 
-import SMSRapido from "../../containers/sms/SMSRapido";
-
 import Table from "../Table";
 import Modal from "../Modal";
 
@@ -200,9 +198,8 @@ export default class Telefones extends Component{
                     <Modal
                         IsModalOpen={this.state.IsModalOpen}
                         closeModal={this.closeModal.bind(this)}
+                        title="SMS Rápido"
                     >
-                        <SMSRapido />
-                        <button onClick={this.closeModal.bind(this)}>close</button>
                     </Modal>
 
                     <Notification ref={n => this._notificationSystem = n} />
