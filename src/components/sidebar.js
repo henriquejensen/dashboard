@@ -103,7 +103,7 @@ class Sidebar extends Component {
           <aside>            
             {this.props.activedMenu ? (
                 <div>
-                  <CardInfoMenuUser color={this.props.color}/>
+                  <CardInfoMenuUser color={this.props.color} user={this.props.user}/>
                   <div className="nav nav-tabs">
                     <li className={this.state.tabActive == "menu" ? "active" : ""} onClick={() => this._changeTab("menu")}>
                       <a href="#menu">
@@ -140,6 +140,7 @@ class Sidebar extends Component {
 function mapStateToProps(state) {
 	return {
 		color: state.auth.colorMenu,
+    user: state.user
 	}
 }
 

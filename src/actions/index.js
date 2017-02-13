@@ -66,7 +66,23 @@ export function searchCredito(document, tipo) {
 }
 
 export function searchLocalize(document, tipo) {
-	const senha = tipo+"/ajax?empresa="+localStorage.empresa+"&usuario="+localStorage.user+"&senha="+localStorage.senha+"&documento=";
+	/*return (dispatch) => {
+		ajax.post('https://provider.assertivasolucoes.com.br/veiculo/5034/consultar')
+			.set({'Content-Type': 'application/json', 'keySession': localStorage.getItem("token"), 'Authorization': 'Bearer ' + localStorage.getItem("token")})
+			.send({document: "36891039835"})
+			.end(function(err, res) {
+				console.log(err, res)
+				if (err || !res.ok) {
+					dispatch({type: LOGIN_ERROR, payload: res.body})
+				} else {
+					localStorage.setItem(AUTHENTICATION, res.body.response);
+					dispatch({type: LOGIN_SUCCESS, payload: res.body})
+				}
+			})
+	}*/
+
+
+	const senha = tipo+"/ajax?empresa="+localStorage.empresa+"&usuario="+localStorage.usuario+"&senha="+localStorage.senha+"&documento=";
 
 	if(tipo == "pf") {
 		document = patternDocument(document, 11);
@@ -225,15 +241,33 @@ export function authUser(empresa, user, senha) {
 				if (err || !res.ok) {
 					dispatch({type: LOGIN_ERROR, payload: res.body})
 				} else {
+					console.log("Auth")
 					localStorage.setItem(AUTHENTICATION, res.body.response);
+					localStorage.setItem("usuario", user);
+					localStorage.setItem("empresa", empresa);
+					localStorage.setItem("senha", senha);
 					dispatch({type: LOGIN_SUCCESS, payload: res.body})
 				}
 			})
+
+		/*ajax.post(AUTH_URL)
+			.send({ empresa: empresa, usuario: user, senha: senha})
+			.end(function(err, res) {
+				if (err || !res.ok) {
+					dispatch({type: LOGIN_ERROR, payload: res.body})
+				} else {
+					localStorage.setItem(AUTHENTICATION, res.body.response);
+					dispatch({type: LOGIN_SUCCESS, payload: res.body})
+				}
+			})*/
 	}
 }
 
 export function logOut() {
 	localStorage.removeItem(AUTHENTICATION);
+	localStorage.removeItem("usuario");
+	localStorage.removeItem("empresa");
+	localStorage.removeItem("senha");
 	return {
 		type: LOG_OUT,
 		payload: "logout"

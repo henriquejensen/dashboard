@@ -8,7 +8,7 @@ import UltimasConsultas from "../UltimasConsultas";
 export default class Form extends Component {
     render() {
 		return (
-            <div className="container-form">
+            <div className="container-form noPrint">
                 <Row>
                     <Col md={12} sm={12} className="text-center">
                         {this.props.showLogo ? <img src={this.props.logo} className="logo-produto" />: <img src={this.props.icon} />}

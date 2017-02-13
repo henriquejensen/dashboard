@@ -32,13 +32,14 @@ export default class App extends Component {
   render() {
       return (
         <div>
-            <Header onMenuClicked={this.onMenuClicked} />
-            <div className="sidebar" style={this.state.active ? {} : this.larguraMenuFechado}>
+            <Header onMenuClicked={this.onMenuClicked} className="noPrint" />
+            <div className="sidebar noPrint" style={this.state.active ? {} : this.larguraMenuFechado}>
               <Sidebar onMenuClicked={this.onMenuClicked} activedMenu={this.state.active}/>
             </div>
 
             <div className="container-fluid main" style={this.state.active ? this.larguraMenu : {}}>
                 <Breadcrumbs
+                  className="noPrint"
                   routes={this.props.routes}
                   params={this.props.params}
                 />
