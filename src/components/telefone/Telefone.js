@@ -4,12 +4,42 @@ import Panel from "../panel/Panel";
 import LayoutTelefone from "./layoutTelefone";
 
 export default class Telefone extends Component {
+    state = {
+        newPhone: false
+    }
+
+    sendNewPhone = (newTel) => {
+        console.log("NEW PHONE", newTel);
+
+        this.setState({
+            newPhone: false
+        })
+    }
+
     render() {
         return (
             this.props.fixos || this.props.moveis ?
                 <Panel title="TELEFONES" qtdTotal={[{icon:"fa fa-phone", qtd:this.props.fixos.length},{icon:"fa fa-mobile", qtd:this.props.moveis.length}]}>
-                    <LayoutTelefone fixos={this.props.fixos} moveis={this.props.moveis} />
-                </Panel> :
+                    <LayoutTelefone
+                        fixos={this.props.fixos}
+                        moveis={this.props.moveis}
+                        newPhone={this.state.newPhone}
+                        sendNewPhone={this.sendNewPhone}/>
+                    <div className="col-md-12 col-sm-12 relacionados">
+                        <a className="moreInfo" onClick={() => this.setState({newPhone:!this.state.newPhone})}>
+                            {this.state.newPhone ?
+                                "Cancelar"
+                            : "Adicionar um novo telefone"}
+                        </a>
+                        <a data-tip data-for="moreInfo">
+                            <i className="fa fa-plus pull-right moreInfo"/>
+                        </a>
+                        <a data-tip data-for="usersRelated">
+                            <i className="fa fa-users pull-right"  />
+                        </a>
+                    </div>
+                </Panel>
+                :
                 <Panel title="TELEFONES">
                     <div className="text-center"><strong>Nada consta</strong></div>
                 </Panel>

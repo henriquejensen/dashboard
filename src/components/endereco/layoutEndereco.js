@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Tooltip from "react-tooltip";
+import { Form, FormControl, FormGroup, Button } from "react-bootstrap";
 
 import MapPanel from "../MapPanel";
 import Table from "../Table";
@@ -10,7 +11,8 @@ export default class Enderecos extends Component {
 
     this.state = {
       mapa: false,
-      idCep: ""
+      idCep: "",
+      IsModalOpen: false
     }
 
     this.mostrarMapa = this.mostrarMapa.bind(this);
@@ -70,19 +72,14 @@ export default class Enderecos extends Component {
                           </tbody>
                         )
                     })}
-                </Table>
 
-              
-              {this.props.relacionados ?
-                <a data-tip data-for="usersRelated">
-                  <i className="glyphicon glyphicon-user pull-right relacionados" onClick={this.props.relacionados} />
-                </a>
-              : ""}
+                </Table>
 
               <Tooltip id="tooltipMap">
                 <span>Visualizar endereço</span>
               </Tooltip>
-              
+
+
             </div>)
   }
 }

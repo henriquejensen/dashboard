@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Tooltip from "react-tooltip";
 import Notification from "react-notification-system";
+import { Form, FormControl, FormGroup, Button } from "react-bootstrap";
 
 import Table from "../Table";
 import Modal from "../Modal";
@@ -13,10 +14,16 @@ export default class Telefones extends Component{
         this.state = {
             smShow: false,
             IsModalOpen: false,
-            showMoreTel: false
+            showMoreTel: false,
+            telefone: "",
+            celular: ""
         };
 
         this._notificationSystem = null;
+
+        this.closeModal = this.closeModal.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.sendNewPhone = this.sendNewPhone.bind(this);
 
     }
 
@@ -29,9 +36,30 @@ export default class Telefones extends Component{
         }
     }
 
+    sendNewPhone(evt) {
+        evt.preventDefault();
+
+        this.state.telefone ?
+            this.props.sendNewPhone(this.state.telefone)
+        :   this.props.sendNewPhone(this.state.celular)
+
+        this.setState({
+            telefone: "",
+            celular: ""
+        })
+
+        this._addNotification("Obrigado pelo envio. Seu pedido de inserção será analisado")
+    }
+
     closeModal() {
         this.setState({
             IsModalOpen: false
+        })
+    }
+
+    onChange(evt) {
+        this.setState({
+            [evt.target.name]: evt.target.value
         })
     }
 
@@ -50,45 +78,65 @@ export default class Telefones extends Component{
                                         return (
                                         <tr key={i} className={i > 3 ? (this.state.showMoreTel ? "" : "display-none") : ""} >
                                             <td>
-                                                <div className="col-md-3 col-sm-3">
-                                                    <i className="fa fa-phone" /> {tel[0]}{tel[1]} {tel.substring(2)}
-                                                </div>
+                                                <i className="fa fa-phone" /> {tel[0]}{tel[1]} {tel.substring(2)}
+                                            </td>
 
+                                            <td>
                                                 <a data-tip data-for="tooltipCopy">
-                                                    <div className="col-md-1 col-sm-1 col-xs-1">
-                                                        <CopyToClipboard text={tel} onCopy={() => this._addNotification("Número copiado com sucesso")}>
-                                                            <i className="fa fa-clipboard icon-tel" />
-                                                        </CopyToClipboard>
-                                                    </div>
+                                                    <CopyToClipboard text={tel} onCopy={() => this._addNotification("Número copiado com sucesso")}>
+                                                        <i className="fa fa-clipboard icon-tel" />
+                                                    </CopyToClipboard>
                                                 </a>
+                                            </td>
 
+                                            <td>
                                                 <a data-tip data-for="tooltipMessageVoice">
-                                                    <div className="col-md-1 col-sm-1 col-xs-1">
-                                                        <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
-                                                    </div>
+                                                    <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                                 </a>
+                                            </td>
 
+                                            <td>
                                                 <a data-tip data-for="tooltipCall">
-                                                    <div className="col-md-1 col-sm-1 col-xs-1">
-                                                        <i className="fa fa-phone icon-tel icon-tel-phone" />
-                                                    </div>
+                                                    <i className="fa fa-phone icon-tel icon-tel-phone" />
                                                 </a>
+                                            </td>
 
+                                            <td>
                                                 <a data-tip data-for="tooltipHot">
-                                                    <div className="col-md-1 col-sm-1 col-xs-1">
-                                                        <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
-                                                    </div>
+                                                    <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
                                                 </a>
+                                            </td>
 
+                                            <td>
                                                 <a data-tip data-for="tooltipOperadora">
-                                                    <div className="col-md-3 col-sm-3 col-xs-3">
-                                                        <img src="http://logok.org/wp-content/uploads/2015/06/Claro-logo-logotype-1024x768.png" width="25"/>
-                                                    </div>
+                                                    <img src="http://logok.org/wp-content/uploads/2015/06/Claro-logo-logotype-1024x768.png" width="25"/>
                                                 </a>
                                             </td>
                                         </tr>)
                                     }
                                 })}
+
+                                {this.props.newPhone ?
+                                    <tr>
+                                        <td>
+                                            <Form inline onSubmit={this.sendNewPhone}>
+                                                <FormGroup controlId="formInlineName" bsSize="small">
+                                                    <FormControl
+                                                        type="text"
+                                                        placeholder="Digite o novo número"
+                                                        name="telefone"
+                                                        value={this.state.telefone}
+                                                        onChange={this.onChange}/>
+                                                </FormGroup>
+                                                {' '}
+                                                <Button type="submit" bsSize="small" bsStyle="success">
+                                                    Enviar
+                                                </Button>
+                                            </Form>   
+                                        </td>
+                                    </tr>
+                                : ""}
+
                             </tbody>
                         </Table>
                     </div>
@@ -103,62 +151,82 @@ export default class Telefones extends Component{
                                     return (
                                         <tr key={i} className={i > 3 ? (this.state.showMoreTel ? "" : "display-none") : ""}>
                                             <td>
-                                                <div className="col-md-3 col-sm-3" style={{paddingRight: 0}}>
-                                                    <i className="fa fa-mobile" /> {tel[0]}{tel[1]} {tel.substring(2)}
-                                                </div>
+                                                <i className="fa fa-mobile" /> {tel[0]}{tel[1]} {tel.substring(2)}
+                                            </td>
 
+                                            <td>
                                                 <a data-tip data-for="tooltipCopy">
-                                                    <div className="col-md-1 col-sm-1 col-xs-1">
-                                                        <CopyToClipboard text={tel} onCopy={() => this._addNotification("Número copiado com sucesso")}>
-                                                            <i className="fa fa-clipboard icon-tel" />
-                                                        </CopyToClipboard>
-                                                    </div>
+                                                    <CopyToClipboard text={tel} onCopy={() => this._addNotification("Número copiado com sucesso")}>
+                                                        <i className="fa fa-clipboard icon-tel" />
+                                                    </CopyToClipboard>
                                                 </a>
+                                            </td>
 
+                                            <td>
                                                 <a data-tip data-for="tooltipSMS">
-                                                    <div className="col-md-1 col-sm-1 col-xs-1">
-                                                        <i className="fa fa-comments icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
-                                                    </div>
+                                                    <i className="fa fa-comments icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                                 </a>
+                                            </td>
 
+                                            <td>
                                                 <a data-tip data-for="tooltipMessageVoice">
-                                                    <div className="col-md-1 col-sm-1 col-xs-1">
-                                                        <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
-                                                    </div>
+                                                    <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                                 </a>
+                                            </td>
 
+                                            <td>
                                                 <a data-tip data-for="tooltipCall">
-                                                    <div className="col-md-1 col-sm-1 col-xs-1">
-                                                        <i className="fa fa-mobile icon-tel icon-tel-phone" />
-                                                    </div>
+                                                    <i className="fa fa-mobile icon-tel icon-tel-phone" />
                                                 </a>
+                                            </td>
 
+                                            <td>
                                                 <a data-tip data-for="tooltipHot">
-                                                    <div className="col-md-1 col-sm-1 col-xs-1">
-                                                        <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
-                                                    </div>
+                                                    <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
                                                 </a>
+                                            </td>
 
+                                            <td>
                                                 <a data-tip data-for="tooltipWhats">
-                                                    <div className="col-md-1 col-sm-1 col-xs-1">
-                                                        <img src="../../../public/images/whatsapp.png" width="15"/>
-                                                    </div>
+                                                    <img src="../../../public/images/whatsapp.png" width="15"/>
                                                 </a>
+                                            </td>
 
+                                            <td>
                                                 <a data-tip data-for="tooltipViber">
-                                                    <div className="col-md-1 col-sm-1 col-xs-1">
-                                                        <img src="../../../public/images/viber.png" width="15"/>
-                                                    </div>
+                                                    <img src="../../../public/images/viber.png" width="15"/>
                                                 </a>
+                                            </td>
 
+                                            <td>
                                                 <a data-tip data-for="tooltipOperadora">
-                                                    <div className="col-md-2 col-xs-2 col-xs-2">
-                                                        <img src="http://2.bp.blogspot.com/-2iz4nnxuSu8/TyHGVjiLdDI/AAAAAAAABbw/wJWY-ugjozI/s1600/logotipo+oi.jpg" width="20" className="like-button"/>
-                                                    </div>
+                                                    <img src="http://2.bp.blogspot.com/-2iz4nnxuSu8/TyHGVjiLdDI/AAAAAAAABbw/wJWY-ugjozI/s1600/logotipo+oi.jpg" width="20" className="like-button"/>
                                                 </a>
                                             </td>
                                         </tr>)
                                 })}
+
+                               {this.props.newPhone ?
+                                    <tr>
+                                        <td>
+                                            <Form inline>
+                                                <FormGroup controlId="formInlineName" bsSize="small">
+                                                    <FormControl
+                                                        type="text"
+                                                        placeholder="Digite o novo número"
+                                                        name="celular"
+                                                        value={this.state.celular}
+                                                        onChange={this.onChange}/>
+                                                </FormGroup>
+                                                {' '}
+                                                <Button type="submit" bsSize="small" bsStyle="success" onClick={this.sendNewPhone}>
+                                                    Enviar
+                                                </Button>
+                                            </Form>                                      
+                                        </td>
+                                    </tr>
+                                : ""}
+
                             </tbody>
                         </Table>
                     </div>
@@ -197,7 +265,7 @@ export default class Telefones extends Component{
 
                     <Modal
                         IsModalOpen={this.state.IsModalOpen}
-                        closeModal={this.closeModal.bind(this)}
+                        closeModal={this.closeModal}
                         title="SMS Rápido"
                     >
                     </Modal>

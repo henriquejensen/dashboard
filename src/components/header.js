@@ -72,7 +72,6 @@ class MenuSuperior extends Component {
 	render() {
 		return (
 		<div>
-			<img src={this.props.user.avatar_url} alt="Imagem do usuário" className="menu-image-user" />
 			<Navbar style={{backgroundColor: this.props.color, borderRadius: 0}} collapseOnSelect>
 				<i className="fa fa-bars menu-hamburguer" onClick={this.props.onMenuClicked} />
 				<Navbar.Header style={{marginLeft:"45px"}}>

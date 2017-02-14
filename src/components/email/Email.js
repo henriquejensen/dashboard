@@ -8,8 +8,17 @@ export default class Email extends Component {
         return (
             this.props.emails ?
                 <Panel title="EMAILS" qtdTotal={[{icon:"fa fa-envelope-o", qtd:this.props.emails.length}]}>
-                    <div className="col-md-12 col-xs-12">
-                        <LayoutEmail emails={this.props.emails} />
+                    <LayoutEmail emails={this.props.emails} />
+                    <div className="col-md-12 col-sm-12 relacionados">
+                        <a className="moreInfo">
+                            Adicionar um novo email
+                        </a>
+                        <a data-tip data-for="moreInfo">
+                            <i className="fa fa-plus pull-right moreInfo"/>
+                        </a>
+                        <a data-tip data-for="usersRelated">
+                            <i className="fa fa-users pull-right"  />
+                        </a>
                     </div>
                 </Panel> :
                 <Panel title="EMAILS">

@@ -12,7 +12,7 @@ import notifications from "./data/notifications.json";
 const user = {
     email: "henriquejensen@hotmail.com",
     telefone: "11996997909",
-    avatar_url: "http://media.cargocollective.com/1/0/789/headerimg/profile.png",
+    avatar_url: "https://cdn1.iconfinder.com/data/icons/user-pictures/100/supportmale-512.png",
     background_url: "http://retrapack.com.br/wp-content/uploads/2015/01/839274-landscape-sunset.jpg",
     firm_url: "http://www.goodrickes.co.za/images/icon2.png",
     empresa: "",

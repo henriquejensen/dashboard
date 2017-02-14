@@ -12,8 +12,7 @@ export default class Panel extends Component {
 
     render() {
         return (
-            <div className="row row-localize">
-                <div className="col-md-12">
+            <div className="row-localize">
                     <div className="panel panel-default">
                         {this.props.title ? <div className="panel-heading" style={{position: "relative"}}>
                             {this.props.qtdTotal ? 
@@ -41,7 +40,6 @@ export default class Panel extends Component {
                             {this.props.children}
                         </div>
                     </div>
-                </div>
             </div>
         )
     }

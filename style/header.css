@@ -88,11 +88,8 @@
 }
 
 .menu-image-user {
-    width:30px;
-    position: fixed;
-    right:10px;
-    top:8px;
-    z-index: 2
+    width:35px;
+    height: 35px;
 }
 
 .notication {
@@ -113,10 +110,6 @@
 @media(max-width: 768px) {
     #menu-header-produtos {
         display: block
-    }
-
-    .menu-image-user {
-        display: none
     }
 }
 

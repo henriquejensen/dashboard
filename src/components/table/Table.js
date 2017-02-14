@@ -8,7 +8,9 @@ export default class Table extends Component {
     render() {
         return (
             <div>
-                <h4>{this.props.title}</h4>
+                {this.props.title ?
+                    <h4>{this.props.title}</h4>
+                : ""}
                 <table className="table table-striped table-hover table-responsive">
                     <thead>
                         <tr>
