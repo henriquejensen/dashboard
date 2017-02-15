@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import Panel from "../../components/Panel";
 
+import { patternCNPJ } from "../utils/functions/patternDocuments";
+
 export default class Cadastro extends Component{
   constructor(props) {
     super(props);
@@ -10,7 +12,6 @@ export default class Cadastro extends Component{
   render() {
     return (
         <Panel title="DADOS CADASTRAIS">
-
             <div className="col-md-4">
                 <strong>Razão social: </strong>
                 {this.props.dados.razaoSocial}
@@ -18,7 +19,7 @@ export default class Cadastro extends Component{
 
             <div className="col-md-4">
                 <strong>CNPJ: </strong>
-                {this.props.dados.cnpj}
+                {patternCNPJ(this.props.dados.cnpj)}
             </div>
 
             <div className="col-md-4">
@@ -132,8 +133,6 @@ export default class Cadastro extends Component{
                     <a href={this.props.dados.site} target="_blank">{this.props.dados.site}</a>
                 : <span>Nada consta</span>}
             </div>
-
-
         </Panel>)
   }
 }

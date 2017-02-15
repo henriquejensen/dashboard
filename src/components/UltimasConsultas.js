@@ -4,6 +4,8 @@ import Tooltip from 'react-tooltip'
 import Panel from "./Panel";
 import Table from "./Table";
 
+import { patternCPF, patternCNPJ } from "./utils/functions/patternDocuments";
+
 export default class UltimasConsultas extends Component {
     render() {
         return (
@@ -16,7 +18,11 @@ export default class UltimasConsultas extends Component {
                             return (
                                 <tr key={index}>
                                     <td>{consulta.tipo}</td>
-                                    <td>{consulta.pesquisa}</td>
+                                    {consulta.tipo == "CPF" ?
+                                        <td>{patternCPF(consulta.pesquisa)}</td>
+                                    : consulta.tipo == "CNPJ" ?
+                                        <td>{patternCNPJ(consulta.pesquisa)}</td>
+                                    : ""}                                    
                                     <td>{consulta.data}</td>
                                     <td>
                                         <a data-tip data-for="tooltipConsultar">

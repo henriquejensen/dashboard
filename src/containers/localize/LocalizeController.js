@@ -70,12 +70,14 @@ class LocalizeController extends Component {
 		document.title = "Assertiva > Localize";
 	}
 
+	//busca as pessoas relacionadas a este doc, tipo é CPF ou CNPJ
 	searchPessoasRelacionadas(doc, tipo) {
 		this.props.loadingLocalize();
 		this.props.searchPessoasRelacionadas(doc, tipo);
 	}
 
-	//recebe o documento da pessoa e da pessoa relacionada a esta.
+	//recebe o documento da pessoa e da pessoa relacionada a esta e
+	//irá buscar pelo telefone ou endereço da pessoa
 	_showRelacionados(doc, docPessoaRelacionado, tipo) {
 		this.props.loadingLocalize();
 		this.props.showRelacionados(doc, docPessoaRelacionado, tipo);
@@ -572,13 +574,22 @@ class LocalizeController extends Component {
 						>
 							{this.props.datas.map((data, index) => {
 								return (
-									<Tab eventKey={data.label} title={<Titletab icon={data.icon} label={data.label} close={() => this.closeTab(index)}/>} key={index}>
+									<Tab
+										eventKey={data.label}
+										title={
+											<Titletab
+												icon={data.icon} label={data.label}
+												tipo={data.tipo}
+												close={() => this.closeTab(index)}
+											/>
+										}
+										key={index}
+									>
 										{/*Verifica se o produto pesquisado é localize, pois pode ser gerado abas de outros produtos no Localize*/}
 										{data.produto == "localize" ?
 											<LocalizeView
 												data={data}
 												searchLocalize={this.searchLocalize}
-												showPessoasRelacionadas={this._showPessoasRelacionadas}
 												showRelacionados={this._showRelacionados}
 												pessoasRelacionadas={this.searchPessoasRelacionadas}/>
 										:
@@ -588,7 +599,6 @@ class LocalizeController extends Component {
 												tipo={data.tipo}
 												index={index}
 												searchLocalize={this.searchLocalize}
-												showPessoasRelacionadas={this._showPessoasRelacionadas}
 												showRelacionados={this._showRelacionados}
 												pessoasRelacionadas={this.searchPessoasRelacionadas}/>
 										:

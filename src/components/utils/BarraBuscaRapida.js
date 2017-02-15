@@ -3,7 +3,7 @@ import { FormGroup, FormControl, InputGroup, Button } from "react-bootstrap";
 
 import Modal from "../Modal";
 import GridProdutos from "./GridProdutos";
-import { format } from "./formatDocumento";
+import { patternCPF, patternCNPJ } from "./functions/patternDocuments";
 
 export default class BarraBuscaRapida extends Component {
     constructor(props) {
@@ -74,7 +74,7 @@ export default class BarraBuscaRapida extends Component {
                 <Modal
                     IsModalOpen={this.state.IsModalOpen}
                     closeModal={this.closeModal.bind(this)}
-                    title={"Busca pelo "+ (this.state.isCPF? "CPF" : "CNPJ") + ": "+format(this.state.documento)}
+                    title={"Busca pelo "+ (this.state.isCPF? "CPF " + patternCPF(this.state.documento) : "CNPJ " + patternCNPJ(this.state.documento))}
                 >
                     <GridProdutos
                         changeDocumentType={this.changeDocumentType}

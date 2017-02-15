@@ -60,12 +60,16 @@ export default class Endereco extends Component {
                                     "Cancelar"
                                 : "Adicionar um novo endereço"}
                             </a>
-                            <a data-tip data-for="moreInfo">
-                                <i className="fa fa-plus pull-right moreInfo"/>
-                            </a>
-                            <a data-tip data-for="usersRelated">
-                                <i className="fa fa-users pull-right"  />
-                            </a>
+                            {this.props.pessoas}
+                                <a
+                                    className="moreInfo"
+                                    data-tip data-for="usersRelated"
+                                    onClick={() => console.log("Clicou")}
+                                >
+                                    <span className="pull-right">
+                                        Endereços Relacionados
+                                    </span>
+                                </a>
                         </div>
                     </Panel> :
                     <Panel title="ENDEREÇOS">

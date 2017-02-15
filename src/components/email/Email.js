@@ -37,11 +37,10 @@ export default class Email extends Component {
                                 "Cancelar"
                             : "Adicionar um novo email"}
                         </a>
-                        <a data-tip data-for="moreInfo">
-                            <i className="fa fa-plus pull-right moreInfo"/>
-                        </a>
                         <a data-tip data-for="usersRelated">
-                            <i className="fa fa-users pull-right"  />
+                            <span className="pull-right">
+                                Emails Relacionados
+                            </span>
                         </a>
                     </div>
                 </Panel> :
