@@ -7,7 +7,7 @@ import Table from "../../components/Table";
 export default class CardWithTable extends Component {
   render() {
     return (
-            <Panel title={this.props.title ? this.props.title : <div>outro</div>}>
+            <Panel title={this.props.title ? this.props.title : ""}>
                 <Table fields={this.props.fields ? this.props.fields : ""}>
                     {this.props.children}
                 </Table>

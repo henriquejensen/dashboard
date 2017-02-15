@@ -13,6 +13,7 @@ import {
 		CLOSE_LOCALIZE_MODEL,
 		LOADING_LOCALIZE,
 		CLOSE_TAB_LOCALIZE,
+		CHANGE_TAB_LOCALIZE,
 		CLOSE_MESSAGE_ERROR_LOCALIZE
 } from "../constants/constantsLocalize";
 import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB, ICON_CREDITO } from "../constants/utils";
@@ -132,7 +133,17 @@ export default function(state = initialState, action) {
 					message: "",
 					loading: false,
 					response: newResponse,
-					tabActive: newResponse ? newResponse[0].label : ""
+					tabActive: newResponse[newResponse.length-1].label
+				}
+
+			case CHANGE_TAB_LOCALIZE:
+				let tab = searchDocument(newState.response,action.payload)
+				return {
+					status: "changeTab",
+					message: "",
+					loading: false,
+					response: newState.response,
+					tabActive: newState.response.length > 0 ? newState.response[tab].label : ""
 				}
 				
 			case SEARCH_BY_CPF:
@@ -256,6 +267,17 @@ export default function(state = initialState, action) {
 	return state;
 }
 
+//Busca no array das pessoas pesquisadas o documento passado
+function searchDocument(list, doc) {
+	for(let i=0; i<list.length; i++) {
+		if(doc == list[i].label) {
+			return i;
+		}
+	}
+
+	return 0;
+}
+
 //Busca no array de pessoas pesquisadas o documento passado
 function searchPessoa(list, doc) {
 	for(let i=0; i<list.length; i++) {
@@ -264,7 +286,7 @@ function searchPessoa(list, doc) {
 		}
 	}
 
-	return -1;
+	return 0;
 }
 
 function searchPosPessoa(listPeople, doc) {

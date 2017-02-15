@@ -8,6 +8,7 @@ import {
 		seeModel,
 		closeModel,
 		closeTab,
+		changeTab,
 		closeMessageErrorLocalize
 } from "../../actions/index";
 
@@ -564,8 +565,8 @@ class LocalizeController extends Component {
 				{this.props.datas.length > 0 ? 
 					(
 						<Tabs
-							activeKey={this.state.changeTab ? this.state.nextTab : this.props.tabActive}
-							onSelect={(key) => {this.setState({nextTab:key, changeTab: true})}}
+							activeKey={this.props.tabActive}
+							onSelect={(key) => {this.props.changeTab(key)}}
 							animation={false}
 							id="uncontrolled-tab-example"
 						>
@@ -628,6 +629,7 @@ function mapDispatchToProps(dispatch) {
 			seeModel,
 			closeModel,
 			closeTab,
+			changeTab,
 			closeMessageErrorLocalize
 		},
 		dispatch);

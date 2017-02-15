@@ -12,6 +12,7 @@ import {
 		CLOSE_LOCALIZE_MODEL,
 		LOADING_LOCALIZE,
 		CLOSE_TAB_LOCALIZE,
+		CHANGE_TAB_LOCALIZE,
 		SEARCH_BY_CREDITO_PF,
 		SEARCH_BY_CREDITO_PJ,
 		CLOSE_MESSAGE_ERROR_LOCALIZE
@@ -23,7 +24,6 @@ import {
 		LOGIN_ERROR,
 		LOG_OUT,
 		LOADING,
-		CHANGE_TAB,
 		CLOSE_TAB,
 		AUTH_URL,
 		AUTHENTICATION,
@@ -35,6 +35,13 @@ export function closeMessageErrorLocalize() {
 	return {
 		type: CLOSE_MESSAGE_ERROR_LOCALIZE,
 		payload: "close"
+	}
+}
+
+export function changeTab(index) {
+	return {
+		type: CHANGE_TAB_LOCALIZE,
+		payload: index
 	}
 }
 

@@ -9,7 +9,6 @@ export default class CardInfoMenuUser extends Component {
                     <Image src={this.props.user.avatar_url} className="menu-image-user" circle/>
                 </Col>
                 <Col md={9} sm={12} style={{position:"absolute", top:"27%", color: "white", right:"0", fontWeight:"bold"}}>
-                    {console.log("USEr", this.props.user)}
                     <p>{this.props.user.usuarioNome}</p>
                     <p>{this.props.user.perfilDescricao}</p>
                 </Col>

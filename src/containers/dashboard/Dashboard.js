@@ -209,7 +209,7 @@ class Dashboard extends Component {
 									)
 								})
 							: 
-								<div className="text-center">Nenhum dado encontrado</div>}
+								<tr className="text-center">Nenhum dado encontrado</tr>}
 						</tbody>
 					</CardWithTable>
 
@@ -231,11 +231,12 @@ class Dashboard extends Component {
 									)
 								})
 							: 
-								<div className="text-center">Nenhum dado encontrado</div>}
+								<tr className="text-center">Nenhum dado encontrado</tr>}
 						</tbody>
 					</CardWithTable>
 
 					<CardWithTable title="ÚLTIMAS NOTÍCIAS">
+						<tbody>
 						<Col sm={12}>
 							<Media style={{padding:"7px"}}>
 								<Media.Left>
@@ -287,6 +288,7 @@ class Dashboard extends Component {
 								</Media.Body>
 							</Media>
 						</Col>
+						</tbody>
 					</CardWithTable>
 				</Col>
 				

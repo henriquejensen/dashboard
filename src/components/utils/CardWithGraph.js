@@ -27,69 +27,64 @@ const style = {
 const quantidadeElementos = 3;
 const tamanhoCard = 4;
 
-export default class CardInfo extends Component {
+export default class CardWithGraph extends Component {
+    constructor(props) {
+        super();
 
-    state = {
-        showMore: false
+        this.state = {
+            showMore: false
+        }
+
+        this.renderInfo = this.renderInfo.bind(this);
+    }
+
+    renderInfo(infoToRender) {
+        return (
+            infoToRender.map((info,index) => {
+                return (
+                    info.datasets !== undefined ?
+                        <td key={index}>
+                            <Pie
+                                height={80}
+                                data={info}
+                                options={{
+                                    legend:{
+                                        position: "right",
+                                        usePointStyle: false
+                                    }
+                                }}/>
+                            <p style={style.graphText}>{info.descricao}</p>
+                        </td>
+                    : 
+                        <td key={index}>
+                            <h2 style={style.card}>{info.quantidade}</h2>
+                            <p style={style.text}>{info.label}</p>
+                        </td>
+                )
+            })
+        )
     }
 
     render() {
         return (
                 <Panel title={this.props.title ? this.props.title : <div>outro</div>}>
-                    <Col md={12}>
-                        <Table>
+                    <Table>
+                        {/*Renderiza os elementos visiveis na tela do dashboard*/}
+                        <tbody>
                             <tr>
-                                {this.props.info.slice(0,quantidadeElementos).map((info,index) => {
-                                    return (
-                                            info.datasets !== undefined ?
-                                                <td key={index} style={style.graph}>
-                                                    <Pie
-                                                        height={80}
-                                                        data={info}
-                                                        options={{
-                                                            legend:{
-                                                                position: "right",
-                                                                usePointStyle: false
-                                                            }
-                                                        }}/>
-                                                    <p style={style.graphText}>{info.descricao}</p>
-                                                </td>
-                                            : 
-                                                <td key={index}>
-                                                    <h2 style={style.card}>{info.quantidade}</h2>
-                                                    <p style={style.text}>{info.label}</p>
-                                                </td>
-                                    )
-                                })}
+                                {this.renderInfo(this.props.info.slice(0,quantidadeElementos))}
                             </tr>
+                        </tbody>
 
+                        {/*Renderiza os elementos visíveis somente quando o usuário clica em ver mais*/}
+                        {this.state.showMore ?
                             <tbody>
-                                {this.state.showMore ?
-                                    this.props.info.slice(quantidadeElementos,this.props.info.length).map((info,index) => {
-                                        return (
-                                                info.datasets !== undefined ?
-                                                    <td key={index} style={style.graph}>
-                                                        <Pie
-                                                            data={info}
-                                                            options={{
-                                                                legend:{
-                                                                    position: "right",
-                                                                    usePointStyle: false
-                                                                }
-                                                            }}/>
-                                                        <p style={style.graphText}>{info.descricao}</p>
-                                                    </td>
-                                                : 
-                                                    <td key={index}>
-                                                        <h2 style={style.card}>{info.quantidade}</h2>
-                                                        <p style={style.text}>{info.label}</p>
-                                                    </td>
-                                        )
-                                    })
-                                : ""}
+                                <tr>
+                                    {this.renderInfo(this.props.info.slice(quantidadeElementos,this.props.info.length))}
+                                </tr>
                             </tbody>
-                        </Table>
-                    </Col>
+                        : ""}
+                    </Table>
 
                     {this.props.info.length > quantidadeElementos ? (
                         <div className="col-md-12 moreInfo" onClick={() => this.setState({showMore:!this.state.showMore})}>

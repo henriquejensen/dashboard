@@ -42,7 +42,7 @@ export default class Emails extends Component {
         return (
             <Table>
                 <tbody>
-                    {this.props.emails.map((email,i) => {
+                    {emails.map((email,i) => {
                         return (
                             <tr key={i}>
                                 <td>{email.email}</td>
