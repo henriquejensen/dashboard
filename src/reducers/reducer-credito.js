@@ -2,7 +2,8 @@ import {
     CLOSE_TAB_CREDITO,
     CLOSE_CREDITO_MODEL,
     LOADING_CREDITO,
-    SEE_CREDITO_MODEL
+    SEE_CREDITO_MODEL,
+    GET_CREDITO_LAST_QUERIES
 } from "../constants/constantsCredito";
 import {
     ICON_CREDITO,
@@ -12,13 +13,15 @@ import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB } from "..
 
 import model from "./data/jsonPadraoCredito.json";
 import modelCNPJ from "./data/jsonPadraoCreditoCNPJ.json";
+import lastQueries from "./data/lastQueries.json";
 
 const getInitialState = {
     loading: false,
     status: "",
     message: "",
     response: "",
-    tabActive: ""
+    tabActive: "",
+    lastQueries: []
 }
 
 export default function(state=getInitialState, action) {
@@ -39,15 +42,26 @@ export default function(state=getInitialState, action) {
     }
 
     switch(action.type) {
-        case LOADING_CREDITO: {
+        case GET_CREDITO_LAST_QUERIES:
+            return {
+                loading: false,
+                status: "lastQueries",
+                message: "",
+                response: state.response,
+                tabActive: state.tabActive,
+                lastQueries: lastQueries.credito,
+            }
+
+        case LOADING_CREDITO:
             return {
                 loading: true,
                 status: "loading",
                 message: "",
                 response: state.response,
-                tabActive: state.tabActive
+                tabActive: state.tabActive,
+                lastQueries: state.lastQueries
             }
-        }
+
         case SEE_CREDITO_MODEL:
             response.data = model;
             response.label = model.cadastroPf.cpf;
@@ -65,7 +79,8 @@ export default function(state=getInitialState, action) {
                 status: "model",
                 message: "",
                 response: [response, responseCNPJ],
-                tabActive: ""
+                tabActive: "",
+                lastQueries: state.lastQueries
             }
 
         case CLOSE_CREDITO_MODEL:
@@ -80,7 +95,8 @@ export default function(state=getInitialState, action) {
                 message: "",
                 loading: false,
                 response: newResponse,
-                tabActive: ""
+                tabActive: "",
+                lastQueries: state.lastQueries
             }
     }
 

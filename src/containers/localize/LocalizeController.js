@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+		getLastQueries,
 		loadingLocalize,
 		searchLocalize,
 		searchLocalizeByParams,
@@ -64,6 +65,11 @@ class LocalizeController extends Component {
 		this.form = this.form.bind(this);
 		this.closeTab = this.closeTab.bind(this);
 		this.hiddenBuscaAvancada = this.hiddenBuscaAvancada.bind(this);
+	}
+
+	componentWillMount() {
+		console.log("LOCALIZE WILL");
+		this.props.getLastQueries();
 	}
 
 	componentDidMount() {
@@ -169,7 +175,8 @@ class LocalizeController extends Component {
 				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
 				seeModelo = {this.props.seeModel}
 				status = {this.props.status}
-				message = {this.props.message} >
+				message = {this.props.message}
+				lastQueries = {this.props.lastQueries} >
 					
 					<Col md={2}>
 						<select
@@ -233,7 +240,8 @@ class LocalizeController extends Component {
 				buscaAvancada = {this.state.buscaAvancada}
 				hiddenBuscaAvancada = {this.hiddenBuscaAvancada}
 				status = {this.props.status}
-				message = {this.props.message} >
+				message = {this.props.message}
+				lastQueries = {this.props.lastQueries} >
 				
 					<Col md={2}>
 						<select
@@ -394,7 +402,8 @@ class LocalizeController extends Component {
 				hiddenBuscaAvancada = {this.hiddenBuscaAvancada}
 				seeModelo = {this.props.seeModel}
 				status = {this.props.status}
-				message = {this.props.message} >
+				message = {this.props.message}
+				lastQueries = {this.props.lastQueries} >
 				
 					<Col md={2}>
 						<select
@@ -558,6 +567,7 @@ class LocalizeController extends Component {
 	}
 
 	render() {
+		console.log("LOCALIZE RENDER");
 		return(
 			<div className="container">
 				{this.form()}
@@ -620,17 +630,20 @@ class LocalizeController extends Component {
 }
 
 function mapStateToProps(state) {
+	console.log("STATE", state.localize);
 	return {
 		datas: state.localize.response,
 		status: state.localize.status,
 		message: state.localize.message,
 		loading: state.localize.loading,
-		tabActive: state.localize.tabActive
+		tabActive: state.localize.tabActive,
+		lastQueries: state.localize.lastQueries
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
+			getLastQueries,
 			loadingLocalize,
 			searchLocalize,
 			searchLocalizeByParams,

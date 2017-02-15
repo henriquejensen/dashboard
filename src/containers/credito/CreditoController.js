@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Tabs, Tab} from "react-bootstrap";
 
 import {
+		getLastQueries,
 		seeModel,
 		closeModel,
 		closeTab,
@@ -56,6 +57,10 @@ class Credito extends Component {
 		this.closeTab = this.closeTab.bind(this);
 	}
 
+	componentWillMount() {
+		this.props.getLastQueries();
+	}
+
 	componentDidMount() {
 		document.title = "Assertiva > Crédito";
 	}
@@ -98,7 +103,8 @@ class Credito extends Component {
 				onformSubmit = {this.onFormSubmit}
 				seeModelo = {this.props.seeModel}
 				status = {this.props.status}
-				message = {this.props.message} >
+				message = {this.props.message}
+				lastQueries = {this.props.lastQueries} >
 					
 					<Col md={2}>
 						<select
@@ -156,7 +162,8 @@ class Credito extends Component {
 				onformSubmit = {this.onFormSubmit}
 				seeModelo = {this.props.seeModel}
 				status = {this.props.status}
-				message = {this.props.message} >
+				message = {this.props.message}
+				lastQueries = {this.props.lastQueries} >
 					
 					<Col md={2}>
 						<select
@@ -294,7 +301,8 @@ class Credito extends Component {
 				onformSubmit = {this.onFormSubmit}
 				seeModelo = {this.props.seeModel}
 				status = {this.props.status}
-				message = {this.props.message} >
+				message = {this.props.message}
+				lastQueries = {this.props.lastQueries} >
 					
 					<Col md={2}>
 						<select
@@ -425,17 +433,20 @@ class Credito extends Component {
 }
 
 function mapStateToProps(state) {
+
 	return {
 		datas: state.credito.response,
 		status: state.credito.status,
 		message: state.credito.message,
 		loading: state.credito.loading,
-		tabActive: state.credito.tabActive
+		tabActive: state.credito.tabActive,
+		lastQueries: state.credito.lastQueries
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
+		getLastQueries,
 		seeModel,
 		closeModel,
 		changeTab,

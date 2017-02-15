@@ -77,13 +77,7 @@ export default class Form extends Component {
                     {this.props.showLogo ? 
                         <Col md={12} sm={12}> 
                             <LocalizeDescription />
-                            <UltimasConsultas consultas={[
-                                {tipo:"CPF", pesquisa:34168058875, data:"12/12/2017"},
-                                {tipo:"CNPJ", pesquisa:15724796000100, data:"12/12/2017"},
-                                {tipo:"CPF", pesquisa:5348371823, data:"12/12/2017"},
-                                {tipo:"CPF", pesquisa:22430907836, data:"12/12/2017"},
-                                {tipo:"CPF", pesquisa:22430907836, data:"12/12/2017"}
-                            ]} />
+                            <UltimasConsultas consultas={this.props.lastQueries} />
                         </Col>
                     : "" }
                 </Row>

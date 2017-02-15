@@ -12,18 +12,19 @@ export default class UltimasConsultas extends Component {
             <Panel title="Últimas consultas" qtdTotal={[{
                 qtd:this.props.consultas.length, icon:"fa fa-users"
             }]}>
-                <Table fields={["Tipo", "Documento/Pesquisa", "Data/Hora", ""]} >
+                <Table fields={["Tipo", "Documento", "Pesquisa", "Data/Hora", ""]} >
                     <tbody>
                         {this.props.consultas.map((consulta,index) => {
                             return (
                                 <tr key={index}>
                                     <td>{consulta.tipo}</td>
                                     {consulta.tipo == "CPF" ?
-                                        <td>{patternCPF(consulta.pesquisa)}</td>
+                                        <td>{patternCPF(consulta.documento)}</td>
                                     : consulta.tipo == "CNPJ" ?
-                                        <td>{patternCNPJ(consulta.pesquisa)}</td>
-                                    : ""}                                    
-                                    <td>{consulta.data}</td>
+                                        <td>{patternCNPJ(consulta.documento)}</td>
+                                    : ""}
+                                    <td>{consulta.pesquisa}</td>                                
+                                    <td>{consulta.dataHora}</td>
                                     <td>
                                         <a data-tip data-for="tooltipConsultar">
                                             <div className="mapa-button">

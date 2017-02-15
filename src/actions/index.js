@@ -15,7 +15,8 @@ import {
 		CHANGE_TAB_LOCALIZE,
 		SEARCH_BY_CREDITO_PF,
 		SEARCH_BY_CREDITO_PJ,
-		CLOSE_MESSAGE_ERROR_LOCALIZE
+		CLOSE_MESSAGE_ERROR_LOCALIZE,
+		GET_LOCALIZE_LAST_QUERIES
 } from "../constants/constantsLocalize";
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 import { GET_CAMPANHAS_SMS, GET_CENTRO_CUSTO_SMS, GET_RESPOSTAS_SMS } from "../constants/constantsSMS";
@@ -30,6 +31,13 @@ import {
 		REQUEST_ERROR,
 		ERR_CONNECTION_REFUSED
 } from "../constants/utils";
+
+export function getLastQueries() {
+    return {
+        type: GET_LOCALIZE_LAST_QUERIES,
+        payload: "lastQueries"
+    }
+}
 
 export function closeMessageErrorLocalize() {
 	return {

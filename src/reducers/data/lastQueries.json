@@ -1,0 +1,98 @@
+{
+    "localize": [
+        {
+            "tipo": "CPF",
+            "documento": 34168058875,
+            "pesquisa": "CPF",
+            "dataHora": "12/12/2016"
+        },
+        {
+            "tipo": "CPF",
+            "documento": 22430907836,
+            "pesquisa": "CNPJ",
+            "dataHora": "12/12/2016"
+        },
+        {
+            "tipo": "CNPJ",
+            "documento": 8579209000163,
+            "pesquisa": "CNPJ",
+            "dataHora": "12/12/2016"
+        },
+        {
+            "tipo": "CPF",
+            "documento": 5366214700,
+            "pesquisa": "CNPJ",
+            "dataHora": "12/12/2016"
+        },
+        {
+            "tipo": "CPF",
+            "documento": 26675175807,
+            "pesquisa": "CNPJ",
+            "dataHora": "12/12/2016"
+        }
+    ],
+    "credito": [
+        {
+            "tipo": "CPF",
+            "documento": 34168058875,
+            "pesquisa": "Consulta Simples",
+            "dataHora": "12/12/2016"
+        },
+        {
+            "tipo": "CPF",
+            "documento": 22430907836,
+            "pesquisa": "Consulta Simples",
+            "dataHora": "12/12/2016"
+        },
+        {
+            "tipo": "CNPJ",
+            "documento": 8579209000163,
+            "pesquisa": "Consulta Simples",
+            "dataHora": "12/12/2016"
+        },
+        {
+            "tipo": "CPF",
+            "documento": 5366214700,
+            "pesquisa": "Consulta Simples",
+            "dataHora": "12/12/2016"
+        },
+        {
+            "tipo": "CPF",
+            "documento": 26675175807,
+            "pesquisa": "Consulta Completa",
+            "dataHora": "12/12/2016"
+        }
+    ],
+    "focofiscal": [
+        {
+            "tipo": "CPF",
+            "documento": 34168058875,
+            "pesquisa": "CPF",
+            "dataHora": "12/12/2016"
+        },
+        {
+            "tipo": "CPF",
+            "documento": 22430907836,
+            "pesquisa": "CNPJ",
+            "dataHora": "12/12/2016"
+        },
+        {
+            "tipo": "CNPJ",
+            "documento": 8579209000163,
+            "pesquisa": "CNPJ",
+            "dataHora": "12/12/2016"
+        },
+        {
+            "tipo": "CPF",
+            "documento": 5366214700,
+            "pesquisa": "CNPJ",
+            "dataHora": "12/12/2016"
+        },
+        {
+            "tipo": "CPF",
+            "documento": 26675175807,
+            "pesquisa": "CNPJ",
+            "dataHora": "12/12/2016"
+        }
+    ]
+}

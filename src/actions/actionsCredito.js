@@ -3,7 +3,16 @@ import {
     CLOSE_CREDITO_MODEL,
     LOADING_CREDITO,
     SEE_CREDITO_MODEL,
+    GET_CREDITO_LAST_QUERIES
 } from "../constants/constantsCredito";
+
+export function getLastQueries() {
+    return {
+        type: GET_CREDITO_LAST_QUERIES,
+        payload: "lastQueries"
+    }
+}
+
 
 export function loading() {
     return {
