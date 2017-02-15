@@ -48,7 +48,7 @@ export default class Telefones extends Component{
             celular: ""
         })
 
-        this._addNotification("Obrigado pelo envio. Seu pedido de inserção será analisado")
+        this._addNotification("Obrigado pelo envio. Seu pedido de inserção será analisado");
     }
 
     closeModal() {

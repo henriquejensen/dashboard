@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import Notification from "react-notification-system";
 
 import Panel from "../panel/Panel";
 import Modal from "../Modal";
@@ -13,8 +14,19 @@ export default class Endereco extends Component {
             IsModalOpen: false
         }
 
+        this._notificationSystem = null;
+
         this.closeModal = this.closeModal.bind(this);
         this.sendNewAddress = this.sendNewAddress.bind(this);
+    }
+
+    _addNotification(message) {
+        if (this._notificationSystem) {
+                this._notificationSystem.addNotification({
+                message: message,
+                level: 'success'
+            });
+        }
     }
 
     closeModal() {
@@ -25,6 +37,8 @@ export default class Endereco extends Component {
 
     sendNewAddress(newAddress) {
         console.log("NEW ADDRESS", newAddress);
+
+        this._addNotification("Obrigado pelo envio. Seu pedido de inserção será analisado");
 
         this.setState({
             IsModalOpen: false
@@ -67,6 +81,8 @@ export default class Endereco extends Component {
                         <EnviarEndereco sendNewAddress={this.sendNewAddress} />
 
                     </Modal>
+
+                    <Notification ref={n => this._notificationSystem = n} />
               
             </span>
         )

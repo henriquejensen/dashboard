@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Tooltip from "react-tooltip";
 import Notification from "react-notification-system";
-import { Col } from "react-bootstrap";
+import { Col, Form, FormControl, FormGroup, Button } from "react-bootstrap";
 
 import EnviarEmail from "../forms/EnviarEmail";
 import Table from "../table/Table";
@@ -14,12 +14,15 @@ export default class Emails extends Component {
 
         this.state = {
             isModalOpen: false,
-            emailEnviar: ""
+            emailEnviar: "",
+            email: ""
         }
 
         this._notificationSystem = null;
 
         this.renderEmail = this.renderEmail.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.sendNewEmail = this.sendNewEmail.bind(this);
     }
 
 	closeModal() {
@@ -36,6 +39,20 @@ export default class Emails extends Component {
                 level: 'success'
             });
         }
+    }
+
+    onChange(evt) {
+        this.setState({
+            email: evt.target.value
+        })
+    }
+
+    sendNewEmail(evt) {
+        evt.preventDefault();
+
+        this._addNotification("Obrigado pelo envio. Seu pedido de inserção será analisado");
+
+        this.props.sendNewEmail(this.state.email);
     }
 
     renderEmail(emails) {
@@ -63,6 +80,8 @@ export default class Emails extends Component {
                             </tr>
                         )
                     })}
+
+
                 </tbody>
             </Table>
         )
@@ -79,6 +98,25 @@ export default class Emails extends Component {
                 <Col md={6}>
                     {this.renderEmail(emails.slice(emails.length/2, emails.length))}
                 </Col>
+
+                {this.props.newEmail ?
+                    <Col md={12}>
+                        <Form inline onSubmit={this.sendNewEmail}>
+                            <FormGroup controlId="formInlineName" bsSize="small">
+                                <FormControl
+                                    type="email"
+                                    placeholder="Digite o novo email"
+                                    name="email"
+                                    value={this.state.email}
+                                    onChange={this.onChange}/>
+                            </FormGroup>
+                            {' '}
+                            <Button type="submit" bsSize="small" bsStyle="success">
+                                Enviar
+                            </Button>
+                        </Form>
+                    </Col>                                     
+                : ""}
 
                 <Modal
                     IsModalOpen={this.state.isModalOpen}

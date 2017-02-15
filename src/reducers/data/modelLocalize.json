@@ -238,6 +238,16 @@
       "tags": [
         null
       ]
+    },
+    {
+      "posicao": 0,
+      "email": "emailEmpresa@emailEmpresa.com",
+      "pontuacao": 8,
+      "grupo": "",
+      "relacao": "",
+      "tags": [
+        null
+      ]
     }
   ],
   "veiculos": [

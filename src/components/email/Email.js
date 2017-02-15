@@ -4,14 +4,38 @@ import Panel from "../panel/Panel";
 import LayoutEmail from "./LayoutEmail";
 
 export default class Email extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            newEmail: false
+        }
+
+        this.sendNewEmail = this.sendNewEmail.bind(this);
+    }
+
+    sendNewEmail(newEmail) {
+        console.log("NEW EMAIL", newEmail);
+
+        this.setState({
+            newEmail: false
+        })
+    }
+
     render() {
         return (
             this.props.emails ?
                 <Panel title="EMAILS" qtdTotal={[{icon:"fa fa-envelope-o", qtd:this.props.emails.length}]}>
-                    <LayoutEmail emails={this.props.emails} />
+                    <LayoutEmail
+                        emails={this.props.emails}
+                        newEmail={this.state.newEmail}
+                        sendNewEmail={this.sendNewEmail}
+                    />
                     <div className="col-md-12 col-sm-12 relacionados">
-                        <a className="moreInfo">
-                            Adicionar um novo email
+                        <a className="moreInfo" onClick={() => this.setState({newEmail:!this.state.newEmail})}>
+                            {this.state.newEmail ?
+                                "Cancelar"
+                            : "Adicionar um novo email"}
                         </a>
                         <a data-tip data-for="moreInfo">
                             <i className="fa fa-plus pull-right moreInfo"/>
