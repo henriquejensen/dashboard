@@ -547,6 +547,8 @@ class LocalizeController extends Component {
 		let tipo = this.state.tipo;
 		let options = ["CPF", "CNPJ", "TELEFONE", "NOME", "ENDERECO", "EMAIL"];
 
+		console.log("RENDER", pathTipo, tipo);
+
 		if(!tipo) {
 			tipo = pathTipo;
 		}
@@ -567,7 +569,6 @@ class LocalizeController extends Component {
 	}
 
 	render() {
-		console.log("LOCALIZE RENDER");
 		return(
 			<div className="container">
 				{this.form()}
@@ -630,7 +631,6 @@ class LocalizeController extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log("STATE", state.localize);
 	return {
 		datas: state.localize.response,
 		status: state.localize.status,

@@ -1,4 +1,4 @@
-export const AUTH_URL = "https://auth.assertivasolucoes.com.br/auth/get-key-session";
+export const AUTH_URL = "https://auth.assertivasolucoes.com.br/auth/get-key-session-user";
 export const INFO_URL = "https://auth.assertivasolucoes.com.br/info/get-info-user";
 export const AUTHENTICATION = "token";
 export const REQUEST_ERROR = "REQUEST_ERROR";

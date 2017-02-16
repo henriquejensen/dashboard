@@ -22,8 +22,8 @@ import menu from "./menu/menu.json";
 import { browserHistory } from 'react-router';
 
 import { logoTopo } from "../constants/imagensAssertiva";
-import { logOut } from "../actions/index";
 import {
+		logOut,
 		getUserData
 } from "../actions/actionsCommon";
 
