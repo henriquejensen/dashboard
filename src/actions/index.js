@@ -81,10 +81,11 @@ export function searchCredito(document, tipo) {
 }
 
 export function searchLocalize(document, tipo) {
-	/*return (dispatch) => {
-		ajax.post('https://provider.assertivasolucoes.com.br/veiculo/5034/consultar')
-			.set({'Content-Type': 'application/json', 'keySession': localStorage.getItem("token"), 'Authorization': 'Bearer ' + localStorage.getItem("token")})
-			.send({document: "36891039835"})
+	return (dispatch) => {
+		/*ajax.post('https://provider.assertivasolucoes.com.br/credito/5002/consultar')
+			.type('form')
+			.set({Authorization: 'Bearer ' + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwcm90b2NvbG9UcmFuc2FjYW8iOiIxQTJCM0M0RDVFNkYiLCJjbGllbnRlIjoiQVNTRVJUSVZBIiwiaWRVc3VhcmlvIjoiNjE2ODQxIiwidXN1YXJpbyI6IkpPUkdFLkZFUlJFSVJBIiwiZXhwIjoxNTE2MzgwNTI3LCJpYXQiOjE0ODQ4NDQ1Mjd9.fzS8qC1WRPkV3XZYxB5a6kK8nN71DnlK3YeMMXU2270" })
+			.send({document: "02069765000103"})
 			.end(function(err, res) {
 				console.log(err, res)
 				if (err || !res.ok) {
@@ -93,46 +94,46 @@ export function searchLocalize(document, tipo) {
 					localStorage.setItem(AUTHENTICATION, res.body.response);
 					dispatch({type: LOGIN_SUCCESS, payload: res.body})
 				}
-			})
-	}*/
+			})*/
 
 
-	const senha = tipo+"/ajax?empresa="+localStorage.empresa+"&usuario="+localStorage.usuario+"&senha="+localStorage.senha+"&documento=";
+		const senha = tipo+"/ajax?empresa="+localStorage.empresa+"&usuario="+localStorage.usuario+"&senha="+localStorage.senha+"&documento=";
 
-	if(tipo == "pf") {
-		document = patternDocument(document, 11);
+		if(tipo == "pf") {
+			document = patternDocument(document, 11);
 
-		return (dispatch) => {
-			ajax.get(URL_SEARCH+senha+document)
-				.then((response) => {
-					let data = JSON.parse(response.text);
-					if(data.ERRORS) {
-						dispatch({type: REQUEST_ERROR, payload: data})
-					} else {
-						dispatch({type: SEARCH_BY_CPF, payload: data.PF.DADOS})
-					}
-				})
-				.catch((error) => {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				})
-		}
+			return (dispatch) => {
+				ajax.get(URL_SEARCH+senha+document)
+					.then((response) => {
+						let data = JSON.parse(response.text);
+						if(data.ERRORS) {
+							dispatch({type: REQUEST_ERROR, payload: data})
+						} else {
+							dispatch({type: SEARCH_BY_CPF, payload: data.PF.DADOS})
+						}
+					})
+					.catch((error) => {
+						dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+					})
+			}
 
-	} else if(tipo == "pj") {
-		document = patternDocument(document, 14);
+		} else if(tipo == "pj") {
+			document = patternDocument(document, 14);
 
-		return (dispatch) => {
-			ajax.get(URL_SEARCH+senha+document)
-				.then((response) => {
-					let data = JSON.parse(response.text);
-					if(data.ERRORS) {
-						dispatch({type: "REQUEST_ERROR", payload: data})
-					} else {
-						dispatch({type: SEARCH_BY_CNPJ, payload: data.PJ.DADOS})
-					}
-				})
-				.catch((error) => {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				})
+			return (dispatch) => {
+				ajax.get(URL_SEARCH+senha+document)
+					.then((response) => {
+						let data = JSON.parse(response.text);
+						if(data.ERRORS) {
+							dispatch({type: "REQUEST_ERROR", payload: data})
+						} else {
+							dispatch({type: SEARCH_BY_CNPJ, payload: data.PJ.DADOS})
+						}
+					})
+					.catch((error) => {
+						dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+					})
+			}
 		}
 	}
 }
@@ -246,52 +247,5 @@ export function showRelacionados(doc, docRelacionado, tipo) {
 				documentoRelacionado: docRelacionado
 			}
 		}
-	}
-}
-
-export function authUser(empresa, user, senha) {
-	return (dispatch) => {
-		ajax.get(AUTH_URL+"?empresa="+empresa+"&usuario="+user+"&senha="+senha)
-			.end(function(err, res) {
-				if (err || !res.ok) {
-					dispatch({type: LOGIN_ERROR, payload: res.body})
-				} else {
-					console.log("Auth")
-					localStorage.setItem(AUTHENTICATION, res.body.response);
-					localStorage.setItem("usuario", user);
-					localStorage.setItem("empresa", empresa);
-					localStorage.setItem("senha", senha);
-					dispatch({type: LOGIN_SUCCESS, payload: res.body})
-				}
-			})
-
-		/*ajax.post(AUTH_URL)
-			.send({ empresa: empresa, usuario: user, senha: senha})
-			.end(function(err, res) {
-				if (err || !res.ok) {
-					dispatch({type: LOGIN_ERROR, payload: res.body})
-				} else {
-					localStorage.setItem(AUTHENTICATION, res.body.response);
-					dispatch({type: LOGIN_SUCCESS, payload: res.body})
-				}
-			})*/
-	}
-}
-
-export function logOut() {
-	localStorage.removeItem(AUTHENTICATION);
-	localStorage.removeItem("usuario");
-	localStorage.removeItem("empresa");
-	localStorage.removeItem("senha");
-	return {
-		type: LOG_OUT,
-		payload: "logout"
-	}
-}
-
-export function loading() {
-	return {
-		type: LOADING,
-		payload: "loading"
 	}
 }

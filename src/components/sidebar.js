@@ -138,6 +138,7 @@ class Sidebar extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log("USER", state.user)
 	return {
 		color: state.auth.colorMenu,
     user: state.user

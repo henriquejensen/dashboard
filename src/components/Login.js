@@ -3,7 +3,7 @@ import { Link, browserHistory } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { authUser, loading } from "../actions/index";
+import { authUser, loading } from "../actions/actionsCommon";
 
 
 class Login extends Component {
