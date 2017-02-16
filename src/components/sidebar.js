@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { changeColorMenu } from "../actions/actionsCommon";
+import { changeColorMenu, changeProductType } from "../actions/actionsCommon";
 
 import menu from "./menu/menu.json";
 import CardInfoMenuUser from "./utils/CardInfoMenuUser";
@@ -16,6 +16,8 @@ class Sidebar extends Component {
       tabActive: "menu",
       menuOpened: ""
     }
+
+    this.onClickMenu = this.onClickMenu.bind(this);
   }
 
   componentDidMount() {
@@ -34,7 +36,13 @@ class Sidebar extends Component {
     this.setState({
       menuOpened: menu
     })
-    
+  }
+
+  onClickMenu(evt, color, product, type ) {
+    evt.preventDefault();~
+
+    this.props.changeColorMenu(color);
+    this.props.changeProductType(product, type)
   }
 
   renderMenu() {
@@ -43,7 +51,7 @@ class Sidebar extends Component {
           <ul className="sidebar-nav">
             {menu.sidebar.map((opt, index) => {
               return (
-                <li key={index} onClick={(evt) => {evt.preventDefault();this.props.changeColorMenu(opt.color)}}>
+                <li key={index} onClick={(evt) => this.onClickMenu(evt, opt.color, opt.label, "")}>
                   <Link to={opt.link} onClick={() => this.activeMenuDropdown(opt.id)} activeStyle={{backgroundColor: "#E7E7E7"}}>
                     {this.props.activedMenu ?
                       <img src={opt.image} className="sub-icon" alt={opt.alt}/>
@@ -56,7 +64,7 @@ class Sidebar extends Component {
                   <ul className={this.state.menuOpened == opt.id && this.props.activedMenu ? "sidebar-item-dropdown" : "display-none"}>
                     {opt.subItems.map((subOpt, j) => {
                       return (
-                        <Link to={subOpt.link} key={j}>
+                        <Link to={subOpt.link} key={j} onClick={(evt) => this.onClickMenu(evt, opt.color, opt.label, subOpt.id)}>
                           <li>{subOpt.label}</li>
                         </Link>
                       )
@@ -138,7 +146,6 @@ class Sidebar extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("USER", state.user)
 	return {
 		color: state.auth.colorMenu,
     user: state.user
@@ -147,7 +154,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-			changeColorMenu
+			changeColorMenu,
+      changeProductType
 		},
 		dispatch);
 }

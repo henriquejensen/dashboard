@@ -12,8 +12,15 @@ import {
 		AUTH_URL,
 		AUTHENTICATION,
 		REQUEST_ERROR,
-		ERR_CONNECTION_REFUSED
+		ERR_CONNECTION_REFUSED,
 } from "../constants/utils";
+
+export function changeProductType(product, type) {
+	return {
+		type: "CHANGE_" + product.toUpperCase() + "_TYPE",
+		payload: type
+	}
+}
 
 export function changeColorMenu(color) {
     return {
@@ -23,12 +30,10 @@ export function changeColorMenu(color) {
 }
 
 export function getUserData() {
-	console.log("GET INFO")
 	return (dispatch) => {
 		ajax.post(INFO_URL)
             .set({keySession: localStorage.getItem("token")})
 			.end(function(err, res) {
-				console.log("RESPOSTA", err, res)
 				if (err || !res.ok) {
 					dispatch({type: INFO_ERROR, payload: res.body})
 				} else {

@@ -15,7 +15,7 @@ export default class Titletab extends Component {
                 
                 {this.props.tipo == "CPF" ?
                     patternCPF(this.props.label)
-                    : tipo == "CNPJ" ?
+                    : this.props.tipo == "CNPJ" ?
                         patternCNPJ(this.props.label)
                 : this.props.label}
 			</div>

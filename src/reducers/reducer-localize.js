@@ -17,7 +17,14 @@ import {
 		CLOSE_MESSAGE_ERROR_LOCALIZE,
 		GET_LOCALIZE_LAST_QUERIES
 } from "../constants/constantsLocalize";
-import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB, ICON_CREDITO } from "../constants/utils";
+import {
+		REQUEST_ERROR,
+		ERR_CONNECTION_REFUSED,
+		CHANGE_TAB,
+		CLOSE_TAB,
+		ICON_CREDITO,
+		CHANGE_LOCALIZE_TYPE
+} from "../constants/utils";
 import model from "./data/modelLocalize.json";
 import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
 import relacionados from "./data/relacionados.json";
@@ -42,7 +49,8 @@ const initialState = {
 	response: [],
 	loading: false,
 	tabActive: "",
-	lastQueries: []
+	lastQueries: [],
+	type: ""
 }
 
 let cont = 0;
@@ -68,6 +76,16 @@ export default function(state = initialState, action) {
 		}
 
 		switch(action.type) {
+			case CHANGE_LOCALIZE_TYPE:
+				return {
+					status: "changeType",
+					message: "",
+					loading: false,
+					response: newState.response,
+					tabActive: newState.tabActive,
+					lastQueries: newState.lastQueries,
+					type: action.payload.toUpperCase()
+				}
 			case GET_LOCALIZE_LAST_QUERIES:
 				return {
 					loading: false,
@@ -76,6 +94,7 @@ export default function(state = initialState, action) {
 					response: state.response,
 					tabActive: state.tabActive,
 					lastQueries: lastQueries.localize,
+					type: newState.type
 				}
 
 			case LOADING_LOCALIZE:
@@ -85,7 +104,8 @@ export default function(state = initialState, action) {
 					loading: true,
 					response: newState.response,
 					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				}
 			case SEE_LOCALIZE_MODEL:
 				response.data = model;
@@ -100,7 +120,8 @@ export default function(state = initialState, action) {
 					loading: false,
 					response: [response],
 					tabActive: model.cadastroPf.cpf,
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				}
 
 			case SEARCH_BY_CREDITO_PF:
@@ -116,7 +137,8 @@ export default function(state = initialState, action) {
 					message: "",
 					response: [...newState.response, response],
 					tabActive: modelCredito.cadastroPf.cpf,
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				}
 
 			case SEARCH_BY_CREDITO_PJ:
@@ -132,7 +154,8 @@ export default function(state = initialState, action) {
 					message: "",
 					response: [...newState.response, response],
 					tabActive: modelCreditoCNPJ.cadastroPj.cnpj,
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				}
 
 			case CLOSE_LOCALIZE_MODEL:
@@ -142,7 +165,8 @@ export default function(state = initialState, action) {
 					message: "",
 					response: [],
 					tabActive: "",
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				}
 
 			case CLOSE_TAB_LOCALIZE:
@@ -155,7 +179,8 @@ export default function(state = initialState, action) {
 					loading: false,
 					response: newResponse,
 					tabActive: newResponse[newResponse.length-1].label,
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				}
 
 			case CHANGE_TAB_LOCALIZE:
@@ -166,7 +191,8 @@ export default function(state = initialState, action) {
 					loading: false,
 					response: newState.response,
 					tabActive: newState.response.length > 0 ? newState.response[tab].label : "",
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				}
 				
 			case SEARCH_BY_CPF:
@@ -181,7 +207,8 @@ export default function(state = initialState, action) {
 					loading: false,
 					response: [...newState.response, response],
 					tabActive: response.data.CPF,
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				};
 
 			case SEARCH_BY_CNPJ:
@@ -196,7 +223,8 @@ export default function(state = initialState, action) {
 					loading: false,
 					response: [...newState.response, response],
 					tabActive: response.data.CNPJ,
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				};
 
 			case SEARCH_BY_PARAMS:
@@ -212,7 +240,8 @@ export default function(state = initialState, action) {
 					loading: false,
 					response: newState.status == "model" ? [response] : [...newState.response, response],
 					tabActive: cont,
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				};
 
 			case SEARCH_BY_PESSOAS_RELACIONADOS:
@@ -228,7 +257,8 @@ export default function(state = initialState, action) {
 					loading: false,
 					response: newState.response,
 					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				};
 
 			case SEARCH_BY_TELEFONES_RELACIONADOS:
@@ -247,7 +277,8 @@ export default function(state = initialState, action) {
 					loading: false,
 					response: newState.response,
 					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				};
 
 			case SEARCH_BY_ENDERECOS_RELACIONADOS:
@@ -261,7 +292,8 @@ export default function(state = initialState, action) {
 					loading: false,
 					response: newState.response,
 					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				};
 
 			case REQUEST_ERROR:
@@ -271,7 +303,8 @@ export default function(state = initialState, action) {
 					loading: false,
 					response: newState.response,
 					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				};
 
 			case ERR_CONNECTION_REFUSED:
@@ -281,7 +314,8 @@ export default function(state = initialState, action) {
 					loading: false,
 					response: newState.response,
 					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				};
 
 			case CLOSE_MESSAGE_ERROR_LOCALIZE:
@@ -291,8 +325,10 @@ export default function(state = initialState, action) {
 					loading: false,
 					response: newState.response,
 					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries
+					lastQueries: newState.lastQueries,
+					type: newState.type
 				}
+
 		}
 	}
 

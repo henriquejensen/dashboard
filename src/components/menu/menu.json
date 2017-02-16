@@ -17,12 +17,12 @@
             "image": "../../public/assertiva/icon-localize-new.png",
             "alt": "Icone Localize",
             "subItems": [
-                {"label": "CPF", "link": "/localize/cpf"},
-                {"label": "CNPJ", "link": "/localize/cnpj"},
-                {"label": "Telefone", "link": "/localize/telefone"},
-                {"label": "Nome", "link": "/localize/nome"},
-                {"label": "Endereço", "link": "/localize/endereco"},
-                {"label": "Email", "link": "/localize/email"}
+                {"label": "CPF", "id": "cpf", "link": "/localize/cpf"},
+                {"label": "CNPJ", "id": "cnpj", "link": "/localize/cnpj"},
+                {"label": "Telefone", "id": "telefone", "link": "/localize/telefone"},
+                {"label": "Nome", "id": "nome", "link": "/localize/nome"},
+                {"label": "Endereço", "id": "endereco", "link": "/localize/endereco"},
+                {"label": "Email", "id": "email", "link": "/localize/email"}
             ]
         },
         {
@@ -33,10 +33,10 @@
             "image": "../../public/assertiva/icon-sms-new.png",
             "alt": "Icone SMS",
             "subItems": [
-                {"label": "Envio de SMS", "link": "/sms"},
-                {"label": "Centro de Custo", "link": "/sms/centrocusto"},
-                {"label": "Respostas", "link": "/sms/respostas"},
-                {"label": "Relatório", "link": "/sms"}
+                {"label": "Envio de SMS", "id": "envioSMS", "link": "/sms"},
+                {"label": "Centro de Custo", "id": "centroCusto", "link": "/sms/centrocusto"},
+                {"label": "Respostas", "id": "respostas", "link": "/sms/respostas"},
+                {"label": "Relatório", "id": "relatorio", "link": "/sms"}
             ]
         },
         {
@@ -65,12 +65,12 @@
             "image": "../../public/assertiva/icon-credito-new.png",
             "alt": "Icone Crédito",
             "subItems": [
-                {"label": "Consulta Completa", "link": "/credito/completa"},
-                {"label": "Consulta Intermediária", "link": "/credito/intermediaria"},
-                {"label": "Intermediária Plus/Pessoal Plus", "link": "/credito/intermediariaPlus"},
-                {"label": "Consulta Simples", "link": "/credito/simples"},
-                {"label": "Consulta Cheque", "link": "/credito/cheque"},
-                {"label": "Consulta Express", "link": "/credito/express"}
+                {"label": "Consulta Completa", "id": "completa", "link": "/credito/completa"},
+                {"label": "Consulta Intermediária", "id": "intermediaria", "link": "/credito/intermediaria"},
+                {"label": "Intermediária Plus/Pessoal Plus", "id": "intermediariaPlus", "link": "/credito/intermediariaPlus"},
+                {"label": "Consulta Simples", "id": "simples", "link": "/credito/simples"},
+                {"label": "Consulta Cheque", "id": "cheque", "link": "/credito/cheque"},
+                {"label": "Consulta Express", "id": "express", "link": "/credito/express"}
             ]
         },
         {
@@ -81,13 +81,13 @@
             "image": "../../public/assertiva/icon-localize-new.png",
             "alt": "Icone Veiculos",
             "subItems": [
-                {"label": "Agregados", "link": "/veiculos"},
-                {"label": "BDV Estadual", "link": "/veiculos"},
-                {"label": "Decodificador", "link": "/veiculos"},
-                {"label": "Localização", "link": "/veiculos"},
-                {"label": "Proprietários", "link": "/veiculos"},
-                {"label": "Leilão", "link": "/veiculos"},
-                {"label": "Sinistro", "link": "/veiculos"}
+                {"label": "Agregados", "id": "agregados", "link": "/veiculos"},
+                {"label": "BDV Estadual", "id": "bdv", "link": "/veiculos"},
+                {"label": "Decodificador", "id": "decodificador", "link": "/veiculos"},
+                {"label": "Localização", "id": "localizacao", "link": "/veiculos"},
+                {"label": "Proprietários", "id": "proprietarios", "link": "/veiculos"},
+                {"label": "Leilão", "id": "leilao", "link": "/veiculos"},
+                {"label": "Sinistro", "id": "sinistro", "link": "/veiculos"}
             ]
         },
         {
@@ -98,11 +98,11 @@
             "image": "../../public/assertiva/icon-focofiscal-new.png",
             "alt": "Icone Foco Fiscal",
             "subItems": [
-                {"label": "Receita PF", "link": "/focofiscal/receitaPf"},
-                {"label": "Receita PJ", "link": "/focofiscal/receitaPj"},
-                {"label": "Receita PJ Sintegra", "link": "/focofiscal/receitaSintegra"},
-                {"label": "Sintegra Unificada", "link": "/focofiscal/sintegraUnificada"},
-                {"label": "Simples Nacional", "link": "/focofiscal/simplesNacional"}
+                {"label": "Receita PF", "id": "pf", "link": "/focofiscal/receitaPf"},
+                {"label": "Receita PJ", "id": "pj", "link": "/focofiscal/receitaPj"},
+                {"label": "Receita PJ Sintegra", "id": "sintegra", "link": "/focofiscal/receitaSintegra"},
+                {"label": "Sintegra Unificada", "id": "unificada", "link": "/focofiscal/sintegraUnificada"},
+                {"label": "Simples Nacional", "id": "simples", "link": "/focofiscal/simplesNacional"}
             ]
         },
         {

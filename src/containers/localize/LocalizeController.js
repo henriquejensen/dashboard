@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { changeProductType } from "../../actions/actionsCommon";
 import {
 		getLastQueries,
 		loadingLocalize,
@@ -49,10 +50,7 @@ class LocalizeController extends Component {
 				numeroInicial: "",
 				numeroFinal: "",
 			},
-			tipo: "",
-			nextTab: "",
 			tipoLogradouro: "",
-			changeTab: false,
 			buscaAvancada: false
 		}
 
@@ -61,6 +59,7 @@ class LocalizeController extends Component {
 		this.searchPessoasRelacionadas = this.searchPessoasRelacionadas.bind(this);
 		this._showRelacionados = this._showRelacionados.bind(this);
 		this.onChange = this.onChange.bind(this);
+		this.onChangeType = this.onChangeType.bind(this);
 		this.onChangeInput = this.onChangeInput.bind(this);
 		this.form = this.form.bind(this);
 		this.closeTab = this.closeTab.bind(this);
@@ -68,7 +67,6 @@ class LocalizeController extends Component {
 	}
 
 	componentWillMount() {
-		console.log("LOCALIZE WILL");
 		this.props.getLastQueries();
 	}
 
@@ -90,10 +88,6 @@ class LocalizeController extends Component {
 	}
 
 	searchLocalize(doc, tipo) {
-		console.log("SEARCH LOCALIZE", doc, tipo);
-		this.setState({
-			changeTab: false
-		})
 		this.props.loadingLocalize();
 		this.props.searchLocalize(doc, tipo);
 	}
@@ -103,19 +97,15 @@ class LocalizeController extends Component {
 
 		this.props.loadingLocalize();
 
-		let tipo = this.state.tipo ? this.state.tipo : location.pathname.split("/")[2].toUpperCase();
-
-		if(tipo == "CPF" || tipo == "CNPJ") {
+		if(this.props.type == "CPF" || this.props.type == "CNPJ") {
 			let searchBy = "pf";
-			if(tipo == "CNPJ")
+			if(this.props.type == "CNPJ")
 				searchBy = "pj";
 			
 			this.props.searchLocalize(this.state.localizeInput.documento, searchBy);
 		} else {
-			this.props.searchLocalizeByParams(this.state.localizeInput, tipo);
+			this.props.searchLocalizeByParams(this.state.localizeInput, this.props.type);
 		}
-
-		console.log("SUBMIT", this.state.localizeInput);
 
 		this.setState({
 			localizeInput: {
@@ -134,6 +124,10 @@ class LocalizeController extends Component {
 				numeroFinal: "",
 			},
 		});
+	}
+
+	onChangeType(evt) {
+		this.props.changeProductType("localize", evt.target.value)
 	}
 
 	onChange(evt) {
@@ -181,9 +175,8 @@ class LocalizeController extends Component {
 					<Col md={2}>
 						<select
 							className="form-control"
-							name="tipo"
-							onChange={this.onChange}
-							value={this.state.tipo ? this.state.tipo : optionSelected}
+							onChange={this.onChangeType}
+							value={this.props.type}
 							required>
 							<option value="">Selecione</option>
 							{options.map((opt,i) => {
@@ -237,6 +230,7 @@ class LocalizeController extends Component {
 				showLogo = {this.props.datas.length == 0 ? true : false}
 				onformSubmit = {this.onFormSubmit}
 				seeModelo = {this.props.seeModel}
+				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
 				buscaAvancada = {this.state.buscaAvancada}
 				hiddenBuscaAvancada = {this.hiddenBuscaAvancada}
 				status = {this.props.status}
@@ -246,9 +240,8 @@ class LocalizeController extends Component {
 					<Col md={2}>
 						<select
 							className="form-control"
-							name="tipo"
-							onChange={this.onChange}
-							value={this.state.tipo ? this.state.tipo : optionSelected}
+							onChange={this.onChangeType}
+							value={this.props.type}
 							required>
 							<option value="">Selecione</option>
 							{options.map((opt,i) => {
@@ -398,6 +391,7 @@ class LocalizeController extends Component {
 				logo = {LOGO_LOCALIZE}
 				showLogo = {this.props.datas.length == 0 ? true : false}
 				onformSubmit = {this.onFormSubmit}
+				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
 				buscaAvancada = {this.state.buscaAvancada}
 				hiddenBuscaAvancada = {this.hiddenBuscaAvancada}
 				seeModelo = {this.props.seeModel}
@@ -408,9 +402,8 @@ class LocalizeController extends Component {
 					<Col md={2}>
 						<select
 							className="form-control"
-							name="tipo"
-							onChange={this.onChange}
-							value={this.state.tipo ? this.state.tipo : optionSelected}
+							onChange={this.onChangeType}
+							value={this.props.type}
 							required
 						>
 							<option value="">Selecione</option>
@@ -542,36 +535,28 @@ class LocalizeController extends Component {
 		)
 	}
 
-	form() {
-		let pathTipo = location.pathname.split("/")[2] ? location.pathname.split("/")[2].toUpperCase() : "";
-		let tipo = this.state.tipo;
+	form(tipo) {
 		let options = ["CPF", "CNPJ", "TELEFONE", "NOME", "ENDERECO", "EMAIL"];
 
-		console.log("RENDER", pathTipo, tipo);
-
-		if(!tipo) {
-			tipo = pathTipo;
-		}
-
 		return (
-			pathTipo || tipo ?
+			tipo ?
 				tipo == "CPF" || tipo == "CNPJ" ? 
-					this.renderForm(tipo.toLowerCase(), options, pathTipo)
+					this.renderForm(tipo.toLowerCase(), options, tipo)
 				: tipo == "NOME" ? 
-					this.renderFormNome(tipo.toLowerCase(), options, pathTipo)
+					this.renderFormNome(tipo.toLowerCase(), options, tipo)
 					: tipo == "TELEFONE" ?
-						this.renderForm(tipo.toLowerCase(), options, pathTipo)
+						this.renderForm(tipo.toLowerCase(), options, tipo)
 					: tipo == "EMAIL" ?
-						this.renderForm(tipo.toLowerCase(), options, pathTipo)
-					: this.renderFormEndereco(tipo.toLowerCase(), options, pathTipo)
-			: this.renderForm(tipo.toLowerCase(), options, pathTipo)
+						this.renderForm(tipo.toLowerCase(), options, tipo)
+					: this.renderFormEndereco(tipo.toLowerCase(), options, tipo)
+			: this.renderForm(tipo.toLowerCase(), options, tipo)
 		)
 	}
 
 	render() {
 		return(
 			<div className="container">
-				{this.form()}
+				{this.form(this.props.type)}
 
 				{this.props.loading ? <div className="imgSearching"><img src="../../../public/loading.gif" /></div> : ""}
 
@@ -584,6 +569,7 @@ class LocalizeController extends Component {
 							id="uncontrolled-tab-example"
 						>
 							{this.props.datas.map((data, index) => {
+								{console.log("DATA", data)}
 								return (
 									<Tab
 										eventKey={data.label}
@@ -631,18 +617,21 @@ class LocalizeController extends Component {
 }
 
 function mapStateToProps(state) {
+	console.log("STATE LOCALIZE", state.localize.type)
 	return {
 		datas: state.localize.response,
 		status: state.localize.status,
 		message: state.localize.message,
 		loading: state.localize.loading,
 		tabActive: state.localize.tabActive,
-		lastQueries: state.localize.lastQueries
+		lastQueries: state.localize.lastQueries,
+		type: state.localize.type
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
+			changeProductType,
 			getLastQueries,
 			loadingLocalize,
 			searchLocalize,

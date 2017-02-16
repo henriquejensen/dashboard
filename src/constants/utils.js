@@ -16,3 +16,7 @@ export const ICON_CREDITO = "https://s3-us-west-2.amazonaws.com/assportal/IMAGEN
 export const LOGO_FOCOFISCAL = "../../../public/assertiva/logo-focofiscal.png";
 export const ICON_FOCOFISCAL = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/icon-focofiscal.png";
 export const CHANGE_COLOR_MENU = "CHANGE_COLOR_MENU";
+
+export const CHANGE_LOCALIZE_TYPE = "CHANGE_LOCALIZE_TYPE";
+export const CHANGE_CREDITO_TYPE = "CHANGE_CREDITO_TYPE";
+export const CHANGE_FOCOFISCAL_TYPE = "CHANGE_FOCOFISCAL_TYPE";
