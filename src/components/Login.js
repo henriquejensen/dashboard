@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, browserHistory } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import ajax from "superagent";
 
 import { authUser, loading } from "../actions/actionsCommon";
 
@@ -13,12 +14,22 @@ class Login extends Component {
         this.state = {
             empresa: "",
             user: "",
-            senha: ""
+            senha: "",
+            ip: ""
         }
 
         this.onChange = this.onChange.bind(this);
         this.onFormSubmit = this.onFormSubmit.bind(this);
         this.changeroute = this.changeroute.bind(this);
+    }
+
+    componentWillMount() {
+        ajax.get("https://auth.assertivasolucoes.com.br/auth/get-info-request/d9230bc071484cdd9fc721b")
+            .then((response) => {
+                this.setState({
+                    ip: JSON.parse(response.text).IP
+                })
+            })
     }
 
 	componentDidMount() {
@@ -74,7 +85,7 @@ class Login extends Component {
                                     <input type="checkbox" value="remember-me" />
                                     Lembre-me
                                 </label>
-                                <Link href="#" className="pull-right need-help">IP: 187.108.44.218</Link><span className="clearfix"></span>
+                                <Link href="#" className="pull-right need-help">IP: {this.state.ip}</Link><span className="clearfix"></span>
                             </form>
                         </div>
                         <Link to="/signin" className="text-center new-account">Esqueci minha senha </Link>
