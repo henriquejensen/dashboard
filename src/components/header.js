@@ -18,7 +18,7 @@ import {
 		Row
 } from "react-bootstrap";
 
-import menu from "./menu/menu.json";
+import menu from "./utils/common/menu.json";
 import { browserHistory } from 'react-router';
 
 import { logoTopo } from "../constants/imagensAssertiva";

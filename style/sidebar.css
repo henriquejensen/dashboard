@@ -131,15 +131,15 @@
     background-color: rgba(0,0,0,.03)
 }
 
-.sidebar-item-dropdown > a {
+.sidebar-item-dropdown > li > a {
     color: #7f7f7f;
 }
 
-.sidebar-item-dropdown > a > li {
+.sidebar-item-dropdown > li {
     padding: 7px 0px;
 }
 
-.sidebar-item-dropdown > a > li:hover {
+.sidebar-item-dropdown > li:hover {
     font-weight: bold;
 }
 

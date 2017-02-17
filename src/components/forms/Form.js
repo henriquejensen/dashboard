@@ -16,6 +16,19 @@ export default class Form extends Component {
                     
                     <Col md={12} sm={12}>
                         <form onSubmit={this.props.onformSubmit} className="my-form">
+                            <Col md={2}>
+                                <select
+                                    className="form-control"
+                                    onChange={this.props.onChange}
+                                    value={this.props.type}
+                                    required
+                                >
+                                    <option value="">Selecione</option>
+                                    {this.props.options.map((opt,i) => {
+                                        return <option value={opt.id.toUpperCase()} key={i}>{opt.label}</option>
+                                    })}
+                                </select>
+                            </Col>
 
                             {this.props.children}
 

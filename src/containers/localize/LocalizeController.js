@@ -28,11 +28,12 @@ import Titletab from "../../components/utils/Titletab";
 import { LOGO_LOCALIZE, ICON_LOCALIZE } from "../../constants/utils";
 
 import estados from "../../components/utils/common/estados.json";
+import menu from "../../components/utils/common/menu.json";
 import tiposLogradouro from "../../components/utils/common/tiposLogradouro.json";
 
 class LocalizeController extends Component {
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 
 		this.state = {
 			localizeInput: {
@@ -159,270 +160,155 @@ class LocalizeController extends Component {
 		}
 	}
 
-	renderForm(formType, options, optionSelected) {
+	renderForm() {
 		return (
-			<MyForm
-				icon = {ICON_LOCALIZE}
-				logo = {LOGO_LOCALIZE}
-				showLogo = {this.props.datas.length == 0 ? true : false}
-				onformSubmit = {this.onFormSubmit}
-				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
-				seeModelo = {this.props.seeModel}
-				status = {this.props.status}
-				message = {this.props.message}
-				lastQueries = {this.props.lastQueries} >
-					
-					<Col md={2}>
-						<select
-							className="form-control"
-							onChange={this.onChangeType}
-							value={this.props.type}
-							required>
-							<option value="">Selecione</option>
-							{options.map((opt,i) => {
-								return <option value={opt} key={i}>{opt}</option>
-							})}
-						</select>
-					</Col>
-					<Col md={8}>
-						<input
-							className="form-control"
-							type={
-								formType == "telefone" ?
-									"number"
-									: formType == "email" ?
-										"email"
-								: "text"
-							}
-							placeholder={
-								formType == "telefone" ?
-									"Digite o telefone"
-									: formType == "email" ?
-										"Digite o email"
-								: "Digite o documento"
-							}
-							value={
-								formType == "telefone" ?
-									this.state.localizeInput.telefone
-									: formType == "email" ?
-										this.state.localizeInput.email
-								: this.state.localizeInput.documento
-							}
-							name={
-								formType == "telefone" ?
-									"telefone"
-									: formType == "email" ?
-										"email"
-								: "documento"
-							}
-							onChange={this.onChangeInput}
-						/>
-					</Col>
-			</MyForm>
+			<span>
+				<Col md={8}>
+					<input
+						className="form-control"
+						type={
+							this.props.type == "TELEFONE" ?
+								"number"
+								: this.props.type == "EMAIL" ?
+									"email"
+							: "text"
+						}
+						placeholder={
+							this.props.type == "TELEFONE" ?
+								"Digite o telefone"
+								: this.props.type == "EMAIL" ?
+									"Digite o email"
+							: "Digite o documento"
+						}
+						value={
+							this.props.type == "TELEFONE" ?
+								this.state.localizeInput.telefone
+								: this.props.type == "EMAIL" ?
+									this.state.localizeInput.email
+							: this.state.localizeInput.documento
+						}
+						name={
+							this.props.type == "TELEFONE" ?
+								"telefone"
+								: this.props.type == "EMAIL" ?
+									"email"
+							: "documento"
+						}
+						onChange={this.onChangeInput}
+					/>
+				</Col>
+			</span>
 		)
 	}
 
-	renderFormEndereco(formType, options, optionSelected) {
+	renderFormEndereco() {
 		return (
-			<MyForm
-				icon = {ICON_LOCALIZE}
-				logo = {LOGO_LOCALIZE}
-				showLogo = {this.props.datas.length == 0 ? true : false}
-				onformSubmit = {this.onFormSubmit}
-				seeModelo = {this.props.seeModel}
-				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
-				buscaAvancada = {this.state.buscaAvancada}
-				hiddenBuscaAvancada = {this.hiddenBuscaAvancada}
-				status = {this.props.status}
-				message = {this.props.message}
-				lastQueries = {this.props.lastQueries} >
-				
-					<Col md={2}>
-						<select
-							className="form-control"
-							onChange={this.onChangeType}
-							value={this.props.type}
-							required>
-							<option value="">Selecione</option>
-							{options.map((opt,i) => {
-								return <option value={opt} key={i}>{opt}</option>
-							})}
-						</select>
-					</Col>
-					<Col md={10}>
-						<input
-							className="form-control"
-							type="text"
-							name="enderecoCep"
-							onChange={this.onChangeInput}
-							value={this.state.localizeInput.enderecoCep}
-							placeholder="Endereço ou CEP"
-							required
-						/>
-					</Col>
+			<span>
+				<Col md={10}>
+					<input
+						className="form-control"
+						type="text"
+						name="enderecoCep"
+						onChange={this.onChangeInput}
+						value={this.state.localizeInput.enderecoCep}
+						placeholder="Endereço ou CEP"
+						required
+					/>
+				</Col>
 
-					<Col md={2}>
-						<select
-							className="form-control"
-							name="tipoLogradouro"
-							onChange={this.onChangeInput}
-							value={this.state.localizeInput.tipoLogradouro}
-						>
-							<option value="">Tipo Logradouro</option>
-							{tiposLogradouro.tiposLogradouro.map((tipo,i) => {
-								return <option value={tipo.sigla} key={i}>{tipo.name}</option>
-							})}
-						</select>
-					</Col>
+				<Col md={2}>
+					<select
+						className="form-control"
+						name="tipoLogradouro"
+						onChange={this.onChangeInput}
+						value={this.state.localizeInput.tipoLogradouro}
+					>
+						<option value="">Tipo Logradouro</option>
+						{tiposLogradouro.tiposLogradouro.map((tipo,i) => {
+							return <option value={tipo.sigla} key={i}>{tipo.name}</option>
+						})}
+					</select>
+				</Col>
 
-					<Col md={5}>
-						<input
-							className="form-control"
-							type="text"
-							name="complemento"
-							onChange={this.onChangeInput}
-							value={this.state.localizeInput.complemento}
-							placeholder="Complemento"
-						/>
-					</Col>
-					<Col md={3}>
-						<input
-							className="form-control"
-							type="number"
-							name="numeroInicial"
-							onChange={this.onChangeInput}
-							value={this.state.localizeInput.numeroInicial}
-							placeholder="Nº inicial"
-						/>
-					</Col>
-					<Col md={2}>
-						<input
-							className="form-control"
-							type="number"
-							name="numeroFinal"
-							onChange={this.onChangeInput}
-							value={this.state.localizeInput.numeroFinal}
-							placeholder="Nº final"
-						/>
-					</Col>
+				<Col md={5}>
+					<input
+						className="form-control"
+						type="text"
+						name="complemento"
+						onChange={this.onChangeInput}
+						value={this.state.localizeInput.complemento}
+						placeholder="Complemento"
+					/>
+				</Col>
+				<Col md={3}>
+					<input
+						className="form-control"
+						type="number"
+						name="numeroInicial"
+						onChange={this.onChangeInput}
+						value={this.state.localizeInput.numeroInicial}
+						placeholder="Nº inicial"
+					/>
+				</Col>
+				<Col md={2}>
+					<input
+						className="form-control"
+						type="number"
+						name="numeroFinal"
+						onChange={this.onChangeInput}
+						value={this.state.localizeInput.numeroFinal}
+						placeholder="Nº final"
+					/>
+				</Col>
 
-					<Col md={2}>
-						<select
-							className="form-control"
-							name="estado"
-							onChange={this.onChangeInput}
-							value={this.state.localizeInput.estado}
-						>
-							<option value="">Selecione UF</option>
-							{estados.estados.map((estado,i) => {
-								return <option value={estado.sigla} key={i}>{estado.sigla}</option>
-							})}
-						</select>
-					</Col>
-					<Col md={5}>
-						<input
-							className="form-control"
-							type="text"
-							name="cidade"
-							value={this.state.localizeInput.cidade}
-							onChange={this.onChangeInput}
-							placeholder="Digite o nome da cidade"
-						/>
-					</Col>
-					<Col md={this.state.buscaAvancada ? 5 : 3}>
-						<input
-							className="form-control"
-							type="text"
-							name="bairro"
-							value={this.state.localizeInput.bairro}
-							onChange={this.onChangeInput}
-							placeholder="Digite o nome do bairro"
-						/>
-					</Col>
+				<Col md={2}>
+					<select
+						className="form-control"
+						name="estado"
+						onChange={this.onChangeInput}
+						value={this.state.localizeInput.estado}
+					>
+						<option value="">Selecione UF</option>
+						{estados.estados.map((estado,i) => {
+							return <option value={estado.sigla} key={i}>{estado.sigla}</option>
+						})}
+					</select>
+				</Col>
+				<Col md={5}>
+					<input
+						className="form-control"
+						type="text"
+						name="cidade"
+						value={this.state.localizeInput.cidade}
+						onChange={this.onChangeInput}
+						placeholder="Digite o nome da cidade"
+					/>
+				</Col>
+				<Col md={this.state.buscaAvancada ? 5 : 3}>
+					<input
+						className="form-control"
+						type="text"
+						name="bairro"
+						value={this.state.localizeInput.bairro}
+						onChange={this.onChangeInput}
+						placeholder="Digite o nome do bairro"
+					/>
+				</Col>
 
-					{/*Input da busca avançada*/}
-					{this.state.buscaAvancada ?
-						<Col md={7}>
-							<input
-								className="form-control"
-								name="nome"
-								value={this.state.localizeInput.nome}
-								onChange={this.onChangeInput}
-								type="text"
-								placeholder="Digite o Nome" />
-						</Col>
-					: ""}
-
-					{this.state.buscaAvancada ?
-						<Col md={2}>
-							<input
-								className="form-control"
-								type="date"
-								name="dataNascimento"
-								value={this.state.localizeInput.dataNascimento}
-								onChange={this.onChangeInput}
-							/>
-						</Col>
-					: ""}
-
-					{this.state.buscaAvancada ?
-						<Col md={1}>
-							<select
-								className="form-control"
-								name="sexo"
-								onChange={this.onChangeInput}
-								value={this.state.localizeInput.sexo}
-							>
-								<option value="">Sexo</option>
-								<option value="M">M</option>
-								<option value="F">F</option>
-							</select>
-						</Col>
-					: ""}
-			
-			</MyForm>
-		)
-	}
-
-	renderFormNome(formType, options, optionSelected) {
-		return (
-			<MyForm
-				icon = {ICON_LOCALIZE}
-				logo = {LOGO_LOCALIZE}
-				showLogo = {this.props.datas.length == 0 ? true : false}
-				onformSubmit = {this.onFormSubmit}
-				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
-				buscaAvancada = {this.state.buscaAvancada}
-				hiddenBuscaAvancada = {this.hiddenBuscaAvancada}
-				seeModelo = {this.props.seeModel}
-				status = {this.props.status}
-				message = {this.props.message}
-				lastQueries = {this.props.lastQueries} >
-				
-					<Col md={2}>
-						<select
-							className="form-control"
-							onChange={this.onChangeType}
-							value={this.props.type}
-							required
-						>
-							<option value="">Selecione</option>
-							{options.map((opt,i) => {
-								return <option value={opt} key={i}>{opt}</option>
-							})}
-						</select>
-					</Col>
-					<Col md={6}>
+				{/*Input da busca avançada*/}
+				{this.state.buscaAvancada ?
+					<Col md={7}>
 						<input
 							className="form-control"
 							name="nome"
 							value={this.state.localizeInput.nome}
 							onChange={this.onChangeInput}
 							type="text"
-							placeholder="Digite o Nome"
-							required
-						/>
+							placeholder="Digite o Nome" />
 					</Col>
+				: ""}
+
+				{this.state.buscaAvancada ?
 					<Col md={2}>
 						<input
 							className="form-control"
@@ -432,7 +318,10 @@ class LocalizeController extends Component {
 							onChange={this.onChangeInput}
 						/>
 					</Col>
-					<Col md={2}>
+				: ""}
+
+				{this.state.buscaAvancada ?
+					<Col md={1}>
 						<select
 							className="form-control"
 							name="sexo"
@@ -444,112 +333,167 @@ class LocalizeController extends Component {
 							<option value="F">F</option>
 						</select>
 					</Col>
+				: ""}
+			
+			</span>
+		)
+	}
 
+	renderFormNome() {
+		return (
+			<span>
+				<Col md={6}>
+					<input
+						className="form-control"
+						name="nome"
+						value={this.state.localizeInput.nome}
+						onChange={this.onChangeInput}
+						type="text"
+						placeholder="Digite o Nome"
+						required
+					/>
+				</Col>
+				<Col md={2}>
+					<input
+						className="form-control"
+						type="date"
+						name="dataNascimento"
+						value={this.state.localizeInput.dataNascimento}
+						onChange={this.onChangeInput}
+					/>
+				</Col>
+				<Col md={2}>
+					<select
+						className="form-control"
+						name="sexo"
+						onChange={this.onChangeInput}
+						value={this.state.localizeInput.sexo}
+					>
+						<option value="">Sexo</option>
+						<option value="M">M</option>
+						<option value="F">F</option>
+					</select>
+				</Col>
+
+				<Col md={2}>
+					<select
+						className="form-control"
+						name="estado"
+						onChange={this.onChangeInput}
+						value={this.state.localizeInput.estado}
+					>
+						<option value="">Selecione UF</option>
+						{estados.estados.map((estado,i) => {
+							return <option value={estado.sigla} key={i}>{estado.sigla}</option>
+						})}
+					</select>
+				</Col>
+				<Col md={this.state.buscaAvancada ? 6 : 5}>
+					<input 
+						className="form-control"
+						type="text"
+						name="cidade"
+						onChange={this.onChangeInput}
+						value={this.state.localizeInput.cidade}
+						placeholder="Digite o nome da cidade"
+					
+					/>
+				</Col>
+				<Col md={this.state.buscaAvancada ? 4 : 3}>
+					<input
+						className="form-control"
+						type="text"
+						name="bairro"
+						onChange={this.onChangeInput}
+						value={this.state.localizeInput.bairro}
+						placeholder="Digite o nome do bairro"
+					/>
+				</Col>
+
+				{/*Input da busca avançada*/}
+				{this.state.buscaAvancada ?
 					<Col md={2}>
-						<select
-							className="form-control"
-							name="estado"
-							onChange={this.onChangeInput}
-							value={this.state.localizeInput.estado}
-						>
-							<option value="">Selecione UF</option>
-							{estados.estados.map((estado,i) => {
-								return <option value={estado.sigla} key={i}>{estado.sigla}</option>
-							})}
-						</select>
-					</Col>
-					<Col md={this.state.buscaAvancada ? 6 : 5}>
-						<input 
-							className="form-control"
-							type="text"
-							name="cidade"
-							onChange={this.onChangeInput}
-							value={this.state.localizeInput.cidade}
-							placeholder="Digite o nome da cidade"
-						
-						/>
-					</Col>
-					<Col md={this.state.buscaAvancada ? 4 : 3}>
 						<input
 							className="form-control"
 							type="text"
-							name="bairro"
+							name="complemento"
 							onChange={this.onChangeInput}
-							value={this.state.localizeInput.bairro}
-							placeholder="Digite o nome do bairro"
+							value={this.state.localizeInput.complemento}
+							placeholder="Complemento"
 						/>
 					</Col>
+				: ""}
 
-					{/*Input da busca avançada*/}
-					{this.state.buscaAvancada ?
-						<Col md={2}>
-							<input
-								className="form-control"
-								type="text"
-								name="complemento"
-								onChange={this.onChangeInput}
-								value={this.state.localizeInput.complemento}
-								placeholder="Complemento"
-							/>
-						</Col>
-					: ""}
+				{this.state.buscaAvancada ?
+					<Col md={4}>
+						<input
+							className="form-control"
+							name="enderecoCep"
+							onChange={this.onChangeInput}
+							value={this.state.localizeInput.enderecoCep}
+							type="text"
+							placeholder="Endereço ou CEP" />
+					</Col>
+				: ""}
 
-					{this.state.buscaAvancada ?
-						<Col md={4}>
-							<input
-								className="form-control"
-								name="enderecoCep"
-								onChange={this.onChangeInput}
-								value={this.state.localizeInput.enderecoCep}
-								type="text"
-								placeholder="Endereço ou CEP" />
-						</Col>
-					: ""}
+				{this.state.buscaAvancada ?
+					<Col md={2}>
+						<input
+							className="form-control"
+							type="number"
+							name="numeroInicial"
+							onChange={this.onChangeInput}
+							value={this.state.localizeInput.numeroInicial}
+							placeholder="Nº inicial" />
+					</Col>
+				: ""}
+					
+				{this.state.buscaAvancada ?
+					<Col md={2}>
+						<input
+							className="form-control"
+							type="number"
+							name="numeroFinal"
+							onChange={this.onChangeInput}
+							value={this.state.localizeInput.numeroFinal}
+							placeholder="Nº final"
+						/>
+					</Col>
+				: ""}
 
-					{this.state.buscaAvancada ?
-						<Col md={2}>
-							<input
-								className="form-control"
-								type="number"
-								name="numeroInicial"
-								onChange={this.onChangeInput}
-								value={this.state.localizeInput.numeroInicial}
-								placeholder="Nº inicial" />
-						</Col>
-					: ""}
-						
-					{this.state.buscaAvancada ?
-						<Col md={2}>
-							<input
-								className="form-control"
-								type="number"
-								name="numeroFinal"
-								onChange={this.onChangeInput}
-								value={this.state.localizeInput.numeroFinal}
-								placeholder="Nº final"
-							/>
-						</Col>
-					: ""}
-
-			</MyForm>
+			</span>
 		)
 	}
 
 	form(tipo) {
-		let options = ["CPF", "CNPJ", "TELEFONE", "NOME", "ENDERECO", "EMAIL"];
-
 		return (
-			tipo ?
-				tipo == "CPF" || tipo == "CNPJ" ? 
-					this.renderForm(tipo.toLowerCase(), options, tipo)
-				: tipo == "NOME" ? 
-					this.renderFormNome(tipo.toLowerCase(), options, tipo)
-					: tipo == "TELEFONE" ?
-						this.renderForm(tipo.toLowerCase(), options, tipo)
-					: tipo == "EMAIL" ?
-						this.renderForm(tipo.toLowerCase(), options, tipo)
-					: this.renderFormEndereco(tipo.toLowerCase(), options, tipo)
-			: this.renderForm(tipo.toLowerCase(), options, tipo)
+			<MyForm
+				icon = {ICON_LOCALIZE}
+				logo = {LOGO_LOCALIZE}
+				showLogo = {this.props.datas.length == 0 ? true : false}
+				onformSubmit = {this.onFormSubmit}
+				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
+				options={menu.sidebar[1].subItems}
+				onChange={this.onChangeType}
+                type={this.props.type}
+				seeModelo = {this.props.seeModel}
+				status = {this.props.status}
+				message = {this.props.message}
+				lastQueries = {this.props.lastQueries}
+			>
+				{tipo ?
+					tipo == "CPF" || tipo == "CNPJ" ? 
+						this.renderForm()
+					: tipo == "NOME" ? 
+						this.renderFormNome()
+						: tipo == "TELEFONE" ?
+							this.renderForm()
+						: tipo == "EMAIL" ?
+							this.renderForm()
+						: this.renderFormEndereco()
+					: this.renderForm()
+				}
+			</MyForm>
 		)
 	}
 
@@ -569,7 +513,6 @@ class LocalizeController extends Component {
 							id="uncontrolled-tab-example"
 						>
 							{this.props.datas.map((data, index) => {
-								{console.log("DATA", data)}
 								return (
 									<Tab
 										eventKey={data.label}
@@ -617,7 +560,6 @@ class LocalizeController extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log("STATE LOCALIZE", state.localize.type)
 	return {
 		datas: state.localize.response,
 		status: state.localize.status,

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { changeColorMenu, changeProductType } from "../actions/actionsCommon";
 
-import menu from "./menu/menu.json";
+import menu from "./utils/common/menu.json";
 import CardInfoMenuUser from "./utils/CardInfoMenuUser";
 
 class Sidebar extends Component {
@@ -39,7 +39,9 @@ class Sidebar extends Component {
   }
 
   onClickMenu(evt, color, product, type ) {
-    evt.preventDefault();~
+    evt.preventDefault();
+
+    console.log("CHANGE MENU", color,product,type)
 
     this.props.changeColorMenu(color);
     this.props.changeProductType(product, type)
@@ -64,9 +66,11 @@ class Sidebar extends Component {
                   <ul className={this.state.menuOpened == opt.id && this.props.activedMenu ? "sidebar-item-dropdown" : "display-none"}>
                     {opt.subItems.map((subOpt, j) => {
                       return (
-                        <Link to={subOpt.link} key={j} onClick={(evt) => this.onClickMenu(evt, opt.color, opt.label, subOpt.id)}>
-                          <li>{subOpt.label}</li>
-                        </Link>
+                          <li onClick={(evt) => this.onClickMenu(evt, opt.color, opt.label, subOpt.id)}>
+                            <Link to={subOpt.link} key={j}>
+                              {subOpt.label}
+                            </Link>
+                          </li>
                       )
                     })}                    
                   </ul>
