@@ -238,11 +238,21 @@
   ],
   "emails": [
     {
-      "posicao": null,
-      "email": null,
-      "pontuacao": null,
-      "grupo": null,
-      "relacao": null,
+      "posicao": 0,
+      "email": "exemplo@exemplo.com",
+      "pontuacao": 8,
+      "grupo": "",
+      "relacao": "",
+      "tags": [
+        null
+      ]
+    },
+    {
+      "posicao": 0,
+      "email": "teste@teste.com",
+      "pontuacao": 8,
+      "grupo": "",
+      "relacao": "",
       "tags": [
         null
       ]

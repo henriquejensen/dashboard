@@ -3,7 +3,8 @@ import {
     CLOSE_CREDITO_MODEL,
     LOADING_CREDITO,
     SEE_CREDITO_MODEL,
-    GET_CREDITO_LAST_QUERIES
+    GET_CREDITO_LAST_QUERIES,
+    CHANGE_TAB_CREDITO
 } from "../constants/constantsCredito";
 
 export function getLastQueries() {
@@ -13,6 +14,12 @@ export function getLastQueries() {
     }
 }
 
+export function changeTab(index) {
+	return {
+		type: CHANGE_TAB_CREDITO,
+		payload: index
+	}
+}
 
 export function loading() {
     return {

@@ -7,7 +7,7 @@ import { Form, FormControl, FormGroup, Button } from "react-bootstrap";
 import Table from "../Table";
 import Modal from "../Modal";
 
-export default class Telefones extends Component{
+export default class LayoutTelefone extends Component{
     constructor(props) {
         super(props);
 

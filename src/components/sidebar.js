@@ -41,8 +41,6 @@ class Sidebar extends Component {
   onClickMenu(evt, color, product, type ) {
     evt.preventDefault();
 
-    console.log("CHANGE MENU", color,product,type)
-
     this.props.changeColorMenu(color);
     this.props.changeProductType(product, type)
   }
@@ -53,7 +51,7 @@ class Sidebar extends Component {
           <ul className="sidebar-nav">
             {menu.sidebar.map((opt, index) => {
               return (
-                <li key={index} onClick={(evt) => this.onClickMenu(evt, opt.color, opt.label, "")}>
+                <li key={index} onClick={(evt) => {evt.preventDefault();this.props.changeColorMenu(opt.color)}}>
                   <Link to={opt.link} onClick={() => this.activeMenuDropdown(opt.id)} activeStyle={{backgroundColor: "#E7E7E7"}}>
                     {this.props.activedMenu ?
                       <img src={opt.image} className="sub-icon" alt={opt.alt}/>
@@ -66,8 +64,11 @@ class Sidebar extends Component {
                   <ul className={this.state.menuOpened == opt.id && this.props.activedMenu ? "sidebar-item-dropdown" : "display-none"}>
                     {opt.subItems.map((subOpt, j) => {
                       return (
-                          <li onClick={(evt) => this.onClickMenu(evt, opt.color, opt.label, subOpt.id)}>
-                            <Link to={subOpt.link} key={j}>
+                          <li
+                            onClick={(evt) => this.onClickMenu(evt, opt.color, opt.id, subOpt.id)}
+                            key={j}
+                          >
+                            <Link to={subOpt.link}>
                               {subOpt.label}
                             </Link>
                           </li>

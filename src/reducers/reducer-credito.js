@@ -3,9 +3,11 @@ import {
     CLOSE_CREDITO_MODEL,
     LOADING_CREDITO,
     SEE_CREDITO_MODEL,
-    GET_CREDITO_LAST_QUERIES
+    GET_CREDITO_LAST_QUERIES,
+    CHANGE_TAB_CREDITO
 } from "../constants/constantsCredito";
 import {
+    CHANGE_CREDITO_TYPE,
     ICON_CREDITO,
 } from "../constants/utils";
 
@@ -19,9 +21,10 @@ const getInitialState = {
     loading: false,
     status: "",
     message: "",
-    response: "",
+    response: [],
     tabActive: "",
-    lastQueries: []
+    lastQueries: [],
+    type: ""
 }
 
 export default function(state=getInitialState, action) {
@@ -50,6 +53,7 @@ export default function(state=getInitialState, action) {
                 response: state.response,
                 tabActive: state.tabActive,
                 lastQueries: lastQueries.credito,
+                type: state.type
             }
 
         case LOADING_CREDITO:
@@ -59,7 +63,8 @@ export default function(state=getInitialState, action) {
                 message: "",
                 response: state.response,
                 tabActive: state.tabActive,
-                lastQueries: state.lastQueries
+                lastQueries: state.lastQueries,
+                type: state.type
             }
 
         case SEE_CREDITO_MODEL:
@@ -79,12 +84,21 @@ export default function(state=getInitialState, action) {
                 status: "model",
                 message: "",
                 response: [response, responseCNPJ],
-                tabActive: "",
-                lastQueries: state.lastQueries
+                tabActive: model.cadastroPf.cpf,
+                lastQueries: state.lastQueries,
+                type: state.type
             }
 
         case CLOSE_CREDITO_MODEL:
-            return getInitialState;
+            return {
+                status: "closeModel",
+                message: "",
+                loading: false,
+                response: [],
+                tabActive: "",
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
 
         case CLOSE_TAB_CREDITO:
             let newResponse = state.response.concat();
@@ -95,10 +109,45 @@ export default function(state=getInitialState, action) {
                 message: "",
                 loading: false,
                 response: newResponse,
-                tabActive: "",
-                lastQueries: state.lastQueries
+                tabActive: newResponse[newResponse.length-1].label,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+        case CHANGE_CREDITO_TYPE:
+            return {
+                status: "changeType",
+                message: "",
+                loading: false,
+                response: state.response,
+                tabActive: state.tabActiv,
+                lastQueries: state.lastQueries,
+                type: action.payload.toUpperCase()
+            }
+
+        case CHANGE_TAB_CREDITO:
+            let tab = searchDocument(state.response,action.payload);
+            console.log("TAB", tab)
+            return {
+                status: "changeTab",
+                message: "",
+                loading: false,
+                response: state.response,
+                tabActive: state.response.length > 0 ? state.response[tab].label : "",
+                lastQueries: state.lastQueries,
+                type: state.type
             }
     }
 
     return state;
+}
+
+//Busca no array das pessoas pesquisadas o documento passado
+function searchDocument(list, doc) {
+	for(let i=0; i<list.length; i++) {
+		if(doc == list[i].label) {
+			return i;
+		}
+	}
+
+	return 0;
 }

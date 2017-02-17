@@ -161,7 +161,7 @@ export default function(state = initialState, action) {
 			case CLOSE_LOCALIZE_MODEL:
 				return {
 					loading: false,
-					status: "closeAll",
+					status: "closeModel",
 					message: "",
 					response: [],
 					tabActive: "",

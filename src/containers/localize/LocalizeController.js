@@ -473,6 +473,8 @@ class LocalizeController extends Component {
 				showLogo = {this.props.datas.length == 0 ? true : false}
 				onformSubmit = {this.onFormSubmit}
 				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
+				buscaAvancada={tipo == "NOME" || tipo == "ENDERECO" ? this.state.buscaAvancada : undefined}
+				hiddenBuscaAvancada={tipo == "NOME" || tipo == "ENDERECO" ? this.hiddenBuscaAvancada : undefined}
 				options={menu.sidebar[1].subItems}
 				onChange={this.onChangeType}
                 type={this.props.type}
@@ -518,7 +520,8 @@ class LocalizeController extends Component {
 										eventKey={data.label}
 										title={
 											<Titletab
-												icon={data.icon} label={data.label}
+												icon={data.icon}
+												label={data.label}
 												tipo={data.tipo}
 												close={() => this.closeTab(index)}
 											/>
