@@ -7,6 +7,8 @@ import Table from "../table/Table";
 import Modal from "../Modal";
 import EnviarRenda from "../forms/EnviarRenda";
 
+import { formatDate, formatCurrency } from "../utils/functions/patternDocuments";
+
 export default class RendaEmpregador extends Component {
     constructor() {
         super();
@@ -61,7 +63,7 @@ export default class RendaEmpregador extends Component {
                                     {this.props.rendas.map((renda, index) => {
                                         return (
                                             <tr key={index}>
-                                                <td>R$ {renda.rendaEstimada}</td>
+                                                <td>{formatCurrency(renda.rendaEstimada)}</td>
                                                 <td>{renda.faixaRenda}</td>
                                                 <td>
                                                     {renda.empregador}
@@ -72,7 +74,7 @@ export default class RendaEmpregador extends Component {
                                                     </a>
                                                 </td>
                                                 <td>{renda.setorEmpregador}</td>
-                                                <td>{renda.rendaDataRef}</td>
+                                                <td>{formatDate(renda.rendaDataRef)}</td>
                                                 <td>{renda.cboDescricao + " - " + renda.cboCodigo}</td>
                                             </tr>
                                         )

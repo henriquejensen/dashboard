@@ -23,3 +23,16 @@ export function patternRG(doc) {
 
     return rg.substring(0,2) + "." + rg.substring(2,5) + "." + rg.substring(5,8) +  "-" + rg.substring(8);
 }
+
+export function formatDate(date) {
+    var newDate = new Date(date);
+    var format = new Intl.DateTimeFormat("pt-BR");
+
+    return format.format(newDate);
+}
+
+export function formatCurrency(currency) {
+    var newCurrency = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+
+    return newCurrency.format(currency);
+}

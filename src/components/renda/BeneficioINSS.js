@@ -3,6 +3,8 @@ import React,  { Component } from "react";
 import Panel from "../panel/Panel";
 import Table from "../table/Table";
 
+import { formatDate, formatCurrency } from "../utils/functions/patternDocuments";
+
 export default class BeneficiosINSS extends Component {
     render() {
         return (
@@ -19,10 +21,10 @@ export default class BeneficiosINSS extends Component {
                                     return (
                                         <tr key={index}>
                                             <td>{beneficio.tipoBeneficio}</td>
-                                            <td>R$ {beneficio.valorBeneficio}</td>
+                                            <td>{formatCurrency(beneficio.valorBeneficio)}</td>
                                             <td>{beneficio.faixaBeneficio}</td>
                                             <td>{beneficio.descricaoBeneficio}</td>
-                                            <td>{beneficio.beneficioDataRef}</td>
+                                            <td>{formatDate(beneficio.beneficioDataRef)}</td>
                                             <td>{beneficio.numeroBeneficio}</td>
                                             <td>{beneficio.codigoBeneficio}</td>
                                             <td>{beneficio.statusBeneficio}</td>
