@@ -21,7 +21,7 @@ import Titletab from "../../components/utils/Titletab";
 
 import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
 
-import { LOGO_FOCOFISCAL, ICON_FOCOFISCAL } from "../../constants/utils";
+import { LOGO_FOCOFISCAL, ICON_FOCOFISCAL, LOADING_GIF } from "../../constants/utils";
 
 import estados from "../../components/utils/common/estados.json";
 import menu from "../../components/utils/common/menu.json";
@@ -160,7 +160,7 @@ class FocoFiscal extends Component {
 			<div className="container">
 				{this.form(this.props.type)}
 
-				{this.props.loading ? <div className="imgSearching"><img src="../../../public/loading.gif" /></div> : ""}
+				{this.props.loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
 
 				{this.props.datas.length > 0 ? 
 					(

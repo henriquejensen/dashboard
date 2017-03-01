@@ -6,6 +6,7 @@ import ajax from "superagent";
 
 import { authUser, loading } from "../actions/actionsCommon";
 
+import { LOADING_GIF } from "../constants/utils";
 
 class Login extends Component {
     constructor(props) {
@@ -68,7 +69,7 @@ class Login extends Component {
                             Identifique-se para acessar nossos serviços
                         </h3>
 
-                        {this.props.auth.loading ? <div className="imgSearching"><img src="../../public/loading.gif" /></div> : ""}
+                        {this.props.auth.loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
 
                         {this.props.auth.error ? 
                             <div className="alert alert-danger text-center" role="alert">{this.props.auth.msgn}</div> : ""}

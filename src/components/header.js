@@ -122,7 +122,7 @@ class MenuSuperior extends Component {
 							})}
 						</NavDropdown>
 
-						<NavDropdown title={this.props.user.usuarioNome ? this.props.user.usuarioNome : "Assertiva"} id="basic-nav-dropdown">
+						<NavDropdown title={this.props.user.usuarioNome ? this.props.user.usuarioNome : "DESCONECTADO"} id="basic-nav-dropdown">
 							{menu.header.user.map((opt, index) => {
 								if(opt.label != "Sair") {
 									return (

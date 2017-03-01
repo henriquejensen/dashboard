@@ -1,3 +1,5 @@
+import { browserHistory } from "react-router";
+
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 import { 
         ICON_LOCALIZE,
@@ -210,7 +212,13 @@ export default function (state = user, action) {
             newState.pessoaStatusWs = response.pessoaStatusWs;
             newState.usuarioId = response.usuarioId;
             newState.usuarioNome = response.usuarioNome;
-            return newState
+            return newState;
+        
+        case INFO_ERROR:
+            localStorage.removeItem("token");
+            browserHistory.push("/");
+            return state;
+
     }
     return state;
 } 
