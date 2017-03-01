@@ -22,18 +22,18 @@ export default class LocalizeView extends Component {
         return (
             <PanelGroup>
                 {this.props.tipo == "CPF" ?
-                    <Dados dados={this.props.data.cadastroPf} searchPerson={this.props.searchLocalize} />
+                    <Dados dados={this.props.data.cadastro} searchPerson={this.props.searchLocalize} />
                 : <DadosPj dados={this.props.data.cadastroPj} searchPerson={this.props.searchLocalize} />}
                 <Telefones fixos={this.props.data.telefones.fixos} moveis={this.props.data.telefones.moveis} />
                 <Enderecos enderecos={this.props.data.enderecos} />
                 <Emails emails={this.props.data.emails} />
-                <Sociedades participacoes={this.props.data.quadroSocialParticipacoes.participacao} />
-                <RendaEmpregador renda={this.props.data.rendaEmpregador} searchPerson={this.props.searchLocalize}/>
+                <Sociedades participacoes={this.props.data.participacoesEmpresas} searchPerson={this.props.searchLocalize}/>
+                <RendaEmpregador rendas={this.props.data.rendaEmpregador} searchPerson={this.props.searchLocalize}/>
                 <RendaEstimada rendaEstimada={this.props.data.rendaEstimada} />
-                <BeneficioINSS beneficio={this.props.data.rendaBeneficioAssistencial} />
+                <BeneficioINSS beneficios={this.props.data.rendaBeneficioAssistencial} />
                 <RendaEntidadeClasseLiberal renda={this.props.data.rendaEntidadeClasseLiberal} />
                 <Veiculos veiculos={this.props.data.veiculos} />
-                <Protocolo info={this.props.data.info} />
+                <Protocolo info={this.props.data.cabecalho} />
             </PanelGroup>
         )
     }

@@ -25,7 +25,7 @@ import CreditoView from "../credito/CreditoView";
 import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
 
-import { LOGO_LOCALIZE, ICON_LOCALIZE } from "../../constants/utils";
+import { LOGO_LOCALIZE, ICON_LOCALIZE, LOADING_GIF } from "../../constants/utils";
 
 import estados from "../../components/utils/common/estados.json";
 import menu from "../../components/utils/common/menu.json";
@@ -504,7 +504,7 @@ class LocalizeController extends Component {
 			<div className="container">
 				{this.form(this.props.type)}
 
-				{this.props.loading ? <div className="imgSearching"><img src="../../../public/loading.gif" /></div> : ""}
+				{this.props.loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
 
 				{this.props.datas.length > 0 ? 
 					(

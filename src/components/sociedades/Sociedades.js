@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip'
+import { Button } from "react-bootstrap";
 
 import Panel from "../panel/Panel";
 import Table from "../table/Table";
@@ -16,26 +17,26 @@ export default class Sociedades extends Component {
                   <div className="col-md-12">
                     <Table
                         fields={
-                            ["Documento", "Nome", "Cargo", "Participação", "Entrada", "Relacionamento", ""]
+                            ["Nome", "Cargo", "Participação", "Entrada", "Saída", "Relacionamento"]
                         }
                     >
                       <tbody>
                         {this.props.participacoes.map((participacao, index) => {
                           return (
                             <tr key={index}>
-                              <td>{participacao.documento}</td>
-                              <td>{participacao.nome}</td>
+                              <td>
+                                  {participacao.nome}
+                                  <a data-tip data-for='tooltipConsultar'>
+                                      <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(participacao.documento, "pj")}>
+                                          <i className='fa fa-search'/>
+                                      </Button>
+                                  </a>
+                              </td>
                               <td>{participacao.qualificacaoSocio}</td>
                               <td>{participacao.participacao}</td>
                               <td>{participacao.dataEntrada}</td>
+                              <td>{participacao.dataSaida ? participacao.dataSaida : "Atual"}</td>
                               <td>{participacao.relacao}</td>
-                              <td>
-                                <a data-tip data-for='tooltipConsultar'>
-                                  <div className="mapa-button">
-                                      <i className='fa fa-search'/>
-                                  </div>
-                                </a>
-                              </td>
                             </tr>
                           )
                         })}

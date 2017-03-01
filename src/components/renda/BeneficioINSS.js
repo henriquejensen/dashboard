@@ -6,7 +6,7 @@ import Table from "../table/Table";
 export default class BeneficiosINSS extends Component {
     render() {
         return (
-            this.props.beneficio ?
+            this.props.beneficios ?
                 <Panel title="BENEFÍCIO ASSISTENCIAL E INSS">
                     <div className="col-md-12 col-sm-12">            
                         <Table
@@ -15,16 +15,20 @@ export default class BeneficiosINSS extends Component {
                             }
                         >
                             <tbody>
-                                <tr>
-                                    <td>{this.props.beneficio.tipoBeneficio}</td>
-                                    <td>{this.props.beneficio.valorBeneficio}</td>
-                                    <td>{this.props.beneficio.faixaBeneficio}</td>
-                                    <td>{this.props.beneficio.descricaoBeneficio}</td>
-                                    <td>{this.props.beneficio.beneficioDataRef}</td>
-                                    <td>{this.props.beneficio.numeroBeneficio}</td>
-                                    <td>{this.props.beneficio.codigoBeneficio}</td>
-                                    <td>{this.props.beneficio.statusBeneficio}</td>
-                                </tr>
+                                {this.props.beneficios.map((beneficio, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{beneficio.tipoBeneficio}</td>
+                                            <td>R$ {beneficio.valorBeneficio}</td>
+                                            <td>{beneficio.faixaBeneficio}</td>
+                                            <td>{beneficio.descricaoBeneficio}</td>
+                                            <td>{beneficio.beneficioDataRef}</td>
+                                            <td>{beneficio.numeroBeneficio}</td>
+                                            <td>{beneficio.codigoBeneficio}</td>
+                                            <td>{beneficio.statusBeneficio}</td>
+                                        </tr>
+                                    )
+                                })}
                             </tbody>
                         </Table>
                     </div>

@@ -100,16 +100,20 @@ export function searchLocalize(document, tipo) {
 	const senha = tipo+"/ajax?empresa="+localStorage.empresa+"&usuario="+localStorage.usuario+"&senha="+localStorage.senha+"&documento=";
 
 	if(tipo == "pf") {
+		console.log("BUSCA POR CPF")
 		document = patternDocument(document, 11);
 
 		return (dispatch) => {
-			ajax.get(URL_SEARCH+senha+document)
+			ajax.post("https://services.assertivasolucoes.com.br/v1/localize/1000/consultar")
+				.send({cpf: document})
+				.set({'Content-Type': 'application/x-www-form-urlencoded','Authorization': 'MEU_TOKEN_0123456789'})
 				.then((response) => {
-					let data = JSON.parse(response.text);
-					if(data.ERRORS) {
-						dispatch({type: REQUEST_ERROR, payload: data})
+					console.log("CHEGOU", response, response.body)
+					if(response.status == 200) {
+						console.log("SEARCH_BY_CPF")
+						dispatch({type: SEARCH_BY_CPF, payload: response.body})
 					} else {
-						dispatch({type: SEARCH_BY_CPF, payload: data.PF.DADOS})
+						dispatch({type: REQUEST_ERROR, payload: response.body})
 					}
 				})
 				.catch((error) => {

@@ -109,7 +109,7 @@ export default function(state = initialState, action) {
 				}
 			case SEE_LOCALIZE_MODEL:
 				response.data = model;
-				response.label = model.cadastroPf.cpf;
+				response.label = model.cadastro.cpf;
 				response.tipo = "CPF";
 				response.icon = ICON_LOCALIZE;
 				response.produto = "modelLocalize";
@@ -119,7 +119,7 @@ export default function(state = initialState, action) {
 					message: "",
 					loading: false,
 					response: [response],
-					tabActive: model.cadastroPf.cpf,
+					tabActive: model.cadastro.cpf,
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				}
@@ -197,16 +197,16 @@ export default function(state = initialState, action) {
 				
 			case SEARCH_BY_CPF:
 				response.data = action.payload;
-				response.label = response.data.CPF;
+				response.label = action.payload.cadastro.cpf;
 				response.tipo = "CPF";
 				response.icon = ICON_LOCALIZE;
-				response.produto = "localize";
+				response.produto = "modelLocalize";
 				return {
 					status: "success",
 					message: "",
 					loading: false,
 					response: [...newState.response, response],
-					tabActive: response.data.CPF,
+					tabActive: action.payload.cadastro.cpf,
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				};

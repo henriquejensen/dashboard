@@ -27,10 +27,6 @@
     display: flex;
 }
 
-.nav-tabs {
-    background-color: #f0f0f0;
-}
-
 #sidebar-wrapper {
     box-shadow: 0 1px 4px rgba(0,0,0,.3);
     margin-left: -220px;

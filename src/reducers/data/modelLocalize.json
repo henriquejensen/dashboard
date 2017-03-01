@@ -1,12 +1,11 @@
 {
-  "info": {
-    "produto": "localize",
-    "consulta": "CPF",
+  "cabecalho": {
+    "produto": "LOCALIZE",
+    "consulta": "PESSOA_FISICA",
     "protocoloTransacao": "da758c2a-e689-4759-b7d1-009e15b1f302",
-    "dataHora": "DD/MM/AAAA HH:MM:SS",
-    "tempoResposta": null
+    "dataHora": "01/03/2017 10:02:21"
   },
-  "cadastroPf": {
+  "cadastro": {
     "cpf": 12345678901,
     "nome": "XXXXXX XXXXXX XXXXXX",
     "sexo": "M",
@@ -21,15 +20,13 @@
     "statusProtocolo": "da758c2a-e689-4759-b7d1-009e15b1f302",
     "maeNome": "XXXXXXX XXXXXX XXXXXX",
     "maeCpf": 12345678901,
-    "obitoProvavel": false,
+    "obitoProvavel": "NÃO",
     "tituloEleitor": 33333333333,
     "grauInstrucao": "",
     "dependentes": "",
     "estadoCivil": "casado",
     "nacionalidade": "brasileiro",
-    "tags": [
-      null
-    ]
+    "tags": null
   },
   "cadastroPj": {
     "cnpj": 99999911111166,
@@ -63,6 +60,19 @@
     "grupo": "",
     "subgrupo": ""
   },
+  "participacoesEmpresas" : [ {
+    "documentoConsultado" : "22555574875",
+    "nomeConsultado" : "PEDRO GONCALVES AQUINO",
+    "posicao" : "1",
+    "documento" : "18291189000184",
+    "nome" : "PEDRO GONCALVES AQUINO 22555574875",
+    "participacao" : "100.00",
+    "qualificacaoSocio" : "SOCIO-ADMINISTRADOR",
+    "dataEntrada" : "13/06/2013",
+    "dataSaida" : null,
+    "valorParticipacao" : null,
+    "tags" : null
+  } ],
   "quadroSocialParticipacoes": {
     "relacao": "",
     "documentoConsultado": 12345678901,
@@ -79,24 +89,22 @@
       null
     ]
   },
-  "rendaEmpregador": {
-    "cpf": 12345678901,
-    "posicao": 0,
-    "empregador": "XXXX XXXXX XXXX",
-    "documentoEmpregador": 12345678901,
-    "setorEmpregador": "SETOR EMPREGADOR",
-    "cboCodigo": 1111,
-    "cboDescricao": "CBO DESCRICAO",
-    "cboSetor": "CBO SETOR",
-    "cboSinonimos": "CBO SINONIMOS",
-    "rendaEstimada": 10000,
-    "faixaRenda": "500 à 1500",
-    "rendaDataRef": "DD/MM/AAAA",
-    "tags": [
-      null
-    ]
-  },
-  "rendaBeneficioAssistencial": {
+  "rendaEmpregador": [{
+      "cpf": 12345678901,
+      "posicao": 0,
+      "empregador": "XXXX XXXXX XXXX",
+      "documentoEmpregador": 12345678901,
+      "setorEmpregador": "SETOR EMPREGADOR",
+      "cboCodigo": 1111,
+      "cboDescricao": "CBO DESCRICAO",
+      "cboSetor": "CBO SETOR",
+      "cboSinonimos": "CBO SINONIMOS",
+      "rendaEstimada": 10000,
+      "faixaRenda": "500 à 1500",
+      "rendaDataRef": "DD/MM/AAAA",
+      "tags": null
+  }],
+  "rendaBeneficioAssistencial": [{
     "cpf": 12345678901,
     "posicao": 1,
     "numeroBeneficio": 22222,
@@ -110,7 +118,7 @@
     "tags": [
       null
     ]
-  },
+  }],
   "rendaEntidadeClasseLiberal": {
     "cpf": 12345678901,
     "posicao": 0,

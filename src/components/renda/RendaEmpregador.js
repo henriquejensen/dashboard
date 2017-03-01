@@ -49,31 +49,34 @@ export default class RendaEmpregador extends Component {
     render() {
         return (
             <span>
-                {this.props.renda ?
+                {this.props.rendas ?
                     <Panel title="RENDA EMPREGADOR">
                         <Col md={12} sm={12}>            
                             <Table
                                 fields={
-                                    ["Renda Estimada", "Faixa de Renda", "Empregador", "Setor", "Data Referência", "CBO", "CBO Sinonimos"]
+                                    ["Renda Estimada", "Faixa de Renda", "Empregador", "Setor", "Data Referência", "CBO"]
                                 }
                             >
                                 <tbody>
-                                    <tr>
-                                        <td>{this.props.renda.rendaEstimada}</td>
-                                        <td>{this.props.renda.faixaRenda}</td>
-                                        <td>
-                                            {this.props.renda.empregador}
-                                            <a data-tip data-for='tooltipConsultar'>
-                                                <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(this.props.renda.documentoEmpregador, "pf")}>
-                                                    <i className='fa fa-search'/>
-                                                </Button>
-                                            </a>
-                                        </td>
-                                        <td>{this.props.renda.setorEmpregador}</td>
-                                        <td>{this.props.renda.rendaDataRef}</td>
-                                        <td>{this.props.renda.cboDescricao + " - " + this.props.renda.cboCodigo}</td>
-                                        <td>{this.props.renda.cboSinonimos}</td>
-                                    </tr>
+                                    {this.props.rendas.map((renda, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td>R$ {renda.rendaEstimada}</td>
+                                                <td>{renda.faixaRenda}</td>
+                                                <td>
+                                                    {renda.empregador}
+                                                    <a data-tip data-for='tooltipConsultar'>
+                                                        <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(renda.documentoEmpregador, "pj")}>
+                                                            <i className='fa fa-search'/>
+                                                        </Button>
+                                                    </a>
+                                                </td>
+                                                <td>{renda.setorEmpregador}</td>
+                                                <td>{renda.rendaDataRef}</td>
+                                                <td>{renda.cboDescricao + " - " + renda.cboCodigo}</td>
+                                            </tr>
+                                        )
+                                    })}
                                 </tbody>
                             </Table>
                             

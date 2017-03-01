@@ -21,7 +21,7 @@ export default class Dados extends Component{
             </div>
             <div className="col-md-6">
               <strong>Status CPF: </strong>
-              <span className={this.props.dados.status == "ATIVO" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.status}</span>
+              <span className={this.props.dados.status == "ATIVO" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.status ? this.props.dados.status : "Nada consta"}</span>
             </div>
 
             <div className="col-md-6">
@@ -39,7 +39,7 @@ export default class Dados extends Component{
             </div>
             <div className="col-md-6">
               <strong>Óbito: </strong>
-              <span className={this.props.dados.obitoProvavel ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.obitoProvavel ? "SIM" : "NÃO"}</span>
+              <span className={this.props.dados.obitoProvavel == "SIM" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.obitoProvavel ? this.props.dados.obitoProvavel : "Nada consta"}</span>
             </div>
 
             <div className="col-md-6">
