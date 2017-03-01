@@ -214,16 +214,16 @@ export default function(state = initialState, action) {
 
 			case SEARCH_BY_CNPJ:
 				response.data = action.payload;
-				response.label = response.data.CNPJ;
+				response.label = action.payload.cadastro.cnpj;
 				response.tipo = "CNPJ";
 				response.icon = ICON_LOCALIZE;
-				response.produto = "localize";
+				response.produto = "modelLocalize";
 				return {
 					status: "success",
 					message: "",
 					loading: false,
 					response: [...newState.response, response],
-					tabActive: response.data.CNPJ,
+					tabActive: action.payload.cadastro.cnpj,
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				};

@@ -107,13 +107,15 @@ export function searchLocalize(document, tipo) {
 		document = patternDocument(document, 14);
 
 		return (dispatch) => {
-			ajax.get(URL_SEARCH+senha+document)
+			ajax.post("https://services.assertivasolucoes.com.br/v1/localize/1001/consultar")
+				.send({cnpj: document})
+				.set({'Content-Type': 'application/x-www-form-urlencoded','Authorization': 'MEU_TOKEN_0123456789'})
 				.then((response) => {
-					let data = JSON.parse(response.text);
-					if(data.ERRORS) {
-						dispatch({type: "REQUEST_ERROR", payload: data})
+					console.log("RESPONSE", response)
+					if(response.status == 200) {
+						dispatch({type: SEARCH_BY_CNPJ, payload: response.body})
 					} else {
-						dispatch({type: SEARCH_BY_CNPJ, payload: data.PJ.DADOS})
+						dispatch({type: REQUEST_ERROR, payload: response.body})
 					}
 				})
 				.catch((error) => {
