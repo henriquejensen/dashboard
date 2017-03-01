@@ -18,16 +18,17 @@ import PanelGroup from "../../components/panel/PanelGroup";
 
 export default class LocalizeView extends Component {
     render() {
-        console.log("DATa", this.props.data)
         return (
             <PanelGroup>
+                {console.log("DATA", this.props.data)}
                 {this.props.tipo == "CPF" ?
                     <Dados dados={this.props.data.cadastro} searchPerson={this.props.searchLocalize} />
-                : <DadosPj dados={this.props.data.cadastroPj} searchPerson={this.props.searchLocalize} />}
-                <Telefones fixos={this.props.data.telefones.fixos} moveis={this.props.data.telefones.moveis} />
+                : <DadosPj dados={this.props.data.cadastro} searchPerson={this.props.searchLocalize} />}
+                {console.log("DSFASDF", this.props.data.telefones)}
+                <Telefones telefones={this.props.data.telefones} />
                 <Enderecos enderecos={this.props.data.enderecos} />
                 <Emails emails={this.props.data.emails} />
-                <Sociedades participacoes={this.props.data.participacoesEmpresas} searchPerson={this.props.searchLocalize}/>
+                <Sociedades participacoes={this.props.data.participacoesEmpresas} searchPerson={this.props.searchLocalize}/>                
                 <RendaEmpregador rendas={this.props.data.rendaEmpregador} searchPerson={this.props.searchLocalize}/>
                 <RendaEstimada rendaEstimada={this.props.data.rendaEstimada} />
                 <BeneficioINSS beneficios={this.props.data.rendaBeneficioAssistencial} />

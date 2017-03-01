@@ -17,12 +17,14 @@ export default class Telefone extends Component {
     }
 
     render() {
+        let fixos = this.props.telefones ? this.props.telefones.fixos : "";
+        let moveis = this.props.telefones ? this.props.telefones.moveis : "";
         return (
-            this.props.fixos || this.props.moveis ?
-                <Panel title="TELEFONES" qtdTotal={[{icon:"fa fa-phone", qtd:this.props.fixos.length},{icon:"fa fa-mobile", qtd:this.props.moveis.length}]}>
+            this.props.telefones ?
+                <Panel title="TELEFONES" qtdTotal={[{icon:"fa fa-phone", qtd:fixos.length},{icon:"fa fa-mobile", qtd:moveis.length}]}>
                     <LayoutTelefone
-                        fixos={this.props.fixos}
-                        moveis={this.props.moveis}
+                        fixos={fixos}
+                        moveis={moveis}
                         newPhone={this.state.newPhone}
                         sendNewPhone={this.sendNewPhone}/>
                     <div className="col-md-12 col-sm-12 relacionados">

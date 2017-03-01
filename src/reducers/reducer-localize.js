@@ -196,6 +196,7 @@ export default function(state = initialState, action) {
 				}
 				
 			case SEARCH_BY_CPF:
+				console.log("REDUCER", action.payload);
 				response.data = action.payload;
 				response.label = action.payload.cadastro.cpf;
 				response.tipo = "CPF";

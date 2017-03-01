@@ -81,26 +81,10 @@ export function searchCredito(document, tipo) {
 }
 
 export function searchLocalize(document, tipo) {
-	/*return (dispatch) => {
-		ajax.post('https://provider.assertivasolucoes.com.br/veiculo/5034/consultar')
-			.set({'Content-Type': 'application/json', 'keySession': localStorage.getItem("token"), 'Authorization': 'Bearer ' + localStorage.getItem("token")})
-			.send({document: "36891039835"})
-			.end(function(err, res) {
-				console.log(err, res)
-				if (err || !res.ok) {
-					dispatch({type: LOGIN_ERROR, payload: res.body})
-				} else {
-					localStorage.setItem(AUTHENTICATION, res.body.response);
-					dispatch({type: LOGIN_SUCCESS, payload: res.body})
-				}
-			})
-	}*/
-
-
+	console.log("DOCUMENT", document, tipo)
 	const senha = tipo+"/ajax?empresa="+localStorage.empresa+"&usuario="+localStorage.usuario+"&senha="+localStorage.senha+"&documento=";
 
 	if(tipo == "pf") {
-		console.log("BUSCA POR CPF")
 		document = patternDocument(document, 11);
 
 		return (dispatch) => {
@@ -108,9 +92,8 @@ export function searchLocalize(document, tipo) {
 				.send({cpf: document})
 				.set({'Content-Type': 'application/x-www-form-urlencoded','Authorization': 'MEU_TOKEN_0123456789'})
 				.then((response) => {
-					console.log("CHEGOU", response, response.body)
+					console.log("RESPONSE", response)
 					if(response.status == 200) {
-						console.log("SEARCH_BY_CPF")
 						dispatch({type: SEARCH_BY_CPF, payload: response.body})
 					} else {
 						dispatch({type: REQUEST_ERROR, payload: response.body})
@@ -120,7 +103,6 @@ export function searchLocalize(document, tipo) {
 					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
 				})
 		}
-
 	} else if(tipo == "pj") {
 		document = patternDocument(document, 14);
 

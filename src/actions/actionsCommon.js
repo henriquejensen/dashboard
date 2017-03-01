@@ -34,7 +34,6 @@ export function getUserData() {
 		ajax.post(INFO_URL)
             .set({keySession: localStorage.getItem("token")})
 			.end(function(err, res) {
-				console.log("RETORNO", err, res);
 				if (res.status == 200) {
 					dispatch({type: INFO_SUCCESS, payload: res.body})
 				} else {
@@ -51,7 +50,6 @@ export function authUser(empresa, user, senha) {
 				if (err || !res.ok) {
 					dispatch({type: LOGIN_ERROR, payload: res.body})
 				} else {
-					console.log("Auth")
 					localStorage.setItem(AUTHENTICATION, res.body.response);
 					dispatch({type: LOGIN_SUCCESS, payload: res.body})
 				}
