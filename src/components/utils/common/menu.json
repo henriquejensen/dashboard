@@ -12,9 +12,9 @@
         {
             "label": "Localize",
             "id": "localize",
-            "color": "#4285f4",
+            "color": "#7a5ec0",
             "link": "/localize",
-            "image": "../../public/assertiva/icon-localize-new.png",
+            "image": "../../public/assertiva/icon-focofiscal-new.png",
             "alt": "Icone Localize",
             "subItems": [
                 {"label": "CPF", "id": "cpf", "link": "/localize/cpf"},
@@ -42,18 +42,18 @@
         {
             "label": "Base Certa",
             "id": "basecerta",
-            "color": "#7a5ec0",
+            "color": "#4285f4",
             "link": "/basecerta",
-            "image": "../../public/assertiva/icon-focofiscal-new.png",
+            "image": "../../public/assertiva/icon-localize-new.png",
             "alt": "Icone Base Certa",
             "subItems": []
         },
         {
             "label": "Venda+",
             "id": "vendamais",
-            "color": "#ff5d31",
+            "color": "#7a5ec0",
             "link": "/vendamais",
-            "image": "../../public/assertiva/icon-consigmais-new.png",
+            "image": "../../public/assertiva/icon-focofiscal-new.png",
             "alt": "Icone Venda+",
             "subItems": []
         },
@@ -94,8 +94,8 @@
             "label": "Foco Fiscal",
             "id": "focofiscal",
             "link": "/focofiscal",
-            "color": "#7a5ec0",
-            "image": "../../public/assertiva/icon-focofiscal-new.png",
+            "color": "#ff5d31",
+            "image": "../../public/assertiva/icon-consigmais-new.png",
             "alt": "Icone Foco Fiscal",
             "subItems": [
                 {"label": "Receita PF", "id": "pf", "link": "/focofiscal/receitaPf"},
@@ -118,6 +118,12 @@
 
     "header":
         {
+            "cadastro": [
+                {
+                    "label": "Usuários",
+                    "link": "/cadastro/usuarios"
+                }
+            ],
             "relatorios": [
                 {
                     "label": "Relatórios",

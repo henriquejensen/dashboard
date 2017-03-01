@@ -20,6 +20,7 @@ import VendaMais from "./containers/vendamais/VendaMais";
 import ConsigMais from "./containers/consigmais/ConsigMais";
 
 import Relatorios from "./containers/relatorios/Relatorios";
+import Cadastro from "./containers/cadastro/Cadastro";
 
 export default (
   <Route>
@@ -48,6 +49,10 @@ export default (
       <Route name="Veiculos" path="veiculos" component={Veiculos} />
       <Route name="Venda+" path="vendamais" component={VendaMais} />
       <Route name="Consig+" path="consigmais" component={ConsigMais} />
+
+      <Route name="Cadastro" path="cadastro" component={Cadastro}>
+        <Route name="Usuários" path=":tipo" component={Cadastro} />
+      </Route>
 
       <Route name="Relatórios" path="relatorios" component={Relatorios}>
         <Route name="Consultas" path=":tipo" component={Relatorios} />

@@ -14,7 +14,7 @@ export default class Form extends Component {
                         {this.props.showLogo ? <img src={this.props.logo} className="logo-produto" />: <img src={this.props.icon} />}
                     </Col>
                     
-                    <Col md={12} sm={12}>
+                    <Col>
                         <form onSubmit={this.props.onformSubmit} className="my-form">
                             <Col md={2}>
                                 <select

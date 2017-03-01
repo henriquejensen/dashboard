@@ -102,6 +102,16 @@ class MenuSuperior extends Component {
 							})}
 						</NavDropdown>
 
+						<NavDropdown title="Cadastro" id="basic-nav-dropdown">
+							{menu.header.cadastro.map((opt, index) => {
+								return (
+									<MenuItem key={index} onClick={() => this.changeRoute(opt.link)}>
+										{opt.label}
+									</MenuItem>
+								)
+							})}
+						</NavDropdown>
+
 						<NavDropdown title="Relatórios" id="basic-nav-dropdown">
 							{menu.header.relatorios.map((opt, index) => {
 								return (
