@@ -33,12 +33,11 @@ export default class Telefone extends Component {
                                 "Cancelar"
                             : "Adicionar um novo telefone"}
                         </a>
-                        <a data-tip data-for="moreInfo">
-                            <i className="fa fa-plus pull-right moreInfo"/>
-                        </a>
-                        <a data-tip data-for="usersRelated">
-                            <i className="fa fa-users pull-right"  />
-                        </a>
+                        {fixos.length > 4 || moveis.length > 4 ? 
+                            <a data-tip data-for="moreInfo">
+                                <i className="fa fa-plus pull-right moreInfo"/>
+                            </a>
+                        : ""}
                     </div>
                 </Panel>
                 :

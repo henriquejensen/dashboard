@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button, Col } from "react-bootstrap";
 
 import TelefoneLayout from "../telefone/layoutTelefone";
 import EnderecoLayout from "../endereco/layoutEndereco";
@@ -6,104 +7,69 @@ import Panel from "../Panel";
 import Table from "../Table";
 
 export default class Relacionados extends Component {
-    state = {
-        showRelacionados: {
-            telefones: [],
-            enderecos: []
-        }
-    }
-
-    showRelacionados = (doc, tipo) => {
-        let newRelacionados;
-        if(tipo == "telefone") {
-            newRelacionados = this.state.showRelacionados.telefones.concat();
-        } else if (tipo == "endereco") {
-            newRelacionados = this.state.showRelacionados.enderecos.concat();
-        }
-
-        if(newRelacionados.includes(doc)) {
-            newRelacionados.pop(doc);
-        } else {
-            newRelacionados.push(doc);
-        }
-
-        if(tipo == "telefone") {
-            this.setState({
-                showRelacionados: {
-                    telefones: newRelacionados,
-                    enderecos: this.state.showRelacionados.enderecos
-                }
-            })
-        } else if (tipo == "endereco") {
-            this.setState({
-                showRelacionados: {
-                    telefones: this.state.showRelacionados.telefones,
-                    enderecos: newRelacionados
-                }
-            })
-        }
-    }
-
     render() {
         return (
-            <Panel title={this.props.title} qtdTotal={[{qtd:this.props.relacionados.length,icon:"fa fa-users"}]}>
+            <Panel
+                title="PESSOAS RELACIONADAS"
+                qtdTotal={[{qtd:this.props.relacionados.length,icon:"fa fa-users"}]}>
                 <div className="col-md-12">
-                    <Table 
-                        fields= {["", "Relação", "Nome", "Data nasc", "Cidade", "UF", "Ação"]}
-                    >
-                            {this.props.relacionados.map((pessoa, index) => {
-                                return (
-                                    <tbody key={index}>
-                                        <tr>
-                                            <td>
-                                                <div className="mapa-button" onClick={() => this.props.searchLocalize(pessoa.documento, "pf")}>
-                                                    <i className='fa fa-search'/>
-                                                </div>
+                    <Table fields= {["Relação", "Nome", "Consultar"]} >
+                        {this.props.relacionados.map((pessoa, index) => {
+                            return (
+                                <tbody key={index}>
+                                    <tr>
+                                        <td>
+                                            {pessoa.relacao}
+                                        </td>
+                                        <td>
+                                            {pessoa.nome}
+                                            {pessoa.documento ? 
+                                                <a data-tip data-for='tooltipConsultar'>
+                                                    <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(pessoa.documento, "pf")}>
+                                                        <i className='fa fa-search'/>
+                                                    </Button>
+                                                </a>
+                                            : ""}
+                                        </td>
+                                        <td>
+                                            <a data-tip data-for='tooltipConsultar'>
+                                                <Button bsSize="small" bsStyle="info" className="mapa-button" onClick={pessoa.relacao == "MAE" ? "" : () => this.props.searchTelefonesPessoaRelacionada(this.props.documento, pessoa.documento)}>
+                                                    <i className='fa fa-phone'/>
+                                                </Button>
+                                            </a>
+                                            {' '}
+                                            <a data-tip data-for='tooltipConsultar'>
+                                                <Button bsSize="small" bsStyle="info" className="mapa-button" onClick={pessoa.relacao == "MAE" ? "" : () => this.props.searchEnderecosPessoaRelacionada(this.props.documento, pessoa.documento)}>
+                                                    <i className='fa fa-map'/>
+                                                </Button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        {pessoa.enderecos ? 
+                                            <td colSpan={3}>
+                                                <EnderecoLayout enderecos={pessoa.enderecos} />
                                             </td>
-                                            <td>
-                                                {pessoa.relacao}
+                                        : ""}
+                                    </tr>
+                                    <tr>
+                                        {pessoa.telefones ? 
+                                            <td colSpan={3}>
+                                                <TelefoneLayout fixos={pessoa.telefones.fixos} moveis={pessoa.telefones.moveis} />
                                             </td>
-                                            <td>{pessoa.nome}</td>
-                                            <td>{pessoa.dataNasc}</td>
-                                            <td>{pessoa.cidade}</td>
-                                            <td>{pessoa.uf}</td>
-                                            <td>
-                                                {this.props.tipo == "telefone" ?
-                                                    pessoa.telefones ?
-                                                        (this.state.showRelacionados.telefones.includes(pessoa.documento) ?
-                                                            <i className="fa fa-caret-up" onClick={() => this.showRelacionados(pessoa.documento, this.props.tipo)}>Ocultar</i>
-                                                        : <i className="fa fa-caret-down" onClick={() => this.showRelacionados(pessoa.documento, this.props.tipo)}>Mostrar</i>)
-                                                    : <a onClick={() => this.props.searchRelacionados(this.props.documento, pessoa.documento, this.props.tipo)}>Pesquisar {this.props.tipo + "s"}</a>
-                                                : this.props.tipo == "endereco" ?
-                                                    pessoa.enderecos ?
-                                                        (this.state.showRelacionados.enderecos.includes(pessoa.documento) ?
-                                                            <i className="fa fa-caret-up" onClick={() => this.showRelacionados(pessoa.documento, this.props.tipo)}>Ocultar</i>
-                                                        : <i className="fa fa-caret-down" onClick={() => this.showRelacionados(pessoa.documento, this.props.tipo)}>Mostrar</i>)
-                                                    : <a onClick={() => this.props.searchRelacionados(this.props.documento, pessoa.documento, this.props.tipo)}>Pesquisar {this.props.tipo + "s"}</a>
-                                                : ""}
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr >
-                                            {this.props.tipo == "telefone" ?
-                                                pessoa.telefones && pessoa.telefones.fixos.length > 0 && this.state.showRelacionados.telefones.includes(pessoa.documento) ?
-                                                    <td colSpan={7} style={{padding:"5px 0"}}>
-                                                        <TelefoneLayout fixos = {pessoa.telefones.fixos} moveis = {pessoa.telefones.moveis} />
-                                                    </td>
-                                                : ""
-                                            : this.props.tipo == "endereco" ?
-                                                pessoa.enderecos && pessoa.enderecos.length > 0 && this.state.showRelacionados.enderecos.includes(pessoa.documento) ?
-                                                    <td colSpan={7} style={{padding:"5px 0"}}>
-                                                        <EnderecoLayout enderecos = {pessoa.enderecos} />
-                                                    </td>
-                                                : ""
-                                            : ""
-                                            }
-                                        </tr>
-                                    </tbody>
-                                )
-                            })}
+                                        : ""}
+                                    </tr>
+                                </tbody>
+                            )
+                        })}
                     </Table>
+
+                    <Col md={12}>
+                        <a onClick={() => this.props.searchPessoasRelacionadas(this.props.documento)} className="moreInfo pull-right">
+                            Ver mais pessoas relacionadas
+                        </a>
+                    </Col>
                     
                 </div>
             </Panel>

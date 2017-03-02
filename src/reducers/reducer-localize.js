@@ -35,7 +35,7 @@ import lastQueries from "./data/lastQueries.json";
 
 const telefonesRelacionados = [
 	{documento: 5366214700, fixos: ["12345656", "98765423"], moveis: ["989876787"]},
-	{documento: 26675175807, fixos: ["55545656", "22265423"], moveis: ["456876787","997069496"]},
+	{documento: 26675175807, fixos: ["55545656", "22265423"], moveis: ["456876787","997069496"]}
 ]
 
 const enderecosRelacionados = [
@@ -63,10 +63,7 @@ export default function(state = initialState, action) {
 			tipo: "",
 			icon: "",
 			produto: "",
-			pessoasRelacionadas: {
-				pessoasTelefones: [],
-				pessoasEnderecos: []
-			}
+			pessoasRelacionadas: []
 		}
 
 		let newState = Object.assign({},state);
@@ -112,7 +109,7 @@ export default function(state = initialState, action) {
 				response.label = model.cadastro.cpf;
 				response.tipo = "CPF";
 				response.icon = ICON_LOCALIZE;
-				response.produto = "modelLocalize";
+				response.produto = "localize";
 
 				return {
 					status: "model",
@@ -196,12 +193,11 @@ export default function(state = initialState, action) {
 				}
 				
 			case SEARCH_BY_CPF:
-				console.log("REDUCER", action.payload);
 				response.data = action.payload;
 				response.label = action.payload.cadastro.cpf;
 				response.tipo = "CPF";
 				response.icon = ICON_LOCALIZE;
-				response.produto = "modelLocalize";
+				response.produto = "localize";
 				return {
 					status: "success",
 					message: "",
@@ -217,7 +213,7 @@ export default function(state = initialState, action) {
 				response.label = action.payload.cadastro.cnpj;
 				response.tipo = "CNPJ";
 				response.icon = ICON_LOCALIZE;
-				response.produto = "modelLocalize";
+				response.produto = "localize";
 				return {
 					status: "success",
 					message: "",
@@ -246,14 +242,10 @@ export default function(state = initialState, action) {
 				};
 
 			case SEARCH_BY_PESSOAS_RELACIONADOS:
-				if(action.payload.tipo == "telefone") {
-					newState.response[searchPessoa(newState.response,action.payload.documento)].pessoasRelacionadas.pessoasTelefones = pessoasRelacionadas.pessoasRelacionadas;
-				} else if(action.payload.tipo == "endereco") {
-					newState.response[searchPessoa(newState.response,action.payload.documento)].pessoasRelacionadas.pessoasEnderecos = pessoasRelacionadas.pessoasRelacionadas;
-				}
+				newState.response[searchPessoa(newState.response,action.payload)].pessoasRelacionadas = pessoasRelacionadas.pessoasRelacionadas;
 				
 				return {
-					status: "pessoas "+action.payload.tipo,
+					status: "pessoasRelacionadas"+action.payload,
 					message: "",
 					loading: false,
 					response: newState.response,
@@ -267,10 +259,11 @@ export default function(state = initialState, action) {
 				let posPessoaTelefone = searchPessoa(newState.response,action.payload.documento);
 
 				//busca a pessoa relacionado que foi clicada para mostrar os telefones
-				let posPessoaRelacionadaTelefones = searchPosPessoa(newState.response[posPessoaTelefone].pessoasRelacionadas.pessoasTelefones, action.payload.documentoRelacionado);
+				let posPessoaRelacionadaTelefones = searchPosPessoa(newState.response[posPessoaTelefone].pessoasRelacionadas, action.payload.documentoRelacionado);
 
-				//adciona na pessoa relacionada os telefones encontrados
-				newState.response[posPessoaTelefone].pessoasRelacionadas.pessoasTelefones[posPessoaRelacionadaTelefones].telefones = searchTelefonesRelacionados(telefonesRelacionados, action.payload.documentoRelacionado);
+				//adiciona na pessoa relacionada os telefones encontrados
+				console.log("RELA", action.payload.documento, action.payload.documentoRelacionado, posPessoaTelefone, posPessoaRelacionadaTelefones, newState.response[posPessoaTelefone])
+				newState.response[posPessoaTelefone].pessoasRelacionadas[posPessoaRelacionadaTelefones].telefones = searchTelefonesRelacionados(telefonesRelacionados, action.payload.documentoRelacionado);
 				
 				return {
 					status: "telefones",
@@ -284,9 +277,9 @@ export default function(state = initialState, action) {
 
 			case SEARCH_BY_ENDERECOS_RELACIONADOS:
 				let posPessoaEndereco = searchPessoa(newState.response,action.payload.documento);
-				let posPessoaRelacionadaEndereco = searchPosPessoa(newState.response[posPessoaEndereco].pessoasRelacionadas.pessoasEnderecos, action.payload.documentoRelacionado);
+				let posPessoaRelacionadaEndereco = searchPosPessoa(newState.response[posPessoaEndereco].pessoasRelacionadas, action.payload.documentoRelacionado);
 
-				newState.response[posPessoaEndereco].pessoasRelacionadas.pessoasEnderecos[posPessoaRelacionadaEndereco].enderecos = searchEnderecosRelacionados(enderecosRelacionados, action.payload.documentoRelacionado);
+				newState.response[posPessoaEndereco].pessoasRelacionadas[posPessoaRelacionadaEndereco].enderecos = searchEnderecosRelacionados(enderecosRelacionados, action.payload.documentoRelacionado);
 				return {
 					status: "enderecos",
 					message: "",
@@ -350,7 +343,7 @@ function searchDocument(list, doc) {
 //Busca no array de pessoas pesquisadas o documento passado
 function searchPessoa(list, doc) {
 	for(let i=0; i<list.length; i++) {
-		if(doc == list[i].data.CPF) {
+		if(doc == list[i].data.cadastro.cpf) {
 			return i;
 		}
 	}
@@ -364,6 +357,8 @@ function searchPosPessoa(listPeople, doc) {
 			return i;
 		}
 	}
+
+	return 0;
 }
 
 //funcao recebe a lista das pessoas pesquisadas, a lista de telefones de todos os telefones e o documento que esta solicitando os telefones

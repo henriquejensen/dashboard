@@ -3,6 +3,8 @@ import React,  { Component } from "react";
 import Panel from "../panel/Panel";
 import Table from "../table/Table";
 
+import { formatCurrency } from "../utils/functions/patternDocuments";
+
 export default class RendaEntidadeClasseLiberal extends Component {
     render() {
         return (
@@ -18,8 +20,8 @@ export default class RendaEntidadeClasseLiberal extends Component {
                                 <tr>
                                     <td>{this.props.renda.associacao}</td>
                                     <td>{this.props.renda.profissao}</td>
-                                    <td>{this.props.renda.rendaMedia}</td>
-                                    <td>{this.props.renda.rendaMinima}</td>
+                                    <td>{formatCurrency(this.props.renda.rendaMedia)}</td>
+                                    <td>{formatCurrency(this.props.renda.rendaMinima)}</td>
                                     <td>{this.props.renda.identidadeProfissional}</td>
                                 </tr>
                             </tbody>

@@ -61,15 +61,6 @@ export default class Endereco extends Component {
                                 : "Adicionar um novo endereço"}
                             </a>
                             {this.props.pessoas}
-                                <a
-                                    className="moreInfo"
-                                    data-tip data-for="usersRelated"
-                                    onClick={() => console.log("Clicou")}
-                                >
-                                    <span className="pull-right">
-                                        Endereços Relacionados
-                                    </span>
-                                </a>
                         </div>
                     </Panel> :
                     <Panel title="ENDEREÇOS">

@@ -6,7 +6,8 @@ import {
 		searchLocalize,
 		searchLocalizeByParams,
 		searchPessoasRelacionadas,
-		showRelacionados,
+		searchTelefonesPessoaRelacionada,
+		searchEnderecosPessoaRelacionada,
 		seeModel,
 		closeModel,
 		closeTab,
@@ -18,7 +19,6 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Tabs, Tab, Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
 
-import LocalizeView from "./LocalizeView";
 import LocalizeViewPattern from "./LocalizeViewPattern";
 import CreditoView from "../credito/CreditoView";
 
@@ -55,16 +55,6 @@ class LocalizeController extends Component {
 			buscaAvancada: false
 		}
 
-		this.onFormSubmit = this.onFormSubmit.bind(this);
-		this.searchLocalize = this.searchLocalize.bind(this);
-		this.searchPessoasRelacionadas = this.searchPessoasRelacionadas.bind(this);
-		this._showRelacionados = this._showRelacionados.bind(this);
-		this.onChange = this.onChange.bind(this);
-		this.onChangeType = this.onChangeType.bind(this);
-		this.onChangeInput = this.onChangeInput.bind(this);
-		this.form = this.form.bind(this);
-		this.closeTab = this.closeTab.bind(this);
-		this.hiddenBuscaAvancada = this.hiddenBuscaAvancada.bind(this);
 	}
 
 	componentWillMount() {
@@ -76,24 +66,31 @@ class LocalizeController extends Component {
 	}
 
 	//busca as pessoas relacionadas a este doc, tipo é CPF ou CNPJ
-	searchPessoasRelacionadas(doc, tipo) {
+	searchPessoasRelacionadas = (doc) => {
 		this.props.loadingLocalize();
-		this.props.searchPessoasRelacionadas(doc, tipo);
+		this.props.searchPessoasRelacionadas(doc);
 	}
 
 	//recebe o documento da pessoa e da pessoa relacionada a esta e
 	//irá buscar pelo telefone ou endereço da pessoa
-	_showRelacionados(doc, docPessoaRelacionado, tipo) {
+	searchTelefonesPessoaRelacionada = (documento, docPessoaRelacionado) => {
 		this.props.loadingLocalize();
-		this.props.showRelacionados(doc, docPessoaRelacionado, tipo);
+		this.props.searchTelefonesPessoaRelacionada(documento, docPessoaRelacionado);
 	}
 
-	searchLocalize(doc, tipo) {
+	//recebe o documento da pessoa e da pessoa relacionada a esta e
+	//irá buscar pelo telefone ou endereço da pessoa
+	searchEnderecosPessoaRelacionada = (documento, docPessoaRelacionado) => {
+		this.props.loadingLocalize();
+		this.props.searchEnderecosPessoaRelacionada(documento, docPessoaRelacionado);
+	}
+
+	searchLocalize = (doc, tipo) => {
 		this.props.loadingLocalize();
 		this.props.searchLocalize(doc, tipo);
 	}
 
-	onFormSubmit(evt) {
+	onFormSubmit = (evt) => {
 		evt.preventDefault();
 
 		this.props.loadingLocalize();
@@ -127,17 +124,17 @@ class LocalizeController extends Component {
 		});
 	}
 
-	onChangeType(evt) {
+	onChangeType = (evt) => {
 		this.props.changeProductType("localize", evt.target.value)
 	}
 
-	onChange(evt) {
+	onChange = (evt) => {
 		this.setState({
 			[evt.target.name]: evt.target.value
 		})
 	}
 
-	onChangeInput(evt) {
+	onChangeInput = (evt) => {
 		let newStateLocalize = this.state.localizeInput;
 		newStateLocalize[evt.target.name] = evt.target.value
 		this.setState({
@@ -145,13 +142,13 @@ class LocalizeController extends Component {
 		})
 	}
 
-	hiddenBuscaAvancada() {
+	hiddenBuscaAvancada = () => {
 		this.setState({
 			buscaAvancada: !this.state.buscaAvancada
 		})
 	}
 
-	closeTab(index) {
+	closeTab = (index) => {
 		{/*Fecha as abas, quando sobrar um chama a funcao para fechar tudo (closeModel)*/}
 		if(this.props.datas.length > 1) {
 			this.props.closeTab(index);
@@ -160,7 +157,7 @@ class LocalizeController extends Component {
 		}
 	}
 
-	renderForm() {
+	renderForm = () => {
 		return (
 			<span>
 				<Col md={8}>
@@ -201,7 +198,7 @@ class LocalizeController extends Component {
 		)
 	}
 
-	renderFormEndereco() {
+	renderFormEndereco = () => {
 		return (
 			<span>
 				<Col md={10}>
@@ -339,7 +336,7 @@ class LocalizeController extends Component {
 		)
 	}
 
-	renderFormNome() {
+	renderFormNome = () => {
 		return (
 			<span>
 				<Col md={6}>
@@ -465,7 +462,7 @@ class LocalizeController extends Component {
 		)
 	}
 
-	form(tipo) {
+	form = (tipo) => {
 		return (
 			<MyForm
 				icon = {ICON_LOCALIZE}
@@ -528,22 +525,18 @@ class LocalizeController extends Component {
 										}
 										key={index}
 									>
+										{console.log("DATA", data)}
 										{/*Verifica se o produto pesquisado é localize, pois pode ser gerado abas de outros produtos no Localize*/}
 										{data.produto == "localize" ?
-											<LocalizeView
-												data={data}
-												searchLocalize={this.searchLocalize}
-												showRelacionados={this._showRelacionados}
-												pessoasRelacionadas={this.searchPessoasRelacionadas}/>
-										:
-										data.produto == "modelLocalize" ?
 											<LocalizeViewPattern
 												data={data.data}
 												tipo={data.tipo}
 												index={index}
 												searchLocalize={this.searchLocalize}
-												showRelacionados={this._showRelacionados}
-												pessoasRelacionadas={this.searchPessoasRelacionadas}/>
+												searchPessoasRelacionadas={this.searchPessoasRelacionadas}
+												pessoasRelacionadas={data.pessoasRelacionadas}
+												searchTelefonesPessoaRelacionada={this.searchTelefonesPessoaRelacionada}
+												searchEnderecosPessoaRelacionada={this.searchEnderecosPessoaRelacionada}/>
 										:
 										data.produto == "credito" ?
 											<CreditoView
@@ -582,7 +575,8 @@ function mapDispatchToProps(dispatch) {
 			searchLocalize,
 			searchLocalizeByParams,
 			searchPessoasRelacionadas,
-			showRelacionados,
+			searchTelefonesPessoaRelacionada,
+			searchEnderecosPessoaRelacionada,
 			seeModel,
 			closeModel,
 			closeTab,

@@ -15,8 +15,6 @@ export default class Email extends Component {
     }
 
     sendNewEmail(newEmail) {
-        console.log("NEW EMAIL", newEmail);
-
         this.setState({
             newEmail: false
         })
@@ -36,11 +34,6 @@ export default class Email extends Component {
                             {this.state.newEmail ?
                                 "Cancelar"
                             : "Adicionar um novo email"}
-                        </a>
-                        <a data-tip data-for="usersRelated">
-                            <span className="pull-right">
-                                Emails Relacionados
-                            </span>
                         </a>
                     </div>
                 </Panel> :

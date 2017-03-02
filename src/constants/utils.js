@@ -22,3 +22,5 @@ export const CHANGE_COLOR_MENU = "CHANGE_COLOR_MENU";
 export const CHANGE_LOCALIZE_TYPE = "CHANGE_LOCALIZE_TYPE";
 export const CHANGE_CREDITO_TYPE = "CHANGE_CREDITO_TYPE";
 export const CHANGE_FOCOFISCAL_TYPE = "CHANGE_FOCOFISCAL_TYPE";
+
+export const IMAGE_ANY_TOKEN = "../../../public/assertiva/warning.png";

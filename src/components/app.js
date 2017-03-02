@@ -6,6 +6,8 @@ import { Col, Jumbotron } from "react-bootstrap";
 import Header from "./header";
 import Sidebar from "./sidebar";
 
+import { IMAGE_ANY_TOKEN } from "../constants/utils";
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -35,6 +37,7 @@ export default class App extends Component {
       if(!localStorage.getItem("token")) {
         return (
           <Jumbotron className="text-center">
+            <img src={IMAGE_ANY_TOKEN} style={{width:"200px"}} />
             <h1>Você não está logado! :/</h1>
             <p>Faça o login para ter acesso aos produtos</p>
             <p><a href="/">Login</a></p>

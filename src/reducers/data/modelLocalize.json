@@ -32,14 +32,14 @@
     "cnpj": 99999911111166,
     "razaoSocial": "XXXXX XXXXXX",
     "nomeFantasia": "YYYY YYYYYY YYYYY",
-    "dataAbertura": "DD/MM/AAAA",
+    "dataAbertura": "01/01/2001",
     "idadeEmpresa": 5,
     "faixaIdade": "2 a 3 anos",
     "quantidadeFuncionarios": 100,
     "faixaFuncionarios": "50 a 100",
     "porteEmpresa": "GRANDE",
     "receitaStatus": "Ativa",
-    "dataReceitaStatus": "DD/MM/AAAA",
+    "dataReceitaStatus": "01/01/2001",
     "cnae": 200,
     "cnaeDescricao": "DDDDD DAAAAA BBBBBB",
     "cnaeGrupo": "GGGG GGGGG",
@@ -82,8 +82,8 @@
     "nome": "AAAAAA AAAAA AAA",
     "participacao": [],
     "qualificacaoSocio": "",
-    "dataEntrada": "DD/MM/AAAA",
-    "dataSaida": "DD/MM/AAAA",
+    "dataEntrada": "01/01/2001",
+    "dataSaida": "01/01/2001",
     "valorParticipacao": "",
     "tags": [
       null
@@ -101,7 +101,7 @@
       "cboSinonimos": "CBO SINONIMOS",
       "rendaEstimada": 10000,
       "faixaRenda": "500 à 1500",
-      "rendaDataRef": "DD/MM/AAAA",
+      "rendaDataRef": "01/01/2001",
       "tags": null
   }],
   "rendaBeneficioAssistencial": [{
@@ -114,7 +114,7 @@
     "faixaBeneficio": "1500 à 2500",
     "tipoBeneficio": "TIPO BENEFÍCIO",
     "statusBeneficio": "STATUS",
-    "beneficioDataRef": "DD/MM/AAAA",
+    "beneficioDataRef": "01/01/2001",
     "tags": [
       null
     ]
@@ -203,7 +203,7 @@
       "grupo": "",
       "documento": "12345678901",
       "nome": "XXXXXX XXXXXX XXXXXX",
-      "dataNascimento": "DD/MM/AAAA"
+      "dataNascimento": "01/01/2001"
     }
   ],
   "enderecos": [

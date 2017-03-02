@@ -88,7 +88,7 @@ export default class Cadastro extends Component{
             <div className="col-md-4">
                 <strong>Idade: </strong>
                 {this.props.dados.idadeEmpresa ? 
-                    this.props.dados.idadeEmpresa
+                    this.props.dados.idadeEmpresa + " anos"
                 : <span>Nada consta</span>}
             </div>
 

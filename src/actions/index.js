@@ -1,7 +1,8 @@
 import ajax from "superagent";
 
 import {
-		URL_SEARCH,
+		URL_SEARCH_CPF,
+		URL_SEARCH_CNPJ,
 		SEARCH_BY_CPF,
 		SEARCH_BY_CNPJ,
 		SEARCH_BY_PARAMS,
@@ -81,18 +82,14 @@ export function searchCredito(document, tipo) {
 }
 
 export function searchLocalize(document, tipo) {
-	console.log("DOCUMENT", document, tipo)
-	const senha = tipo+"/ajax?empresa="+localStorage.empresa+"&usuario="+localStorage.usuario+"&senha="+localStorage.senha+"&documento=";
-
 	if(tipo == "pf") {
 		document = patternDocument(document, 11);
 
 		return (dispatch) => {
-			ajax.post("https://services.assertivasolucoes.com.br/v1/localize/1000/consultar")
+			ajax.post(URL_SEARCH_CPF)
 				.send({cpf: document})
-				.set({'Content-Type': 'application/x-www-form-urlencoded','Authorization': 'MEU_TOKEN_0123456789'})
+				.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
 				.then((response) => {
-					console.log("RESPONSE", response)
 					if(response.status == 200) {
 						dispatch({type: SEARCH_BY_CPF, payload: response.body})
 					} else {
@@ -107,11 +104,10 @@ export function searchLocalize(document, tipo) {
 		document = patternDocument(document, 14);
 
 		return (dispatch) => {
-			ajax.post("https://services.assertivasolucoes.com.br/v1/localize/1001/consultar")
+			ajax.post(URL_SEARCH_CNPJ)
 				.send({cnpj: document})
-				.set({'Content-Type': 'application/x-www-form-urlencoded','Authorization': 'MEU_TOKEN_0123456789'})
+				.set({'Content-Type': 'application/x-www-form-urlencoded','Authorization': localStorage.getItem("token")})
 				.then((response) => {
-					console.log("RESPONSE", response)
 					if(response.status == 200) {
 						dispatch({type: SEARCH_BY_CNPJ, payload: response.body})
 					} else {
@@ -207,32 +203,30 @@ export function getRespostasSMS() {
 	}
 }
 
-export function searchPessoasRelacionadas(doc, tipo) {
+export function searchPessoasRelacionadas(doc) {
+	console.log("ACTION RELACIOANDSO", doc)
 	return {
 		type: SEARCH_BY_PESSOAS_RELACIONADOS,
+		payload: doc
+	}
+}
+
+export function searchTelefonesPessoaRelacionada(doc, docRelacionado) {
+	return {
+		type: SEARCH_BY_TELEFONES_RELACIONADOS,
 		payload: {
 			documento: doc,
-			tipo: tipo
+			documentoRelacionado: docRelacionado
 		}
 	}
 }
 
-export function showRelacionados(doc, docRelacionado, tipo) {
-	if( tipo == "telefone") {
-		return {
-			type: SEARCH_BY_TELEFONES_RELACIONADOS,
-			payload: {
-				documento: doc,
-				documentoRelacionado: docRelacionado
-			}
-		}
-	} else if( tipo == "endereco") {
-		return {
-			type: SEARCH_BY_ENDERECOS_RELACIONADOS,
-			payload: {
-				documento: doc,
-				documentoRelacionado: docRelacionado
-			}
+export function searchEnderecosPessoaRelacionada(doc, docRelacionado) {
+	return {
+		type: SEARCH_BY_ENDERECOS_RELACIONADOS,
+		payload: {
+			documento: doc,
+			documentoRelacionado: docRelacionado
 		}
 	}
 }

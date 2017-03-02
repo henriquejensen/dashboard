@@ -51,7 +51,7 @@ export default class Dados extends Component{
               {this.props.dados.signo}
             </div>
 
-            <div className="col-md-12" style={{paddingTop:"5px", width:"100%", border: "0px solid #dddddd", borderTopWidth: "1px"}}>
+            {/*<div className="col-md-12" style={{paddingTop:"5px", width:"100%", border: "0px solid #dddddd", borderTopWidth: "1px"}}>
               <strong>MÃE: </strong>
               {this.props.dados.maeNome ?
                 <span>
@@ -65,7 +65,7 @@ export default class Dados extends Component{
                   :""}
                 </span>
               : <div>Nada consta</div>}
-            </div>
+            </div>*/}
             
             
             <div className="col-md-12 moreInfo" onClick={() => this.setState({moreInfo:!this.state.moreInfo})}>
