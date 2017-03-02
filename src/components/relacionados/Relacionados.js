@@ -33,13 +33,13 @@ export default class Relacionados extends Component {
                                         </td>
                                         <td>
                                             <a data-tip data-for='tooltipConsultar'>
-                                                <Button bsSize="small" bsStyle="info" className="mapa-button" onClick={pessoa.relacao == "MAE" ? "" : () => this.props.searchTelefonesPessoaRelacionada(this.props.documento, pessoa.documento)}>
+                                                <Button bsSize="small" bsStyle="info" className="mapa-button" onClick={pessoa.relacao == "MAE" ? ()=>{} : () => this.props.searchTelefonesPessoaRelacionada(this.props.documento, pessoa.documento)}>
                                                     <i className='fa fa-phone'/>
                                                 </Button>
                                             </a>
                                             {' '}
                                             <a data-tip data-for='tooltipConsultar'>
-                                                <Button bsSize="small" bsStyle="info" className="mapa-button" onClick={pessoa.relacao == "MAE" ? "" : () => this.props.searchEnderecosPessoaRelacionada(this.props.documento, pessoa.documento)}>
+                                                <Button bsSize="small" bsStyle="info" className="mapa-button" onClick={pessoa.relacao == "MAE" ? ()=>{} : () => this.props.searchEnderecosPessoaRelacionada(this.props.documento, pessoa.documento)}>
                                                     <i className='fa fa-map'/>
                                                 </Button>
                                             </a>

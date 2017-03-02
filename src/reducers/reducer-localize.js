@@ -291,9 +291,10 @@ export default function(state = initialState, action) {
 				};
 
 			case REQUEST_ERROR:
+				console.log("REQUEST_ERROR", action.payload.mensagem)
 				return {
 					status: "error request",
-					message: action.payload.ERRORS.ERROR.content,
+					message: action.payload.mensagem,
 					loading: false,
 					response: newState.response,
 					tabActive: newState.tabActive,

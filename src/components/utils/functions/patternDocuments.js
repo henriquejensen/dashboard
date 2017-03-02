@@ -25,14 +25,20 @@ export function patternRG(doc) {
 }
 
 export function formatDate(date) {
-    var newDate = new Date(date);
-    var format = new Intl.DateTimeFormat("pt-BR");
+    let newDate = new Date(date);
+    let format = new Intl.DateTimeFormat("pt-BR");
 
     return format.format(newDate);
 }
 
 export function formatCurrency(currency) {
-    var newCurrency = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+    let newCurrency = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
     return newCurrency.format(currency);
+}
+
+export function formatPhone(phone) {
+    let newPhone = phone.toString().replace("(","").replace(")","").replace(" ","").replace("-","");
+    
+    return newPhone[0] + newPhone[1] + " " + newPhone.substring(2);
 }

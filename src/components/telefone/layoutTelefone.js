@@ -7,6 +7,8 @@ import { Form, FormControl, FormGroup, Button } from "react-bootstrap";
 import Table from "../Table";
 import Modal from "../Modal";
 
+import { formatPhone } from "../utils/functions/patternDocuments";
+
 export default class LayoutTelefone extends Component{
     constructor(props) {
         super(props);
@@ -14,7 +16,6 @@ export default class LayoutTelefone extends Component{
         this.state = {
             smShow: false,
             IsModalOpen: false,
-            showMoreTel: false,
             telefone: "",
             celular: ""
         };
@@ -70,20 +71,16 @@ export default class LayoutTelefone extends Component{
                         <Table>
                             <tbody>
                                 {this.props.fixos.map((tel,i) => {
-                                    if(tel.telefone) {
-                                        tel = tel.telefone.toString().replace("(","").replace(")","").replace(" ","").replace("-","");
-                                    }
-                                    
-                                    if(tel != "") {
-                                        return (
-                                        <tr key={i} className={i > 3 ? (this.state.showMoreTel ? "" : "display-none") : ""} >
+                                    return (
+                                        <tr key={i} className={i > 3 ? (this.props.showMoreTel ? "" : "display-none") : ""} >
                                             <td>
-                                                <i className="fa fa-phone" /> {tel[0]}{tel[1]} {tel.substring(2)}
+                                                <i className="fa fa-phone" />
+                                                {formatPhone(tel.telefone)}
                                             </td>
 
                                             <td>
                                                 <a data-tip data-for="tooltipCopy">
-                                                    <CopyToClipboard text={tel} onCopy={() => this._addNotification("Número copiado com sucesso")}>
+                                                    <CopyToClipboard text={tel.telefone} onCopy={() => this._addNotification("Número copiado com sucesso")}>
                                                         <i className="fa fa-clipboard icon-tel" />
                                                     </CopyToClipboard>
                                                 </a>
@@ -113,7 +110,6 @@ export default class LayoutTelefone extends Component{
                                                 </a>
                                             </td>
                                         </tr>)
-                                    }
                                 })}
 
                                 {this.props.newPhone ?
@@ -145,18 +141,21 @@ export default class LayoutTelefone extends Component{
                         <Table>
                             <tbody>
                                 {this.props.moveis.map((tel,i) => {
-                                    if(tel.telefone) {
-                                        tel = tel.telefone.toString();
-                                    }
                                     return (
-                                        <tr key={i} className={i > 3 ? (this.state.showMoreTel ? "" : "display-none") : ""}>
+                                        <tr
+                                            key={i}
+                                            className={this.props.showMoreTel !== undefined ?
+                                                (i > 3 ? 
+                                                    (this.props.showMoreTel ? "" : "display-none")
+                                                : "")
+                                            : ""}>
                                             <td>
-                                                <i className="fa fa-mobile" /> {tel[0]}{tel[1]} {tel.substring(2)}
+                                                <i className="fa fa-mobile" /> {formatPhone(tel.telefone)}
                                             </td>
 
                                             <td>
                                                 <a data-tip data-for="tooltipCopy">
-                                                    <CopyToClipboard text={tel} onCopy={() => this._addNotification("Número copiado com sucesso")}>
+                                                    <CopyToClipboard text={tel.telefone} onCopy={() => this._addNotification("Número copiado com sucesso")}>
                                                         <i className="fa fa-clipboard icon-tel" />
                                                     </CopyToClipboard>
                                                 </a>

@@ -5,7 +5,8 @@ import LayoutTelefone from "./layoutTelefone";
 
 export default class Telefone extends Component {
     state = {
-        newPhone: false
+        newPhone: false,
+        showMoreTel: false
     }
 
     sendNewPhone = (newTel) => {
@@ -23,6 +24,7 @@ export default class Telefone extends Component {
             this.props.telefones ?
                 <Panel title="TELEFONES" qtdTotal={[{icon:"fa fa-phone", qtd:fixos.length},{icon:"fa fa-mobile", qtd:moveis.length}]}>
                     <LayoutTelefone
+                        showMoreTel={this.state.showMoreTel}
                         fixos={fixos}
                         moveis={moveis}
                         newPhone={this.state.newPhone}
@@ -34,8 +36,10 @@ export default class Telefone extends Component {
                             : "Adicionar um novo telefone"}
                         </a>
                         {fixos.length > 4 || moveis.length > 4 ? 
-                            <a data-tip data-for="moreInfo">
-                                <i className="fa fa-plus pull-right moreInfo"/>
+                            <a data-tip data-for="moreInfo" onClick={() => this.setState({showMoreTel: !this.state.showMoreTel})}>
+                                {this.state.showMoreTel ?
+                                    <i className="fa fa-minus pull-right moreInfo" />
+                                : <i className="fa fa-plus pull-right moreInfo" />}
                             </a>
                         : ""}
                     </div>

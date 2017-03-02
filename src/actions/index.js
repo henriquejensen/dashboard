@@ -89,16 +89,18 @@ export function searchLocalize(document, tipo) {
 			ajax.post(URL_SEARCH_CPF)
 				.send({cpf: document})
 				.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
-				.then((response) => {
-					if(response.status == 200) {
-						dispatch({type: SEARCH_BY_CPF, payload: response.body})
+				.end(function(error, response) {
+					if (response) {
+						if (response.status == 200) {
+							dispatch({type: SEARCH_BY_CPF, payload: response.body})
+						} else {
+							dispatch({type: REQUEST_ERROR, payload: response.body.erro})
+						}
 					} else {
-						dispatch({type: REQUEST_ERROR, payload: response.body})
+						dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
 					}
 				})
-				.catch((error) => {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				})
+
 		}
 	} else if(tipo == "pj") {
 		document = patternDocument(document, 14);
@@ -107,15 +109,16 @@ export function searchLocalize(document, tipo) {
 			ajax.post(URL_SEARCH_CNPJ)
 				.send({cnpj: document})
 				.set({'Content-Type': 'application/x-www-form-urlencoded','Authorization': localStorage.getItem("token")})
-				.then((response) => {
-					if(response.status == 200) {
-						dispatch({type: SEARCH_BY_CNPJ, payload: response.body})
+				.end(function(error, response) {
+					if (response) {
+						if (response.status == 200) {
+							dispatch({type: SEARCH_BY_CNPJ, payload: response.body})
+						} else {
+							dispatch({type: REQUEST_ERROR, payload: response.body.erro})
+						}
 					} else {
-						dispatch({type: REQUEST_ERROR, payload: response.body})
+						dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
 					}
-				})
-				.catch((error) => {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
 				})
 		}
 	}
