@@ -24,3 +24,5 @@ export const CHANGE_CREDITO_TYPE = "CHANGE_CREDITO_TYPE";
 export const CHANGE_FOCOFISCAL_TYPE = "CHANGE_FOCOFISCAL_TYPE";
 
 export const IMAGE_ANY_TOKEN = "../../../public/assertiva/warning.png";
+
+export const NENHUM_REGISTRO = "Nenhum registro encontrado";

@@ -8,6 +8,7 @@ import Table from "../Table";
 import Modal from "../Modal";
 
 import { formatPhone } from "../utils/functions/patternDocuments";
+import { NENHUM_REGISTRO } from "../../constants/utils";
 
 export default class LayoutTelefone extends Component{
     constructor(props) {
@@ -70,47 +71,49 @@ export default class LayoutTelefone extends Component{
                     <div className="col-md-6">
                         <Table>
                             <tbody>
-                                {this.props.fixos.map((tel,i) => {
-                                    return (
-                                        <tr key={i} className={i > 3 ? (this.props.showMoreTel ? "" : "display-none") : ""} >
-                                            <td>
-                                                <i className="fa fa-phone" />
-                                                {formatPhone(tel.telefone)}
-                                            </td>
+                                {this.props.fixos.length > 0 ?
+                                    this.props.fixos.map((tel,i) => {
+                                        return (
+                                            <tr key={i} className={i > 3 ? (this.props.showMoreTel ? "" : "display-none") : ""} >
+                                                <td>
+                                                    <i className="fa fa-phone" />
+                                                    {formatPhone(tel.telefone)}
+                                                </td>
 
-                                            <td>
-                                                <a data-tip data-for="tooltipCopy">
-                                                    <CopyToClipboard text={tel.telefone} onCopy={() => this._addNotification("Número copiado com sucesso")}>
-                                                        <i className="fa fa-clipboard icon-tel" />
-                                                    </CopyToClipboard>
-                                                </a>
-                                            </td>
+                                                <td>
+                                                    <a data-tip data-for="tooltipCopy">
+                                                        <CopyToClipboard text={tel.telefone} onCopy={() => this._addNotification("Número copiado com sucesso")}>
+                                                            <i className="fa fa-clipboard icon-tel" />
+                                                        </CopyToClipboard>
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                <a data-tip data-for="tooltipMessageVoice">
-                                                    <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
-                                                </a>
-                                            </td>
+                                                <td>
+                                                    <a data-tip data-for="tooltipMessageVoice">
+                                                        <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                <a data-tip data-for="tooltipCall">
-                                                    <i className="fa fa-phone icon-tel icon-tel-phone" />
-                                                </a>
-                                            </td>
+                                                <td>
+                                                    <a data-tip data-for="tooltipCall">
+                                                        <i className="fa fa-phone icon-tel icon-tel-phone" />
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                <a data-tip data-for="tooltipHot">
-                                                    <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
-                                                </a>
-                                            </td>
+                                                <td>
+                                                    <a data-tip data-for="tooltipHot">
+                                                        <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                <a data-tip data-for="tooltipOperadora">
-                                                    <img src="http://logok.org/wp-content/uploads/2015/06/Claro-logo-logotype-1024x768.png" width="25"/>
-                                                </a>
-                                            </td>
-                                        </tr>)
-                                })}
+                                                <td>
+                                                    <a data-tip data-for="tooltipOperadora">
+                                                        <img src="http://logok.org/wp-content/uploads/2015/06/Claro-logo-logotype-1024x768.png" width="25"/>
+                                                    </a>
+                                                </td>
+                                            </tr>)
+                                    })
+                                : NENHUM_REGISTRO}
 
                                 {this.props.newPhone ?
                                     <tr>
@@ -140,70 +143,72 @@ export default class LayoutTelefone extends Component{
                     <div className="col-md-6">
                         <Table>
                             <tbody>
-                                {this.props.moveis.map((tel,i) => {
-                                    return (
-                                        <tr
-                                            key={i}
-                                            className={this.props.showMoreTel !== undefined ?
-                                                (i > 3 ? 
-                                                    (this.props.showMoreTel ? "" : "display-none")
-                                                : "")
-                                            : ""}>
-                                            <td>
-                                                <i className="fa fa-mobile" /> {formatPhone(tel.telefone)}
-                                            </td>
+                                {this.props.moveis.length > 0 ?
+                                    this.props.moveis.map((tel,i) => {
+                                        return (
+                                            <tr
+                                                key={i}
+                                                className={this.props.showMoreTel !== undefined ?
+                                                    (i > 3 ? 
+                                                        (this.props.showMoreTel ? "" : "display-none")
+                                                    : "")
+                                                : ""}>
+                                                <td>
+                                                    <i className="fa fa-mobile" /> {formatPhone(tel.telefone)}
+                                                </td>
 
-                                            <td>
-                                                <a data-tip data-for="tooltipCopy">
-                                                    <CopyToClipboard text={tel.telefone} onCopy={() => this._addNotification("Número copiado com sucesso")}>
-                                                        <i className="fa fa-clipboard icon-tel" />
-                                                    </CopyToClipboard>
-                                                </a>
-                                            </td>
+                                                <td>
+                                                    <a data-tip data-for="tooltipCopy">
+                                                        <CopyToClipboard text={tel.telefone} onCopy={() => this._addNotification("Número copiado com sucesso")}>
+                                                            <i className="fa fa-clipboard icon-tel" />
+                                                        </CopyToClipboard>
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                <a data-tip data-for="tooltipSMS">
-                                                    <i className="fa fa-comments icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
-                                                </a>
-                                            </td>
+                                                <td>
+                                                    <a data-tip data-for="tooltipSMS">
+                                                        <i className="fa fa-comments icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                <a data-tip data-for="tooltipMessageVoice">
-                                                    <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
-                                                </a>
-                                            </td>
+                                                <td>
+                                                    <a data-tip data-for="tooltipMessageVoice">
+                                                        <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                <a data-tip data-for="tooltipCall">
-                                                    <i className="fa fa-mobile icon-tel icon-tel-phone" />
-                                                </a>
-                                            </td>
+                                                <td>
+                                                    <a data-tip data-for="tooltipCall">
+                                                        <i className="fa fa-mobile icon-tel icon-tel-phone" />
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                <a data-tip data-for="tooltipHot">
-                                                    <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
-                                                </a>
-                                            </td>
+                                                <td>
+                                                    <a data-tip data-for="tooltipHot">
+                                                        <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                <a data-tip data-for="tooltipWhats">
-                                                    <img src="../../../public/images/whatsapp.png" width="15"/>
-                                                </a>
-                                            </td>
+                                                <td>
+                                                    <a data-tip data-for="tooltipWhats">
+                                                        <img src="../../../public/images/whatsapp.png" width="15"/>
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                <a data-tip data-for="tooltipViber">
-                                                    <img src="../../../public/images/viber.png" width="15"/>
-                                                </a>
-                                            </td>
+                                                <td>
+                                                    <a data-tip data-for="tooltipViber">
+                                                        <img src="../../../public/images/viber.png" width="15"/>
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                <a data-tip data-for="tooltipOperadora">
-                                                    <img src="http://2.bp.blogspot.com/-2iz4nnxuSu8/TyHGVjiLdDI/AAAAAAAABbw/wJWY-ugjozI/s1600/logotipo+oi.jpg" width="20" className="like-button"/>
-                                                </a>
-                                            </td>
-                                        </tr>)
-                                })}
+                                                <td>
+                                                    <a data-tip data-for="tooltipOperadora">
+                                                        <img src="http://2.bp.blogspot.com/-2iz4nnxuSu8/TyHGVjiLdDI/AAAAAAAABbw/wJWY-ugjozI/s1600/logotipo+oi.jpg" width="20" className="like-button"/>
+                                                    </a>
+                                                </td>
+                                            </tr>)
+                                    })
+                                : NENHUM_REGISTRO}
 
                                {this.props.newPhone ?
                                     <tr>

@@ -84,27 +84,31 @@ export default class Dados extends Component{
 
             {this.state.moreInfo ? 
               <div >
+                <Col md={6}>
+                  <strong>Faixa de idade: </strong>
+                  {this.props.dados.faixaIdade ? this.props.dados.faixaIdade : "Nada consta"}
+                </Col>
                 <div className="col-md-6">
                   <strong>Data status CPF: </strong>
                   {this.props.dados.statusData ? this.props.dados.statusData : "Nada consta"}
                 </div>
 
-                <div className="col-md-6" style={{marginBottom:"20px"}}>
+                <div className="col-md-6">
                   <strong>Protocolo: </strong>
                   {this.props.dados.statusProtocolo ? this.props.dados.statusProtocolo : "Nada consta"}
                 </div>
 
-                <div className="col-md-4" style={{marginBottom:"20px"}}>
+                <div className="col-md-6">
                   <strong>Titulo de eleitor: </strong>
                   {this.props.dados.tituloEleitor ? this.props.dados.tituloEleitor : "Nada consta"}
                 </div>
 
-                <div className="col-md-4" style={{marginBottom:"20px"}}>
+                <div className="col-md-6" style={{marginBottom:"20px"}}>
                   <strong>Nacionalidade: </strong>
                   {this.props.dados.nacionalidade ? this.props.dados.nacionalidade : "Nada consta"}
                 </div>
 
-                <div className="col-md-4" style={{marginBottom:"20px"}}>
+                <div className="col-md-6" style={{marginBottom:"20px"}}>
                   <strong>Estado civil: </strong>
                   {this.props.dados.estadoCivil ? this.props.dados.estadoCivil : "Nada consta"}
                 </div>
