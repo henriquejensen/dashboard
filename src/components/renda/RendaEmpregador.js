@@ -58,14 +58,13 @@ export default class RendaEmpregador extends Component {
                         <Col md={12} sm={12}>            
                             <Table
                                 fields={
-                                    ["Renda Estimada", "Faixa de Renda", "Empregador", "Setor", "Data Referência", "CBO"]
+                                    ["Faixa de Renda", "Empregador", "Setor", "Data Referência", "CBO"]
                                 }
                             >
                                 <tbody>
                                     {this.props.rendas.map((renda, index) => {
                                         return (
                                             <tr key={index}>
-                                                <td>{formatCurrency(renda.rendaEstimada)}</td>
                                                 <td>{renda.faixaRenda}</td>
                                                 <td>
                                                     {renda.empregador}
@@ -77,7 +76,7 @@ export default class RendaEmpregador extends Component {
                                                 </td>
                                                 <td>{renda.setorEmpregador}</td>
                                                 <td>{formatDate(renda.rendaDataRef)}</td>
-                                                <td>{renda.cboDescricao + " - " + renda.cboCodigo}</td>
+                                                <td>{renda.cboDescricao}</td>
                                             </tr>
                                         )
                                     })}

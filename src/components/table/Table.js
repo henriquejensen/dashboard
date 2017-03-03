@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { Table } from "react-bootstrap";
 
-export default class Table extends Component {
+export default class MyTable extends Component {
     constructor(props) {
         super(props);
     }
@@ -11,7 +12,7 @@ export default class Table extends Component {
                 {this.props.title ?
                     <h4>{this.props.title}</h4>
                 : ""}
-                <table className="table table-striped table-hover table-responsive">
+                <Table striped hover responsive>
                     <thead>
                         <tr>
                             {this.props.fields ? 
@@ -24,7 +25,7 @@ export default class Table extends Component {
                     
                     {this.props.children}
                     
-                </table>
+                </Table>
             </div>
         )
     }

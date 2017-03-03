@@ -3,8 +3,8 @@ import { Button, Col } from "react-bootstrap";
 
 import TelefoneLayout from "../telefone/layoutTelefone";
 import EnderecoLayout from "../endereco/layoutEndereco";
-import Panel from "../Panel";
-import Table from "../Table";
+import Panel from "../panel/Panel";
+import Table from "../table/Table";
 
 export default class Relacionados extends Component {
     render() {

@@ -19,7 +19,7 @@ export default class Sociedades extends Component {
                   <div className="col-md-12">
                     <Table
                         fields={
-                            ["Nome", "Cargo", "Participação", "Entrada", "Saída", "Relacionamento"]
+                            ["Nome", "Cargo", "Participação"]
                         }
                     >
                       <tbody>
@@ -36,9 +36,6 @@ export default class Sociedades extends Component {
                               </td>
                               <td>{participacao.qualificacaoSocio}</td>
                               <td>{participacao.participacao}</td>
-                              <td>{participacao.dataEntrada}</td>
-                              <td>{participacao.dataSaida ? participacao.dataSaida : "Atual"}</td>
-                              <td>{participacao.relacao}</td>
                             </tr>
                           )
                         })}

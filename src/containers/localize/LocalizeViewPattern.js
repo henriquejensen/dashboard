@@ -25,6 +25,13 @@ export default class LocalizeView extends Component {
                 {this.props.tipo == "CPF" ?
                     <Dados dados={this.props.data.cadastro} searchPerson={this.props.searchLocalize} />
                 : <DadosPj dados={this.props.data.cadastro} searchPerson={this.props.searchLocalize} />}
+
+                <Telefones telefones={this.props.data.telefones} />
+
+                <Enderecos enderecos={this.props.data.enderecos} />
+
+                <Emails emails={this.props.data.emails} />
+
                 {this.props.tipo == "CPF" ?
                     <Relacionados
                         documento={this.props.data.cadastro.cpf}
@@ -41,12 +48,6 @@ export default class LocalizeView extends Component {
                         searchPerson={this.props.searchLocalize}
                     />
                 : ""}
-
-                <Telefones telefones={this.props.data.telefones} />
-
-                <Enderecos enderecos={this.props.data.enderecos} />
-
-                <Emails emails={this.props.data.emails} />
 
                 {this.props.tipo == "CNPJ" ?
                     <Socios socios={this.props.data.quadroSocietario} searchPerson={this.props.searchLocalize} />

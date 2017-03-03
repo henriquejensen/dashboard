@@ -23,7 +23,7 @@ export default class Panel extends Component {
                                 }) : ""}
                             
                             <a data-tip data-for="arrowPanel">
-                                <i className={this.state.show ? "glyphicon glyphicon-triangle-top arrow-panel" : "glyphicon glyphicon-triangle-bottom arrow-panel"} onClick={() => this.setState({show:!this.state.show})} />
+                                <i className={this.state.show ? "noPrint glyphicon glyphicon-triangle-top arrow-panel" : "noPrint glyphicon glyphicon-triangle-bottom arrow-panel"} onClick={() => this.setState({show:!this.state.show})} />
                             </a>
                             
                             <Tooltip

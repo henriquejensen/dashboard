@@ -3,7 +3,7 @@ import Tooltip from "react-tooltip";
 import { Form, FormControl, FormGroup, Button } from "react-bootstrap";
 
 import MapPanel from "../MapPanel";
-import Table from "../Table";
+import Table from "../table/Table";
 
 export default class Enderecos extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ export default class Enderecos extends Component {
             <div>
                 <Table
                   fields={
-                    ["Logradouro", "Número", "Complemento", "Bairro", "Cidade", "UF", "CEP", ""]
+                    ["dfasdf", "Número", "Complemento", "Bairro", "Cidade", "UF", "CEP", ""]
                   }
                 >
                     {this.props.enderecos.map((end,i) => {

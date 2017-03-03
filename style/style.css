@@ -23,6 +23,14 @@ input {
     transition: .5s;
 }
 
+#menu-opened {
+    margin-left: 200px;
+}
+
+#menu-closed {
+    margin-left: -150px;
+}
+
 .input-file {
     color: #1a0dab;
     cursor: pointer
@@ -348,13 +356,27 @@ input {
     .noPrint {
         display: none;
     }
+    .breadcrumbs {
+        display: none;
+    }
+    .moreInfo {
+        display: none;
+    }
+    .nav-tabs {
+        display: none;
+    }
+    .btn {
+        display: none;
+    }
+    .table-responsive {
+        overflow-x: visible;
+    }
+    #menu-opened {
+        margin-left: 0px;
+    }
 }
 
 @media(max-width: 992px) {
-    .table {
-        display: block;
-    }
-
     .my-form {
         width: 100%;
     }
