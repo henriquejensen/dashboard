@@ -67,14 +67,14 @@ export default class Emails extends Component {
                                     <a data-tip data-for="tooltipCopy">
                                         <div className="col-md-1">
                                             <CopyToClipboard text={email.email} onCopy={() => this._addNotification("Email copiado com sucesso")}>
-                                                <i className="fa fa-clipboard icon-tel" />
+                                                <i className="noPrint fa fa-clipboard icon-tel" />
                                             </CopyToClipboard>
                                         </div>
                                     </a>
                                 </td>
                                 <td>
                                     <a data-tip data-for="tooltipEmail">
-                                        <i className="glyphicon glyphicon-envelope icon-tel icon-tel-msg" onClick={() => this.setState({isModalOpen: true, emailEnviar: email.email})}/>
+                                        <i className="noPrint glyphicon glyphicon-envelope icon-tel icon-tel-msg" onClick={() => this.setState({isModalOpen: true, emailEnviar: email.email})}/>
                                     </a>
                                 </td>
                             </tr>

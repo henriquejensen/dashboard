@@ -13,7 +13,7 @@ export default class Relacionados extends Component {
                 title="PESSOAS RELACIONADAS"
                 qtdTotal={[{qtd:this.props.relacionados.length,icon:"fa fa-users"}]}>
                 <div className="col-md-12">
-                    <Table fields= {["Relação", "Nome", "Consultar"]} >
+                    <Table fields= {["Relação", "Nome"]} >
                         {this.props.relacionados.map((pessoa, index) => {
                             return (
                                 <tbody key={index}>

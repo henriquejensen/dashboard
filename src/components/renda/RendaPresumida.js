@@ -10,7 +10,7 @@ export default class RendaPresumida extends Component {
         return (
             <div>
                 <a name={"Renda presumida"+this.props.index}></a>
-                <Panel title="RENDA PRESUMIDA">
+                <Panel title="RENDA PRESUMIDA" qtdTotal={[{icon:"fa fa-money", qtd:this.props.rendas.length}]}>
                     
                     <div className="col-md-12">
                         <Table

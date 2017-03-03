@@ -36,7 +36,7 @@ export default class Enderecos extends Component {
             <div>
                 <Table
                   fields={
-                    ["dfasdf", "Número", "Complemento", "Bairro", "Cidade", "UF", "CEP", ""]
+                    ["Logradouro", "Número", "Complemento", "Bairro", "Cidade", "UF", "CEP", ""]
                   }
                 >
                     {this.props.enderecos.map((end,i) => {
@@ -54,7 +54,7 @@ export default class Enderecos extends Component {
                               <td>
                                   <a data-tip data-for="tooltipMap">
                                     <div
-                                      className={this.state.mapa && this.state.idCep == i+end.cep ? "mapa-button mapa-button-close" : "mapa-button"}
+                                      className={this.state.mapa && this.state.idCep == i+end.cep ? "noPrint mapa-button mapa-button-close" : "noPrint mapa-button"}
                                       onClick={() => this.mostrarMapa(i+end.cep)}>
                                       <i className={this.state.mapa && this.state.idCep == i+end.cep ? "fa fa-times-circle": "fa fa-map-o"} />
                                     </div>

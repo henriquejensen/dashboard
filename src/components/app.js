@@ -9,25 +9,11 @@ import Sidebar from "./sidebar";
 import { IMAGE_ANY_TOKEN } from "../constants/utils";
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      active: true
-    }
-
-    this.larguraMenu = {
-      marginLeft:"200px"
-    };
-
-    this.larguraMenuFechado = {
-      marginLeft:"-150px"
-    };
-
-    this.onMenuClicked = this.onMenuClicked.bind(this);
+  state = {
+    active: true
   }
 
-	onMenuClicked() {
+	onMenuClicked = () => {
     this.setState({
       active: !this.state.active
     })

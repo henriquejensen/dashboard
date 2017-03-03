@@ -80,7 +80,7 @@ export default class LayoutTelefone extends Component{
                                                     {formatPhone(tel.telefone)}
                                                 </td>
 
-                                                <td>
+                                                <td className="noPrint">
                                                     <a data-tip data-for="tooltipCopy">
                                                         <CopyToClipboard text={tel.telefone} onCopy={() => this._addNotification("Número copiado com sucesso")}>
                                                             <i className="fa fa-clipboard icon-tel" />
@@ -88,19 +88,19 @@ export default class LayoutTelefone extends Component{
                                                     </a>
                                                 </td>
 
-                                                <td>
+                                                <td className="noPrint">
                                                     <a data-tip data-for="tooltipMessageVoice">
                                                         <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                                     </a>
                                                 </td>
 
-                                                <td>
+                                                <td className="noPrint">
                                                     <a data-tip data-for="tooltipCall">
                                                         <i className="fa fa-phone icon-tel icon-tel-phone" />
                                                     </a>
                                                 </td>
 
-                                                <td>
+                                                <td className="noPrint">
                                                     <a data-tip data-for="tooltipHot">
                                                         <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
                                                     </a>
@@ -154,10 +154,11 @@ export default class LayoutTelefone extends Component{
                                                     : "")
                                                 : ""}>
                                                 <td>
-                                                    <i className="fa fa-mobile" /> {formatPhone(tel.telefone)}
+                                                    <i className="fa fa-mobile" />
+                                                    {formatPhone(tel.telefone)}
                                                 </td>
 
-                                                <td>
+                                                <td className="noPrint">
                                                     <a data-tip data-for="tooltipCopy">
                                                         <CopyToClipboard text={tel.telefone} onCopy={() => this._addNotification("Número copiado com sucesso")}>
                                                             <i className="fa fa-clipboard icon-tel" />
@@ -165,37 +166,37 @@ export default class LayoutTelefone extends Component{
                                                     </a>
                                                 </td>
 
-                                                <td>
+                                                <td className="noPrint">
                                                     <a data-tip data-for="tooltipSMS">
                                                         <i className="fa fa-comments icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                                     </a>
                                                 </td>
 
-                                                <td>
+                                                <td className="noPrint">
                                                     <a data-tip data-for="tooltipMessageVoice">
                                                         <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
                                                     </a>
                                                 </td>
 
-                                                <td>
+                                                <td className="noPrint">
                                                     <a data-tip data-for="tooltipCall">
                                                         <i className="fa fa-mobile icon-tel icon-tel-phone" />
                                                     </a>
                                                 </td>
 
-                                                <td>
+                                                <td className="noPrint">
                                                     <a data-tip data-for="tooltipHot">
                                                         <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
                                                     </a>
                                                 </td>
 
-                                                <td>
+                                                <td className="noPrint">
                                                     <a data-tip data-for="tooltipWhats">
                                                         <img src="../../../public/images/whatsapp.png" width="15"/>
                                                     </a>
                                                 </td>
 
-                                                <td>
+                                                <td className="noPrint">
                                                     <a data-tip data-for="tooltipViber">
                                                         <img src="../../../public/images/viber.png" width="15"/>
                                                     </a>

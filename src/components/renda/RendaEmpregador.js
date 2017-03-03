@@ -54,7 +54,7 @@ export default class RendaEmpregador extends Component {
         return (
             <span>
                 {this.props.rendas ?
-                    <Panel title="RENDA EMPREGADOR">
+                    <Panel title="RENDA EMPREGADOR" qtdTotal={[{icon:"fa fa-money", qtd:this.props.rendas.length}]}>
                         <Col md={12} sm={12}>            
                             <Table
                                 fields={
