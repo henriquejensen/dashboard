@@ -5,6 +5,8 @@ import { Button } from "react-bootstrap";
 import Panel from "../panel/Panel";
 import Table from "../table/Table";
 
+import { NENHUM_REGISTRO } from "../../constants/utils";
+
 export default class Sociedades extends Component {
   render() {
     return (
@@ -50,7 +52,7 @@ export default class Sociedades extends Component {
                 </Panel>
               :
                 <Panel title="PARTICIPAÇÕES EM EMPRESAS">
-                    <div className="text-center"><strong>Nada consta</strong></div>
+                    <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
                 </Panel>
               }
           </div>

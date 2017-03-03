@@ -5,6 +5,8 @@ import Table from "../table/Table";
 
 import { formatCurrency } from "../utils/functions/patternDocuments";
 
+import { NENHUM_REGISTRO } from "../../constants/utils";
+
 export default class RendaEntidadeClasseLiberal extends Component {
     render() {
         return (
@@ -30,7 +32,7 @@ export default class RendaEntidadeClasseLiberal extends Component {
                 </Panel>
             :
                 <Panel title="RENDA ENTIDADE CLASSE LIBERAL">
-                    <div className="text-center"><strong>Nada consta</strong></div>
+                    <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
                 </Panel>
         )
     }

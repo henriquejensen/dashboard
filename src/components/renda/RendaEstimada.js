@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import Panel from "../panel/Panel";
 import Table from "../table/Table";
 
+import { NENHUM_REGISTRO } from "../../constants/utils";
+
 export default class RendaEstimada extends Component {
   render() {
     const renda = this.props.rendaEstimada;
@@ -28,7 +30,7 @@ export default class RendaEstimada extends Component {
                 </Panel>
             :
                 <Panel title="RENDA ESTIMADA">
-                    <div className="text-center"><strong>Nada consta</strong></div>
+                    <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
                 </Panel>
         )
   }

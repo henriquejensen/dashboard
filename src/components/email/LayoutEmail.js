@@ -89,14 +89,15 @@ export default class Emails extends Component {
 
     render() {
         let emails = this.props.emails;
+        let medium = Math.round(emails.length/2);
         return (
             <div>
                 <Col md={6}>
-                    {this.renderEmail(emails.slice(0,emails.length/2))}
+                    {this.renderEmail(emails.slice(0, medium))}
                 </Col>
                 
                 <Col md={6}>
-                    {this.renderEmail(emails.slice(emails.length/2, emails.length))}
+                    {this.renderEmail(emails.slice(medium, emails.length))}
                 </Col>
 
                 {this.props.newEmail ?

@@ -1,5 +1,5 @@
-export const URL_SEARCH_CPF = "https://managerbigdata.assertivasolucoes.com.br/localize/pessoafisica/consultar";
-export const URL_SEARCH_CNPJ = "https://managerbigdata.assertivasolucoes.com.br/localize/pessoajuridica/consultar";
+export const URL_SEARCH_CPF = "https://managerbigdata.assertivasolucoes.com.br/localize/1002/consultar";
+export const URL_SEARCH_CNPJ = "https://managerbigdata.assertivasolucoes.com.br/localize/1003/consultar";
 
 export const SEE_LOCALIZE_MODEL = "SEE_LOCALIZE_MODEL";
 export const CLOSE_LOCALIZE_MODEL = "CLOSE_LOCALIZE_MODEL";

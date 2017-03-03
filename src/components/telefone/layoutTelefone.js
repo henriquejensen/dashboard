@@ -113,7 +113,7 @@ export default class LayoutTelefone extends Component{
                                                 </td>
                                             </tr>)
                                     })
-                                : NENHUM_REGISTRO}
+                                : NENHUM_REGISTRO + " de telefone fixo"}
 
                                 {this.props.newPhone ?
                                     <tr>
@@ -208,7 +208,7 @@ export default class LayoutTelefone extends Component{
                                                 </td>
                                             </tr>)
                                     })
-                                : NENHUM_REGISTRO}
+                                : NENHUM_REGISTRO + " de telefone móvel"}
 
                                {this.props.newPhone ?
                                     <tr>

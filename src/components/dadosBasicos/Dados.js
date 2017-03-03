@@ -6,6 +6,8 @@ import { patternCPF, patternRG } from "../utils/functions/patternDocuments";
 
 import Panel from "../panel/Panel";
 
+import { NENHUM_REGISTRO } from "../../constants/utils";
+
 export default class Dados extends Component{
 
   state = {
@@ -21,7 +23,7 @@ export default class Dados extends Component{
             </div>
             <div className="col-md-6">
               <strong>Status CPF: </strong>
-              <span className={this.props.dados.status == "ATIVO" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.status ? this.props.dados.status : "Nada consta"}</span>
+              <span className={this.props.dados.status == "ATIVO" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.status ? this.props.dados.status : NENHUM_REGISTRO}</span>
             </div>
 
             <div className="col-md-6">
@@ -39,12 +41,12 @@ export default class Dados extends Component{
             </div>
             <div className="col-md-6">
               <strong>Óbito: </strong>
-              <span className={this.props.dados.obitoProvavel == "SIM" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.obitoProvavel ? this.props.dados.obitoProvavel : "Nada consta"}</span>
+              <span className={this.props.dados.obitoProvavel == "SIM" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.obitoProvavel ? this.props.dados.obitoProvavel : NENHUM_REGISTRO}</span>
             </div>
 
             <div className="col-md-6">
               <strong>RG: </strong>
-              {this.props.dados.rg ? patternRG(this.props.dados.rg) + "/" + this.props.dados.ufRg : "Nada consta"}
+              {this.props.dados.rg ? patternRG(this.props.dados.rg) + "/" + this.props.dados.ufRg : NENHUM_REGISTRO}
             </div>
             <div className="col-md-6">
               <strong>Signo: </strong>
@@ -86,31 +88,31 @@ export default class Dados extends Component{
               <div >
                 <Col md={6}>
                   <strong>Faixa de idade: </strong>
-                  {this.props.dados.faixaIdade ? this.props.dados.faixaIdade : "Nada consta"}
+                  {this.props.dados.faixaIdade ? this.props.dados.faixaIdade : NENHUM_REGISTRO}
                 </Col>
                 <div className="col-md-6">
                   <strong>Data status CPF: </strong>
-                  {this.props.dados.statusData ? this.props.dados.statusData : "Nada consta"}
+                  {this.props.dados.statusData ? this.props.dados.statusData : NENHUM_REGISTRO}
                 </div>
 
                 <div className="col-md-6">
                   <strong>Protocolo: </strong>
-                  {this.props.dados.statusProtocolo ? this.props.dados.statusProtocolo : "Nada consta"}
+                  {this.props.dados.statusProtocolo ? this.props.dados.statusProtocolo : NENHUM_REGISTRO}
                 </div>
 
                 <div className="col-md-6">
                   <strong>Titulo de eleitor: </strong>
-                  {this.props.dados.tituloEleitor ? this.props.dados.tituloEleitor : "Nada consta"}
+                  {this.props.dados.tituloEleitor ? this.props.dados.tituloEleitor : NENHUM_REGISTRO}
                 </div>
 
                 <div className="col-md-6" style={{marginBottom:"20px"}}>
                   <strong>Nacionalidade: </strong>
-                  {this.props.dados.nacionalidade ? this.props.dados.nacionalidade : "Nada consta"}
+                  {this.props.dados.nacionalidade ? this.props.dados.nacionalidade : NENHUM_REGISTRO}
                 </div>
 
                 <div className="col-md-6" style={{marginBottom:"20px"}}>
                   <strong>Estado civil: </strong>
-                  {this.props.dados.estadoCivil ? this.props.dados.estadoCivil : "Nada consta"}
+                  {this.props.dados.estadoCivil ? this.props.dados.estadoCivil : NENHUM_REGISTRO}
                 </div>
               </div> : ""}
           </Panel>

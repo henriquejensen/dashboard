@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import Panel from "../panel/Panel";
 import Table from "../table/Table";
 
+import { NENHUM_REGISTRO } from "../../constants/utils";
+
 export default class RendaPresumida extends Component {
     render(){
         return (

@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import Panel from "../panel/Panel";
 import LayoutEmail from "./LayoutEmail";
 
+import { NENHUM_REGISTRO } from "../../constants/utils";
+
 export default class Email extends Component {
     constructor() {
         super();
@@ -38,7 +40,7 @@ export default class Email extends Component {
                     </div>
                 </Panel> :
                 <Panel title="EMAILS">
-                    <div className="text-center"><strong>Nada consta</strong></div>
+                    <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
                 </Panel>
         )
     }

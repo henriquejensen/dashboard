@@ -6,6 +6,8 @@ import Modal from "../Modal";
 import LayoutEndereco from "./layoutEndereco";
 import EnviarEndereco from "../forms/EnviarEndereco";
 
+import { NENHUM_REGISTRO } from "../../constants/utils";
+
 export default class Endereco extends Component {
     constructor(props) {
         super(props);
@@ -64,7 +66,7 @@ export default class Endereco extends Component {
                         </div>
                     </Panel> :
                     <Panel title="ENDEREÇOS">
-                        <div className="text-center"><strong>Nada consta</strong></div>
+                        <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
                     </Panel>}
 
                     <Modal

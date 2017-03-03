@@ -3,6 +3,8 @@ import React, { Component } from "react"
 import Panel from "../panel/Panel";
 import LayoutTelefone from "./layoutTelefone";
 
+import { NENHUM_REGISTRO } from "../../constants/utils";
+
 export default class Telefone extends Component {
     state = {
         newPhone: false,
@@ -46,7 +48,7 @@ export default class Telefone extends Component {
                 </Panel>
                 :
                 <Panel title="TELEFONES">
-                    <div className="text-center"><strong>Nada consta</strong></div>
+                    <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
                 </Panel>
         )
     }
