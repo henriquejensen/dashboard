@@ -35,7 +35,7 @@ export default class Sociedades extends Component {
                                   </a>
                               </td>
                               <td>{participacao.qualificacaoSocio}</td>
-                              <td>{participacao.participacao}</td>
+                              <td>{participacao.participacao}%</td>
                             </tr>
                           )
                         })}

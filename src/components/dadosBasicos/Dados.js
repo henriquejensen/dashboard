@@ -68,21 +68,6 @@ export default class Dados extends Component{
                 </span>
               : <div>Nada consta</div>}
             </div>*/}
-            
-            
-            <div className="col-md-12 moreInfo" onClick={() => this.setState({moreInfo:!this.state.moreInfo})}>
-              <a data-tip data-for="moreInfo">
-                <i className={this.state.moreInfo ? "fa fa-minus pull-right moreInfo" : "fa fa-plus pull-right moreInfo"} />
-              </a>
-            </div>
-            
-            <Tooltip id="moreInfo">
-              <span>Mais informações</span>
-            </Tooltip>
-            <Tooltip id="tooltipConsultar">
-              <span>Consultar</span>
-            </Tooltip>
-
 
             {this.state.moreInfo ? 
               <div >
@@ -105,16 +90,29 @@ export default class Dados extends Component{
                   {this.props.dados.tituloEleitor ? this.props.dados.tituloEleitor : NENHUM_REGISTRO}
                 </div>
 
-                <div className="col-md-6" style={{marginBottom:"20px"}}>
+                <div className="col-md-6">
                   <strong>Nacionalidade: </strong>
                   {this.props.dados.nacionalidade ? this.props.dados.nacionalidade : NENHUM_REGISTRO}
                 </div>
 
-                <div className="col-md-6" style={{marginBottom:"20px"}}>
+                <div className="col-md-6">
                   <strong>Estado civil: </strong>
                   {this.props.dados.estadoCivil ? this.props.dados.estadoCivil : NENHUM_REGISTRO}
                 </div>
               </div> : ""}
+            
+              <div className="col-md-12 moreInfo" onClick={() => this.setState({moreInfo:!this.state.moreInfo})}>
+                <a data-tip data-for="moreInfo">
+                  <i className={this.state.moreInfo ? "fa fa-minus pull-right moreInfo" : "fa fa-plus pull-right moreInfo"} />
+                </a>
+              </div>
+
+              <Tooltip id="moreInfo">
+                <span>Mais informações</span>
+              </Tooltip>
+              <Tooltip id="tooltipConsultar">
+                <span>Consultar</span>
+              </Tooltip>
           </Panel>
     )
   }

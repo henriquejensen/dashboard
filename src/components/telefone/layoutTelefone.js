@@ -145,6 +145,7 @@ export default class LayoutTelefone extends Component{
                             <tbody>
                                 {this.props.moveis.length > 0 ?
                                     this.props.moveis.map((tel,i) => {
+                                        console.log("TEL", tel)
                                         return (
                                             <tr
                                                 key={i}

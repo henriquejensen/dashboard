@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import Dados from "../../components/dadosBasicos/Dados";
 import DadosPj from "../../components/dadosBasicos/DadosPj";
+import CadastroCnpjCnaesSecundarias from "../../components/dadosBasicos/CadastroCnpjCnaesSecundarias";
 import Telefones from "../../components/telefone/Telefone";
 import Emails from "../../components/email/Email";
 import Enderecos from "../../components/endereco/Endereco";
@@ -47,6 +48,10 @@ export default class LocalizeView extends Component {
                         ])}
                         searchPerson={this.props.searchLocalize}
                     />
+                : ""}
+
+                {this.props.tipo == "CNPJ" ?
+                    <CadastroCnpjCnaesSecundarias cnpjCnaesSecundarias={this.props.data.cadastroCnpjCnaesSecundarias} />
                 : ""}
 
                 {this.props.tipo == "CNPJ" ?

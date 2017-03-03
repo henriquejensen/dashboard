@@ -11,7 +11,7 @@ export default class BeneficiosINSS extends Component {
     render() {
         return (
             this.props.beneficios ?
-                <Panel title="BENEFÍCIO ASSISTENCIAL E INSS">
+                <Panel title="BENEFÍCIO ASSISTENCIAL E INSS" qtdTotal={[{icon:"fa fa-money", qtd:this.props.beneficios.length}]}>
                     <div className="col-md-12 col-sm-12">            
                         <Table
                             fields={
