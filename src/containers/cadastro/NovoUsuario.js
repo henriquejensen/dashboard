@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Col, FormControl, Label, ControlLabel, Button, Radio } from "react-bootstrap";
 
+import { FieldGroup, SelectGroup, RadioGroup } from "../../components/forms/CommonForms";
+
 let perfilOptions = [
     "Operador", "Gerente", "ADM"
 ]
@@ -26,40 +28,9 @@ class NovoUsuario extends Component {
     }
 
     onChangeRadio = (id, value) => {
-        console.log("ASDFA", id, value)
         this.setState({
             [id]: value
         })
-    }
-
-    renderFieldGroup(id, label, type, name, placeholder) {
-        return (
-            <FormGroup controlId={id} style={{marginLeft:0, marginRight:0}}>
-                <ControlLabel>{label}</ControlLabel>
-                <FormControl
-                    type={type}
-                    name={name}
-                    placeholder={placeholder}
-                    onChange={this.onChange}
-                />
-            </FormGroup>
-        )
-    }
-
-    renderSelectGroup(id, label, type, name, options) {
-        return (
-            <FormGroup controlId={id} style={{marginLeft:0, marginRight:0}}>
-                <ControlLabel>{label}</ControlLabel>
-                <FormControl
-                    name={name}
-                    componentClass={type}
-                >
-                    {options.map((opt, index) => {
-                        return <option key={index} value={opt}>{opt}</option>
-                    })}
-                </FormControl>
-            </FormGroup>
-        )
     }
 
     renderRadioGroup(id, label, fieldChecked) {
@@ -85,27 +56,65 @@ class NovoUsuario extends Component {
             <Col md={12}>
                 <Form horizontal onSubmit={this.onFormSubmit}>
                     <Col md={12}>
-                        {this.renderFieldGroup("inputUser", "Usuário", "text", "name", "Digite o nome do usuário")}
+                        <FieldGroup
+                            id="inputUser"
+                            type="text"
+                            label="Usuário"
+                            name="nome"
+                            placeholder="Digite o nome do usuário"
+                            onChange={this.onChange} />
                     </Col>
                     <Col md={6}>
-                        {this.renderFieldGroup("inputEmailPrincipal", "Email Principal", "email", "email", "Email principal")}
+                        <FieldGroup
+                            id="inputEmailPrincipal"
+                            type="email"
+                            label="Email Principal"
+                            name="email"
+                            placeholder="Email principal"
+                            onChange={this.onChange} />
                     </Col>
                     <Col md={6}>
-                        {this.renderFieldGroup("inputEmail2", "Email 2", "email", "email2", "Email secundário")}
+                        <FieldGroup
+                            id="inputEmail2"
+                            type="email"
+                            label="Email 2"
+                            name="email2"
+                            placeholder="Email secundário"
+                            onChange={this.onChange} />
                     </Col>
                     <Col md={6}>
-                        {this.renderSelectGroup("perfil", "Perfil", "select", "perfil", perfilOptions)}
+                        <SelectGroup
+                            id="perfil"
+                            type="select"
+                            label="Perfil"
+                            name="perfil"
+                            onChange={this.onChange}
+                            options={perfilOptions} />
                     </Col>
                     <Col md={6}>
-                        {this.renderSelectGroup("status", "Status", "select", "status", ["SIM", "NÃO"])}
+                        <SelectGroup
+                            id="status"
+                            type="select"
+                            label="Status"
+                            name="perfil"
+                            onChange={this.onChange}
+                            options={["SIM", "NÃO"]} />
                     </Col>
 
                     <Col md={6}>
-                        {this.renderRadioGroup("boleto", "Visualizar boleto", this.state.boleto)}
+                        <RadioGroup
+                            id="boleto"
+                            label="Visualizar boleto"
+                            onChangeRadio={this.onChangeRadio}
+                            fieldChecked={this.state.boleto} />
                     </Col>
 
                     <Col md={6}>
-                        {this.renderRadioGroup("dossie", "Acesso ao Dossiê", this.state.dossie)}
+                        <RadioGroup
+                            id="dossie"
+                            label="Acesso ao Dossiê"
+                            onChangeRadio={this.onChangeRadio}
+                            fieldChecked={this.state.dossie} />
                     </Col>
 
                     <Col md={6}>
