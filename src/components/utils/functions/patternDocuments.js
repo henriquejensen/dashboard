@@ -1,4 +1,6 @@
 export function patternCPF(doc) {
+    if(!doc) return doc;
+
     let cpf = doc.toString();
 
     for(let i=cpf.length; i<11;i++) {
@@ -9,6 +11,7 @@ export function patternCPF(doc) {
 }
 
 export function patternCNPJ(doc) {
+    if(!doc) return doc;
     let cnpj = doc.toString();
 
     for(let i=cnpj.length; i<14;i++) {
@@ -19,12 +22,14 @@ export function patternCNPJ(doc) {
 }
 
 export function patternRG(doc) {
+    if(!doc) return doc;
     let rg = doc.toString();
 
     return rg.substring(0,2) + "." + rg.substring(2,5) + "." + rg.substring(5,8) +  "-" + rg.substring(8);
 }
 
 export function formatDate(date) {
+    if(!date) return date;
     let newDate = new Date(date);
     let format = new Intl.DateTimeFormat("pt-BR");
 
@@ -32,12 +37,14 @@ export function formatDate(date) {
 }
 
 export function formatCurrency(currency) {
+    if(!currency) return currency;
     let newCurrency = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
     return newCurrency.format(currency);
 }
 
 export function formatPhone(phone) {
+    if(!phone) return phone;
     let newPhone = phone.toString().replace("(","").replace(")","").replace(" ","").replace("-","");
     
     return newPhone[0] + newPhone[1] + " " + newPhone.substring(2);

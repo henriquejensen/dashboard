@@ -6,6 +6,7 @@ import Panel from "../../components/panel/Panel";
 import Table from "../../components/table/Table";
 
 import EditarUsuario from "./EditarUsuario";
+import NovoUsuario from "./NovoUsuario";
 
 const groups = [
     {status: true, group: "GRUPO_ADM"},
@@ -19,12 +20,12 @@ const groups = [
 const users = [
     {status: true, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
     {status: true, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
+    {status: false, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
+    {status: false, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
     {status: true, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
     {status: true, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
-    {status: true, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
-    {status: true, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
-    {status: true, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
-    {status: true, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
+    {status: false, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
+    {status: false, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
     {status: true, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"}
 ]
 
@@ -38,7 +39,9 @@ class Cadastro extends Component {
                 grupo: ""
             },
             showAdvancedSearch: false,
-            showModal: false
+            showModal: false,
+            screenToShow: "",
+            screenTitle: ""
         }
     }
 
@@ -63,9 +66,11 @@ class Cadastro extends Component {
         console.log("SUBMIT FORM", this.state.usuario);
     }
 
-    openModal = () => {
+    openModal = (screen, title) => {
         this.setState({
-            showModal: true
+            showModal: true,
+            screenToShow: screen,
+            screenTitle: title
         })
     }
 
@@ -148,25 +153,32 @@ class Cadastro extends Component {
             <Panel title="GRUPOS" qtdTotal={[{qtd:groups.length, icon:"fa fa-users"}]}>
                 <Table
                     fields={
-                        ["Status", "Grupo", "Ações"]
+                        ["","Status", "Grupo", "Ações"]
                     }
                 >
                     <tbody>
                         {groups.map((group,index) => {
                             return (
                                 <tr key={index}>
-                                    <td>{group.status ? '[v]' : '[x]'}</td>
+                                    <td></td>
+                                    <td>
+                                        <i
+                                            className="fa fa-circle-thin"
+                                            id={group.status ? "userActivated" : "userDeactivated"}
+                                            aria-hidden="true">
+                                        </i>   
+                                    </td>
                                     <td>{group.group}</td>
                                     <td>
-                                        <Button onClick={this.openModal}>
+                                        <Button onClick={() => this.openModal(<EditarUsuario/>, "Editar grupo")}>
                                             <i className="fa fa-pencil" />
                                         </Button>
                                         {'   '}
-                                        <Button onClick={this.openModal}>
+                                        <Button onClick={() => this.openModal(<NovoUsuario cancel={this.closeModal} usuario={{boleto:"NAO", dossie:"NAO"}}/>, "Novo usuário do grupo " + group.group)}>
                                             <i className="fa fa-user-plus" />
                                         </Button>
                                         {'   '}
-                                        <Button onClick={this.openModal}>
+                                        <Button onClick={() => this.openModal(<EditarUsuario/>, "Ativar consultas")}>
                                             <i className="fa fa-gear" />
                                         </Button>
                                     </td>
@@ -188,22 +200,29 @@ class Cadastro extends Component {
             <Panel title="USUÁRIOS" qtdTotal={[{qtd:users.length, icon:"fa fa-user"}]}>
                 <Table
                     fields={
-                        ["Status", "Usuário", "Grupo", "Ações"]
+                        ["","Status", "Usuário", "Grupo", "Ações"]
                     }
                 >
                     <tbody>
                         {users.map((user,index) => {
                             return (
                                 <tr key={index}>
-                                    <td>{user.status ? '[v]' : '[x]'}</td>
+                                    <td></td>
+                                    <td>
+                                        <i
+                                            className="fa fa-circle-thin"
+                                            id={user.status ? "userActivated" : "userDeactivated"}
+                                            aria-hidden="true">
+                                        </i>   
+                                    </td>
                                     <td>{user.user}</td>
                                     <td>{user.group}</td>
                                     <td>
-                                        <Button onClick={this.openModal}>
+                                        <Button onClick={() => this.openModal(<EditarUsuario/>, "Editar usuário")}>
                                             <i className="fa fa-pencil" />
                                         </Button>
                                         {'   '}
-                                        <Button onClick={this.openModal}>
+                                        <Button onClick={() => this.openModal(<EditarUsuario/>, "Permissões")}>
                                             <i className="fa fa-list-alt" />
                                         </Button>
                                     </td>
@@ -238,9 +257,9 @@ class Cadastro extends Component {
                 <Modal
                     IsModalOpen={this.state.showModal}
                     closeModal={this.closeModal}
-                    title="SMS Rápido"
+                    title={this.state.screenTitle}
                 >
-                    <EditarUsuario />
+                    {this.state.screenToShow}
                 </Modal>
 
             </Col>
