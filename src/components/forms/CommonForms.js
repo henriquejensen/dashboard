@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, FormGroup, Col, FormControl, Label, ControlLabel, Button, Radio } from "react-bootstrap";
+import { Form, FormGroup, Col, FormControl, Label, ControlLabel, Button, Radio, Checkbox } from "react-bootstrap";
 
 export const FieldGroup = (props) => {
     return (
@@ -22,6 +22,7 @@ export const SelectGroup = (props) => {
             <FormControl
                 name={props.name}
                 componentClass={props.type}
+                onChange={props.onChange}
             >
                 {props.options.map((opt, index) => {
                     return <option key={index} value={opt}>{opt}</option>
@@ -45,6 +46,35 @@ export const RadioGroup = (props) => {
                     NAO
                 </Radio>
             </Col>
+        </FormGroup>
+    )
+}
+
+export const TextArea = (props) => {
+    return (
+        <FormGroup controlId={props.id}>
+            <ControlLabel>{props.label}</ControlLabel>
+            <FormControl
+                componentClass="textarea"
+                name={props.name}
+                placeholder={props.placeholder}
+                onChange={props.onChange} />
+        </FormGroup>
+    )
+}
+
+export const CheckboxGroup = (props) => {
+    return (
+        <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}} className={props.center ? "text-center": ""}>
+            <ControlLabel>{props.label}</ControlLabel><br/>
+            {props.options.map((opt,index) => {
+                return (
+                    <Checkbox key={index} inline={props.inline}>
+                        {opt}
+                    </Checkbox>
+                )
+            })}
+
         </FormGroup>
     )
 }

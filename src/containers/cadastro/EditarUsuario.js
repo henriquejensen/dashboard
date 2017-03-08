@@ -1,49 +1,224 @@
 import React, { Component } from "react";
+import { Tabs, Tab, Col, Button, Form } from "react-bootstrap";
 
-import { Tabs, Tab, Col, Button, Label, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FieldGroup, SelectGroup, TextArea } from "../../components/forms/CommonForms";
 
-export const FieldGroup = (props) => {
+const Grupo = (props) => {
     return (
-        <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}}>
-            <ControlLabel>{props.label}</ControlLabel>
-            <FormControl
-                type={props.type}
-            />
-        </FormGroup>
+        <Col md={12}>
+            <FieldGroup
+                id="inputUser"
+                type="text"
+                label="Cliente Nome"
+                name="nome"
+                placeholder="Digite o nome do cliente"
+                onChange={props.onChange} />
+
+            <FieldGroup
+                id="inputUser"
+                type="text"
+                label="Cliente Login"
+                name="login"
+                placeholder="Digite o login do cliente"
+                onChange={props.onChange} />
+
+            <FieldGroup
+                id="inputUser"
+                type="text"
+                label="Nome do grupo"
+                name="grupo"
+                placeholder="Digite o nome do grupo"
+                onChange={props.onChange} />
+        </Col>
     )
 }
 
- export const GrupoCliente = () => {
-     return (
-         <FieldGroup id="TESTE" label="TATAT" type="text" />
-     )
- }
+const DadosBasicos = (props) => {
+    return (
+        <span>
+            <Col md={6}>
+                <FieldGroup
+                    id="inputUser"
+                    type="text"
+                    label="Usuário"
+                    name="nome"
+                    placeholder="Digite o nome do usuario"
+                    onChange={props.onChange} />
+            </Col>
+            
+            <Col md={6}>
+                <FieldGroup
+                    id="inputPassword"
+                    type="password"
+                    label="Senha"
+                    name="senha"
+                    placeholder="********"
+                    onChange={props.onChange} />
+            </Col>
 
-const editar = [
-    {label: "Grupo e Cliente", form: <GrupoCliente />},
-    {label: "Dados Básicos", form: <GrupoCliente />},
-    {label: "Limitação", form: <GrupoCliente />},
-    {label: "Observações", form: <GrupoCliente />}
-]
+            <Col md={6}>
+                <FieldGroup
+                    id="inputEmail"
+                    type="email"
+                    label="Email principal"
+                    name="email"
+                    placeholder="Digite o email principal"
+                    onChange={props.onChange} />
+            </Col>
+
+            <Col md={6}>
+                <FieldGroup
+                    id="inputEmail2"
+                    type="email"
+                    label="Email 2"
+                    name="email2"
+                    placeholder="Digite o email secundário"
+                    onChange={props.onChange} />
+            </Col>
+
+            <Col md={6}>
+                <SelectGroup
+                    id="perfil"
+                    type="select"
+                    label="Perfil"
+                    name="perfil"
+                    options={["GERENTE", "OPERADOR", "ADM"]}
+                    onChange={props.onChange} />
+            </Col>
+
+            <Col md={6}>
+                <SelectGroup
+                    id="status"
+                    type="select"
+                    label="Status ativo"
+                    name="status"
+                    options={["SIM", "NAO"]}
+                    onChange={props.onChange} />
+            </Col>
+
+            <Col md={6}>
+                <SelectGroup
+                    id="boleto"
+                    type="select"
+                    label="Visualizar boleto"
+                    name="boleto"
+                    options={["SIM", "NAO"]}
+                    onChange={props.onChange} />
+            </Col>
+
+            <Col md={6}>
+                <SelectGroup
+                    id="inputEmail2"
+                    type="select"
+                    label="Acesso ao dossiê"
+                    name="dossie"
+                    options={["SIM", "NAO"]}
+                    onChange={props.onChange} />
+            </Col>
+        </span>
+    )
+}
+
+const Limitacao = (props) => {
+    return (
+        <span>
+            <Col md={4}>
+                <FieldGroup
+                    id="limite"
+                    type="number"
+                    label="Limite de quantidade"
+                    name="limite"
+                    placeholder="0"
+                    onChange={props.onChange} />
+            </Col>
+
+            <Col md={4}>
+                <SelectGroup
+                    id="tipoLimitacao"
+                    type="select"
+                    label="Tipo da limitação"
+                    name="tipoLimitacao"
+                    options={["INATIVO", "CONSUMO"]}
+                    onChange={props.onChange} />
+            </Col>
+
+            <Col md={4}>
+                <SelectGroup
+                    id="periodoLimitacao"
+                    type="select"
+                    label="Período da limitação"
+                    name="periodoLimitacao"
+                    options={["AVULSO", "MENSAL"]}
+                    onChange={props.onChange} />
+            </Col>
+        </span>
+    )
+}
+
+const Observacoes = (props) => {
+    return (
+        <Col md={12}>
+            <TextArea
+                id="observacoes"
+                label="Observações"
+                placeholder="Escreva alguma observação sobre o usuário"
+                name="observacoes"
+                onChange={props.onChange} />
+        </Col>
+    )
+}
+
 
 class EditarUsuario extends Component {
+    onFormSubmit = (evt) => {
+        evt.preventDefault();
+
+        console.log(this.state);
+    }
+
+    onChange = (evt) => {
+        this.setState({
+            [evt.target.name]: evt.target.value
+        })
+    }
+    
     render() {
+        const editar = [
+            {label: "Grupo e Cliente", form: <Grupo onChange={this.onChange} />},
+            {label: "Dados Básicos", form: <DadosBasicos onChange={this.onChange} />},
+            {label: "Limitação", form: <Limitacao onChange={this.onChange} />},
+            {label: "Observações", form: <Observacoes onChange={this.onChange} />}
+        ]
+
         return (
             <Col md={12}>
-                <Tabs
-                    defaultActiveKey={1}
-                    id="uncontrolled-tab-example">
+                <Form horizontal onSubmit={this.onFormSubmit}>
+                    <Tabs
+                        defaultActiveKey={1}
+                        id="uncontrolled-tab-example">
 
-                    {editar.map((item,index) => {
-                        console.log(item.form)
-                        return (
-                            <Tab eventKey={index} title={item.label} key={index}>
-                                {item.form}
-                            </Tab>
-                        )
-                    })}
+                        {editar.map((item,index) => {
+                            return (
+                                <Tab eventKey={index} title={item.label} key={index}>
+                                    {item.form}
+                                </Tab>
+                            )
+                        })}
 
-                </Tabs>
+                    </Tabs>
+
+                    <Col md={6}>
+                        <Button
+                            type="submit"
+                            onClick={this.props.cancel}>Cancelar</Button>
+                    </Col>
+                    <Col md={6}>
+                        <Button
+                            className="pull-right"
+                            type="submit"
+                            bsStyle="info">Salvar</Button>
+                    </Col>
+                </Form>
             </Col>
         )
     }

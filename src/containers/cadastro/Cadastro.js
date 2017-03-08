@@ -5,8 +5,14 @@ import Modal from "../../components/Modal";
 import Panel from "../../components/panel/Panel";
 import Table from "../../components/table/Table";
 
+{/*Funções para o Usuario*/}
 import EditarUsuario from "./EditarUsuario";
+import ConfigurarPermissoes from "./ConfigurarPermissoes";
+
+{/*Funções para o Grupo*/}
+import EditarGrupo from "./EditarGrupo";
 import NovoUsuario from "./NovoUsuario";
+import AtivarConsultas from "./AtivarConsultas";
 
 const groups = [
     {status: true, group: "GRUPO_ADM"},
@@ -41,7 +47,8 @@ class Cadastro extends Component {
             showAdvancedSearch: false,
             showModal: false,
             screenToShow: "",
-            screenTitle: ""
+            screenTitle: "",
+            sizeModal: ""
         }
     }
 
@@ -66,11 +73,12 @@ class Cadastro extends Component {
         console.log("SUBMIT FORM", this.state.usuario);
     }
 
-    openModal = (screen, title) => {
+    openModal = (screen, title, size="") => {
         this.setState({
             showModal: true,
             screenToShow: screen,
-            screenTitle: title
+            screenTitle: title,
+            sizeModal: size
         })
     }
 
@@ -163,6 +171,7 @@ class Cadastro extends Component {
                                     <td></td>
                                     <td>
                                         <i
+                                            style={{borderRadius:5}}
                                             className="fa fa-circle-thin"
                                             id={group.status ? "userActivated" : "userDeactivated"}
                                             aria-hidden="true">
@@ -170,7 +179,7 @@ class Cadastro extends Component {
                                     </td>
                                     <td>{group.group}</td>
                                     <td>
-                                        <Button onClick={() => this.openModal(<EditarUsuario/>, "Editar grupo")}>
+                                        <Button onClick={() => this.openModal(<EditarGrupo cancel={this.closeModal} />, "Editar grupo", "large")}>
                                             <i className="fa fa-pencil" />
                                         </Button>
                                         {'   '}
@@ -178,7 +187,7 @@ class Cadastro extends Component {
                                             <i className="fa fa-user-plus" />
                                         </Button>
                                         {'   '}
-                                        <Button onClick={() => this.openModal(<EditarUsuario/>, "Ativar consultas")}>
+                                        <Button onClick={() => this.openModal(<AtivarConsultas cancel={this.closeModal}/>, "Ativar consultas")}>
                                             <i className="fa fa-gear" />
                                         </Button>
                                     </td>
@@ -210,6 +219,7 @@ class Cadastro extends Component {
                                     <td></td>
                                     <td>
                                         <i
+                                            style={{borderRadius:5}}
                                             className="fa fa-circle-thin"
                                             id={user.status ? "userActivated" : "userDeactivated"}
                                             aria-hidden="true">
@@ -222,7 +232,7 @@ class Cadastro extends Component {
                                             <i className="fa fa-pencil" />
                                         </Button>
                                         {'   '}
-                                        <Button onClick={() => this.openModal(<EditarUsuario/>, "Permissões")}>
+                                        <Button onClick={() => this.openModal(<ConfigurarPermissoes cancel={this.closeModal}/>, "Configurar Permissões")}>
                                             <i className="fa fa-list-alt" />
                                         </Button>
                                     </td>
@@ -258,6 +268,7 @@ class Cadastro extends Component {
                     IsModalOpen={this.state.showModal}
                     closeModal={this.closeModal}
                     title={this.state.screenTitle}
+                    size={this.state.sizeModal}
                 >
                     {this.state.screenToShow}
                 </Modal>

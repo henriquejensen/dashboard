@@ -355,13 +355,11 @@ input {
 #userActivated {
     color: #5cb85c;
     background: #5cb85c;
-    border-radius: 5px;
 }
 
 #userDeactivated {
     color: #c9302c;
     background: #c9302c;
-    border-radius: 5px;
 }
 
 @media print {
