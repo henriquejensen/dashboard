@@ -65,15 +65,11 @@ class AtivarConsultas extends Component {
     }
 
     checkedBoxAddAll = (status) => {
-        console.log("ARRIVE", status)
         let newDescriptionStatus = this.state.descricaoConsultas.concat();
 
         for(let i in this.state.checkedBox) {
-            console.log("I", i)
-            newDescriptionStatus[i].ativado = status;
+            newDescriptionStatus[this.state.checkedBox[i]].ativado = status;
         }
-
-        console.log("NES", newDescriptionStatus, this.state.checkedBox)
 
         this.setState({
             descricaoConsultas: newDescriptionStatus

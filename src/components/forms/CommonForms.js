@@ -8,6 +8,7 @@ export const FieldGroup = (props) => {
             <FormControl
                 type={props.type}
                 name={props.name}
+                value={props.value}
                 placeholder={props.placeholder}
                 onChange={props.onChange}
             />
@@ -25,7 +26,7 @@ export const SelectGroup = (props) => {
                 onChange={props.onChange}
             >
                 {props.options.map((opt, index) => {
-                    return <option key={index} value={opt}>{opt}</option>
+                    return <option key={index} selected={props.value == opt} value={opt}>{opt}</option>
                 })}
             </FormControl>
         </FormGroup>
@@ -69,7 +70,7 @@ export const CheckboxGroup = (props) => {
             <ControlLabel>{props.label}</ControlLabel><br/>
             {props.options.map((opt,index) => {
                 return (
-                    <Checkbox key={index} inline={props.inline}>
+                    <Checkbox key={index} inline={props.inline} checked={props.values[index]}>
                         {opt}
                     </Checkbox>
                 )

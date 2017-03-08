@@ -7,6 +7,7 @@ import FocoFiscalData from "./reducer-focofiscal";
 import campanhasSMS from "./reducer-sms";
 import ChartData from "./reducer-chart-data";
 import auth from "./reducer-application";
+import cadastro from "./reducer-cadastro";
 
 const rootReducer = combineReducers({
   localize: LocalizeData,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   centroCustoSMS: campanhasSMS,
   respostasSMS: campanhasSMS,
   auth,
+  cadastro
 });
 
 export default rootReducer;

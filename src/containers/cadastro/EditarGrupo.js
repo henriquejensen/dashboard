@@ -13,8 +13,8 @@ const Cliente = (props) => {
                     type="text"
                     label="Razão social"
                     name="razaoSocial"
-                    placeholder="Nome do cliente"
-                    onChange={props.onChange} />
+                    value={props.razaoSocial}
+                    placeholder="Nome do cliente" />
             </Col>
 
             <Col md={6}>
@@ -23,8 +23,8 @@ const Cliente = (props) => {
                     type="text"
                     label="Cliente Login"
                     name="login"
-                    placeholder="Cliente login"
-                    onChange={props.onChange} />
+                    value={props.login}
+                    placeholder="Cliente login" />
             </Col>
         </span>
     )
@@ -39,7 +39,7 @@ const DadosBasicos = (props) => {
                     type="text"
                     label="Nome do grupo"
                     name="nomeGrupo"
-                    placeholder="Nome do grupo"
+                    value={props.nomeGrupo}
                     onChange={props.onChange} />
             </Col>
 
@@ -49,6 +49,7 @@ const DadosBasicos = (props) => {
                     type="date"
                     label="Início do consumo"
                     name="inicioConsumo"
+                    value={props.inicioConsumo}
                     onChange={props.onChange} />
             </Col>
 
@@ -58,6 +59,7 @@ const DadosBasicos = (props) => {
                     type="date"
                     label="Fim do consumo"
                     name="fimConsumo"
+                    value={props.fimConsumo}
                     onChange={props.onChange} />
             </Col>
 
@@ -67,6 +69,7 @@ const DadosBasicos = (props) => {
                     type="select"
                     label="Bloqueado"
                     name="bloqueado"
+                    value={props.bloqueado}
                     options={["SIM", "NAO"]}
                     onChange={props.onChange} />
             </Col>
@@ -77,6 +80,7 @@ const DadosBasicos = (props) => {
                     type="select"
                     label="Status ativo"
                     name="tipoGrupo"
+                    value={props.status}
                     options={["CLIENTE", "FUNCIONARIO", "TESTE", "OUTROS"]}
                     onChange={props.onChange} />
             </Col>
@@ -87,6 +91,7 @@ const DadosBasicos = (props) => {
                     type="select"
                     label="Acesso a WebService"
                     name="acessoWS"
+                    value={props.webService}
                     options={["SIM", "NAO"]}
                     onChange={props.onChange} />
             </Col>
@@ -97,6 +102,7 @@ const DadosBasicos = (props) => {
                     type="text"
                     label="Ip's de acesso"
                     name="ipAcesso"
+                    value={props.ips}
                     placeholder="0.0.0.0, 0.0.0.0, 0.0.0.0"
                     onChange={props.onChange} />
             </Col>
@@ -113,6 +119,7 @@ const Horario = (props) => {
                     type="select"
                     label="Bloquear por horário?"
                     name="bloquearHorario"
+                    value={props.bloquearHorario}
                     options={["SIM", "NAO"]}
                     onChange={props.onChange} />
             </Col>
@@ -123,6 +130,7 @@ const Horario = (props) => {
                     type="time"
                     label="Acessar das 00:00"
                     name="acessarDas"
+                    value={props.horarioInicio}
                     onChange={props.onChange} />
             </Col>
 
@@ -132,6 +140,7 @@ const Horario = (props) => {
                     type="time"
                     label="Acessar até às 00:00"
                     name="acessarAte"
+                    value={props.horarioFim}
                     onChange={props.onChange} />
             </Col>
 
@@ -141,7 +150,9 @@ const Horario = (props) => {
                     label="Selecionar os dias que poderá acessar"
                     center={true}
                     inline={true}
-                    options={["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"]} />
+                    values={props.dias}
+                    options={["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"]}
+                    onChange={props.onChange} />
             </Col>
 
         </span>
@@ -157,6 +168,7 @@ const LimitacaoTotal = (props) => {
                     type="number"
                     label="Limite de quantidade"
                     name="limite"
+                    value={props.limite}
                     placeholder="0"
                     onChange={props.onChange} />
             </Col>
@@ -167,6 +179,7 @@ const LimitacaoTotal = (props) => {
                     type="select"
                     label="Tipo da limitação"
                     name="tipoLimitacao"
+                    value={props.tipoLimitacao}
                     options={["INATIVO", "CONSUMO"]}
                     onChange={props.onChange} />
             </Col>
@@ -177,6 +190,7 @@ const LimitacaoTotal = (props) => {
                     type="select"
                     label="Período da limitação"
                     name="periodoLimitacao"
+                    value={props.periodoLimitacao}
                     options={["AVULSO", "MENSAL"]}
                     onChange={props.onChange} />
             </Col>
@@ -194,20 +208,20 @@ const LimitacaoTotal = (props) => {
 }
 
 const LimitacaoProduto = (props) => {
-    let produtos = ["Localize", "Veículo", "Consig+", "Crédito", "FocoFiscal", "Venda+", "SMS", "BaseCerta"];
     return (
             <Table>
                 <tbody>
-                    {produtos.map((produto,index) => {
+                    {props.produtos.map((produto,index) => {
                         return (
                             <tr key={index}>
-                                <td><h3>{produto}</h3></td>
+                                <td><h3>{produto.label}</h3></td>
                                 <td>
                                     <FieldGroup
                                         id="produtoQuantidade"
                                         type="number"
                                         label="Quantidade"
                                         name="produtoQuantidade"
+                                        value={produto.quantidade}
                                         onChange={props.onChange} />
                                 </td>
 
@@ -217,6 +231,7 @@ const LimitacaoProduto = (props) => {
                                         type="select"
                                         label="Tipo da limitação"
                                         name="tipoLimitacaoProduto"
+                                        value={produto.tipoLimitacao}
                                         options={["INATIVO", "CONSUMO"]}
                                         onChange={props.onChange} />
                                 </td>
@@ -227,6 +242,7 @@ const LimitacaoProduto = (props) => {
                                         type="select"
                                         label="Período da limitação"
                                         name="periodoLimitacaoProduto"
+                                        value={produto.periodoLimitacao}
                                         options={["AVULSO", "MENSAL"]}
                                         onChange={props.onChange} />
                                 </td>
@@ -247,11 +263,11 @@ const Observacoes = (props) => {
                 label="Observações"
                 placeholder="Escreva alguma observação sobre o usuário"
                 name="observacoes"
+                value={props.obs}
                 onChange={props.onChange} />
         </Col>
     )
 }
-
 
 class EditarGrupo extends Component {
     onFormSubmit = (evt) => {
@@ -267,13 +283,16 @@ class EditarGrupo extends Component {
     }
     
     render() {
+        const grupo = this.props.grupoInfo;
         const editar = [
-            {label: "Cliente", form: <Cliente onChange={this.onChange} />},
-            {label: "Dados Básicos", form: <DadosBasicos onChange={this.onChange} />},
-            {label: "Horário", form: <Horario onChange={this.onChange} />},
-            {label: "Limitação total", form: <LimitacaoTotal onChange={this.onChange} />},
-            {label: "Limitação por produto", form: <LimitacaoProduto onChange={this.onChange} />},
-            {label: "Observações", form: <Observacoes onChange={this.onChange} />}
+            {label: "Cliente", form: <Cliente onChange={this.onChange} razaoSocial={grupo.pessoaVO.razaoSocial} login={grupo.pessoaVO.descricao} />},
+            {label: "Dados Básicos", form: <DadosBasicos onChange={this.onChange} nomeGrupo={grupo.descricao} inicioConsumo={grupo.dataInicio} fimConsumo={grupo.dataFinal} bloqueado={grupo.statusBloqueado} status={grupo.statusAtivo} webService={grupo.wsStatus}
+            ips={grupo.ipAcesso}/>},
+            {label: "Horário", form: <Horario onChange={this.onChange} bloquearHorario={grupo.statusAccessTime} horarioInicio={grupo.horaIniAccessTime} horarioFim={grupo.horaFimAccessTime} dias={[grupo.accessTimeSeg, grupo.accessTimeTer, grupo.accessTimeQua, grupo.accessTimeQui, grupo.accessTimeSex, grupo.accessTimeSab, grupo.accessTimeDom]} />},
+            {label: "Limitação total", form: <LimitacaoTotal onChange={this.onChange} limite={grupo.limiteValor} periodoLimitacao={grupo.periodoLimitacao} tipoLimitacao={grupo.tipoLimitacao} />},
+            {label: "Limitação por produto", form: <LimitacaoProduto onChange={this.onChange} produtos={[
+                {label:"Localize", quantidade:grupo.localizeLimiteValor, tipoLimitacao:grupo.localizeTipoLimitacao, periodoLimitacao:grupo.localizePeriodoLimitacao}]} />},
+            {label: "Observações", form: <Observacoes onChange={this.onChange} obs={grupo.obs} />}
         ]
 
         return (

@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import { Col, Form, FormControl, Button, InputGroup } from "react-bootstrap";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { Col, Form, FormControl, Button, InputGroup, Pagination } from "react-bootstrap";
+
+import { getGruposCadastro, loadingCadastro, getUsersCadastro } from "../../actions/actionsCadastro";
 
 import Modal from "../../components/Modal";
 import Panel from "../../components/panel/Panel";
@@ -14,27 +18,6 @@ import EditarGrupo from "./EditarGrupo";
 import NovoUsuario from "./NovoUsuario";
 import AtivarConsultas from "./AtivarConsultas";
 
-const groups = [
-    {status: true, group: "GRUPO_ADM"},
-    {status: true, group: "GRUPO_USUARIOS_LOCALIZE"},
-    {status: false, group: "GRUPO_EMPRESA"},
-    {status: true, group: "GRUPO_GERENTES"},
-    {status: false, group: "GRUPO_TERCEIRIZADO"},
-    {status: true, group: "GRUPO_RESTRITO"}
-];
-
-const users = [
-    {status: true, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
-    {status: true, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
-    {status: false, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
-    {status: false, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
-    {status: true, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
-    {status: true, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
-    {status: false, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
-    {status: false, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"},
-    {status: true, user: "GRUPO_ADM", group: "GRUPO_USUARIOS_LOCALIZE"}
-]
-
 class Cadastro extends Component {
     constructor() {
         super();
@@ -48,8 +31,15 @@ class Cadastro extends Component {
             showModal: false,
             screenToShow: "",
             screenTitle: "",
-            sizeModal: ""
+            sizeModal: "",
+            activePage: 1
         }
+    }
+
+    componentWillMount() {
+        this.props.loadingCadastro();
+        this.props.getGruposCadastro();
+        this.props.getUsersCadastro();
     }
 
     closeModal = () => {
@@ -80,6 +70,12 @@ class Cadastro extends Component {
             screenTitle: title,
             sizeModal: size
         })
+    }
+
+    handleSelect = (eventKey) => {
+        this.setState({
+            activePage: eventKey
+        });
     }
 
     renderForm = () => {
@@ -158,14 +154,14 @@ class Cadastro extends Component {
 
     renderGroupPanel = () => {
         return (
-            <Panel title="GRUPOS" qtdTotal={[{qtd:groups.length, icon:"fa fa-users"}]}>
+            <Panel title="GRUPOS" qtdTotal={[{qtd:this.props.grupos.length, icon:"fa fa-users"}]}>
                 <Table
                     fields={
                         ["","Status", "Grupo", "Ações"]
                     }
                 >
                     <tbody>
-                        {groups.map((group,index) => {
+                        {this.props.grupos.map((group,index) => {
                             return (
                                 <tr key={index}>
                                     <td></td>
@@ -173,17 +169,17 @@ class Cadastro extends Component {
                                         <i
                                             style={{borderRadius:5}}
                                             className="fa fa-circle-thin"
-                                            id={group.status ? "userActivated" : "userDeactivated"}
+                                            id={group.statusBloqueado == "NAO" ? "userActivated" : "userDeactivated"}
                                             aria-hidden="true">
                                         </i>   
                                     </td>
-                                    <td>{group.group}</td>
+                                    <td>{group.descricao}</td>
                                     <td>
-                                        <Button onClick={() => this.openModal(<EditarGrupo cancel={this.closeModal} />, "Editar grupo", "large")}>
+                                        <Button onClick={() => this.openModal(<EditarGrupo cancel={this.closeModal} grupoInfo={group} />, "Editar grupo", "large")}>
                                             <i className="fa fa-pencil" />
                                         </Button>
                                         {'   '}
-                                        <Button onClick={() => this.openModal(<NovoUsuario cancel={this.closeModal} usuario={{boleto:"NAO", dossie:"NAO"}}/>, "Novo usuário do grupo " + group.group)}>
+                                        <Button onClick={() => this.openModal(<NovoUsuario cancel={this.closeModal} usuario={{boleto:"NAO", dossie:"NAO"}}/>, "Novo usuário do grupo " + group.descricao)}>
                                             <i className="fa fa-user-plus" />
                                         </Button>
                                         {'   '}
@@ -206,14 +202,14 @@ class Cadastro extends Component {
 
     renderUsersPanel = () => {
         return (
-            <Panel title="USUÁRIOS" qtdTotal={[{qtd:users.length, icon:"fa fa-user"}]}>
+            <Panel title="USUÁRIOS" qtdTotal={[{qtd:this.props.users.length, icon:"fa fa-user"}]}>
                 <Table
                     fields={
                         ["","Status", "Usuário", "Grupo", "Ações"]
                     }
                 >
                     <tbody>
-                        {users.map((user,index) => {
+                        {this.props.users.map((user,index) => {
                             return (
                                 <tr key={index}>
                                     <td></td>
@@ -221,12 +217,12 @@ class Cadastro extends Component {
                                         <i
                                             style={{borderRadius:5}}
                                             className="fa fa-circle-thin"
-                                            id={user.status ? "userActivated" : "userDeactivated"}
+                                            id={user.statusAtivo == "SIM" ? "userActivated" : "userDeactivated"}
                                             aria-hidden="true">
                                         </i>   
                                     </td>
-                                    <td>{user.user}</td>
-                                    <td>{user.group}</td>
+                                    <td>{user.usuario}</td>
+                                    <td>{user.grupoUsuarioVO.descricao}</td>
                                     <td>
                                         <Button onClick={() => this.openModal(<EditarUsuario/>, "Editar usuário")}>
                                             <i className="fa fa-pencil" />
@@ -243,7 +239,14 @@ class Cadastro extends Component {
                             
                         </tr>
                     </tbody>
-                </Table>                    
+                </Table>
+                <Col md={12} className="text-center">
+                    <Pagination
+                        bsSize="medium"
+                        items={2}
+                        activePage={this.state.activePage}
+                        onSelect={this.handleSelect} />
+                </Col>          
             </Panel>
         )
     }
@@ -278,4 +281,22 @@ class Cadastro extends Component {
     }
 }
 
-export default Cadastro;
+function mapStateToProps(state) {
+    console.log("STATE", state.cadastro)
+	return {
+        grupos: state.cadastro.grupos,
+        users: state.cadastro.users,
+        loading: state.cadastro.loading
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({
+			getGruposCadastro,
+            getUsersCadastro,
+            loadingCadastro
+		},
+		dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cadastro);
