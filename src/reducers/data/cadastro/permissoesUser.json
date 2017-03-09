@@ -1,0 +1,383 @@
+{
+    "permissoes": [
+        {
+            "userId": 0,
+            "permissoes": {
+                "bloqueioRelatorios": [
+                    {"status":true, "label":"Não extrair relatórios de informações de clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações de grupos"},
+                    {"status":true, "label":"Não extrair relatórios de informações de usuários"},
+                    {"status":true, "label":"Não extrair relatórios de informações de contato dos clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações dos valores das consultas"},
+                    {"status":true, "label":"Não extrair relatórios de consumo de Localize, Crédito, Veículo e Foco Fiscal"},
+                    {"status":true, "label":"Não extrair relatórios dos envios de sms"},
+                    {"status":true, "label":"Não extrair relatórios das informações do Base certa"},
+                    {"status":true, "label":"Não extrair relatórios do consumo total de todos os produtos"},
+                    {"status":true, "label":"Não extrair relatórios das informações de Cancelamento"},
+                    {"status":true, "label":"Não extrair relatórios das informações dos Clientes x Carteira"},
+                    {"status":true, "label":"Não extrair relatórios das informações do ranking de vendas"}
+                ],
+                "bloqueioAcessos": [
+                    {"status":true, "label":"Não inserir/alterar clientes, contratos e contatos"},
+                    {"status":true, "label":"Não visualizar lista de clientes em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de grupos em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de usuários em cadastro"},
+                    {"status":true, "label":"Não visualizar o Histórico de Faturamento por filtro de cliente"},
+                    {"status":true, "label":"Não visualizar a Prévia de Faturamento por filtro de cliente"}
+                ]
+            }
+        },
+        {
+            "userId": 1,
+            "permissoes": {
+                "bloqueioRelatorios": [
+                    {"status":true, "label":"Não extrair relatórios de informações de clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações de grupos"},
+                    {"status":true, "label":"Não extrair relatórios de informações de usuários"},
+                    {"status":true, "label":"Não extrair relatórios de informações de contato dos clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações dos valores das consultas"},
+                    {"status":true, "label":"Não extrair relatórios de consumo de Localize, Crédito, Veículo e Foco Fiscal"},
+                    {"status":true, "label":"Não extrair relatórios dos envios de sms"},
+                    {"status":true, "label":"Não extrair relatórios das informações do Base certa"},
+                    {"status":true, "label":"Não extrair relatórios do consumo total de todos os produtos"},
+                    {"status":true, "label":"Não extrair relatórios das informações de Cancelamento"},
+                    {"status":true, "label":"Não extrair relatórios das informações dos Clientes x Carteira"},
+                    {"status":true, "label":"Não extrair relatórios das informações do ranking de vendas"}
+                ],
+                "bloqueioAcessos": [
+                    {"status":true, "label":"Não inserir/alterar clientes, contratos e contatos"},
+                    {"status":true, "label":"Não visualizar lista de clientes em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de grupos em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de usuários em cadastro"},
+                    {"status":true, "label":"Não visualizar o Histórico de Faturamento por filtro de cliente"},
+                    {"status":true, "label":"Não visualizar a Prévia de Faturamento por filtro de cliente"}
+                ]
+            }
+        },
+        {
+            "userId": 2,
+            "permissoes": {
+                "bloqueioRelatorios": [
+                    {"status":true, "label":"Não extrair relatórios de informações de clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações de grupos"},
+                    {"status":true, "label":"Não extrair relatórios de informações de usuários"},
+                    {"status":true, "label":"Não extrair relatórios de informações de contato dos clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações dos valores das consultas"},
+                    {"status":true, "label":"Não extrair relatórios de consumo de Localize, Crédito, Veículo e Foco Fiscal"},
+                    {"status":true, "label":"Não extrair relatórios dos envios de sms"},
+                    {"status":true, "label":"Não extrair relatórios das informações do Base certa"},
+                    {"status":true, "label":"Não extrair relatórios do consumo total de todos os produtos"},
+                    {"status":true, "label":"Não extrair relatórios das informações de Cancelamento"},
+                    {"status":true, "label":"Não extrair relatórios das informações dos Clientes x Carteira"},
+                    {"status":true, "label":"Não extrair relatórios das informações do ranking de vendas"}
+                ],
+                "bloqueioAcessos": [
+                    {"status":true, "label":"Não inserir/alterar clientes, contratos e contatos"},
+                    {"status":true, "label":"Não visualizar lista de clientes em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de grupos em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de usuários em cadastro"},
+                    {"status":true, "label":"Não visualizar o Histórico de Faturamento por filtro de cliente"},
+                    {"status":true, "label":"Não visualizar a Prévia de Faturamento por filtro de cliente"}
+                ]
+            }
+        },
+        {
+            "userId": 3,
+            "permissoes": {
+                "bloqueioRelatorios": [
+                    {"status":true, "label":"Não extrair relatórios de informações de clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações de grupos"},
+                    {"status":true, "label":"Não extrair relatórios de informações de usuários"},
+                    {"status":true, "label":"Não extrair relatórios de informações de contato dos clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações dos valores das consultas"},
+                    {"status":true, "label":"Não extrair relatórios de consumo de Localize, Crédito, Veículo e Foco Fiscal"},
+                    {"status":true, "label":"Não extrair relatórios dos envios de sms"},
+                    {"status":true, "label":"Não extrair relatórios das informações do Base certa"},
+                    {"status":true, "label":"Não extrair relatórios do consumo total de todos os produtos"},
+                    {"status":true, "label":"Não extrair relatórios das informações de Cancelamento"},
+                    {"status":true, "label":"Não extrair relatórios das informações dos Clientes x Carteira"},
+                    {"status":true, "label":"Não extrair relatórios das informações do ranking de vendas"}
+                ],
+                "bloqueioAcessos": [
+                    {"status":true, "label":"Não inserir/alterar clientes, contratos e contatos"},
+                    {"status":true, "label":"Não visualizar lista de clientes em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de grupos em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de usuários em cadastro"},
+                    {"status":true, "label":"Não visualizar o Histórico de Faturamento por filtro de cliente"},
+                    {"status":true, "label":"Não visualizar a Prévia de Faturamento por filtro de cliente"}
+                ]
+            }
+        },
+        {
+            "userId": 4,
+            "permissoes": {
+                "bloqueioRelatorios": [
+                    {"status":true, "label":"Não extrair relatórios de informações de clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações de grupos"},
+                    {"status":true, "label":"Não extrair relatórios de informações de usuários"},
+                    {"status":true, "label":"Não extrair relatórios de informações de contato dos clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações dos valores das consultas"},
+                    {"status":true, "label":"Não extrair relatórios de consumo de Localize, Crédito, Veículo e Foco Fiscal"},
+                    {"status":true, "label":"Não extrair relatórios dos envios de sms"},
+                    {"status":true, "label":"Não extrair relatórios das informações do Base certa"},
+                    {"status":true, "label":"Não extrair relatórios do consumo total de todos os produtos"},
+                    {"status":true, "label":"Não extrair relatórios das informações de Cancelamento"},
+                    {"status":true, "label":"Não extrair relatórios das informações dos Clientes x Carteira"},
+                    {"status":true, "label":"Não extrair relatórios das informações do ranking de vendas"}
+                ],
+                "bloqueioAcessos": [
+                    {"status":true, "label":"Não inserir/alterar clientes, contratos e contatos"},
+                    {"status":true, "label":"Não visualizar lista de clientes em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de grupos em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de usuários em cadastro"},
+                    {"status":true, "label":"Não visualizar o Histórico de Faturamento por filtro de cliente"},
+                    {"status":true, "label":"Não visualizar a Prévia de Faturamento por filtro de cliente"}
+                ]
+            }
+        },
+        {
+            "userId": 5,
+            "permissoes": {
+                "bloqueioRelatorios": [
+                    {"status":true, "label":"Não extrair relatórios de informações de clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações de grupos"},
+                    {"status":true, "label":"Não extrair relatórios de informações de usuários"},
+                    {"status":true, "label":"Não extrair relatórios de informações de contato dos clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações dos valores das consultas"},
+                    {"status":true, "label":"Não extrair relatórios de consumo de Localize, Crédito, Veículo e Foco Fiscal"},
+                    {"status":true, "label":"Não extrair relatórios dos envios de sms"},
+                    {"status":true, "label":"Não extrair relatórios das informações do Base certa"},
+                    {"status":true, "label":"Não extrair relatórios do consumo total de todos os produtos"},
+                    {"status":true, "label":"Não extrair relatórios das informações de Cancelamento"},
+                    {"status":true, "label":"Não extrair relatórios das informações dos Clientes x Carteira"},
+                    {"status":true, "label":"Não extrair relatórios das informações do ranking de vendas"}
+                ],
+                "bloqueioAcessos": [
+                    {"status":true, "label":"Não inserir/alterar clientes, contratos e contatos"},
+                    {"status":true, "label":"Não visualizar lista de clientes em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de grupos em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de usuários em cadastro"},
+                    {"status":true, "label":"Não visualizar o Histórico de Faturamento por filtro de cliente"},
+                    {"status":true, "label":"Não visualizar a Prévia de Faturamento por filtro de cliente"}
+                ]
+            }
+        },
+        {
+            "userId": 6,
+            "permissoes": {
+                "bloqueioRelatorios": [
+                    {"status":true, "label":"Não extrair relatórios de informações de clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações de grupos"},
+                    {"status":true, "label":"Não extrair relatórios de informações de usuários"},
+                    {"status":true, "label":"Não extrair relatórios de informações de contato dos clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações dos valores das consultas"},
+                    {"status":true, "label":"Não extrair relatórios de consumo de Localize, Crédito, Veículo e Foco Fiscal"},
+                    {"status":true, "label":"Não extrair relatórios dos envios de sms"},
+                    {"status":true, "label":"Não extrair relatórios das informações do Base certa"},
+                    {"status":true, "label":"Não extrair relatórios do consumo total de todos os produtos"},
+                    {"status":true, "label":"Não extrair relatórios das informações de Cancelamento"},
+                    {"status":true, "label":"Não extrair relatórios das informações dos Clientes x Carteira"},
+                    {"status":true, "label":"Não extrair relatórios das informações do ranking de vendas"}
+                ],
+                "bloqueioAcessos": [
+                    {"status":true, "label":"Não inserir/alterar clientes, contratos e contatos"},
+                    {"status":true, "label":"Não visualizar lista de clientes em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de grupos em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de usuários em cadastro"},
+                    {"status":true, "label":"Não visualizar o Histórico de Faturamento por filtro de cliente"},
+                    {"status":true, "label":"Não visualizar a Prévia de Faturamento por filtro de cliente"}
+                ]
+            }
+        },
+        {
+            "userId": 7,
+            "permissoes": {
+                "bloqueioRelatorios": [
+                    {"status":true, "label":"Não extrair relatórios de informações de clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações de grupos"},
+                    {"status":true, "label":"Não extrair relatórios de informações de usuários"},
+                    {"status":true, "label":"Não extrair relatórios de informações de contato dos clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações dos valores das consultas"},
+                    {"status":true, "label":"Não extrair relatórios de consumo de Localize, Crédito, Veículo e Foco Fiscal"},
+                    {"status":true, "label":"Não extrair relatórios dos envios de sms"},
+                    {"status":true, "label":"Não extrair relatórios das informações do Base certa"},
+                    {"status":true, "label":"Não extrair relatórios do consumo total de todos os produtos"},
+                    {"status":true, "label":"Não extrair relatórios das informações de Cancelamento"},
+                    {"status":true, "label":"Não extrair relatórios das informações dos Clientes x Carteira"},
+                    {"status":true, "label":"Não extrair relatórios das informações do ranking de vendas"}
+                ],
+                "bloqueioAcessos": [
+                    {"status":true, "label":"Não inserir/alterar clientes, contratos e contatos"},
+                    {"status":true, "label":"Não visualizar lista de clientes em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de grupos em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de usuários em cadastro"},
+                    {"status":true, "label":"Não visualizar o Histórico de Faturamento por filtro de cliente"},
+                    {"status":true, "label":"Não visualizar a Prévia de Faturamento por filtro de cliente"}
+                ]
+            }
+        },
+        {
+            "userId": 8,
+            "permissoes": {
+                "bloqueioRelatorios": [
+                    {"status":true, "label":"Não extrair relatórios de informações de clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações de grupos"},
+                    {"status":true, "label":"Não extrair relatórios de informações de usuários"},
+                    {"status":true, "label":"Não extrair relatórios de informações de contato dos clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações dos valores das consultas"},
+                    {"status":true, "label":"Não extrair relatórios de consumo de Localize, Crédito, Veículo e Foco Fiscal"},
+                    {"status":true, "label":"Não extrair relatórios dos envios de sms"},
+                    {"status":true, "label":"Não extrair relatórios das informações do Base certa"},
+                    {"status":true, "label":"Não extrair relatórios do consumo total de todos os produtos"},
+                    {"status":true, "label":"Não extrair relatórios das informações de Cancelamento"},
+                    {"status":true, "label":"Não extrair relatórios das informações dos Clientes x Carteira"},
+                    {"status":true, "label":"Não extrair relatórios das informações do ranking de vendas"}
+                ],
+                "bloqueioAcessos": [
+                    {"status":true, "label":"Não inserir/alterar clientes, contratos e contatos"},
+                    {"status":true, "label":"Não visualizar lista de clientes em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de grupos em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de usuários em cadastro"},
+                    {"status":true, "label":"Não visualizar o Histórico de Faturamento por filtro de cliente"},
+                    {"status":true, "label":"Não visualizar a Prévia de Faturamento por filtro de cliente"}
+                ]
+            }
+        },
+        {
+            "userId": 9,
+            "permissoes": {
+                "bloqueioRelatorios": [
+                    {"status":true, "label":"Não extrair relatórios de informações de clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações de grupos"},
+                    {"status":true, "label":"Não extrair relatórios de informações de usuários"},
+                    {"status":true, "label":"Não extrair relatórios de informações de contato dos clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações dos valores das consultas"},
+                    {"status":true, "label":"Não extrair relatórios de consumo de Localize, Crédito, Veículo e Foco Fiscal"},
+                    {"status":true, "label":"Não extrair relatórios dos envios de sms"},
+                    {"status":true, "label":"Não extrair relatórios das informações do Base certa"},
+                    {"status":true, "label":"Não extrair relatórios do consumo total de todos os produtos"},
+                    {"status":true, "label":"Não extrair relatórios das informações de Cancelamento"},
+                    {"status":true, "label":"Não extrair relatórios das informações dos Clientes x Carteira"},
+                    {"status":true, "label":"Não extrair relatórios das informações do ranking de vendas"}
+                ],
+                "bloqueioAcessos": [
+                    {"status":true, "label":"Não inserir/alterar clientes, contratos e contatos"},
+                    {"status":true, "label":"Não visualizar lista de clientes em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de grupos em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de usuários em cadastro"},
+                    {"status":true, "label":"Não visualizar o Histórico de Faturamento por filtro de cliente"},
+                    {"status":true, "label":"Não visualizar a Prévia de Faturamento por filtro de cliente"}
+                ]
+            }
+        },
+        {
+            "userId": 10,
+            "permissoes": {
+                "bloqueioRelatorios": [
+                    {"status":true, "label":"Não extrair relatórios de informações de clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações de grupos"},
+                    {"status":true, "label":"Não extrair relatórios de informações de usuários"},
+                    {"status":true, "label":"Não extrair relatórios de informações de contato dos clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações dos valores das consultas"},
+                    {"status":true, "label":"Não extrair relatórios de consumo de Localize, Crédito, Veículo e Foco Fiscal"},
+                    {"status":true, "label":"Não extrair relatórios dos envios de sms"},
+                    {"status":true, "label":"Não extrair relatórios das informações do Base certa"},
+                    {"status":true, "label":"Não extrair relatórios do consumo total de todos os produtos"},
+                    {"status":true, "label":"Não extrair relatórios das informações de Cancelamento"},
+                    {"status":true, "label":"Não extrair relatórios das informações dos Clientes x Carteira"},
+                    {"status":true, "label":"Não extrair relatórios das informações do ranking de vendas"}
+                ],
+                "bloqueioAcessos": [
+                    {"status":true, "label":"Não inserir/alterar clientes, contratos e contatos"},
+                    {"status":true, "label":"Não visualizar lista de clientes em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de grupos em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de usuários em cadastro"},
+                    {"status":true, "label":"Não visualizar o Histórico de Faturamento por filtro de cliente"},
+                    {"status":true, "label":"Não visualizar a Prévia de Faturamento por filtro de cliente"}
+                ]
+            }
+        },
+        {
+            "userId": 11,
+            "permissoes": {
+                "bloqueioRelatorios": [
+                    {"status":true, "label":"Não extrair relatórios de informações de clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações de grupos"},
+                    {"status":true, "label":"Não extrair relatórios de informações de usuários"},
+                    {"status":true, "label":"Não extrair relatórios de informações de contato dos clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações dos valores das consultas"},
+                    {"status":true, "label":"Não extrair relatórios de consumo de Localize, Crédito, Veículo e Foco Fiscal"},
+                    {"status":true, "label":"Não extrair relatórios dos envios de sms"},
+                    {"status":true, "label":"Não extrair relatórios das informações do Base certa"},
+                    {"status":true, "label":"Não extrair relatórios do consumo total de todos os produtos"},
+                    {"status":true, "label":"Não extrair relatórios das informações de Cancelamento"},
+                    {"status":true, "label":"Não extrair relatórios das informações dos Clientes x Carteira"},
+                    {"status":true, "label":"Não extrair relatórios das informações do ranking de vendas"}
+                ],
+                "bloqueioAcessos": [
+                    {"status":true, "label":"Não inserir/alterar clientes, contratos e contatos"},
+                    {"status":true, "label":"Não visualizar lista de clientes em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de grupos em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de usuários em cadastro"},
+                    {"status":true, "label":"Não visualizar o Histórico de Faturamento por filtro de cliente"},
+                    {"status":true, "label":"Não visualizar a Prévia de Faturamento por filtro de cliente"}
+                ]
+            }
+        },
+        {
+            "userId": 11,
+            "permissoes": {
+                "bloqueioRelatorios": [
+                    {"status":true, "label":"Não extrair relatórios de informações de clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações de grupos"},
+                    {"status":true, "label":"Não extrair relatórios de informações de usuários"},
+                    {"status":true, "label":"Não extrair relatórios de informações de contato dos clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações dos valores das consultas"},
+                    {"status":true, "label":"Não extrair relatórios de consumo de Localize, Crédito, Veículo e Foco Fiscal"},
+                    {"status":true, "label":"Não extrair relatórios dos envios de sms"},
+                    {"status":true, "label":"Não extrair relatórios das informações do Base certa"},
+                    {"status":true, "label":"Não extrair relatórios do consumo total de todos os produtos"},
+                    {"status":true, "label":"Não extrair relatórios das informações de Cancelamento"},
+                    {"status":true, "label":"Não extrair relatórios das informações dos Clientes x Carteira"},
+                    {"status":true, "label":"Não extrair relatórios das informações do ranking de vendas"}
+                ],
+                "bloqueioAcessos": [
+                    {"status":true, "label":"Não inserir/alterar clientes, contratos e contatos"},
+                    {"status":true, "label":"Não visualizar lista de clientes em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de grupos em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de usuários em cadastro"},
+                    {"status":true, "label":"Não visualizar o Histórico de Faturamento por filtro de cliente"},
+                    {"status":true, "label":"Não visualizar a Prévia de Faturamento por filtro de cliente"}
+                ]
+            }
+        },
+        {
+            "userId": 12,
+            "permissoes": {
+                "bloqueioRelatorios": [
+                    {"status":true, "label":"Não extrair relatórios de informações de clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações de grupos"},
+                    {"status":true, "label":"Não extrair relatórios de informações de usuários"},
+                    {"status":true, "label":"Não extrair relatórios de informações de contato dos clientes"},
+                    {"status":true, "label":"Não extrair relatórios de informações dos valores das consultas"},
+                    {"status":true, "label":"Não extrair relatórios de consumo de Localize, Crédito, Veículo e Foco Fiscal"},
+                    {"status":true, "label":"Não extrair relatórios dos envios de sms"},
+                    {"status":true, "label":"Não extrair relatórios das informações do Base certa"},
+                    {"status":true, "label":"Não extrair relatórios do consumo total de todos os produtos"},
+                    {"status":true, "label":"Não extrair relatórios das informações de Cancelamento"},
+                    {"status":true, "label":"Não extrair relatórios das informações dos Clientes x Carteira"},
+                    {"status":true, "label":"Não extrair relatórios das informações do ranking de vendas"}
+                ],
+                "bloqueioAcessos": [
+                    {"status":true, "label":"Não inserir/alterar clientes, contratos e contatos"},
+                    {"status":true, "label":"Não visualizar lista de clientes em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de grupos em cadastro"},
+                    {"status":true, "label":"Não visualizar lista de usuários em cadastro"},
+                    {"status":true, "label":"Não visualizar o Histórico de Faturamento por filtro de cliente"},
+                    {"status":true, "label":"Não visualizar a Prévia de Faturamento por filtro de cliente"}
+                ]
+            }
+        }
+  
+    ]
+}

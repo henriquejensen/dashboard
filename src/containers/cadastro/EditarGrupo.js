@@ -291,7 +291,16 @@ class EditarGrupo extends Component {
             {label: "Horário", form: <Horario onChange={this.onChange} bloquearHorario={grupo.statusAccessTime} horarioInicio={grupo.horaIniAccessTime} horarioFim={grupo.horaFimAccessTime} dias={[grupo.accessTimeSeg, grupo.accessTimeTer, grupo.accessTimeQua, grupo.accessTimeQui, grupo.accessTimeSex, grupo.accessTimeSab, grupo.accessTimeDom]} />},
             {label: "Limitação total", form: <LimitacaoTotal onChange={this.onChange} limite={grupo.limiteValor} periodoLimitacao={grupo.periodoLimitacao} tipoLimitacao={grupo.tipoLimitacao} />},
             {label: "Limitação por produto", form: <LimitacaoProduto onChange={this.onChange} produtos={[
-                {label:"Localize", quantidade:grupo.localizeLimiteValor, tipoLimitacao:grupo.localizeTipoLimitacao, periodoLimitacao:grupo.localizePeriodoLimitacao}]} />},
+                {label:"Localize", quantidade:grupo.localizeLimiteValor, tipoLimitacao:grupo.localizeTipoLimitacao, periodoLimitacao:grupo.localizePeriodoLimitacao},
+                {label:"SMS", quantidade:grupo.smsLimiteValor, tipoLimitacao:grupo.smsTipoLimitacao, periodoLimitacao:grupo.smsPeriodoLimitacao},
+                {label:"Crédito", quantidade:grupo.creditoLimiteValor, tipoLimitacao:grupo.creditoTipoLimitacao, periodoLimitacao:grupo.creditoPeriodoLimitacao},
+                {label:"Foco Fiscal", quantidade:grupo.focofiscalLimiteValor, tipoLimitacao:grupo.focofiscalTipoLimitacao, periodoLimitacao:grupo.focofiscalPeriodoLimitacao},
+                {label:"Base Certa", quantidade:grupo.bcLimiteValor, tipoLimitacao:grupo.bcTipoLimitacao, periodoLimitacao:grupo.bcPeriodoLimitacao},
+                {label:"Venda+", quantidade:grupo.vendaMaisLimiteValor, tipoLimitacao:grupo.vendaMaisTipoLimitacao, periodoLimitacao:grupo.vendaMaisPeriodoLimitacao},
+                {label:"Consig+", quantidade:grupo.consigLimiteValor, tipoLimitacao:grupo.consigTipoLimitacao, periodoLimitacao:grupo.consigPeriodoLimitacao},
+                {label:"Veículos", quantidade:grupo.veiculosLimiteValor, tipoLimitacao:grupo.veiculosTipoLimitacao, periodoLimitacao:grupo.veiculosPeriodoLimitacao}
+            
+            ]} />},
             {label: "Observações", form: <Observacoes onChange={this.onChange} obs={grupo.obs} />}
         ]
 

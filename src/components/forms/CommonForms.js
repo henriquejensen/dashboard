@@ -68,13 +68,9 @@ export const CheckboxGroup = (props) => {
     return (
         <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}} className={props.center ? "text-center": ""}>
             <ControlLabel>{props.label}</ControlLabel><br/>
-            {props.options.map((opt,index) => {
-                return (
-                    <Checkbox key={index} inline={props.inline} checked={props.values[index]}>
-                        {opt}
-                    </Checkbox>
-                )
-            })}
+            <Checkbox inline={props.inline} checked={props.checked}>
+                {props.text}
+            </Checkbox>
 
         </FormGroup>
     )

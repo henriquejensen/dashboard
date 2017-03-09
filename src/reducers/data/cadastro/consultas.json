@@ -1,0 +1,92 @@
+{
+    "consultas": [
+        {
+            "grupoId": 0,
+            "consultas": [
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA PF"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA NOME"},
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA PJ SOCIOS"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA TELEFONE"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA PJ"},
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA ENDERECO"}
+            ]
+        },
+        {
+            "grupoId": 1,
+            "consultas": [
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA PF"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA NOME"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA PJ SOCIOS"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA TELEFONE"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA PJ"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA ENDERECO"}
+            ]
+        },
+        {
+            "grupoId": 2,
+            "consultas": [
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA PF"},
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA NOME"},
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA PJ SOCIOS"},
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA TELEFONE"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA PJ"},
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA ENDERECO"}
+            ]
+        },
+        {
+            "grupoId": 3,
+            "consultas": [
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA PF"},
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA NOME"},
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA PJ SOCIOS"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA TELEFONE"},
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA PJ"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA ENDERECO"}
+            ]
+        },
+        {
+            "grupoId": 4,
+            "consultas": [
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA PF"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA NOME"},
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA PJ SOCIOS"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA TELEFONE"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA PJ"},
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA ENDERECO"}
+            ]
+        },
+        {
+            "grupoId": 5,
+            "consultas": [
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA PF"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA NOME"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA PJ SOCIOS"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA TELEFONE"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA PJ"},
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA ENDERECO"}
+            ]
+        },
+        {
+            "grupoId": 6,
+            "consultas": [
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA PF"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA NOME"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA PJ SOCIOS"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA TELEFONE"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA PJ"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA ENDERECO"}
+            ]
+        },
+        {
+            "grupoId": 7,
+            "consultas": [
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA PF"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA NOME"},
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA PJ SOCIOS"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA TELEFONE"},
+                {"ativado": false, "descricao": "LOCALIZE - CONSULTA PJ"},
+                {"ativado": true, "descricao": "LOCALIZE - CONSULTA ENDERECO"}
+            ]
+        }
+    ]
+}

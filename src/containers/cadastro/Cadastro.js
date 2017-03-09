@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Col, Form, FormControl, Button, InputGroup, Pagination } from "react-bootstrap";
 
-import { getGruposCadastro, loadingCadastro, getUsersCadastro } from "../../actions/actionsCadastro";
+import { getGruposCadastro, loadingCadastro, getUsersCadastro, getConsultasGrupo, getPermissoesUser } from "../../actions/actionsCadastro";
 
 import Modal from "../../components/Modal";
 import Panel from "../../components/panel/Panel";
@@ -183,7 +183,7 @@ class Cadastro extends Component {
                                             <i className="fa fa-user-plus" />
                                         </Button>
                                         {'   '}
-                                        <Button onClick={() => this.openModal(<AtivarConsultas cancel={this.closeModal}/>, "Ativar consultas")}>
+                                        <Button onClick={() => this.openModal(<AtivarConsultas cancel={this.closeModal} getConsultasGrupo={this.props.getConsultasGrupo} grupoId={group.id} consultas={this.props.consultas}/>, "Ativar consultas")}>
                                             <i className="fa fa-gear" />
                                         </Button>
                                     </td>
@@ -221,14 +221,14 @@ class Cadastro extends Component {
                                             aria-hidden="true">
                                         </i>   
                                     </td>
-                                    <td>{user.usuario}</td>
+                                    <td>{user.nome}</td>
                                     <td>{user.grupoUsuarioVO.descricao}</td>
                                     <td>
-                                        <Button onClick={() => this.openModal(<EditarUsuario/>, "Editar usuário")}>
+                                        <Button onClick={() => this.openModal(<EditarUsuario userInfo={user}/>, "Editar usuário")}>
                                             <i className="fa fa-pencil" />
                                         </Button>
                                         {'   '}
-                                        <Button onClick={() => this.openModal(<ConfigurarPermissoes cancel={this.closeModal}/>, "Configurar Permissões")}>
+                                        <Button onClick={() => this.openModal(<ConfigurarPermissoes cancel={this.closeModal} permissoes={this.props.permissoes} getPermissoesUser={this.props.getPermissoesUser} userId={user.id}/>, "Configurar Permissões")}>
                                             <i className="fa fa-list-alt" />
                                         </Button>
                                     </td>
@@ -285,6 +285,8 @@ function mapStateToProps(state) {
     console.log("STATE", state.cadastro)
 	return {
         grupos: state.cadastro.grupos,
+        consultas: state.cadastro.consultas,
+        permissoes: state.cadastro.permissoes,
         users: state.cadastro.users,
         loading: state.cadastro.loading
 	}
@@ -294,7 +296,9 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 			getGruposCadastro,
             getUsersCadastro,
-            loadingCadastro
+            getConsultasGrupo,
+            getPermissoesUser,
+            loadingCadastro,
 		},
 		dispatch);
 }

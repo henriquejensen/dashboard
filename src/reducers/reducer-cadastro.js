@@ -1,11 +1,15 @@
-import { GET_USERS_CADASTRO, GET_GROUPS_CADASTRO, LOADING_CADASTRO } from "../constants/constantsCadastro";
+import { GET_USERS_CADASTRO, GET_PERMISSOES_USER, GET_GROUPS_CADASTRO, GET_CONSULTAS_GRUPO, LOADING_CADASTRO } from "../constants/constantsCadastro";
 
 import groups from "./data/cadastro/grupos.json";
 import users from "./data/cadastro/users.json";
+import consultas from "./data/cadastro/consultas.json";
+import permissoesUser from "./data/cadastro/permissoesUser.json";
 
 const getInitialState = {
     grupos: [],
     users: [],
+    consultas: [],
+    permissoes: [],
     loading: false,
     error: false,
     msgn: ""
@@ -17,6 +21,8 @@ export default function(state=getInitialState, action) {
             return {
                 grupos: state.grupos,
                 users: state.users,
+                consultas: state.consultas,
+                permissoes: state.permissoes,
                 loading: true,
                 error: false,
                 msgn: "loading",
@@ -26,6 +32,8 @@ export default function(state=getInitialState, action) {
             return {
                 grupos: groups.grupos,
                 users: state.users,
+                consultas: state.consultas,
+                permissoes: state.permissoes,
                 loading: false,
                 error: false,
                 msgn: "groups",
@@ -35,6 +43,32 @@ export default function(state=getInitialState, action) {
             return {
                 grupos: state.grupos,
                 users: users.usuarios,
+                consultas: state.consultas,
+                permissoes: state.permissoes,
+                loading: false,
+                error: false,
+                msgn: "users",
+            }
+            
+        case GET_CONSULTAS_GRUPO:
+            let responseConsultas = getConsultaByIdGrupo(consultas.consultas, action.payload);
+            return {
+                grupos: state.grupos,
+                users: state.users,
+                consultas: responseConsultas ? responseConsultas.consultas : [],
+                permissoes: state.permissoes,
+                loading: false,
+                error: false,
+                msgn: "users",
+            }
+
+        case GET_PERMISSOES_USER:
+            let responsePermissoes = getPermissoesByIdUser(permissoesUser.permissoes, action.payload);
+            return {
+                grupos: state.grupos,
+                users: state.users,
+                consultas: state.consultas,
+                permissoes: responsePermissoes ? responsePermissoes.permissoes : [],
                 loading: false,
                 error: false,
                 msgn: "users",
@@ -42,4 +76,23 @@ export default function(state=getInitialState, action) {
     }
 
     return state;
+}
+
+function getPermissoesByIdUser(permissoesList, id) {
+    for(let i in permissoesList) {
+        if(permissoesList[i].userId == id)
+            return permissoesList[i];
+    }
+
+    return null;
+}
+
+
+function getConsultaByIdGrupo(consultaList, id) {
+    for(let i in consultaList) {
+        if(consultaList[i].grupoId == id)
+            return consultaList[i];
+    }
+
+    return null;
 }

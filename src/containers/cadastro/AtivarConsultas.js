@@ -5,15 +5,12 @@ import Table from "../../components/table/Table";
 
 class AtivarConsultas extends Component {
     state = {
-        descricaoConsultas: [
-            {ativado: true, descricao: "LOCALIZE - CONSULTA PF"},
-            {ativado: true, descricao: "LOCALIZE - CONSULTA NOME"},
-            {ativado: false, descricao: "LOCALIZE - CONSULTA PJ SOCIOS"},
-            {ativado: true, descricao: "LOCALIZE - CONSULTA TELEFONE"},
-            {ativado: true, descricao: "LOCALIZE - CONSULTA PJ"},
-            {ativado: true, descricao: "LOCALIZE - CONSULTA ENDERECO"}
-        ],
+        descricaoConsultas: this.props.consultas,
         checkedBox: []
+    }
+
+    componentWillMount() {
+        this.props.getConsultasGrupo(this.props.grupoId);
     }
 
     onFormSubmit = (evt) => {
