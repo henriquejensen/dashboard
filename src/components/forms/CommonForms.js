@@ -8,7 +8,7 @@ export const FieldGroup = (props) => {
             <FormControl
                 type={props.type}
                 name={props.name}
-                value={props.value}
+                value={props.value ? props.value : undefined}
                 placeholder={props.placeholder}
                 onChange={props.onChange}
             />

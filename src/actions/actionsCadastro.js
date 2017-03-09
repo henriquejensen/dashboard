@@ -1,4 +1,4 @@
-import { GET_USERS_CADASTRO, GET_PERMISSOES_USER, GET_GROUPS_CADASTRO, GET_CONSULTAS_GRUPO, LOADING_CADASTRO } from "../constants/constantsCadastro";
+import { GET_USERS_CADASTRO, GET_USERS_BY_GROUP_ID, GET_PERMISSOES_USER, GET_GROUPS_CADASTRO, GET_CONSULTAS_GRUPO, LOADING_CADASTRO } from "../constants/constantsCadastro";
 
 export function loadingCadastro() {
     return {
@@ -32,5 +32,12 @@ export function getPermissoesUser(userId) {
     return {
         type: GET_PERMISSOES_USER,
         payload: userId
+    }
+}
+
+export function getUsersByGroupId(grupoId) {
+    return {
+        type: GET_USERS_BY_GROUP_ID,
+        payload: grupoId
     }
 }

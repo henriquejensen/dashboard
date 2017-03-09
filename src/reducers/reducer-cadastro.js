@@ -1,4 +1,4 @@
-import { GET_USERS_CADASTRO, GET_PERMISSOES_USER, GET_GROUPS_CADASTRO, GET_CONSULTAS_GRUPO, LOADING_CADASTRO } from "../constants/constantsCadastro";
+import { GET_USERS_CADASTRO, GET_USERS_BY_GROUP_ID, GET_PERMISSOES_USER, GET_GROUPS_CADASTRO, GET_CONSULTAS_GRUPO, LOADING_CADASTRO } from "../constants/constantsCadastro";
 
 import groups from "./data/cadastro/grupos.json";
 import users from "./data/cadastro/users.json";
@@ -49,13 +49,24 @@ export default function(state=getInitialState, action) {
                 error: false,
                 msgn: "users",
             }
+
+        case GET_USERS_BY_GROUP_ID:
+            return {
+                grupos: state.grupos,
+                users: getUsersByGroupId(users.usuarios, action.payload),
+                consultas: state.consultas,
+                permissoes: state.permissoes,
+                loading: false,
+                error: false,
+                msgn: "usersGroup",
+            }
             
         case GET_CONSULTAS_GRUPO:
             let responseConsultas = getConsultaByIdGrupo(consultas.consultas, action.payload);
             return {
                 grupos: state.grupos,
                 users: state.users,
-                consultas: responseConsultas ? responseConsultas.consultas : [],
+                consultas: responseConsultas.consultas,
                 permissoes: state.permissoes,
                 loading: false,
                 error: false,
@@ -68,7 +79,7 @@ export default function(state=getInitialState, action) {
                 grupos: state.grupos,
                 users: state.users,
                 consultas: state.consultas,
-                permissoes: responsePermissoes ? responsePermissoes.permissoes : [],
+                permissoes: responsePermissoes.permissoes,
                 loading: false,
                 error: false,
                 msgn: "users",
@@ -78,13 +89,24 @@ export default function(state=getInitialState, action) {
     return state;
 }
 
+function getUsersByGroupId(users, groupId) {
+    let arrayUsers = [];
+    for(let i in users) {
+        if(users[i].grupoUsuarioVO.id == groupId) {
+            arrayUsers.push(users[i]);
+        }
+    }
+
+    return arrayUsers;
+}
+
 function getPermissoesByIdUser(permissoesList, id) {
     for(let i in permissoesList) {
         if(permissoesList[i].userId == id)
             return permissoesList[i];
     }
 
-    return null;
+    return [];
 }
 
 
@@ -94,5 +116,5 @@ function getConsultaByIdGrupo(consultaList, id) {
             return consultaList[i];
     }
 
-    return null;
+    return [];
 }

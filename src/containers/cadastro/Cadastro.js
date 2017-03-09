@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Col, Form, FormControl, Button, InputGroup, Pagination } from "react-bootstrap";
 
-import { getGruposCadastro, loadingCadastro, getUsersCadastro, getConsultasGrupo, getPermissoesUser } from "../../actions/actionsCadastro";
+import { getGruposCadastro, getUsersCadastro, getUsersByGroupId, getConsultasGrupo, getPermissoesUser, loadingCadastro } from "../../actions/actionsCadastro";
 
 import Modal from "../../components/Modal";
 import Panel from "../../components/panel/Panel";
@@ -32,7 +32,13 @@ class Cadastro extends Component {
             screenToShow: "",
             screenTitle: "",
             sizeModal: "",
-            activePage: 1
+            activePage: 1,
+            maxUsersShown: 10,
+            groupInfo: {
+                color: "#CBE6F3",
+                id: -1,
+                groupName: ""
+            }
         }
     }
 
@@ -74,7 +80,9 @@ class Cadastro extends Component {
 
     handleSelect = (eventKey) => {
         this.setState({
-            activePage: eventKey
+            activePage: eventKey,
+            firsElement: (eventKey-1)*this.state.maxUsersShown,
+            lastElement: (eventKey-1)*this.state.maxUsersShown+this.state.maxUsersShown
         });
     }
 
@@ -152,6 +160,32 @@ class Cadastro extends Component {
         )
     }
 
+    clickedOnUsersGroup = (groupId, groupName) => {
+        this.setState({
+            groupInfo: {
+                color: "#CBE6F3",
+                id: groupId,
+                groupName: groupName
+            }
+        });
+
+        this.props.getUsersByGroupId(groupId);
+    }
+
+    showAllUsers = () => {
+        this.setState({
+            firsElement: "",
+            lastElement: "",
+            groupInfo: {
+                color: "#CBE6F3",
+                id: -1,
+                groupName: ""
+            }
+        })
+
+        this.props.getUsersCadastro();
+    }
+
     renderGroupPanel = () => {
         return (
             <Panel title="GRUPOS" qtdTotal={[{qtd:this.props.grupos.length, icon:"fa fa-users"}]}>
@@ -163,7 +197,7 @@ class Cadastro extends Component {
                     <tbody>
                         {this.props.grupos.map((group,index) => {
                             return (
-                                <tr key={index}>
+                                <tr key={index} style={group.id == this.state.groupInfo.id ? {backgroundColor:this.state.groupInfo.color} : {}}>
                                     <td></td>
                                     <td>
                                         <i
@@ -186,6 +220,10 @@ class Cadastro extends Component {
                                         <Button onClick={() => this.openModal(<AtivarConsultas cancel={this.closeModal} getConsultasGrupo={this.props.getConsultasGrupo} grupoId={group.id} consultas={this.props.consultas}/>, "Ativar consultas")}>
                                             <i className="fa fa-gear" />
                                         </Button>
+                                        {'   '}
+                                        <Button onClick={() => this.clickedOnUsersGroup(group.id, group.descricao)}>
+                                            <i className="fa fa-users" />
+                                        </Button>
                                     </td>
                                 </tr>
                             )
@@ -201,15 +239,16 @@ class Cadastro extends Component {
     }
 
     renderUsersPanel = () => {
+        const totalPages = (this.props.users.length/this.state.maxUsersShown)+1;
         return (
-            <Panel title="USUÁRIOS" qtdTotal={[{qtd:this.props.users.length, icon:"fa fa-user"}]}>
+            <Panel title={"USUÁRIOS "+this.state.groupInfo.groupName}  qtdTotal={[{qtd:this.props.users.length, icon:"fa fa-user"}]}>
                 <Table
                     fields={
                         ["","Status", "Usuário", "Grupo", "Ações"]
                     }
                 >
                     <tbody>
-                        {this.props.users.map((user,index) => {
+                        {this.props.users.slice(this.state.firsElement, this.state.lastElement).map((user,index) => {
                             return (
                                 <tr key={index}>
                                     <td></td>
@@ -240,13 +279,15 @@ class Cadastro extends Component {
                         </tr>
                     </tbody>
                 </Table>
-                <Col md={12} className="text-center">
-                    <Pagination
-                        bsSize="medium"
-                        items={2}
-                        activePage={this.state.activePage}
-                        onSelect={this.handleSelect} />
-                </Col>          
+                {this.props.users.length > 10 ?
+                    <Col md={12} className="text-center">
+                        <Pagination
+                            bsSize="medium"
+                            items={totalPages}
+                            activePage={this.state.activePage}
+                            onSelect={this.handleSelect} />
+                    </Col>
+                : ""}    
             </Panel>
         )
     }
@@ -259,11 +300,15 @@ class Cadastro extends Component {
                 </Col>
                 {this.renderForm()}
 
-                <Col md={5}>
+                <Col md={6}>
+                    <Button onClick={this.showAllUsers} block>
+                        Mostrar todos os usuários
+                    </Button>
+                    <br/>
                     {this.renderGroupPanel()}
                 </Col>
 
-                <Col md={7}>
+                <Col md={6}>
                     {this.renderUsersPanel()}
                 </Col>
 
@@ -296,6 +341,7 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 			getGruposCadastro,
             getUsersCadastro,
+            getUsersByGroupId,
             getConsultasGrupo,
             getPermissoesUser,
             loadingCadastro,
