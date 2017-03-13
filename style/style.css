@@ -102,17 +102,12 @@ input {
     margin-right: 7px;
 }
 
-.glyphicon-hourglass {
-    color: yellow;
-    font-size: 16px
-}
-
-.glyphicon-remove {
+.my-warning {
     color: red;
     font-size: 16px
 }
 
-.glyphicon-ok {
+.my-ok {
     color: #5cb85c;
     font-size: 16px
 }

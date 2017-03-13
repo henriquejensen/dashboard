@@ -1,0 +1,56 @@
+{
+    "campanhas": [
+        {
+            "id": 1077907,
+            "cliente": "ASS_INTERNO_API_SP", 
+            "grupo": "API_SP",
+            "usuario": "GMX-ADM",
+            "campanha": "SMS Web Service",
+            "cadastro": "22/12/16 12:39",
+            "centroCusto": "Padrão",
+            "rota": [
+                "Curto", "Web Service"
+            ],
+            "status": 0
+        },
+        {
+            "id": 1077752,
+            "cliente": "ASS_INTERNO_API_SP", 
+            "grupo": "API_SP",
+            "usuario": "GMX-ADM",
+            "campanha": "SMS Web Service",
+            "cadastro": "22/12/16 12:39",
+            "centroCusto": "Padrão",
+            "rota": [
+                "Curto", "Web Service"
+            ],
+            "status": 1
+        },
+        {
+            "id": 1077648,
+            "cliente": "ASS_INTERNO_API_SP", 
+            "grupo": "API_SP",
+            "usuario": "GMX-ADM",
+            "campanha": "SMS Web Service",
+            "cadastro": "22/12/16 12:39",
+            "centroCusto": "Padrão",
+            "rota": [
+                "Curto", "Web Service"
+            ],
+            "status": 2
+        },
+        {
+            "id": 1077549,
+            "cliente": "ASS_INTERNO_API_SP", 
+            "grupo": "API_SP",
+            "usuario": "GMX-ADM",
+            "campanha": "SMS Web Service",
+            "cadastro": "22/12/16 12:39",
+            "centroCusto": "Padrão",
+            "rota": [
+                "Curto", "Web Service"
+            ],
+            "status": 0
+        }
+    ]
+}

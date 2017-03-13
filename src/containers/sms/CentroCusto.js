@@ -36,17 +36,7 @@ class CentroCusto extends Component {
                     ["ID", "Descrição", "Status", "Ações"]
                   }
                 >
-                  <tbody>
-                      {this.props.centroCustoSMS.length > 0 ? this.props.centroCustoSMS.map((datas, index) => {
-                        return <tr key={index}>
-                          {datas.map((data, i) =>{
-                              return <td key={i}>
-                                {data}
-                              </td>
-                          })}
-                        </tr>
-                      }) : <tr ><td colSpan="4" className="text-center">Nenhum registro encontrado</td></tr>}
-                  </tbody>
+
                 </Table>
 
                 <div className="col-md-12">

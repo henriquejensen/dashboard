@@ -18,7 +18,6 @@ class Respostas extends Component {
   componentDidMount() {
     document.title = "Assertiva > SMS > Respostas";
 
-    this.props.getRespostasSMS();
   }
 
   render() {
@@ -56,23 +55,7 @@ class Respostas extends Component {
                     ["Numero", "Data do Recebimento", "Rota", "Mensagem Enviada", "Mensagem Recebida", "Ações"]
                   }
                 >
-                  <tbody>
-                      {this.props.respostasSMS.length  > 0 ? this.props.respostasSMS.map((datas, index) => {
-                        return <tr key={index}>
-                          {datas.map((data, i) =>{
-                            if(i < 5) {
-                              return <td key={i}>
-                                {data}
-                              </td>
-                            } else {
-                              return <td key={i} className="acoes">
-                                    <i className="glyphicon glyphicon-share-alt" />
-                                  </td>
-                            }
-                          })}
-                        </tr>
-                      }) :  <tr ><td colSpan="8" className="text-center">Nenhum registro encontrado</td></tr>}
-                  </tbody>
+
                 </Table>
 
               </div>
@@ -85,16 +68,4 @@ class Respostas extends Component {
   }
 }
 
-
-function mapStateToProps(state) {
-  return {
-    respostasSMS: state.respostasSMS
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getRespostasSMS }, dispatch)
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Respostas);
+export default Respostas;

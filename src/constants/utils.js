@@ -17,6 +17,9 @@ export const LOGO_CREDITO = "../../../public/assertiva/logo-credito.png";
 export const ICON_CREDITO = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/icon-credito.png";
 export const LOGO_FOCOFISCAL = "../../../public/assertiva/logo-focofiscal.png";
 export const ICON_FOCOFISCAL = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/icon-focofiscal.png";
+export const LOGO_SMS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-sms.png";
+export const ICON_SMS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-sms.png";
+
 export const CHANGE_COLOR_MENU = "CHANGE_COLOR_MENU";
 
 export const CHANGE_LOCALIZE_TYPE = "CHANGE_LOCALIZE_TYPE";
