@@ -34,8 +34,8 @@ import modelCreditoCNPJ from "./data/jsonPadraoCreditoCNPJ.json";
 import lastQueries from "./data/lastQueries.json";
 
 const telefonesRelacionados = [
-	{documento: 5366214700, fixos: ["12345656", "98765423"], moveis: ["989876787"]},
-	{documento: 26675175807, fixos: ["55545656", "22265423"], moveis: ["456876787","997069496"]}
+	{documento: 5366214700, fixos: [{documento: 12345678901, posicao: 0, telefone: '193553625'},{documento: 12345678901, posicao: 0, telefone: '1948484848'}], moveis:[{documento: 12345678901, posicao: 0, telefone: '193553625'},{documento: 12345678901, posicao: 0, telefone: '1948484848'}]},
+	{documento: 26675175807, fixos: [{documento: 12345678901, posicao: 0, telefone: '55545656'},{documento: 12345678901, posicao: 0, telefone: '22265423'}], moveis:[{documento: 12345678901, posicao: 0, telefone: '456876787'},{documento: 12345678901, posicao: 0, telefone: '997069496'}]}
 ]
 
 const enderecosRelacionados = [
@@ -262,7 +262,6 @@ export default function(state = initialState, action) {
 				let posPessoaRelacionadaTelefones = searchPosPessoa(newState.response[posPessoaTelefone].pessoasRelacionadas, action.payload.documentoRelacionado);
 
 				//adiciona na pessoa relacionada os telefones encontrados
-				console.log("RELA", action.payload.documento, action.payload.documentoRelacionado, posPessoaTelefone, posPessoaRelacionadaTelefones, newState.response[posPessoaTelefone])
 				newState.response[posPessoaTelefone].pessoasRelacionadas[posPessoaRelacionadaTelefones].telefones = searchTelefonesRelacionados(telefonesRelacionados, action.payload.documentoRelacionado);
 				
 				return {

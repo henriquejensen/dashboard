@@ -7,6 +7,58 @@ import Panel from "../panel/Panel";
 import Table from "../table/Table";
 
 export default class Relacionados extends Component {
+    state = {
+        showMessageSeeMore: true,
+        phone: true,
+        map: true,
+        buttonsClicked: {
+            phone: {},
+            map: {}
+        }
+    }
+
+    searchPessoasRelacionadas = (doc) => {
+        this.setState({
+            showMessageSeeMore: false
+        })
+
+        this.props.searchPessoasRelacionadas(doc);
+    }
+
+    showMoreItems = (doc, tipo) => {
+        let buttonsClickedNew = Object.assign({},this.state.buttonsClicked);
+        /*exemplo: buttonsClickedNew.phones[1234] = false*/
+        buttonsClickedNew[tipo][doc] = buttonsClickedNew[tipo][doc] ? !buttonsClickedNew[tipo][doc] : true;
+        
+        this.setState({
+            buttonsClicked: buttonsClickedNew
+        })
+    }
+
+    search = (docPessoa, docPesquisa, icon) => {
+        if(icon == "phone")
+            this.props.searchTelefonesPessoaRelacionada(docPessoa, docPesquisa);
+        else
+            this.props.searchEnderecosPessoaRelacionada(docPessoa, docPesquisa);
+        
+    }
+
+    renderButtons = (items, relacao, pos, documento, icon) => {
+        return (
+            <a data-tip data-for='tooltipConsultar'>
+                <Button
+                    bsSize="small"
+                    bsStyle={items ? "danger" : "info"}
+                    className="my-button"
+                    onClick={relacao == "MAE" ? ()=> {} : items ? () => this.showMoreItems(documento, icon) : () => this.search(this.props.documento, documento, icon)} >
+                    {items ?
+                        <i className='fa fa-times'/>
+                    :   <i className={'fa fa-'+icon}/> }
+                </Button>
+            </a>
+        )
+    }
+
     render() {
         return (
             <Panel
@@ -32,29 +84,21 @@ export default class Relacionados extends Component {
                                             : ""}
                                         </td>
                                         <td>
-                                            <a data-tip data-for='tooltipConsultar'>
-                                                <Button bsSize="small" bsStyle="info" className="mapa-button" onClick={pessoa.relacao == "MAE" ? ()=>{} : () => this.props.searchTelefonesPessoaRelacionada(this.props.documento, pessoa.documento)}>
-                                                    <i className='fa fa-phone'/>
-                                                </Button>
-                                            </a>
+                                            {this.renderButtons(pessoa.telefones, pessoa.relacao, index, pessoa.documento, "phone")}
                                             {' '}
-                                            <a data-tip data-for='tooltipConsultar'>
-                                                <Button bsSize="small" bsStyle="info" className="mapa-button" onClick={pessoa.relacao == "MAE" ? ()=>{} : () => this.props.searchEnderecosPessoaRelacionada(this.props.documento, pessoa.documento)}>
-                                                    <i className='fa fa-map'/>
-                                                </Button>
-                                            </a>
+                                            {this.renderButtons(pessoa.enderecos, pessoa.relacao, index, pessoa.documento, "map")}
                                         </td>
                                     </tr>
                                     
                                     <tr>
-                                        {pessoa.enderecos ? 
+                                        {pessoa.enderecos && this.state.buttonsClicked.map[pessoa.documento] ? 
                                             <td colSpan={3}>
                                                 <EnderecoLayout enderecos={pessoa.enderecos} />
                                             </td>
                                         : ""}
                                     </tr>
                                     <tr>
-                                        {pessoa.telefones ? 
+                                        {pessoa.telefones && this.state.buttonsClicked.phone[pessoa.documento] ? 
                                             <td colSpan={3}>
                                                 <TelefoneLayout fixos={pessoa.telefones.fixos} moveis={pessoa.telefones.moveis} />
                                             </td>
@@ -65,11 +109,13 @@ export default class Relacionados extends Component {
                         })}
                     </Table>
 
-                    <Col md={12}>
-                        <a onClick={() => this.props.searchPessoasRelacionadas(this.props.documento)} className="moreInfo pull-right">
-                            Ver mais pessoas relacionadas
-                        </a>
-                    </Col>
+                    {this.state.showMessageSeeMore ?
+                        <Col md={12}>
+                            <a onClick={() => this.searchPessoasRelacionadas(this.props.documento)} className="moreInfo pull-right">
+                                Ver mais pessoas relacionadas
+                            </a>
+                        </Col>
+                    : ""}
                     
                 </div>
             </Panel>

@@ -207,7 +207,6 @@ export function getRespostasSMS() {
 }
 
 export function searchPessoasRelacionadas(doc) {
-	console.log("ACTION RELACIOANDSO", doc)
 	return {
 		type: SEARCH_BY_PESSOAS_RELACIONADOS,
 		payload: doc

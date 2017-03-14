@@ -335,6 +335,16 @@ input {
     margin: 0px 10px;
 }
 
+.my-button {
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    width: 30px;
+    font-size: 11px;
+    padding: 3px;
+    margin: 0px 10px;
+}
+
 .mapa-button-close {
     background-color: red;
 }
