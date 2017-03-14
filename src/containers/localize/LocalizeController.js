@@ -4,6 +4,7 @@ import {
 		getLastQueries,
 		loadingLocalize,
 		searchLocalize,
+		searchLocalizeByEmail,
 		searchLocalizeByParams,
 		searchPessoasRelacionadas,
 		searchTelefonesPessoaRelacionada,
@@ -19,6 +20,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Tabs, Tab, Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
 
+import BuscaPorRelacionados from "./BuscaPorRelacionados";
 import LocalizeViewPattern from "./LocalizeViewPattern";
 import CreditoView from "../credito/CreditoView";
 
@@ -32,29 +34,25 @@ import menu from "../../components/utils/common/menu.json";
 import tiposLogradouro from "../../components/utils/common/tiposLogradouro.json";
 
 class LocalizeController extends Component {
-	constructor() {
-		super();
 
-		this.state = {
-			localizeInput: {
-				documento: "",
-				telefone: "",
-				email: "",
-				nome: "",
-				dataNascimento: "",
-				sexo: "",
-				estado: "",
-				cidade: "",
-				bairro: "",
-				complemento: "",
-				enderecoCep: "",
-				numeroInicial: "",
-				numeroFinal: "",
-			},
-			tipoLogradouro: "",
-			buscaAvancada: false
-		}
-
+	state = {
+		localizeInput: {
+			documento: "",
+			telefone: "",
+			email: "",
+			nome: "",
+			dataNascimento: "",
+			sexo: "",
+			estado: "",
+			cidade: "",
+			bairro: "",
+			complemento: "",
+			endereco: "",
+			cep: "",
+			numeroInicial: "",
+			numeroFinal: "",
+		},
+		buscaAvancada: false
 	}
 
 	componentWillMount() {
@@ -101,7 +99,11 @@ class LocalizeController extends Component {
 				searchBy = "pj";
 			
 			this.props.searchLocalize(this.state.localizeInput.documento, searchBy);
-		} else {
+		} else if(this.props.type == "EMAIL") {
+			this.props.searchLocalizeByEmail(this.state.localizeInput.email)
+		} else if(this.state.localizeInput.endereco) {
+			console.log("ENDERE",this.state.localizeInput.endereco)
+			
 			this.props.searchLocalizeByParams(this.state.localizeInput, this.props.type);
 		}
 
@@ -205,29 +207,15 @@ class LocalizeController extends Component {
 					<input
 						className="form-control"
 						type="text"
-						name="enderecoCep"
+						name="endereco"
 						onChange={this.onChangeInput}
-						value={this.state.localizeInput.enderecoCep}
+						value={this.state.localizeInput.endereco}
 						placeholder="Endereço ou CEP"
 						required
 					/>
 				</Col>
 
-				<Col md={2}>
-					<select
-						className="form-control"
-						name="tipoLogradouro"
-						onChange={this.onChangeInput}
-						value={this.state.localizeInput.tipoLogradouro}
-					>
-						<option value="">Tipo Logradouro</option>
-						{tiposLogradouro.tiposLogradouro.map((tipo,i) => {
-							return <option value={tipo.sigla} key={i}>{tipo.name}</option>
-						})}
-					</select>
-				</Col>
-
-				<Col md={5}>
+				<Col md={7}>
 					<input
 						className="form-control"
 						type="text"
@@ -543,7 +531,12 @@ class LocalizeController extends Component {
 												data={data.data}
 												tipo={data.tipo}
 												index={index}/>
-										: ""}
+										: 
+											<BuscaPorRelacionados
+												relacionados={data.data}
+												searchLocalize={this.searchLocalize}
+											/>
+										}
 									</Tab>
 								)
 							})}
@@ -573,6 +566,7 @@ function mapDispatchToProps(dispatch) {
 			getLastQueries,
 			loadingLocalize,
 			searchLocalize,
+			searchLocalizeByEmail,
 			searchLocalizeByParams,
 			searchPessoasRelacionadas,
 			searchTelefonesPessoaRelacionada,

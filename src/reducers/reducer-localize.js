@@ -1,6 +1,7 @@
 import {
 		SEARCH_BY_CPF,
 		SEARCH_BY_CNPJ,
+		SEARCH_BY_EMAIL,
 		SEARCH_BY_PARAMS,
 		ICON_LOCALIZE,
 		SEARCH_BY_PESSOAS_RELACIONADOS,
@@ -181,7 +182,9 @@ export default function(state = initialState, action) {
 				}
 
 			case CHANGE_TAB_LOCALIZE:
-				let tab = searchDocument(newState.response,action.payload)
+				let tab = searchDocument(newState.response,action.payload);
+				tab >= 0 ? tab : 0;
+
 				return {
 					status: "changeTab",
 					message: "",
@@ -193,16 +196,21 @@ export default function(state = initialState, action) {
 				}
 				
 			case SEARCH_BY_CPF:
-				response.data = action.payload;
-				response.label = action.payload.cadastro.cpf;
-				response.tipo = "CPF";
-				response.icon = ICON_LOCALIZE;
-				response.produto = "localize";
+				let verifyIfCPFExists = searchDocument(newState.response, action.payload.cadastro.cpf);
+
+				if(verifyIfCPFExists == -1) {
+					response.data = action.payload;
+					response.label = action.payload.cadastro.cpf;
+					response.tipo = "CPF";
+					response.icon = ICON_LOCALIZE;
+					response.produto = "localize";
+				}
+
 				return {
 					status: "success",
 					message: "",
 					loading: false,
-					response: [...newState.response, response],
+					response: verifyIfCPFExists == -1 ? [...newState.response, response] : newState.response,
 					tabActive: action.payload.cadastro.cpf,
 					lastQueries: newState.lastQueries,
 					type: newState.type
@@ -226,11 +234,11 @@ export default function(state = initialState, action) {
 
 			case SEARCH_BY_PARAMS:
 				cont++;
-				response.data = relacionados;
+				response.data = relacionados.relacionados;
 				response.label = cont;
 				response.tipo = action.payload.tipo;
 				response.icon = ICON_LOCALIZE;
-				response.produto = "localize";
+				response.produto = action.payload.tipo;
 				return {
 					status: "success",
 					message: "",
@@ -323,6 +331,24 @@ export default function(state = initialState, action) {
 					type: newState.type
 				}
 
+			case SEARCH_BY_EMAIL:
+				let label = "Email:"+action.payload.cabecalho.entrada.split("@")[0];
+				cont++;
+				response.data = action.payload.localizePorEmail;
+				response.label = label;
+				response.tipo = action.payload.tipo;
+				response.icon = ICON_LOCALIZE;
+				response.produto = action.payload.tipo;
+				return {
+					status: "success",
+					message: "",
+					loading: false,
+					response: newState.status == "model" ? [response] : [...newState.response, response],
+					tabActive: label,
+					lastQueries: newState.lastQueries,
+					type: newState.type
+				};
+
 		}
 	}
 
@@ -337,7 +363,7 @@ function searchDocument(list, doc) {
 		}
 	}
 
-	return 0;
+	return -1;
 }
 
 //Busca no array de pessoas pesquisadas o documento passado
