@@ -3,9 +3,11 @@ import ajax from "superagent";
 import {
 		URL_SEARCH_CPF,
 		URL_SEARCH_CNPJ,
+		URL_SEARCH_TELEFONE,
 		URL_SEARCH_EMAIL,
 		SEARCH_BY_CPF,
 		SEARCH_BY_CNPJ,
+		SEARCH_BY_TELEFONE,
 		SEARCH_BY_EMAIL,
 		SEARCH_BY_PARAMS,
 		SEARCH_BY_PESSOAS_RELACIONADOS,
@@ -244,6 +246,25 @@ export function searchLocalizeByEmail(email) {
 				if (response) {
 					if (response.status == 200) {
 						dispatch({type: SEARCH_BY_EMAIL, payload: response.body})
+					} else {
+						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
+					}
+				} else {
+					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+				}
+			})
+	}
+}
+
+export function searchLocalizeByTelefone(telefone) {
+	return (dispatch) => {
+		ajax.post(URL_SEARCH_TELEFONE)
+			.send({telefone:telefone})
+			.set({'Content-Type': 'application/x-www-form-urlencoded','Authorization': localStorage.getItem("token")})
+			.end(function(error, response) {
+				if (response) {
+					if (response.status == 200) {
+						dispatch({type: SEARCH_BY_TELEFONE, payload: response.body})
 					} else {
 						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
 					}

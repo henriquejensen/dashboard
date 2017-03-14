@@ -28,9 +28,7 @@ export default (
     <Route path='/signin' component={Signin} />
 
     <Route onEnter={requireAuth} component={App}>
-      <Route path='/' name="Home" component={Dashboard} />
-
-      <Route name="Localize" path="localize" component={Localize}	>
+      <Route name="Localize" path="/" component={Localize}	>
         <Route name="Localize" path=":tipo" component={Localize}	/>
       </Route>
 

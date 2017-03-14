@@ -4,6 +4,7 @@ import {
 		getLastQueries,
 		loadingLocalize,
 		searchLocalize,
+		searchLocalizeByTelefone,
 		searchLocalizeByEmail,
 		searchLocalizeByParams,
 		searchPessoasRelacionadas,
@@ -20,7 +21,8 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Tabs, Tab, Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
 
-import BuscaPorRelacionados from "./BuscaPorRelacionados";
+import BuscaPorRelacionados from "../../components/relacionados/BuscaPorRelacionados";
+import Protocolo from "../../components/protocolo/Protocolo";
 import LocalizeViewPattern from "./LocalizeViewPattern";
 import CreditoView from "../credito/CreditoView";
 
@@ -101,6 +103,8 @@ class LocalizeController extends Component {
 			this.props.searchLocalize(this.state.localizeInput.documento, searchBy);
 		} else if(this.props.type == "EMAIL") {
 			this.props.searchLocalizeByEmail(this.state.localizeInput.email)
+		} else if(this.props.type == "TELEFONE") {
+			this.props.searchLocalizeByTelefone(this.state.localizeInput.telefone)
 		} else if(this.state.localizeInput.endereco) {
 			console.log("ENDERE",this.state.localizeInput.endereco)
 			
@@ -266,7 +270,7 @@ class LocalizeController extends Component {
 						name="cidade"
 						value={this.state.localizeInput.cidade}
 						onChange={this.onChangeInput}
-						placeholder="Digite o nome da cidade"
+						placeholder="Digite o nome da cidade (sem abreviação)"
 					/>
 				</Col>
 				<Col md={this.state.buscaAvancada ? 5 : 3}>
@@ -334,7 +338,7 @@ class LocalizeController extends Component {
 						value={this.state.localizeInput.nome}
 						onChange={this.onChangeInput}
 						type="text"
-						placeholder="Digite o Nome"
+						placeholder="Digite o Nome (sem abreviação)"
 						required
 					/>
 				</Col>
@@ -380,7 +384,7 @@ class LocalizeController extends Component {
 						name="cidade"
 						onChange={this.onChangeInput}
 						value={this.state.localizeInput.cidade}
-						placeholder="Digite o nome da cidade"
+						placeholder="Digite o nome da cidade (sem abreviação)"
 					
 					/>
 				</Col>
@@ -531,11 +535,13 @@ class LocalizeController extends Component {
 												data={data.data}
 												tipo={data.tipo}
 												index={index}/>
-										: 
-											<BuscaPorRelacionados
-												relacionados={data.data}
-												searchLocalize={this.searchLocalize}
-											/>
+										: 	<span>
+												<BuscaPorRelacionados
+													relacionados={data.data}
+													searchPerson={this.searchLocalize}
+												/>
+												<Protocolo info={data.data.cabecalho} />
+											</span>
 										}
 									</Tab>
 								)
@@ -566,6 +572,7 @@ function mapDispatchToProps(dispatch) {
 			getLastQueries,
 			loadingLocalize,
 			searchLocalize,
+			searchLocalizeByTelefone,
 			searchLocalizeByEmail,
 			searchLocalizeByParams,
 			searchPessoasRelacionadas,

@@ -114,35 +114,10 @@ class Sidebar extends Component {
       return (      
           <aside>            
             {this.props.activedMenu ? (
-                <div>
-                  <CardInfoMenuUser color={this.props.color} user={this.props.user}/>
-                  <div className="nav nav-tabs">
-                    <li className={this.state.tabActive == "menu" ? "active" : ""} onClick={() => this._changeTab("menu")}>
-                      <a href="#menu">
-                        <i className="fa fa-picture-o" />
-                      </a>
-                    </li>
-
-                    <li className={this.state.tabActive == "chat" ? "active" : ""} onClick={() => this._changeTab("chat")}>
-                      <a href="#chat">
-                        <i className="fa fa-comments-o" />
-                      </a>
-                    </li>
-
-                    <li className={this.state.tabActive == "stats" ? "active" : ""} onClick={() => this._changeTab("stats")}>
-                      <a href="#stats">
-                        <i className="fa fa-line-chart" />
-                      </a>
-                    </li>
-                  </div>
-                </div>
+                <CardInfoMenuUser color={this.props.color} user={this.props.user}/>
               ) : ""}
 
-            <div className="tab-content">
               {this.renderMenu()}
-              {this.renderChat()}
-              {this.renderStats()}
-            </div>
           </aside>
       )
 

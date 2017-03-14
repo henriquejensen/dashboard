@@ -1,6 +1,7 @@
 import {
 		SEARCH_BY_CPF,
 		SEARCH_BY_CNPJ,
+		SEARCH_BY_TELEFONE,
 		SEARCH_BY_EMAIL,
 		SEARCH_BY_PARAMS,
 		ICON_LOCALIZE,
@@ -183,7 +184,7 @@ export default function(state = initialState, action) {
 
 			case CHANGE_TAB_LOCALIZE:
 				let tab = searchDocument(newState.response,action.payload);
-				tab >= 0 ? tab : 0;
+				tab = tab >= 0 ? tab : 0;
 
 				return {
 					status: "changeTab",
@@ -332,10 +333,10 @@ export default function(state = initialState, action) {
 				}
 
 			case SEARCH_BY_EMAIL:
-				let label = "Email:"+action.payload.cabecalho.entrada.split("@")[0];
-				cont++;
+				let labelEmail = "Email:"+action.payload.cabecalho.entrada.split("@")[0];
+				action.payload.localizePorEmail["cabecalho"] = action.payload.cabecalho;
 				response.data = action.payload.localizePorEmail;
-				response.label = label;
+				response.label = labelEmail;
 				response.tipo = action.payload.tipo;
 				response.icon = ICON_LOCALIZE;
 				response.produto = action.payload.tipo;
@@ -344,7 +345,25 @@ export default function(state = initialState, action) {
 					message: "",
 					loading: false,
 					response: newState.status == "model" ? [response] : [...newState.response, response],
-					tabActive: label,
+					tabActive: labelEmail,
+					lastQueries: newState.lastQueries,
+					type: newState.type
+				};
+
+			case SEARCH_BY_TELEFONE:
+				let labelTelefone = "Tel:"+action.payload.cabecalho.entrada;
+				action.payload.localizePorTelefone["cabecalho"] = action.payload.cabecalho;
+				response.data = action.payload.localizePorTelefone;
+				response.label = labelTelefone;
+				response.tipo = action.payload.tipo;
+				response.icon = ICON_LOCALIZE;
+				response.produto = action.payload.tipo;
+				return {
+					status: "success",
+					message: "",
+					loading: false,
+					response: newState.status == "model" ? [response] : [...newState.response, response],
+					tabActive: labelTelefone,
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				};

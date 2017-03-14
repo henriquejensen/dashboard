@@ -15,20 +15,22 @@ export default class Socios extends Component {
                     <Table fields={["Nome", "Qualificação", "Participação", "Entrada", "Saída"]} >
                         <tbody>
                             {this.props.socios.map((soc,i) => {
-                                return <tr key={i}>
-                                <td>
-                                    {soc.nome}
-                                    <a data-tip data-for='tooltipConsultar'>
-                                        <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(soc.documento, "pf")}>
-                                            <i className='fa fa-search'/>
-                                        </Button>
-                                    </a>
-                                </td>
-                                    <td>{soc.qualificacaoSocio}</td>
-                                    <td className="text-center">{soc.participacao}%</td>
-                                    <td>{soc.dataEntrada}</td>
-                                    <td>{soc.dataSaida ? soc.dataSaida : "Atual"}</td>
-                                </tr>
+                                return (
+                                    <tr key={i}>
+                                        <td>
+                                            {soc.nome}
+                                            <a data-tip data-for='tooltipConsultar'>
+                                                <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(soc.documento, "pf")}>
+                                                    <i className='fa fa-search'/>
+                                                </Button>
+                                            </a>
+                                        </td>
+                                        <td>{soc.qualificacaoSocio}</td>
+                                        <td className="text-center">{soc.participacao}%</td>
+                                        <td>{soc.dataEntrada}</td>
+                                        <td>{soc.dataSaida ? soc.dataSaida : "Atual"}</td>
+                                    </tr>
+                                )
                             })}
                         </tbody>
                     </Table>
