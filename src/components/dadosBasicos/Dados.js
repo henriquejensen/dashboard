@@ -41,7 +41,7 @@ export default class Dados extends Component{
             </div>
             <div className="col-md-6">
               <strong>Óbito: </strong>
-              <span className={this.props.dados.obitoProvavel == "SIM" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.obitoProvavel ? this.props.dados.obitoProvavel : NENHUM_REGISTRO}</span>
+              <span className={this.props.dados.obitoProvavel == "SIM" ? "destaque-desativado" : "destaque-ativado"}>{this.props.dados.obitoProvavel ? this.props.dados.obitoProvavel : NENHUM_REGISTRO}</span>
             </div>
 
             <div className="col-md-6">
@@ -52,22 +52,6 @@ export default class Dados extends Component{
               <strong>Signo: </strong>
               {this.props.dados.signo}
             </div>
-
-            {/*<div className="col-md-12" style={{paddingTop:"5px", width:"100%", border: "0px solid #dddddd", borderTopWidth: "1px"}}>
-              <strong>MÃE: </strong>
-              {this.props.dados.maeNome ?
-                <span>
-                  {this.props.dados.maeNome}
-                  {this.props.dados.maeCpf ?
-                    <a data-tip data-for='tooltipConsultar'>
-                      <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(this.props.dados.maeCpf, "pf")}>
-                          <i className='fa fa-search'/>
-                      </Button>
-                    </a>
-                  :""}
-                </span>
-              : <div>Nada consta</div>}
-            </div>*/}
 
             {this.state.moreInfo ? 
               <div >

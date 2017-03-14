@@ -108,7 +108,7 @@ export default class LayoutTelefone extends Component{
 
                                                 <td>
                                                     <a data-tip data-for="tooltipOperadora">
-                                                        <img src="http://logok.org/wp-content/uploads/2015/06/Claro-logo-logotype-1024x768.png" width="25"/>
+                                                        {tel.operadora ? tel.operadora.split("-")[0] : ""}
                                                     </a>
                                                 </td>
                                             </tr>)
@@ -204,7 +204,7 @@ export default class LayoutTelefone extends Component{
 
                                                 <td>
                                                     <a data-tip data-for="tooltipOperadora">
-                                                        <img src="http://2.bp.blogspot.com/-2iz4nnxuSu8/TyHGVjiLdDI/AAAAAAAABbw/wJWY-ugjozI/s1600/logotipo+oi.jpg" width="20" className="like-button"/>
+                                                        {tel.operadora ? tel.operadora.split("-")[0] : ""}
                                                     </a>
                                                 </td>
                                             </tr>)

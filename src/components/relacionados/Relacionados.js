@@ -66,7 +66,7 @@ export default class Relacionados extends Component {
                 qtdTotal={[{qtd:this.props.relacionados.length,icon:"fa fa-users"}]}>
                 <div className="col-md-12">
                     <Table fields= {["Relação", "Nome", ""]} >
-                        {this.props.relacionados.map((pessoa, index) => {
+                        {this.props.relacionados.reverse().map((pessoa, index) => {
                             return (
                                 <tbody key={index}>
                                     <tr>
