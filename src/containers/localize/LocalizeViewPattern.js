@@ -39,6 +39,10 @@ export default class LocalizeView extends Component {
                     <Dados dados={this.props.data.cadastro} searchPerson={this.props.searchLocalize} />
                 : <DadosPj dados={this.props.data.cadastro} searchPerson={this.props.searchLocalize} />}
 
+                {this.props.tipo == "CNPJ" ?
+                    <CadastroCnpjCnaesSecundarias cnpjCnaesSecundarias={this.props.data.cadastroCnpjCnaesSecundarias} />
+                : ""}
+
                 <Telefones telefones={this.props.data.telefones} />
 
                 <Enderecos enderecos={this.props.data.enderecos} />
@@ -54,10 +58,6 @@ export default class LocalizeView extends Component {
                         relacionados={this.props.pessoasRelacionadas.concat(this.verificarMae(this.props.data.cadastro.maeNome, this.props.data.cadastro.maeCpf))}
                         searchPerson={this.props.searchLocalize}
                     />
-                : ""}
-
-                {this.props.tipo == "CNPJ" ?
-                    <CadastroCnpjCnaesSecundarias cnpjCnaesSecundarias={this.props.data.cadastroCnpjCnaesSecundarias} />
                 : ""}
 
                 {this.props.tipo == "CNPJ" ?
