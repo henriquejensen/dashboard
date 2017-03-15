@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Tooltip from 'react-tooltip';
 import { Col, Row, Alert } from "react-bootstrap";
 
+import { REQUEST_ERROR } from "../../constants/utils";
 import { LocalizeDescription, CreditoDescription, FocoFiscalDescription } from "../ProductDescription";
 import UltimasConsultas from "../UltimasConsultas";
 
@@ -16,19 +17,21 @@ export default class Form extends Component {
                     
                     <Col>
                         <form onSubmit={this.props.onformSubmit} className="my-form">
-                            <Col md={2}>
-                                <select
-                                    className="form-control"
-                                    onChange={this.props.onChange}
-                                    value={this.props.type}
-                                    required
-                                >
-                                    <option value="">Selecione</option>
-                                    {this.props.options.map((opt,i) => {
-                                        return <option value={opt.id.toUpperCase()} key={i}>{opt.label}</option>
-                                    })}
-                                </select>
-                            </Col>
+                            {this.props.options ? 
+                                <Col md={2}>
+                                    <select
+                                        className="form-control"
+                                        onChange={this.props.onChange}
+                                        value={this.props.type}
+                                        required
+                                    >
+                                        <option value="">Selecione</option>
+                                        {this.props.options.map((opt,i) => {
+                                            return <option value={opt.id.toUpperCase()} key={i}>{opt.label}</option>
+                                        })}
+                                    </select>
+                                </Col>
+                            : ""}
 
                             {this.props.children}
 
@@ -79,7 +82,7 @@ export default class Form extends Component {
                         <span>Veja Detalhes do Produto</span>
                     </Tooltip>
 
-                    {this.props.status == "error request" || this.props.status == "error connection" ?
+                    {this.props.status == REQUEST_ERROR || this.props.status == "error connection" ?
                         <Col md={12} sm={12}> 
                             <Alert bsStyle="danger" className="text-center" onDismiss={this.props.closeMessageErrorLocalize}>
                                 {this.props.message}

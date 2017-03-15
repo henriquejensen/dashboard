@@ -25,7 +25,8 @@ import {
 		CHANGE_TAB,
 		CLOSE_TAB,
 		ICON_CREDITO,
-		CHANGE_LOCALIZE_TYPE
+		CHANGE_LOCALIZE_TYPE,
+		NENHUM_REGISTRO
 } from "../constants/utils";
 import model from "./data/modelLocalize.json";
 import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
@@ -199,6 +200,7 @@ export default function(state = initialState, action) {
 			case SEARCH_BY_CPF:
 				let verifyIfCPFExists = searchDocument(newState.response, action.payload.cadastro.cpf);
 
+				/*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
 				if(verifyIfCPFExists == -1) {
 					response.data = action.payload;
 					response.label = action.payload.cadastro.cpf;
@@ -218,17 +220,71 @@ export default function(state = initialState, action) {
 				};
 
 			case SEARCH_BY_CNPJ:
-				response.data = action.payload;
-				response.label = action.payload.cadastro.cnpj;
-				response.tipo = "CNPJ";
-				response.icon = ICON_LOCALIZE;
-				response.produto = "localize";
+				let verifyIfCNPJExists = searchDocument(newState.response, action.payload.cadastro.cnpj);
+
+				/*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
+				if(verifyIfCNPJExists == -1) {
+					response.data = action.payload;
+					response.label = action.payload.cadastro.cnpj;
+					response.tipo = "CNPJ";
+					response.icon = ICON_LOCALIZE;
+					response.produto = "localize";
+				}
+
 				return {
 					status: "success",
 					message: "",
 					loading: false,
-					response: [...newState.response, response],
+					response: verifyIfCNPJExists == -1 ? [...newState.response, response] : newState.response,
 					tabActive: action.payload.cadastro.cnpj,
+					lastQueries: newState.lastQueries,
+					type: newState.type
+				};
+
+			case SEARCH_BY_EMAIL:
+				let labelEmail = "Email:"+action.payload.cabecalho.entrada.split("@")[0];
+				let verifyIfEmailExists = searchDocument(newState.response, labelEmail);
+				
+				if(verifyIfEmailExists == -1) {
+					action.payload.localizePorEmail["cabecalho"] = action.payload.cabecalho;
+					response.data = action.payload.localizePorEmail;
+					response.label = labelEmail;
+					response.tipo = action.payload.tipo;
+					response.icon = ICON_LOCALIZE;
+					response.produto = action.payload.tipo;
+				}
+
+				return {
+					status: "success",
+					message: "",
+					loading: false,
+					response: verifyIfEmailExists == -1 ? [...newState.response, response] : newState.response,
+					tabActive: verifyIfEmailExists == -1 ? labelEmail : newState.tabActive,
+					lastQueries: newState.lastQueries,
+					type: newState.type
+				};
+
+			case SEARCH_BY_TELEFONE:
+				let telefones = action.payload.localizePorTelefone;
+				let labelTelefone, verifyIfTelefoneExists;
+				if(telefones) {
+					labelTelefone = "Tel:"+action.payload.cabecalho.entrada;
+					verifyIfTelefoneExists = searchDocument(newState.response, labelTelefone);
+					if(verifyIfTelefoneExists == -1) {
+						telefones["cabecalho"] = action.payload.cabecalho;
+						response.data = telefones;
+						response.label = labelTelefone;
+						response.tipo = action.payload.tipo;
+						response.icon = ICON_LOCALIZE;
+						response.produto = action.payload.tipo;
+					}
+				}
+				return {
+					status: telefones ? "success" : REQUEST_ERROR,
+					message: telefones ? "" : NENHUM_REGISTRO,
+					loading: false,
+					response: telefones && verifyIfTelefoneExists == -1 ? [...newState.response, response] : newState.response,
+					tabActive: telefones && verifyIfTelefoneExists == -1 ? labelTelefone : newState.tabActive,
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				};
@@ -299,9 +355,8 @@ export default function(state = initialState, action) {
 				};
 
 			case REQUEST_ERROR:
-				console.log("REQUEST_ERROR", action.payload.mensagem)
 				return {
-					status: "error request",
+					status: REQUEST_ERROR,
 					message: action.payload.mensagem,
 					loading: false,
 					response: newState.response,
@@ -332,41 +387,7 @@ export default function(state = initialState, action) {
 					type: newState.type
 				}
 
-			case SEARCH_BY_EMAIL:
-				let labelEmail = "Email:"+action.payload.cabecalho.entrada.split("@")[0];
-				action.payload.localizePorEmail["cabecalho"] = action.payload.cabecalho;
-				response.data = action.payload.localizePorEmail;
-				response.label = labelEmail;
-				response.tipo = action.payload.tipo;
-				response.icon = ICON_LOCALIZE;
-				response.produto = action.payload.tipo;
-				return {
-					status: "success",
-					message: "",
-					loading: false,
-					response: newState.status == "model" ? [response] : [...newState.response, response],
-					tabActive: labelEmail,
-					lastQueries: newState.lastQueries,
-					type: newState.type
-				};
 
-			case SEARCH_BY_TELEFONE:
-				let labelTelefone = "Tel:"+action.payload.cabecalho.entrada;
-				action.payload.localizePorTelefone["cabecalho"] = action.payload.cabecalho;
-				response.data = action.payload.localizePorTelefone;
-				response.label = labelTelefone;
-				response.tipo = action.payload.tipo;
-				response.icon = ICON_LOCALIZE;
-				response.produto = action.payload.tipo;
-				return {
-					status: "success",
-					message: "",
-					loading: false,
-					response: newState.status == "model" ? [response] : [...newState.response, response],
-					tabActive: labelTelefone,
-					lastQueries: newState.lastQueries,
-					type: newState.type
-				};
 
 		}
 	}

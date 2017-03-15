@@ -24,7 +24,7 @@
             "image": "../../public/assertiva/icon-sms-new.png",
             "alt": "Icone SMS",
             "subItems": [
-                {"label": "Envio de SMS", "id": "envioSMS", "link": "/sms"},
+                {"label": "Monitor de envios", "id": "envioSMS", "link": "/sms"},
                 {"label": "Centro de Custo", "id": "centroCusto", "link": "/sms/centrocusto"},
                 {"label": "Respostas", "id": "respostas", "link": "/sms/respostas"},
                 {"label": "Relatório", "id": "relatorio", "link": "/sms"}

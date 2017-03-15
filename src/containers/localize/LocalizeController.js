@@ -36,21 +36,16 @@ import menu from "../../components/utils/common/menu.json";
 import tiposLogradouro from "../../components/utils/common/tiposLogradouro.json";
 
 class LocalizeController extends Component {
-
 	state = {
 		localizeInput: {
-			documento: "",
-			telefone: "",
-			email: "",
 			nome: "",
 			dataNascimento: "",
 			sexo: "",
-			estado: "",
+			uf: "",
 			cidade: "",
 			bairro: "",
 			complemento: "",
-			endereco: "",
-			cep: "",
+			enderecoOuCep: "",
 			numeroInicial: "",
 			numeroFinal: "",
 		},
@@ -100,34 +95,25 @@ class LocalizeController extends Component {
 			if(this.props.type == "CNPJ")
 				searchBy = "pj";
 			
-			this.props.searchLocalize(this.state.localizeInput.documento, searchBy);
+			this.props.searchLocalize(this.state.documento, searchBy);
+			this.setState({
+				documento: ""
+			})
 		} else if(this.props.type == "EMAIL") {
-			this.props.searchLocalizeByEmail(this.state.localizeInput.email)
+			this.props.searchLocalizeByEmail(this.state.email);
+			this.setState({
+				email: ""
+			})
 		} else if(this.props.type == "TELEFONE") {
-			this.props.searchLocalizeByTelefone(this.state.localizeInput.telefone)
-		} else if(this.state.localizeInput.endereco) {
-			console.log("ENDERE",this.state.localizeInput.endereco)
-			
+			this.props.searchLocalizeByTelefone(this.state.telefone);
+			this.setState({
+				telefone: ""
+			})
+		} else {
+			console.log("NOME OU EMAIL", this.state.localizeInput);
+
 			this.props.searchLocalizeByParams(this.state.localizeInput, this.props.type);
 		}
-
-		this.setState({
-			localizeInput: {
-				documento: "",
-				telefone: "",
-				email: "",
-				nome: "",
-				dataNascimento: "",
-				sexo: "",
-				estado: "",
-				cidade: "",
-				bairro: "",
-				complemento: "",
-				enderecoCep: "",
-				numeroInicial: "",
-				numeroFinal: "",
-			},
-		});
 	}
 
 	onChangeType = (evt) => {
@@ -185,10 +171,10 @@ class LocalizeController extends Component {
 						}
 						value={
 							this.props.type == "TELEFONE" ?
-								this.state.localizeInput.telefone
+								this.state.telefone
 								: this.props.type == "EMAIL" ?
-									this.state.localizeInput.email
-							: this.state.localizeInput.documento
+									this.state.email
+							: this.state.documento
 						}
 						name={
 							this.props.type == "TELEFONE" ?
@@ -197,7 +183,7 @@ class LocalizeController extends Component {
 									"email"
 							: "documento"
 						}
-						onChange={this.onChangeInput}
+						onChange={this.onChange}
 					/>
 				</Col>
 			</span>
@@ -211,9 +197,9 @@ class LocalizeController extends Component {
 					<input
 						className="form-control"
 						type="text"
-						name="endereco"
+						name="enderecoOuCep"
 						onChange={this.onChangeInput}
-						value={this.state.localizeInput.endereco}
+						value={this.state.localizeInput.enderecoOuCep}
 						placeholder="Endereço ou CEP"
 						required
 					/>
@@ -253,9 +239,9 @@ class LocalizeController extends Component {
 				<Col md={2}>
 					<select
 						className="form-control"
-						name="estado"
+						name="uf"
 						onChange={this.onChangeInput}
-						value={this.state.localizeInput.estado}
+						value={this.state.localizeInput.uf}
 					>
 						<option value="">Selecione UF</option>
 						{estados.estados.map((estado,i) => {
@@ -367,9 +353,9 @@ class LocalizeController extends Component {
 				<Col md={2}>
 					<select
 						className="form-control"
-						name="estado"
+						name="uf"
 						onChange={this.onChangeInput}
-						value={this.state.localizeInput.estado}
+						value={this.state.localizeInput.uf}
 					>
 						<option value="">Selecione UF</option>
 						{estados.estados.map((estado,i) => {
@@ -417,9 +403,9 @@ class LocalizeController extends Component {
 					<Col md={4}>
 						<input
 							className="form-control"
-							name="enderecoCep"
+							name="enderecoOuCep"
 							onChange={this.onChangeInput}
-							value={this.state.localizeInput.enderecoCep}
+							value={this.state.localizeInput.enderecoOuCep}
 							type="text"
 							placeholder="Endereço ou CEP" />
 					</Col>

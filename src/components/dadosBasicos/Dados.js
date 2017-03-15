@@ -23,7 +23,9 @@ export default class Dados extends Component{
             </div>
             <div className="col-md-6">
               <strong>Status CPF: </strong>
-              <span className={this.props.dados.status == "ATIVO" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.status ? this.props.dados.status : NENHUM_REGISTRO}</span>
+              {this.props.dados.status ?
+                <span className={this.props.dados.status == "ATIVO" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.status}</span>
+              : <span>{NENHUM_REGISTRO}</span>}
             </div>
 
             <div className="col-md-6">
@@ -41,7 +43,9 @@ export default class Dados extends Component{
             </div>
             <div className="col-md-6">
               <strong>Óbito: </strong>
-              <span className={this.props.dados.obitoProvavel == "SIM" ? "destaque-desativado" : "destaque-ativado"}>{this.props.dados.obitoProvavel ? this.props.dados.obitoProvavel : NENHUM_REGISTRO}</span>
+              {this.props.dados.obitoProvavel ?
+              <span className={this.props.dados.obitoProvavel == "SIM" ? "destaque-desativado" : "destaque-ativado"}>{this.props.dados.obitoProvavel}</span>
+              : <span>{NENHUM_REGISTRO}</span>}
             </div>
 
             <div className="col-md-6">

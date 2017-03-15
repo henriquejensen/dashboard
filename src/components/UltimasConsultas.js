@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip'
+import { Button } from "react-bootstrap";
 
 import Panel from "./Panel";
 import Table from "./Table";
@@ -26,10 +27,10 @@ export default class UltimasConsultas extends Component {
                                     <td>{consulta.pesquisa}</td>                                
                                     <td>{consulta.dataHora}</td>
                                     <td>
-                                        <a data-tip data-for="tooltipConsultar">
-                                            <div className="mapa-button">
+                                        <a data-tip data-for='tooltipConsultar'>
+                                            <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(consulta.documento, "pf")}>
                                                 <i className='fa fa-search'/>
-                                            </div>
+                                            </Button>
                                         </a>
                                     </td>
                                 </tr>

@@ -15,6 +15,8 @@ export const CHANGE_CREDITO_TYPE = "CHANGE_CREDITO_TYPE";
 export const CHANGE_FOCOFISCAL_TYPE = "CHANGE_FOCOFISCAL_TYPE";
 export const NENHUM_REGISTRO = "Nenhum registro encontrado";
 
+export const IMAGE_ANY_TOKEN = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/warning.png";
+
 export const LOADING_GIF = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/loading.gif";
 export const LOGO_LOCALIZE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-localiz" +
         "e.png";
@@ -34,5 +36,10 @@ export const LOGO_BASECERTA = "https://s3-us-west-2.amazonaws.com/front.assertiv
         "ta.png";
 export const ICON_BASECERTA = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-basecer" +
         "ta.png";
+export const LOGO_VENDAMAIS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-vendamais.png";
+export const ICON_VENDAMAIS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-vendamais.png";
+export const LOGO_VEICULOS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-veiculos.png";
+export const ICON_VEICULOS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-veiculos.png";
+export const LOGO_CONSIGMAIS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-consigmais.png";
+export const ICON_CONSIGMAIS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-consigmais.png";
 
-export const IMAGE_ANY_TOKEN = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/warning.png";
