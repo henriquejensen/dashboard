@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class ConsigMais extends Component {
 
 	componentDidMount() {
-		document.title = "Assertiva > Consig+";
+		document.title = "Consig+ > Assertiva";
 	}
 
 	render() {

@@ -76,7 +76,7 @@ class SMS extends Component {
   }
 
   componentDidMount() {
-    document.title = "Assertiva > SMS";
+    document.title = "SMS > Assertiva";
 
     this.props.getCampanhasSMS();
   }

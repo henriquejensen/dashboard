@@ -114,7 +114,7 @@ class Sidebar extends Component {
       return (      
           <aside>            
             {this.props.activedMenu ? (
-                <CardInfoMenuUser color={this.props.color} user={this.props.user}/>
+                  <CardInfoMenuUser color={this.props.color} user={this.props.user}/>
               ) : ""}
 
               {this.renderMenu()}

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Veiculos extends Component {
 
 	componentDidMount() {
-		document.title = "Assertiva > Veículos";
+		document.title = "Veículos > Assertiva";
 	}
 
 	render() {

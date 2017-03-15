@@ -55,7 +55,7 @@ class FocoFiscal extends Component {
 	}
 
 	componentDidMount() {
-		document.title = "Assertiva > Foco Fiscal";
+		document.title = "Foco Fiscal > Assertiva";
 	}
 
 	closeTab(index) {
@@ -99,7 +99,7 @@ class FocoFiscal extends Component {
 				showLogo = {this.props.datas.length == 0 ? true : false}
 				onformSubmit = {this.onFormSubmit}
 				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
-				options={menu.sidebar[7].subItems}
+				options={menu.sidebar[6].subItems}
 				onChange={this.onChangeType}
                 type={this.props.type}
 				seeModelo = {this.props.seeModel}

@@ -87,40 +87,6 @@ class MenuSuperior extends Component {
 					</Navbar.Form>
 
 					<Nav pullRight>
-						<NavDropdown title={<Notification />} id="menu-notification">
-							{this.props.notifications.map((notification, index) => {
-								return (
-									<MenuItem
-										onClick={(evt) => this.onOpenNotification(evt,index)}
-										key={index}
-										className="notication">
-											<p >{notification.dataHora} </p>
-											<h4>{notification.assunto} </h4>
-											<p style={{overflow:"hidden"}}>{notification.mensagem} </p>
-									</MenuItem>
-								)
-							})}
-						</NavDropdown>
-
-						<NavDropdown title="Cadastro" id="basic-nav-dropdown">
-							{menu.header.cadastro.map((opt, index) => {
-								return (
-									<MenuItem key={index} onClick={() => this.changeRoute(opt.link)}>
-										{opt.label}
-									</MenuItem>
-								)
-							})}
-						</NavDropdown>
-
-						<NavDropdown title="Relatórios" id="basic-nav-dropdown">
-							{menu.header.relatorios.map((opt, index) => {
-								return (
-									<MenuItem key={index} onClick={() => this.changeRoute(opt.link)}>
-										{opt.label}
-									</MenuItem>
-								)
-							})}
-						</NavDropdown>
 
 						<NavDropdown title={this.props.user.usuarioNome ? this.props.user.usuarioNome : "DESCONECTADO"} id="basic-nav-dropdown">
 							{menu.header.user.map((opt, index) => {

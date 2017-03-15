@@ -20,7 +20,7 @@ class EditUser extends Component {
     }
 
 	componentDidMount() {
-		document.title = "Assertiva > Editar Usuário";
+		document.title = "Editar Usuário > Assertiva";
 	}
 
     userEditInfo(nome, email, telefone) {

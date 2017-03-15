@@ -66,7 +66,7 @@ class Credito extends Component {
 	}
 
 	componentDidMount() {
-		document.title = "Assertiva > Crédito";
+		document.title = "Crédito > Assertiva";
 	}
 
 	closeTab(index) {
@@ -315,7 +315,7 @@ class Credito extends Component {
 				showLogo = {this.props.datas.length == 0 ? true : false}
 				onformSubmit = {this.onFormSubmit}
 				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
-				options={menu.sidebar[5].subItems}
+				options={menu.sidebar[4].subItems}
 				onChange={this.onChangeType}
                 type={this.props.type}
 				seeModelo = {this.props.seeModel}

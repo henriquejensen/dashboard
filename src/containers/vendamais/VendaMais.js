@@ -4,7 +4,7 @@ import { Tabs, Tab} from "react-bootstrap";
 export default class VendaMais extends Component {
 
 	componentDidMount() {
-		document.title = "Assertiva > Venda+";
+		document.title = "Venda+ > Assertiva";
 	}
 
 	render() {

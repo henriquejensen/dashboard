@@ -62,7 +62,7 @@ class LocalizeController extends Component {
 	}
 
 	componentDidMount() {
-		document.title = "Assertiva > Localize";
+		document.title = "Localize > Assertiva";
 	}
 
 	//busca as pessoas relacionadas a este doc, tipo é CPF ou CNPJ
@@ -464,7 +464,7 @@ class LocalizeController extends Component {
 				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
 				buscaAvancada={tipo == "NOME" || tipo == "ENDERECO" ? this.state.buscaAvancada : undefined}
 				hiddenBuscaAvancada={tipo == "NOME" || tipo == "ENDERECO" ? this.hiddenBuscaAvancada : undefined}
-				options={menu.sidebar[1].subItems}
+				options={menu.sidebar[0].subItems}
 				onChange={this.onChangeType}
                 type={this.props.type}
 				seeModelo = {this.props.seeModel}
