@@ -5,11 +5,13 @@ import {
 		URL_SEARCH_CNPJ,
 		URL_SEARCH_TELEFONE,
 		URL_SEARCH_EMAIL,
+		URL_SEARCH_NOME_ENDERECO,
+		URL_SEARCH_PESSOAS_RELACIONADAS,
 		SEARCH_BY_CPF,
 		SEARCH_BY_CNPJ,
 		SEARCH_BY_TELEFONE,
 		SEARCH_BY_EMAIL,
-		SEARCH_BY_PARAMS,
+		SEARCH_BY_NOME_ENDERECO,
 		SEARCH_BY_PESSOAS_RELACIONADOS,
 		SEARCH_BY_TELEFONES_RELACIONADOS,
 		SEARCH_BY_ENDERECOS_RELACIONADOS,
@@ -104,7 +106,6 @@ export function searchLocalize(document, tipo) {
 						dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
 					}
 				})
-
 		}
 	} else if(tipo == "pj") {
 		document = patternDocument(document, 14);
@@ -128,14 +129,30 @@ export function searchLocalize(document, tipo) {
 	}
 }
 
-export function searchLocalizeByParams(inputLocalize, tipo) {
-	return {
-		type: SEARCH_BY_PARAMS,
-		payload: {
-			input: inputLocalize,
-			tipo: tipo
+export function searchLocalizeByNomeEndereco(inputLocalize, tipo, labelToTab) {
+		return (dispatch) => {
+			ajax.post(URL_SEARCH_NOME_ENDERECO)
+				.send(inputLocalize)
+				.set({'Authorization': localStorage.getItem("token")})
+				.end(function(error, response) {
+					if (response) {
+						if (response.status == 200) {
+							dispatch({
+								type: SEARCH_BY_NOME_ENDERECO,
+								payload: {
+									response: response.body,
+									tipo: tipo,
+									label: labelToTab
+								}
+							})
+						} else {
+							dispatch({type: REQUEST_ERROR, payload: response.body.erro})
+						}
+					} else {
+						dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+					}
+				})
 		}
-	}
 }
 
 export function seeModel() {
@@ -210,30 +227,55 @@ export function getRespostasSMS() {
 	}
 }
 
-export function searchPessoasRelacionadas(doc) {
-	return {
-		type: SEARCH_BY_PESSOAS_RELACIONADOS,
-		payload: doc
-	}
-}
-
 export function searchTelefonesPessoaRelacionada(doc, docRelacionado) {
-	return {
-		type: SEARCH_BY_TELEFONES_RELACIONADOS,
-		payload: {
-			documento: doc,
-			documentoRelacionado: docRelacionado
-		}
+	return (dispatch) => {
+		ajax.post(URL_SEARCH_CPF)
+			.send({cpf: docRelacionado})
+			.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
+			.end(function(error, response) {
+				if (response) {
+					if (response.status == 200) {
+						dispatch({
+							type: SEARCH_BY_TELEFONES_RELACIONADOS,
+							payload: {
+								response: response.body.telefones,
+								documento: doc,
+								documentoRelacionado: docRelacionado
+							}
+						})
+					} else {
+						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
+					}
+				} else {
+					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+				}
+			})
 	}
 }
 
 export function searchEnderecosPessoaRelacionada(doc, docRelacionado) {
-	return {
-		type: SEARCH_BY_ENDERECOS_RELACIONADOS,
-		payload: {
-			documento: doc,
-			documentoRelacionado: docRelacionado
-		}
+	return (dispatch) => {
+		ajax.post(URL_SEARCH_CPF)
+			.send({cpf: docRelacionado})
+			.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
+			.end(function(error, response) {
+				if (response) {
+					if (response.status == 200) {
+						dispatch({
+							type: SEARCH_BY_ENDERECOS_RELACIONADOS,
+							payload: {
+								response: response.body.enderecos,
+								documento: doc,
+								documentoRelacionado: docRelacionado
+							}
+						})
+					} else {
+						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
+					}
+				} else {
+					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+				}
+			})
 	}
 }
 
@@ -265,6 +307,25 @@ export function searchLocalizeByTelefone(telefone) {
 				if (response) {
 					if (response.status == 200) {
 						dispatch({type: SEARCH_BY_TELEFONE, payload: response.body})
+					} else {
+						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
+					}
+				} else {
+					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+				}
+			})
+	}
+}
+
+export function searchPessoasRelacionadas(cpf) {
+	return (dispatch) => {
+		ajax.post(URL_SEARCH_PESSOAS_RELACIONADAS)
+			.send({cpf})
+			.set({'Content-Type': 'application/x-www-form-urlencoded','Authorization': localStorage.getItem("token")})
+			.end(function(error, response) {
+				if (response) {
+					if (response.status == 200) {
+						dispatch({type: SEARCH_BY_PESSOAS_RELACIONADOS, payload: response.body})
 					} else {
 						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
 					}

@@ -3,7 +3,7 @@ import {
 		SEARCH_BY_CNPJ,
 		SEARCH_BY_TELEFONE,
 		SEARCH_BY_EMAIL,
-		SEARCH_BY_PARAMS,
+		SEARCH_BY_NOME_ENDERECO,
 		ICON_LOCALIZE,
 		SEARCH_BY_PESSOAS_RELACIONADOS,
 		SEARCH_BY_TELEFONES_RELACIONADOS,
@@ -56,8 +56,6 @@ const initialState = {
 	type: ""
 }
 
-let cont = 0;
-
 export default function(state = initialState, action) {
 	if(action.payload) {
 		let response = {
@@ -71,6 +69,7 @@ export default function(state = initialState, action) {
 
 		let newState = Object.assign({},state);
 
+		/*Verifica se existem 6 elementos */
 		if(state.response.length > 6) {
 			newState.response.shift();
 		}
@@ -198,7 +197,7 @@ export default function(state = initialState, action) {
 				}
 				
 			case SEARCH_BY_CPF:
-				let verifyIfCPFExists = searchDocument(newState.response, action.payload.cadastro.cpf);
+				let verifyIfCPFExists = action.payload.cadastro ? searchDocument(newState.response, action.payload.cadastro.cpf) : -2;
 
 				/*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
 				if(verifyIfCPFExists == -1) {
@@ -207,20 +206,30 @@ export default function(state = initialState, action) {
 					response.tipo = "CPF";
 					response.icon = ICON_LOCALIZE;
 					response.produto = "localize";
+
+					if(action.payload.cadastro.maeNome) {
+						response.pessoasRelacionadas[0] = {
+							nome: action.payload.cadastro.maeNome,
+							documento: action.payload.cadastro.maeCpf,
+							relacao: "Mãe"
+						}
+					}
 				}
 
+				
+
 				return {
-					status: "success",
-					message: "",
+					status: verifyIfCPFExists == -2 ? REQUEST_ERROR : "sucesss",
+					message: verifyIfCPFExists == -2 ? NENHUM_REGISTRO : "",
 					loading: false,
 					response: verifyIfCPFExists == -1 ? [...newState.response, response] : newState.response,
-					tabActive: action.payload.cadastro.cpf,
+					tabActive: verifyIfCPFExists == -2 ? newState.tabActive : action.payload.cadastro.cpf,
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				};
 
 			case SEARCH_BY_CNPJ:
-				let verifyIfCNPJExists = searchDocument(newState.response, action.payload.cadastro.cnpj);
+				let verifyIfCNPJExists = action.payload.cadastro ? searchDocument(newState.response, action.payload.cadastro.cnpj) : -2;
 
 				/*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
 				if(verifyIfCNPJExists == -1) {
@@ -232,11 +241,11 @@ export default function(state = initialState, action) {
 				}
 
 				return {
-					status: "success",
-					message: "",
+					status: verifyIfCNPJExists == -2 ? REQUEST_ERROR : "sucesss",
+					message: verifyIfCNPJExists == -2 ? NENHUM_REGISTRO : "",
 					loading: false,
 					response: verifyIfCNPJExists == -1 ? [...newState.response, response] : newState.response,
-					tabActive: action.payload.cadastro.cnpj,
+					tabActive: verifyIfCNPJExists == -2 ? newState.tabActive : action.payload.cadastro.cnpj,
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				};
@@ -289,26 +298,33 @@ export default function(state = initialState, action) {
 					type: newState.type
 				};
 
-			case SEARCH_BY_PARAMS:
-				cont++;
-				response.data = relacionados.relacionados;
-				response.label = cont;
-				response.tipo = action.payload.tipo;
-				response.icon = ICON_LOCALIZE;
-				response.produto = action.payload.tipo;
+			case SEARCH_BY_NOME_ENDERECO:
+				let label = action.payload.tipo+":"+action.payload.label;
+				let nomeOuEndereco = action.payload.response.localizePorNomeOuEndereco;
+				let verifyIfNomeOrEnderecoExists = searchDocument(newState.response, label);
+
+				if(verifyIfNomeOrEnderecoExists == -1) {
+					nomeOuEndereco["cabecalho"] = action.payload.response.cabecalho;
+					response.data = nomeOuEndereco;
+					response.label = label;
+					response.tipo = action.payload.tipo;
+					response.icon = ICON_LOCALIZE;
+					response.produto = action.payload.tipo;
+				}
+
 				return {
 					status: "success",
 					message: "",
 					loading: false,
-					response: newState.status == "model" ? [response] : [...newState.response, response],
-					tabActive: cont,
+					response: verifyIfNomeOrEnderecoExists == -1 ? [...newState.response, response] : newState.response,
+					tabActive: verifyIfNomeOrEnderecoExists == -1 ? label : newState.tabActive,
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				};
 
 			case SEARCH_BY_PESSOAS_RELACIONADOS:
-				newState.response[searchPessoa(newState.response,action.payload)].pessoasRelacionadas = pessoasRelacionadas.pessoasRelacionadas;
-				
+				newState.response[searchPessoa(newState.response,action.payload.cabecalho.entrada)].pessoasRelacionadas = action.payload.localizePessoasRelacionadas;
+
 				return {
 					status: "pessoasRelacionadas"+action.payload,
 					message: "",
@@ -322,12 +338,11 @@ export default function(state = initialState, action) {
 			case SEARCH_BY_TELEFONES_RELACIONADOS:
 				//busca nas documentos pesquisados no localize o documento que sera inserido os telefones relacionados
 				let posPessoaTelefone = searchPessoa(newState.response,action.payload.documento);
-
 				//busca a pessoa relacionado que foi clicada para mostrar os telefones
 				let posPessoaRelacionadaTelefones = searchPosPessoa(newState.response[posPessoaTelefone].pessoasRelacionadas, action.payload.documentoRelacionado);
 
 				//adiciona na pessoa relacionada os telefones encontrados
-				newState.response[posPessoaTelefone].pessoasRelacionadas[posPessoaRelacionadaTelefones].telefones = searchTelefonesRelacionados(telefonesRelacionados, action.payload.documentoRelacionado);
+				newState.response[posPessoaTelefone].pessoasRelacionadas[posPessoaRelacionadaTelefones].telefones = action.payload.response;
 				
 				return {
 					status: "telefones",
@@ -343,7 +358,8 @@ export default function(state = initialState, action) {
 				let posPessoaEndereco = searchPessoa(newState.response,action.payload.documento);
 				let posPessoaRelacionadaEndereco = searchPosPessoa(newState.response[posPessoaEndereco].pessoasRelacionadas, action.payload.documentoRelacionado);
 
-				newState.response[posPessoaEndereco].pessoasRelacionadas[posPessoaRelacionadaEndereco].enderecos = searchEnderecosRelacionados(enderecosRelacionados, action.payload.documentoRelacionado);
+				newState.response[posPessoaEndereco].pessoasRelacionadas[posPessoaRelacionadaEndereco].enderecos = action.payload.response;
+
 				return {
 					status: "enderecos",
 					message: "",

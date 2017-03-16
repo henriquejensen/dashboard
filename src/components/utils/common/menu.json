@@ -3,9 +3,9 @@
         {
             "label": "Localize",
             "id": "localize",
-            "color": "#7a5ec0",
+            "color": "#673ab7",
             "link": "/localize",
-            "image": "../../public/assertiva/icon-focofiscal-new.png",
+            "image": "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-localize-new.png",
             "alt": "Icone Localize",
             "subItems": [
                 {"label": "CPF", "id": "cpf", "link": "/localize/cpf"},
@@ -19,9 +19,9 @@
         {
             "label": "SMS",
             "id": "sms",
-            "color": "#34a853",
+            "color": "#4caf50",
             "link": "/sms",
-            "image": "../../public/assertiva/icon-sms-new.png",
+            "image": "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-sms-new.png",
             "alt": "Icone SMS",
             "subItems": [
                 {"label": "Monitor de envios", "id": "envioSMS", "link": "/sms"},
@@ -33,27 +33,27 @@
         {
             "label": "Base Certa",
             "id": "basecerta",
-            "color": "#4285f4",
+            "color": "#f44336",
             "link": "/basecerta",
-            "image": "../../public/assertiva/icon-localize-new.png",
+            "image": "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-basecerta-new.png",
             "alt": "Icone Base Certa",
             "subItems": []
         },
         {
             "label": "Venda+",
             "id": "vendamais",
-            "color": "#7a5ec0",
+            "color": "#795548",
             "link": "/vendamais",
-            "image": "../../public/assertiva/icon-focofiscal-new.png",
+            "image": "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-vendamais-new.png",
             "alt": "Icone Venda+",
             "subItems": []
         },
         {
             "label": "Crédito",
             "id": "credito",
-            "color": "#ffa02e",
+            "color": "#ff9800",
             "link": "/credito",
-            "image": "../../public/assertiva/icon-credito-new.png",
+            "image": "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-new.png",
             "alt": "Icone Crédito",
             "subItems": [
                 {"label": "Consulta Completa", "id": "completa", "link": "/credito/completa"},
@@ -67,9 +67,9 @@
         {
             "label": "Veículos",
             "id": "veiculos",
-            "color": "#4285f4",
+            "color": "#607d8b",
             "link": "/veiculos",
-            "image": "../../public/assertiva/icon-localize-new.png",
+            "image": "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-veiculos-new.png",
             "alt": "Icone Veiculos",
             "subItems": [
                 {"label": "Agregados", "id": "agregados", "link": "/veiculos"},
@@ -85,8 +85,8 @@
             "label": "Foco Fiscal",
             "id": "focofiscal",
             "link": "/focofiscal",
-            "color": "#ff5d31",
-            "image": "../../public/assertiva/icon-consigmais-new.png",
+            "color": "#e91e63",
+            "image": "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-focofiscal-new.png",
             "alt": "Icone Foco Fiscal",
             "subItems": [
                 {"label": "Receita PF", "id": "pf", "link": "/focofiscal/receitaPf"},
@@ -100,8 +100,8 @@
             "label": "Consig+",
             "id": "consigmais",
             "link": "/consigmais",
-            "color": "#ffa02e",
-            "image": "../../public/assertiva/icon-consigmais-new.png",
+            "color": "#ff5722",
+            "image": "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-consigmais-new.png",
             "alt": "Icone Consig+",
             "subItems": []
         }

@@ -22,12 +22,12 @@ export default class BuscaPorRelacionados extends Component {
                                 return (
                                     <tr key={index}>
                                         <td>
-                                            {relacionado.nome}
                                             <a data-tip data-for='tooltipConsultar'>
                                                 <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(relacionado.documento, tipo)}>
                                                     <i className='fa fa-search'/>
                                                 </Button>
                                             </a>
+                                            {relacionado.nome}
                                         </td>
                                         <td>{relacionado.dataNascimento}</td>
                                         <td>{relacionado.pessoaRelacionada}</td>

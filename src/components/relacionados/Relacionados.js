@@ -28,7 +28,7 @@ export default class Relacionados extends Component {
     showMoreItems = (doc, tipo) => {
         let buttonsClickedNew = Object.assign({},this.state.buttonsClicked);
         /*exemplo: buttonsClickedNew.phones[1234] = false*/
-        buttonsClickedNew[tipo][doc] = buttonsClickedNew[tipo][doc] ? !buttonsClickedNew[tipo][doc] : true;
+        buttonsClickedNew[tipo][doc] = !buttonsClickedNew[tipo][doc];
         
         this.setState({
             buttonsClicked: buttonsClickedNew
@@ -36,6 +36,13 @@ export default class Relacionados extends Component {
     }
 
     search = (docPessoa, docPesquisa, icon) => {
+        let buttonsClickedNew = Object.assign({},this.state.buttonsClicked);
+        buttonsClickedNew[icon][docPesquisa] = buttonsClickedNew[icon][docPesquisa] ? !buttonsClickedNew[icon][docPesquisa] : true;
+
+        this.setState({
+            buttonsClicked: buttonsClickedNew
+        })
+
         if(icon == "phone")
             this.props.searchTelefonesPessoaRelacionada(docPessoa, docPesquisa);
         else
@@ -48,12 +55,14 @@ export default class Relacionados extends Component {
             <a data-tip data-for='tooltipConsultar'>
                 <Button
                     bsSize="small"
-                    bsStyle={items ? "danger" : "info"}
+                    bsStyle={this.state.buttonsClicked[icon][documento] ? "danger" : "info"}
                     className="my-button"
-                    onClick={relacao == "MAE" ? ()=> {} : items ? () => this.showMoreItems(documento, icon) : () => this.search(this.props.documento, documento, icon)} >
+                    onClick={items ? () => this.showMoreItems(documento, icon) : () => this.search(this.props.documento, documento, icon)} >
                     {items ?
-                        <i className='fa fa-times'/>
-                    :   <i className={'fa fa-'+icon}/> }
+                        this.state.buttonsClicked[icon][documento] ?
+                            <i className='fa fa-times'/>
+                        : <i className='fa fa-eye'/>
+                    :   <i className={'fa fa-'+icon} /> }
                 </Button>
             </a>
         )
@@ -66,15 +75,14 @@ export default class Relacionados extends Component {
                 qtdTotal={[{qtd:this.props.relacionados.length,icon:"fa fa-users"}]}>
                 <div className="col-md-12">
                     <Table fields= {["Relação", "Nome", ""]} >
-                        {this.props.relacionados.reverse().map((pessoa, index) => {
+                        {this.props.relacionados.map((pessoa, index) => {
                             return (
                                 <tbody key={index}>
                                     <tr>
                                         <td>
                                             {pessoa.relacao}
                                         </td>
-                                        <td>
-                                            {pessoa.nome}
+                                        <td>                                            
                                             {pessoa.documento ? 
                                                 <a data-tip data-for='tooltipConsultar'>
                                                     <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(pessoa.documento, "pf")}>
@@ -82,6 +90,7 @@ export default class Relacionados extends Component {
                                                     </Button>
                                                 </a>
                                             : ""}
+                                            {pessoa.nome}
                                         </td>
                                         <td>
                                             {this.renderButtons(pessoa.telefones, pessoa.relacao, index, pessoa.documento, "phone")}

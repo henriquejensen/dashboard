@@ -15,15 +15,16 @@ export default class Socios extends Component {
                     <Table fields={["Nome", "Qualificação", "Participação", "Entrada", "Saída"]} >
                         <tbody>
                             {this.props.socios.map((soc,i) => {
+                                let tipo = soc.documento.length > 11 ? "pj" : "pf";
                                 return (
                                     <tr key={i}>
                                         <td>
-                                            {soc.nome}
                                             <a data-tip data-for='tooltipConsultar'>
-                                                <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(soc.documento, "pf")}>
+                                                <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(soc.documento, tipo)}>
                                                     <i className='fa fa-search'/>
                                                 </Button>
                                             </a>
+                                            {soc.nome}
                                         </td>
                                         <td>{soc.qualificacaoSocio}</td>
                                         <td className="text-center">{soc.participacao}%</td>

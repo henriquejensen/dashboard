@@ -6,7 +6,7 @@ import {
 		searchLocalize,
 		searchLocalizeByTelefone,
 		searchLocalizeByEmail,
-		searchLocalizeByParams,
+		searchLocalizeByNomeEndereco,
 		searchPessoasRelacionadas,
 		searchTelefonesPessoaRelacionada,
 		searchEnderecosPessoaRelacionada,
@@ -91,11 +91,13 @@ class LocalizeController extends Component {
 		this.props.loadingLocalize();
 
 		if(this.props.type == "CPF" || this.props.type == "CNPJ") {
+			let documento = this.state.documento;
+			documento = documento.replace(/[^0-9]/g,"");
 			let searchBy = "pf";
 			if(this.props.type == "CNPJ")
 				searchBy = "pj";
 			
-			this.props.searchLocalize(this.state.documento, searchBy);
+			this.props.searchLocalize(documento, searchBy);
 			this.setState({
 				documento: ""
 			})
@@ -110,9 +112,23 @@ class LocalizeController extends Component {
 				telefone: ""
 			})
 		} else {
-			console.log("NOME OU EMAIL", this.state.localizeInput);
+			let labelToTab = this.props.type == "NOME" ? this.state.localizeInput.nome : this.state.localizeInput.enderecoOuCep
+			this.props.searchLocalizeByNomeEndereco(this.state.localizeInput, this.props.type, labelToTab);
 
-			this.props.searchLocalizeByParams(this.state.localizeInput, this.props.type);
+			this.setState({
+				localizeInput: {
+					nome: "",
+					dataNascimento: "",
+					sexo: "",
+					uf: "",
+					cidade: "",
+					bairro: "",
+					complemento: "",
+					enderecoOuCep: "",
+					numeroInicial: "",
+					numeroFinal: "",
+				}
+			})
 		}
 	}
 
@@ -503,7 +519,6 @@ class LocalizeController extends Component {
 										}
 										key={index}
 									>
-										{console.log("DATA", data)}
 										{/*Verifica se o produto pesquisado é localize, pois pode ser gerado abas de outros produtos no Localize*/}
 										{data.produto == "localize" ?
 											<LocalizeViewPattern
@@ -560,7 +575,7 @@ function mapDispatchToProps(dispatch) {
 			searchLocalize,
 			searchLocalizeByTelefone,
 			searchLocalizeByEmail,
-			searchLocalizeByParams,
+			searchLocalizeByNomeEndereco,
 			searchPessoasRelacionadas,
 			searchTelefonesPessoaRelacionada,
 			searchEnderecosPessoaRelacionada,

@@ -12,7 +12,7 @@ export default class CadastroCnpjCnaesSecundarias extends Component {
     render() {
         return (
             this.props.cnpjCnaesSecundarias ?
-                <Panel title="CNPJ OU CNAES SECUNDÁRIAS" qtdTotal={[{icon:"fa fa-building-o", qtd:this.props.cnpjCnaesSecundarias.length}]}>
+                <Panel title="CNPJ OU CNAES SECUNDÁRIAS" qtdTotal={[{icon:"fa fa-building-o", qtd:this.props.cnpjCnaesSecundarias.length}]} showPanel={false}>
                     <Col md={12} sm={12}>            
                         <Table
                             fields={

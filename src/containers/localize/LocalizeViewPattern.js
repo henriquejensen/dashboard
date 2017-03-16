@@ -20,18 +20,6 @@ import Protocolo from "../../components/protocolo/Protocolo";
 import PanelGroup from "../../components/panel/PanelGroup";
 
 export default class LocalizeView extends Component {
-    verificarMae = (maeNome, maeCpf) => {
-        if(maeNome)
-            return [
-                {
-                    relacao:"MAE",
-                    nome: maeNome,
-                    documento: maeCpf,
-                }
-            ]
-        return [];
-    }
-
     render() {
         return (
             <PanelGroup>
@@ -55,7 +43,7 @@ export default class LocalizeView extends Component {
                         searchPessoasRelacionadas={this.props.searchPessoasRelacionadas}
                         searchTelefonesPessoaRelacionada={this.props.searchTelefonesPessoaRelacionada}
                         searchEnderecosPessoaRelacionada={this.props.searchEnderecosPessoaRelacionada}
-                        relacionados={this.props.pessoasRelacionadas.concat(this.verificarMae(this.props.data.cadastro.maeNome, this.props.data.cadastro.maeCpf))}
+                        relacionados={this.props.pessoasRelacionadas}
                         searchPerson={this.props.searchLocalize}
                     />
                 : ""}
@@ -71,7 +59,7 @@ export default class LocalizeView extends Component {
                         <RendaEmpregador rendas={this.props.data.rendaEmpregador} searchPerson={this.props.searchLocalize}/>
 
                         <RendaEstimada rendaEstimada={this.props.data.rendaEstimada} />
-
+                        
                         <BeneficioINSS beneficios={this.props.data.rendaBeneficioAssistencial} />
 
                         <RendaEntidadeClasseLiberal renda={this.props.data.rendaEntidadeClasseLiberal} />

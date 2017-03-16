@@ -27,12 +27,12 @@ export default class Sociedades extends Component {
                           return (
                             <tr key={index}>
                               <td>
-                                  {participacao.nome}
                                   <a data-tip data-for='tooltipConsultar'>
                                       <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(participacao.documento, "pj")}>
                                           <i className='fa fa-search'/>
                                       </Button>
                                   </a>
+                                  {participacao.nome}
                               </td>
                               <td>{participacao.qualificacaoSocio}</td>
                               <td>{participacao.participacao}%</td>

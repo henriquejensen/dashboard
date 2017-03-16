@@ -5,7 +5,7 @@ import { Button, Col, Form, DropdownButton, MenuItem } from "react-bootstrap";
 
 import { getCampanhasSMS } from "../../actions/index";
 
-import { FieldGroup } from "../../components/forms/CommonForms";
+import { FieldGroup, SelectGroup } from "../../components/forms/CommonForms";
 import Panel from "../../components/panel/Panel";
 import Table from "../../components/table/Table";
 import Modal from "../../components/Modal";
@@ -25,44 +25,55 @@ class BaseCerta extends Component {
   renderForm = () => {
       return (
           <Form onSubmit={this.onFormSubmit} className="my-form">
-              <Col md={2}>
+              <Col md={1}>
                   <FieldGroup
-                    id="smsCampanha"
-                    label="Campanha"
+                    id="ticket"
+                    label="Ticket"
                     type="text"
-                    name="campanha" />
+                    name="ticket" />
               </Col>
 
               <Col md={2}>
                   <FieldGroup
-                    id="smsDataInicio"
-                    label="Data Início"
-                    type="date"
-                    name="dataInicio" />
-              </Col>
-
-              <Col md={2}>
-                  <FieldGroup
-                    id="smsDataFim"
-                    label="Data Fim"
-                    type="date"
-                    name="dataFim" />
-              </Col>
-
-              <Col md={2}>
-                  <FieldGroup
-                    id="smsCliente"
-                    label="Cliente"
+                    id="layout"
+                    label="Layout"
                     type="text"
-                    name="cliente" />
+                    name="layout" />
               </Col>
 
               <Col md={2}>
                   <FieldGroup
-                    id="smsUsuario"
+                    id="clienteLogin"
+                    label="Cliente Login"
+                    type="text"
+                    name="clienteLogin" />
+              </Col>
+
+              <Col md={2}>
+                  <FieldGroup
+                    id="nomeGrupo"
+                    label="Nome do Grupo"
+                    type="text"
+                    name="nomeGrupo" />
+              </Col>
+
+              <Col md={2}>
+                  <FieldGroup
+                    id="usuario"
                     label="Usuário"
                     type="text"
                     name="usuario" />
+              </Col>
+
+              <Col md={1}>
+                  <SelectGroup
+                    id="limitar"
+                    label="Usuário"
+                    type="select"
+                    name="usuario"
+                    options={["10", "20","30", "40","50", "60","70", "80","90","Todos"]}
+                    value="50"
+                    onChange={this.onChange} />
               </Col>
 
               <Col md={2}>
