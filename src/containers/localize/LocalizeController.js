@@ -30,6 +30,7 @@ import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
 
 import { LOGO_LOCALIZE, ICON_LOCALIZE, LOADING_GIF } from "../../constants/utils";
+import { CPF_CODE, CNPJ_CODE, EMAIL_CODE, TELEFONE_CODE, NOME_ENDERECO_CODE } from "../../constants/constantsLocalize";
 
 import estados from "../../components/utils/common/estados.json";
 import menu from "../../components/utils/common/menu.json";
@@ -53,11 +54,38 @@ class LocalizeController extends Component {
 	}
 
 	componentWillMount() {
-		this.props.getLastQueries();
+		this.props.getLastQueries(CPF_CODE, "CPF");
+		this.props.getLastQueries(CNPJ_CODE, "CNPJ");
+		this.props.getLastQueries(TELEFONE_CODE, "TELEFONE");
+		this.props.getLastQueries(EMAIL_CODE, "EMAIL");
+		this.props.getLastQueries(NOME_ENDERECO_CODE, "NOMEOUENDERECO");
 	}
 
 	componentDidMount() {
 		document.title = "Localize > Assertiva";
+	}
+
+	searchUltimasConsultas = (entrada) => {
+		this.props.loadingLocalize();
+
+		if(this.props.type == "CPF")
+			this.props.searchLocalize(entrada, "pf");
+		else if(this.props.type == "CNPJ")
+			this.props.searchLocalize(entrada, "pj");
+		else if(this.props.type == "TELEFONE")
+			this.props.searchLocalizeByTelefone(entrada);
+		else if(this.props.type == "EMAIL")
+			this.props.searchLocalizeByEmail(entrada);
+		else {
+			let nomeEndereco = Object.assign({}, this.state.localizeInput);
+
+			if(this.props.type == "NOME")
+				nomeEndereco.nome = entrada;
+			else
+				nomeEndereco.enderecoOuCep = entrada;
+			this.props.searchLocalizeByNomeEndereco(nomeEndereco, this.props.type, this.props.type);
+		}
+
 	}
 
 	//busca as pessoas relacionadas a este doc, tipo é CPF ou CNPJ
@@ -107,7 +135,9 @@ class LocalizeController extends Component {
 				email: ""
 			})
 		} else if(this.props.type == "TELEFONE") {
-			this.props.searchLocalizeByTelefone(this.state.telefone);
+			let telefone = this.state.telefone;
+			telefone = telefone.replace(/[^0-9]/g,"");
+			this.props.searchLocalizeByTelefone(telefone);
 			this.setState({
 				telefone: ""
 			})
@@ -472,6 +502,7 @@ class LocalizeController extends Component {
 				seeModelo = {this.props.seeModel}
 				status = {this.props.status}
 				message = {this.props.message}
+				searchUltimasConsultas={this.searchUltimasConsultas}
 				lastQueries = {this.props.lastQueries}
 			>
 				{tipo ?

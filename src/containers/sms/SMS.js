@@ -148,7 +148,9 @@ class SMS extends Component {
           title={this.state.modalTitle}
       >
 
-        <SMSRapido />
+        <SMSRapido
+          cancel={() => this.setState({IsModalOpen: false})}
+          sendSMS={console.log("SEND SMS")} />
         
       </Modal>
 
@@ -158,7 +160,6 @@ class SMS extends Component {
 
 
 function mapStateToProps(state) {
-  console.log("SMS", state.campanhasSMS);
   return {
     campanhasSMS: state.campanhasSMS
   }

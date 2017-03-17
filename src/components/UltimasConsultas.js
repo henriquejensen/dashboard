@@ -8,35 +8,31 @@ import Table from "./Table";
 import { patternCPF, patternCNPJ } from "./utils/functions/patternDocuments";
 
 export default class UltimasConsultas extends Component {
+
     render() {
         return (
-            <Panel title="Últimas consultas" qtdTotal={[{
-                qtd:this.props.consultas.length, icon:"fa fa-users"
-            }]}>
-                <Table fields={["Tipo", "Documento", "Pesquisa", "Data/Hora", ""]} >
-                    <tbody>
-                        {this.props.consultas.map((consulta,index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{consulta.tipo}</td>
-                                    {consulta.tipo == "CPF" ?
-                                        <td>{patternCPF(consulta.documento)}</td>
-                                    : consulta.tipo == "CNPJ" ?
-                                        <td>{patternCNPJ(consulta.documento)}</td>
-                                    : ""}
-                                    <td>{consulta.pesquisa}</td>                                
-                                    <td>{consulta.dataHora}</td>
-                                    <td>
-                                        <a data-tip data-for='tooltipConsultar'>
-                                            <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(consulta.documento, "pf")}>
-                                                <i className='fa fa-search'/>
-                                            </Button>
-                                        </a>
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
+            <Panel title="Últimas consultas">
+                <Table fields={["Tipo", "Entrada", "Data/Hora", ""]} >
+                    {this.props.consultas && this.props.type ?
+                        <tbody>
+                            {this.props.consultas[this.props.type].map((consulta,index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{this.props.type}</td>
+                                        <td>{consulta.entrada}</td>
+                                        <td>{consulta.dataHora}</td>
+                                        <td>
+                                            <a data-tip data-for='tooltipConsultar'>
+                                                <Button bsStyle="info" className="mapa-button" onClick={() => this.props.search(consulta.entrada)}>
+                                                    <i className='fa fa-search'/>
+                                                </Button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    : ""}
                 </Table>
 
                 <Tooltip id="tooltipConsultar">

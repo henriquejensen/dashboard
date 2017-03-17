@@ -93,7 +93,7 @@ export default class Form extends Component {
                     {this.props.showLogo ? 
                         <Col md={12} sm={12}> 
                             <LocalizeDescription />
-                            <UltimasConsultas consultas={this.props.lastQueries} />
+                            <UltimasConsultas consultas={this.props.lastQueries} type={this.props.type} search={this.props.searchUltimasConsultas} />
                         </Col>
                     : "" }
                 </Row>

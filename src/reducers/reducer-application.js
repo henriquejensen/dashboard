@@ -1,7 +1,7 @@
 import { LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT, CHANGE_COLOR_MENU, AUTHENTICATION, LOADING } from "../constants/utils";
 
 const getInitialState = {
-    colorMenu: "#7a5ec0",
+    colorMenu: "#673ab7",
     loading: false,
     logado: false,
     error: false,

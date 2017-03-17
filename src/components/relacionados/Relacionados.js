@@ -85,7 +85,7 @@ export default class Relacionados extends Component {
                                         <td>                                            
                                             {pessoa.documento ? 
                                                 <a data-tip data-for='tooltipConsultar'>
-                                                    <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(pessoa.documento, "pf")}>
+                                                    <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(pessoa.documento, pessoa.documento.length > 11 ? "pj" : "pf")}>
                                                         <i className='fa fa-search'/>
                                                     </Button>
                                                 </a>

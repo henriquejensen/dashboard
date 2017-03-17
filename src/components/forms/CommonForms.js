@@ -51,6 +51,23 @@ export const RadioGroup = (props) => {
     )
 }
 
+export const RadioGroupGeneric = (props) => {
+    return (
+        <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}}>
+            <Col md={12}><ControlLabel>{props.label}</ControlLabel></Col>
+            {props.datas.map((data,index) => {
+                return (
+                    <Col md={props.colRadio} key={index}>
+                        <Radio onClick={(evt) => props.onChange(index, evt.target.name)} name={props.id} checked={data.checked}>
+                            {data.info}
+                        </Radio>
+                    </Col>
+                )
+            })}
+        </FormGroup>
+    )
+}
+
 export const TextArea = (props) => {
     return (
         <FormGroup controlId={props.id}>
@@ -72,6 +89,15 @@ export const CheckboxGroup = (props) => {
                 {props.text}
             </Checkbox>
 
+        </FormGroup>
+    )
+}
+
+export const TextAreaGroup = (props) => {
+    return (
+        <FormGroup controlId={props.id}>
+            <ControlLabel>{props.label}</ControlLabel>
+            <FormControl componentClass="textarea" placeholder={props.placeholder} />
         </FormGroup>
     )
 }

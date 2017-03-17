@@ -67,12 +67,12 @@ export default class RendaEmpregador extends Component {
                                             <tr key={index}>
                                                 <td>{renda.faixaRenda}</td>
                                                 <td>
-                                                    {renda.empregador}
                                                     <a data-tip data-for='tooltipConsultar'>
                                                         <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(renda.documentoEmpregador, "pj")}>
                                                             <i className='fa fa-search'/>
                                                         </Button>
                                                     </a>
+                                                    {renda.empregador}
                                                 </td>
                                                 <td>{renda.setorEmpregador}</td>
                                                 <td>{formatDate(renda.rendaDataRef)}</td>

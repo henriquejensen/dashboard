@@ -7,6 +7,7 @@ import {
 		URL_SEARCH_EMAIL,
 		URL_SEARCH_NOME_ENDERECO,
 		URL_SEARCH_PESSOAS_RELACIONADAS,
+		URL_SEARCH_ULTIMAS_CONSULTAS_LOCALIZE,
 		SEARCH_BY_CPF,
 		SEARCH_BY_CNPJ,
 		SEARCH_BY_TELEFONE,
@@ -39,7 +40,30 @@ import {
 		ERR_CONNECTION_REFUSED
 } from "../constants/utils";
 
-export function getLastQueries() {
+export function getLastQueries(code, tipo) {
+	return (dispatch) => {
+		ajax.post(URL_SEARCH_ULTIMAS_CONSULTAS_LOCALIZE)
+			.send({consulta: code})
+			.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
+			.end(function(error, response) {
+				if (response) {
+					if (response.status == 200) {
+						dispatch({
+							type: GET_LOCALIZE_LAST_QUERIES,
+							payload: {
+								response: response.body,
+								tipo: tipo
+							}
+						})
+					} else {
+						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
+					}
+				} else {
+					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+				}
+			})
+	}
+
     return {
         type: GET_LOCALIZE_LAST_QUERIES,
         payload: "lastQueries"

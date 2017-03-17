@@ -52,7 +52,14 @@ const initialState = {
 	response: [],
 	loading: false,
 	tabActive: "",
-	lastQueries: [],
+		lastQueries: {
+		CPF:[],
+		CNPJ:[],
+		TELEFONE:[],
+		EMAIL:[],
+		NOME:[],
+		ENDERECO:[],
+	},
 	type: ""
 }
 
@@ -86,13 +93,19 @@ export default function(state = initialState, action) {
 					type: action.payload.toUpperCase()
 				}
 			case GET_LOCALIZE_LAST_QUERIES:
+				if(action.payload.tipo == "NOMEOUENDERECO") {
+					newState.lastQueries["NOME"] = patternJsonNomeOuEndereco(action.payload.response.localizeUltimasConsultas, "NOME");
+					newState.lastQueries["ENDERECO"] = patternJsonNomeOuEndereco(action.payload.response.localizeUltimasConsultas, "ENDERECO");
+				} else {
+					newState.lastQueries[action.payload.tipo] = action.payload.response.localizeUltimasConsultas;
+				}
 				return {
 					loading: false,
 					status: "lastQueries",
 					message: "",
 					response: state.response,
 					tabActive: state.tabActive,
-					lastQueries: lastQueries.localize,
+					lastQueries: newState.lastQueries,
 					type: newState.type
 				}
 
@@ -124,35 +137,43 @@ export default function(state = initialState, action) {
 				}
 
 			case SEARCH_BY_CREDITO_PF:
-				response.data = modelCredito;
-				response.label = modelCredito.cadastroPf.cpf;
-				response.tipo = "CPF";
-				response.icon = ICON_CREDITO;
-				response.produto = "credito";
+				let verifyIfCreditoPFExists = searchDocument(newState.response, modelCredito.cadastroPf.cpf);
+
+				if(verifyIfCreditoPFExists == -1) {
+					response.data = modelCredito;
+					response.label = modelCredito.cadastroPf.cpf;
+					response.tipo = "CPF";
+					response.icon = ICON_CREDITO;
+					response.produto = "credito";
+				}
 
 				return {
 					loading: false,
 					status: "success",
 					message: "",
-					response: [...newState.response, response],
-					tabActive: modelCredito.cadastroPf.cpf,
+					response: verifyIfCreditoPFExists == -1 ? [...newState.response, response] : newState.response,
+					tabActive: verifyIfCreditoPFExists == -1 ? modelCredito.cadastroPf.cpf : newState.tabActive,
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				}
 
 			case SEARCH_BY_CREDITO_PJ:
-				response.data = modelCreditoCNPJ;
-				response.label = modelCreditoCNPJ.cadastroPj.cnpj;
-				response.tipo = "CNPJ";
-				response.icon = ICON_CREDITO;
-				response.produto = "credito";
+				let verifyIfCreditoPJExists = searchDocument(newState.response, modelCreditoCNPJ.cadastroPj.cnpj);
+
+				if(verifyIfCreditoPJExists == -1) {
+					response.data = modelCreditoCNPJ;
+					response.label = modelCreditoCNPJ.cadastroPj.cnpj;
+					response.tipo = "CNPJ";
+					response.icon = ICON_CREDITO;
+					response.produto = "credito";
+				}
 
 				return {
 					loading: false,
 					status: "success",
 					message: "",
-					response: [...newState.response, response],
-					tabActive: modelCreditoCNPJ.cadastroPj.cnpj,
+					response: verifyIfCreditoPJExists == -1 ? [...newState.response, response] : newState.response,
+					tabActive: verifyIfCreditoPJExists == -1 ? modelCreditoCNPJ.cadastroPj.cnpj : newState.tabActive,
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				}
@@ -323,7 +344,7 @@ export default function(state = initialState, action) {
 				};
 
 			case SEARCH_BY_PESSOAS_RELACIONADOS:
-				newState.response[searchPessoa(newState.response,action.payload.cabecalho.entrada)].pessoasRelacionadas = action.payload.localizePessoasRelacionadas;
+				newState.response[searchDocument(newState.response,action.payload.cabecalho.entrada)].pessoasRelacionadas = action.payload.localizePessoasRelacionadas;
 
 				return {
 					status: "pessoasRelacionadas"+action.payload,
@@ -337,7 +358,7 @@ export default function(state = initialState, action) {
 
 			case SEARCH_BY_TELEFONES_RELACIONADOS:
 				//busca nas documentos pesquisados no localize o documento que sera inserido os telefones relacionados
-				let posPessoaTelefone = searchPessoa(newState.response,action.payload.documento);
+				let posPessoaTelefone = searchDocument(newState.response,action.payload.documento);
 				//busca a pessoa relacionado que foi clicada para mostrar os telefones
 				let posPessoaRelacionadaTelefones = searchPosPessoa(newState.response[posPessoaTelefone].pessoasRelacionadas, action.payload.documentoRelacionado);
 
@@ -355,7 +376,7 @@ export default function(state = initialState, action) {
 				};
 
 			case SEARCH_BY_ENDERECOS_RELACIONADOS:
-				let posPessoaEndereco = searchPessoa(newState.response,action.payload.documento);
+				let posPessoaEndereco = searchDocument(newState.response,action.payload.documento);
 				let posPessoaRelacionadaEndereco = searchPosPessoa(newState.response[posPessoaEndereco].pessoasRelacionadas, action.payload.documentoRelacionado);
 
 				newState.response[posPessoaEndereco].pessoasRelacionadas[posPessoaRelacionadaEndereco].enderecos = action.payload.response;
@@ -409,6 +430,21 @@ export default function(state = initialState, action) {
 	}
 
 	return state;
+}
+
+function patternJsonNomeOuEndereco(list, tipo) {
+	let nome = [];
+	let endereco = [];
+
+	for(let i=0; i<list.length; i++) {
+		let entrada = JSON.parse(list[i].entrada);
+		if(tipo == "NOME" && entrada.nome)
+			nome.push({entrada:entrada.nome, dataHora:list[i].dataHora});
+		if(tipo == "ENDERECO" && entrada.enderecoOuCep)
+			endereco.push({entrada:entrada.enderecoOuCep, dataHora:list[i].dataHora});
+	}
+
+	return tipo == "NOME" ? nome : endereco;
 }
 
 //Busca no array das pessoas pesquisadas o documento passado
