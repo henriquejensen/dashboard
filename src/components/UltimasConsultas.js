@@ -20,7 +20,7 @@ export default class UltimasConsultas extends Component {
                                     <tr key={index}>
                                         <td>{this.props.type}</td>
                                         <td>{consulta.entrada}</td>
-                                        <td>{consulta.dataHora}</td>
+                                        <td>{new Date(consulta.dataHora).toLocaleString()}</td>
                                         <td>
                                             <a data-tip data-for='tooltipConsultar'>
                                                 <Button bsStyle="info" className="mapa-button" onClick={() => this.props.search(consulta.entrada)}>
