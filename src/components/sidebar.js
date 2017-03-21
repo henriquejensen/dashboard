@@ -33,7 +33,7 @@ class Sidebar extends Component {
   
   activeMenuDropdown(menu) {
     this.setState({
-      menuOpened: menu
+      menuOpened: this.state.menuOpened == menu ? "" : menu
     })
   }
 

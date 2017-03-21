@@ -6,6 +6,8 @@ import Login from "./components/Login";
 import Signin from "./components/Signin";
 
 import EditUser from "./containers/user/EditUser";
+import Contato from "./containers/contato";
+
 import Localize from "./containers/localize/LocalizeController";
 import Dashboard from "./containers/dashboard/Dashboard";
 import Chat from "./containers/chat/Chat";
@@ -59,6 +61,8 @@ export default (
       </Route>
       
       <Route name="Editar" path="editar" component={EditUser}	/>
+      <Route name="Contato" path="contato" component={Contato}	/>
+
       <Route name="Chat" path="chat" component={Chat}	/>
     </Route>
 

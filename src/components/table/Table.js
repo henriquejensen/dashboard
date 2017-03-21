@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import { Table } from "react-bootstrap";
 
 export default class MyTable extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div>
@@ -17,13 +13,31 @@ export default class MyTable extends Component {
                         <tr>
                             {this.props.fields ? 
                                 this.props.fields.map((field, index) => {
-                                    return <th key={index}>{field}</th>
+                                    return (
+                                        <th key={index} onClick={() => this.props.orderTableBy(field)}>{field}</th>
+                                    )
                                 })
                             : ""}
                         </tr>
                     </thead>
-                    
-                    {this.props.children}
+
+                    {this.props.elements ?
+                        <tbody>
+                            {this.props.elements.map((elements, index) => {
+                                return (
+                                    <tr key={index}>
+                                        {Object.values(elements).map((el, j)=>{
+                                            return (
+                                                <td key={j}>{el}</td>
+                                            )
+                                        })}
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    : 
+                        this.props.children
+                    }
                     
                 </Table>
             </div>

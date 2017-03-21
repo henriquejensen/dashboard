@@ -8,16 +8,40 @@ import Table from "../table/Table";
 import { NENHUM_REGISTRO } from "../../constants/utils";
 
 export default class BuscaPorRelacionados extends Component {
+    state = {
+        relacionados: this.props.relacionados,
+        orderByGreater: true
+    }
+
+    orderName(list) {
+
+    }
+
+    orderTableBy = (key) => {
+        let newRelacionados = this.state.relacionados.concat();
+
+        let posFieldClicked = key == "Pessoa Relacionada" ? "pessoaRelacionada" : key == "Data nasc." ? "dataNascimento" : key.toLocaleLowerCase() ;
+        let order = this.state.orderByGreater;
+
+        newRelacionados.sort(
+            function(x,z){
+                return x[posFieldClicked] > z[posFieldClicked]
+            }
+        )
+
+        this.setState({
+            relacionados: newRelacionados,
+            orderByGreater: !this.state.orderByGreater
+        })
+    }
+
     render() {
         return (
-            this.props.relacionados ? 
-                <Panel title="RESULTADOS DA BUSCA" qtdTotal={[{qtd:this.props.relacionados.length,icon:"fa fa-users"}]}>
-                    <Table 
-                        fields = {[
-                            "Nome", "Data nasc.", "Pessoa Relacionada", "Cidade", "UF"]}
-                    >
+            this.props.relacionados ?
+                <Panel title="RESULTADOS DA BUSCA" qtdTotal={[{qtd:this.state.relacionados.length,icon:"fa fa-users"}]}>
+                    <Table fields = {["Nome", "Data nasc.", "Pessoa Relacionada", "Cidade", "UF"]} orderTableBy={this.orderTableBy}>
                         <tbody>
-                            {this.props.relacionados.map((relacionado,index) => {
+                            {this.state.relacionados.map((relacionado,index) => {
                                 let tipo = relacionado.tipo == "Pessoa Física" ? "pf":"pj";
                                 return (
                                     <tr key={index}>

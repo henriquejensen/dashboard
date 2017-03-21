@@ -63,9 +63,6 @@ export function authUser(empresa, user, senha) {
 					dispatch({type: LOGIN_ERROR, payload: res.body})
 				} else {
 					localStorage.setItem(AUTHENTICATION, res.body.response);
-					localStorage.setItem("empresa", empresa);
-					localStorage.setItem("usuario", user);
-					localStorage.setItem("senha", senha);
 					dispatch({type: LOGIN_SUCCESS, payload: res.body})
 				}
 			})
@@ -74,9 +71,6 @@ export function authUser(empresa, user, senha) {
 
 export function logOut() {
 	localStorage.removeItem(AUTHENTICATION);
-	localStorage.removeItem('empresa');
-	localStorage.removeItem('usuario');
-	localStorage.removeItem('senha');
 	return {
 		type: LOG_OUT,
 		payload: "logout"

@@ -29,6 +29,7 @@ import CreditoView from "../credito/CreditoView";
 import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
 
+import { COMPANY_NAME_SHORT } from "../../constants/constantsCompany";
 import { LOGO_LOCALIZE, ICON_LOCALIZE, LOADING_GIF } from "../../constants/utils";
 import { CPF_CODE, CNPJ_CODE, EMAIL_CODE, TELEFONE_CODE, NOME_ENDERECO_CODE } from "../../constants/constantsLocalize";
 
@@ -62,7 +63,7 @@ class LocalizeController extends Component {
 	}
 
 	componentDidMount() {
-		document.title = "Localize > Assertiva";
+		document.title = "Localize > "+COMPANY_NAME_SHORT;
 	}
 
 	searchUltimasConsultas = (entrada) => {
@@ -119,7 +120,7 @@ class LocalizeController extends Component {
 		this.props.loadingLocalize();
 
 		if(this.props.type == "CPF" || this.props.type == "CNPJ") {
-			let documento = this.state.documento;
+			let documento = this.state.documento ? this.state.documento : "DOCUMENTO";
 			documento = documento.replace(/[^0-9]/g,"");
 			let searchBy = "pf";
 			if(this.props.type == "CNPJ")
@@ -229,6 +230,7 @@ class LocalizeController extends Component {
 									"email"
 							: "documento"
 						}
+						required
 						onChange={this.onChange}
 					/>
 				</Col>
@@ -543,7 +545,7 @@ class LocalizeController extends Component {
 										title={
 											<Titletab
 												icon={data.icon}
-												label={data.label}
+												label={data.label.length > 20 ? data.label.substring(0,20)+"..." : data.label}
 												tipo={data.tipo}
 												close={() => this.closeTab(index)}
 											/>
@@ -569,7 +571,7 @@ class LocalizeController extends Component {
 												index={index}/>
 										: 	<span>
 												<BuscaPorRelacionados
-													relacionados={data.data}
+													relacionados={data.data.response ? data.data.response : data.data}
 													searchPerson={this.searchLocalize}
 												/>
 												<Protocolo info={data.data.cabecalho} />

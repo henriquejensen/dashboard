@@ -134,16 +134,12 @@
                 }
             ],
             "user": [
-                {
-                    "label": "Ajuda",
-                    "link": "/editar"
+                {      
+                    "label": "Contato",
+                    "link": "/contato"
                 },
                 {
                     "label": "Atualizar dados",
-                    "link": "/editar"
-                },
-                {
-                    "label": "Contato",
                     "link": "/editar"
                 },
                 {

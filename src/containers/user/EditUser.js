@@ -45,12 +45,7 @@ class EditUser extends Component {
     render() {
         return (
             <div className="container">
-                <div>
-                    <InfoUser user={this.props.user} userEditInfo={this.userEditInfo} />
-                    <ImagesUser user={this.props.user} userEditInfo={this.userEditInfo} />
-                </div>
-                
-                <DashboardUser user={this.props.user} userDashboard={this.userDashboard} />
+                <InfoUser user={this.props.user} userEditInfo={this.userEditInfo} />
 
                 <Notification ref={n => this._notificationSystem = n} />
             </div>
@@ -59,7 +54,6 @@ class EditUser extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log("STATE", state)
     return {
         user: state.user
     }

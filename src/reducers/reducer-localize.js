@@ -64,7 +64,6 @@ const initialState = {
 }
 
 export default function(state = initialState, action) {
-	if(action.payload) {
 		let response = {
 			data: "",
 			label: "",
@@ -77,7 +76,7 @@ export default function(state = initialState, action) {
 		let newState = Object.assign({},state);
 
 		/*Verifica se existem 6 elementos */
-		if(state.response.length > 6) {
+		if(state.response.length > 5) {
 			newState.response.shift();
 		}
 
@@ -321,11 +320,14 @@ export default function(state = initialState, action) {
 
 			case SEARCH_BY_NOME_ENDERECO:
 				let label = action.payload.tipo+":"+action.payload.label;
-				let nomeOuEndereco = action.payload.response.localizePorNomeOuEndereco;
+				let nomeOuEndereco = {};
 				let verifyIfNomeOrEnderecoExists = searchDocument(newState.response, label);
 
 				if(verifyIfNomeOrEnderecoExists == -1) {
-					nomeOuEndereco["cabecalho"] = action.payload.response.cabecalho;
+					nomeOuEndereco = {
+						response: action.payload.response.localizePorNomeOuEndereco,
+						cabecalho: action.payload.response.cabecalho
+					}
 					response.data = nomeOuEndereco;
 					response.label = label;
 					response.tipo = action.payload.tipo;
@@ -427,7 +429,6 @@ export default function(state = initialState, action) {
 
 
 		}
-	}
 
 	return state;
 }

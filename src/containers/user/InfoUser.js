@@ -1,4 +1,5 @@
 import React, { Component} from "react";
+import { Col } from "react-bootstrap";
 
 export default class Info extends Component {
     constructor(props) {
@@ -44,7 +45,7 @@ export default class Info extends Component {
 
     render() {
         return (
-            <div className="col-md-7">
+            <Col md={12}>
                 <div className="panel panel-default">
                     <div className="panel-heading text-center">
                         DADOS PESSOAIS
@@ -90,6 +91,6 @@ export default class Info extends Component {
                         </div>
                     </div>
                 </div>
-            </div>)
+            </Col>)
     }
 }
