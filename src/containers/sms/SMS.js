@@ -93,7 +93,7 @@ class SMS extends Component {
     <section>
 
       <Col md={12} sm={12} className="text-center">
-        <img src={LOGO_SMS} className="logo-produto" style={{width:120}} />
+        <img src={LOGO_SMS} className="logo-produto" />
 
         <Col style={{position:"absolute", right:15, top:0}}>
           <DropdownButton bsStyle={"primary"} title="Enviar SMS" id={'dropdown-basic-0'} style={{float:"right"}}>

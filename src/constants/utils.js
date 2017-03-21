@@ -13,6 +13,7 @@ export const CHANGE_COLOR_MENU = "CHANGE_COLOR_MENU";
 export const CHANGE_LOCALIZE_TYPE = "CHANGE_LOCALIZE_TYPE";
 export const CHANGE_CREDITO_TYPE = "CHANGE_CREDITO_TYPE";
 export const CHANGE_FOCOFISCAL_TYPE = "CHANGE_FOCOFISCAL_TYPE";
+export const CHANGE_VEICULOS_TYPE = "CHANGE_VEICULOS_TYPE";
 export const NENHUM_REGISTRO = "Nenhum registro encontrado";
 
 export const IMAGE_ANY_TOKEN = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/warning.png";

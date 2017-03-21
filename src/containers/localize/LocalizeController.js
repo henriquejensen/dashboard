@@ -66,7 +66,7 @@ class LocalizeController extends Component {
 		document.title = "Localize > "+COMPANY_NAME_SHORT;
 	}
 
-	searchUltimasConsultas = (entrada) => {
+	researchUltimasConsultas = (entrada) => {
 		this.props.loadingLocalize();
 
 		if(this.props.type == "CPF")
@@ -504,7 +504,7 @@ class LocalizeController extends Component {
 				seeModelo = {this.props.seeModel}
 				status = {this.props.status}
 				message = {this.props.message}
-				searchUltimasConsultas={this.searchUltimasConsultas}
+				searchUltimasConsultas={this.researchUltimasConsultas}
 				lastQueries = {this.props.lastQueries}
 			>
 				{tipo ?

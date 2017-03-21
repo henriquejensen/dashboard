@@ -10,10 +10,7 @@ import {
 		closeTab,
 		changeTab
 } from "../../actions/actionsCredito";
-import {
-		changeProductType,
-		changeMenu
-} from "../../actions/actionsCommon";
+import { changeProductType } from "../../actions/actionsCommon";
 
 import CreditoView from "./CreditoView";
 import MyForm from "../../components/forms/Form";
@@ -22,6 +19,8 @@ import Titletab from "../../components/utils/Titletab";
 import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
 
 import { LOGO_CREDITO, ICON_CREDITO, LOADING_GIF } from "../../constants/utils";
+import { COMPLETA_CODE, INTERMEDIARIA_CODE, INTERMEDIARIA_PLUS_CODE, SIMPLES_CODE, CHEQUE_CODE, EXPRESS_CODE } from "../../constants/constantsCredito";
+import { COMPANY_NAME_SHORT } from "../../constants/constantsCompany";
 
 import estados from "../../components/utils/common/estados.json";
 import menu from "../../components/utils/common/menu.json";
@@ -52,24 +51,22 @@ class Credito extends Component {
 				servico: []
 			}
 		}
-
-		this.form = this.form.bind(this);
-		this.onFormSubmit = this.onFormSubmit.bind(this);
-		this.onChange = this.onChange.bind(this);
-		this.onChangeType = this.onChangeType.bind(this);
-		this.onChangeInput = this.onChangeInput.bind(this);
-		this.closeTab = this.closeTab.bind(this);
 	}
 
 	componentWillMount() {
-		this.props.getLastQueries();
+		this.props.getLastQueries(COMPLETA_CODE, "COMPLETA");
+		this.props.getLastQueries(INTERMEDIARIA_CODE, "INTERMEDIARIA");
+		this.props.getLastQueries(INTERMEDIARIA_PLUS_CODE, "INTERMEDIARIAPLUS");
+		this.props.getLastQueries(SIMPLES_CODE, "SIMPLES");
+		this.props.getLastQueries(CHEQUE_CODE, "CHEQUE");
+		this.props.getLastQueries(EXPRESS_CODE, "EXPRESS");
 	}
 
 	componentDidMount() {
-		document.title = "Crédito > Assertiva";
+		document.title = "Crédito > " + COMPANY_NAME_SHORT;
 	}
 
-	closeTab(index) {
+	closeTab = (index) => {
 		{/*Fecha as abas, quando sobrar um chama a funcao para fechar tudo (closeModel)*/}
 		if(this.props.datas.length > 1) {
 			this.props.closeTab(index);
@@ -78,7 +75,7 @@ class Credito extends Component {
 		}
 	}
 
-	onChangeInput(evt) {
+	onChangeInput = (evt) => {
 		let newStateCredito = this.state.creditoInput;
 		newStateCredito[evt.target.name] = evt.target.value
 		this.setState({
@@ -86,17 +83,17 @@ class Credito extends Component {
 		})
 	}
 
-	onChangeType(evt) {
+	onChangeType = (evt) => {
 		this.props.changeProductType("credito", evt.target.value)
 	}
 
-	onChange(evt) {
+	onChange = (evt) => {
 		this.setState({
 			[evt.target.name]: evt.target.value
 		})
 	}
 
-	onFormSubmit(evt) {
+	onFormSubmit = (evt) => {
 		evt.preventDefault();
 
 		console.log("SUBMIT", this.props.type, this.state.creditoInput);
@@ -307,7 +304,7 @@ class Credito extends Component {
 		)
 	}
 
-	form(tipo) {
+	form = (tipo) => {
 		return (
 			<MyForm
 				icon = {ICON_CREDITO}

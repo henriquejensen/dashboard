@@ -4,3 +4,10 @@ export const LOADING_CREDITO = "LOADING_CREDITO";
 export const CLOSE_TAB_CREDITO = "CLOSE_TAB_CREDITO";
 export const GET_CREDITO_LAST_QUERIES = "GET_CREDITO_LAST_QUERIES";
 export const CHANGE_TAB_CREDITO = "CHANGE_TAB_CREDITO";
+
+export const COMPLETA_CODE = "1002";
+export const INTERMEDIARIA_CODE = "1003";
+export const INTERMEDIARIA_PLUS_CODE = "1004";
+export const SIMPLES_CODE = "1005";
+export const CHEQUE_CODE = "1006";
+export const EXPRESS_CODE = "1007";

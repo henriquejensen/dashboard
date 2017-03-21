@@ -7,7 +7,7 @@ import {
     CHANGE_TAB_CREDITO
 } from "../constants/constantsCredito";
 
-export function getLastQueries() {
+export function getLastQueries(code, tipo) {
     return {
         type: GET_CREDITO_LAST_QUERIES,
         payload: "lastQueries"

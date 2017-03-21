@@ -15,6 +15,7 @@ import {
 		ERR_CONNECTION_REFUSED,
 } from "../constants/utils";
 
+/* Muda o tipo do produto, ex: Localizel, tipo cpf ao clicar em cnpj muda para cnpj */
 export function changeProductType(product, type) {
 	return {
 		type: "CHANGE_" + product.toUpperCase() + "_TYPE",

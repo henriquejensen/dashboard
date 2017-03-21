@@ -1,98 +1,134 @@
 {
-    "localize": [
-        {
-            "tipo": "CPF",
-            "documento": 34168058875,
-            "pesquisa": "CPF",
-            "dataHora": "12/12/2016"
-        },
-        {
-            "tipo": "CPF",
-            "documento": 22430907836,
-            "pesquisa": "CNPJ",
-            "dataHora": "12/12/2016"
-        },
-        {
-            "tipo": "CNPJ",
-            "documento": 8579209000163,
-            "pesquisa": "CNPJ",
-            "dataHora": "12/12/2016"
-        },
-        {
-            "tipo": "CPF",
-            "documento": 5366214700,
-            "pesquisa": "CNPJ",
-            "dataHora": "12/12/2016"
-        },
-        {
-            "tipo": "CPF",
-            "documento": 19527193000161,
-            "pesquisa": "CPF",
-            "dataHora": "12/12/2016"
-        }
-    ],
-    "credito": [
-        {
-            "tipo": "CPF",
-            "documento": 34168058875,
-            "pesquisa": "Consulta Simples",
-            "dataHora": "12/12/2016"
-        },
-        {
-            "tipo": "CPF",
-            "documento": 22430907836,
-            "pesquisa": "Consulta Simples",
-            "dataHora": "12/12/2016"
-        },
-        {
-            "tipo": "CNPJ",
-            "documento": 8579209000163,
-            "pesquisa": "Consulta Simples",
-            "dataHora": "12/12/2016"
-        },
-        {
-            "tipo": "CPF",
-            "documento": 5366214700,
-            "pesquisa": "Consulta Simples",
-            "dataHora": "12/12/2016"
-        },
-        {
-            "tipo": "CPF",
-            "documento": 26675175807,
-            "pesquisa": "Consulta Completa",
-            "dataHora": "12/12/2016"
-        }
-    ],
-    "focofiscal": [
-        {
-            "tipo": "CPF",
-            "documento": 34168058875,
-            "pesquisa": "Receita PF",
-            "dataHora": "12/12/2016"
-        },
-        {
-            "tipo": "CPF",
-            "documento": 22430907836,
-            "pesquisa": "Receita PJ",
-            "dataHora": "12/12/2016"
-        },
-        {
-            "tipo": "CNPJ",
-            "documento": 8579209000163,
-            "pesquisa": "Receita PJ",
-            "dataHora": "12/12/2016"
-        },
-        {
-            "tipo": "CPF",
-            "documento": 5366214700,
-            "pesquisa": "Receita PF",
-            "dataHora": "12/12/2016"
-        },
-        {
-            "tipo": "CPF",
-            "documento": 19527193000161,
-            "pesquisa": "Receita PJ Sintegra",
-            "dataHora": "12/12/2016"
-        }
-    ]
+    "credito": {
+        "COMPLETA": [
+            {
+                "entrada": 12345612345,
+                "dataHora": "12/12/2016"
+            },
+            {
+                "entrada": 22430907836,
+                "dataHora": "12/12/2016"
+            },
+            {
+                "entrada": 8579209000163,
+                "dataHora": "12/12/2016"
+            },
+            {
+                "entrada": 5366214700,
+                "dataHora": "12/12/2016"
+            },
+            {
+                "entrada": 26675175807,
+                "dataHora": "12/12/2016"
+            }
+        ],
+        "INTERMEDIARIA": [
+            {
+                "entrada": 12345612345,
+                "dataHora": "12/12/2016"
+            },
+            {
+                "entrada": 22430907836,
+                "dataHora": "12/12/2016"
+            },
+            {
+                "entrada": 8579209000163,
+                "dataHora": "12/12/2016"
+            },
+            {
+                "entrada": 5366214700,
+                "dataHora": "12/12/2016"
+            },
+            {
+                "entrada": 26675175807,
+                "dataHora": "12/12/2016"
+            }
+        ],
+        "INTERMEDIARIAPLUS": [
+
+        ],
+        "SIMPLES": [
+
+        ],
+        "CHEQUE": [
+
+        ],
+        "EXPRESS": []
+    },
+    "focofiscal": {
+        "PF": [
+            {
+                "entrada": 12345612345,
+                "dataHora": "12/12/2016"
+            }
+        ],
+        "PJ": [
+            {
+                "entrada": 12345612345,
+                "dataHora": "12/12/2016"
+            }
+        ],
+        "SINTEGRA": [
+            {
+                "entrada": 12345612345,
+                "dataHora": "12/12/2016"
+            }
+        ],
+        "UNIFICADA": [
+            {
+                "entrada": 12345612345,
+                "dataHora": "12/12/2016"
+            }
+        ],
+        "SIMPLES": [
+            {
+                "entrada": 12345612345,
+                "dataHora": "12/12/2016"
+            }
+        ]
+    },
+    "veiculos": {
+        "AGREGADOS": [
+            {
+                "entrada": 12345612345,
+                "dataHora": "12/12/2016"
+            }
+        ],
+        "BDV": [
+            {
+                "entrada": 12345612345,
+                "dataHora": "12/12/2016"
+            }
+        ],
+        "DECODIFICADOR": [
+            {
+                "entrada": 12345612345,
+                "dataHora": "12/12/2016"
+            }
+        ],
+        "LOCALIZACAO": [
+            {
+                "entrada": 12345612345,
+                "dataHora": "12/12/2016"
+            }
+        ],
+        "PROPRIETARIOS": [
+            {
+                "entrada": 12345612345,
+                "dataHora": "12/12/2016"
+            }
+        ],
+        "LEILAO": [
+            {
+                "entrada": 12345612345,
+                "dataHora": "12/12/2016"
+            }
+        ],
+        "SINISTRO": [
+            {
+                "entrada": 12345612345,
+                "dataHora": "12/12/2016"
+            }
+        ]
+    }
 }
