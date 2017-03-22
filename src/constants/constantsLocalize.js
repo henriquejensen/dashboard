@@ -27,6 +27,7 @@ export const SEARCH_BY_ENDERECOS_RELACIONADOS = "SEARCH_BY_ENDERECOS_RELACIONADO
 export const SEARCH_BY_EMAILS_RELACIONADOS = "SEARCH_BY_EMAILS_RELACIONADOS";
 export const SEARCH_BY_CREDITO_PF = "SEARCH_BY_CREDITO_PF";
 export const SEARCH_BY_CREDITO_PJ = "SEARCH_BY_CREDITO_PJ";
+export const SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS = "SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS";
 
 export const LOGO_LOCALIZE = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/localize-logopagina.png";
 export const ICON_LOCALIZE = "https://s3-us-west-2.amazonaws.com/assportal/IMAGENS-PORTAL/icone-localize.png";

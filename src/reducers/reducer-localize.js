@@ -11,6 +11,7 @@ import {
 		SEARCH_BY_EMAILS_RELACIONADOS,
 		SEARCH_BY_CREDITO_PF,
 		SEARCH_BY_CREDITO_PJ,
+		SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS,
 		SEE_LOCALIZE_MODEL,
 		CLOSE_LOCALIZE_MODEL,
 		LOADING_LOCALIZE,
@@ -35,16 +36,6 @@ import relacionados from "./data/relacionados.json";
 import modelCredito from "./data/jsonPadraoCredito.json";
 import modelCreditoCNPJ from "./data/jsonPadraoCreditoCNPJ.json";
 import lastQueries from "./data/lastQueries.json";
-
-const telefonesRelacionados = [
-	{documento: 5366214700, fixos: [{documento: 12345678901, posicao: 0, telefone: '193553625'},{documento: 12345678901, posicao: 0, telefone: '1948484848'}], moveis:[{documento: 12345678901, posicao: 0, telefone: '193553625'},{documento: 12345678901, posicao: 0, telefone: '1948484848'}]},
-	{documento: 26675175807, fixos: [{documento: 12345678901, posicao: 0, telefone: '55545656'},{documento: 12345678901, posicao: 0, telefone: '22265423'}], moveis:[{documento: 12345678901, posicao: 0, telefone: '456876787'},{documento: 12345678901, posicao: 0, telefone: '997069496'}]}
-]
-
-const enderecosRelacionados = [
-	{documento: 5366214700, enderecos: [{bairro:"BONFIM", cep:1307070, cidade:"CAMPINAS", logradouro:"GOVENADOR PEDRO DE TOLEDO", numero:12, tipoLogradouro:"AV", uf:"SP"}]},
-	{documento: 26675175807, enderecos: [{bairro:"CAMBUI", cep:1307070, cidade:"CAMPINAS", logradouro:"ANDRADE NEVES", numero:12, tipoLogradouro:"AV", uf:"SP"}]},
-]
 
 const initialState = {
 	status: "",
@@ -217,7 +208,7 @@ export default function(state = initialState, action) {
 				}
 				
 			case SEARCH_BY_CPF:
-				let verifyIfCPFExists = action.payload.cadastro ? searchDocument(newState.response, action.payload.cadastro.cpf) : -2;
+				let verifyIfCPFExists = action.payload && action.payload.cadastro  ? searchDocument(newState.response, action.payload.cadastro.cpf) : -2;
 
 				/*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
 				if(verifyIfCPFExists == -1) {
@@ -249,7 +240,7 @@ export default function(state = initialState, action) {
 				};
 
 			case SEARCH_BY_CNPJ:
-				let verifyIfCNPJExists = action.payload.cadastro ? searchDocument(newState.response, action.payload.cadastro.cnpj) : -2;
+				let verifyIfCNPJExists = action.payload && action.payload.cadastro ? searchDocument(newState.response, action.payload.cadastro.cnpj) : -2;
 
 				/*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
 				if(verifyIfCNPJExists == -1) {
@@ -426,6 +417,19 @@ export default function(state = initialState, action) {
 					type: newState.type
 				}
 
+			case SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS:
+				newState.lastQueries[action.payload.consulta][action.payload.posElemento][action.payload.tipo] = action.payload.response[action.payload.tipo];
+
+				return {
+					loading: false,
+					status: "lastQueries"+action.payload.tipo+action.payload.posElemento+action.payload.consulta,
+					message: "",
+					response: state.response,
+					tabActive: state.tabActive,
+					lastQueries: newState.lastQueries,
+					type: state.type
+				}
+
 
 
 		}
@@ -433,6 +437,8 @@ export default function(state = initialState, action) {
 	return state;
 }
 
+/* Nome e endereco é retornado como json no cabecalho, esta funcao faz o parse neste
+json e retira apenas as informacoes necessarias */
 function patternJsonNomeOuEndereco(list, tipo) {
 	let nome = [];
 	let endereco = [];
@@ -459,17 +465,6 @@ function searchDocument(list, doc) {
 	return -1;
 }
 
-//Busca no array de pessoas pesquisadas o documento passado
-function searchPessoa(list, doc) {
-	for(let i=0; i<list.length; i++) {
-		if(doc == list[i].data.cadastro.cpf) {
-			return i;
-		}
-	}
-
-	return 0;
-}
-
 function searchPosPessoa(listPeople, doc) {
 	for(let i=0; i<listPeople.length; i++) {
 		if(doc == listPeople[i].documento) {
@@ -478,27 +473,4 @@ function searchPosPessoa(listPeople, doc) {
 	}
 
 	return 0;
-}
-
-//funcao recebe a lista das pessoas pesquisadas, a lista de telefones de todos os telefones e o documento que esta solicitando os telefones
-// retorna um objeto dos telefones fixos e moveis da lista de telefones
-function searchTelefonesRelacionados(listPhones, doc) {
-	for(let j=0; j<listPhones.length; j++) {
-		if(doc == listPhones[j].documento) {
-			return {
-				fixos: listPhones[j].fixos,
-				moveis: listPhones[j].moveis
-			}
-		}
-	}
-}
-
-//funcao recebe a lista das pessoas pesquisadas, a lista de telefones de todos os telefones e o documento que esta solicitando os telefones
-// retorna um objeto dos telefones fixos e moveis da lista de telefones
-function searchEnderecosRelacionados(listAddress, doc) {
-	for(let j=0; j<listAddress.length; j++) {
-		if(doc == listAddress[j].documento) {
-			return listAddress[j].enderecos
-		}
-	}
 }

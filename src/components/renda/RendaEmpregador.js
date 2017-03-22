@@ -68,7 +68,7 @@ export default class RendaEmpregador extends Component {
                                                 <td>{renda.faixaRenda}</td>
                                                 <td>
                                                     <a data-tip data-for='tooltipConsultar'>
-                                                        <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(renda.documentoEmpregador, "pj")}>
+                                                        <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(renda.documentoEmpregador, "CNPJ")}>
                                                             <i className='fa fa-search'/>
                                                         </Button>
                                                     </a>

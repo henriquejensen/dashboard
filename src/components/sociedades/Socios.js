@@ -15,7 +15,7 @@ export default class Socios extends Component {
                     <Table fields={["Nome", "Qualificação", "Participação", "Entrada", "Saída"]} >
                         <tbody>
                             {this.props.socios.map((soc,i) => {
-                                let tipo = soc.documento.length > 11 ? "pj" : "pf";
+                                let tipo = soc.documento.length > 11 ? "CNPJ" : "CPF";
                                 return (
                                     <tr key={i}>
                                         <td>

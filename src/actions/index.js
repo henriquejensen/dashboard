@@ -16,6 +16,7 @@ import {
 		SEARCH_BY_PESSOAS_RELACIONADOS,
 		SEARCH_BY_TELEFONES_RELACIONADOS,
 		SEARCH_BY_ENDERECOS_RELACIONADOS,
+		SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS,
 		SEE_LOCALIZE_MODEL,
 		CLOSE_LOCALIZE_MODEL,
 		LOADING_LOCALIZE,
@@ -111,46 +112,28 @@ export function searchCredito(document, tipo) {
 	}
 }
 
-export function searchLocalize(document, tipo) {
-	if(tipo == "pf") {
-		document = patternDocument(document, 11);
+export function searchLocalize(documento, tipo) {
+	let data = tipo == "CPF" ? {cpf:documento} : {cnpj:documento};
+	let url = tipo == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
+	let search = tipo == "CPF" ? SEARCH_BY_CPF : SEARCH_BY_CNPJ;
 
-		return (dispatch) => {
-			ajax.post(URL_SEARCH_CPF)
-				.send({cpf: document})
-				.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
-				.end(function(error, response) {
-					if (response) {
-						if (response.status == 200) {
-							dispatch({type: SEARCH_BY_CPF, payload: response.body})
-						} else {
-							dispatch({type: REQUEST_ERROR, payload: response.body.erro})
-						}
+	return (dispatch) => {
+		ajax.post(url)
+			.send(data)
+			.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
+			.end(function(error, response) {
+				if (response) {
+					if (response.status == 200) {
+						dispatch({type: search, payload: response.body})
 					} else {
-						dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
 					}
-				})
-		}
-	} else if(tipo == "pj") {
-		document = patternDocument(document, 14);
-
-		return (dispatch) => {
-			ajax.post(URL_SEARCH_CNPJ)
-				.send({cnpj: document})
-				.set({'Content-Type': 'application/x-www-form-urlencoded','Authorization': localStorage.getItem("token")})
-				.end(function(error, response) {
-					if (response) {
-						if (response.status == 200) {
-							dispatch({type: SEARCH_BY_CNPJ, payload: response.body})
-						} else {
-							dispatch({type: REQUEST_ERROR, payload: response.body.erro})
-						}
-					} else {
-						dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-					}
-				})
-		}
+				} else {
+					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+				}
+			})
 	}
+
 }
 
 export function searchLocalizeByNomeEndereco(inputLocalize, tipo, labelToTab) {
@@ -359,3 +342,36 @@ export function searchPessoasRelacionadas(cpf) {
 			})
 	}
 }
+
+/** Tipo pode CPF/CNPJ, consulta é endereco ou telefone, posElemento é a posicao no array do elemento clicado, documento é
+ * o documento da pessoa a ser buscada
+ */
+export function searchEnderecosTelefonesUltimasConsultas(tipo, consulta, posElemento, documento) {
+	let data = tipo == "CPF" ? {cpf:documento} : {cnpj:documento};
+	let url = tipo == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
+
+	return (dispatch) => {
+		ajax.post(url)
+			.send(data)
+			.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
+			.end(function(error, response) {
+				if (response) {
+					if (response.status == 200) {
+						dispatch({
+							type: SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS,
+							payload: {
+								response: response.body,
+								tipo: tipo,
+								consulta: consulta,
+								posElemento: posElemento
+							}
+						})
+					} else {
+						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
+					}
+				} else {
+					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+				}
+			})
+	}
+} 

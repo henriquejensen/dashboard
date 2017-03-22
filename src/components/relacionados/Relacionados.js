@@ -13,7 +13,7 @@ export default class Relacionados extends Component {
         map: true,
         buttonsClicked: {
             phone: {},
-            map: {}
+            home: {}
         }
     }
 
@@ -85,7 +85,7 @@ export default class Relacionados extends Component {
                                         <td>                                            
                                             {pessoa.documento ? 
                                                 <a data-tip data-for='tooltipConsultar'>
-                                                    <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(pessoa.documento, pessoa.documento.length > 11 ? "pj" : "pf")}>
+                                                    <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(pessoa.documento, pessoa.documento.length > 11 ? "CNPJ" : "CPF")}>
                                                         <i className='fa fa-search'/>
                                                     </Button>
                                                 </a>
@@ -95,12 +95,12 @@ export default class Relacionados extends Component {
                                         <td>
                                             {this.renderButtons(pessoa.telefones, pessoa.relacao, index, pessoa.documento, "phone")}
                                             {' '}
-                                            {this.renderButtons(pessoa.enderecos, pessoa.relacao, index, pessoa.documento, "map")}
+                                            {this.renderButtons(pessoa.enderecos, pessoa.relacao, index, pessoa.documento, "home")}
                                         </td>
                                     </tr>
                                     
                                     <tr>
-                                        {pessoa.enderecos && this.state.buttonsClicked.map[pessoa.documento] ? 
+                                        {pessoa.enderecos && this.state.buttonsClicked.home[pessoa.documento] ? 
                                             <td colSpan={3}>
                                                 <EnderecoLayout enderecos={pessoa.enderecos} />
                                             </td>

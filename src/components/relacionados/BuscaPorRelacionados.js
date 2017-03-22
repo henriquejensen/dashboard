@@ -42,7 +42,7 @@ export default class BuscaPorRelacionados extends Component {
                     <Table fields = {["Nome", "Data nasc.", "Pessoa Relacionada", "Cidade", "UF"]} orderTableBy={this.orderTableBy}>
                         <tbody>
                             {this.state.relacionados.map((relacionado,index) => {
-                                let tipo = relacionado.tipo == "Pessoa Física" ? "pf":"pj";
+                                let tipo = relacionado.tipo == "Pessoa Física" ? "CPF":"CNPJ";
                                 return (
                                     <tr key={index}>
                                         <td>

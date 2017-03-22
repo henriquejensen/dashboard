@@ -193,11 +193,11 @@ input {
 }
 
 .imgSearching > img {
-    height: 150px;
+    height: 120px;
     position: fixed;
     z-index: 2;
     left: 700px;
-    top: 210px;
+    top: 250px;
 }
 
 .my-form {

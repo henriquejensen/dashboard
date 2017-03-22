@@ -76,7 +76,7 @@ export default class LayoutTelefone extends Component{
                                         return (
                                             <tr key={i} className={i > 3 ? (this.props.showMoreTel ? "" : "display-none") : ""} >
                                                 <td>
-                                                    <i className="fa fa-phone" />
+                                                    <i className="fa fa-phone" />{" "}
                                                     {formatPhone(tel.telefone)}
                                                 </td>
 
@@ -154,7 +154,7 @@ export default class LayoutTelefone extends Component{
                                                     : "")
                                                 : ""}>
                                                 <td>
-                                                    <i className="fa fa-mobile" />
+                                                    <i className="fa fa-mobile" />{" "}
                                                     {formatPhone(tel.telefone)}
                                                 </td>
 

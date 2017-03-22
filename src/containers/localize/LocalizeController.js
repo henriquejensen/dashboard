@@ -10,6 +10,7 @@ import {
 		searchPessoasRelacionadas,
 		searchTelefonesPessoaRelacionada,
 		searchEnderecosPessoaRelacionada,
+		searchEnderecosTelefonesUltimasConsultas,
 		seeModel,
 		closeModel,
 		closeTab,
@@ -69,10 +70,8 @@ class LocalizeController extends Component {
 	researchUltimasConsultas = (entrada) => {
 		this.props.loadingLocalize();
 
-		if(this.props.type == "CPF")
-			this.props.searchLocalize(entrada, "pf");
-		else if(this.props.type == "CNPJ")
-			this.props.searchLocalize(entrada, "pj");
+		if(this.props.type == "CPF" || this.props.type == "CNPJ")
+			this.props.searchLocalize(entrada, this.props.type);
 		else if(this.props.type == "TELEFONE")
 			this.props.searchLocalizeByTelefone(entrada);
 		else if(this.props.type == "EMAIL")
@@ -122,11 +121,8 @@ class LocalizeController extends Component {
 		if(this.props.type == "CPF" || this.props.type == "CNPJ") {
 			let documento = this.state.documento ? this.state.documento : "DOCUMENTO";
 			documento = documento.replace(/[^0-9]/g,"");
-			let searchBy = "pf";
-			if(this.props.type == "CNPJ")
-				searchBy = "pj";
 			
-			this.props.searchLocalize(documento, searchBy);
+			this.props.searchLocalize(documento, this.props.type);
 			this.setState({
 				documento: ""
 			})
@@ -505,6 +501,7 @@ class LocalizeController extends Component {
 				status = {this.props.status}
 				message = {this.props.message}
 				searchUltimasConsultas={this.researchUltimasConsultas}
+				searchEnderecosTelefonesUltimasConsultas={this.props.type == "CPF" || this.props.type == "CNPJ" ? this.props.searchEnderecosTelefonesUltimasConsultas : ""}
 				lastQueries = {this.props.lastQueries}
 			>
 				{tipo ?
@@ -612,6 +609,7 @@ function mapDispatchToProps(dispatch) {
 			searchPessoasRelacionadas,
 			searchTelefonesPessoaRelacionada,
 			searchEnderecosPessoaRelacionada,
+			searchEnderecosTelefonesUltimasConsultas,
 			seeModel,
 			closeModel,
 			closeTab,
