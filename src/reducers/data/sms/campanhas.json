@@ -8,10 +8,8 @@
             "campanha": "SMS Web Service",
             "cadastro": "22/12/16 12:39",
             "centroCusto": "Padrão",
-            "rota": [
-                "Curto", "Web Service"
-            ],
-            "status": 0
+            "rota": "Curto, Web Service",
+            "status": 100
         },
         {
             "id": 1077752,
@@ -21,10 +19,8 @@
             "campanha": "SMS Web Service",
             "cadastro": "22/12/16 12:39",
             "centroCusto": "Padrão",
-            "rota": [
-                "Curto", "Web Service"
-            ],
-            "status": 1
+            "rota": "Curto, Web Service",
+            "status": 50
         },
         {
             "id": 1077648,
@@ -34,10 +30,8 @@
             "campanha": "SMS Web Service",
             "cadastro": "22/12/16 12:39",
             "centroCusto": "Padrão",
-            "rota": [
-                "Curto", "Web Service"
-            ],
-            "status": 2
+            "rota": "Curto, Web Service",
+            "status": 100
         },
         {
             "id": 1077549,
@@ -47,10 +41,8 @@
             "campanha": "SMS Web Service",
             "cadastro": "22/12/16 12:39",
             "centroCusto": "Padrão",
-            "rota": [
-                "Curto", "Web Service"
-            ],
-            "status": 0
+            "rota": "Curto, Web Service",
+            "status": 100
         }
     ]
 }

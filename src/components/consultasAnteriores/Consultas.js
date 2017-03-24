@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip'
+import { Col, Button } from "react-bootstrap";
 
 import Panel from "../../components/panel/Panel";
 import Table from "../table/Table";
@@ -13,25 +14,25 @@ export default class Consultas extends Component {
                     <div className="col-md-12">
                         <Table
                             fields={
-                                ["Nome do Associado", "Data da Consulta", "Cidade Origem", "Segmento", "Quantidade", ""]
+                                ["Nome do Associado", "Data da Consulta", "Cidade Origem", "Segmento", "Quantidade"]
                             }
                         >
                             <tbody>
                                 {this.props.consultas.consultasAnteriores.map((consulta,index) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{consulta.consultante}</td>
+                                            <td>
+                                                <a data-tip data-for='tooltipConsultar'>
+                                                    <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(consulta.documento, "CPF")}>
+                                                        <i className='fa fa-search'/>
+                                                    </Button>
+                                                </a>
+                                                {consulta.consultante}
+                                            </td>
                                             <td>{consulta.data}</td>
                                             <td>{consulta.cidade}</td>
                                             <td>{consulta.segmento}</td>  
                                             <td>{consulta.quantidade}</td>
-                                            <td>
-                                                <a data-tip data-for='tooltipConsultar'>
-                                                    <div className="mapa-button">
-                                                        <i className='fa fa-search'/>
-                                                    </div>
-                                                </a>
-                                            </td>
                                         </tr>
                                     )
                                 })}

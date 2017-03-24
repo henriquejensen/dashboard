@@ -1,25 +1,21 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { Button, Col, Form, DropdownButton, MenuItem } from "react-bootstrap";
+import { Button, Col, Form, DropdownButton, MenuItem, ProgressBar } from "react-bootstrap";
 
-import { getCampanhasSMS } from "../../actions/index";
+import { getTicketsVendaMais } from "../../actions/actionsVendaMais";
 
-import { FieldGroup } from "../../components/forms/CommonForms";
+import { FieldGroup, SelectGroup } from "../../components/forms/CommonForms";
 import Panel from "../../components/panel/Panel";
-import Table from "../../components/table/Table";
+
 import Modal from "../../components/Modal";
 
-import { LOGO_VENDAMAIS } from "../../constants/utils";
+import { LOGO_VENDAMAIS, NENHUM_REGISTRO } from "../../constants/utils";
+import { COMPANY_NAME_SHORT } from "../../constants/constantsCompany";
 
 class VendaMais extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      campanhasSMS: this.props.campanhasSMS,
-      IsModalOpen: false
-    }
+  state = {
+    IsModalOpen: false
   }
 
   renderForm = () => {
@@ -27,31 +23,23 @@ class VendaMais extends Component {
           <Form onSubmit={this.onFormSubmit} className="my-form">
               <Col md={2}>
                   <FieldGroup
-                    id="smsCampanha"
-                    label="Campanha"
+                    id="ticket"
+                    label="Ticket"
+                    type="number"
+                    name="ticket" />
+              </Col>
+
+              <Col md={3}>
+                  <FieldGroup
+                    id="nome"
+                    label="Nome"
                     type="text"
-                    name="campanha" />
+                    name="nome" />
               </Col>
 
               <Col md={2}>
                   <FieldGroup
-                    id="smsDataInicio"
-                    label="Data Início"
-                    type="date"
-                    name="dataInicio" />
-              </Col>
-
-              <Col md={2}>
-                  <FieldGroup
-                    id="smsDataFim"
-                    label="Data Fim"
-                    type="date"
-                    name="dataFim" />
-              </Col>
-
-              <Col md={2}>
-                  <FieldGroup
-                    id="smsCliente"
+                    id="cliente"
                     label="Cliente"
                     type="text"
                     name="cliente" />
@@ -59,10 +47,21 @@ class VendaMais extends Component {
 
               <Col md={2}>
                   <FieldGroup
-                    id="smsUsuario"
-                    label="Usuário"
+                    id="solicitante"
+                    label="Solicitante"
                     type="text"
-                    name="usuario" />
+                    name="solicitante" />
+              </Col>
+
+              <Col md={1}>
+                  <SelectGroup
+                    id="limitar"
+                    label="Usuário"
+                    type="select"
+                    name="usuario"
+                    options={["10", "20","30", "40","50", "60","70", "80","90","Todos"]}
+                    value="50"
+                    onChange={this.onChange} />
               </Col>
 
               <Col md={2}>
@@ -74,9 +73,9 @@ class VendaMais extends Component {
   }
 
   componentDidMount() {
-    document.title = "Venda+ > Assertiva";
+    document.title = "Venda+ > "+COMPANY_NAME_SHORT;
 
-    this.props.getCampanhasSMS();
+    this.props.getTicketsVendaMais();
   }
 
   openModal = (text) => {
@@ -93,51 +92,50 @@ class VendaMais extends Component {
       <Col md={12} sm={12} className="text-center">
         <img src={LOGO_VENDAMAIS} className="logo-produto" />
 
-        <Col style={{position:"absolute", right:15, top:0}}>
-          <DropdownButton bsStyle={"primary"} title="Enviar SMS" id={'dropdown-basic-0'} style={{float:"right"}}>
-            <MenuItem eventKey="1" onClick={() => this.openModal("SMS Rápido")}>Rápido</MenuItem>
-            <MenuItem eventKey="2" onClick={() => this.openModal("SMS por Arquivo")}>Arquivo</MenuItem>
+        <Col md={2} style={{position:"absolute", right:24, top:0}}>
+          <DropdownButton bsStyle={"primary"} title="Criar Ticket" id={'dropdown-basic-0'} style={{float:"right"}}>
+            <MenuItem eventKey="1" onClick={() => this.openModal("Cadastro de um novo ticket")}>Cadastro de ticket</MenuItem>
+            <MenuItem eventKey="2" onClick={() => this.openModal("Solicitação especial")}>Solicitação especial</MenuItem>
           </DropdownButton>
         </Col>
+
       </Col>
 
       {this.renderForm()}
             
       <Col md={12}>
-        <Panel title="MONITOR DE ENVIOS" qtdTotal={[{icon:"fa fa-envelope-o", qtd:this.props.campanhasSMS.length}]}>
-            <Table
-              fields={
-                ["Ticket", "Layout", "Arquivo", "Solicitante", "Início/Fim", "Status", "	Relatório", "Ações"]
-              }
-            >
-              <tbody>
-                  {this.props.campanhasSMS.length  > 0 ? this.props.campanhasSMS.map((campanha, index) => {
-                    return (
-                      <tr key={index}>
-                        <td>{campanha.id}</td>
-                        <td>
-                          <strong>Cliente:</strong> {campanha.cliente} <br/>
-                          <strong>Grupo:</strong> {campanha.grupo} <br/>
-                          <strong>Usuário:</strong> {campanha.usuario}
-                        </td>
-                        <td>{campanha.campanha}</td>
-                        <td>{campanha.cadastro}</td>
-                        <td>{campanha.centroCusto}</td>
-                        <td>
-                          {campanha.rota[0]}<br/>
-                          {campanha.rota[1]}
-                        </td>
-                        <td> <i className={campanha.status == 1 ? "fa fa-check my-ok" : campanha.status == 2 ? "fa fa-times my-warning" : "fa fa-spinner" } /></td>
-                        <td className="acoes">
-                          <i className="fa fa-list" />
-                          <i className="fa fa-share" />
-                        </td>
-                      </tr>
-                    )
-                  }) :  <tr ><td colSpan="8" className="text-center">Nenhum registro encontrado</td></tr>}
-              </tbody>
-            </Table>
-        </Panel>
+        {this.props.tickets.length > 0 ? 
+          this.props.tickets.map((ticket,index) => {
+            return (
+              <Panel title={"Ticket: "+ticket.ticket} key={index} qtdTotal={[{icon:"fa fa-ticket", qtd:ticket.quantidade}]}>
+                <Col md={6}>
+                  <strong>Nome: </strong>{ticket.nome}
+                </Col>
+                <Col md={3}>
+                  <strong>Envio: </strong>{ticket.postagem}
+                </Col>
+                <Col md={3}>
+                  <strong>Entrega: </strong>{ticket.entrega}
+                </Col>
+
+                <Col md={6}>
+                  <strong>Descrição: </strong>{ticket.descricao}
+                </Col>
+
+                <Col md={6}>
+                  <strong>Solicitante: </strong>{ticket.solicitante}
+                </Col>
+
+                <Col md={6}>
+                  <ProgressBar now={ticket.status} label={`${ticket.status}%`} active bsStyle={ticket.status == 100 ? "success" : "warning"} />
+                </Col>
+              </Panel>
+            )
+          })
+        :
+              <Panel title="Ticket">
+                <Col md={12} className="text-center">{NENHUM_REGISTRO}</Col>
+              </Panel>}
       </Col>
 
       <Modal
@@ -155,12 +153,12 @@ class VendaMais extends Component {
 
 function mapStateToProps(state) {
   return {
-    campanhasSMS: state.campanhasSMS
+    tickets: state.vendamais.tickets
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getCampanhasSMS }, dispatch)
+  return bindActionCreators({ getTicketsVendaMais }, dispatch)
 }
 
 

@@ -27,7 +27,8 @@ import {
 		CLOSE_TAB,
 		ICON_CREDITO,
 		CHANGE_LOCALIZE_TYPE,
-		NENHUM_REGISTRO
+		NENHUM_REGISTRO,
+		SUCCESS
 } from "../constants/utils";
 import model from "./data/modelLocalize.json";
 import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
@@ -74,7 +75,7 @@ export default function(state = initialState, action) {
 		switch(action.type) {
 			case CHANGE_LOCALIZE_TYPE:
 				return {
-					status: "changeType",
+					status: SUCCESS,
 					message: "",
 					loading: false,
 					response: newState.response,
@@ -208,7 +209,7 @@ export default function(state = initialState, action) {
 				}
 				
 			case SEARCH_BY_CPF:
-				let verifyIfCPFExists = action.payload && action.payload.cadastro  ? searchDocument(newState.response, action.payload.cadastro.cpf) : -2;
+				let verifyIfCPFExists = action.payload && action.payload.cadastro && action.payload.cadastro.cpf ? searchDocument(newState.response, action.payload.cadastro.cpf) : -2;
 
 				/*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
 				if(verifyIfCPFExists == -1) {
@@ -227,10 +228,8 @@ export default function(state = initialState, action) {
 					}
 				}
 
-				
-
 				return {
-					status: verifyIfCPFExists == -2 ? REQUEST_ERROR : "sucesss",
+					status: verifyIfCPFExists == -2 ? REQUEST_ERROR : SUCCESS,
 					message: verifyIfCPFExists == -2 ? NENHUM_REGISTRO : "",
 					loading: false,
 					response: verifyIfCPFExists == -1 ? [...newState.response, response] : newState.response,
@@ -252,7 +251,7 @@ export default function(state = initialState, action) {
 				}
 
 				return {
-					status: verifyIfCNPJExists == -2 ? REQUEST_ERROR : "sucesss",
+					status: verifyIfCNPJExists == -2 ? REQUEST_ERROR : SUCCESS,
 					message: verifyIfCNPJExists == -2 ? NENHUM_REGISTRO : "",
 					loading: false,
 					response: verifyIfCNPJExists == -1 ? [...newState.response, response] : newState.response,

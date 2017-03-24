@@ -9,6 +9,8 @@ import ChartData from "./reducer-chart-data";
 import auth from "./reducer-application";
 import cadastro from "./reducer-cadastro";
 import veiculos from "./reducer-veiculos";
+import vendamais from "./reducer-vendamais";
+import basecerta from "./reducer-basecerta";
 
 const rootReducer = combineReducers({
   localize: LocalizeData,
@@ -21,7 +23,9 @@ const rootReducer = combineReducers({
   respostasSMS: campanhasSMS,
   auth,
   cadastro,
-  veiculos
+  veiculos,
+  vendamais,
+  basecerta
 });
 
 export default rootReducer;

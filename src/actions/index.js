@@ -28,7 +28,7 @@ import {
 		GET_LOCALIZE_LAST_QUERIES
 } from "../constants/constantsLocalize";
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
-import { GET_CAMPANHAS_SMS, GET_CENTRO_CUSTO_SMS, GET_RESPOSTAS_SMS } from "../constants/constantsSMS";
+
 import {
 		LOGIN_SUCCESS,
 		LOGIN_ERROR,
@@ -210,27 +210,6 @@ export function userDashboard(gadgets, charts) {
 	return {
 		type: USER_EDIT_DASHBOARD,
 		payload: dashboardPreferences
-	}
-}
-
-export function getCampanhasSMS() {
-	return {
-		type: GET_CAMPANHAS_SMS,
-		payload: ""
-	}
-}
-
-export function getCentroCustoSMS() {
-	return {
-		type: GET_CENTRO_CUSTO_SMS,
-		payload: ""
-	}
-}
-
-export function getRespostasSMS() {
-	return {
-		type: GET_RESPOSTAS_SMS,
-		payload: ""
 	}
 }
 

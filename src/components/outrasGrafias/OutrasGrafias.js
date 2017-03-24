@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Col } from "react-bootstrap";
 
 import Endereco from "../endereco/layoutEndereco";
 import Panel from "../panel/Panel";
@@ -8,21 +9,21 @@ export default class OutrasGrafias extends Component {
         return(
             <Panel title="OUTRAS GRAFIAS" qtdTotal={[{icon:"fa fa-pencil", qtd:this.props.grafias.length}]}>
                 <a name={"Outras grafias"+this.props.index}></a>
-                <div className="col-md-12">
-                    {this.props.grafias.map((grafia, index) => {
-                        return (
-                            <div key={index}>
-                                <div className="col-md-6"><strong>Nome:</strong> {grafia.nome}</div>
-                                <div className="col-md-6"><strong>Documento:</strong> {grafia.documento}</div>
+                {this.props.grafias.map((grafia, index) => {
+                    return (
+                        <div key={index}>
+                            <Col md={6}><strong>Nome:</strong> {grafia.nome}</Col>
+                            <Col md={6}><strong>Documento:</strong> {grafia.documento}</Col>
 
+                            <Col md={12}>
                                 <Endereco enderecos={[
                                     grafia
                                 ]} />
-                            </div>
-                        )
-                    })}
+                            </Col>
+                        </div>
+                    )
+                })}
 
-                </div>
             </Panel>
         )
     }

@@ -126,7 +126,6 @@ export default function(state=getInitialState, action) {
 
         case CHANGE_TAB_CREDITO:
             let tab = searchDocument(state.response,action.payload);
-            console.log("TAB", tab)
             return {
                 status: "changeTab",
                 message: "",

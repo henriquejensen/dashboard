@@ -1,0 +1,130 @@
+{
+    "tickets": [
+        {
+            "ticket": 56564,
+            "layout": "Intervalor",
+            "arquivo": "Arquivo",
+            "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",
+            "inicio": "23/03/2017 - 15:54",
+            "fim": "23/03/2017 - 15:54",
+            "status": 100,
+            "telefones": [],
+            "relatorio": {
+                "cpf": {
+                    "entrada": 58,
+                    "saida": 16
+                },
+                "cnpj": {
+                    "entrada": 0,
+                    "saida": 0
+                },
+                "invalidos": 0,
+                "total": {
+                    "entrada": 58,
+                    "saida": 16
+                }
+            }
+
+        },
+        {
+            "ticket": 56563,
+            "layout": "Assertiva",
+            "arquivo": "Arquivo",
+            "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",
+            "inicio": "23/03/2017 - 15:54",
+            "fim": "23/03/2017 - 15:54",
+            "status": 80,
+            "telefones": [],
+            "relatorio": {
+                "cpf": {
+                    "entrada": 58,
+                    "saida": 16
+                },
+                "cnpj": {
+                    "entrada": 0,
+                    "saida": 0
+                },
+                "invalidos": 0,
+                "total": {
+                    "entrada": 58,
+                    "saida": 16
+                }
+            }
+        },
+        {
+            "ticket": 56562,
+            "layout": "Rennov",
+            "arquivo": "Arquivo",
+            "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",
+            "inicio": "23/03/2017 - 15:54",
+            "fim": "23/03/2017 - 15:54",
+            "status": 100,
+            "telefones": [],
+            "relatorio": {
+                "cpf": {
+                    "entrada": 58,
+                    "saida": 16
+                },
+                "cnpj": {
+                    "entrada": 0,
+                    "saida": 0
+                },
+                "invalidos": 0,
+                "total": {
+                    "entrada": 58,
+                    "saida": 16
+                }
+            }
+        },
+        {
+            "ticket": 56561,
+            "layout": "Rennov",
+            "arquivo": "Arquivo",
+            "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",
+            "inicio": "23/03/2017 - 15:54",
+            "fim": "23/03/2017 - 15:54",
+            "status": 35,
+            "telefones": [],
+            "relatorio": {
+                "cpf": {
+                    "entrada": 58,
+                    "saida": 16
+                },
+                "cnpj": {
+                    "entrada": 0,
+                    "saida": 0
+                },
+                "invalidos": 0,
+                "total": {
+                    "entrada": 58,
+                    "saida": 16
+                }
+            }
+        },
+        {
+            "ticket": 56560,
+            "layout": "Assertiva V2",
+            "arquivo": "Arquivo",
+            "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",
+            "inicio": "23/03/2017 - 15:54",
+            "fim": "23/03/2017 - 15:54",
+            "status": 100,
+            "telefones": [],
+            "relatorio": {
+                "cpf": {
+                    "entrada": 58,
+                    "saida": 16
+                },
+                "cnpj": {
+                    "entrada": 0,
+                    "saida": 0
+                },
+                "invalidos": 0,
+                "total": {
+                    "entrada": 58,
+                    "saida": 16
+                }
+            }
+        }
+    ]
+}

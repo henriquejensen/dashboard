@@ -10,7 +10,6 @@ import Protocolo from "../../components/protocolo/Protocolo";
 
 export default class FocoFiscalView extends Component {
     render(){
-        console.log("VIEW", this.props)
         return (
             <PanelGroup>
                 {this.props.tipo == "CPF" ?

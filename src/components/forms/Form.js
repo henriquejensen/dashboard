@@ -12,7 +12,7 @@ export default class Form extends Component {
             <div className="container-form noPrint">
                 <Row>
                     <Col md={12} sm={12} className="text-center">
-                        {this.props.showLogo ? <img src={this.props.logo} className="logo-produto" />: <img src={this.props.icon} />}
+                        {this.props.showLogo ? <img src={this.props.logo} className="logo-produto" />: <img className="icon-produto" src={this.props.icon} />}
                     </Col>
                     
                     <Col>

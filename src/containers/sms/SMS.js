@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { Button, Col, Form, DropdownButton, MenuItem } from "react-bootstrap";
+import { Button, Col, Form, DropdownButton, MenuItem, ProgressBar } from "react-bootstrap";
 
-import { getCampanhasSMS } from "../../actions/index";
+import { getCampanhasSMS } from "../../actions/actionsSMS";
 
 import SMSRapido from "./SMSRapido";
 
@@ -12,7 +12,7 @@ import Panel from "../../components/panel/Panel";
 import Table from "../../components/table/Table";
 import Modal from "../../components/Modal";
 
-import { LOGO_SMS } from "../../constants/utils";
+import { LOGO_SMS, NENHUM_REGISTRO } from "../../constants/utils";
 
 class SMS extends Component {
   constructor(props) {
@@ -95,7 +95,7 @@ class SMS extends Component {
       <Col md={12} sm={12} className="text-center">
         <img src={LOGO_SMS} className="logo-produto" />
 
-        <Col style={{position:"absolute", right:15, top:0}}>
+        <Col md={2} style={{position:"absolute", right:24, top:0}}>
           <DropdownButton bsStyle={"primary"} title="Enviar SMS" id={'dropdown-basic-0'} style={{float:"right"}}>
             <MenuItem eventKey="1" onClick={() => this.openModal("SMS Rápido")}>Rápido</MenuItem>
             <MenuItem eventKey="2" onClick={() => this.openModal("SMS por Arquivo")}>Arquivo</MenuItem>
@@ -104,42 +104,46 @@ class SMS extends Component {
       </Col>
 
       {this.renderForm()}
-            
+
       <Col md={12}>
-        <Panel title="MONITOR DE ENVIOS" qtdTotal={[{icon:"fa fa-envelope-o", qtd:this.props.campanhasSMS.length}]}>
-            <Table
-              fields={
-                ["ID", "Grupo", "Campanha", "Cadastro", "Centro de Custo", "Rota", "Status", "Ações"]
-              }
-            >
-              <tbody>
-                  {this.props.campanhasSMS.length  > 0 ? this.props.campanhasSMS.map((campanha, index) => {
-                    return (
-                      <tr key={index}>
-                        <td>{campanha.id}</td>
-                        <td>
-                          <strong>Cliente:</strong> {campanha.cliente} <br/>
-                          <strong>Grupo:</strong> {campanha.grupo} <br/>
-                          <strong>Usuário:</strong> {campanha.usuario}
-                        </td>
-                        <td>{campanha.campanha}</td>
-                        <td>{campanha.cadastro}</td>
-                        <td>{campanha.centroCusto}</td>
-                        <td>
-                          {campanha.rota[0]}<br/>
-                          {campanha.rota[1]}
-                        </td>
-                        <td> <i className={campanha.status == 1 ? "fa fa-check my-ok" : campanha.status == 2 ? "fa fa-times my-warning" : "fa fa-spinner" } /></td>
-                        <td className="acoes">
-                          <i className="fa fa-list" />
-                          <i className="fa fa-share" />
-                        </td>
-                      </tr>
-                    )
-                  }) :  <tr ><td colSpan="8" className="text-center">Nenhum registro encontrado</td></tr>}
-              </tbody>
-            </Table>
-        </Panel>
+        {this.props.campanhas.length > 0 ? 
+          this.props.campanhas.map((campanha,index) => {
+            return (
+              <Panel title={"Ticket: "+campanha.id} key={index} >
+                <Col md={4}>
+                  <strong>Campanha: </strong>{campanha.campanha}
+                </Col>
+                <Col md={3}>
+                  <strong>Cadastro: </strong>{campanha.cadastro}
+                </Col>
+                <Col md={3}>
+                  <strong>Centro de Custo: </strong>{campanha.centroCusto}
+                </Col>
+
+                <Col md={4}>
+                  <strong>Cliente: </strong>{campanha.cliente}
+                </Col>
+                <Col md={4}>
+                  <strong>Grupo: </strong>{campanha.grupo}
+                </Col>
+                <Col md={4}>
+                  <strong>Usuário: </strong>{campanha.usuario}
+                </Col>
+
+                <Col md={12}>
+                  <strong>Rota: </strong>{campanha.rota}
+                </Col>
+
+                <Col md={6}>
+                  <ProgressBar now={campanha.status} label={`${campanha.status}%`} active bsStyle={campanha.status == 100 ? "success" : "warning"} />
+                </Col>
+              </Panel>
+            )
+          })
+        :
+              <Panel title="Ticket">
+                <Col md={12} className="text-center">{NENHUM_REGISTRO}</Col>
+              </Panel>}
       </Col>
 
       <Modal
@@ -161,7 +165,7 @@ class SMS extends Component {
 
 function mapStateToProps(state) {
   return {
-    campanhasSMS: state.campanhasSMS
+    campanhas: state.campanhasSMS
   }
 }
 

@@ -1,25 +1,22 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { Button, Col, Form, DropdownButton, MenuItem } from "react-bootstrap";
+import { Button, Col, Form, DropdownButton, MenuItem, ProgressBar } from "react-bootstrap";
 
-import { getCampanhasSMS } from "../../actions/index";
+import { getTicketsBaseCerta } from "../../actions/actionsBaseCerta";
 
 import { FieldGroup, SelectGroup } from "../../components/forms/CommonForms";
 import Panel from "../../components/panel/Panel";
 import Table from "../../components/table/Table";
 import Modal from "../../components/Modal";
 
-import { LOGO_BASECERTA } from "../../constants/utils";
+import { LOGO_BASECERTA, NENHUM_REGISTRO } from "../../constants/utils";
+import { COMPANY_NAME_SHORT } from "../../constants/constantsCompany";
 
 class BaseCerta extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      campanhasSMS: this.props.campanhasSMS,
-      IsModalOpen: false
-    }
+  state = {
+    IsModalOpen: false
   }
 
   renderForm = () => {
@@ -29,7 +26,7 @@ class BaseCerta extends Component {
                   <FieldGroup
                     id="ticket"
                     label="Ticket"
-                    type="text"
+                    type="number"
                     name="ticket" />
               </Col>
 
@@ -85,9 +82,9 @@ class BaseCerta extends Component {
   }
 
   componentDidMount() {
-    document.title = "Base Certa > Assertiva";
+    document.title = "Base Certa > "+COMPANY_NAME_SHORT;
 
-    this.props.getCampanhasSMS();
+    this.props.getTicketsBaseCerta();
   }
 
   openModal = (text) => {
@@ -104,51 +101,49 @@ class BaseCerta extends Component {
       <Col md={12} sm={12} className="text-center">
         <img src={LOGO_BASECERTA} className="logo-produto" />
 
-        <Col style={{position:"absolute", right:15, top:0}}>
-          <DropdownButton bsStyle={"primary"} title="Enviar SMS" id={'dropdown-basic-0'} style={{float:"right"}}>
-            <MenuItem eventKey="1" onClick={() => this.openModal("SMS Rápido")}>Rápido</MenuItem>
-            <MenuItem eventKey="2" onClick={() => this.openModal("SMS por Arquivo")}>Arquivo</MenuItem>
+        <Col md={2} style={{position:"absolute", right:24, top:0}}>
+          <DropdownButton bsStyle={"primary"} title="Criar enriquecimento" id={'dropdown-basic-0'} style={{float:"right"}}>
+            <MenuItem eventKey="1" onClick={() => this.openModal("Novo enriquecimento")}>Novo enriquecimento</MenuItem>
+            <MenuItem eventKey="2" onClick={() => this.openModal("Solicitação especial")}>Solicitação especial</MenuItem>
           </DropdownButton>
         </Col>
       </Col>
 
       {this.renderForm()}
-            
+
       <Col md={12}>
-        <Panel title="MONITOR DE ENVIOS" qtdTotal={[{icon:"fa fa-envelope-o", qtd:this.props.campanhasSMS.length}]}>
-            <Table
-              fields={
-                ["Ticket", "Layout", "Arquivo", "Solicitante", "Início/Fim", "Status", "	Relatório", "Ações"]
-              }
-            >
-              <tbody>
-                  {this.props.campanhasSMS.length  > 0 ? this.props.campanhasSMS.map((campanha, index) => {
-                    return (
-                      <tr key={index}>
-                        <td>{campanha.id}</td>
-                        <td>
-                          <strong>Cliente:</strong> {campanha.cliente} <br/>
-                          <strong>Grupo:</strong> {campanha.grupo} <br/>
-                          <strong>Usuário:</strong> {campanha.usuario}
-                        </td>
-                        <td>{campanha.campanha}</td>
-                        <td>{campanha.cadastro}</td>
-                        <td>{campanha.centroCusto}</td>
-                        <td>
-                          {campanha.rota[0]}<br/>
-                          {campanha.rota[1]}
-                        </td>
-                        <td> <i className={campanha.status == 1 ? "fa fa-check my-ok" : campanha.status == 2 ? "fa fa-times my-warning" : "fa fa-spinner" } /></td>
-                        <td className="acoes">
-                          <i className="fa fa-list" />
-                          <i className="fa fa-share" />
-                        </td>
-                      </tr>
-                    )
-                  }) :  <tr ><td colSpan="8" className="text-center">Nenhum registro encontrado</td></tr>}
-              </tbody>
-            </Table>
-        </Panel>
+        {this.props.tickets.length > 0 ? 
+          this.props.tickets.map((ticket,index) => {
+            return (
+              <Panel title={"Ticket: "+ticket.ticket} key={index} >
+                <Col md={6}>
+                  <strong>Solicitante: </strong>{ticket.solicitante}
+                </Col>
+                <Col md={3}>
+                  <strong>Layout: </strong>{ticket.layout}
+                </Col>
+                <Col md={3}>
+                  <strong>Arquivo: </strong>{ticket.arquivo}
+                </Col>
+
+                <Col md={6}>
+                  <strong>Início: </strong>{ticket.inicio}
+                </Col>
+
+                <Col md={6}>
+                  <strong>Fim: </strong>{ticket.fim}
+                </Col>
+
+                <Col md={6}>
+                  <ProgressBar now={ticket.status} label={`${ticket.status}%`} active bsStyle={ticket.status == 100 ? "success" : "warning"} />
+                </Col>
+              </Panel>
+            )
+          })
+        :
+              <Panel title="Ticket">
+                <Col md={12} className="text-center">{NENHUM_REGISTRO}</Col>
+              </Panel>}
       </Col>
 
       <Modal
@@ -166,12 +161,12 @@ class BaseCerta extends Component {
 
 function mapStateToProps(state) {
   return {
-    campanhasSMS: state.campanhasSMS
+    tickets: state.basecerta.tickets
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getCampanhasSMS }, dispatch)
+  return bindActionCreators({ getTicketsBaseCerta }, dispatch)
 }
 
 

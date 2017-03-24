@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Col } from "react-bootstrap";
 
 import Panel from "../panel/Panel";
 import Table from "../table/Table";
@@ -10,15 +11,19 @@ export default class RegistroDebito extends Component {
             <a name={"Registros de Débitos"+this.props.index}></a>
             <Panel title="REGISTROS DE DÉBITOS" qtdTotal={[{icon:"fa fa-credit-card-alt", qtd:this.props.registros.quantidadeRegistros}]}>
               
-              <div className="col-md-12">
-                <div className="col-md-4"><strong>Ocorrência mais Antiga:</strong> {this.props.registros.ocorrenciaMaisAntiga}</div>
-                <div className="col-md-4"><strong>Ocorrência mais Recente:</strong> {this.props.registros.ocorrenciaMaisRecente}</div>
-                <div className="col-md-4"><strong>Valor Total:</strong> R$ {this.props.registros.valorTotal}</div>
+              <Col md={12}>
+                <Col md={4}><strong>Ocorrência mais Antiga:</strong> {this.props.registros.ocorrenciaMaisAntiga}</Col>
+                <Col md={4}><strong>Ocorrência mais Recente:</strong> {this.props.registros.ocorrenciaMaisRecente}</Col>
+                <Col md={4}><strong>Valor Total:</strong> R$ {this.props.registros.valorTotal}</Col>
+              </Col>
+
+              <Col md={12}>
                 <Table
                     fields={
                         ["Associado/Credor", "Data Inclusão", "Data vencimento", "Origem", "Contrato", "Comprador/Avalista", "Valor", "Cidade", "Telefone"]
                     }
                 >
+
                   <tbody>
                     {this.props.registros.registrosDebitos.map((registro, index) => {
                       return (
@@ -37,7 +42,7 @@ export default class RegistroDebito extends Component {
                     })}
                   </tbody>
                 </Table>
-              </div>
+              </Col>
             </Panel>
           </div>
       )

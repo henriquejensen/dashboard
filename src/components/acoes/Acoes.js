@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Col } from "react-bootstrap";
 
 import Panel from "../panel/Panel";
 import Table from "../table/Table";
@@ -10,13 +11,16 @@ export default class Acoes extends Component {
             <a name={"Recuperações, Falências e Ações Judiciais"+this.props.index}></a>
             <a name={"Ações"+this.props.index}></a>
             <Panel title="RECUPERAÇÕES, FALÊNCIAS E AÇÕES JUDICIAIS" qtdTotal={[{icon:"fa fa-line-chart", qtd:this.props.acoes.quantidadeAcoes}]}>
-              <div className="col-md-12">
-                <div className="col-md-4"><strong>Ocorrência mais Antiga:</strong> {this.props.acoes.ocorrenciaMaisAntiga}</div>
-                <div className="col-md-4"><strong>Ocorrência mais Recente:</strong> {this.props.acoes.ocorrenciaMaisRecente}</div>
-                <div className="col-md-4"><strong>Valor Total:</strong> R$ {this.props.acoes.valorTotal}</div>
+              <Col md={12}>
+                <Col md={4}><strong>Ocorrência mais Antiga:</strong> {this.props.acoes.ocorrenciaMaisAntiga}</Col>
+                <Col md={4}><strong>Ocorrência mais Recente:</strong> {this.props.acoes.ocorrenciaMaisRecente}</Col>
+                <Col md={4}><strong>Valor Total:</strong> R$ {this.props.acoes.valorTotal}</Col>
+              </Col>
+
+              <Col md={12}>
                 <Table
                     fields={
-                        ["Data", "Valor", "Cód. Vara", "Local (vara)", "Cidade", "Tipo"]
+                        ["Data", "Valor", "Cód. Vara", "Local (vara)", "Cidade", "UF", "Tipo"]
                     }
                 >
                   <tbody>
@@ -34,7 +38,7 @@ export default class Acoes extends Component {
                     })}
                   </tbody>
                 </Table>
-              </div>
+              </Col>
             </Panel>
           </div>
       )

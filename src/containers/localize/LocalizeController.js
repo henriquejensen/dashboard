@@ -31,7 +31,7 @@ import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
 
 import { COMPANY_NAME_SHORT } from "../../constants/constantsCompany";
-import { LOGO_LOCALIZE, ICON_LOCALIZE, LOADING_GIF } from "../../constants/utils";
+import { LOGO_LOCALIZE, ICON_LOCALIZE, LOADING_GIF, SUCCESS, REQUEST_ERROR, ERR_CONNECTION_REFUSED } from "../../constants/utils";
 import { CPF_CODE, CNPJ_CODE, EMAIL_CODE, TELEFONE_CODE, NOME_ENDERECO_CODE } from "../../constants/constantsLocalize";
 
 import estados from "../../components/utils/common/estados.json";
@@ -521,6 +521,9 @@ class LocalizeController extends Component {
 	}
 
 	render() {
+		if(this.props.status == SUCCESS || this.props.status == ERR_CONNECTION_REFUSED || this.props.status == REQUEST_ERROR) {
+			window.scrollTo(0, 0);
+		}
 		return(
 			<div className="container">
 				{this.form(this.props.type)}
@@ -532,7 +535,7 @@ class LocalizeController extends Component {
 						<Tabs
 							activeKey={this.props.tabActive}
 							onSelect={(key) => {this.props.changeTab(key)}}
-							animation={false}
+							animation={true}
 							id="uncontrolled-tab-example"
 						>
 							{this.props.datas.map((data, index) => {

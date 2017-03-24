@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Col } from "react-bootstrap";
 
 import Panel from "../panel/Panel";
 import Table from "../table/Table";
@@ -9,31 +10,20 @@ export default class Protestos extends Component {
           <div>
             <a name={"Protestos"+this.props.index}></a>
             <Panel title="PROTESTOS" qtdTotal={[{icon:"fa fa-ban", qtd:this.props.protestos.quantidadeRegistros}]}>
-              
-              <div className="col-md-12">
-                <div className="col-md-4"><strong>Ocorrência mais Antiga:</strong> {this.props.protestos.ocorrenciaMaisAntiga}</div>
-                <div className="col-md-4"><strong>Ocorrência mais Recente:</strong> {this.props.protestos.ocorrenciaMaisRecente}</div>
-                <div className="col-md-4"><strong>Valor Total:</strong> R$ {this.props.protestos.valorTotal}</div>
+              <Col md={12}>
+                <Col md={4}><strong>Ocorrência mais Antiga:</strong> {this.props.protestos.ocorrenciaMaisAntiga}</Col>
+                <Col md={4}><strong>Ocorrência mais Recente:</strong> {this.props.protestos.ocorrenciaMaisRecente}</Col>
+                <Col md={4}><strong>Valor Total:</strong> R$ {this.props.protestos.valorTotal}</Col>
+              </Col>
+
+              <Col md={12}>
                 <Table
                     fields={
                         ["Data", "Valor", "Cartório", "Cidade", "UF"]
                     }
-                >
-                  <tbody>
-                    {this.props.protestos.protestosDetalhados.map((protesto, index) => {
-                      return (
-                        <tr key={index}>
-                          <td>{protesto.data}</td>
-                          <td>{protesto.valor}</td>
-                          <td>{protesto.cartorio}</td>
-                          <td>{protesto.cidade}</td>
-                          <td>{protesto.uf}</td>
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </Table>
-              </div>
+                    elements={this.props.protestos.protestosDetalhados}
+                />
+              </Col>
             </Panel>
           </div>
       )

@@ -69,9 +69,9 @@ class GridProdutos extends Component {
             let tipo;
 
             this.props.isCPF ?
-                tipo = "pf"
+                tipo = "CPF"
             :
-                tipo = "pj"
+                tipo = "CNPJ"
 
             this.state.optionsSelected['Localize'] ?
                 this.props.searchLocalize(this.props.documento, tipo)
@@ -111,7 +111,7 @@ class GridProdutos extends Component {
                         <Col md={4} key={index}>
                             <Panel>
                                 <Col xs={12} md={12}>
-                                    <Image src={produto.icon} rounded />
+                                    <Image src={produto.icon} className="icon-produto" rounded />{" "}
                                     {produto.label}
                                 </Col>
                                 <Col xs={12} md={12}>
