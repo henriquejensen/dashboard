@@ -61,11 +61,12 @@ export default class UltimasConsultas extends Component {
     }
 
     render() {
+        let consultas = this.props.consultas;
         return (
             <Panel title="Últimas consultas">
                 <Table fields={fields} >
-                    {this.props.consultas && this.props.type ?
-                            this.props.consultas[this.props.type].map((consulta,index) => {
+                    {consultas ?
+                            consultas.map((consulta,index) => {
                                 return (
                                     <tbody key={index}>
                                         <tr>

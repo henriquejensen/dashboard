@@ -105,7 +105,7 @@ class FocoFiscal extends Component {
 				seeModelo = {this.props.seeModel}
 				status = {this.props.status}
 				message = {this.props.message}
-				lastQueries = {this.props.lastQueries}
+				lastQueries = {this.props.lastQueries[this.props.type]}
 			>
 				<Col md={tipo == "UNIFICADA" || tipo == "PF" ? 6 : 8}>
 					<input

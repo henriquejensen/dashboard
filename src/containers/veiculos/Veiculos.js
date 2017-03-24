@@ -125,7 +125,7 @@ class Veiculos extends Component {
 				seeModelo = {this.props.seeModel}
 				status = {this.props.status}
 				message = {this.props.message}
-				lastQueries = {this.props.lastQueries}
+				lastQueries = {this.props.lastQueries[this.props.type]}
 			>
 
 				{this.renderForm()}

@@ -11,6 +11,7 @@ import cadastro from "./reducer-cadastro";
 import veiculos from "./reducer-veiculos";
 import vendamais from "./reducer-vendamais";
 import basecerta from "./reducer-basecerta";
+import consigmais from "./reducer-consigmais";
 
 const rootReducer = combineReducers({
   localize: LocalizeData,
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   cadastro,
   veiculos,
   vendamais,
-  basecerta
+  basecerta,
+  consigmais
 });
 
 export default rootReducer;

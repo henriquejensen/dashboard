@@ -502,7 +502,7 @@ class LocalizeController extends Component {
 				message = {this.props.message}
 				searchUltimasConsultas={this.researchUltimasConsultas}
 				searchEnderecosTelefonesUltimasConsultas={this.props.type == "CPF" || this.props.type == "CNPJ" ? this.props.searchEnderecosTelefonesUltimasConsultas : ""}
-				lastQueries = {this.props.lastQueries}
+				lastQueries = {this.props.lastQueries[this.props.type]}
 			>
 				{tipo ?
 					tipo == "CPF" || tipo == "CNPJ" ? 
