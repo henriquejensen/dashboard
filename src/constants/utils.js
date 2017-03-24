@@ -1,6 +1,7 @@
 export const AUTH_URL = "https://auth.assertivasolucoes.com.br/auth/get-key-session-user";
 export const INFO_URL = "https://auth.assertivasolucoes.com.br/info/get-info-user";
 export const AUTHENTICATION = "token";
+
 export const REQUEST_ERROR = "REQUEST_ERROR";
 export const ERR_CONNECTION_REFUSED = "ERR_CONNECTION_REFUSED";
 export const INFO_SUCCESS = "INFO_SUCCESS";
@@ -15,6 +16,11 @@ export const CHANGE_LOCALIZE_TYPE = "CHANGE_LOCALIZE_TYPE";
 export const CHANGE_CREDITO_TYPE = "CHANGE_CREDITO_TYPE";
 export const CHANGE_FOCOFISCAL_TYPE = "CHANGE_FOCOFISCAL_TYPE";
 export const CHANGE_VEICULOS_TYPE = "CHANGE_VEICULOS_TYPE";
+export const LAST_QUERIES = "LAST_QUERIES";
+
+export const MESSAGE_SUCCESS_NUMBER_COPY = "Número copiado com sucesso";
+export const MESSAGE_SUCCESS_ADD_NEW_PHONE = "Obrigado pelo envio. Seu pedido de inserção será analisado";
+export const MESSAGE_SUCCESS_SMS = "Mensagem enviada com sucesso!";
 export const NENHUM_REGISTRO = "Nenhum registro encontrado";
 
 export const IMAGE_ANY_TOKEN = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/warning.png";

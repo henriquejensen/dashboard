@@ -11,7 +11,7 @@ import Panel from "../../components/panel/Panel";
 import Modal from "../../components/Modal";
 
 import { LOGO_VENDAMAIS, NENHUM_REGISTRO } from "../../constants/utils";
-import { COMPANY_NAME_SHORT } from "../../constants/constantsCompany";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_VENDAMAIS } from "../../constants/constantsCompany";
 
 class VendaMais extends Component {
   state = {
@@ -72,10 +72,12 @@ class VendaMais extends Component {
       )
   }
 
-  componentDidMount() {
-    document.title = "Venda+ > "+COMPANY_NAME_SHORT;
-
+  componentWillMount() {
     this.props.getTicketsVendaMais();
+  }
+
+  componentDidMount() {
+    document.title = COMPANY_PRODUCT_VENDAMAIS + " > " + COMPANY_NAME_SHORT;
   }
 
   openModal = (text) => {

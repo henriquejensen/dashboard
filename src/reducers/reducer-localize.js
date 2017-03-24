@@ -1,10 +1,16 @@
 import {
+		CHANGE_TAB_LOCALIZE,
+		CLOSE_LOCALIZE_MODEL,
+		CLOSE_MESSAGE_ERROR_LOCALIZE,
+		CLOSE_TAB_LOCALIZE,
+		GET_LOCALIZE_LAST_QUERIES,
+		ICON_LOCALIZE,
+		LOADING_LOCALIZE,
 		SEARCH_BY_CPF,
 		SEARCH_BY_CNPJ,
 		SEARCH_BY_TELEFONE,
 		SEARCH_BY_EMAIL,
 		SEARCH_BY_NOME_ENDERECO,
-		ICON_LOCALIZE,
 		SEARCH_BY_PESSOAS_RELACIONADOS,
 		SEARCH_BY_TELEFONES_RELACIONADOS,
 		SEARCH_BY_ENDERECOS_RELACIONADOS,
@@ -13,21 +19,17 @@ import {
 		SEARCH_BY_CREDITO_PJ,
 		SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS,
 		SEE_LOCALIZE_MODEL,
-		CLOSE_LOCALIZE_MODEL,
-		LOADING_LOCALIZE,
-		CLOSE_TAB_LOCALIZE,
-		CHANGE_TAB_LOCALIZE,
-		CLOSE_MESSAGE_ERROR_LOCALIZE,
-		GET_LOCALIZE_LAST_QUERIES
 } from "../constants/constantsLocalize";
 import {
-		REQUEST_ERROR,
-		ERR_CONNECTION_REFUSED,
+		CHANGE_LOCALIZE_TYPE,
 		CHANGE_TAB,
 		CLOSE_TAB,
+		ERR_CONNECTION_REFUSED,
 		ICON_CREDITO,
-		CHANGE_LOCALIZE_TYPE,
+		LAST_QUERIES,
+		LOADING,
 		NENHUM_REGISTRO,
+		REQUEST_ERROR,
 		SUCCESS
 } from "../constants/utils";
 import model from "./data/modelLocalize.json";
@@ -92,7 +94,7 @@ export default function(state = initialState, action) {
 				}
 				return {
 					loading: false,
-					status: "lastQueries",
+					status: LAST_QUERIES,
 					message: "",
 					response: state.response,
 					tabActive: state.tabActive,
@@ -102,7 +104,7 @@ export default function(state = initialState, action) {
 
 			case LOADING_LOCALIZE:
 				return {
-					status: "loading",
+					status: LOADING,
 					message: "",
 					loading: true,
 					response: newState.response,

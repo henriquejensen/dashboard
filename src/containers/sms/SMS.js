@@ -7,6 +7,8 @@ import { getCampanhasSMS } from "../../actions/actionsSMS";
 
 import SMSRapido from "./SMSRapido";
 
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_SMS } from "../../constants/constantsCompany";
+
 import { FieldGroup } from "../../components/forms/CommonForms";
 import Panel from "../../components/panel/Panel";
 import Table from "../../components/table/Table";
@@ -75,10 +77,12 @@ class SMS extends Component {
       )
   }
 
-  componentDidMount() {
-    document.title = "SMS > Assertiva";
-
+  componentWillMount() {
     this.props.getCampanhasSMS();
+  }
+
+  componentDidMount() {
+    document.title = COMPANY_PRODUCT_SMS + " > " + COMPANY_NAME_SHORT;
   }
 
   openModal = (text) => {

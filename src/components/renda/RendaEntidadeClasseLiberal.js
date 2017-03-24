@@ -1,4 +1,5 @@
 import React,  { Component } from "react";
+import { Button } from "react-bootstrap";
 
 import Panel from "../panel/Panel";
 import Table from "../table/Table";
@@ -20,7 +21,14 @@ export default class RendaEntidadeClasseLiberal extends Component {
                         >
                             <tbody>
                                 <tr>
-                                    <td>{this.props.renda.associacao}</td>
+                                    <td>
+                                        <a data-tip data-for='tooltipConsultar'>
+                                            <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(this.props.renda.cpf, "CPF")}>
+                                                <i className='fa fa-search'/>
+                                            </Button>
+                                        </a>
+                                        {this.props.renda.associacao}
+                                    </td>
                                     <td>{this.props.renda.profissao}</td>
                                     <td>{formatCurrency(this.props.renda.rendaMedia)}</td>
                                     <td>{formatCurrency(this.props.renda.rendaMinima)}</td>

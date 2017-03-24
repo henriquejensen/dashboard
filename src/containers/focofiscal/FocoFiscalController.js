@@ -22,6 +22,7 @@ import Titletab from "../../components/utils/Titletab";
 import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
 
 import { LOGO_FOCOFISCAL, ICON_FOCOFISCAL, LOADING_GIF } from "../../constants/utils";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_FOCOFISCAL } from "../../constants/constantsCompany";
 
 import estados from "../../components/utils/common/estados.json";
 import menu from "../../components/utils/common/menu.json";
@@ -55,7 +56,7 @@ class FocoFiscal extends Component {
 	}
 
 	componentDidMount() {
-		document.title = "Foco Fiscal > Assertiva";
+		document.title = COMPANY_PRODUCT_FOCOFISCAL + " > " + COMPANY_NAME_SHORT;
 	}
 
 	closeTab(index) {

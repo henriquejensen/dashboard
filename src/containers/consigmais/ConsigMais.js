@@ -113,7 +113,6 @@ class ConsigMais extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log("STATE", state)
 	return {
 		datas: state.consigmais.response,
 		status: state.consigmais.status,

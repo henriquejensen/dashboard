@@ -30,7 +30,7 @@ import CreditoView from "../credito/CreditoView";
 import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
 
-import { COMPANY_NAME_SHORT } from "../../constants/constantsCompany";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_LOCALIZE } from "../../constants/constantsCompany";
 import { LOGO_LOCALIZE, ICON_LOCALIZE, LOADING_GIF, SUCCESS, REQUEST_ERROR, ERR_CONNECTION_REFUSED } from "../../constants/utils";
 import { CPF_CODE, CNPJ_CODE, EMAIL_CODE, TELEFONE_CODE, NOME_ENDERECO_CODE } from "../../constants/constantsLocalize";
 
@@ -64,7 +64,7 @@ class LocalizeController extends Component {
 	}
 
 	componentDidMount() {
-		document.title = "Localize > "+COMPANY_NAME_SHORT;
+		document.title = COMPANY_PRODUCT_LOCALIZE + " > " + COMPANY_NAME_SHORT;
 	}
 
 	researchUltimasConsultas = (entrada) => {
@@ -535,12 +535,12 @@ class LocalizeController extends Component {
 						<Tabs
 							activeKey={this.props.tabActive}
 							onSelect={(key) => {this.props.changeTab(key)}}
-							animation={true}
 							id="uncontrolled-tab-example"
 						>
 							{this.props.datas.map((data, index) => {
 								return (
 									<Tab
+										animation={true}
 										eventKey={data.label}
 										title={
 											<Titletab

@@ -20,7 +20,7 @@ import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} 
 
 import { LOGO_CREDITO, ICON_CREDITO, LOADING_GIF } from "../../constants/utils";
 import { COMPLETA_CODE, INTERMEDIARIA_CODE, INTERMEDIARIA_PLUS_CODE, SIMPLES_CODE, CHEQUE_CODE, EXPRESS_CODE } from "../../constants/constantsCredito";
-import { COMPANY_NAME_SHORT } from "../../constants/constantsCompany";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO } from "../../constants/constantsCompany";
 
 import estados from "../../components/utils/common/estados.json";
 import menu from "../../components/utils/common/menu.json";
@@ -63,7 +63,7 @@ class Credito extends Component {
 	}
 
 	componentDidMount() {
-		document.title = "Crédito > " + COMPANY_NAME_SHORT;
+		document.title = COMPANY_PRODUCT_CREDITO + " > " + COMPANY_NAME_SHORT;
 	}
 
 	closeTab = (index) => {

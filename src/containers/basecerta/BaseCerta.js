@@ -11,7 +11,7 @@ import Table from "../../components/table/Table";
 import Modal from "../../components/Modal";
 
 import { LOGO_BASECERTA, NENHUM_REGISTRO } from "../../constants/utils";
-import { COMPANY_NAME_SHORT } from "../../constants/constantsCompany";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_BASECERTA } from "../../constants/constantsCompany";
 
 class BaseCerta extends Component {
 
@@ -81,10 +81,12 @@ class BaseCerta extends Component {
       )
   }
 
-  componentDidMount() {
-    document.title = "Base Certa > "+COMPANY_NAME_SHORT;
-
+  componentWillMount() {
     this.props.getTicketsBaseCerta();
+  }
+
+  componentDidMount() {
+    document.title = COMPANY_PRODUCT_BASECERTA + " > " + COMPANY_NAME_SHORT;
   }
 
   openModal = (text) => {

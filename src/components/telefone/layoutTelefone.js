@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Tooltip from "react-tooltip";
 import Notification from "react-notification-system";
-import { Form, FormControl, FormGroup, Button } from "react-bootstrap";
+import { Button, Col, Form, FormControl, FormGroup } from "react-bootstrap";
 
 import Table from "../Table";
 import Modal from "../Modal";
+import EnviarSMS from "../forms/EnvioSMS";
 
 import { formatPhone } from "../utils/functions/patternDocuments";
-import { NENHUM_REGISTRO } from "../../constants/utils";
+import { MESSAGE_SUCCESS_ADD_NEW_PHONE, MESSAGE_SUCCESS_NUMBER_COPY, MESSAGE_SUCCESS_SMS, NENHUM_REGISTRO, SUCCESS } from "../../constants/utils";
 
 export default class LayoutTelefone extends Component{
     constructor(props) {
@@ -23,22 +24,24 @@ export default class LayoutTelefone extends Component{
 
         this._notificationSystem = null;
 
-        this.closeModal = this.closeModal.bind(this);
-        this.onChange = this.onChange.bind(this);
-        this.sendNewPhone = this.sendNewPhone.bind(this);
-
     }
 
     _addNotification(message) {
         if (this._notificationSystem) {
                 this._notificationSystem.addNotification({
                 message: message,
-                level: 'success'
+                level: SUCCESS.toLocaleLowerCase()
             });
         }
     }
 
-    sendNewPhone(evt) {
+    sendSMS = (evt) => {
+        evt.preventDefault();
+        this.closeModal();
+        this._addNotification(MESSAGE_SUCCESS_SMS);
+    }
+
+    sendNewPhone = (evt) => {
         evt.preventDefault();
 
         this.state.telefone ?
@@ -50,16 +53,16 @@ export default class LayoutTelefone extends Component{
             celular: ""
         })
 
-        this._addNotification("Obrigado pelo envio. Seu pedido de inserção será analisado");
+        this._addNotification(MESSAGE_SUCCESS_ADD_NEW_PHONE);
     }
 
-    closeModal() {
+    closeModal = () => {
         this.setState({
             IsModalOpen: false
         })
     }
 
-    onChange(evt) {
+    onChange = (evt) => {
         this.setState({
             [evt.target.name]: evt.target.value
         })
@@ -68,7 +71,7 @@ export default class LayoutTelefone extends Component{
     render() {
         return (
                 <div>
-                    <div className="col-md-6">
+                    <Col md={6}>
                         <Table>
                             <tbody>
                                 {this.props.fixos.length > 0 ?
@@ -82,7 +85,7 @@ export default class LayoutTelefone extends Component{
 
                                                 <td className="noPrint">
                                                     <a data-tip data-for="tooltipCopy">
-                                                        <CopyToClipboard text={tel.telefone} onCopy={() => this._addNotification("Número copiado com sucesso")}>
+                                                        <CopyToClipboard text={tel.telefone} onCopy={() => this._addNotification(MESSAGE_SUCCESS_NUMBER_COPY)}>
                                                             <i className="fa fa-clipboard icon-tel" />
                                                         </CopyToClipboard>
                                                     </a>
@@ -90,7 +93,7 @@ export default class LayoutTelefone extends Component{
 
                                                 <td className="noPrint">
                                                     <a data-tip data-for="tooltipMessageVoice">
-                                                        <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
+                                                        <i className="fa fa-microphone icon-tel icon-tel-msg" />
                                                     </a>
                                                 </td>
 
@@ -138,9 +141,9 @@ export default class LayoutTelefone extends Component{
 
                             </tbody>
                         </Table>
-                    </div>
+                    </Col>
 
-                    <div className="col-md-6">
+                    <Col md={6}>
                         <Table>
                             <tbody>
                                 {this.props.moveis.length > 0 ?
@@ -160,7 +163,7 @@ export default class LayoutTelefone extends Component{
 
                                                 <td className="noPrint">
                                                     <a data-tip data-for="tooltipCopy">
-                                                        <CopyToClipboard text={tel.telefone} onCopy={() => this._addNotification("Número copiado com sucesso")}>
+                                                        <CopyToClipboard text={tel.telefone} onCopy={() => this._addNotification(MESSAGE_SUCCESS_NUMBER_COPY)}>
                                                             <i className="fa fa-clipboard icon-tel" />
                                                         </CopyToClipboard>
                                                     </a>
@@ -168,13 +171,13 @@ export default class LayoutTelefone extends Component{
 
                                                 <td className="noPrint">
                                                     <a data-tip data-for="tooltipSMS">
-                                                        <i className="fa fa-comments icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
+                                                        <i className="fa fa-comments icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true, numeros: tel.telefone })}/>
                                                     </a>
                                                 </td>
 
                                                 <td className="noPrint">
                                                     <a data-tip data-for="tooltipMessageVoice">
-                                                        <i className="fa fa-microphone icon-tel icon-tel-msg" onClick={()=>this.setState({ IsModalOpen: true })}/>
+                                                        <i className="fa fa-microphone icon-tel icon-tel-msg" />
                                                     </a>
                                                 </td>
 
@@ -234,7 +237,7 @@ export default class LayoutTelefone extends Component{
 
                             </tbody>
                         </Table>
-                    </div>
+                    </Col>
 
                     <Tooltip id="tooltipCopy">
                         <span>Copiar número</span>
@@ -271,8 +274,13 @@ export default class LayoutTelefone extends Component{
                     <Modal
                         IsModalOpen={this.state.IsModalOpen}
                         closeModal={this.closeModal}
-                        title="SMS Rápido"
+                        title="Envio de SMS"
                     >
+                        <EnviarSMS
+                            cancel={this.closeModal} 
+                            onSendSMS={this.sendSMS}
+                            onChange={this.onChange}
+                            numeros={this.state.numeros} />
                     </Modal>
 
                     <Notification ref={n => this._notificationSystem = n} />

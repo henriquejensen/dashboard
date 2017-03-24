@@ -97,7 +97,7 @@ export const TextAreaGroup = (props) => {
     return (
         <FormGroup controlId={props.id}>
             <ControlLabel>{props.label}</ControlLabel>
-            <FormControl componentClass="textarea" placeholder={props.placeholder} />
+            <FormControl componentClass="textarea" required placeholder={props.placeholder} />
         </FormGroup>
     )
 }

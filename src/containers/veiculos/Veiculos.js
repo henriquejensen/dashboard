@@ -13,7 +13,7 @@ import {
 import { changeProductType } from "../../actions/actionsCommon";
 
 import { LOGO_VEICULOS, ICON_VEICULOS, LOADING_GIF } from "../../constants/utils";
-import { COMPANY_NAME_SHORT } from "../../constants/constantsCompany";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_VEICULOS } from "../../constants/constantsCompany";
 import { AGREGADOS_CODE, BDV_CODE, DECODIFICADOR_CODE, LOCALIZACAO_CODE, PROPRIETARIOS_CODE, LEILAO_CODE, SINISTRO_CODE } from "../../constants/constantsVeiculos";
 
 import MyForm from "../../components/forms/Form";
@@ -27,7 +27,7 @@ class Veiculos extends Component {
 	}
 
 	componentDidMount() {
-		document.title = "Veículos > " + COMPANY_NAME_SHORT;
+		document.title = COMPANY_PRODUCT_VEICULOS + " > " + COMPANY_NAME_SHORT;
 	}
 
 	componentWillMount() {
