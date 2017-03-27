@@ -5,10 +5,12 @@ import {
     CLOSE_CREDITO_MODEL,
     CLOSE_MESSAGE_ERROR_CREDITO,
     CLOSE_TAB_CREDITO,
+    GET_CREDITO_CHEQUE,
     GET_CREDITO_COMPLETA,
     GET_CREDITO_LAST_QUERIES,
     LOADING_CREDITO,
     SEE_CREDITO_MODEL,
+    URL_CREDITO_SEARCH_CHEQUE,
     URL_CREDITO_SEARCH_COMPLETA
 } from "../constants/constantsCredito";
 
@@ -55,6 +57,28 @@ export function loadingCredito() {
         type: LOADING_CREDITO,
         payload: "loading"
     }
+}
+
+export function searchCreditoCheque(chequeData) {
+	return (dispatch) => {
+		ajax.post(URL_CREDITO_SEARCH_CHEQUE)
+			.send({cheque:chequeData})
+			.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
+			.end(function(error, response) {
+				if (response) {
+					if (response.status == 200) {
+						dispatch({
+							type: GET_CREDITO_CHEQUE,
+							payload: chequeData
+						})
+					} else {
+						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
+					}
+				} else {
+					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+				}
+			})
+	}
 }
 
 export function searchCreditoCompleta(documento) {

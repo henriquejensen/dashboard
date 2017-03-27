@@ -16,7 +16,7 @@ import CentroCusto from "./containers/sms/CentroCusto";
 import Respostas from "./containers/sms/Respostas";
 import BaseCerta from "./containers/basecerta/BaseCerta";
 import Credito from "./containers/credito/CreditoController";
-import Veiculos from "./containers/veiculos/Veiculos";
+import Veiculos from "./containers/veiculos/VeiculosController";
 import FocoFiscal from "./containers/focofiscal/FocoFiscalController";
 import VendaMais from "./containers/vendamais/VendaMais";
 import ConsigMais from "./containers/consigmais/ConsigMais";

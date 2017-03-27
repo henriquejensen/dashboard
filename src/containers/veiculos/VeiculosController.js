@@ -4,11 +4,14 @@ import { connect } from "react-redux";
 import { Col } from "react-bootstrap";
 
 import {
-		getLastQueries,
-		seeModel,
+		changeTab,
+		closeMessageErrorVeiculos,
 		closeModel,
 		closeTab,
-		changeTab
+		getLastQueries,
+		loadingVeiculos,
+		searchByVeiculos,
+		seeModel
 } from "../../actions/actionsVeiculos";
 import { changeProductType } from "../../actions/actionsCommon";
 
@@ -21,7 +24,7 @@ import MyForm from "../../components/forms/Form";
 import menu from "../../components/utils/common/menu.json";
 import estados from "../../components/utils/common/estados.json";
 
-class Veiculos extends Component {
+class VeiculosController extends Component {
 	state = {
 
 	}
@@ -37,7 +40,10 @@ class Veiculos extends Component {
 	onFormSubmit = (evt) => {
 		evt.preventDefault();
 
-		console.log("SUBMIT VEICULOS", this.state);
+		this.props.loadingVeiculos();
+
+		this.props.searchByVeiculos(this.state);
+
 	}
 
 	onChange = (evt) => {
@@ -106,6 +112,7 @@ class Veiculos extends Component {
 						value={this.state.chassi}
 						name="chassi"
 						onChange={this.onChange}
+						required
 					/>
 				</Col>
 			</span>
@@ -119,6 +126,7 @@ class Veiculos extends Component {
 				logo = {LOGO_VEICULOS}
 				showLogo = {this.props.datas.length == 0 ? true : false}
 				onformSubmit = {this.onFormSubmit}
+				closeMessageError = {this.props.closeMessageErrorVeiculos}
 				options={menu.sidebar[5].subItems}
 				onChange={this.onChangeType}
                 type={this.props.type}
@@ -138,6 +146,8 @@ class Veiculos extends Component {
 		return (
 			<div className="container">
 				{this.form(this.props.type)}
+
+				{this.props.loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
 			</div>
 		)
 	}
@@ -158,8 +168,15 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		changeProductType,
-		getLastQueries
+		changeTab,
+		closeMessageErrorVeiculos,
+		closeModel,
+		closeTab,
+		getLastQueries,
+		loadingVeiculos,
+		searchByVeiculos,
+		seeModel
 	}, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Veiculos);
+export default connect(mapStateToProps, mapDispatchToProps)(VeiculosController);

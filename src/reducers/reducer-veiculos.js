@@ -1,12 +1,14 @@
 import {
-    SEE_VEICULOS_MODEL,
+    CLOSE_MESSAGE_ERROR_VEICULOS,
     CLOSE_VEICULOS_MODEL,
     ICON_VEICULOS,
+    GET_FOCOFISCAL,
+    GET_VEICULOS_LAST_QUERIES,
     LOADING_VEICULOS,
-    GET_VEICULOS_LAST_QUERIES
+    SEE_VEICULOS_MODEL
 } from "../constants/constantsVeiculos";
 
-import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB, CHANGE_VEICULOS_TYPE } from "../constants/utils";
+import { CHANGE_TAB, CHANGE_VEICULOS_TYPE, CLOSE_TAB, ERR_CONNECTION_REFUSED, ERROR_503, REQUEST_ERROR } from "../constants/utils";
 
 import model from "./data/jsonPadrao.json";
 import lastQueries from "./data/lastQueries.json";
@@ -31,6 +33,61 @@ export default function(state=getInitialState, action) {
     }
 
     switch(action.type) {
+        case CHANGE_VEICULOS_TYPE:
+            return {
+                status: "changeType",
+                message: "",
+                loading: false,
+                response: state.response,
+                tabActive: state.tabActiv,
+                lastQueries: state.lastQueries,
+                type: action.payload.toUpperCase()
+            }
+
+        case CLOSE_MESSAGE_ERROR_VEICULOS:
+            return {
+                status: "",
+                message: "",
+                loading: false,
+                response: state.response,
+                tabActive: state.tabActive,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+
+        case CLOSE_VEICULOS_MODEL:
+            return {
+                loading: false,
+                status: "closeModel",
+                message: "",
+                response: "",
+                tabActive: state.tabActive,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+
+        case ERR_CONNECTION_REFUSED:
+            return {
+                status: ERR_CONNECTION_REFUSED,
+                message: ERROR_503,
+                loading: false,
+                response: state.response,
+                tabActive: state.tabActive,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }    
+
+        case GET_VEICULOS_LAST_QUERIES:
+            return {
+                loading: false,
+                status: "lastQueries",
+                message: "",
+                response: state.response,
+                tabActive: state.tabActive,
+                lastQueries: lastQueries.veiculos,
+                type: state.type
+            }
+
         case LOADING_VEICULOS:
             return {
                 loading: true,
@@ -56,39 +113,6 @@ export default function(state=getInitialState, action) {
                 tabActive: model.cadastroPf.cpf,
                 lastQueries: state.lastQueries,
                 type: state.type
-            }
-
-        case CLOSE_VEICULOS_MODEL:
-            return {
-                loading: false,
-                status: "closeModel",
-                message: "",
-                response: "",
-                tabActive: state.tabActive,
-                lastQueries: state.lastQueries,
-                type: state.type
-            }
-
-        case GET_VEICULOS_LAST_QUERIES:
-            return {
-                loading: false,
-                status: "lastQueries",
-                message: "",
-                response: state.response,
-                tabActive: state.tabActive,
-                lastQueries: lastQueries.veiculos,
-                type: state.type
-            }
-
-        case CHANGE_VEICULOS_TYPE:
-            return {
-                status: "changeType",
-                message: "",
-                loading: false,
-                response: state.response,
-                tabActive: state.tabActiv,
-                lastQueries: state.lastQueries,
-                type: action.payload.toUpperCase()
             }
     }
 

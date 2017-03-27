@@ -4,11 +4,16 @@ import { connect } from "react-redux";
 import { Tabs, Tab } from "react-bootstrap";
 
 import {
-		seeModel,
-		closeModel,
-		getLastQueries,
 		changeTab,
-		closeTab
+		closeMessageErrorFocoFiscal,
+		closeModel,
+		closeTab,
+		getLastQueries,
+		loadingFocoFiscal,
+		seeModel,
+		searchByFocoFiscal,
+		searchByReceitaPF,
+		searchBySintegraUnificada
 } from "../../actions/actionsFocoFiscal";
 import {
 		changeProductType,
@@ -27,10 +32,6 @@ import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_FOCOFISCAL } from "../../constants/
 import estados from "../../components/utils/common/estados.json";
 import menu from "../../components/utils/common/menu.json";
 
-const tiposCheque = [
-	"Apenas Cadastro", "Digitando dados do Cheque", "Por Código de Barras (CMC-7)", 
-]
-
 class FocoFiscal extends Component {
 	constructor() {
 		super();
@@ -43,12 +44,6 @@ class FocoFiscal extends Component {
 			}
 		}
 
-		this.form = this.form.bind(this);
-		this.onFormSubmit = this.onFormSubmit.bind(this);
-		this.onChange = this.onChange.bind(this);
-		this.onChangeType = this.onChangeType.bind(this);
-		this.onChangeInput = this.onChangeInput.bind(this);
-		this.closeTab = this.closeTab.bind(this);
 	}
 
 	componentWillMount() {
@@ -59,7 +54,7 @@ class FocoFiscal extends Component {
 		document.title = COMPANY_PRODUCT_FOCOFISCAL + " > " + COMPANY_NAME_SHORT;
 	}
 
-	closeTab(index) {
+	closeTab = (index) => {
 		{/*Fecha as abas, quando sobrar um chama a funcao para fechar tudo (closeModel)*/}
 		if(this.props.datas.length > 1) {
 			this.props.closeTab(index);
@@ -68,7 +63,7 @@ class FocoFiscal extends Component {
 		}
 	}
 
-	onChangeInput(evt) {
+	onChangeInput = (evt) => {
 		let newState = this.state.focofiscalInput;
 		newState[evt.target.name] = evt.target.value
 		this.setState({
@@ -76,30 +71,46 @@ class FocoFiscal extends Component {
 		})
 	}
 
-	onChangeType(evt) {
+	onChangeType = (evt) => {
 		this.props.changeProductType("focofiscal", evt.target.value)
 	}
 
-	onChange(evt) {
+	onChange = (evt) => {
 		this.setState({
 			[evt.target.name]: evt.target.value
 		})
 	}
 
-	onFormSubmit(evt) {
+	onFormSubmit = (evt) => {
 		evt.preventDefault();
 
-		console.log("SUBMIT", this.props.type, this.state.focofiscalInput);
+		this.props.loadingFocoFiscal();
+
+		if(this.props.type == "PF") {
+			this.props.searchByReceitaPF(this.state.focofiscalInput.documento, this.state.focofiscalInput.dataNascimento);
+		} else if(this.props.type == "UNIFICADA") {
+			this.props.searchBySintegraUnificada(this.state.focofiscalInput.documento, this.state.focofiscalInput.estado);
+		} else {
+			this.props.searchByFocoFiscal(this.state.focofiscalInput.documento);
+		}
+		
+		this.setState({
+			focofiscalInput: {
+				documento: "",
+				dataNascimento: "",
+				estado: ""
+			}
+		})
 	}
 
-	form(tipo) {
+	form = (tipo) => {
 		return (
 			<MyForm
 				icon = {ICON_FOCOFISCAL}
 				logo = {LOGO_FOCOFISCAL}
 				showLogo = {this.props.datas.length == 0 ? true : false}
 				onformSubmit = {this.onFormSubmit}
-				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
+				closeMessageError = {this.props.closeMessageErrorFocoFiscal}
 				options={menu.sidebar[6].subItems}
 				onChange={this.onChangeType}
                 type={this.props.type}
@@ -214,11 +225,16 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		changeProductType,
-		getLastQueries,
-		seeModel,
+		closeMessageErrorFocoFiscal,
 		closeModel,
 		changeTab,
-		closeTab
+		closeTab,
+		getLastQueries,
+		loadingFocoFiscal,
+		seeModel,
+		searchByFocoFiscal,
+		searchByReceitaPF,
+		searchBySintegraUnificada
 	}, dispatch)
 }
 

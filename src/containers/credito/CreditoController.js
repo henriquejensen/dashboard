@@ -11,6 +11,7 @@ import {
 		getLastQueries,
 		loadingCredito,
 		seeModel,
+		searchCreditoCheque,
 		searchCreditoCompleta
 } from "../../actions/actionsCredito";
 import { changeProductType } from "../../actions/actionsCommon";
@@ -51,7 +52,11 @@ class Credito extends Component {
 				digitoChequeInicial: "",
 				CMC7: "",
 				folhas: "",
-				servico: []
+				servico: [],
+				receitaFederal: false,
+				ccf: false,
+				protestoPublico: false,
+				sintegra: false
 			}
 		}
 	}
@@ -86,6 +91,14 @@ class Credito extends Component {
 		})
 	}
 
+	onChangeInputCheckBox = (evt) => {
+		let newStateCredito = this.state.creditoInput;
+		newStateCredito[evt.target.name] = !newStateCredito[evt.target.name]
+		this.setState({
+			creditoInput: newStateCredito
+		})
+	}
+
 	onChangeType = (evt) => {
 		this.props.changeProductType("credito", evt.target.value)
 	}
@@ -101,11 +114,35 @@ class Credito extends Component {
 
 		this.props.loadingCredito();
 
-		if(this.props.type == "COMPLETA") {
+		if(this.props.type == "CHEQUE") {
+			this.props.searchCreditoCheque(this.state.creditoInput);
+		} else {
 			this.props.searchCreditoCompleta(this.state.creditoInput.documento);
 		}
 
-		console.log("SUBMIT", this.props.type, this.state.creditoInput);
+		this.setState({
+			tipo: "",
+			expressTipo: "CPF",
+			tipoCheque: "Apenas Cadastro",
+			creditoInput: {
+				documento: "",
+				uf: "",
+				banco: "",
+				agência: "",
+				conta: "",
+				digitoConta: "",
+				chequeInicial: "",
+				digitoChequeInicial: "",
+				CMC7: "",
+				folhas: "",
+				servico: [],
+				receitaFederal: false,
+				ccf: false,
+				protestoPublico: false,
+				sintegra: false
+			}
+		})
+
 	}
 
 	renderForm(showUF) {
@@ -122,6 +159,7 @@ class Credito extends Component {
 						}
 						value={this.state.creditoInput.documento}
 						name="documento"
+						required
 						onChange={this.onChangeInput}
 						style={{width:'100%'}}/>
 				</Col>
@@ -167,6 +205,7 @@ class Credito extends Component {
 						placeholder="CPF ou CNPJ"
 						value={this.state.creditoInput.documento}
 						name="documento"
+						required
 						onChange={this.onChangeInput}/>
 				</Col>
 
@@ -283,6 +322,7 @@ class Credito extends Component {
 						placeholder="CPF ou CNPJ"
 						value={this.state.creditoInput.documento}
 						name="documento"
+						c
 						onChange={this.onChangeInput}/>
 				</Col>
 
@@ -292,18 +332,34 @@ class Credito extends Component {
 							Cadastral
 						</Checkbox>
 						{' '}
-						<Checkbox inline>
+						<Checkbox
+							inline
+							name="receitaFederal"
+							onChange={this.onChangeInputCheckBox}
+							checked={this.state.creditoInput.receitaFederal}>
 							Receita Federal
 						</Checkbox>
 						{' '}
-						<Checkbox inline>
+						<Checkbox
+							inline
+							name="sintegra"
+							onChange={this.onChangeInputCheckBox}
+							checked={this.state.creditoInput.sintegra}>
 							Sintegra
 						</Checkbox>
-						<Checkbox inline>
+						<Checkbox
+							inline
+							name="ccf"
+							onChange={this.onChangeInputCheckBox}
+							checked={this.state.creditoInput.ccf}>
 							CCF
 						</Checkbox>
 						{this.state.expressTipo == "CNPJ" ?
-							<Checkbox inline>
+							<Checkbox
+								inline
+								name="protestoPublico"
+								onChange={this.onChangeInputCheckBox}
+								checked={this.state.creditoInput.protestoPublico}>
 								Protesto Público 
 							</Checkbox>
 						: ""}
@@ -311,6 +367,16 @@ class Credito extends Component {
 				</Col>
 			</span>
 		)
+	}
+
+	researchUltimasConsultas = (entrada) => {
+		this.props.loadingCredito();
+
+		if(this.props.type == "CHEQUE") {
+			this.props.searchCreditoCheque(entrada);
+		} else {
+			this.props.searchCreditoCompleta(entrada);
+		}
 	}
 
 	form = (tipo) => {
@@ -327,6 +393,7 @@ class Credito extends Component {
 				seeModelo = {this.props.seeModel}
 				status = {this.props.status}
 				message = {this.props.message}
+				searchUltimasConsultas={this.researchUltimasConsultas}
 				lastQueries = {this.props.lastQueries[this.props.type]}
 			>
 				{tipo ?
@@ -412,6 +479,7 @@ function mapDispatchToProps(dispatch) {
 		getLastQueries,
 		loadingCredito,
 		seeModel,
+		searchCreditoCheque,
 		searchCreditoCompleta
 	}, dispatch)
 }

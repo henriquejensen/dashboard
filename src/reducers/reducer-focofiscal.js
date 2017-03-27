@@ -1,12 +1,13 @@
 import {
-    SEE_FOCOFISCAL_MODEL,
     CLOSE_FOCOFISCAL_MODEL,
+    CLOSE_MESSAGE_ERROR_FOCOFISCAL,
+    GET_FOCOFISCAL_LAST_QUERIES,
     ICON_FOCOFISCAL,
     LOADING_FOCOFISCAL,
-    GET_FOCOFISCAL_LAST_QUERIES
+    SEE_FOCOFISCAL_MODEL
 } from "../constants/constantsFocoFiscal";
 
-import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB, CHANGE_FOCOFISCAL_TYPE } from "../constants/utils";
+import { CHANGE_FOCOFISCAL_TYPE, CHANGE_TAB, CLOSE_TAB, ERR_CONNECTION_REFUSED, ERROR_503, REQUEST_ERROR } from "../constants/utils";
 
 import model from "./data/jsonPadrao.json";
 import lastQueries from "./data/lastQueries.json";
@@ -58,12 +59,34 @@ export default function(state=getInitialState, action) {
                 type: state.type
             }
 
+        case CLOSE_MESSAGE_ERROR_FOCOFISCAL:
+            return {
+                status: "",
+                message: "",
+                loading: false,
+                response: state.response,
+                tabActive: state.tabActive,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+
         case CLOSE_FOCOFISCAL_MODEL:
             return {
                 loading: false,
                 status: "closeModel",
                 message: "",
                 response: "",
+                tabActive: state.tabActive,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+
+        case ERR_CONNECTION_REFUSED:
+            return {
+                status: ERR_CONNECTION_REFUSED,
+                message: ERROR_503,
+                loading: false,
+                response: state.response,
                 tabActive: state.tabActive,
                 lastQueries: state.lastQueries,
                 type: state.type
