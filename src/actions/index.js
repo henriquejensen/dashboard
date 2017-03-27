@@ -322,12 +322,17 @@ export function searchPessoasRelacionadas(cpf) {
 	}
 }
 
-/** Tipo pode CPF/CNPJ, consulta é endereco ou telefone, posElemento é a posicao no array do elemento clicado, documento é
+/** Consutla pode ser CPF/CNPJ, tipo é endereco ou telefone, posElemento é a posicao no array do elemento clicado, documento é
  * o documento da pessoa a ser buscada
  */
 export function searchEnderecosTelefonesUltimasConsultas(tipo, consulta, posElemento, documento) {
-	let data = tipo == "CPF" ? {cpf:documento} : {cnpj:documento};
-	let url = tipo == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
+	let data = {cpf:documento};
+	let url = URL_SEARCH_CPF;
+
+	if(consulta == "CNPJ") {
+		data = {cnpj:documento};
+		url = URL_SEARCH_CNPJ;
+	}
 
 	return (dispatch) => {
 		ajax.post(url)

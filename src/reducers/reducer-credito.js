@@ -1,17 +1,22 @@
 import {
-    CLOSE_TAB_CREDITO,
     CLOSE_CREDITO_MODEL,
+    CLOSE_MESSAGE_ERROR_CREDITO,
+    CLOSE_TAB_CREDITO,
     LOADING_CREDITO,
     SEE_CREDITO_MODEL,
     GET_CREDITO_LAST_QUERIES,
     CHANGE_TAB_CREDITO
 } from "../constants/constantsCredito";
+
 import {
     CHANGE_CREDITO_TYPE,
+    CHANGE_TAB,
+    CLOSE_TAB,
+    ERR_CONNECTION_REFUSED,
+    ERROR_503,
     ICON_CREDITO,
+    REQUEST_ERROR
 } from "../constants/utils";
-
-import { REQUEST_ERROR, ERR_CONNECTION_REFUSED, CHANGE_TAB, CLOSE_TAB } from "../constants/utils";
 
 import model from "./data/jsonPadraoCredito.json";
 import modelCNPJ from "./data/jsonPadraoCreditoCNPJ.json";
@@ -45,6 +50,77 @@ export default function(state=getInitialState, action) {
     }
 
     switch(action.type) {
+        case CHANGE_CREDITO_TYPE:
+            return {
+                status: "changeType",
+                message: "",
+                loading: false,
+                response: state.response,
+                tabActive: state.tabActiv,
+                lastQueries: state.lastQueries,
+                type: action.payload.toUpperCase()
+            }
+
+        case CHANGE_TAB_CREDITO:
+            let tab = searchDocument(state.response,action.payload);
+            return {
+                status: "changeTab",
+                message: "",
+                loading: false,
+                response: state.response,
+                tabActive: state.response.length > 0 ? state.response[tab].label : "",
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+
+        case CLOSE_CREDITO_MODEL:
+            return {
+                status: "closeModel",
+                message: "",
+                loading: false,
+                response: [],
+                tabActive: "",
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+
+        case CLOSE_MESSAGE_ERROR_CREDITO:
+            return {
+                status: "",
+                message: "",
+                loading: false,
+                response: state.response,
+                tabActive: state.tabActive,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+
+        case CLOSE_TAB_CREDITO:
+            let newResponse = state.response.concat();
+            let closed = newResponse.splice(action.payload, 1);
+
+            return {
+                status: "closeTab",
+                message: "",
+                loading: false,
+                response: newResponse,
+                tabActive: newResponse[newResponse.length-1].label,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+            
+
+        case ERR_CONNECTION_REFUSED:
+            return {
+                status: ERR_CONNECTION_REFUSED,
+                message: ERROR_503,
+                loading: false,
+                response: state.response,
+                tabActive: state.tabActive,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+
         case GET_CREDITO_LAST_QUERIES:
             return {
                 loading: false,
@@ -85,53 +161,6 @@ export default function(state=getInitialState, action) {
                 message: "",
                 response: [response, responseCNPJ],
                 tabActive: model.cadastroPf.cpf,
-                lastQueries: state.lastQueries,
-                type: state.type
-            }
-
-        case CLOSE_CREDITO_MODEL:
-            return {
-                status: "closeModel",
-                message: "",
-                loading: false,
-                response: [],
-                tabActive: "",
-                lastQueries: state.lastQueries,
-                type: state.type
-            }
-
-        case CLOSE_TAB_CREDITO:
-            let newResponse = state.response.concat();
-            let closed = newResponse.splice(action.payload, 1);
-
-            return {
-                status: "closeTab",
-                message: "",
-                loading: false,
-                response: newResponse,
-                tabActive: newResponse[newResponse.length-1].label,
-                lastQueries: state.lastQueries,
-                type: state.type
-            }
-        case CHANGE_CREDITO_TYPE:
-            return {
-                status: "changeType",
-                message: "",
-                loading: false,
-                response: state.response,
-                tabActive: state.tabActiv,
-                lastQueries: state.lastQueries,
-                type: action.payload.toUpperCase()
-            }
-
-        case CHANGE_TAB_CREDITO:
-            let tab = searchDocument(state.response,action.payload);
-            return {
-                status: "changeTab",
-                message: "",
-                loading: false,
-                response: state.response,
-                tabActive: state.response.length > 0 ? state.response[tab].label : "",
                 lastQueries: state.lastQueries,
                 type: state.type
             }

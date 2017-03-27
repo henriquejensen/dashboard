@@ -38,8 +38,6 @@ export default class Endereco extends Component {
     }
 
     sendNewAddress(newAddress) {
-        console.log("NEW ADDRESS", newAddress);
-
         this._addNotification("Obrigado pelo envio. Seu pedido de inserção será analisado");
 
         this.setState({

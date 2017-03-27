@@ -65,7 +65,6 @@ export default class RendaEmpregador extends Component {
                                     {this.props.rendas.map((renda, index) => {
                                         return (
                                             <tr key={index}>
-                                                <td>{renda.faixaRenda}</td>
                                                 <td>
                                                     <a data-tip data-for='tooltipConsultar'>
                                                         <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(renda.documentoEmpregador, "CNPJ")}>
@@ -77,6 +76,7 @@ export default class RendaEmpregador extends Component {
                                                 <td>{renda.setorEmpregador}</td>
                                                 <td>{formatDate(renda.rendaDataRef)}</td>
                                                 <td>{renda.cboDescricao}</td>
+                                                <td>{renda.faixaRenda}</td>
                                             </tr>
                                         )
                                     })}

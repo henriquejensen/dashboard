@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Tooltip from 'react-tooltip';
 import { Col, Row, Alert } from "react-bootstrap";
 
-import { REQUEST_ERROR } from "../../constants/utils";
+import { ERR_CONNECTION_REFUSED, REQUEST_ERROR } from "../../constants/utils";
 import { LocalizeDescription, CreditoDescription, FocoFiscalDescription } from "../ProductDescription";
 import UltimasConsultas from "../UltimasConsultas";
 
@@ -82,9 +82,9 @@ export default class Form extends Component {
                         <span>Veja Detalhes do Produto</span>
                     </Tooltip>
 
-                    {this.props.status == REQUEST_ERROR || this.props.status == "error connection" ?
+                    {this.props.status == REQUEST_ERROR || this.props.status == ERR_CONNECTION_REFUSED ?
                         <Col md={12} sm={12}> 
-                            <Alert bsStyle="danger" className="text-center" onDismiss={this.props.closeMessageErrorLocalize}>
+                            <Alert bsStyle="danger" className="text-center" onDismiss={this.props.closeMessageError}>
                                 {this.props.message}
                             </Alert>
                         </Col>

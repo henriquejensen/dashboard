@@ -39,15 +39,12 @@ export default class MapPanel extends Component {
   }
 
   onMapCreated(map) {
-    console.log("MAP",map);
   }
 
   onDragEnd(e) {
-    console.log('onDragEnd', e);
   }
 
   onClick(e) {
-    console.log('onClick', e);
   }
 
   render() {

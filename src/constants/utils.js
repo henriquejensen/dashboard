@@ -18,6 +18,7 @@ export const CHANGE_FOCOFISCAL_TYPE = "CHANGE_FOCOFISCAL_TYPE";
 export const CHANGE_VEICULOS_TYPE = "CHANGE_VEICULOS_TYPE";
 export const LAST_QUERIES = "LAST_QUERIES";
 
+export const ERROR_503 = "Serviço temporariamente indisponível, tente novamente mais tarde"
 export const MESSAGE_SUCCESS_NUMBER_COPY = "Número copiado com sucesso";
 export const MESSAGE_SUCCESS_ADD_NEW_PHONE = "Obrigado pelo envio. Seu pedido de inserção será analisado";
 export const MESSAGE_SUCCESS_SMS = "Mensagem enviada com sucesso!";

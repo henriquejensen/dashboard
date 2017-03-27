@@ -4,11 +4,14 @@ import { connect } from "react-redux";
 import { Tabs, Tab} from "react-bootstrap";
 
 import {
-		getLastQueries,
-		seeModel,
+		changeTab,
 		closeModel,
+		closeMessageErrorCredito,
 		closeTab,
-		changeTab
+		getLastQueries,
+		loadingCredito,
+		seeModel,
+		searchCreditoCompleta
 } from "../../actions/actionsCredito";
 import { changeProductType } from "../../actions/actionsCommon";
 
@@ -95,6 +98,12 @@ class Credito extends Component {
 
 	onFormSubmit = (evt) => {
 		evt.preventDefault();
+
+		this.props.loadingCredito();
+
+		if(this.props.type == "COMPLETA") {
+			this.props.searchCreditoCompleta(this.state.creditoInput.documento);
+		}
 
 		console.log("SUBMIT", this.props.type, this.state.creditoInput);
 	}
@@ -311,7 +320,7 @@ class Credito extends Component {
 				logo = {LOGO_CREDITO}
 				showLogo = {this.props.datas.length == 0 ? true : false}
 				onformSubmit = {this.onFormSubmit}
-				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
+				closeMessageError = {this.props.closeMessageErrorCredito}
 				options={menu.sidebar[4].subItems}
 				onChange={this.onChangeType}
                 type={this.props.type}
@@ -396,11 +405,14 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		changeProductType,
-		getLastQueries,
-		seeModel,
-		closeModel,
 		changeTab,
-		closeTab
+		closeModel,
+		closeMessageErrorCredito,
+		closeTab,
+		getLastQueries,
+		loadingCredito,
+		seeModel,
+		searchCreditoCompleta
 	}, dispatch)
 }
 

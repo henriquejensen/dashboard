@@ -491,7 +491,7 @@ class LocalizeController extends Component {
 				logo = {LOGO_LOCALIZE}
 				showLogo = {this.props.datas.length == 0 ? true : false}
 				onformSubmit = {this.onFormSubmit}
-				closeMessageErrorLocalize = {this.props.closeMessageErrorLocalize}
+				closeMessageError = {this.props.closeMessageErrorLocalize}
 				buscaAvancada={tipo == "NOME" || tipo == "ENDERECO" ? this.state.buscaAvancada : undefined}
 				hiddenBuscaAvancada={tipo == "NOME" || tipo == "ENDERECO" ? this.hiddenBuscaAvancada : undefined}
 				options={menu.sidebar[0].subItems}

@@ -311,7 +311,12 @@ export default function(state = initialState, action) {
 				};
 
 			case SEARCH_BY_NOME_ENDERECO:
-				let label = action.payload.tipo+":"+action.payload.label;
+				/*Construcao do nome da label na tab */
+				let nameLabel = JSON.parse(action.payload.response.cabecalho.entrada);
+				nameLabel = Object.values(nameLabel);
+				nameLabel = nameLabel.toString().replace(/,/g,"").replace(action.payload.label,"");
+				let label = action.payload.tipo+":"+action.payload.label+nameLabel;
+
 				let nomeOuEndereco = {};
 				let verifyIfNomeOrEnderecoExists = searchDocument(newState.response, label);
 
@@ -398,7 +403,7 @@ export default function(state = initialState, action) {
 
 			case ERR_CONNECTION_REFUSED:
 				return {
-					status: "error connection",
+					status: ERR_CONNECTION_REFUSED,
 					message: "Serviço temporariamente indisponível, tente novamente mais tarde",
 					loading: false,
 					response: newState.response,
