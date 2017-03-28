@@ -7,10 +7,9 @@ import { patternCPF, patternCNPJ } from "./functions/patternDocuments";
 export default class Titletab extends Component {
     render() {
         return (
-            <div>
-                <button className="close" onClick={this.props.close}>
-                    <i className="fa fa-times close-tab"/>
-                </button>
+            <span>
+                <i className="fa fa-times close-tab close" onClick={this.props.close}/>
+
 				<img src={this.props.icon} width="25" style={{padding: "0px 3px"}}/>
                 
                 {this.props.tipo == "CPF" ?
@@ -18,7 +17,7 @@ export default class Titletab extends Component {
                     : this.props.tipo == "CNPJ" ?
                         patternCNPJ(this.props.label)
                 : this.props.label}
-			</div>
+			</span>
         )
     }
 }

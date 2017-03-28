@@ -1,6 +1,7 @@
 export const AUTH_URL = "https://auth.assertivasolucoes.com.br/auth/get-key-session-user";
 export const INFO_URL = "https://auth.assertivasolucoes.com.br/info/get-info-user";
 export const AUTHENTICATION = "token";
+export const GOOGLE_MAPS_KEY = 'AIzaSyDrjaImSSsOUSh9d5KDq9RVnHKtNSI_GJI';
 
 export const REQUEST_ERROR = "REQUEST_ERROR";
 export const ERR_CONNECTION_REFUSED = "ERR_CONNECTION_REFUSED";
@@ -23,6 +24,7 @@ export const MESSAGE_SUCCESS_NUMBER_COPY = "Número copiado com sucesso";
 export const MESSAGE_SUCCESS_ADD_NEW_PHONE = "Obrigado pelo envio. Seu pedido de inserção será analisado";
 export const MESSAGE_SUCCESS_SMS = "Mensagem enviada com sucesso!";
 export const NENHUM_REGISTRO = "Nenhum registro encontrado";
+export const ADDRESS_NOT_FOUND = "Endereço não encontrado";
 
 export const IMAGE_ANY_TOKEN = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/warning.png";
 

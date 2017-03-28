@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Tooltip from "react-tooltip";
 import { Form, FormControl, FormGroup, Button } from "react-bootstrap";
 
-import MapPanel from "../MapPanel";
+import MapPanel from "./MapPanel";
 import Table from "../table/Table";
 
 export default class Enderecos extends Component {
@@ -65,7 +65,7 @@ export default class Enderecos extends Component {
                             <tr>
                                 {this.state.mapa && this.state.idCep == i+end.cep ?
                                   <td colSpan="8" style={{position:"relative"}}>
-                                    <MapPanel endereco={end.tipoLogradouro + "." + end.logradouro + "," + end.cidade}/>
+                                    <MapPanel endereco={end.tipoLogradouro + "." + end.logradouro + "," + end.cidade} latitude={end.latitude} longitude={end.longitude} />
                                   </td>
                                 : ""}
                             </tr>

@@ -484,6 +484,11 @@ class LocalizeController extends Component {
 		)
 	}
 
+	searchEnderecosTelefonesUltimasConsultas = (tipo, consulta, index, documento ) => {
+		this.props.loadingLocalize();
+		this.props.searchEnderecosTelefonesUltimasConsultas(tipo, consulta, index, documento);
+	}
+
 	form = (tipo) => {
 		return (
 			<MyForm
@@ -501,7 +506,7 @@ class LocalizeController extends Component {
 				status = {this.props.status}
 				message = {this.props.message}
 				searchUltimasConsultas={this.researchUltimasConsultas}
-				searchEnderecosTelefonesUltimasConsultas={this.props.type == "CPF" || this.props.type == "CNPJ" ? this.props.searchEnderecosTelefonesUltimasConsultas : ""}
+				searchEnderecosTelefonesUltimasConsultas={this.props.type == "CPF" || this.props.type == "CNPJ" ? this.searchEnderecosTelefonesUltimasConsultas : ""}
 				lastQueries = {this.props.lastQueries[this.props.type]}
 			>
 				{tipo ?

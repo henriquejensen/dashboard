@@ -263,7 +263,7 @@ export default function(state = initialState, action) {
 				};
 
 			case SEARCH_BY_EMAIL:
-				let labelEmail = "Email:"+action.payload.cabecalho.entrada.split("@")[0];
+				let labelEmail = "Email:"+action.payload.cabecalho.entrada;
 				let verifyIfEmailExists = searchDocument(newState.response, labelEmail);
 				
 				if(verifyIfEmailExists == -1) {

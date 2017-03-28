@@ -20,9 +20,6 @@ export default class RendaEmpregador extends Component {
         }
 
         this._notificationSystem = null;
-
-        this.closeModal = this.closeModal.bind(this);
-        this.sendNewIncome = this.sendNewIncome.bind(this);
     }
 
     _addNotification(message) {
@@ -34,13 +31,13 @@ export default class RendaEmpregador extends Component {
         }
     }
 
-    closeModal() {
+    closeModal = () => {
         this.setState({
             IsModalOpen: false
         })
     }
 
-    sendNewIncome(newIncome) {
+    sendNewIncome = (newIncome) => {
         console.log("NEW INCOME", newIncome);
 
         this._addNotification("Obrigado pelo envio. Seu pedido de inserção será analisado");
@@ -58,7 +55,7 @@ export default class RendaEmpregador extends Component {
                         <Col md={12} sm={12}>            
                             <Table
                                 fields={
-                                    ["Faixa de Renda", "Empregador", "Setor", "Data Referência", "CBO"]
+                                    ["Empregador", "Setor", "Data Referência", "CBO", "Faixa de Renda"]
                                 }
                             >
                                 <tbody>

@@ -42,7 +42,7 @@ export default class Dados extends Component{
               {this.props.dados.sexo}
             </div>
             <div className="col-md-6">
-              <strong>Óbito: </strong>
+              <strong>Provável óbito: </strong>
               {this.props.dados.obitoProvavel ?
               <span className={this.props.dados.obitoProvavel == "SIM" ? "destaque-desativado" : "destaque-ativado"}>{this.props.dados.obitoProvavel}</span>
               : <span>{NENHUM_REGISTRO}</span>}
