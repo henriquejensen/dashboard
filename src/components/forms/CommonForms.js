@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, FormGroup, Col, FormControl, Label, ControlLabel, Button, Radio, Checkbox } from "react-bootstrap";
+import { Form, FormGroup, Col, FormControl, Label, ControlLabel, Button, Radio, Checkbox, HelpBlock } from "react-bootstrap";
 
 export const FieldGroup = (props) => {
     return (
@@ -7,11 +7,13 @@ export const FieldGroup = (props) => {
             <ControlLabel>{props.label}</ControlLabel>
             <FormControl
                 type={props.type}
+                style={props.error ? {borderColor:"red"} : {}}
                 name={props.name}
                 value={props.value ? props.value : undefined}
                 placeholder={props.placeholder}
                 onChange={props.onChange}
             />
+            <HelpBlock>{props.message}</HelpBlock>
         </FormGroup>
     )
 }
@@ -68,15 +70,18 @@ export const RadioGroupGeneric = (props) => {
     )
 }
 
-export const TextArea = (props) => {
+export const TextAreaGroup = (props) => {
     return (
         <FormGroup controlId={props.id}>
             <ControlLabel>{props.label}</ControlLabel>
             <FormControl
+                style={props.error ? {borderColor:"red"} : {}}
                 componentClass="textarea"
                 name={props.name}
+                value={props.value}
                 placeholder={props.placeholder}
                 onChange={props.onChange} />
+            <HelpBlock>{props.message}</HelpBlock>
         </FormGroup>
     )
 }
@@ -89,15 +94,6 @@ export const CheckboxGroup = (props) => {
                 {props.text}
             </Checkbox>
 
-        </FormGroup>
-    )
-}
-
-export const TextAreaGroup = (props) => {
-    return (
-        <FormGroup controlId={props.id}>
-            <ControlLabel>{props.label}</ControlLabel>
-            <FormControl componentClass="textarea" required placeholder={props.placeholder} />
         </FormGroup>
     )
 }

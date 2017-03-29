@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Col, Button, ButtonToolbar } from "react-bootstrap";
+import { Button, ButtonToolbar, Col, Image } from "react-bootstrap";
 
 import { FieldGroup, RadioGroupGeneric, TextAreaGroup, SelectGroup } from "../../components/forms/CommonForms";
+import { MESSAGE_FIELD_CELULARES_EMPTY, MESSAGE_FIELD_CONTEUDO_EMPTY, MESSAGE_HELP_CELULARES } from "../../constants/utils";
 
 export default class SMSRapido extends Component {
     state = {
@@ -10,7 +11,9 @@ export default class SMSRapido extends Component {
             {info:"Longo", checked:false},
             {info:"Carta", checked:false}
         ],
-        nextScreen: false
+        nextScreen: false,
+        isCelularesEmpty: false,
+        isConteudoEmpty: false
     }
 
     onChangeRota = (id, name) => {
@@ -52,15 +55,22 @@ export default class SMSRapido extends Component {
                         type="textarea"
                         label="Celular(es)"
                         name="celulares"
+                        error={this.state.isCelularesEmpty}
+                        message={this.state.isCelularesEmpty ? MESSAGE_FIELD_CELULARES_EMPTY : MESSAGE_HELP_CELULARES}
+                        value={this.state.celulares}
+                        onChange={this.onChange}
                         placeholder="Ex: 5199999999,518888888,517777777" />
                 </Col>
 
                 <Col md={12}>
                     <TextAreaGroup
                         id="conteudoSMS"
-                        type="textarea"
                         label="Conteúdo do SMS"
                         name="conteudoSMS"
+                        error={this.state.isConteudoEmpty}
+                        message={this.state.isConteudoEmpty ? MESSAGE_FIELD_CONTEUDO_EMPTY : ""}
+                        value={this.state.conteudoSMS}
+                        onChange={this.onChange}
                         placeholder="Conteudo do SMS" />
                 </Col>
 
@@ -100,7 +110,7 @@ export default class SMSRapido extends Component {
         return (
             <span>
                 <Col md={7}>
-                    <Col md={2}>
+                    <Col md={6}>
                         <FieldGroup
                             id="validos"
                             type="text"
@@ -109,7 +119,7 @@ export default class SMSRapido extends Component {
                             value='45' />
                     </Col>
 
-                    <Col md={2}>
+                    <Col md={6}>
                         <FieldGroup
                             id="duplicados"
                             type="text"
@@ -118,7 +128,7 @@ export default class SMSRapido extends Component {
                             value="0" />
                     </Col>
                             
-                    <Col md={2}>
+                    <Col md={6}>
                         <FieldGroup
                             id="invalidos"
                             type="text"
@@ -127,7 +137,7 @@ export default class SMSRapido extends Component {
                             value='5' />
                     </Col>
 
-                    <Col md={2}>
+                    <Col md={6}>
                         <FieldGroup
                             id="total"
                             type="text"
@@ -135,19 +145,39 @@ export default class SMSRapido extends Component {
                             name="total"
                             value='50' />
                     </Col>
+
+                    <Col md={12}>
+                        <FieldGroup
+                            id="totalCobrado"
+                            type="text"
+                            label="Total de SMS cobrados"
+                            name="totalCobrado"
+                            value='45' />
+                    </Col>
                 </Col>
 
                 <Col md={5}>
-                    <div style={{background:"url(https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/phone.png)"}}></div>
+                    <div style={{width:"220px", height:"400px", backgroundImage:"url(https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/phone.png)", backgroundSize:"cover"}}>
+                        <span style={{position:"absolute", top:75, fontSize:9, marginLeft:42, marginRight:55}}>{this.state.conteudoSMS}</span>
+                    </div>
                 </Col>
             </span>
         )
     }
 
     nextScreen = () => {
-        this.setState({
-            nextScreen: !this.state.nextScreen
-        })
+        if(!this.state.celulares || !this.state.conteudoSMS) {
+            this.setState({
+                isCelularesEmpty: !this.state.celulares ? true : false,
+                isConteudoEmpty: !this.state.conteudoSMS ? true : false,
+            })
+        } else {
+            this.setState({
+                nextScreen: !this.state.nextScreen,
+                isCelularesEmpty: false,
+                isConteudoEmpty: false,
+            })
+        }
     }
     
     render() {

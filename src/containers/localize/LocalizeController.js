@@ -56,15 +56,13 @@ class LocalizeController extends Component {
 	}
 
 	componentWillMount() {
+		document.title = COMPANY_PRODUCT_LOCALIZE + " > " + COMPANY_NAME_SHORT;
+		this.props.loadingLocalize();
 		this.props.getLastQueries(CPF_CODE, "CPF");
 		this.props.getLastQueries(CNPJ_CODE, "CNPJ");
 		this.props.getLastQueries(TELEFONE_CODE, "TELEFONE");
 		this.props.getLastQueries(EMAIL_CODE, "EMAIL");
 		this.props.getLastQueries(NOME_ENDERECO_CODE, "NOMEOUENDERECO");
-	}
-
-	componentDidMount() {
-		document.title = COMPANY_PRODUCT_LOCALIZE + " > " + COMPANY_NAME_SHORT;
 	}
 
 	researchUltimasConsultas = (entrada) => {
@@ -207,7 +205,7 @@ class LocalizeController extends Component {
 						}
 						placeholder={
 							this.props.type == "TELEFONE" ?
-								"Digite o telefone"
+								"Digite o DD + telefone "
 								: this.props.type == "EMAIL" ?
 									"Digite o email"
 							: "Digite o documento"
@@ -594,6 +592,7 @@ class LocalizeController extends Component {
 }
 
 function mapStateToProps(state) {
+	console.log("STATE", state)
 	return {
 		datas: state.localize.response,
 		status: state.localize.status,

@@ -19,6 +19,9 @@ export const CHANGE_FOCOFISCAL_TYPE = "CHANGE_FOCOFISCAL_TYPE";
 export const CHANGE_VEICULOS_TYPE = "CHANGE_VEICULOS_TYPE";
 export const LAST_QUERIES = "LAST_QUERIES";
 
+export const MESSAGE_HELP_CELULARES = "Formato: DDD Sem o zero + Número, separado por vírgula ou quebra de linha";
+export const MESSAGE_FIELD_CELULARES_EMPTY = "Preencha pelo menos 1 celular válido";
+export const MESSAGE_FIELD_CONTEUDO_EMPTY = "O campo conteúdo é obrigatório";
 export const ERROR_503 = "Serviço temporariamente indisponível, tente novamente mais tarde"
 export const MESSAGE_SUCCESS_NUMBER_COPY = "Número copiado com sucesso";
 export const MESSAGE_SUCCESS_ADD_NEW_PHONE = "Obrigado pelo envio. Seu pedido de inserção será analisado";

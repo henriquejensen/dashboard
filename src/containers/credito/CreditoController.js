@@ -61,17 +61,15 @@ class Credito extends Component {
 		}
 	}
 
-	componentWillMount() {
+	componentDidMount() {
+		document.title = COMPANY_PRODUCT_CREDITO + " > " + COMPANY_NAME_SHORT;
+		this.props.loadingCredito();
 		this.props.getLastQueries(COMPLETA_CODE, "COMPLETA");
 		this.props.getLastQueries(INTERMEDIARIA_CODE, "INTERMEDIARIA");
 		this.props.getLastQueries(INTERMEDIARIA_PLUS_CODE, "INTERMEDIARIAPLUS");
 		this.props.getLastQueries(SIMPLES_CODE, "SIMPLES");
 		this.props.getLastQueries(CHEQUE_CODE, "CHEQUE");
 		this.props.getLastQueries(EXPRESS_CODE, "EXPRESS");
-	}
-
-	componentDidMount() {
-		document.title = COMPANY_PRODUCT_CREDITO + " > " + COMPANY_NAME_SHORT;
 	}
 
 	closeTab = (index) => {

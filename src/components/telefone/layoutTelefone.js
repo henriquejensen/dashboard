@@ -4,7 +4,7 @@ import Tooltip from "react-tooltip";
 import Notification from "react-notification-system";
 import { Button, Col, Form, FormControl, FormGroup } from "react-bootstrap";
 
-import Table from "../Table";
+import Table from "../table/Table";
 import Modal from "../Modal";
 import EnviarSMS from "../forms/EnvioSMS";
 
@@ -23,7 +23,6 @@ export default class LayoutTelefone extends Component{
         };
 
         this._notificationSystem = null;
-
     }
 
     _addNotification(message) {
