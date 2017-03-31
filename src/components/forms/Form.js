@@ -60,7 +60,7 @@ export default class Form extends Component {
                             {this.props.buscaAvancada != undefined ?
                                 !this.props.buscaAvancada ?
                                     <Col md={12} sm={12}>
-                                        <span className="pull-right busca-avancada" onClick={this.props.hiddenBuscaAvancada}>Busca avancada</span>
+                                        <span className="pull-right busca-avancada" onClick={this.props.hiddenBuscaAvancada}>Busca avançada</span>
                                     </Col>
                                 :
                                     <Col md={12} sm={12}>

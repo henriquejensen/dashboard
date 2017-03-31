@@ -1,57 +1,85 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Col, Form, FormControl, Button, InputGroup, Pagination } from "react-bootstrap";
+import { Alert, Button, Col, Form, InputGroup, Pagination } from "react-bootstrap";
 
-import { getGruposCadastro, getUsersCadastro, getUsersByGroupId, getConsultasGrupo, getPermissoesUser, loadingCadastro } from "../../actions/actionsCadastro";
+import { addNewUser, closeMessageError, getGruposCadastro, getUsersCadastro, getUsersByGroupId, getConsultasGrupo, getPermissoesUser, loadingCadastro, updateUser } from "../../actions/actionsCadastro";
+
+import { FieldGroup, SelectGroup } from "../../components/forms/CommonForms";
+
+import { ADD_NEW_USER, MESSAGE_ADD_USER_SUCCESS } from "../../constants/constantsCadastro";
+import { LOADING_GIF, NENHUM_REGISTRO } from "../../constants/utils";
 
 import Modal from "../../components/Modal";
 import Panel from "../../components/panel/Panel";
 import Table from "../../components/table/Table";
 
 {/*Funções para o Usuario*/}
-import EditarUsuario from "./EditarUsuario";
 import ConfigurarPermissoes from "./ConfigurarPermissoes";
 
 {/*Funções para o Grupo*/}
 import EditarGrupo from "./EditarGrupo";
-import NovoUsuario from "./NovoUsuario";
+import Usuario from "./Usuario";
 import AtivarConsultas from "./AtivarConsultas";
 
-class Cadastro extends Component {
-    constructor() {
-        super();
+const perfilOptions = [
+    {value: 14, label: "OPERADOR"},
+    {value: 13, label: "GERENTE"}
+]
 
-        this.state = {
-            usuario: {
-                nome: "",
-                grupo: ""
-            },
-            showAdvancedSearch: false,
-            showModal: false,
-            screenToShow: "",
-            screenTitle: "",
-            sizeModal: "",
-            activePage: 1,
-            maxUsersShown: 10,
-            groupInfo: {
-                color: "#CBE6F3",
-                id: -1,
-                groupName: ""
-            }
+const quantidadeGrupos = 10;
+
+class Cadastro extends Component {
+    state = {
+        usuario: {
+            nome: undefined,
+            grupo: undefined,
+            razaoSocial: undefined,
+            clienteLogin: undefined,
+            status: undefined,
+            perfilVO: undefined
+        },
+        showAdvancedSearch: false,
+        showModal: false,
+        screenToShow: undefined,
+        screenTitle: undefined,
+        sizeModal: undefined,
+        activePage: 1,
+        maxUsersShown: 10,
+        groupInfo: {
+            color: "#CBE6F3",
+            id: -1,
+            groupName: undefined
         }
     }
 
     componentWillMount() {
         this.props.loadingCadastro();
-        this.props.getGruposCadastro();
+        this.props.getGruposCadastro(20);
         this.props.getUsersCadastro();
+    }
+
+    addNewUser = (user) => {
+        this.closeModal();
+        this.props.loadingCadastro();
+        this.props.addNewUser(user);
+    }
+
+    updateUser = (user) => {
+        this.closeModal();
+        this.props.loadingCadastro();
+        this.props.updateUser(user);
     }
 
     closeModal = () => {
         this.setState({
             showModal: false
         })
+    }
+
+    getMoreGroups = () => {
+        this.props.loadingCadastro();
+        this.props.getGruposCadastro(quantidadeGrupos+this.props.grupos.length);
     }
 
     onChangeUser = (evt) => {
@@ -90,65 +118,67 @@ class Cadastro extends Component {
         return (
             <Form onSubmit={this.onFormSubmit} className="my-form">
                 <Col md={this.state.showAdvancedSearch ? 12: 10}>
-                    <FormControl
+                    <FieldGroup
+                        id="nome"
                         type="text"
-                        placeholder="Digite o nome do usuário"
                         name="nome"
+                        placeholder="Digite o nome do usuário"
                         value={this.state.usuario.nome}
-                        onChange={this.onChangeUser}
-                    />
+                        onChange={this.onChangeUser} />
                 </Col>
                 {this.state.showAdvancedSearch ?
                     <span>
                         <Col md={2}>
-                            <FormControl
+                            <FieldGroup
+                                id="grupo"
                                 type="text"
-                                placeholder="Digite o nome do usuário"
-                                name="nome"
-                                value={this.state.usuario.nome}
-                                onChange={this.onChangeUser}
-                            />
+                                name="grupo"
+                                placeholder="Nome grupo"
+                                value={this.state.usuario.grupo}
+                                onChange={this.onChangeUser} />
                         </Col>
                         <Col md={2}>
-                            <FormControl
+                            <FieldGroup
+                                id="clienteLogin"
                                 type="text"
-                                placeholder="Digite o nome do usuário"
-                                name="nome"
-                                value={this.state.usuario.nome}
-                                onChange={this.onChangeUser}
-                            />
+                                name="clienteLogin"
+                                placeholder="Cliente login"
+                                value={this.state.usuario.clienteLogin}
+                                onChange={this.onChangeUser} />
                         </Col>
                         <Col md={2}>
-                            <FormControl
+                            <FieldGroup
+                                id="razaoSocial"
                                 type="text"
-                                placeholder="Digite o nome do usuário"
-                                name="nome"
-                                value={this.state.usuario.nome}
-                                onChange={this.onChangeUser}
-                            />
+                                name="razaoSocial"
+                                placeholder="Razão social"
+                                value={this.state.usuario.razaoSocial}
+                                onChange={this.onChangeUser} />
                         </Col>
                         <Col md={2}>
-                            <FormControl
-                                type="text"
-                                placeholder="Digite o nome do usuário"
-                                name="nome"
-                                value={this.state.usuario.nome}
-                                onChange={this.onChangeUser}
-                            />
+                            <SelectGroup
+                                id="perfilVO"
+                                type="select"
+                                name="perfilVO"
+                                label={undefined}
+                                value={this.state.perfilVO}
+                                options={perfilOptions}
+                                onChange={this.onChange} />
                         </Col>
                         <Col md={2}>
-                            <FormControl
-                                type="text"
-                                placeholder="Digite o nome do usuário"
-                                name="nome"
-                                value={this.state.usuario.nome}
-                                onChange={this.onChangeUser}
-                            />
+                            <SelectGroup
+                                id="perfilVO"
+                                type="select"
+                                name="perfilVO"
+                                label={undefined}
+                                value={this.state.status}
+                                options={["ATIVO", "INATIVO"]}
+                                onChange={this.onChange} />
                         </Col>
                     </span>
                 : ""}
                 <Col md={2}>
-                    <Button style={{width:"100%"}} bsStyle="info">Pesquisar</Button>
+                    <Button style={{width:"100%"}} bsStyle="info" type="submit">Pesquisar</Button>
                 </Col>
                 <Col md={12}>
                     {this.state.showAdvancedSearch ? 
@@ -160,7 +190,9 @@ class Cadastro extends Component {
         )
     }
 
-    clickedOnUsersGroup = (groupId, groupName) => {
+    clickedOnUsersGroup = (groupId, groupName, groupStatus) => {
+        this.props.loadingCadastro();
+
         this.setState({
             groupInfo: {
                 color: "#CBE6F3",
@@ -169,59 +201,56 @@ class Cadastro extends Component {
             }
         });
 
-        this.props.getUsersByGroupId(groupId);
+        this.props.getUsersByGroupId(groupId, groupName, groupStatus);
     }
 
     showAllUsers = () => {
+        this.props.loadingCadastro();
+        this.props.getUsersCadastro();
+
         this.setState({
-            firsElement: "",
-            lastElement: "",
+            firsElement: undefined,
+            lastElement: undefined,
             groupInfo: {
                 color: "#CBE6F3",
                 id: -1,
                 groupName: ""
             }
         })
-
-        this.props.getUsersCadastro();
     }
 
     renderGroupPanel = () => {
         return (
             <Panel title="GRUPOS" qtdTotal={[{qtd:this.props.grupos.length, icon:"fa fa-users"}]}>
-                <Table
-                    fields={
-                        ["","Status", "Grupo", "Ações"]
-                    }
-                >
+                <Table  fields={["ID - Status", "Grupo", "Ações"]}>
                     <tbody>
                         {this.props.grupos.map((group,index) => {
                             return (
                                 <tr key={index} style={group.id == this.state.groupInfo.id ? {backgroundColor:this.state.groupInfo.color} : {}}>
-                                    <td></td>
                                     <td>
                                         <i
                                             style={{borderRadius:5}}
                                             className="fa fa-circle-thin"
-                                            id={group.statusBloqueado == "NAO" ? "userActivated" : "userDeactivated"}
+                                            id={group.statusBloqueado == "SIM" ? "userDeactivated" : "userActivated"}
                                             aria-hidden="true">
-                                        </i>   
+                                        </i>
+                                        {" - " + group.id}  
                                     </td>
                                     <td>{group.descricao}</td>
                                     <td>
-                                        <Button onClick={() => this.openModal(<EditarGrupo cancel={this.closeModal} grupoInfo={group} />, "Editar grupo", "large")}>
+                                        <Button bsSize="xsmall" onClick={() => this.openModal(<EditarGrupo cancel={this.closeModal} grupoInfo={group} />, "Editar grupo " + group.descricao, "large")}>
                                             <i className="fa fa-pencil" />
                                         </Button>
                                         {'   '}
-                                        <Button onClick={() => this.openModal(<NovoUsuario cancel={this.closeModal} usuario={{boleto:"NAO", dossie:"NAO"}}/>, "Novo usuário do grupo " + group.descricao)}>
+                                        <Button bsSize="xsmall" onClick={() => this.openModal(<Usuario cancel={this.closeModal} grupoId={group.id} addNewUser={this.addNewUser} options={perfilOptions} />, "Novo usuário do grupo " + group.descricao)}>
                                             <i className="fa fa-user-plus" />
                                         </Button>
                                         {'   '}
-                                        <Button onClick={() => this.openModal(<AtivarConsultas cancel={this.closeModal} getConsultasGrupo={this.props.getConsultasGrupo} grupoId={group.id} consultas={this.props.consultas}/>, "Ativar consultas")}>
+                                        {/*<Button bsSize="xsmall" onClick={() => this.openModal(<AtivarConsultas cancel={this.closeModal} getConsultasGrupo={this.props.getConsultasGrupo} grupoId={group.id} consultas={this.props.consultas}/>, "Ativar consultas")}>
                                             <i className="fa fa-gear" />
                                         </Button>
-                                        {'   '}
-                                        <Button onClick={() => this.clickedOnUsersGroup(group.id, group.descricao)}>
+                                        {'   '}*/}
+                                        <Button bsSize="xsmall" onClick={() => this.clickedOnUsersGroup(group.id, group.descricao, group.statusBloqueado)}>
                                             <i className="fa fa-users" />
                                         </Button>
                                     </td>
@@ -233,53 +262,74 @@ class Cadastro extends Component {
                         </tr>
                     </tbody>
                 </Table>
+
+                <Button onClick={this.getMoreGroups} block>Carregar mais Grupos </Button>
                     
             </Panel>
         )
     }
 
     renderUsersPanel = () => {
-        const totalPages = (this.props.users.length/this.state.maxUsersShown)+1;
+        const users = this.props.users ? this.props.users : [];
+        const totalPages = (users.length/this.state.maxUsersShown);
         return (
-            <Panel title={"USUÁRIOS "+this.state.groupInfo.groupName}  qtdTotal={[{qtd:this.props.users.length, icon:"fa fa-user"}]}>
-                <Table
-                    fields={
-                        ["","Status", "Usuário", "Grupo", "Ações"]
-                    }
-                >
+            <Panel title={"USUÁRIOS "+this.state.groupInfo.groupName}  qtdTotal={[{qtd:users.length, icon:"fa fa-user"}]}>
+                <Table  fields={["ID - Status", "Usuário", "Grupo", "Ações"]}>
                     <tbody>
-                        {this.props.users.slice(this.state.firsElement, this.state.lastElement).map((user,index) => {
-                            return (
-                                <tr key={index}>
-                                    <td></td>
-                                    <td>
-                                        <i
-                                            style={{borderRadius:5}}
-                                            className="fa fa-circle-thin"
-                                            id={user.statusAtivo == "SIM" ? "userActivated" : "userDeactivated"}
-                                            aria-hidden="true">
-                                        </i>   
-                                    </td>
-                                    <td>{user.nome}</td>
-                                    <td>{user.grupoUsuarioVO.descricao}</td>
-                                    <td>
-                                        <Button onClick={() => this.openModal(<EditarUsuario userInfo={user}/>, "Editar usuário")}>
-                                            <i className="fa fa-pencil" />
-                                        </Button>
-                                        {'   '}
-                                        <Button onClick={() => this.openModal(<ConfigurarPermissoes cancel={this.closeModal} permissoes={this.props.permissoes} getPermissoesUser={this.props.getPermissoesUser} userId={user.id}/>, "Configurar Permissões")}>
-                                            <i className="fa fa-list-alt" />
-                                        </Button>
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                        <tr>
-                            
-                        </tr>
+                        {users.length > 0 ?
+                            users.slice(this.state.firsElement, this.state.lastElement).map((user,index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>
+                                            <i
+                                                style={{borderRadius:5}}
+                                                className="fa fa-circle-thin"
+                                                id={user.statusAtivo == "SIM" ? "userActivated" : "userDeactivated"}
+                                                aria-hidden="true">
+                                            </i>
+                                            {" - " + user.id}
+                                        </td>
+                                        <td>{user.usuario}</td>
+                                        <td>{user.grupoUsuarioVO.descricao}</td>
+                                        <td>
+                                            <Button
+                                                bsSize="xsmall"
+                                                onClick={() => this.openModal(
+                                                    <Usuario
+                                                        cancel={this.closeModal}
+                                                        usuarioId={user.id}
+                                                        grupoId={user.grupoUsuarioVO.id}
+                                                        perfilVO={user.perfilVO.id}
+                                                        usuario={user.usuario}
+                                                        email1={user.email1}
+                                                        email2={user.email2}
+                                                        statusAtivo={user.statusAtivo}
+                                                        statusBoleto={user.statusBoleto}
+                                                        tipoLimitacao={user.tipoLimitacao}
+                                                        periodoLimitacao={user.periodoLimitacao}
+                                                        limiteValorString={user.limiteValor}
+                                                        options={perfilOptions}
+                                                        obs={user.obs}
+                                                        addNewUser={this.updateUser}/>,
+                                                    "Editar usuário " + user.usuario)}>
+                                                <i className="fa fa-pencil" />
+                                            </Button>
+                                            {/*
+                                                {'   '}
+                                                <Button bsSize="xsmall" onClick={() => this.openModal(<ConfigurarPermissoes cancel={this.closeModal} permissoes={this.props.permissoes} getPermissoesUser={this.props.getPermissoesUser} userId={user.id}/>, "Configurar Permissões")}>
+                                                    <i className="fa fa-list-alt" />
+                                                </Button>
+                                            */}
+                                        </td>
+                                    </tr>
+                                )
+                            }) :
+                            <tr>
+                                <td colSpan={5} className="text-center">{NENHUM_REGISTRO}</td>
+                            </tr> }
                     </tbody>
                 </Table>
-                {this.props.users.length > 10 ?
+                {users.length > 10 ?
                     <Col md={12} className="text-center">
                         <Pagination
                             bsSize="medium"
@@ -300,8 +350,20 @@ class Cadastro extends Component {
                 </Col>
                 {this.renderForm()}
 
+                {this.props.error || this.props.message == ADD_NEW_USER ?
+                    <Col md={12} sm={12}> 
+                        <Alert bsStyle={this.props.error ? "danger" : "success"} className="text-center" onDismiss={this.props.closeMessageError}>
+                            {this.props.error ?
+                                this.props.message
+                            : MESSAGE_ADD_USER_SUCCESS }
+                        </Alert>
+                    </Col>
+                : ""}
+
+                {this.props.loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
+
                 <Col md={6}>
-                    <Button onClick={this.showAllUsers} block>
+                    <Button bsSize="small" onClick={this.showAllUsers} block>
                         Mostrar todos os usuários
                     </Button>
                     <br/>
@@ -327,24 +389,28 @@ class Cadastro extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log("STATE", state.cadastro)
 	return {
         grupos: state.cadastro.grupos,
         consultas: state.cadastro.consultas,
         permissoes: state.cadastro.permissoes,
         users: state.cadastro.users,
-        loading: state.cadastro.loading
+        loading: state.cadastro.loading,
+        error: state.cadastro.error,
+        message: state.cadastro.message
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
+            addNewUser,
+            closeMessageError,
 			getGruposCadastro,
             getUsersCadastro,
             getUsersByGroupId,
             getConsultasGrupo,
             getPermissoesUser,
             loadingCadastro,
+            updateUser
 		},
 		dispatch);
 }

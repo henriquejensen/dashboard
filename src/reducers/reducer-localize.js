@@ -25,6 +25,7 @@ import {
 		CHANGE_TAB,
 		CLOSE_TAB,
 		ERR_CONNECTION_REFUSED,
+		ERR_CONNECTION_REFUSED_MESSAGE,
 		ICON_CREDITO,
 		LAST_QUERIES,
 		LOADING,
@@ -404,7 +405,7 @@ export default function(state = initialState, action) {
 			case ERR_CONNECTION_REFUSED:
 				return {
 					status: ERR_CONNECTION_REFUSED,
-					message: "Serviço temporariamente indisponível, tente novamente mais tarde",
+					message: ERR_CONNECTION_REFUSED_MESSAGE,
 					loading: false,
 					response: newState.response,
 					tabActive: newState.tabActive,

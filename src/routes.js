@@ -52,9 +52,7 @@ export default (
       <Route name="Venda+" path="vendamais" component={VendaMais} />
       <Route name="Consig+" path="consigmais" component={ConsigMais} />
 
-      <Route name="Cadastro" path="cadastro" component={Cadastro}>
-        <Route name="Usuários" path=":tipo" component={Cadastro} />
-      </Route>
+      <Route name="Cadastro" path="cadastro" component={Cadastro} />
 
       <Route name="Relatórios" path="relatorios" component={Relatorios}>
         <Route name="Consultas" path=":tipo" component={Relatorios} />

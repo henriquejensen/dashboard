@@ -45,7 +45,7 @@ export function getLastQueries(code, tipo) {
 	return (dispatch) => {
 		ajax.post(URL_SEARCH_ULTIMAS_CONSULTAS_LOCALIZE)
 			.send({consulta: code})
-			.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
+			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
 				if (response) {
 					if (response.status == 200) {
@@ -120,7 +120,7 @@ export function searchLocalize(documento, tipo) {
 	return (dispatch) => {
 		ajax.post(url)
 			.send(data)
-			.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
+			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
 				if (response) {
 					if (response.status == 200) {
@@ -140,7 +140,7 @@ export function searchLocalizeByNomeEndereco(inputLocalize, tipo, labelToTab) {
 		return (dispatch) => {
 			ajax.post(URL_SEARCH_NOME_ENDERECO)
 				.send(inputLocalize)
-				.set({'Authorization': localStorage.getItem("token")})
+				.set({authorization: localStorage.getItem("token")})
 				.end(function(error, response) {
 					if (response) {
 						if (response.status == 200) {
@@ -217,7 +217,7 @@ export function searchTelefonesPessoaRelacionada(doc, docRelacionado) {
 	return (dispatch) => {
 		ajax.post(URL_SEARCH_CPF)
 			.send({cpf: docRelacionado})
-			.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
+			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
 				if (response) {
 					if (response.status == 200) {
@@ -243,7 +243,7 @@ export function searchEnderecosPessoaRelacionada(doc, docRelacionado) {
 	return (dispatch) => {
 		ajax.post(URL_SEARCH_CPF)
 			.send({cpf: docRelacionado})
-			.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
+			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
 				if (response) {
 					if (response.status == 200) {
@@ -269,7 +269,7 @@ export function searchLocalizeByEmail(email) {
 	return (dispatch) => {
 		ajax.post(URL_SEARCH_EMAIL)
 			.send({email:email})
-			.set({'Content-Type': 'application/x-www-form-urlencoded','Authorization': localStorage.getItem("token")})
+			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
 				if (response) {
 					if (response.status == 200) {
@@ -288,7 +288,7 @@ export function searchLocalizeByTelefone(telefone) {
 	return (dispatch) => {
 		ajax.post(URL_SEARCH_TELEFONE)
 			.send({telefone:telefone})
-			.set({'Content-Type': 'application/x-www-form-urlencoded','Authorization': localStorage.getItem("token")})
+			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
 				if (response) {
 					if (response.status == 200) {
@@ -307,7 +307,7 @@ export function searchPessoasRelacionadas(cpf) {
 	return (dispatch) => {
 		ajax.post(URL_SEARCH_PESSOAS_RELACIONADAS)
 			.send({cpf})
-			.set({'Content-Type': 'application/x-www-form-urlencoded','Authorization': localStorage.getItem("token")})
+			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
 				if (response) {
 					if (response.status == 200) {
@@ -337,7 +337,7 @@ export function searchEnderecosTelefonesUltimasConsultas(tipo, consulta, posElem
 	return (dispatch) => {
 		ajax.post(url)
 			.send(data)
-			.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
+			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
 				if (response) {
 					if (response.status == 200) {

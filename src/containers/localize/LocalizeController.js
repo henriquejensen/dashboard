@@ -592,7 +592,6 @@ class LocalizeController extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log("STATE", state)
 	return {
 		datas: state.localize.response,
 		status: state.localize.status,

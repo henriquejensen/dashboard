@@ -109,12 +109,10 @@
 
     "header":
         {
-            "cadastro": [
-                {
-                    "label": "Usuários",
-                    "link": "/cadastro/usuarios"
-                }
-            ],
+            "cadastro": {
+                "label": "Cadastro",
+                "link": "/cadastro"
+            },
             "relatorios": [
                 {
                     "label": "Relatórios",

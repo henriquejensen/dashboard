@@ -86,6 +86,7 @@ class MenuSuperior extends Component {
 					</Navbar.Form>
 
 					<Nav pullRight>
+						<NavItem onClick={() => this.changeRoute(menu.header.cadastro.link)}>{menu.header.cadastro.label}</NavItem>
 
 						<NavDropdown title={this.props.user.usuarioNome ? this.props.user.usuarioNome : "DESCONECTADO"} id="basic-nav-dropdown">
 							{menu.header.user.map((opt, index) => {

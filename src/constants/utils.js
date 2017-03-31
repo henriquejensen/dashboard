@@ -5,6 +5,7 @@ export const GOOGLE_MAPS_KEY = 'AIzaSyDrjaImSSsOUSh9d5KDq9RVnHKtNSI_GJI';
 
 export const REQUEST_ERROR = "REQUEST_ERROR";
 export const ERR_CONNECTION_REFUSED = "ERR_CONNECTION_REFUSED";
+export const ERR_CONNECTION_REFUSED_MESSAGE = "Serviço temporariamente indisponível, tente novamente mais tarde"
 export const INFO_SUCCESS = "INFO_SUCCESS";
 export const INFO_ERROR = "INFO_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";

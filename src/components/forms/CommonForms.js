@@ -4,7 +4,7 @@ import { Form, FormGroup, Col, FormControl, Label, ControlLabel, Button, Radio, 
 export const FieldGroup = (props) => {
     return (
         <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}}>
-            <ControlLabel>{props.label}</ControlLabel>
+            {props.label ? <ControlLabel>{props.label}</ControlLabel> : ""}
             <FormControl
                 type={props.type}
                 style={props.error ? {borderColor:"red"} : {}}
@@ -21,14 +21,14 @@ export const FieldGroup = (props) => {
 export const SelectGroup = (props) => {
     return (
         <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}}>
-            <ControlLabel>{props.label}</ControlLabel>
+            {props.label ? <ControlLabel>{props.label}</ControlLabel> : ""}
             <FormControl
                 name={props.name}
                 componentClass={props.type}
                 onChange={props.onChange}
             >
                 {props.options.map((opt, index) => {
-                    return <option key={index} selected={props.value == opt} value={opt}>{opt}</option>
+                    return <option key={index} selected={props.value == opt} value={opt.value ? opt.value : opt}>{opt.label ? opt.label : opt}</option>
                 })}
             </FormControl>
         </FormGroup>
@@ -38,7 +38,7 @@ export const SelectGroup = (props) => {
 export const RadioGroup = (props) => {
     return (
         <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}}>
-            <Col md={12}><ControlLabel>{props.label}</ControlLabel></Col>
+            {props.label ? <Col md={12}><ControlLabel>{props.label}</ControlLabel></Col> : ""}
             <Col md={6}>
                 <Radio onClick={() => props.onChangeRadio(props.id,"SIM")} checked={props.fieldChecked == "SIM" ? true : false}>
                     SIM
@@ -56,7 +56,7 @@ export const RadioGroup = (props) => {
 export const RadioGroupGeneric = (props) => {
     return (
         <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}}>
-            <Col md={12}><ControlLabel>{props.label}</ControlLabel></Col>
+            {props.label ? <Col md={12}><ControlLabel>{props.label}</ControlLabel></Col> : ""}
             {props.datas.map((data,index) => {
                 return (
                     <Col md={props.colRadio} key={index}>
@@ -73,7 +73,7 @@ export const RadioGroupGeneric = (props) => {
 export const TextAreaGroup = (props) => {
     return (
         <FormGroup controlId={props.id}>
-            <ControlLabel>{props.label}</ControlLabel>
+            {props.label ? <ControlLabel>{props.label}</ControlLabel> : ""}
             <FormControl
                 style={props.error ? {borderColor:"red"} : {}}
                 componentClass="textarea"
@@ -89,10 +89,22 @@ export const TextAreaGroup = (props) => {
 export const CheckboxGroup = (props) => {
     return (
         <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}} className={props.center ? "text-center": ""}>
-            <ControlLabel>{props.label}</ControlLabel><br/>
-            <Checkbox inline={props.inline} checked={props.checked}>
-                {props.text}
-            </Checkbox>
+            {props.label ? <ControlLabel>{props.label}<br/></ControlLabel> : ""}
+            {props.options ? 
+                props.options.map((opt,index) => {
+                    return (
+                        <Checkbox
+                            inline={props.inline}
+                            checked={props.values[index] || props.values[index] == "SIM"}>
+                            {opt}
+                        </Checkbox>
+                    )
+                })
+            :
+                <Checkbox inline={props.inline} checked={props.checked}>
+                    {props.text}
+                </Checkbox>
+            }
 
         </FormGroup>
     )

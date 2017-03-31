@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Tabs, Tab, Col, Button, Form } from "react-bootstrap";
 
-import { FieldGroup, SelectGroup, TextArea, CheckboxGroup } from "../../components/forms/CommonForms";
+import { FieldGroup, SelectGroup, TextAreaGroup, CheckboxGroup } from "../../components/forms/CommonForms";
 import Table from "../../components/table/Table";
 
 const Cliente = (props) => {
@@ -113,47 +113,51 @@ const DadosBasicos = (props) => {
 const Horario = (props) => {
     return (
         <span>
-            <Col md={4}>
+            <Col md={props.bloquearHorario == "SIM" ? 4 : 12}>
                 <SelectGroup
                     id="bloquearHorario"
                     type="select"
                     label="Bloquear por horário?"
                     name="bloquearHorario"
                     value={props.bloquearHorario}
-                    options={["SIM", "NAO"]}
+                    options={["SIM", "NÃO"]}
                     onChange={props.onChange} />
             </Col>
 
-            <Col md={4}>
-                <FieldGroup
-                    id="acessarDas"
-                    type="time"
-                    label="Acessar das 00:00"
-                    name="acessarDas"
-                    value={props.horarioInicio}
-                    onChange={props.onChange} />
-            </Col>
+            {props.bloquearHorario == "SIM" ?
+                <span>
+                    <Col md={4}>
+                        <FieldGroup
+                            id="acessarDas"
+                            type="time"
+                            label="Acessar das 00:00"
+                            name="acessarDas"
+                            value={props.horarioInicio}
+                            onChange={props.onChange} />
+                    </Col>
 
-            <Col md={4}>
-                <FieldGroup
-                    id="acessarAte"
-                    type="time"
-                    label="Acessar até às 00:00"
-                    name="acessarAte"
-                    value={props.horarioFim}
-                    onChange={props.onChange} />
-            </Col>
+                    <Col md={4}>
+                        <FieldGroup
+                            id="acessarAte"
+                            type="time"
+                            label="Acessar até às 00:00"
+                            name="acessarAte"
+                            value={props.horarioFim}
+                            onChange={props.onChange} />
+                    </Col>
 
-            <Col md={12}>
-                <CheckboxGroup
-                    id="diasAcesso"
-                    label="Selecionar os dias que poderá acessar"
-                    center={true}
-                    inline={true}
-                    values={props.dias}
-                    options={["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"]}
-                    onChange={props.onChange} />
-            </Col>
+                    <Col md={12}>
+                        <CheckboxGroup
+                            id="diasAcesso"
+                            label="Selecionar os dias que poderá acessar"
+                            center={true}
+                            inline={true}
+                            values={props.dias}
+                            options={["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"]}
+                            onChange={props.onChange} />
+                    </Col>
+                </span>
+            : ""}
 
         </span>
     )
@@ -258,7 +262,7 @@ const LimitacaoProduto = (props) => {
 const Observacoes = (props) => {
     return (
         <Col md={12}>
-            <TextArea
+            <TextAreaGroup
                 id="observacoes"
                 label="Observações"
                 placeholder="Escreva alguma observação sobre o usuário"
@@ -269,7 +273,7 @@ const Observacoes = (props) => {
     )
 }
 
-class EditarGrupo extends Component {
+export default class EditarGrupo extends Component {
     onFormSubmit = (evt) => {
         evt.preventDefault();
 
@@ -288,7 +292,15 @@ class EditarGrupo extends Component {
             {label: "Cliente", form: <Cliente onChange={this.onChange} razaoSocial={grupo.pessoaVO.razaoSocial} login={grupo.pessoaVO.descricao} />},
             {label: "Dados Básicos", form: <DadosBasicos onChange={this.onChange} nomeGrupo={grupo.descricao} inicioConsumo={grupo.dataInicio} fimConsumo={grupo.dataFinal} bloqueado={grupo.statusBloqueado} status={grupo.statusAtivo} webService={grupo.wsStatus}
             ips={grupo.ipAcesso}/>},
-            {label: "Horário", form: <Horario onChange={this.onChange} bloquearHorario={grupo.statusAccessTime} horarioInicio={grupo.horaIniAccessTime} horarioFim={grupo.horaFimAccessTime} dias={[grupo.accessTimeSeg, grupo.accessTimeTer, grupo.accessTimeQua, grupo.accessTimeQui, grupo.accessTimeSex, grupo.accessTimeSab, grupo.accessTimeDom]} />},
+            {
+                label: "Horário",
+                form: <Horario
+                        onChange={this.onChange}
+                        bloquearHorario={grupo.statusAccessTime}
+                        horarioInicio={grupo.dataInicio}
+                        horarioFim={grupo.dataFinal}
+                        dias={[grupo.accessTimeSeg, grupo.accessTimeTer, grupo.accessTimeQua, grupo.accessTimeQui, grupo.accessTimeSex, grupo.accessTimeSab, grupo.accessTimeDom]} />
+            },
             {label: "Limitação total", form: <LimitacaoTotal onChange={this.onChange} limite={grupo.limiteValor} periodoLimitacao={grupo.periodoLimitacao} tipoLimitacao={grupo.tipoLimitacao} />},
             {label: "Limitação por produto", form: <LimitacaoProduto onChange={this.onChange} produtos={[
                 {label:"Localize", quantidade:grupo.localizeLimiteValor, tipoLimitacao:grupo.localizeTipoLimitacao, periodoLimitacao:grupo.localizePeriodoLimitacao},
@@ -299,7 +311,6 @@ class EditarGrupo extends Component {
                 {label:"Venda+", quantidade:grupo.vendaMaisLimiteValor, tipoLimitacao:grupo.vendaMaisTipoLimitacao, periodoLimitacao:grupo.vendaMaisPeriodoLimitacao},
                 {label:"Consig+", quantidade:grupo.consigLimiteValor, tipoLimitacao:grupo.consigTipoLimitacao, periodoLimitacao:grupo.consigPeriodoLimitacao},
                 {label:"Veículos", quantidade:grupo.veiculosLimiteValor, tipoLimitacao:grupo.veiculosTipoLimitacao, periodoLimitacao:grupo.veiculosPeriodoLimitacao}
-            
             ]} />},
             {label: "Observações", form: <Observacoes onChange={this.onChange} obs={grupo.obs} />}
         ]
@@ -337,5 +348,3 @@ class EditarGrupo extends Component {
         )
     }
  }
-
- export default EditarGrupo;
