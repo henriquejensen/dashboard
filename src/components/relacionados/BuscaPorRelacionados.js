@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip'
-import { Button } from "react-bootstrap";
+import { Button, Col } from "react-bootstrap";
 
 import Panel from "../panel/Panel";
 import Table from "../table/Table";
@@ -38,7 +38,11 @@ export default class BuscaPorRelacionados extends Component {
     render() {
         return (
             this.props.relacionados ?
-                <Panel title="RESULTADOS DA BUSCA" qtdTotal={[{qtd:this.state.relacionados.length,icon:"fa fa-users"}]}>
+                <Panel title="RESULTADOS" qtdTotal={[{qtd:this.state.relacionados.length,icon:"fa fa-users"}]}>
+                    {this.props.headerBody ? 
+                        <div style={{paddingLeft:16, paddingTop:5}}><strong>Resultados da busca por:</strong> {this.props.headerBody}</div>
+                    : ""}
+
                     <Table fields = {["Nome", "Data nasc.", "Pessoa Relacionada", "Cidade", "UF"]} orderTableBy={this.orderTableBy}>
                         <tbody>
                             {this.state.relacionados.map((relacionado,index) => {

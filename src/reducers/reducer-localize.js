@@ -33,6 +33,7 @@ import {
 		REQUEST_ERROR,
 		SUCCESS
 } from "../constants/utils";
+import { COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO } from "../constants/constantsCompany";
 import model from "./data/modelLocalize.json";
 import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
 import relacionados from "./data/relacionados.json";
@@ -118,7 +119,7 @@ export default function(state = initialState, action) {
 				response.label = model.cadastro.cpf;
 				response.tipo = "CPF";
 				response.icon = ICON_LOCALIZE;
-				response.produto = "localize";
+				response.produto = COMPANY_PRODUCT_LOCALIZE;
 
 				return {
 					status: "model",
@@ -138,12 +139,12 @@ export default function(state = initialState, action) {
 					response.label = modelCredito.cadastroPf.cpf;
 					response.tipo = "CPF";
 					response.icon = ICON_CREDITO;
-					response.produto = "credito";
+					response.produto = COMPANY_PRODUCT_CREDITO;
 				}
 
 				return {
 					loading: false,
-					status: "success",
+					status: SUCCESS,
 					message: "",
 					response: verifyIfCreditoPFExists == -1 ? [...newState.response, response] : newState.response,
 					tabActive: verifyIfCreditoPFExists == -1 ? modelCredito.cadastroPf.cpf : newState.tabActive,
@@ -159,12 +160,12 @@ export default function(state = initialState, action) {
 					response.label = modelCreditoCNPJ.cadastroPj.cnpj;
 					response.tipo = "CNPJ";
 					response.icon = ICON_CREDITO;
-					response.produto = "credito";
+					response.produto = COMPANY_PRODUCT_CREDITO;
 				}
 
 				return {
 					loading: false,
-					status: "success",
+					status: SUCCESS,
 					message: "",
 					response: verifyIfCreditoPJExists == -1 ? [...newState.response, response] : newState.response,
 					tabActive: verifyIfCreditoPJExists == -1 ? modelCreditoCNPJ.cadastroPj.cnpj : newState.tabActive,
@@ -220,7 +221,7 @@ export default function(state = initialState, action) {
 					response.label = action.payload.cadastro.cpf;
 					response.tipo = "CPF";
 					response.icon = ICON_LOCALIZE;
-					response.produto = "localize";
+					response.produto = COMPANY_PRODUCT_LOCALIZE;
 
 					if(action.payload.cadastro.maeNome) {
 						response.pessoasRelacionadas[0] = {
@@ -250,7 +251,7 @@ export default function(state = initialState, action) {
 					response.label = action.payload.cadastro.cnpj;
 					response.tipo = "CNPJ";
 					response.icon = ICON_LOCALIZE;
-					response.produto = "localize";
+					response.produto = COMPANY_PRODUCT_LOCALIZE;
 				}
 
 				return {
@@ -264,7 +265,7 @@ export default function(state = initialState, action) {
 				};
 
 			case SEARCH_BY_EMAIL:
-				let labelEmail = "Email:"+action.payload.cabecalho.entrada;
+				let labelEmail = "Email: "+action.payload.cabecalho.entrada;
 				let verifyIfEmailExists = searchDocument(newState.response, labelEmail);
 				
 				if(verifyIfEmailExists == -1) {
@@ -277,7 +278,7 @@ export default function(state = initialState, action) {
 				}
 
 				return {
-					status: "success",
+					status: SUCCESS,
 					message: "",
 					loading: false,
 					response: verifyIfEmailExists == -1 ? [...newState.response, response] : newState.response,
@@ -290,7 +291,7 @@ export default function(state = initialState, action) {
 				let telefones = action.payload.localizePorTelefone;
 				let labelTelefone, verifyIfTelefoneExists;
 				if(telefones) {
-					labelTelefone = "Tel:"+action.payload.cabecalho.entrada;
+					labelTelefone = "Tel: "+action.payload.cabecalho.entrada;
 					verifyIfTelefoneExists = searchDocument(newState.response, labelTelefone);
 					if(verifyIfTelefoneExists == -1) {
 						telefones["cabecalho"] = action.payload.cabecalho;
@@ -302,7 +303,7 @@ export default function(state = initialState, action) {
 					}
 				}
 				return {
-					status: telefones ? "success" : REQUEST_ERROR,
+					status: telefones ? SUCCESS : REQUEST_ERROR,
 					message: telefones ? "" : NENHUM_REGISTRO,
 					loading: false,
 					response: telefones && verifyIfTelefoneExists == -1 ? [...newState.response, response] : newState.response,
@@ -313,10 +314,14 @@ export default function(state = initialState, action) {
 
 			case SEARCH_BY_NOME_ENDERECO:
 				/*Construcao do nome da label na tab */
-				let nameLabel = JSON.parse(action.payload.response.cabecalho.entrada);
-				nameLabel = Object.values(nameLabel);
-				nameLabel = nameLabel.toString().replace(/,/g,"").replace(action.payload.label,"");
-				let label = action.payload.tipo+":"+action.payload.label+nameLabel;
+				let nameLabelArray = JSON.parse(action.payload.response.cabecalho.entrada);
+				let nameLabel = [];
+				Object.values(nameLabelArray).forEach((v) => {
+					if(v)
+						nameLabel.push(v)
+				});
+				nameLabel = nameLabel.toString();
+				let label = action.payload.tipo+": "+ nameLabel;
 
 				let nomeOuEndereco = {};
 				let verifyIfNomeOrEnderecoExists = searchDocument(newState.response, label);
@@ -334,7 +339,7 @@ export default function(state = initialState, action) {
 				}
 
 				return {
-					status: "success",
+					status: SUCCESS,
 					message: "",
 					loading: false,
 					response: verifyIfNomeOrEnderecoExists == -1 ? [...newState.response, response] : newState.response,

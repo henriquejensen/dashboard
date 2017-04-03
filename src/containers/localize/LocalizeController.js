@@ -30,7 +30,7 @@ import CreditoView from "../credito/CreditoView";
 import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
 
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_LOCALIZE } from "../../constants/constantsCompany";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO } from "../../constants/constantsCompany";
 import { LOGO_LOCALIZE, ICON_LOCALIZE, LOADING_GIF, SUCCESS, REQUEST_ERROR, ERR_CONNECTION_REFUSED } from "../../constants/utils";
 import { CPF_CODE, CNPJ_CODE, EMAIL_CODE, TELEFONE_CODE, NOME_ENDERECO_CODE } from "../../constants/constantsLocalize";
 
@@ -556,7 +556,7 @@ class LocalizeController extends Component {
 										key={index}
 									>
 										{/*Verifica se o produto pesquisado é localize, pois pode ser gerado abas de outros produtos no Localize*/}
-										{data.produto == "localize" ?
+										{data.produto == COMPANY_PRODUCT_LOCALIZE ?
 											<LocalizeViewPattern
 												data={data.data}
 												tipo={data.tipo}
@@ -567,7 +567,7 @@ class LocalizeController extends Component {
 												searchTelefonesPessoaRelacionada={this.searchTelefonesPessoaRelacionada}
 												searchEnderecosPessoaRelacionada={this.searchEnderecosPessoaRelacionada}/>
 										:
-										data.produto == "credito" ?
+										data.produto == COMPANY_PRODUCT_CREDITO ?
 											<CreditoView
 												data={data.data}
 												tipo={data.tipo}
@@ -576,6 +576,7 @@ class LocalizeController extends Component {
 												<BuscaPorRelacionados
 													relacionados={data.data.response ? data.data.response : data.data}
 													searchPerson={this.searchLocalize}
+													headerBody={data.tipo != "CPF" || data.tipo != "CPF" ? data.label : ""}
 												/>
 												<Protocolo info={data.data.cabecalho} />
 											</span>

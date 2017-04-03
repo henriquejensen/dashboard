@@ -142,9 +142,10 @@ export function getPermissoesUser(userId) {
     }
 }
 
-export function getUsersByGroupId(grupoId, groupName, groupStatus) {
+export function getUsersByGroupId(groupId, groupDescription) {
+	let params = groupId ? ("?usuario.grupoUsuarioVO.id=" + groupId) : ("?usuario.usuario=" + groupDescription)
 	return (dispatch) => {
-		ajax.get(URL_GET_USERS_BY_GROUP_ID+"?usuario.grupoUsuarioVO.id="+grupoId)
+		ajax.get(URL_GET_USERS_BY_GROUP_ID + params)
 			.set({keySession: localStorage.getItem("token")})
 			.end(function(error, response) {
 				if (response) {

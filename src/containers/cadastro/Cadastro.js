@@ -93,8 +93,8 @@ class Cadastro extends Component {
 
     onFormSubmit = (evt) => {
         evt.preventDefault();
-
-        console.log("SUBMIT FORM", this.state.usuario);
+        this.props.loadingCadastro();
+        this.props.getUsersByGroupId("", this.state.usuario.nome);
     }
 
     openModal = (screen, title, size="") => {
@@ -190,7 +190,7 @@ class Cadastro extends Component {
         )
     }
 
-    clickedOnUsersGroup = (groupId, groupName, groupStatus) => {
+    clickedOnUsersGroup = (groupId, groupName) => {
         this.props.loadingCadastro();
 
         this.setState({
@@ -201,7 +201,7 @@ class Cadastro extends Component {
             }
         });
 
-        this.props.getUsersByGroupId(groupId, groupName, groupStatus);
+        this.props.getUsersByGroupId(groupId, "");
     }
 
     showAllUsers = () => {
@@ -250,7 +250,7 @@ class Cadastro extends Component {
                                             <i className="fa fa-gear" />
                                         </Button>
                                         {'   '}*/}
-                                        <Button bsSize="xsmall" onClick={() => this.clickedOnUsersGroup(group.id, group.descricao, group.statusBloqueado)}>
+                                        <Button bsSize="xsmall" onClick={() => this.clickedOnUsersGroup(group.id, group.descricao)}>
                                             <i className="fa fa-users" />
                                         </Button>
                                     </td>

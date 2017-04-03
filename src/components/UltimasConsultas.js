@@ -60,10 +60,37 @@ export default class UltimasConsultas extends Component {
         )
     }
 
+    searchAll = (tipo, data, icon) => {
+        for(let i=0; i<data.length; i++) {
+            this.search(tipo, i, data[i].entrada, icon);
+        }
+    }
+
     render() {
         let consultas = this.props.consultas;
         return (
             <Panel title="Últimas consultas">
+
+                {this.props.searchEnderecosTelefonesUltimasConsultas ? 
+                    <div style={{paddingLeft:8, paddingTop:5}}>
+                        <strong>Busca em lote por:</strong>
+                        {" "}
+                        <Button
+                            bsSize="small"
+                            bsStyle="info"
+                            style={{marginRight:15}}
+                            onClick={() => this.searchAll("enderecos", this.props.consultas, "home")}>
+                                endereços{' '}<i className='fa fa-home'/>
+                        </Button>
+                        <Button
+                            bsSize="small"
+                            bsStyle="info"
+                            onClick={() => this.searchAll("telefones", this.props.consultas, "phone")}>
+                                telefones{' '}<i className='fa fa-phone'/>
+                        </Button>
+                    </div>
+                : ""}
+
                 <Table fields={fields} >
                     {consultas ?
                             consultas.map((consulta,index) => {
@@ -75,7 +102,10 @@ export default class UltimasConsultas extends Component {
                                             <td>{new Date(consulta.dataHora).toLocaleString()}</td>
                                             <td>
                                                 <a data-tip data-for='tooltipConsultar'>
-                                                    <Button bsStyle="info" className="mapa-button" onClick={() => this.props.search(consulta.entrada)}>
+                                                    <Button
+                                                        bsStyle="info"
+                                                        className="mapa-button"
+                                                        onClick={() => this.props.search(consulta.entrada)}>
                                                         <i className='fa fa-search'/>
                                                     </Button>
                                                 </a>
@@ -101,7 +131,7 @@ export default class UltimasConsultas extends Component {
                                         
                                         <tr>
                                             {consulta.telefones && this.state.buttonsClicked.phone[index]? 
-                                                <td colSpan={4}>
+                                                <td colSpan={4} style={{padding:0}}>
                                                     <Telefone fixos={consulta.telefones.fixos} moveis={consulta.telefones.moveis} />
                                                 </td>
                                             : ""}
