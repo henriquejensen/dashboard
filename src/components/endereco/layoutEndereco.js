@@ -36,7 +36,7 @@ export default class Enderecos extends Component {
             <div>
                 <Table
                   fields={
-                    ["Logradouro", "Número", "Complemento", "Bairro", "Cidade", "UF", "CEP", ""]
+                    ["Endereço", "Bairro", "Cidade", "UF", "CEP", ""]
                   }
                 >
                     {this.props.enderecos.map((end,i) => {
@@ -44,9 +44,7 @@ export default class Enderecos extends Component {
                         return (
                           <tbody key={i}>
                             <tr>
-                              <td>{end.tipoLogradouro}. {end.logradouro}</td>
-                              <td>{end.numero}</td>
-                              <td>{end.complemento}</td>
+                              <td>{end.tipoLogradouro}. {end.logradouro}, {end.numero}, {end.complemento}</td>
                               <td>{end.bairro}</td>
                               <td>{end.cidade}</td>
                               <td>{end.uf}</td>

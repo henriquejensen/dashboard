@@ -3,7 +3,7 @@ var CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
-  //zdevtool: 'cheap-module-source-map',
+  //devtool: 'cheap-module-source-map',
   entry: [
     'webpack-dev-server/client',
     './src/index.js'
