@@ -175,7 +175,7 @@ class SMS extends Component {
 
         <Modal
             IsModalOpen={this.state.IsModalOpen}
-            closeModal={() => this.setState({IsModalOpen: false})}
+            closeModal={this.closeModal}
             title={this.state.modalTitle}
         >
 

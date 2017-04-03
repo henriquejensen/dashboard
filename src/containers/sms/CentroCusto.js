@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import { getCentroCustoSMS } from "../../actions/index";
 
-import Table from "../../components/Table";
+import Table from "../../components/table/Table";
 
 class CentroCusto extends Component {
   constructor(props) {

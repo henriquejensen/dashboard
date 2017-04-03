@@ -45,25 +45,32 @@ export default class BuscaPorRelacionados extends Component {
 
                     <Table fields = {["Nome", "Data nasc.", "Pessoa Relacionada", "Cidade", "UF"]} orderTableBy={this.orderTableBy}>
                         <tbody>
-                            {this.state.relacionados.map((relacionado,index) => {
-                                let tipo = relacionado.tipo == "Pessoa Física" ? "CPF":"CNPJ";
-                                return (
-                                    <tr key={index}>
-                                        <td>
-                                            <a data-tip data-for='tooltipConsultar'>
-                                                <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(relacionado.documento, tipo)}>
-                                                    <i className='fa fa-search'/>
-                                                </Button>
-                                            </a>
-                                            {relacionado.nome}
-                                        </td>
-                                        <td>{relacionado.dataNascimento}</td>
-                                        <td>{relacionado.pessoaRelacionada}</td>
-                                        <td>{relacionado.cidade}</td>
-                                        <td>{relacionado.uf}</td>
-                                    </tr>
-                                )
-                            })}
+                            {this.state.relacionados.length > 0 ?
+                                this.state.relacionados.map((relacionado,index) => {
+                                    let tipo = relacionado.tipo == "Pessoa Física" ? "CPF":"CNPJ";
+                                    return (
+                                        <tr key={index}>
+                                            <td>
+                                                <a data-tip data-for='tooltipConsultar'>
+                                                    <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(relacionado.documento, tipo)}>
+                                                        <i className='fa fa-search'/>
+                                                    </Button>
+                                                </a>
+                                                {relacionado.nome}
+                                            </td>
+                                            <td>{relacionado.dataNascimento}</td>
+                                            <td>{relacionado.pessoaRelacionada}</td>
+                                            <td>{relacionado.cidade}</td>
+                                            <td>{relacionado.uf}</td>
+                                        </tr>
+                                    )
+                                })
+                            : 
+                            <tr>
+                                <td colSpan={8} className="text-center">
+                                    <strong>{NENHUM_REGISTRO}</strong>
+                                </td>
+                            </tr>}
                         </tbody>
                     </Table>
 

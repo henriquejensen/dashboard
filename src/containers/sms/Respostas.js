@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { getRespostasSMS } from "../../actions/index";
 
 import Filtro from "../../components/Filtro";
-import Table from "../../components/Table";
+import Table from "../../components/table/Table";
 
 class Respostas extends Component {
   constructor(props) {

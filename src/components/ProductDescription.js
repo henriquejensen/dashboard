@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Panel from "./Panel";
+import Panel from "./panel/Panel";
 
 export class LocalizeDescription extends Component {
     render() {

@@ -3,8 +3,8 @@ import Tooltip from 'react-tooltip'
 import { Col, Row } from "react-bootstrap";
 import {Pie} from 'react-chartjs-2';
 
-import Panel from "../../components/Panel";
-import Table from "../../components/Table";
+import Panel from "../../components/panel/Panel";
+import Table from "../../components/table/Table";
 
 const style = {
     card: {

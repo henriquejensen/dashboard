@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip'
 
-import Panel from "../../components/Panel";
-import Table from "../../components/Table";
+import Panel from "../../components/panel/Panel";
+import Table from "../../components/table/Table";
 
 export default class CardWithTable extends Component {
   render() {

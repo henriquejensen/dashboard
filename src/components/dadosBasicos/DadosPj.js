@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Col } from "react-bootstrap";
 
-import Panel from "../../components/Panel";
+import Panel from "../../components/panel/Panel";
 
 import { patternCNPJ } from "../utils/functions/patternDocuments";
 import { NENHUM_REGISTRO } from "../../constants/utils";

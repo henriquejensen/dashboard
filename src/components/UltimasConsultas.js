@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip'
-import { Button } from "react-bootstrap";
+import { Col, Button } from "react-bootstrap";
 
 import Panel from "./panel/Panel";
 import Table from "./table/Table";
@@ -8,7 +8,7 @@ import Table from "./table/Table";
 import Telefone from "./telefone/layoutTelefone";
 import Endereco from "./endereco/layoutEndereco";
 
-import { patternCPF, patternCNPJ } from "./utils/functions/patternDocuments";
+import Modal from "./Modal";
 
 const fields = ["Tipo", "Entrada", "Data/Hora", ""];
 
@@ -17,7 +17,47 @@ export default class UltimasConsultas extends Component {
         buttonsClicked: {
             phone: {},
             home: {}
-        }
+        },
+        IsModalOpen: false
+    }
+
+    confirmMessage = (consultas) => {
+        return (
+            <Col md={12} className="text-center">
+                Atenção! Ao realizar esta ação você estará realizando {consultas.length} consultas Localize. Você confirma esta ação?
+                <Col md={12}>
+                    <Button
+                        bsSize="small"
+                        bsStyle="danger"
+                        style={{marginRight:15}}
+                        onClick={this.closeModal} >
+                        Não
+                    </Button>
+                    {" "}
+                    <Button
+                        bsSize="small"
+                        bsStyle="info"
+                        onClick={this.searchAll} >
+                        Sim
+                    </Button>
+                </Col>
+            </Col>
+        )
+    }
+
+    confirmSearch = (tipo, data, icon) => {
+        this.setState({
+            IsModalOpen: true,
+            tipo: tipo,
+            data: data,
+            icon: icon
+        })
+    }
+
+    closeModal = () => {
+        this.setState({
+            IsModalOpen: false
+        })
     }
 
     showMoreItems = (index, tipo) => {
@@ -60,16 +100,18 @@ export default class UltimasConsultas extends Component {
         )
     }
 
-    searchAll = (tipo, data, icon) => {
-        for(let i=0; i<data.length; i++) {
-            this.search(tipo, i, data[i].entrada, icon);
+    searchAll = () => {
+        this.closeModal();
+        
+        for(let i=0; i<this.state.data.length; i++) {
+            this.search(this.state.tipo, i, this.state.data[i].entrada, this.state.icon);
         }
     }
 
     render() {
-        let consultas = this.props.consultas;
+        let consultas = this.props.consultas ? this.props.consultas : [];
         return (
-            <Panel title="Últimas consultas">
+            <Panel title="ÚLTIMAS CONSULTAS">
 
                 {this.props.searchEnderecosTelefonesUltimasConsultas ? 
                     <div style={{paddingLeft:8, paddingTop:5}}>
@@ -79,13 +121,13 @@ export default class UltimasConsultas extends Component {
                             bsSize="small"
                             bsStyle="info"
                             style={{marginRight:15}}
-                            onClick={() => this.searchAll("enderecos", this.props.consultas, "home")}>
+                            onClick={() => this.confirmSearch("enderecos", this.props.consultas, "home")}>
                                 endereços{' '}<i className='fa fa-home'/>
                         </Button>
                         <Button
                             bsSize="small"
                             bsStyle="info"
-                            onClick={() => this.searchAll("telefones", this.props.consultas, "phone")}>
+                            onClick={() => this.confirmSearch("telefones", this.props.consultas, "phone")}>
                                 telefones{' '}<i className='fa fa-phone'/>
                         </Button>
                     </div>
@@ -147,6 +189,16 @@ export default class UltimasConsultas extends Component {
                 <Tooltip id="tooltipConsultar">
                     <span>Consultar</span>
                 </Tooltip>
+
+                <Modal
+                    IsModalOpen={this.state.IsModalOpen}
+                    closeModal={this.closeModal}
+                    title={"Busca em lote"}
+                    size="small"
+                >
+                    {this.confirmMessage(consultas)}
+                </Modal>
+
             </Panel>
         )
     }
