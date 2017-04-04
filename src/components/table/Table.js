@@ -14,7 +14,7 @@ export default class MyTable extends Component {
                             {this.props.fields ? 
                                 this.props.fields.map((field, index) => {
                                     return (
-                                        <th key={index} onClick={() => this.props.orderTableBy(field)}>{field}</th>
+                                        <th key={index}>{field}</th>
                                     )
                                 })
                             : ""}
