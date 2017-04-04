@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Col, Button } from "react-bootstrap";
 
-import { FieldGroup, TextArea } from "./CommonForms";
+import { FieldGroup, TextAreaGroup } from "./CommonForms";
 
 export default class EnviarSMS extends Component {
 
@@ -20,7 +20,7 @@ export default class EnviarSMS extends Component {
                 </Col>
 
                 <Col md={12}>
-                    <TextArea
+                    <TextAreaGroup
                         id="mensagem"
                         label="Mensagem"
                         name="mensagem"

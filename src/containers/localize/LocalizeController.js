@@ -11,6 +11,7 @@ import {
 		searchTelefonesPessoaRelacionada,
 		searchEnderecosPessoaRelacionada,
 		searchEnderecosTelefonesUltimasConsultas,
+		searchEnderecosTelefonesResultadosBusca,
 		seeModel,
 		closeModel,
 		closeTab,
@@ -86,11 +87,17 @@ class LocalizeController extends Component {
 
 	}
 
+	searchEnderecosTelefonesResultadosBusca = (isCpfOrCnpj, indexLabel, indexArrayElements, isEnderecoOrTelefone, documento) => {
+		this.props.loadingLocalize();
+		this.props.searchEnderecosTelefonesResultadosBusca(isCpfOrCnpj, indexLabel, indexArrayElements, isEnderecoOrTelefone, documento);
+	}
+
 	//busca as pessoas relacionadas a este doc, tipo é CPF ou CNPJ
 	searchPessoasRelacionadas = (doc) => {
 		this.props.loadingLocalize();
 		this.props.searchPessoasRelacionadas(doc);
 	}
+	
 
 	//recebe o documento da pessoa e da pessoa relacionada a esta e
 	//irá buscar pelo telefone ou endereço da pessoa
@@ -482,7 +489,7 @@ class LocalizeController extends Component {
 		)
 	}
 
-	searchEnderecosTelefonesUltimasConsultas = (tipo, consulta, index, documento ) => {
+	searchEnderecosTelefonesUltimasConsultas = (tipo, consulta, index, documento) => {
 		this.props.loadingLocalize();
 		this.props.searchEnderecosTelefonesUltimasConsultas(tipo, consulta, index, documento);
 	}
@@ -576,7 +583,9 @@ class LocalizeController extends Component {
 												<BuscaPorRelacionados
 													relacionados={data.data.response ? data.data.response : data.data}
 													searchPerson={this.searchLocalize}
-													headerBody={data.tipo != "CPF" || data.tipo != "CPF" ? data.label : ""}
+													headerBody={data.label}
+													searchEnderecosTelefonesResultadosBusca={this.searchEnderecosTelefonesResultadosBusca}
+													indexLabel={index}
 												/>
 												<Protocolo info={data.data.cabecalho} />
 											</span>
@@ -617,6 +626,7 @@ function mapDispatchToProps(dispatch) {
 			searchTelefonesPessoaRelacionada,
 			searchEnderecosPessoaRelacionada,
 			searchEnderecosTelefonesUltimasConsultas,
+			searchEnderecosTelefonesResultadosBusca,
 			seeModel,
 			closeModel,
 			closeTab,

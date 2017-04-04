@@ -115,7 +115,7 @@ export default class LayoutTelefone extends Component{
                                                 </td>
                                             </tr>)
                                     })
-                                : NENHUM_REGISTRO + " de telefone fixo"}
+                                : <tr><td colSpan={6} className="text-center"><strong>{NENHUM_REGISTRO + " de telefone fixo"}</strong></td></tr>}
 
                                 {this.props.newPhone ?
                                     <tr>
@@ -211,7 +211,7 @@ export default class LayoutTelefone extends Component{
                                                 </td>
                                             </tr>)
                                     })
-                                : NENHUM_REGISTRO + " de telefone móvel"}
+                                : <tr><td colSpan={9}className="text-center"><strong>{NENHUM_REGISTRO + " de telefone móvel"}</strong></td></tr>}
 
                                {this.props.newPhone ?
                                     <tr>

@@ -140,8 +140,6 @@ export default class UltimasConsultas extends Component {
                                     <tbody key={index}>
                                         <tr>
                                             <td>{this.props.type}</td>
-                                            <td>{consulta.entrada}</td>
-                                            <td>{new Date(consulta.dataHora).toLocaleString()}</td>
                                             <td>
                                                 <a data-tip data-for='tooltipConsultar'>
                                                     <Button
@@ -151,7 +149,10 @@ export default class UltimasConsultas extends Component {
                                                         <i className='fa fa-search'/>
                                                     </Button>
                                                 </a>
-
+                                                {consulta.entrada}
+                                            </td>
+                                            <td>{new Date(consulta.dataHora).toLocaleString()}</td>
+                                            <td>
                                                 {this.props.searchEnderecosTelefonesUltimasConsultas ?
                                                     <span>
                                                         {" "}

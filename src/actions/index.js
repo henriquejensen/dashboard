@@ -17,6 +17,7 @@ import {
 		SEARCH_BY_TELEFONES_RELACIONADOS,
 		SEARCH_BY_ENDERECOS_RELACIONADOS,
 		SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS,
+		SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA,
 		SEE_LOCALIZE_MODEL,
 		CLOSE_LOCALIZE_MODEL,
 		LOADING_LOCALIZE,
@@ -322,7 +323,7 @@ export function searchPessoasRelacionadas(cpf) {
 	}
 }
 
-/** Consutla pode ser CPF/CNPJ, tipo é endereco ou telefone, posElemento é a posicao no array do elemento clicado, documento é
+/** Consulta pode ser CPF/CNPJ, tipo é endereco ou telefone, posElemento é a posicao no array do elemento clicado, documento é
  * o documento da pessoa a ser buscada
  */
 export function searchEnderecosTelefonesUltimasConsultas(tipo, consulta, posElemento, documento) {
@@ -348,6 +349,46 @@ export function searchEnderecosTelefonesUltimasConsultas(tipo, consulta, posElem
 								tipo: tipo,
 								consulta: consulta,
 								posElemento: posElemento
+							}
+						})
+					} else {
+						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
+					}
+				} else {
+					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+				}
+			})
+	}
+} 
+
+/** Consulta pode ser CPF/CNPJ, tipo é endereco ou telefone, posElemento é a posicao no array do elemento clicado, documento é
+ * o documento da pessoa a ser buscada
+ */
+export function searchEnderecosTelefonesResultadosBusca(searchByCpfOuCnpj, indexLabel, indexArrayElements, isEnderecoOuTelefone, documento) {
+
+	let data = {cpf:documento};
+	let url = URL_SEARCH_CPF;
+
+	if(searchByCpfOuCnpj == "CNPJ") {
+		data = {cnpj:documento};
+		url = URL_SEARCH_CNPJ;
+	}
+
+	return (dispatch) => {
+		ajax.post(url)
+			.send(data)
+			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
+			.end(function(error, response) {
+				if (response) {
+					if (response.status == 200) {
+						dispatch({
+							type: SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA,
+							payload: {
+								response: response.body,
+								searchByCpfOuCnpj: searchByCpfOuCnpj,
+								indexLabel: indexLabel,
+								indexArrayElements: indexArrayElements,
+								isEnderecoOuTelefone: isEnderecoOuTelefone
 							}
 						})
 					} else {

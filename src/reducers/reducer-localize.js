@@ -18,6 +18,7 @@ import {
 		SEARCH_BY_CREDITO_PF,
 		SEARCH_BY_CREDITO_PJ,
 		SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS,
+		SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA,
 		SEE_LOCALIZE_MODEL,
 } from "../constants/constantsLocalize";
 import {
@@ -442,7 +443,20 @@ export default function(state = initialState, action) {
 					type: state.type
 				}
 
+			case SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA:
+				if(action.payload.response) {
+					newState.response[action.payload.indexLabel].data.response[action.payload.indexArrayElements][action.payload.isEnderecoOuTelefone] = action.payload.response[action.payload.isEnderecoOuTelefone];
+				}
 
+				return {
+					loading: false,
+					status: "enderecosTelefones",
+					message: "",
+					response: state.response,
+					tabActive: state.tabActive,
+					lastQueries: state.lastQueries,
+					type: state.type
+				}
 
 		}
 
