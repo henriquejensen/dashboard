@@ -22,7 +22,7 @@ import Titletab from "../../components/utils/Titletab";
 
 import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
 
-import { LOGO_CREDITO, ICON_CREDITO, LOADING_GIF } from "../../constants/utils";
+import { ERR_CONNECTION_REFUSED, LOGO_CREDITO, ICON_CREDITO, LOADING_GIF, REQUEST_ERROR, SUCCESS } from "../../constants/utils";
 import { COMPLETA_CODE, INTERMEDIARIA_CODE, INTERMEDIARIA_PLUS_CODE, SIMPLES_CODE, CHEQUE_CODE, EXPRESS_CODE } from "../../constants/constantsCredito";
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO } from "../../constants/constantsCompany";
 
@@ -320,7 +320,6 @@ class Credito extends Component {
 						placeholder="CPF ou CNPJ"
 						value={this.state.creditoInput.documento}
 						name="documento"
-						c
 						onChange={this.onChangeInput}/>
 				</Col>
 
@@ -412,6 +411,9 @@ class Credito extends Component {
 	}
 
 	render() {
+		if(this.props.status == SUCCESS || this.props.status == ERR_CONNECTION_REFUSED || this.props.status == REQUEST_ERROR) {
+			window.scrollTo(0, 0);
+		}
 		return (
 			<div className="container">
 				{this.form(this.props.type)}

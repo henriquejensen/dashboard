@@ -9,17 +9,22 @@ import {
 } from "../constants/constantsCredito";
 
 import {
-    CHANGE_CREDITO_TYPE,
-    CHANGE_TAB,
-    CLOSE_TAB,
-    ERR_CONNECTION_REFUSED,
-    ERROR_503,
-    ICON_CREDITO,
-    REQUEST_ERROR
+        CHANGE_CREDITO_TYPE,
+		CHANGE_TAB,
+		CLOSE_TAB,
+		ERR_CONNECTION_REFUSED,
+		ERR_CONNECTION_REFUSED_MESSAGE,
+        ERROR_503,
+		ICON_CREDITO,
+		LAST_QUERIES,
+		LOADING,
+		NENHUM_REGISTRO,
+		REQUEST_ERROR,
+		SUCCESS
 } from "../constants/utils";
 
-import model from "./data/jsonPadraoCredito.json";
-import modelCNPJ from "./data/jsonPadraoCreditoCNPJ.json";
+import model from "./data/credito/consultaCPF.json";
+import modelCNPJ from "./data/credito/consultaCNPJ.json";
 import lastQueries from "./data/lastQueries.json";
 
 const getInitialState = {
@@ -52,7 +57,7 @@ export default function(state=getInitialState, action) {
     switch(action.type) {
         case CHANGE_CREDITO_TYPE:
             return {
-                status: "changeType",
+                status: SUCCESS,
                 message: "",
                 loading: false,
                 response: state.response,
@@ -145,13 +150,13 @@ export default function(state=getInitialState, action) {
 
         case SEE_CREDITO_MODEL:
             response.data = model;
-            response.label = model.cadastroPf.cpf;
+            response.label = model.cadastro.cpf;
             response.tipo = "CPF";
             response.icon = ICON_CREDITO;
             response.produto = "credito";
 
             responseCNPJ.data = modelCNPJ;
-            responseCNPJ.label = modelCNPJ.cadastroPj.cnpj;
+            responseCNPJ.label = modelCNPJ.cadastro.cnpj;
             responseCNPJ.tipo = "CNPJ";
             responseCNPJ.icon = ICON_CREDITO;
             responseCNPJ.produto = "credito";
@@ -160,7 +165,7 @@ export default function(state=getInitialState, action) {
                 status: "model",
                 message: "",
                 response: [response, responseCNPJ],
-                tabActive: model.cadastroPf.cpf,
+                tabActive: model.cadastro.cpf,
                 lastQueries: state.lastQueries,
                 type: state.type
             }

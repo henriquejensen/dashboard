@@ -156,6 +156,7 @@ export default class BuscaPorRelacionados extends Component {
                     </div>
 
                     <Col md={12}>
+                        
                         <Table fields = {["Nome", "Data nasc.", "Pessoa Relacionada", "Cidade", "UF", ""]}>
                             {this.state.relacionados.length > 0 ?
                                 this.state.relacionados.map((relacionado,index) => {
@@ -177,7 +178,7 @@ export default class BuscaPorRelacionados extends Component {
                                                 <td>{relacionado.uf}</td>
                                                 <td>
                                                     {this.renderButtons(relacionado.enderecos, "enderecos", index, relacionado.documento, "home", tipo)}
-
+                                                    {" "}
                                                     {this.renderButtons(relacionado.telefones, "telefones", index, relacionado.documento, "phone", tipo)}
                                                 </td>
                                             </tr>
@@ -191,8 +192,9 @@ export default class BuscaPorRelacionados extends Component {
                                             </tr>
                                             
                                             <tr>
-                                                {relacionado.telefones && this.state.buttonsClicked.phone[index]? 
+                                                {relacionado.telefones && this.state.buttonsClicked.phone[index]?
                                                     <td colSpan={6} style={{padding:0}}>
+                                                        {console.log("TELEFONEs", relacionado.telefones, this.state.buttonsClicked.phone[index])}
                                                         <Telefone fixos={relacionado.telefones.fixos} moveis={relacionado.telefones.moveis} />
                                                     </td>
                                                 : ""}
@@ -218,7 +220,7 @@ export default class BuscaPorRelacionados extends Component {
                     <Modal
                         IsModalOpen={this.state.IsModalOpen}
                         closeModal={this.closeModal}
-                        title={"Busca em lote"}
+                        title="Busca em lote"
                         size="small"
                     >
                         {this.confirmMessage(this.props.relacionados)}

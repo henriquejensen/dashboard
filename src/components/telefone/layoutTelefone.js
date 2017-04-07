@@ -73,7 +73,7 @@ export default class LayoutTelefone extends Component{
                     <Col md={6}>
                         <Table>
                             <tbody>
-                                {this.props.fixos.length > 0 ?
+                                {this.props.fixos && this.props.fixos.length > 0 ?
                                     this.props.fixos.map((tel,i) => {
                                         return (
                                             <tr key={i} className={i > 3 ? (this.props.showMoreTel ? "" : "display-none") : ""} >
@@ -145,7 +145,7 @@ export default class LayoutTelefone extends Component{
                     <Col md={6}>
                         <Table>
                             <tbody>
-                                {this.props.moveis.length > 0 ?
+                                {this.props.moveis && this.props.moveis.length > 0 ?
                                     this.props.moveis.map((tel,i) => {
                                         return (
                                             <tr

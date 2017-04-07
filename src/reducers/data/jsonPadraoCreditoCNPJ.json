@@ -84,22 +84,6 @@
     }
   ],
   "participacoesEmpresas": [
-    {
-      "relacao": "SOCIO",
-      "documentoConsultado": 111111122222,
-      "nomeConsultado": "XXXXXXX XXXXXXX",
-      "posicao": null,
-      "documento": 33333333333,
-      "nome": "YYYYYYY YYYYYYYY",
-      "participacao": 50,
-      "qualificacaoSocio": "ADMINISTR",
-      "dataEntrada": "DD/MM/AAAA",
-      "dataSaida": "DD/MM/AAAA",
-      "valorParticipacao": null,
-      "tags": [
-        null
-      ]
-    }
   ],
   "telefones": {
     "fixos": [
@@ -392,7 +376,7 @@
   "quadroResumo": [
     {
       "descricao": "Participações em empresas",
-      "quantidade": 1,
+      "quantidade": 0,
       "primeiraOcorrencia": "DD/MM/AAAA",
       "ultimaOcorrencia": "DD/MM/AAAA",
       "valor": ""
@@ -409,7 +393,7 @@
       "quantidade": 2,
       "primeiraOcorrencia": "DD/MM/AAAA",
       "ultimaOcorrencia": "DD/MM/AAAA",
-      "valor": "1000"
+      "valor": ""
     },
     {
       "descricao": "Ações",
@@ -441,21 +425,21 @@
     },
     {
       "descricao": "Cheque contra ordem outras ocorrências",
-      "quantidade": 1,
+      "quantidade": 0,
       "primeiraOcorrencia": "DD/MM/AAAA",
       "ultimaOcorrencia": "DD/MM/AAAA",
       "valor": ""
     },
     {
       "descricao": "Contra ordem",
-      "quantidade": 1,
+      "quantidade": 0,
       "primeiraOcorrencia": "DD/MM/AAAA",
       "ultimaOcorrencia": "DD/MM/AAAA",
       "valor": ""
     },
     {
       "descricao": "Contra Ordem Documento Diferente Consultado",
-      "quantidade": 1,
+      "quantidade": 0,
       "primeiraOcorrencia": "DD/MM/AAAA",
       "ultimaOcorrencia": "DD/MM/AAAA",
       "valor": ""
@@ -469,14 +453,14 @@
     },
     {
       "descricao": "Informações do poder judiciário",
-      "quantidade": 1,
+      "quantidade": 0,
       "primeiraOcorrencia": "DD/MM/AAAA",
       "ultimaOcorrencia": "DD/MM/AAAA",
       "valor": ""
     },
     {
       "descricao": "Registro de cheque de lojista",
-      "quantidade": 1,
+      "quantidade": 0,
       "primeiraOcorrencia": "DD/MM/AAAA",
       "ultimaOcorrencia": "DD/MM/AAAA",
       "valor": ""

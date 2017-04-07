@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip'
-import { Button } from "react-bootstrap";
+import { Col, Button } from "react-bootstrap";
 
 import Panel from "../panel/Panel";
 import Table from "../table/Table";
@@ -16,12 +16,8 @@ export default class Sociedades extends Component {
               {this.props.participacoes && this.props.participacoes.length > 0 ?
                 <Panel title="PARTICIPAÇÕES EM EMPRESAS" qtdTotal={[{icon:"fa fa-building-o", qtd:this.props.participacoes.length}]}>
                   
-                  <div className="col-md-12">
-                    <Table
-                        fields={
-                            ["Nome", "Cargo", "Participação"]
-                        }
-                    >
+                  <Col md={12}>
+                    <Table fields={["Nome", "Cargo", "Participação"]}>
                       <tbody>
                         {this.props.participacoes.map((participacao, index) => {
                           return (
@@ -41,7 +37,7 @@ export default class Sociedades extends Component {
                         })}
                       </tbody>
                     </Table>
-                  </div>
+                  </Col>
 
                   <Tooltip id="tooltipConsultar">
                       <span>Consultar</span>

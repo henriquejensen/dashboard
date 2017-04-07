@@ -30,30 +30,23 @@ import Modal from "./Modal";
 import BarraBuscaRapida from "./utils/BarraBuscaRapida";
 
 class MenuSuperior extends Component {
-	constructor(props) {
-		super();
-
-		this.state = {
-			IsModalOpen: false,
-			indexNotification: 0
-		}
-
-		this.changeRoute = this.changeRoute.bind(this);
-		this.onOpenNotification = this.onOpenNotification.bind(this);
-	}
-
-	changeRoute(route){
-		if(route == "/login") {
-			this.props.logOut();
-		}
-		browserHistory.push(route);
+	state = {
+		IsModalOpen: false,
+		indexNotification: 0
 	}
 
 	componentWillMount() {
 		this.props.getUserData()
 	}
 
-	onOpenNotification(evt, index) {
+	changeRoute = (route) => {
+		if(route == "/login") {
+			this.props.logOut();
+		}
+		browserHistory.push(route);
+	}
+
+	onOpenNotification = (evt, index) => {
 		evt.preventDefault();
 
 		this.setState({

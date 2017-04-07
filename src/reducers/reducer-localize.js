@@ -27,6 +27,7 @@ import {
 		CLOSE_TAB,
 		ERR_CONNECTION_REFUSED,
 		ERR_CONNECTION_REFUSED_MESSAGE,
+		ERROR_503,
 		ICON_CREDITO,
 		LAST_QUERIES,
 		LOADING,
@@ -88,6 +89,68 @@ export default function(state = initialState, action) {
 					lastQueries: newState.lastQueries,
 					type: action.payload.toUpperCase()
 				}
+
+			case CHANGE_TAB_LOCALIZE:
+				let tab = searchDocument(newState.response,action.payload);
+				tab = tab >= 0 ? tab : 0;
+
+				return {
+					status: "changeTab",
+					message: "",
+					loading: false,
+					response: newState.response,
+					tabActive: newState.response.length > 0 ? newState.response[tab].label : "",
+					lastQueries: newState.lastQueries,
+					type: newState.type
+				}
+
+			case CLOSE_LOCALIZE_MODEL:
+				return {
+					loading: false,
+					status: "closeModel",
+					message: "",
+					response: [],
+					tabActive: "",
+					lastQueries: newState.lastQueries,
+					type: newState.type
+				}
+
+			case CLOSE_MESSAGE_ERROR_LOCALIZE:
+				return {
+					status: "",
+					message: "",
+					loading: false,
+					response: newState.response,
+					tabActive: newState.tabActive,
+					lastQueries: newState.lastQueries,
+					type: newState.type
+				}
+
+			case CLOSE_TAB_LOCALIZE:
+				let newResponse = newState.response.concat();
+				newResponse.splice(action.payload, 1);
+
+				return {
+					status: "closeTab",
+					message: "",
+					loading: false,
+					response: newResponse,
+					tabActive: newResponse[newResponse.length-1].label,
+					lastQueries: newState.lastQueries,
+					type: newState.type
+				}
+
+			case ERR_CONNECTION_REFUSED:
+				return {
+					status: ERR_CONNECTION_REFUSED,
+					message: ERROR_503,
+					loading: false,
+					response: newState.response,
+					tabActive: newState.tabActive,
+					lastQueries: newState.lastQueries,
+					type: newState.type
+				};
+
 			case GET_LOCALIZE_LAST_QUERIES:
 				if(action.payload.tipo == "NOMEOUENDERECO") {
 					newState.lastQueries["NOME"] = patternJsonNomeOuEndereco(action.payload.response.localizeUltimasConsultas, "NOME");
@@ -170,45 +233,6 @@ export default function(state = initialState, action) {
 					message: "",
 					response: verifyIfCreditoPJExists == -1 ? [...newState.response, response] : newState.response,
 					tabActive: verifyIfCreditoPJExists == -1 ? modelCreditoCNPJ.cadastroPj.cnpj : newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
-				}
-
-			case CLOSE_LOCALIZE_MODEL:
-				return {
-					loading: false,
-					status: "closeModel",
-					message: "",
-					response: [],
-					tabActive: "",
-					lastQueries: newState.lastQueries,
-					type: newState.type
-				}
-
-			case CLOSE_TAB_LOCALIZE:
-				let newResponse = newState.response.concat();
-				newResponse.splice(action.payload, 1);
-
-				return {
-					status: "closeTab",
-					message: "",
-					loading: false,
-					response: newResponse,
-					tabActive: newResponse[newResponse.length-1].label,
-					lastQueries: newState.lastQueries,
-					type: newState.type
-				}
-
-			case CHANGE_TAB_LOCALIZE:
-				let tab = searchDocument(newState.response,action.payload);
-				tab = tab >= 0 ? tab : 0;
-
-				return {
-					status: "changeTab",
-					message: "",
-					loading: false,
-					response: newState.response,
-					tabActive: newState.response.length > 0 ? newState.response[tab].label : "",
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				}
@@ -408,30 +432,8 @@ export default function(state = initialState, action) {
 					type: newState.type
 				};
 
-			case ERR_CONNECTION_REFUSED:
-				return {
-					status: ERR_CONNECTION_REFUSED,
-					message: ERR_CONNECTION_REFUSED_MESSAGE,
-					loading: false,
-					response: newState.response,
-					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
-				};
-
-			case CLOSE_MESSAGE_ERROR_LOCALIZE:
-				return {
-					status: "",
-					message: "",
-					loading: false,
-					response: newState.response,
-					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
-				}
-
 			case SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS:
-				newState.lastQueries[action.payload.consulta][action.payload.posElemento][action.payload.tipo] = action.payload.response[action.payload.tipo];
+				newState.lastQueries[action.payload.consulta][action.payload.posElemento][action.payload.tipo] = action.payload.response ? action.payload.response[action.payload.tipo] : [];
 
 				return {
 					loading: false,
@@ -444,9 +446,7 @@ export default function(state = initialState, action) {
 				}
 
 			case SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA:
-				if(action.payload.response) {
-					newState.response[action.payload.indexLabel].data.response[action.payload.indexArrayElements][action.payload.isEnderecoOuTelefone] = action.payload.response[action.payload.isEnderecoOuTelefone];
-				}
+				newState.response[action.payload.indexLabel].data.response[action.payload.indexArrayElements][action.payload.isEnderecoOuTelefone] = action.payload.response ? action.payload.response[action.payload.isEnderecoOuTelefone] : [];
 
 				return {
 					loading: false,

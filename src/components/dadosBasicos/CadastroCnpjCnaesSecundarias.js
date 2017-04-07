@@ -11,7 +11,7 @@ import { NENHUM_REGISTRO } from "../../constants/utils";
 export default class CadastroCnpjCnaesSecundarias extends Component {
     render() {
         return (
-            this.props.cnpjCnaesSecundarias ?
+            this.props.cnpjCnaesSecundarias && this.props.cnpjCnaesSecundarias.length > 0 ?
                 <Panel title="CNPJ OU CNAES SECUNDÁRIAS" qtdTotal={[{icon:"fa fa-building-o", qtd:this.props.cnpjCnaesSecundarias.length}]} showPanel={false}>
                     <Col md={12} sm={12}>            
                         <Table

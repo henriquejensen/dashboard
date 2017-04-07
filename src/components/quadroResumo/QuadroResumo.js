@@ -12,7 +12,7 @@ export default class PainelControle extends Component {
                         <tbody>
                             {this.props.ocorrencias.map((ocorrencia, index) => {
                                 return (
-                                    <tr key={index}>
+                                    <tr key={index} style={ocorrencia.quantidade ? {backgroundColor:"#f1f1c2"} : {}}>
                                         <td>
                                             <a href={"#"+ocorrencia.descricao+this.props.index}>
                                                 {ocorrencia.descricao}

@@ -21,7 +21,7 @@ import {
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Tabs, Tab, Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
+import { Alert, ControlLabel, Checkbox, Col, Tabs, Tab, Form, FormGroup, FormControl, InputGroup } from "react-bootstrap";
 
 import BuscaPorRelacionados from "../../components/relacionados/BuscaPorRelacionados";
 import Protocolo from "../../components/protocolo/Protocolo";
@@ -212,7 +212,7 @@ class LocalizeController extends Component {
 						}
 						placeholder={
 							this.props.type == "TELEFONE" ?
-								"Digite o DD + telefone "
+								"Digite o DDD + telefone "
 								: this.props.type == "EMAIL" ?
 									"Digite o email"
 							: "Digite o documento"
@@ -539,6 +539,12 @@ class LocalizeController extends Component {
 				{this.form(this.props.type)}
 
 				{this.props.loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
+
+				{this.props.datas.length == 0 ?
+					<Alert bsStyle="warning" className="text-center">
+						As reconsultas realizadas no mesmo dia não serão cobradas
+					</Alert>
+				: ""}
 
 				{this.props.datas.length > 0 ? 
 					(

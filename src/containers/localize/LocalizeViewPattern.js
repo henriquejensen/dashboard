@@ -60,7 +60,7 @@ export default class LocalizeView extends Component {
 
                         <RendaEstimada rendaEstimada={this.props.data.rendaEstimada} />
                         
-                        <BeneficioINSS beneficios={this.props.data.rendaBeneficioAssistencial} />
+                        {/*<BeneficioINSS beneficios={this.props.data.rendaBeneficioAssistencial} />*/}
 
                         <RendaEntidadeClasseLiberal renda={this.props.data.rendaEntidadeClasseLiberal} searchPerson={this.props.searchLocalize} />
                     </span>

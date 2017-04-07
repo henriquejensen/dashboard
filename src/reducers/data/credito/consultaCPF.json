@@ -1,0 +1,575 @@
+{
+    "acoes": {
+        "acoes": [
+            {
+                "avalista": "AAAAAAAA",
+                "cidade": "CCCCCCC",
+                "dataAcao": "DD/MM/AAAA",
+                "forum": "DDDDDD",
+                "informacoesAdicionais": null,
+                "posicao": 0,
+                "quantidade": "10",
+                "tipoAcao": "CCCCCCCCC",
+                "uf": "SP",
+                "valor": "100,00",
+                "vara": "BBBBB BBBBB"
+            }
+        ],
+        "ocorrenciaMaisAntiga": {
+            "avalista": "string",
+            "cidade": "string",
+            "dataAcao": "DD/MM/AAAA",
+            "forum": "string",
+            "informacoesAdicionais": "string",
+            "posicao": "string",
+            "quantidade": "string",
+            "tipoAcao": "string",
+            "uf": "string",
+            "valor": "string",
+            "vara": "string"
+        },
+        "ocorrenciaMaisRecente": {
+            "avalista": "string",
+            "cidade": "string",
+            "dataAcao": "DD/MM/AAAA",
+            "forum": "string",
+            "informacoesAdicionais": "string",
+            "posicao": "string",
+            "quantidade": "string",
+            "tipoAcao": "string",
+            "uf": "string",
+            "valor": "string",
+            "vara": "string"
+        },
+        "quantidadeAcoes": "1",
+        "valorTotal": "100,00"
+    },
+    "cabecalho": {
+        "consulta": "completa",
+        "dataHora": "DD/MM/AAAA HH:MM:SS",
+        "entrada": "11111111111110",
+        "produto": "credito",
+        "protocoloTransacao": "da758c2a-e689-4759-b7d1-009e15b1f302"
+    },
+	"cadastro": {
+        "cpf": "22222222220",
+        "dataNascimento": "DD/MM/AAAA",
+        "dependentes": null,
+        "estadoCivil": "SOLTEIRO",
+        "faixaIdade": "20 - 30 anos",
+        "grauInstrucao": "GGGGGGG",
+        "idade": "28",
+        "maeCpf": "11111111110",
+        "maeNome": "XXXXXX XXXXXXX",
+        "nome": "NNNNNNN NNNNN NNNN",
+        "obitoProvavel": "NÃO",
+        "rg": "121212121",
+        "sexo": "M",
+        "signo": "LIBRA",
+        "status": "SSSSSSS",
+        "statusData": "DD/MM/AAAA",
+        "tags": [
+        ],
+        "tituloEleitoral": "132132113",
+        "ufRg": "SP"
+	},
+	"cheques": {
+		"cheques": [
+			{
+				"agencia": "1500",
+				"banco": "ZZZZZZZ",
+				"motivo": "MMMMMMM MMM",
+				"origem": "BBBBB BBBBB",
+				"posicao": 0,
+				"quantidade": "1",
+				"ultimoEm": "DD/MM/AAAA"
+			},
+			{
+				"agencia": "1500",
+				"banco": "ZZZZZZZ",
+				"motivo": "MMMMMMM MMM",
+				"origem": "CCCCCCCCC",
+				"posicao": 0,
+				"quantidade": "1",
+				"ultimoEm": "DD/MM/AAAA"
+			}
+		],
+		"total": "2"
+	},
+	"concedidos": [
+		{
+			"mesAnoVencimento": null,
+			"posicao": null,
+			"quantidade": null,
+			"valor": null
+		}
+	],
+	"consultasAnteriores": {
+		"consultasAnteriores": [
+			{
+				"cidade": "CCCCCCCC",
+				"consultante": "XXXXXX XXXXXX",
+				"data": "DD/MM/AAAA",
+				"grupo": "GGGGGG G",
+				"posicao": 0,
+				"quantidade": "10",
+				"segmento": "SSSSSS SSS",
+				"tags": [
+				],
+				"tipo": null,
+				"uf": null
+			},
+			{
+				"cidade": "CCCCCCCC",
+				"consultante": "XXXXXX XXXXXX",
+				"data": "DD/MM/AAAA",
+				"grupo": "GGGGGG G",
+				"posicao": 0,
+				"quantidade": "5",
+				"segmento": "SSSSSS SSS",
+				"tags": [
+				],
+				"tipo": null,
+				"uf": null
+			}
+		],
+		"quantidadeTotal": "15",
+		"quantidadeUltimoMes": "15",
+		"quantidadeUltimos3Meses": "0",
+		"quantidadeUltimos6Meses": "0",
+		"resumo": null
+	},
+	"emails": [
+		{
+			"email": "exemplo@exemplo.com",
+			"grupo": null,
+			"pontuacao": null,
+			"posicao": 0,
+			"relacao": null,
+			"tags": [
+			]
+		}
+	],
+	"enderecos": [
+		{
+			"bairro": null,
+			"cep": "13070070",
+			"cidade": "CAMPINAS",
+			"complemento": "C",
+			"grupo": null,
+			"latitude": "-22.8465333",
+			"logradouro": "JOAO ERBOLATO",
+			"longitude": "-47.0846438",
+			"numero": "364",
+			"pontuacao": null,
+			"posicao": 0,
+			"tags": [
+			],
+			"tipoLogradouro": "AV",
+			"uf": "SP"
+		}
+	],
+	"limiteSugerido": {
+		"interpretacao": "0,00",
+		"limiteCreditoSugerido": null,
+		"maisInformacoes": null
+	},
+	"outrasGrafias": [
+		{
+			"bairro": "JARDIM CHAPADAO",
+			"cep": "13070070",
+			"cidade": "CAMPINAS",
+			"documento": "11111111111",
+			"endereco": "AV. JARDIM CHAPADAO, 364",
+			"informacoesAdicionais": null,
+			"nome": "AAAAAAA AAAAAA",
+			"posicao": 0,
+			"tags": [
+			],
+			"telefone": "11887879898",
+			"uf": "SP"
+		},
+		{
+			"bairro": "JARDIM CHAPADAO",
+			"cep": "13070070",
+			"cidade": "CAMPINAS",
+			"documento": "11111111111",
+			"endereco": "AV. JARDIM CHAPADAO, 364",
+			"informacoesAdicionais": null,
+			"nome": "AAAAAAA AAAAAA",
+			"posicao": 1,
+			"tags": [
+			],
+			"telefone": "11887879898",
+			"uf": "SP"
+		}
+	],
+	"participacoesEmpresas": [
+	],
+	"protestosDetalhados": {
+		"ocorrenciaMaisAntiga": {
+			"cartorio": "string",
+			"cidade": "string",
+			"dataProtesto": "DD/MM/AAAA",
+			"dataVencimento": "DD/MM/AAAA",
+			"grupo": "string",
+			"informacoesAdicionais": "string",
+			"natureza": "string",
+			"posicao": "string",
+			"tags": [
+				"string"
+			],
+			"uf": "string",
+			"valor": "string"
+		},
+		"ocorrenciaMaisRecente": {
+			"cartorio": "string",
+			"cidade": "string",
+			"dataProtesto": "DD/MM/AAAA",
+			"dataVencimento": "DD/MM/AAAA",
+			"grupo": "string",
+			"informacoesAdicionais": "string",
+			"natureza": "string",
+			"posicao": "string",
+			"tags": [
+				"string"
+			],
+			"uf": "string",
+			"valor": "string"
+		},
+		"protestosDetalhados": [
+			{
+				"cartorio": "XXXXXXX",
+				"cidade": "CCCCCCCC",
+				"dataProtesto": "DD/MM/AAAA",
+				"dataVencimento": "DD/MM/AAAA",
+				"grupo": null,
+				"informacoesAdicionais": null,
+				"natureza": "NNNN",
+				"posicao": 0,
+				"tags": [
+				],
+				"uf": "UF",
+				"valor": "500,00"
+			},
+			{
+				"cartorio": "XXXXXXX",
+				"cidade": "CCCCCCCC",
+				"dataProtesto": "DD/MM/AAAA",
+				"dataVencimento": "DD/MM/AAAA",
+				"grupo": null,
+				"informacoesAdicionais": null,
+				"natureza": "NNNN",
+				"posicao": 0,
+				"tags": [
+				],
+				"uf": "UF",
+				"valor": "500,00"
+			}
+		],
+		"quantidadeRegistros": "2",
+		"valorTotal": "1000,00"
+	},
+	"protestosSimples": {
+		"documento": null,
+		"protestosSimples": [
+			{
+				"estado": null,
+				"quantidade": null
+			}
+		],
+		"quantidadeRegistros": null
+	},
+	"quadroAdministrativo": [
+	],
+    "quadroResumo": [
+        {
+            "descricao": "Participações em empresas",
+            "quantidade": 0,
+            "primeiraOcorrencia": "DD/MM/AAAA",
+            "ultimaOcorrencia": "DD/MM/AAAA",
+            "valor": ""
+        },
+        {
+            "descricao": "Registros de Débitos",
+            "quantidade": 2,
+            "primeiraOcorrencia": "DD/MM/AAAA",
+            "ultimaOcorrencia": "DD/MM/AAAA",
+            "valor": "1000"
+        },
+        {
+            "descricao": "Protestos",
+            "quantidade": 2,
+            "primeiraOcorrencia": "DD/MM/AAAA",
+            "ultimaOcorrencia": "DD/MM/AAAA",
+            "valor": ""
+        },
+        {
+            "descricao": "Ações",
+            "quantidade": 2,
+            "primeiraOcorrencia": "DD/MM/AAAA",
+            "ultimaOcorrencia": "DD/MM/AAAA",
+            "valor": "1000"
+        },
+        {
+            "descricao": "Cheques sem fundo",
+            "quantidade": 2,
+            "primeiraOcorrencia": "DD/MM/AAAA",
+            "ultimaOcorrencia": "DD/MM/AAAA",
+            "valor": ""
+        },
+        {
+            "descricao": "Renda presumida",
+            "quantidade": 1,
+            "primeiraOcorrencia": "DD/MM/AAAA",
+            "ultimaOcorrencia": "DD/MM/AAAA",
+            "valor": ""
+        },
+        {
+            "descricao": "Consultas",
+            "quantidade": 15,
+            "primeiraOcorrencia": "DD/MM/AAAA",
+            "ultimaOcorrencia": "DD/MM/AAAA",
+            "valor": ""
+        },
+        {
+            "descricao": "Cheque contra ordem outras ocorrências",
+            "quantidade": 0,
+            "primeiraOcorrencia": "DD/MM/AAAA",
+            "ultimaOcorrencia": "DD/MM/AAAA",
+            "valor": ""
+        },
+        {
+            "descricao": "Contra ordem",
+            "quantidade": 0,
+            "primeiraOcorrencia": "DD/MM/AAAA",
+            "ultimaOcorrencia": "DD/MM/AAAA",
+            "valor": ""
+        },
+        {
+            "descricao": "Contra Ordem Documento Diferente Consultado",
+            "quantidade": 0,
+            "primeiraOcorrencia": "DD/MM/AAAA",
+            "ultimaOcorrencia": "DD/MM/AAAA",
+            "valor": ""
+        },
+        {
+            "descricao": "Recuperações, Falências e Ações Judiciais",
+            "quantidade": 1,
+            "primeiraOcorrencia": "DD/MM/AAAA",
+            "ultimaOcorrencia": "DD/MM/AAAA",
+            "valor": ""
+        },
+        {
+            "descricao": "Informações do poder judiciário",
+            "quantidade": 0,
+            "primeiraOcorrencia": "DD/MM/AAAA",
+            "ultimaOcorrencia": "DD/MM/AAAA",
+            "valor": ""
+        },
+        {
+            "descricao": "Registro de cheque de lojista",
+            "quantidade": 0,
+            "primeiraOcorrencia": "DD/MM/AAAA",
+            "ultimaOcorrencia": "DD/MM/AAAA",
+            "valor": ""
+        }
+    ],
+	"registrosDebitos": {
+		"ocorrenciaMaisAntiga": {
+			"avalistaComprador": "string",
+			"cidade": "string",
+			"contrato": "string",
+			"credor": "string",
+			"dataInclusao": "string",
+			"dataVencimento": "string",
+			"ddd": "string",
+			"grupo": "string",
+			"informacoesAdicionais": "string",
+			"modalidade": "string",
+			"posicao": "string",
+			"praca": "string",
+			"situacao": "string",
+			"tags": [
+				"string"
+			],
+			"telefone": "string",
+			"tipo": "string",
+			"uf": "string",
+			"valor": "string"
+		},
+		"ocorrenciaMaisRecente": {
+			"avalistaComprador": "string",
+			"cidade": "string",
+			"contrato": "string",
+			"credor": "string",
+			"dataInclusao": "string",
+			"dataVencimento": "string",
+			"ddd": "string",
+			"grupo": "string",
+			"informacoesAdicionais": "string",
+			"modalidade": "string",
+			"posicao": "string",
+			"praca": "string",
+			"situacao": "string",
+			"tags": [
+				"string"
+			],
+			"telefone": "string",
+			"tipo": "string",
+			"uf": "string",
+			"valor": "string"
+		},
+		"quantidadeRegistros": "2",
+		"registrosDebitos": [
+			{
+				"avalistaComprador": "AAAAAAAAA",
+				"cidade": "CCCCCCC",
+				"contrato": "100000000",
+				"credor": "XXXXX XXXX",
+				"dataInclusao": "DD/MM/AAAA",
+				"dataVencimento": "DD/MM/AAAA",
+				"ddd": "19",
+				"grupo": "GGGGGGGG",
+				"informacoesAdicionais": null,
+				"modalidade": "MMMMMMM",
+				"posicao": 0,
+				"praca": "PPPPPPP PPP",
+				"situacao": "string",
+				"tags": [
+				],
+				"telefone": "99999999",
+				"tipo": null,
+				"uf": "string",
+				"valor": "500,00"
+			},
+			{
+				"avalistaComprador": "AAAAAAAAA",
+				"cidade": "CCCCCCC",
+				"contrato": "100000000",
+				"credor": "XXXXX XXXX",
+				"dataInclusao": "DD/MM/AAAA",
+				"dataVencimento": "DD/MM/AAAA",
+				"ddd": "19",
+				"grupo": "GGGGGGGG",
+				"informacoesAdicionais": null,
+				"modalidade": "MMMMMMM",
+				"posicao": 0,
+				"praca": "PPPPPPP PPP",
+				"situacao": "string",
+				"tags": [
+				],
+				"telefone": "99999999",
+				"tipo": null,
+				"uf": "string",
+				"valor": "500,00"
+			}
+		],
+		"valorTotal": "1000,00"
+	},
+    "rendasPresumidas": [
+        {
+            "posicao": 0,
+            "faixa": "até R$440,00",
+            "probabilidade": "1,13"
+        },
+        {
+            "posicao": 0,
+            "faixa": "De R$440,00 até R$880,00",
+            "probabilidade": "19,03"
+        },
+        {
+            "posicao": 0,
+            "faixa": "De R$880,00 até R$1.760,00",
+            "probabilidade": "41,93"
+        },
+        {
+            "posicao": 0,
+            "faixa": "De R$1.760,00 até R$2.640,00",
+            "probabilidade": "15,54"
+        },
+        {
+            "posicao": 0,
+            "faixa": "De R$2.640,00 até R$4.400,00",
+            "probabilidade": "10,89"
+        },
+        {
+            "posicao": 0,
+            "faixa": "De R$4.400,00 até R$8.800,00",
+            "probabilidade": "7,42"
+        },
+        {
+            "posicao": 0,
+            "faixa": "De R$8.800,00 até R$13.200,00",
+            "probabilidade": "1,13"
+        },
+        {
+            "posicao": 0,
+            "faixa": "De R$13.200,00 até R$17.600,00",
+            "probabilidade": "1,13"
+        },
+        {
+            "posicao": 0,
+            "faixa": "Acima de R$17.600,00",
+            "probabilidade": "1,31"
+        }
+    ],
+	"riscoSetor": {
+		"interpretacao": null,
+		"maisInformacoes": null,
+		"pontuacao": null,
+		"probabilidadeMediaInadimplencia": null
+	},
+	"scores": [
+		{
+			"classe": "CCCCCCC",
+			"descricao": "DDDDDD",
+			"grupo": "GGGGGGGG",
+			"periodo": "DD/MM/AAAA",
+			"pontos": "10",
+			"posicao": 0,
+			"probabilidade": "XX",
+			"tags": [
+			],
+			"tipo": "XXXXXX"
+		}
+	],
+	"telefones": {
+		"fixos": [
+			{
+				"grupo": null,
+				"operadora": null,
+				"pontuacao": null,
+				"posicao": null,
+				"relacao": null,
+				"tags": [
+				],
+				"telefone": "1935536256"
+			}
+		],
+		"moveis": [
+			{
+				"grupo": null,
+				"operadora": null,
+				"pontuacao": null,
+				"posicao": 0,
+				"relacao": null,
+				"tags": [
+					"whats", "viber"
+				],
+				"telefone": "119989898984"
+			},
+			{
+				"grupo": null,
+				"operadora": null,
+				"pontuacao": null,
+				"posicao": 1,
+				"relacao": null,
+				"tags": [
+					"whats", "viber"
+				],
+				"telefone": "11887879898"
+			}
+		]
+	}
+}

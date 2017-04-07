@@ -7,7 +7,14 @@ import {
     SEE_FOCOFISCAL_MODEL
 } from "../constants/constantsFocoFiscal";
 
-import { CHANGE_FOCOFISCAL_TYPE, CHANGE_TAB, CLOSE_TAB, ERR_CONNECTION_REFUSED, ERROR_503, REQUEST_ERROR } from "../constants/utils";
+import { 
+    CHANGE_FOCOFISCAL_TYPE,
+    CHANGE_TAB,
+    CLOSE_TAB,
+    ERR_CONNECTION_REFUSED,
+    ERROR_503,
+    REQUEST_ERROR
+} from "../constants/utils";
 
 import model from "./data/jsonPadrao.json";
 import lastQueries from "./data/lastQueries.json";
@@ -32,31 +39,15 @@ export default function(state=getInitialState, action) {
     }
 
     switch(action.type) {
-        case LOADING_FOCOFISCAL:
+        case CHANGE_FOCOFISCAL_TYPE:
             return {
-                loading: true,
-                status: "loading",
+                status: "changeType",
                 message: "",
-                response: state.response,
-                tabActive: state.tabActive,
-                lastQueries: state.lastQueries,
-                type: state.type
-            }
-
-        case SEE_FOCOFISCAL_MODEL:
-            response.data = model;
-            response.label = model.cadastroPf.cpf;
-            response.tipo = "CPF";
-            response.icon = ICON_FOCOFISCAL;
-            response.produto = "focofiscal";
-            return {
                 loading: false,
-                status: "model",
-                message: "",
-                response: [response],
-                tabActive: model.cadastroPf.cpf,
+                response: state.response,
+                tabActive: state.tabActiv,
                 lastQueries: state.lastQueries,
-                type: state.type
+                type: action.payload.toUpperCase()
             }
 
         case CLOSE_MESSAGE_ERROR_FOCOFISCAL:
@@ -103,15 +94,31 @@ export default function(state=getInitialState, action) {
                 type: state.type
             }
 
-        case CHANGE_FOCOFISCAL_TYPE:
+        case LOADING_FOCOFISCAL:
             return {
-                status: "changeType",
+                loading: true,
+                status: "loading",
                 message: "",
-                loading: false,
                 response: state.response,
-                tabActive: state.tabActiv,
+                tabActive: state.tabActive,
                 lastQueries: state.lastQueries,
-                type: action.payload.toUpperCase()
+                type: state.type
+            }
+
+        case SEE_FOCOFISCAL_MODEL:
+            response.data = model;
+            response.label = model.cadastroPf.cpf;
+            response.tipo = "CPF";
+            response.icon = ICON_FOCOFISCAL;
+            response.produto = "focofiscal";
+            return {
+                loading: false,
+                status: "model",
+                message: "",
+                response: [response],
+                tabActive: model.cadastroPf.cpf,
+                lastQueries: state.lastQueries,
+                type: state.type
             }
     }
 
