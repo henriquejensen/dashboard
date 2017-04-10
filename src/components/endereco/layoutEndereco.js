@@ -47,19 +47,40 @@ export default class Enderecos extends Component {
                           return (
                             <tbody key={i}>
                               <tr>
-                                <td>{end.endereco ? end.endereco : end.tipoLogradouro + " "+ end.logradouro + " " + end.numero + " " + end.complemento}</td>
+                                <td>
+                                  {end.endereco ?
+                                    end.endereco :
+                                    (
+                                      (end.tipoLogradouro ? end.tipoLogradouro : "")
+                                      + (end.logradouro ? " " + end.logradouro : "")
+                                      + (end.numero ? ", " + end.numero : "")
+                                      + (end.complemento ? ", " + end.complemento : "")
+                                    )
+                                  }</td>
                                 <td>{end.bairro}</td>
                                 <td>{end.cidade}</td>
                                 <td>{end.uf}</td>
                                 <td>{cep.substring(0,cep.length-3)}-{cep.substring(cep.length-3)}</td>
                                 <td>
-                                    <a data-tip data-for="tooltipMap">
-                                      <div
-                                        className={this.state.mapa && this.state.idCep == i+end.cep ? "noPrint mapa-button mapa-button-close" : "noPrint mapa-button"}
-                                        onClick={() => this.mostrarMapa(i+end.cep)}>
-                                        <i className={this.state.mapa && this.state.idCep == i+end.cep ? "fa fa-times-circle": "fa fa-map-o"} />
-                                      </div>
+                                    <a data-tip data-for='tooltipMap'>
+                                        <Button
+                                          bsStyle="info"
+                                          className={this.state.mapa && this.state.idCep == i+end.cep ? "noPrint mapa-button mapa-button-close" : "noPrint mapa-button"}
+                                          onClick={() => this.mostrarMapa(i+end.cep)}>
+                                            <i className={this.state.mapa && this.state.idCep == i+end.cep ? "fa fa-times-circle": "fa fa-map-o"} />
+                                        </Button>
                                     </a>
+
+                                    {this.props.searchEndereco ? 
+                                      <a data-tip data-for='tooltipConsultarMap'>
+                                          <Button
+                                            bsStyle="info"
+                                            className="mapa-button"
+                                            onClick={() => this.props.searchEndereco(end, "ENDERECO", "ENDERECO")}>
+                                              <i className='fa fa-home'/>
+                                          </Button>
+                                      </a>
+                                    : ""}
                                 </td>
                               </tr>
 
@@ -89,6 +110,9 @@ export default class Enderecos extends Component {
                 <span>Visualizar endereço</span>
               </Tooltip>
 
+              <Tooltip id="tooltipConsultarMap">
+                <span>Consulta por endereço</span>
+              </Tooltip>
 
             </div>)
   }

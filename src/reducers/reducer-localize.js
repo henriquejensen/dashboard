@@ -36,12 +36,12 @@ import {
 		SUCCESS
 } from "../constants/utils";
 import { COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO } from "../constants/constantsCompany";
-import model from "./data/modelLocalize.json";
+import model from "./data/localize/modelLocalize.json";
 import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
 import relacionados from "./data/relacionados.json";
 
-import modelCredito from "./data/jsonPadraoCredito.json";
-import modelCreditoCNPJ from "./data/jsonPadraoCreditoCNPJ.json";
+import modelCredito from "./data/credito/consultaCPF.json";
+import modelCreditoCNPJ from "./data/credito/consultaCNPJ.json";
 import lastQueries from "./data/lastQueries.json";
 
 const initialState = {
@@ -196,11 +196,11 @@ export default function(state = initialState, action) {
 				}
 
 			case SEARCH_BY_CREDITO_PF:
-				let verifyIfCreditoPFExists = searchDocument(newState.response, modelCredito.cadastroPf.cpf);
+				let verifyIfCreditoPFExists = searchDocument(newState.response, modelCredito.cadastro.cpf);
 
 				if(verifyIfCreditoPFExists == -1) {
 					response.data = modelCredito;
-					response.label = modelCredito.cadastroPf.cpf;
+					response.label = modelCredito.cadastro.cpf;
 					response.tipo = "CPF";
 					response.icon = ICON_CREDITO;
 					response.produto = COMPANY_PRODUCT_CREDITO;
@@ -211,17 +211,17 @@ export default function(state = initialState, action) {
 					status: SUCCESS,
 					message: "",
 					response: verifyIfCreditoPFExists == -1 ? [...newState.response, response] : newState.response,
-					tabActive: verifyIfCreditoPFExists == -1 ? modelCredito.cadastroPf.cpf : newState.tabActive,
+					tabActive: verifyIfCreditoPFExists == -1 ? modelCredito.cadastro.cpf : newState.tabActive,
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				}
 
 			case SEARCH_BY_CREDITO_PJ:
-				let verifyIfCreditoPJExists = searchDocument(newState.response, modelCreditoCNPJ.cadastroPj.cnpj);
+				let verifyIfCreditoPJExists = searchDocument(newState.response, modelCreditoCNPJ.cadastro.cnpj);
 
 				if(verifyIfCreditoPJExists == -1) {
 					response.data = modelCreditoCNPJ;
-					response.label = modelCreditoCNPJ.cadastroPj.cnpj;
+					response.label = modelCreditoCNPJ.cadastro.cnpj;
 					response.tipo = "CNPJ";
 					response.icon = ICON_CREDITO;
 					response.produto = COMPANY_PRODUCT_CREDITO;
@@ -232,7 +232,7 @@ export default function(state = initialState, action) {
 					status: SUCCESS,
 					message: "",
 					response: verifyIfCreditoPJExists == -1 ? [...newState.response, response] : newState.response,
-					tabActive: verifyIfCreditoPJExists == -1 ? modelCreditoCNPJ.cadastroPj.cnpj : newState.tabActive,
+					tabActive: verifyIfCreditoPJExists == -1 ? modelCreditoCNPJ.cadastro.cnpj : newState.tabActive,
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				}

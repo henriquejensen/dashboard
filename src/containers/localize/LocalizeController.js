@@ -98,7 +98,6 @@ class LocalizeController extends Component {
 		this.props.searchPessoasRelacionadas(doc);
 	}
 	
-
 	//recebe o documento da pessoa e da pessoa relacionada a esta e
 	//irá buscar pelo telefone ou endereço da pessoa
 	searchTelefonesPessoaRelacionada = (documento, docPessoaRelacionado) => {
@@ -116,6 +115,11 @@ class LocalizeController extends Component {
 	searchLocalize = (doc, tipo) => {
 		this.props.loadingLocalize();
 		this.props.searchLocalize(doc, tipo);
+	}
+
+	searchLocalizeByNomeEndereco = (data, tipo, label) => {
+		this.props.loadingLocalize();
+		this.props.searchLocalizeByNomeEndereco(data, tipo, label);
 	}
 
 	onFormSubmit = (evt) => {
@@ -578,7 +582,8 @@ class LocalizeController extends Component {
 												searchPessoasRelacionadas={this.searchPessoasRelacionadas}
 												pessoasRelacionadas={data.pessoasRelacionadas}
 												searchTelefonesPessoaRelacionada={this.searchTelefonesPessoaRelacionada}
-												searchEnderecosPessoaRelacionada={this.searchEnderecosPessoaRelacionada}/>
+												searchEnderecosPessoaRelacionada={this.searchEnderecosPessoaRelacionada}
+												searchLocalizeByNomeEndereco={this.searchLocalizeByNomeEndereco}/>
 										:
 										data.produto == COMPANY_PRODUCT_CREDITO ?
 											<CreditoView

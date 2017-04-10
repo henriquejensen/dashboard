@@ -33,7 +33,9 @@ export default class LocalizeView extends Component {
 
                 <Telefones telefones={this.props.data.telefones} />
 
-                <Enderecos enderecos={this.props.data.enderecos} />
+                <Enderecos
+                    enderecos={this.props.data.enderecos}
+                    searchEndereco={this.props.searchLocalizeByNomeEndereco} />
 
                 <Emails emails={this.props.data.emails} />
 

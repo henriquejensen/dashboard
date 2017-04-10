@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import Notification from "react-notification-system";
+import { Col } from "react-bootstrap";
 
 import Panel from "../panel/Panel";
 import Modal from "../Modal";
@@ -50,18 +51,22 @@ export default class Endereco extends Component {
             <span>
                 {this.props.enderecos ?
                     <Panel title="ENDEREÇOS" qtdTotal={[{icon:"fa fa-home", qtd:this.props.enderecos.length}]}>
-                        <div className="col-md-12 col-xs-12">
-                            <LayoutEndereco enderecos={this.props.enderecos} newAddress={this.state.IsModalOpen} sendNewAddress={this.sendNewAddress} />
-                        </div>
+                        <Col md={12} xs={12}>
+                            <LayoutEndereco
+                                enderecos={this.props.enderecos}
+                                newAddress={this.state.IsModalOpen}
+                                sendNewAddress={this.sendNewAddress}
+                                searchEndereco={this.props.searchEndereco} />
+                        </Col>
                         
-                        <div className="col-md-12 col-sm-12 relacionados">
+                        <Col md={12} xs={12} className="relacionados">
                             <a className="moreInfo" onClick={() => this.setState({IsModalOpen:!this.state.IsModalOpen})}>
                                 {this.state.IsModalOpen ?
                                     "Cancelar"
                                 : "Adicionar um novo endereço"}
                             </a>
                             {this.props.pessoas}
-                        </div>
+                        </Col>
                     </Panel> :
                     <Panel title="ENDEREÇOS">
                         <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
