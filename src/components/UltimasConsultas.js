@@ -84,7 +84,7 @@ export default class UltimasConsultas extends Component {
 
     renderButtons = (items, tipo, index, documento, icon) => {
         return (
-            <a data-tip data-for='tooltipConsultar'>
+            <a data-tip data-for={'tooltip'}>
                 <Button
                     bsSize="small"
                     bsStyle={this.state.buttonsClicked[icon][index] ? "danger" : "info"}
@@ -190,6 +190,12 @@ export default class UltimasConsultas extends Component {
                 <Tooltip id="tooltipConsultar">
                     <span>Consultar</span>
                 </Tooltip>
+
+                <Tooltip id="tooltip">
+                    <span>Consultar endereços</span>
+                </Tooltip>
+
+
 
                 <Modal
                     IsModalOpen={this.state.IsModalOpen}

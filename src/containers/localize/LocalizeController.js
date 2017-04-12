@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Tooltip from 'react-tooltip';
 import { changeProductType } from "../../actions/actionsCommon";
 import {
 		getLastQueries,
@@ -25,7 +26,7 @@ import { Alert, ControlLabel, Checkbox, Col, Tabs, Tab, Form, FormGroup, FormCon
 
 import BuscaPorRelacionados from "../../components/relacionados/BuscaPorRelacionados";
 import Protocolo from "../../components/protocolo/Protocolo";
-import LocalizeViewPattern from "./LocalizeViewPattern";
+import LocalizeView from "./LocalizeView";
 import CreditoView from "../credito/CreditoView";
 
 import MyForm from "../../components/forms/Form";
@@ -381,15 +382,19 @@ class LocalizeController extends Component {
 						required
 					/>
 				</Col>
+				
 				<Col md={2}>
-					<input
-						className="form-control"
-						type="date"
-						name="dataNascimento"
-						value={this.state.localizeInput.dataNascimento}
-						onChange={this.onChangeInput}
-					/>
+					<a data-tip data-for="tooltipDataNascimento">
+						<input
+							className="form-control"
+							type="date"
+							name="dataNascimento"
+							value={this.state.localizeInput.dataNascimento}
+							onChange={this.onChangeInput}
+						/>
+					</a>
 				</Col>
+				
 				<Col md={2}>
 					<select
 						className="form-control"
@@ -574,7 +579,7 @@ class LocalizeController extends Component {
 									>
 										{/*Verifica se o produto pesquisado é localize, pois pode ser gerado abas de outros produtos no Localize*/}
 										{data.produto == COMPANY_PRODUCT_LOCALIZE ?
-											<LocalizeViewPattern
+											<LocalizeView
 												data={data.data}
 												tipo={data.tipo}
 												index={index}
@@ -607,6 +612,10 @@ class LocalizeController extends Component {
 						</Tabs>
 					)
 				: ""}
+
+				<Tooltip id="tooltipDataNascimento">
+					<span>Data de nascimento</span>
+				</Tooltip>
 			</div>
 		)
 	}

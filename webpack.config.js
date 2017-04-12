@@ -2,10 +2,8 @@ const webpack = require('webpack');
 var CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
-  //devtool: 'cheap-module-source-map',
+  devtool: 'cheap-module-source-map',
   entry: [
-    'webpack-dev-server/client',
     './src/index.js'
   ],
   output: {
@@ -37,7 +35,7 @@ module.exports = {
         }
     ]
   },
-  /*plugins: [
+  plugins: [
     new webpack.DefinePlugin({
       'process.env': {
         // This has effect on the react lib size
@@ -68,7 +66,7 @@ module.exports = {
       exclude: [/\.min\.js$/gi] // skip pre-minified libs
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
-  ],*/
+  ],
   resolve: {
     extensions: ['', '.js', '.jsx', '.css']
   },

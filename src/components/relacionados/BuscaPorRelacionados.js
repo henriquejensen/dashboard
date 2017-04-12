@@ -10,6 +10,8 @@ import Telefone from "../telefone/layoutTelefone";
 
 import { NENHUM_REGISTRO } from "../../constants/utils";
 
+const title = "RESULTADOS";
+
 export default class BuscaPorRelacionados extends Component {
     state = {
         buttonsClicked: {
@@ -129,14 +131,14 @@ export default class BuscaPorRelacionados extends Component {
     render() {
         return (
             this.props.relacionados && this.state.relacionados.length > 0 ?
-                <Panel title="RESULTADOS" qtdTotal={[{qtd:this.state.relacionados.length,icon:"fa fa-users"}]}>
+                <Panel title={title} qtdTotal={[{qtd:this.state.relacionados.length,icon:"fa fa-users"}]}>
                     <div style={{paddingTop:5}}>
-                        <div className="col-md-6">
+                        <Col md={6}>
                             <strong>Resultados da busca por:</strong>
                             {this.props.headerBody}
-                        </div>
+                        </Col>
 
-                        <div className="col-md-6">
+                        <Col md={6}>
                             <strong>Busca em lote por:</strong>
                             {" "}
                             <Button
@@ -152,7 +154,7 @@ export default class BuscaPorRelacionados extends Component {
                                 onClick={() => this.confirmSearch("telefones", this.state.relacionados, "phone")}>
                                     telefones{' '}<i className='fa fa-phone'/>
                             </Button>
-                        </div>
+                        </Col>
                     </div>
 
                     <Col md={12}>
@@ -219,7 +221,7 @@ export default class BuscaPorRelacionados extends Component {
                         {this.confirmMessage(this.props.relacionados)}
                     </Modal>
                 </Panel>
-            :   <Panel title="RESULTADOS DA BUSCA">
+            :   <Panel title={title}>
                     <div style={{paddingTop:5}}>
                         <Col md={12}>
                             <strong>Resultados da busca por:</strong>
