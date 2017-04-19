@@ -127,21 +127,22 @@ class LocalizeController extends Component {
 		evt.preventDefault();
 
 		this.props.loadingLocalize();
+		let type = this.props.type;
 
-		if(this.props.type == "CPF" || this.props.type == "CNPJ") {
+		if(type == "CPF" || type == "CNPJ") {
 			let documento = this.state.documento ? this.state.documento : "DOCUMENTO";
 			documento = documento.replace(/[^0-9]/g,"");
 			
-			this.props.searchLocalize(documento, this.props.type);
+			this.props.searchLocalize(documento, type);
 			this.setState({
 				documento: ""
 			})
-		} else if(this.props.type == "EMAIL") {
+		} else if(type == "EMAIL") {
 			this.props.searchLocalizeByEmail(this.state.email);
 			this.setState({
 				email: ""
 			})
-		} else if(this.props.type == "TELEFONE") {
+		} else if(type == "TELEFONE") {
 			let telefone = this.state.telefone;
 			telefone = telefone.replace(/[^0-9]/g,"");
 			this.props.searchLocalizeByTelefone(telefone);
@@ -149,8 +150,8 @@ class LocalizeController extends Component {
 				telefone: ""
 			})
 		} else {
-			let labelToTab = this.props.type == "NOME" ? this.state.localizeInput.nome : this.state.localizeInput.enderecoOuCep
-			this.props.searchLocalizeByNomeEndereco(this.state.localizeInput, this.props.type, labelToTab);
+			let labelToTab = type == "NOME" ? this.state.localizeInput.nome : this.state.localizeInput.enderecoOuCep
+			this.props.searchLocalizeByNomeEndereco(this.state.localizeInput, type, labelToTab);
 
 			this.setState({
 				localizeInput: {
