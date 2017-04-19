@@ -4,7 +4,6 @@ import { Col, Button } from "react-bootstrap";
 import { FieldGroup, TextAreaGroup } from "./CommonForms";
 
 export default class EnviarSMS extends Component {
-
     render() {
         return (
             <form onSubmit={this.props.onSendSMS}>

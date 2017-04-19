@@ -6,18 +6,13 @@ import { connect } from "react-redux";
 import { changeColorMenu, changeProductType } from "../actions/actionsCommon";
 
 import menu from "./utils/common/menu.json";
+import todosProdutos from "./utils/common/produtos.json";
 import CardInfoMenuUser from "./utils/CardInfoMenuUser";
 
 class Sidebar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      tabActive: "menu",
-      menuOpened: ""
-    }
-
-    this.onClickMenu = this.onClickMenu.bind(this);
+  state = {
+    tabActive: "menu",
+    menuOpened: ""
   }
 
   componentDidMount() {
@@ -28,16 +23,15 @@ class Sidebar extends Component {
     this.setState({
       tabActive: tab
     })
-
   }
   
-  activeMenuDropdown(menu) {
+  activeMenuDropdown = (menu) => {
     this.setState({
       menuOpened: this.state.menuOpened == menu ? "" : menu
     })
   }
 
-  onClickMenu(evt, color, product, type ) {
+  onClickMenu = (evt, color, product, type ) => {
     evt.preventDefault();
 
     this.props.changeColorMenu(color);
@@ -45,37 +39,50 @@ class Sidebar extends Component {
   }
 
   renderMenu() {
+    let produtos = this.props.produtosCliente ? this.props.produtosCliente : [];
     return (
         <div className={this.state.tabActive == "menu" ? "tab-pane active":"tab-pane"} id="sidebar">
           <ul className="sidebar-nav">
-            {menu.sidebar.map((opt, index) => {
-              return (
-                <li key={index} onClick={(evt) => {evt.preventDefault();this.props.changeColorMenu(opt.color)}}>
-                  <Link to={opt.link} onClick={() => this.activeMenuDropdown(opt.id)} activeStyle={{backgroundColor: "#E7E7E7"}}>
-                    {this.props.activedMenu ?
-                      <img src={opt.image} className="sub-icon" alt={opt.alt}/>
-                    : ""}
-                    {opt.label}
-                    {!this.props.activedMenu ?
-                      <img src={opt.image} className="sub-icon sub-icon-open-menu" alt={opt.alt}/>
-                    : ""}
-                  </Link>
-                  <ul className={this.state.menuOpened == opt.id && this.props.activedMenu ? "sidebar-item-dropdown" : "display-none"}>
-                    {opt.subItems.map((subOpt, j) => {
-                      return (
-                          <li
-                            onClick={(evt) => this.onClickMenu(evt, opt.color, opt.id, subOpt.id)}
-                            key={j}
-                          >
-                            <Link to={subOpt.link}>
-                              {subOpt.label}
-                            </Link>
-                          </li>
-                      )
-                    })}                    
-                  </ul>
-                </li> 
-              )
+            {produtos.map((produto, index) => {
+              let opt = todosProdutos[produto];
+              if(opt) {
+                return (
+                  <li
+                    key={index}
+                    onClick={() => {this.props.changeColorMenu(opt.color)}}>
+                      <Link
+                        to={opt.link}
+                        onClick={() => this.activeMenuDropdown(opt.id)}
+                        activeStyle={{backgroundColor: "#E7E7E7"}}>
+                        {this.props.activedMenu ?
+                          <img src={opt.image} className="sub-icon" alt={opt.alt}/>
+                        : ""}
+                        {opt.label}
+                        {!this.props.activedMenu ?
+                          <img
+                            src={opt.image}
+                            className="sub-icon sub-icon-open-menu"
+                            alt={opt.alt}/>
+                        : ""}
+                      </Link>
+
+                      <ul className={this.state.menuOpened == opt.id && this.props.activedMenu ? "sidebar-item-dropdown" : "display-none"}>
+                        {opt.subItems.map((subOpt, j) => {
+                          return (
+                              <li
+                                onClick={(evt) => this.onClickMenu(evt, opt.color, opt.id, subOpt.id)}
+                                key={j}
+                              >
+                                <Link to={subOpt.link}>
+                                  {subOpt.label}
+                                </Link>
+                              </li>
+                          )
+                        })}                    
+                      </ul>
+                  </li>
+                )
+              }
             })}
                           
           </ul>
@@ -127,7 +134,8 @@ class Sidebar extends Component {
 function mapStateToProps(state) {
 	return {
 		color: state.auth.colorMenu,
-    user: state.user
+    user: state.user,
+    produtosCliente: state.user.mapProdutos
 	}
 }
 

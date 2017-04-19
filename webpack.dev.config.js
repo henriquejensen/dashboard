@@ -1,13 +1,11 @@
 const webpack = require('webpack');
+const path  = require("path");
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
-  entry: [
-      'webpack-dev-server/client',
-      './src/index.js'
-  ],
+  entry: './src/index.js',
   output: {
-    path: "public",
+    path: path.resolve(__dirname, "./public"),
     publicPath: '/public',
     filename: 'bundle.js'
   },
@@ -36,23 +34,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.css']
+    extensions: ['', '.js', '.css']
   },
   devServer: {
     historyApiFallback: true,
     contentBase: './'
   },
-};
-
-
-function getEntrySources(sources) {
-    if (process.env.NODE_ENV !== 'production') {
-        sources.push('webpack-dev-server/client');
-    }
-    /*  entry: {
-      helloWorld: getEntrySources([
-          './src/index.js'
-      ])
-  }, */
-    return sources;
 }
