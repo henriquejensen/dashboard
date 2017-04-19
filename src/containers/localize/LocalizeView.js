@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 import Dados from "../../components/dadosBasicos/Dados";
 import DadosPj from "../../components/dadosBasicos/DadosPj";
@@ -23,54 +23,56 @@ export default class LocalizeView extends Component {
     render() {
         return (
             <PanelGroup>
-                {this.props.tipo == "CPF" ?
-                    <Dados dados={this.props.data.cadastro} />
-                : <DadosPj dados={this.props.data.cadastro} />}
+                {this.props.tipo == "CPF"
+                    ? <Dados dados={this.props.data.cadastro}/>
+                    : <DadosPj dados={this.props.data.cadastro}/>}
 
-                {this.props.tipo == "CNPJ" ?
-                    <CadastroCnpjCnaesSecundarias cnpjCnaesSecundarias={this.props.data.cadastroCnpjCnaesSecundarias} />
-                : ""}
+                {this.props.tipo == "CNPJ"
+                    ? <CadastroCnpjCnaesSecundarias
+                            cnpjCnaesSecundarias={this.props.data.cadastroCnpjCnaesSecundarias}/>
+                    : ""}
 
-                <Telefones telefones={this.props.data.telefones} />
+                <Telefones telefones={this.props.data.telefones}/>
 
                 <Enderecos
                     enderecos={this.props.data.enderecos}
-                    searchEndereco={this.props.searchLocalizeByNomeEndereco} />
+                    searchEndereco={this.props.searchLocalizeByNomeEndereco}/>
 
-                <Emails emails={this.props.data.emails} />
+                <Emails emails={this.props.data.emails}/> {this.props.tipo == "CPF"
+                    ? <Relacionados
+                            documento={this.props.data.cadastro.cpf}
+                            searchPessoasRelacionadas={this.props.searchPessoasRelacionadas}
+                            searchTelefonesPessoaRelacionada={this.props.searchTelefonesPessoaRelacionada}
+                            searchEnderecosPessoaRelacionada={this.props.searchEnderecosPessoaRelacionada}
+                            relacionados={this.props.pessoasRelacionadas}
+                            searchPerson={this.props.searchLocalize}/>
+                    : ""}
 
-                {this.props.tipo == "CPF" ?
-                    <Relacionados
-                        documento={this.props.data.cadastro.cpf}
-                        searchPessoasRelacionadas={this.props.searchPessoasRelacionadas}
-                        searchTelefonesPessoaRelacionada={this.props.searchTelefonesPessoaRelacionada}
-                        searchEnderecosPessoaRelacionada={this.props.searchEnderecosPessoaRelacionada}
-                        relacionados={this.props.pessoasRelacionadas}
-                        searchPerson={this.props.searchLocalize}
-                    />
-                : ""}
+                {this.props.tipo == "CNPJ"
+                    ? <Socios
+                            socios={this.props.data.quadroSocietario}
+                            searchPerson={this.props.searchLocalize}/>
+                    : ""}
 
-                {this.props.tipo == "CNPJ" ?
-                    <Socios socios={this.props.data.quadroSocietario} searchPerson={this.props.searchLocalize} />
-                : ""}
+                <Sociedades
+                    participacoes={this.props.data.participacoesEmpresas}
+                    searchPerson={this.props.searchLocalize}/> {this.props.tipo == "CPF"
+                    ? <span>
+                            <RendaEmpregador
+                                rendas={this.props.data.rendaEmpregador}
+                                searchPerson={this.props.searchLocalize}/>
 
-                <Sociedades participacoes={this.props.data.participacoesEmpresas} searchPerson={this.props.searchLocalize}/>      
+                            <RendaEstimada rendaEstimada={this.props.data.rendaEstimada}/> {/*<BeneficioINSS beneficios={this.props.data.rendaBeneficioAssistencial} />*/}
 
-                {this.props.tipo == "CPF" ?
-                    <span>
-                        <RendaEmpregador rendas={this.props.data.rendaEmpregador} searchPerson={this.props.searchLocalize}/>
-
-                        <RendaEstimada rendaEstimada={this.props.data.rendaEstimada} />
-                        
-                        {/*<BeneficioINSS beneficios={this.props.data.rendaBeneficioAssistencial} />*/}
-
-                        <RendaEntidadeClasseLiberal renda={this.props.data.rendaEntidadeClasseLiberal} searchPerson={this.props.searchLocalize} />
-                    </span>
-                : ""}
+                            <RendaEntidadeClasseLiberal
+                                renda={this.props.data.rendaEntidadeClasseLiberal}
+                                searchPerson={this.props.searchLocalize}/>
+                        </span>
+                    : ""}
 
                 {/*<Veiculos veiculos={this.props.data.veiculos} />*/}
 
-                <Protocolo info={this.props.data.cabecalho} />
+                <Protocolo info={this.props.data.cabecalho}/>
             </PanelGroup>
         )
     }
