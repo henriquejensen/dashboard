@@ -7,6 +7,9 @@ import Table from "../table/Table";
 
 import { NENHUM_REGISTRO } from "../../constants/utils";
 
+const tooltipMap = "tooltipMap";
+const tooltipConsultarMap = "tooltipConsultarMap";
+
 export default class Enderecos extends Component {
   constructor(props) {
     super(props);
@@ -34,6 +37,7 @@ export default class Enderecos extends Component {
   }
 
   render() {
+    let enderecos = this.props.enderecos ? this.props.enderecos : [];
     return (
             <div>
                 <Table
@@ -41,8 +45,8 @@ export default class Enderecos extends Component {
                     ["Endereço", "Bairro", "Cidade", "UF", "CEP", ""]
                   }
                 >
-                  {this.props.enderecos && this.props.enderecos.length > 0 ?
-                      this.props.enderecos.map((end,i) => {
+                  {enderecos.length > 0 ?
+                      enderecos.map((end,i) => {
                           let cep = end.cep.toString();
                           return (
                             <tbody key={i}>
@@ -62,7 +66,7 @@ export default class Enderecos extends Component {
                                 <td>{end.uf}</td>
                                 <td>{cep.substring(0,cep.length-3)}-{cep.substring(cep.length-3)}</td>
                                 <td>
-                                    <a data-tip data-for='tooltipMap'>
+                                    <a data-tip data-for={tooltipMap}>
                                         <Button
                                           bsStyle="info"
                                           className={this.state.mapa && this.state.idCep == i+end.cep ? "noPrint mapa-button mapa-button-close" : "noPrint mapa-button"}
@@ -72,7 +76,7 @@ export default class Enderecos extends Component {
                                     </a>
 
                                     {this.props.searchEndereco ? 
-                                      <a data-tip data-for='tooltipConsultarMap'>
+                                      <a data-tip data-for={tooltipConsultarMap}>
                                           <Button
                                             bsStyle="info"
                                             className="mapa-button"
@@ -106,11 +110,11 @@ export default class Enderecos extends Component {
 
                 </Table>
 
-              <Tooltip id="tooltipMap">
+              <Tooltip id={tooltipMap}>
                 <span>Visualizar endereço</span>
               </Tooltip>
 
-              <Tooltip id="tooltipConsultarMap">
+              <Tooltip id={tooltipConsultarMap}>
                 <span>Consulta por endereço</span>
               </Tooltip>
 

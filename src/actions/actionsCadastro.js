@@ -34,8 +34,8 @@ export function addNewUser(usuario) {
 		ajax.post(url)
 			.set({keySession: localStorage.getItem("token")})
 			.end(function(error, response) {
-				if (response) {
-					if (response.status == 200) {
+				if (response.body) {
+					if (response.status == 200 && !response.body.erro) {
 						dispatch({type: ADD_NEW_USER, payload: response.body})
 					} else {
 						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
@@ -65,8 +65,8 @@ export function updateUser(usuario, tipo) {
 		ajax.put(url)
 			.set({keySession: localStorage.getItem("token")})
 			.end(function(error, response) {
-				if (response) {
-					if (response.status == 200) {
+				if (response.body) {
+					if (response.status == 200 && !response.body.erro) {
 						dispatch({type: ADD_NEW_USER, payload: response.body})
 					} else {
 						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
@@ -97,8 +97,8 @@ export function getGruposCadastro(quantidade) {
 		ajax.get(URL_GET_GRUPOS_CADASTRO+"?maxResult="+quantidade)
 			.set({keySession: localStorage.getItem("token")})
 			.end(function(error, response) {
-				if (response) {
-					if (response.status == 200) {
+				if (response.body) {
+					if (response.status == 200 && !response.body.erro) {
 						dispatch({type: GET_GROUPS_CADASTRO, payload: response.body})
 					} else {
 						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
@@ -115,8 +115,8 @@ export function getUsersCadastro() {
 		ajax.get(URL_GET_USERS_CADASTRO)
 			.set({keySession: localStorage.getItem("token")})
 			.end(function(error, response) {
-				if (response) {
-					if (response.status == 200) {
+				if (response.body) {
+					if (response.status == 200 && !response.body.erro) {
 						dispatch({type: GET_USERS_CADASTRO, payload: response.body})
 					} else {
 						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
@@ -148,8 +148,8 @@ export function getUsersByGroupId(groupId, groupDescription) {
 		ajax.get(URL_GET_USERS_BY_GROUP_ID + params)
 			.set({keySession: localStorage.getItem("token")})
 			.end(function(error, response) {
-				if (response) {
-					if (response.status == 200) {
+				if (response.body) {
+					if (response.status == 200 && !response.body.erro) {
 						dispatch({type: GET_USERS_BY_GROUP_ID, payload: response.body})
 					} else {
 						dispatch({type: REQUEST_ERROR, payload: response.body.erro})

@@ -294,8 +294,10 @@ export default function(state = initialState, action) {
 				let verifyIfEmailExists = searchDocument(newState.response, labelEmail);
 				
 				if(verifyIfEmailExists == -1) {
-					action.payload.localizePorEmail["cabecalho"] = action.payload.cabecalho;
-					response.data = action.payload.localizePorEmail;
+					response.data = {
+						response: action.payload.localizePorEmail,
+						cabecalho: action.payload.cabecalho
+					}
 					response.label = labelEmail;
 					response.tipo = action.payload.tipo;
 					response.icon = ICON_LOCALIZE;
@@ -319,8 +321,10 @@ export default function(state = initialState, action) {
 					labelTelefone = "Tel: "+action.payload.cabecalho.entrada;
 					verifyIfTelefoneExists = searchDocument(newState.response, labelTelefone);
 					if(verifyIfTelefoneExists == -1) {
-						telefones["cabecalho"] = action.payload.cabecalho;
-						response.data = telefones;
+						response.data = {
+							response: telefones,
+							cabecalho: action.payload.cabecalho
+						}
 						response.label = labelTelefone;
 						response.tipo = action.payload.tipo;
 						response.icon = ICON_LOCALIZE;
@@ -446,6 +450,9 @@ export default function(state = initialState, action) {
 				}
 
 			case SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA:
+				/**indexLabel -> identifica a aba que solicitou a consulta,
+				 * indexArrayElements -> elemento do array dos resultados que solicitou a consulota
+				 */
 				newState.response[action.payload.indexLabel].data.response[action.payload.indexArrayElements][action.payload.isEnderecoOuTelefone] = action.payload.response ? action.payload.response[action.payload.isEnderecoOuTelefone] : [];
 
 				return {

@@ -77,9 +77,9 @@ class Cadastro extends Component {
         })
     }
 
-    getMoreGroups = () => {
+    getMoreGroups = (grupos) => {
         this.props.loadingCadastro();
-        this.props.getGruposCadastro(quantidadeGrupos+this.props.grupos.length);
+        this.props.getGruposCadastro(quantidadeGrupos+grupos.length);
     }
 
     onChangeUser = (evt) => {
@@ -220,11 +220,12 @@ class Cadastro extends Component {
     }
 
     renderGroupPanel = () => {
+        const grupos = this.props.grupos ? this.props.grupos : [];
         return (
-            <Panel title="GRUPOS" qtdTotal={[{qtd:this.props.grupos.length, icon:"fa fa-users"}]}>
+            <Panel title="GRUPOS" qtdTotal={[{qtd:grupos.length, icon:"fa fa-users"}]}>
                 <Table  fields={["ID - Status", "Grupo", "Ações"]}>
                     <tbody>
-                        {this.props.grupos.map((group,index) => {
+                        {grupos.map((group,index) => {
                             return (
                                 <tr key={index} style={group.id == this.state.groupInfo.id ? {backgroundColor:this.state.groupInfo.color} : {}}>
                                     <td>
@@ -263,7 +264,7 @@ class Cadastro extends Component {
                     </tbody>
                 </Table>
 
-                <Button onClick={this.getMoreGroups} block>Carregar mais Grupos </Button>
+                <Button onClick={() => this.getMoreGroups(grupos)} block>Carregar mais Grupos </Button>
                     
             </Panel>
         )
