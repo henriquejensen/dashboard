@@ -14,6 +14,7 @@ export default class QuadroAdministrativo extends Component {
     return (
           <div>
             <a name={"Quadro administrativo"+this.props.index}></a>
+            <a name={"Administradores"+this.props.index}></a>
             {this.props.administradores && this.props.administradores.length > 0 ?
               <Panel title={title} qtdTotal={[{icon:"fa fa-users", qtd:this.props.administradores.length}]}>
                 

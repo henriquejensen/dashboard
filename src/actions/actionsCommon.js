@@ -35,10 +35,10 @@ export function getUserData() {
 		ajax.post(INFO_URL)
             .set({keySession: localStorage.getItem("token")})
 			.end(function(err, res) {
-				if (res.status == 200) {
+				if (!err && res.status == 200) {
 					dispatch({type: INFO_SUCCESS, payload: res.body})
 				} else {
-					dispatch({type: INFO_ERROR, payload: res.body})
+					dispatch({type: INFO_ERROR })
 				}
 			})
 	}

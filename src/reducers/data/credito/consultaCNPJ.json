@@ -296,14 +296,14 @@
 	],
     "quadroResumo": [
         {
-            "descricao": "Participações em empresas",
+            "descricao": "Participações em Empresas",
             "quantidade": 0,
             "primeiraOcorrencia": "DD/MM/AAAA",
             "ultimaOcorrencia": "DD/MM/AAAA",
             "valor": ""
         },
         {
-            "descricao": "Registros de Débitos",
+            "descricao": "Registro de Débitos",
             "quantidade": 2,
             "primeiraOcorrencia": "DD/MM/AAAA",
             "ultimaOcorrencia": "DD/MM/AAAA",
@@ -324,7 +324,7 @@
             "valor": "1000"
         },
         {
-            "descricao": "Cheques sem fundo",
+            "descricao": "Cheques sem Fundo",
             "quantidade": 2,
             "primeiraOcorrencia": "DD/MM/AAAA",
             "ultimaOcorrencia": "DD/MM/AAAA",

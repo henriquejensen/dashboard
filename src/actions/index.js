@@ -39,7 +39,8 @@ import {
 		AUTH_URL,
 		AUTHENTICATION,
 		REQUEST_ERROR,
-		ERR_CONNECTION_REFUSED
+		ERR_CONNECTION_REFUSED,
+		NENHUM_REGISTRO
 } from "../constants/utils";
 
 export function getLastQueries(code, tipo) {
@@ -175,18 +176,6 @@ export function closeModel() {
 		type: CLOSE_LOCALIZE_MODEL,
 		payload: "closeModel"
 	}
-}
-
-function patternDocument(doc, len) {
-	let docLength = doc.toString().length;
-
-	if(docLength < len) {
-		for(let i=0; i<len-docLength; i++) {
-			doc = "0" + doc;
-		}
-	}
-
-	return doc;
 }
 
 export function userEditInfo(nome, telefone, email) {
@@ -380,7 +369,7 @@ export function searchEnderecosTelefonesResultadosBusca(searchByCpfOuCnpj, index
 			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
 				if (response) {
-					if (response.status == 200) {
+					if (response.status == 200 && response.body) {
 						dispatch({
 							type: SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA,
 							payload: {
@@ -392,7 +381,7 @@ export function searchEnderecosTelefonesResultadosBusca(searchByCpfOuCnpj, index
 							}
 						})
 					} else {
-						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
+						dispatch({type: REQUEST_ERROR, payload: {mensagem:NENHUM_REGISTRO}})
 					}
 				} else {
 					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})

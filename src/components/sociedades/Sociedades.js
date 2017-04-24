@@ -11,13 +11,13 @@ export default class Sociedades extends Component {
   render() {
     return (
           <div>
-            <a name={"Participações em empresas"+this.props.index}></a>
+            <a name={"Participações em Empresas"+this.props.index}></a>
               
               {this.props.participacoes && this.props.participacoes.length > 0 ?
                 <Panel title="PARTICIPAÇÕES EM EMPRESAS" qtdTotal={[{icon:"fa fa-building-o", qtd:this.props.participacoes.length}]}>
                   
                   <Col md={12}>
-                    <Table fields={["Nome", "Cargo", "Participação"]}>
+                    <Table fields={["Nome", "Cargo", "Part. %"]}>
                       <tbody>
                         {this.props.participacoes.map((participacao, index) => {
                           return (
@@ -31,7 +31,7 @@ export default class Sociedades extends Component {
                                   {participacao.nome}
                               </td>
                               <td>{participacao.qualificacaoSocio}</td>
-                              <td>{participacao.participacao}%</td>
+                              <td>{participacao.participacao}</td>
                             </tr>
                           )
                         })}

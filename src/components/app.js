@@ -10,7 +10,7 @@ import { IMAGE_ANY_TOKEN } from "../constants/utils";
 
 export default class App extends Component {
   state = {
-    active: true
+    active: screen.width > 768 ? true : false
   }
 
 	onMenuClicked = () => {

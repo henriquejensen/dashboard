@@ -9,6 +9,7 @@ export default class Consultas extends Component {
     render() {
         return (
             <div>
+                <a name={"Consultas por Segmento"+this.props.index}></a>
                 <a name={"Consultas"+this.props.index}></a>
                 <Panel title="CONSULTAS" qtdTotal={[{icon:"fa fa-search", qtd:this.props.consultas.quantidadeTotal}]}>
                     <div className="col-md-12">

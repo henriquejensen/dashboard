@@ -14,11 +14,12 @@ export default class Acoes extends Component {
         <div>
             <a name={"Recuperações, Falências e Ações Judiciais"+this.props.index}></a>
             <a name={"Ações"+this.props.index}></a>
+            <a name={"Ações Judiciais"+this.props.index}></a>
             {this.props.acoes && this.props.acoes.acoes && this.props.acoes.acoes.length > 0 ?
               <Panel title={title} qtdTotal={[{icon:"fa fa-line-chart", qtd:this.props.acoes.quantidadeAcoes}]}>
                 <Col md={12}>
-                  <Col md={4}><strong>Ocorrência mais Antiga:</strong> {this.props.acoes.ocorrenciaMaisAntiga.dataAcao}</Col>
-                  <Col md={4}><strong>Ocorrência mais Recente:</strong> {this.props.acoes.ocorrenciaMaisRecente.dataAcao}</Col>
+                  <Col md={4}><strong>Ocorrência mais Antiga:</strong> {this.props.acoes.ocorrenciaMaisAntiga}</Col>
+                  <Col md={4}><strong>Ocorrência mais Recente:</strong> {this.props.acoes.ocorrenciaMaisRecente}</Col>
                   <Col md={4}><strong>Valor Total:</strong> R$ {this.props.acoes.valorTotal}</Col>
                 </Col>
 

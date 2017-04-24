@@ -129,9 +129,10 @@ export default class BuscaPorRelacionados extends Component {
     }
 
     render() {
+        let relacionados = this.props.relacionados ? this.props.relacionados : [];
         return (
-            this.props.relacionados && this.state.relacionados.length > 0 ?
-                <Panel title={title} qtdTotal={[{qtd:this.state.relacionados.length,icon:"fa fa-users"}]}>
+            relacionados.length > 0 ?
+                <Panel title={title} qtdTotal={[{qtd:relacionados.length,icon:"fa fa-users"}]}>
                     <div style={{paddingTop:5}}>
                         <Col md={6}>
                             <strong>Resultados da busca por:</strong>
@@ -145,13 +146,13 @@ export default class BuscaPorRelacionados extends Component {
                                 bsSize="small"
                                 bsStyle="info"
                                 style={{marginRight:15}}
-                                onClick={() => this.confirmSearch("enderecos", this.state.relacionados, "home")}>
+                                onClick={() => this.confirmSearch("enderecos", relacionados, "home")}>
                                     endereços{' '}<i className='fa fa-home'/>
                             </Button>
                             <Button
                                 bsSize="small"
                                 bsStyle="info"
-                                onClick={() => this.confirmSearch("telefones", this.state.relacionados, "phone")}>
+                                onClick={() => this.confirmSearch("telefones", relacionados, "phone")}>
                                     telefones{' '}<i className='fa fa-phone'/>
                             </Button>
                         </Col>
@@ -160,7 +161,7 @@ export default class BuscaPorRelacionados extends Component {
                     <Col md={12}>
                         
                         <Table fields = {["Tipo", "Nome", "Data nasc.", "Pessoa Relacionada", "Cidade", "UF", ""]}>
-                                {this.state.relacionados.map((relacionado,index) => {
+                                {relacionados.map((relacionado,index) => {
                                     let tipo = relacionado.tipo == "Pessoa Física" ? "CPF":"CNPJ";
                                     return (
                                         <tbody key={index}>
@@ -198,6 +199,7 @@ export default class BuscaPorRelacionados extends Component {
                                             <tr>
                                                 {relacionado.telefones && this.state.buttonsClicked.phone[index]?
                                                     <td colSpan={6} style={{padding:0}}>
+                                                        {console.log("TELEFONES", relacionado.telefones)}
                                                         <Telefone fixos={relacionado.telefones.fixos} moveis={relacionado.telefones.moveis} />
                                                     </td>
                                                 : ""}

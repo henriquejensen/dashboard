@@ -1,5 +1,6 @@
-export const URL_CREDITO_SEARCH_CHEQUE = "https://managerbigdata.assertivasolucoes.com.br/credito/1006/consultar";
-export const URL_CREDITO_SEARCH_COMPLETA = "https://managerbigdata.assertivasolucoes.com.br/credito/1002/consultar";
+export const URL_CREDITO_SEARCH_CHEQUE = "https://managerprovider.assertivasolucoes.com.br/credito/1006/consultar";
+export const URL_CREDITO_SEARCH_COMPLETA = "https://managerprovider.assertivasolucoes.com.br/credito/5017/consultar";
+export const URL_CREDITO_SEARCH_COMPLETA_PJ = "https://managerprovider.assertivasolucoes.com.br/credito/5018/consultar";
 
 export const SEE_CREDITO_MODEL = "SEE_CREDITO_MODEL";
 export const CLOSE_CREDITO_MODEL = "CLOSE_CREDITO_MODEL";
@@ -11,7 +12,7 @@ export const GET_CREDITO_COMPLETA = "GET_CREDITO_COMPLETA";
 export const GET_CREDITO_LAST_QUERIES = "GET_CREDITO_LAST_QUERIES";
 export const CHANGE_TAB_CREDITO = "CHANGE_TAB_CREDITO";
 
-export const COMPLETA_CODE = "1002";
+export const COMPLETA_CODE = "5017";
 export const INTERMEDIARIA_CODE = "1003";
 export const INTERMEDIARIA_PLUS_CODE = "1004";
 export const SIMPLES_CODE = "1005";

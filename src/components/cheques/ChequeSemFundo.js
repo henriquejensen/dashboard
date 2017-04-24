@@ -12,7 +12,8 @@ export default class ChequeSemFundo extends Component {
   render() {
     return (
           <div>
-            <a name={"Cheques sem fundo"+this.props.index}></a>
+              <a name={"Cheques Sem Fundos"+this.props.index}></a>
+              <a name={"Cheques sem Fundos"+this.props.index}></a>
               {this.props.cheques && this.props.cheques.cheques && this.props.cheques.cheques.length > 0 ?
 
                 <Panel title={title} qtdTotal={[{icon:"fa fa-university", qtd:this.props.cheques.total}]}>

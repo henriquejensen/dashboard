@@ -11,7 +11,8 @@ import {
     LOADING_CREDITO,
     SEE_CREDITO_MODEL,
     URL_CREDITO_SEARCH_CHEQUE,
-    URL_CREDITO_SEARCH_COMPLETA
+    URL_CREDITO_SEARCH_COMPLETA,
+	URL_CREDITO_SEARCH_COMPLETA_PJ
 } from "../constants/constantsCredito";
 
 import { ERR_CONNECTION_REFUSED, REQUEST_ERROR } from "../constants/utils";
@@ -82,16 +83,25 @@ export function searchCreditoCheque(chequeData) {
 }
 
 export function searchCreditoCompleta(documento) {
+	documento = documento.replace(/[^0-9]/g,"");
+	let tipo = documento.length <= 11 ? "CPF" : "CNPJ";
+	let data = documento.length <= 11 ? {cpf:documento} : {cnpj:documento};
+	let url = documento.length <= 11 ? URL_CREDITO_SEARCH_COMPLETA : URL_CREDITO_SEARCH_COMPLETA_PJ;
+
 	return (dispatch) => {
-		ajax.post(URL_CREDITO_SEARCH_COMPLETA)
-			.send({cpf:documento})
-			.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
+		ajax.post(url)
+			.send(data)
+			.set({'Content-Type': 'application/x-www-form-urlencoded',Authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
 				if (response) {
 					if (response.status == 200) {
 						dispatch({
 							type: GET_CREDITO_COMPLETA,
-							payload: documento
+							payload: {
+								documento: documento,
+								response: response.body,
+								tipo: tipo
+							}
 						})
 					} else {
 						dispatch({type: REQUEST_ERROR, payload: response.body.erro})

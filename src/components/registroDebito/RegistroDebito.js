@@ -12,13 +12,14 @@ export default class RegistroDebito extends Component {
   render() {
     return (
           <div>
-            <a name={"Registros de Débitos"+this.props.index}></a>
-            {this.props.registros && this.props.registros.registrosDebitos && this.props.registros.registrosDebitos.length > 0 ?
+            <a name={"Registro de Débitos"+this.props.index}></a>
+            <a name={"Pendências e Restrições Financeiras"+this.props.index}></a>
+            {this.props.registros && this.props.registros.registrosDebitos ?
               <Panel title={title} qtdTotal={[{icon:"fa fa-credit-card-alt", qtd:this.props.registros.quantidadeRegistros}]}>
                 
                 <Col md={12}>
-                  <Col md={4}><strong>Ocorrência mais Antiga:</strong> {this.props.registros.ocorrenciaMaisAntiga.dataInclusao}</Col>
-                  <Col md={4}><strong>Ocorrência mais Recente:</strong> {this.props.registros.ocorrenciaMaisRecente.dataInclusao}</Col>
+                  <Col md={4}><strong>Ocorrência mais Antiga:</strong> {this.props.registros.ocorrenciaMaisAntiga}</Col>
+                  <Col md={4}><strong>Ocorrência mais Recente:</strong> {this.props.registros.ocorrenciaMaisRecente}</Col>
                   <Col md={4}><strong>Valor Total:</strong> R$ {this.props.registros.valorTotal}</Col>
                 </Col>
 

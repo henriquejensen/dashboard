@@ -24,7 +24,7 @@ export default class Dados extends Component{
             <div className="col-md-6">
               <strong>Status CPF: </strong>
               {this.props.dados.status ?
-                <span className={this.props.dados.status == "ATIVO" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.status}</span>
+                <span className={this.props.dados.status == "REGULAR" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.status}</span>
               : <span>{NENHUM_REGISTRO}</span>}
             </div>
 

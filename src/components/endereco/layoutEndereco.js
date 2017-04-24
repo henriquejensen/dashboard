@@ -92,7 +92,9 @@ export default class Enderecos extends Component {
                                   {this.state.mapa && this.state.idCep == i+end.cep ?
                                     <td colSpan="8" style={{position:"relative"}}>
                                       <MapPanel
-                                        endereco={end.tipoLogradouro + "." + end.logradouro + "," + end.cidade}
+                                        endereco={
+                                          (end.tipoLogradouro ? end.tipoLogradouro + "." : "") +
+                                          end.logradouro + "," + end.cidade}
                                         latitude={end.latitude}
                                         longitude={end.longitude} />
                                     </td>

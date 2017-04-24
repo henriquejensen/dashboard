@@ -435,6 +435,7 @@ class Credito extends Component {
 											<Titletab
 												icon={data.icon}
 												label={data.label}
+												tipo={data.tipo}
 												close={() => this.closeTab(index)}
 											/>
 										}

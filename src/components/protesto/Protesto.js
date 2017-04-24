@@ -16,8 +16,8 @@ export default class Protestos extends Component {
               {this.props.protestos && this.props.protestos.protestosDetalhados && this.props.protestos.quantidadeRegistros > 0 ?
                 <Panel title={title} qtdTotal={[{icon:"fa fa-ban", qtd:this.props.protestos.protestosDetalhados.length}]}>
                   <Col md={12}>
-                    <Col md={4}><strong>Ocorrência mais Antiga:</strong> {this.props.protestos.ocorrenciaMaisAntiga.dataProtesto}</Col>
-                    <Col md={4}><strong>Ocorrência mais Recente:</strong> {this.props.protestos.ocorrenciaMaisRecente.dataProtesto}</Col>
+                    <Col md={4}><strong>Ocorrência mais Antiga:</strong> {this.props.protestos.ocorrenciaMaisAntiga}</Col>
+                    <Col md={4}><strong>Ocorrência mais Recente:</strong> {this.props.protestos.ocorrenciaMaisRecente}</Col>
                     <Col md={4}><strong>Valor Total:</strong> R$ {this.props.protestos.valorTotal}</Col>
                   </Col>
 
