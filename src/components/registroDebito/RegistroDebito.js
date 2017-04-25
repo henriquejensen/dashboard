@@ -6,27 +6,31 @@ import Table from "../table/Table";
 
 import { NENHUM_REGISTRO } from "../../constants/utils";
 
+import { formatCurrency } from "../utils/functions/patternDocuments";
+
 const title = "REGISTROS DE DÉBITOS";
 
 export default class RegistroDebito extends Component {
   render() {
+    let registros = this.props.registros;
+    let index = this.props.index;
     return (
           <div>
-            <a name={"Registro de Débitos"+this.props.index}></a>
-            <a name={"Pendências e Restrições Financeiras"+this.props.index}></a>
-            {this.props.registros && this.props.registros.registrosDebitos ?
-              <Panel title={title} qtdTotal={[{icon:"fa fa-credit-card-alt", qtd:this.props.registros.quantidadeRegistros}]}>
+            <a name={"Registro de Débitos"+index}></a>
+            <a name={"Pendências e Restrições Financeiras"+index}></a>
+            {registros && registros.registrosDebitos ?
+              <Panel title={title} qtdTotal={[{icon:"fa fa-credit-card-alt", qtd:registros.registrosDebitos.length}]}>
                 
                 <Col md={12}>
-                  <Col md={4}><strong>Ocorrência mais Antiga:</strong> {this.props.registros.ocorrenciaMaisAntiga}</Col>
-                  <Col md={4}><strong>Ocorrência mais Recente:</strong> {this.props.registros.ocorrenciaMaisRecente}</Col>
-                  <Col md={4}><strong>Valor Total:</strong> R$ {this.props.registros.valorTotal}</Col>
+                  <Col md={4}><strong>Ocorrência mais Antiga:</strong> {registros.ocorrenciaMaisAntiga}</Col>
+                  <Col md={4}><strong>Ocorrência mais Recente:</strong> {registros.ocorrenciaMaisRecente}</Col>
+                  <Col md={4}><strong>Valor Total:</strong> {formatCurrency(registros.valorTotal)}</Col>
                 </Col>
 
                 <Col md={12}>
                   <Table fields={["Associado/Credor", "Data Inclusão", "Data vencimento", "Origem", "Contrato", "Comprador/Avalista", "Valor", "Cidade", "Telefone"]}>
                     <tbody>
-                      {this.props.registros.registrosDebitos.map((registro, index) => {
+                      {registros.registrosDebitos.map((registro, index) => {
                         return (
                           <tr key={index}>
                             <td>{registro.credor}</td>

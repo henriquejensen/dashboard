@@ -19,12 +19,14 @@ export default class Socios extends Component {
                             <Table fields={["Nome", "Qualificação", "Participação", "Entrada", "Saída"]} >
                                 <tbody>
                                     {this.props.socios.map((soc,i) => {
-                                        let tipo = soc.documento.length > 11 ? "CNPJ" : "CPF";
+                                        /**Alguns documentos ja veem formatados, entao retiro a formatacao para pegar o tamanho */
+                                        let documento = soc.documento.replace(/[^0-9]/g,"")
+                                        let tipo = documento.length > 11 ? "CNPJ" : "CPF";
                                         return (
                                             <tr key={i}>
                                                 <td>
                                                     <a data-tip data-for='tooltipConsultar'>
-                                                        <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(soc.documento, tipo)}>
+                                                        <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(documento, tipo)}>
                                                             <i className='fa fa-search'/>
                                                         </Button>
                                                     </a>

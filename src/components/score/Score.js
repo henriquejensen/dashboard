@@ -10,15 +10,16 @@ const title = "SCORE";
 
 export default class Socre extends Component {
     render() {
+        let scores = this.props.scores ? this.props.scores : [];
         return (
         <div>
-            {this.props.scores && this.props.scores.length > 0 ?
-                <Panel title={title} qtdTotal={[{icon:"fa fa-star", qtd:this.props.scores.length}]}>
+            {scores.length > 0 ?
+                <Panel title={title} qtdTotal={[{icon:"fa fa-star", qtd:scores.length}]}>
                     <a name="score"></a>
                     <Col md={12}>
                         <Table fields={["Probabilidade", "Descrição", "Classe", "Grupo", "Período", "Pontos", "Tipo"]}>
                             <tbody>
-                                {this.props.scores.map((score, index) => {
+                                {scores.map((score, index) => {
                                     return (
                                         <tr key={index}>
                                             <td>{score.probabilidade}</td>

@@ -1,6 +1,13 @@
 import ajax from "superagent";
 
 import {
+		URL_SEARCH_CPF,
+		URL_SEARCH_CNPJ,
+		SEARCH_BY_CPF,
+		SEARCH_BY_CNPJ
+} from "../constants/constantsLocalize";
+
+import {
     CHANGE_TAB_CREDITO,
     CLOSE_CREDITO_MODEL,
     CLOSE_MESSAGE_ERROR_CREDITO,
@@ -118,4 +125,28 @@ export function seeModel() {
         type: SEE_CREDITO_MODEL,
         payload: ""
     }
+}
+
+export function searchLocalizeInCredito(documento, tipo, search) {
+	documento = documento.replace(/[^0-9]/g,"");
+	let data = tipo == "CPF" ? {cpf:documento} : {cnpj:documento};
+	let url = tipo == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
+
+	return (dispatch) => {
+		ajax.post(url)
+			.send(data)
+			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
+			.end(function(error, response) {
+				if (response) {
+					if (response.status == 200) {
+						dispatch({type: search, payload: response.body})
+					} else {
+						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
+					}
+				} else {
+					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+				}
+			})
+	}
+
 }

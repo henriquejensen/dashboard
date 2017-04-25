@@ -131,7 +131,6 @@ class LocalizeController extends Component {
 
 		if(type == "CPF" || type == "CNPJ") {
 			let documento = this.state.documento ? this.state.documento : "DOCUMENTO";
-			documento = documento.replace(/[^0-9]/g,"");
 			
 			this.props.searchLocalize(documento, type);
 			this.setState({

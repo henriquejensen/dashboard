@@ -12,18 +12,29 @@ import {
 		loadingCredito,
 		seeModel,
 		searchCreditoCheque,
-		searchCreditoCompleta
+		searchCreditoCompleta,
+		searchLocalizeInCredito
 } from "../../actions/actionsCredito";
 import { changeProductType } from "../../actions/actionsCommon";
 
 import CreditoView from "./CreditoView";
+import LocalizeView from "../localize/LocalizeView";
 import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
 
 import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
 
 import { ERR_CONNECTION_REFUSED, LOGO_CREDITO, ICON_CREDITO, LOADING_GIF, REQUEST_ERROR, SUCCESS } from "../../constants/utils";
-import { COMPLETA_CODE, INTERMEDIARIA_CODE, INTERMEDIARIA_PLUS_CODE, SIMPLES_CODE, CHEQUE_CODE, EXPRESS_CODE } from "../../constants/constantsCredito";
+import {
+	COMPLETA_CODE,
+	INTERMEDIARIA_CODE,
+	INTERMEDIARIA_PLUS_CODE,
+	SEARCH_BY_LOCALIZE_CPF_IN_CREDITO,
+	SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO,
+	SIMPLES_CODE,
+	CHEQUE_CODE,
+	EXPRESS_CODE
+} from "../../constants/constantsCredito";
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO } from "../../constants/constantsCompany";
 
 import estados from "../../components/utils/common/estados.json";
@@ -376,6 +387,12 @@ class Credito extends Component {
 		}
 	}
 
+	searchInLocalize = (documento, tipo) => {
+		let search = tipo === "CPF" ? SEARCH_BY_LOCALIZE_CPF_IN_CREDITO : SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO;
+		this.props.loadingCredito();
+		this.props.searchLocalizeInCredito(documento, tipo, search);
+	}
+
 	form = (tipo) => {
 		return (
 			<MyForm
@@ -445,8 +462,17 @@ class Credito extends Component {
 											<CreditoView
 												data={data.data}
 												tipo={data.tipo}
-												index={index}/>
-										: ""}
+												index={index}
+												searchPerson={this.searchInLocalize}/>
+										: 
+											data.produto == "localize" ?
+												<LocalizeView
+													data={data.data}
+													tipo={data.tipo}
+													index={index}
+													searchLocalize={this.searchInLocalize}
+													pessoasRelacionadas={data.pessoasRelacionadas}/>
+											: ""}
 									</Tab>
 								)
 							})}
@@ -481,7 +507,8 @@ function mapDispatchToProps(dispatch) {
 		loadingCredito,
 		seeModel,
 		searchCreditoCheque,
-		searchCreditoCompleta
+		searchCreditoCompleta,
+		searchLocalizeInCredito
 	}, dispatch)
 }
 

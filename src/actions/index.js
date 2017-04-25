@@ -115,6 +115,7 @@ export function searchCredito(document, tipo) {
 }
 
 export function searchLocalize(documento, tipo) {
+	documento = documento.replace(/[^0-9]/g,"");
 	let data = tipo == "CPF" ? {cpf:documento} : {cnpj:documento};
 	let url = tipo == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
 	let search = tipo == "CPF" ? SEARCH_BY_CPF : SEARCH_BY_CNPJ;

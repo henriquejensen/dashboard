@@ -6,6 +6,8 @@ import Table from "../table/Table";
 
 import { NENHUM_REGISTRO } from "../../constants/utils";
 
+import { formatCurrency } from "../utils/functions/patternDocuments";
+
 const title = "PROTESTOS";
 
 export default class Protestos extends Component {
@@ -18,7 +20,7 @@ export default class Protestos extends Component {
                   <Col md={12}>
                     <Col md={4}><strong>Ocorrência mais Antiga:</strong> {this.props.protestos.ocorrenciaMaisAntiga}</Col>
                     <Col md={4}><strong>Ocorrência mais Recente:</strong> {this.props.protestos.ocorrenciaMaisRecente}</Col>
-                    <Col md={4}><strong>Valor Total:</strong> R$ {this.props.protestos.valorTotal}</Col>
+                    <Col md={4}><strong>Valor Total:</strong> {formatCurrency(this.props.protestos.valorTotal)}</Col>
                   </Col>
 
                   <Col md={12}>

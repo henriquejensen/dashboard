@@ -2,6 +2,9 @@ export const URL_CREDITO_SEARCH_CHEQUE = "https://managerprovider.assertivasoluc
 export const URL_CREDITO_SEARCH_COMPLETA = "https://managerprovider.assertivasolucoes.com.br/credito/5017/consultar";
 export const URL_CREDITO_SEARCH_COMPLETA_PJ = "https://managerprovider.assertivasolucoes.com.br/credito/5018/consultar";
 
+export const SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO = "SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO";
+export const SEARCH_BY_LOCALIZE_CPF_IN_CREDITO = "SEARCH_BY_LOCALIZE_CPF_IN_CREDITO";
+export const SEARCH_BY_LOCALIZE_CPF = "SEARCH_BY_LOCALIZE_CPF";
 export const SEE_CREDITO_MODEL = "SEE_CREDITO_MODEL";
 export const CLOSE_CREDITO_MODEL = "CLOSE_CREDITO_MODEL";
 export const LOADING_CREDITO = "LOADING_CREDITO";

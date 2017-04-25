@@ -6,6 +6,9 @@ import {
     GET_CREDITO_COMPLETA,
     GET_CREDITO_LAST_QUERIES,
     LOADING_CREDITO,
+    SEARCH_BY_LOCALIZE_CPF_IN_CREDITO,
+    SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO,
+    SEARCH_BY_LOCALIZE_CPF,
     SEE_CREDITO_MODEL    
 } from "../constants/constantsCredito";
 
@@ -17,12 +20,17 @@ import {
 		ERR_CONNECTION_REFUSED_MESSAGE,
         ERROR_503,
 		ICON_CREDITO,
+        ICON_LOCALIZE,
 		LAST_QUERIES,
 		LOADING,
 		NENHUM_REGISTRO,
 		REQUEST_ERROR,
 		SUCCESS
 } from "../constants/utils";
+
+import {
+    COMPANY_PRODUCT_LOCALIZE
+} from "../constants/constantsCompany";
 
 import model from "./data/credito/consultaCPF.json";
 import modelCNPJ from "./data/credito/consultaCNPJ.json";
@@ -44,7 +52,8 @@ export default function(state=getInitialState, action) {
         label: "",
         tipo: "",
         icon: "",
-        produto: ""
+        produto: "",
+        pessoasRelacionadas: []
     };
 
     switch(action.type) {
@@ -61,6 +70,8 @@ export default function(state=getInitialState, action) {
 
         case CHANGE_TAB_CREDITO:
             let tab = searchDocument(state.response,action.payload);
+            tab = tab >= 0 ? tab : 0;
+
             return {
                 status: "changeTab",
                 message: "",
@@ -178,7 +189,59 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: state.type
             }
+        
+        case SEARCH_BY_LOCALIZE_CPF_IN_CREDITO: {
+            let verifyIfCPFExists = action.payload && action.payload.cadastro && action.payload.cadastro.cpf ? searchDocument(state.response, action.payload.cadastro.cpf) : -2;
 
+            /*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
+            if(verifyIfCPFExists == -1) {
+                response.data = action.payload;
+                response.label = action.payload.cadastro.cpf;
+                response.tipo = "CPF";
+                response.icon = ICON_LOCALIZE;
+                response.produto = "localize";
+
+                if(action.payload.cadastro.maeNome) {
+                    response.pessoasRelacionadas[0] = {
+                        nome: action.payload.cadastro.maeNome,
+                        documento: action.payload.cadastro.maeCpf,
+                        relacao: "Mãe"
+                    }
+                }
+            }
+
+            return {
+                status: verifyIfCPFExists == -2 ? REQUEST_ERROR : SUCCESS,
+                message: verifyIfCPFExists == -2 ? NENHUM_REGISTRO : "",
+                loading: false,
+                response: verifyIfCPFExists == -1 ? [...state.response, response] : state.response,
+                tabActive: verifyIfCPFExists == -2 ? state.tabActive : action.payload.cadastro.cpf,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+        }
+        case SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO: {
+            let verifyIfCNPJExists = action.payload && action.payload.cadastro ? searchDocument(state.response, action.payload.cadastro.cnpj) : -2;
+
+            /*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
+            if(verifyIfCNPJExists == -1) {
+                response.data = action.payload;
+                response.label = action.payload.cadastro.cnpj;
+                response.tipo = "CNPJ";
+                response.icon = ICON_LOCALIZE;
+                response.produto = "localize";
+            }
+
+            return {
+                status: verifyIfCNPJExists == -2 ? REQUEST_ERROR : SUCCESS,
+                message: verifyIfCNPJExists == -2 ? NENHUM_REGISTRO : "",
+                loading: false,
+                response: verifyIfCNPJExists == -1 ? [...state.response, response] : state.response,
+                tabActive: verifyIfCNPJExists == -2 ? state.tabActive : action.payload.cadastro.cnpj,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+        }
         case SEE_CREDITO_MODEL:
             let responseCNPJ = {};
             response.data = model;
@@ -215,5 +278,5 @@ function searchDocument(list, doc) {
 		}
 	}
 
-	return 0;
+	return -1;
 }

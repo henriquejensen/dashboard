@@ -6,6 +6,8 @@ import Table from "../table/Table";
 
 import { NENHUM_REGISTRO } from "../../constants/utils";
 
+import { formatCurrency } from "../utils/functions/patternDocuments";
+
 const title = "RECUPERAÇÕES, FALÊNCIAS E AÇÕES JUDICIAIS";
 
 export default class Acoes extends Component {
@@ -20,7 +22,7 @@ export default class Acoes extends Component {
                 <Col md={12}>
                   <Col md={4}><strong>Ocorrência mais Antiga:</strong> {this.props.acoes.ocorrenciaMaisAntiga}</Col>
                   <Col md={4}><strong>Ocorrência mais Recente:</strong> {this.props.acoes.ocorrenciaMaisRecente}</Col>
-                  <Col md={4}><strong>Valor Total:</strong> R$ {this.props.acoes.valorTotal}</Col>
+                  <Col md={4}><strong>Valor Total:</strong> {formatCurrency(this.props.acoes.valorTotal)}</Col>
                 </Col>
 
                 <Col md={12}>
