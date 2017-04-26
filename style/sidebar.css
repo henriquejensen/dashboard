@@ -12,7 +12,7 @@
     z-index: 1;
     padding: 0px;
     overflow: hidden;
-    background-color: #e7e7e7;
+    background-color: #ffffff;
     transition: .5s;
 }
 
@@ -49,7 +49,6 @@
     padding: 0;
     height: 100%;
     min-height: 495px;
-    background-color: #fff
 }
 
 #page-content-wrapper {

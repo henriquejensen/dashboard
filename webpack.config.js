@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: "public",
     publicPath: '/',
-    filename: 'deploy.js'
+    filename: 'bundle.js'
   },
   module: {
     loaders: [

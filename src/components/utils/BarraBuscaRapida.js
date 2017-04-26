@@ -6,30 +6,30 @@ import GridProdutos from "./GridProdutos";
 import { patternCPF, patternCNPJ } from "./functions/patternDocuments";
 
 export default class BarraBuscaRapida extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            IsModalOpen: false,
-            isCPF: true,
-            documento: ""
-        }
-
-        this.onChange = this.onChange.bind(this);
-		this.onClickBuscaRapida = this.onClickBuscaRapida.bind(this);
-        this.changeDocumentType = this.changeDocumentType.bind(this);
+    state = {
+        IsModalOpen: false,
+        isCPF: true,
+        documento: ""
     }
 
-	onClickBuscaRapida(evt) {
+	onClickBuscaRapida = (evt) => {
 		evt.preventDefault();
-
-		this.setState({
-			IsModalOpen: true,
-            isCPF: this.state.documento.length <= 11,
-		})
+        let documento = this.state.documento.replace(/[^0-9]/g,"");
+        if(documento.length > 0) {
+            this.setState({
+                IsModalOpen: true,
+                isCPF: documento.length <= 11,
+                documento: documento
+            })
+        } else {
+            this.setState({
+                documento: ""
+            })
+        }
 	}
 
-	onChange(evt) {
+	onChange = (evt) => {
 		this.setState({
 			[evt.target.name]: evt.target.value
 		})
@@ -41,7 +41,7 @@ export default class BarraBuscaRapida extends Component {
         })
     }
 
-    changeDocumentType() {
+    changeDocumentType = () => {
         this.setState({
             isCPF: !this.state.isCPF
         })
@@ -56,7 +56,7 @@ export default class BarraBuscaRapida extends Component {
                             <FormControl
                                 style={{minWidth:"290px"}}
                                 placeholder="Digite o CPF ou CNPJ"
-                                type="number"
+                                type="text"
                                 name="documento"
                                 defaultValue={this.state.documento}
                                 onChange={this.onChange}

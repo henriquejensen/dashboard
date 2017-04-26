@@ -29,6 +29,7 @@ import {
 } from "../constants/utils";
 
 import {
+    COMPANY_PRODUCT_CREDITO,
     COMPANY_PRODUCT_LOCALIZE
 } from "../constants/constantsCompany";
 
@@ -69,7 +70,7 @@ export default function(state=getInitialState, action) {
             }
 
         case CHANGE_TAB_CREDITO:
-            let tab = searchDocument(state.response,action.payload);
+            let tab = findLabelInArray(state.response,action.payload);
             tab = tab >= 0 ? tab : 0;
 
             return {
@@ -131,28 +132,32 @@ export default function(state=getInitialState, action) {
             }
 
         case GET_CREDITO_COMPLETA: {
-            let actionPayload = action.payload;
-            let actionResponse = actionPayload.response;
+            let documento = action.payload.documento;
+            let responseServer = action.payload.response;
+            let tipo = action.payload.tipo;
+            let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
+            let verifyIfDocumentExists = isDocumentNotInArray(state.response, documento);
 
-            /**O documento esta vindo formatado do fornecedor
-             * portanto estou salvando a entrada do cliente no lugar dele
-             * pois formato este documento em todo o site
-             */
-            actionPayload.tipo == "CPF" ?
-                actionResponse.cadastro.cpf = actionPayload.documento
-            :   actionResponse.cadastro.cnpj = actionPayload.documento
+            if(verifyIfDocumentExists) {
+                /**O documento esta vindo formatado do fornecedor
+                 * portanto estou salvando a entrada do cliente no lugar dele
+                 * pois formato este documento em todo o site
+                 */
+                tipo == "CPF" ? responseServer.cadastro.cpf = documento : responseServer.cadastro.cnpj = documento;
 
-            response.data = actionResponse;
-            response.label = actionPayload.documento;
-            response.tipo = actionPayload.tipo;
-            response.icon = ICON_CREDITO;
-            response.produto = "credito";
+                response.data = responseServer;
+                response.label = documento;
+                response.tipo = tipo;
+                response.icon = ICON_CREDITO;
+                response.produto = COMPANY_PRODUCT_CREDITO;
+            }
+
             return {
-                status: SUCCESS,
-                message: "",
+                status: cadastro ? SUCCESS : REQUEST_ERROR,
+                message: cadastro ? "": NENHUM_REGISTRO,
                 loading: false,
-                response: [...state.response, response],
-                tabActive: response.label,
+                response: verifyIfDocumentExists ? [...state.response, response] : state.response,
+                tabActive: cadastro ? documento : state.tabActive,
                 lastQueries: state.lastQueries,
                 type: state.type
             }
@@ -191,53 +196,56 @@ export default function(state=getInitialState, action) {
             }
         
         case SEARCH_BY_LOCALIZE_CPF_IN_CREDITO: {
-            let verifyIfCPFExists = action.payload && action.payload.cadastro && action.payload.cadastro.cpf ? searchDocument(state.response, action.payload.cadastro.cpf) : -2;
+            let responseServer = action.payload;
+            let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
+            let verifyIfCPFExists = isDocumentNotInArray(state.response, cadastro.cpf);
 
-            /*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
-            if(verifyIfCPFExists == -1) {
-                response.data = action.payload;
-                response.label = action.payload.cadastro.cpf;
+            /*Verifica se o documento foi encontrado ou não*/
+            if(verifyIfCPFExists) {
+                response.data = responseServer;
+                response.label = cadastro.cpf;
                 response.tipo = "CPF";
                 response.icon = ICON_LOCALIZE;
-                response.produto = "localize";
+                response.produto = COMPANY_PRODUCT_LOCALIZE;
 
-                if(action.payload.cadastro.maeNome) {
+                if(cadastro.maeNome) {
                     response.pessoasRelacionadas[0] = {
-                        nome: action.payload.cadastro.maeNome,
-                        documento: action.payload.cadastro.maeCpf,
+                        nome: cadastro.maeNome,
+                        documento: cadastro.maeCpf,
                         relacao: "Mãe"
                     }
                 }
             }
-
             return {
-                status: verifyIfCPFExists == -2 ? REQUEST_ERROR : SUCCESS,
-                message: verifyIfCPFExists == -2 ? NENHUM_REGISTRO : "",
+                status: cadastro ? SUCCESS : REQUEST_ERROR,
+                message: cadastro ? "": NENHUM_REGISTRO,
                 loading: false,
-                response: verifyIfCPFExists == -1 ? [...state.response, response] : state.response,
-                tabActive: verifyIfCPFExists == -2 ? state.tabActive : action.payload.cadastro.cpf,
+                response: verifyIfCNPJExists ? [...state.response, response] : state.response,
+                tabActive: cadastro ? cadastro.cpf : state.tabActive,
                 lastQueries: state.lastQueries,
                 type: state.type
             }
         }
         case SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO: {
-            let verifyIfCNPJExists = action.payload && action.payload.cadastro ? searchDocument(state.response, action.payload.cadastro.cnpj) : -2;
+            let responseServer = action.payload;
+            let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
+            let verifyIfCNPJExists = isDocumentNotInArray(state.response, cadastro.cnpj);
 
-            /*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
-            if(verifyIfCNPJExists == -1) {
-                response.data = action.payload;
-                response.label = action.payload.cadastro.cnpj;
+            /*Verifica se o documento foi encontrado ou não*/
+            if(verifyIfCNPJExists) {
+                response.data = responseServer;
+                response.label = cadastro.cnpj;
                 response.tipo = "CNPJ";
                 response.icon = ICON_LOCALIZE;
-                response.produto = "localize";
+                response.produto = COMPANY_PRODUCT_LOCALIZE;
             }
 
             return {
-                status: verifyIfCNPJExists == -2 ? REQUEST_ERROR : SUCCESS,
-                message: verifyIfCNPJExists == -2 ? NENHUM_REGISTRO : "",
+                status: cadastro ? SUCCESS : REQUEST_ERROR,
+                message: cadastro ? "": NENHUM_REGISTRO,
                 loading: false,
-                response: verifyIfCNPJExists == -1 ? [...state.response, response] : state.response,
-                tabActive: verifyIfCNPJExists == -2 ? state.tabActive : action.payload.cadastro.cnpj,
+                response: verifyIfCNPJExists ? [...state.response, response] : state.response,
+                tabActive: cadastro ? cadastro.cnpj : state.tabActive,
                 lastQueries: state.lastQueries,
                 type: state.type
             }
@@ -271,7 +279,17 @@ export default function(state=getInitialState, action) {
 }
 
 //Busca no array das pessoas pesquisadas o documento passado
-function searchDocument(list, doc) {
+function isDocumentNotInArray(list, doc) {
+	for(let i=0; i<list.length; i++) {
+		if(doc == list[i].label) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+function findLabelInArray(list, doc) {
 	for(let i=0; i<list.length; i++) {
 		if(doc == list[i].label) {
 			return i;

@@ -11,16 +11,10 @@ const tooltipMap = "tooltipMap";
 const tooltipConsultarMap = "tooltipConsultarMap";
 
 export default class Enderecos extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      mapa: false,
-      idCep: "",
-      IsModalOpen: false
-    }
-
-    this.mostrarMapa = this.mostrarMapa.bind(this);
+  state = {
+    mapa: false,
+    idCep: "",
+    IsModalOpen: false
   }
 
   fecharMapa() {
@@ -29,7 +23,7 @@ export default class Enderecos extends Component {
     })
   }
 
-  mostrarMapa(idCep) {
+  mostrarMapa = (idCep) => {
     this.setState({
       mapa: !this.state.mapa,
       idCep: idCep
@@ -93,7 +87,9 @@ export default class Enderecos extends Component {
                                     <td colSpan="8" style={{position:"relative"}}>
                                       <MapPanel
                                         endereco={
-                                          (end.tipoLogradouro ? end.tipoLogradouro + "." : "") +
+                                          end.endereco ?
+                                            end.endereco :
+                                            (end.tipoLogradouro ? end.tipoLogradouro + "." : "") +
                                           end.logradouro + "," + end.cidade}
                                         latitude={end.latitude}
                                         longitude={end.longitude} />

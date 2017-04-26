@@ -15,6 +15,7 @@ export default class Acoes extends Component {
     return (
         <div>
             <a name={"Recuperações, Falências e Ações Judiciais"+this.props.index}></a>
+            <a name={"Recuperação e Falências"+this.props.index}></a>
             <a name={"Ações"+this.props.index}></a>
             <a name={"Ações Judiciais"+this.props.index}></a>
             {this.props.acoes && this.props.acoes.acoes && this.props.acoes.acoes.length > 0 ?

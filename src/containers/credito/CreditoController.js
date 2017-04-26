@@ -3,6 +3,13 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Tabs, Tab} from "react-bootstrap";
 
+import CreditoView from "./CreditoView";
+import LocalizeView from "../localize/LocalizeView";
+import MyForm from "../../components/forms/Form";
+import Titletab from "../../components/utils/Titletab";
+
+import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
+
 import {
 		changeTab,
 		closeModel,
@@ -16,14 +23,6 @@ import {
 		searchLocalizeInCredito
 } from "../../actions/actionsCredito";
 import { changeProductType } from "../../actions/actionsCommon";
-
-import CreditoView from "./CreditoView";
-import LocalizeView from "../localize/LocalizeView";
-import MyForm from "../../components/forms/Form";
-import Titletab from "../../components/utils/Titletab";
-
-import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
-
 import { ERR_CONNECTION_REFUSED, LOGO_CREDITO, ICON_CREDITO, LOADING_GIF, REQUEST_ERROR, SUCCESS } from "../../constants/utils";
 import {
 	COMPLETA_CODE,
@@ -33,9 +32,10 @@ import {
 	SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO,
 	SIMPLES_CODE,
 	CHEQUE_CODE,
-	EXPRESS_CODE
+	EXPRESS_CODE,
+	GET_CREDITO_COMPLETA
 } from "../../constants/constantsCredito";
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO } from "../../constants/constantsCompany";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO, COMPANY_PRODUCT_LOCALIZE } from "../../constants/constantsCompany";
 
 import estados from "../../components/utils/common/estados.json";
 import menu from "../../components/utils/common/menu.json";
@@ -45,30 +45,27 @@ const tiposCheque = [
 ]
 
 class Credito extends Component {
-	constructor(props) {
-		super(props);
 
-		this.state = {
-			tipo: "",
-			expressTipo: "CPF",
-			tipoCheque: "Apenas Cadastro",
-			creditoInput: {
-				documento: "",
-				uf: "",
-				banco: "",
-				agência: "",
-				conta: "",
-				digitoConta: "",
-				chequeInicial: "",
-				digitoChequeInicial: "",
-				CMC7: "",
-				folhas: "",
-				servico: [],
-				receitaFederal: false,
-				ccf: false,
-				protestoPublico: false,
-				sintegra: false
-			}
+	state = {
+		tipo: "",
+		expressTipo: "CPF",
+		tipoCheque: "Apenas Cadastro",
+		creditoInput: {
+			documento: "",
+			uf: "",
+			banco: "",
+			agência: "",
+			conta: "",
+			digitoConta: "",
+			chequeInicial: "",
+			digitoChequeInicial: "",
+			CMC7: "",
+			folhas: "",
+			servico: [],
+			receitaFederal: false,
+			ccf: false,
+			protestoPublico: false,
+			sintegra: false
 		}
 	}
 
@@ -126,7 +123,7 @@ class Credito extends Component {
 		if(this.props.type == "CHEQUE") {
 			this.props.searchCreditoCheque(this.state.creditoInput);
 		} else {
-			this.props.searchCreditoCompleta(this.state.creditoInput.documento);
+			this.searchCreditoCompleta(this.state.creditoInput.documento);
 		}
 
 		this.setState({
@@ -383,7 +380,7 @@ class Credito extends Component {
 		if(this.props.type == "CHEQUE") {
 			this.props.searchCreditoCheque(entrada);
 		} else {
-			this.props.searchCreditoCompleta(entrada);
+			this.searchCreditoCompleta(entrada);
 		}
 	}
 
@@ -391,6 +388,12 @@ class Credito extends Component {
 		let search = tipo === "CPF" ? SEARCH_BY_LOCALIZE_CPF_IN_CREDITO : SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO;
 		this.props.loadingCredito();
 		this.props.searchLocalizeInCredito(documento, tipo, search);
+	}
+
+	searchCreditoCompleta = (documento, tipo) => {
+		tipo = tipo ? tipo : documento.length <= 11 ? "CPF" : "CNPJ";
+		this.props.loadingCredito();
+		this.props.searchCreditoCompleta(documento, tipo, GET_CREDITO_COMPLETA);
 	}
 
 	form = (tipo) => {
@@ -458,14 +461,14 @@ class Credito extends Component {
 										}
 										key={index}
 									>
-										{data.produto == "credito" ?
+										{data.produto == COMPANY_PRODUCT_CREDITO ?
 											<CreditoView
 												data={data.data}
 												tipo={data.tipo}
 												index={index}
-												searchPerson={this.searchInLocalize}/>
+												searchPerson={this.searchCreditoCompleta}/>
 										: 
-											data.produto == "localize" ?
+											data.produto == COMPANY_PRODUCT_LOCALIZE ?
 												<LocalizeView
 													data={data.data}
 													tipo={data.tipo}

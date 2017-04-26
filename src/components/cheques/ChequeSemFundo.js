@@ -10,18 +10,21 @@ const title = "CHEQUES SEM FUNDO";
 
 export default class ChequeSemFundo extends Component {
   render() {
+    let cheques = this.props.cheques;
+    let indexOfProps = this.props.index
     return (
           <div>
-              <a name={"Cheques Sem Fundos"+this.props.index}></a>
-              <a name={"Cheques sem Fundos"+this.props.index}></a>
-              {this.props.cheques && this.props.cheques.cheques && this.props.cheques.cheques.length > 0 ?
+              <a name={"Cheques Sem Fundos"+indexOfProps}></a>
+              <a name={"Cheques sem Fundos"+indexOfProps}></a>
+              <a name={"Cheques sem Fundo"+indexOfProps}></a>
+              {cheques && cheques.cheques && cheques.cheques.length > 0 ?
 
-                <Panel title={title} qtdTotal={[{icon:"fa fa-university", qtd:this.props.cheques.total}]}>
+                <Panel title={title} qtdTotal={[{icon:"fa fa-university", qtd:cheques.total}]}>
                   
                   <Col md={12}>
                     <Table fields={["Último Cheque", "Origem", "Quantidade", "Motivo", "Agência", "Banco"]}>
                       <tbody>
-                        {this.props.cheques.cheques.map((cheque, index) => {
+                        {cheques.cheques.map((cheque, index) => {
                           return (
                             <tr key={index}>
                               <td>{cheque.ultimoEm}</td>

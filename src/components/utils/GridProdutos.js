@@ -9,6 +9,7 @@ import {
         searchLocalize,
         loadingLocalize
 } from "../../actions/index";
+import { searchCreditoCompleta } from "../../actions/actionsCredito";
 
 import { ICON_LOCALIZE, ICON_CREDITO, ICON_FOCOFISCAL } from "../../constants/utils";
 
@@ -156,7 +157,7 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
             searchCredito,
 			searchLocalize,
-            loadingLocalize
+            loadingLocalize,
 		},
 		dispatch);
 }

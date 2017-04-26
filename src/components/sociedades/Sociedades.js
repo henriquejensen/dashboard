@@ -7,6 +7,8 @@ import Table from "../table/Table";
 
 import { NENHUM_REGISTRO } from "../../constants/utils";
 
+const title = "PARTICIPAÇÕES EM EMPRESAS";
+
 export default class Sociedades extends Component {
   render() {
     return (
@@ -14,7 +16,7 @@ export default class Sociedades extends Component {
             <a name={"Participações em Empresas"+this.props.index}></a>
               
               {this.props.participacoes && this.props.participacoes.length > 0 ?
-                <Panel title="PARTICIPAÇÕES EM EMPRESAS" qtdTotal={[{icon:"fa fa-building-o", qtd:this.props.participacoes.length}]}>
+                <Panel title={title} qtdTotal={[{icon:"fa fa-building-o", qtd:this.props.participacoes.length}]}>
                   
                   <Col md={12}>
                     <Table fields={["Nome", "Cargo", "Part. %"]}>
@@ -44,7 +46,7 @@ export default class Sociedades extends Component {
                   </Tooltip>
                 </Panel>
               :
-                <Panel title="PARTICIPAÇÕES EM EMPRESAS">
+                <Panel title={title}>
                     <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
                 </Panel>
               }

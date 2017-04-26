@@ -89,11 +89,10 @@ export function searchCreditoCheque(chequeData) {
 	}
 }
 
-export function searchCreditoCompleta(documento) {
+export function searchCreditoCompleta(documento, tipo, search) {
 	documento = documento.replace(/[^0-9]/g,"");
-	let tipo = documento.length <= 11 ? "CPF" : "CNPJ";
-	let data = documento.length <= 11 ? {cpf:documento} : {cnpj:documento};
-	let url = documento.length <= 11 ? URL_CREDITO_SEARCH_COMPLETA : URL_CREDITO_SEARCH_COMPLETA_PJ;
+	let data = tipo === "CPF" ? {cpf:documento} : {cnpj:documento};
+	let url = tipo === "CPF" ? URL_CREDITO_SEARCH_COMPLETA : URL_CREDITO_SEARCH_COMPLETA_PJ;
 
 	return (dispatch) => {
 		ajax.post(url)
@@ -103,7 +102,7 @@ export function searchCreditoCompleta(documento) {
 				if (response) {
 					if (response.status == 200) {
 						dispatch({
-							type: GET_CREDITO_COMPLETA,
+							type: search,
 							payload: {
 								documento: documento,
 								response: response.body,
@@ -129,8 +128,8 @@ export function seeModel() {
 
 export function searchLocalizeInCredito(documento, tipo, search) {
 	documento = documento.replace(/[^0-9]/g,"");
-	let data = tipo == "CPF" ? {cpf:documento} : {cnpj:documento};
-	let url = tipo == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
+	let data = tipo === "CPF" ? {cpf:documento} : {cnpj:documento};
+	let url = tipo === "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
 
 	return (dispatch) => {
 		ajax.post(url)
