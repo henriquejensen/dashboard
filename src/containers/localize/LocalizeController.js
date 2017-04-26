@@ -94,9 +94,9 @@ class LocalizeController extends Component {
 	}
 
 	//busca as pessoas relacionadas a este doc, tipo é CPF ou CNPJ
-	searchPessoasRelacionadas = (doc) => {
+	searchPessoasRelacionadas = (doc, label) => {
 		this.props.loadingLocalize();
-		this.props.searchPessoasRelacionadas(doc);
+		this.props.searchPessoasRelacionadas(doc, label);
 	}
 	
 	//recebe o documento da pessoa e da pessoa relacionada a esta e
@@ -571,7 +571,6 @@ class LocalizeController extends Component {
 											<Titletab
 												icon={data.icon}
 												label={data.label.length > 20 ? data.label.substring(0,20)+"..." : data.label}
-												tipo={data.tipo}
 												close={() => this.closeTab(index)}
 											/>
 										}
@@ -583,6 +582,7 @@ class LocalizeController extends Component {
 												data={data.data}
 												tipo={data.tipo}
 												index={index}
+												label={data.label}
 												searchLocalize={this.searchLocalize}
 												searchPessoasRelacionadas={this.searchPessoasRelacionadas}
 												pessoasRelacionadas={data.pessoasRelacionadas}

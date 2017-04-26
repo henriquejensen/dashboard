@@ -473,6 +473,7 @@ class Credito extends Component {
 													data={data.data}
 													tipo={data.tipo}
 													index={index}
+													label={data.label}
 													searchLocalize={this.searchInLocalize}
 													pessoasRelacionadas={data.pessoasRelacionadas}/>
 											: ""}

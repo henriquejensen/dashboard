@@ -23,6 +23,7 @@ export default class LocalizeView extends Component {
     render() {
         let tipo = this.props.tipo;
         let data = this.props.data;
+        let label = this.props.label;
 
         return (
             <PanelGroup>
@@ -44,6 +45,7 @@ export default class LocalizeView extends Component {
                 <Emails emails={data.emails}/> {tipo == "CPF"
                     ? <Relacionados
                             documento={data.cadastro.cpf}
+                            label={label}
                             searchPessoasRelacionadas={this.props.searchPessoasRelacionadas}
                             searchTelefonesPessoaRelacionada={this.props.searchTelefonesPessoaRelacionada}
                             searchEnderecosPessoaRelacionada={this.props.searchEnderecosPessoaRelacionada}

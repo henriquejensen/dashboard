@@ -17,12 +17,12 @@ export default class Relacionados extends Component {
         }
     }
 
-    searchPessoasRelacionadas = (doc) => {
+    searchPessoasRelacionadas = (doc, label) => {
         this.setState({
             showMessageSeeMore: false
         })
 
-        this.props.searchPessoasRelacionadas(doc);
+        this.props.searchPessoasRelacionadas(doc, label);
     }
 
     showMoreItems = (doc, tipo) => {
@@ -69,11 +69,13 @@ export default class Relacionados extends Component {
     }
 
     render() {
+        let documento = this.props.documento;
+        let label = this.props.label;
         return (
             <Panel
                 title="PESSOAS RELACIONADAS"
                 qtdTotal={[{qtd:this.props.relacionados.length,icon:"fa fa-users"}]}>
-                <div className="col-md-12">
+                <Col md={12}>
                     <Table fields= {["Relação", "Nome", ""]} >
                         {this.props.relacionados.map((pessoa, index) => {
                             return (
@@ -120,13 +122,13 @@ export default class Relacionados extends Component {
 
                     {this.state.showMessageSeeMore ?
                         <Col md={12}>
-                            <a onClick={() => this.searchPessoasRelacionadas(this.props.documento)} className="moreInfo pull-right">
+                            <a onClick={() => this.searchPessoasRelacionadas(documento, label)} className="moreInfo pull-right">
                                 Ver mais pessoas relacionadas
                             </a>
                         </Col>
                     : ""}
                     
-                </div>
+                </Col>
             </Panel>
         )
     }

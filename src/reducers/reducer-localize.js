@@ -14,8 +14,7 @@ import {
 		SEARCH_BY_TELEFONES_RELACIONADOS,
 		SEARCH_BY_ENDERECOS_RELACIONADOS,
 		SEARCH_BY_EMAILS_RELACIONADOS,
-		SEARCH_BY_CREDITO_PF,
-		SEARCH_BY_CREDITO_PJ,
+		SEARCH_BY_CREDITO_IN_LOCALIZE,
 		SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS,
 		SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA,
 		SEE_LOCALIZE_MODEL,
@@ -39,6 +38,8 @@ import { COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO } from "../constants/
 import model from "./data/localize/modelLocalize.json";
 import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
 import relacionados from "./data/relacionados.json";
+
+import { patternCPF, patternCNPJ } from "../components/utils/functions/patternDocuments";
 
 import modelCredito from "./data/credito/consultaCPF.json";
 import modelCreditoCNPJ from "./data/credito/consultaCNPJ.json";
@@ -195,79 +196,74 @@ export default function(state = initialState, action) {
 					type: newState.type
 				}
 
-			case SEARCH_BY_CREDITO_PF:
-				let verifyIfCreditoPFExists = searchDocument(newState.response, modelCredito.cadastro.cpf);
+			case SEARCH_BY_CREDITO_IN_LOCALIZE: {
+				let documento = patternCPF(action.payload.documento);
+				let responseServer = action.payload.response;
+				let tipo = action.payload.tipo;
+				let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_CREDITO;
+				let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
+				let verifyIfDocumentExists = isDocumentNotInArray(state.response, label);
 
-				if(verifyIfCreditoPFExists == -1) {
-					response.data = modelCredito;
-					response.label = modelCredito.cadastro.cpf;
-					response.tipo = "CPF";
+				if(verifyIfDocumentExists) {
+					/**O documento esta vindo formatado do fornecedor
+					 * portanto estou salvando a entrada do cliente no lugar dele
+					 * pois formato este documento em todo o site
+					 */
+					tipo == "CPF" ? responseServer.cadastro.cpf = documento : responseServer.cadastro.cnpj = documento;
+
+					response.data = responseServer;
+					response.label = label;
+					response.tipo = tipo;
 					response.icon = ICON_CREDITO;
 					response.produto = COMPANY_PRODUCT_CREDITO;
 				}
 
 				return {
+					status: cadastro ? SUCCESS : REQUEST_ERROR,
+					message: cadastro ? "": NENHUM_REGISTRO,
 					loading: false,
-					status: SUCCESS,
-					message: "",
-					response: verifyIfCreditoPFExists == -1 ? [...newState.response, response] : newState.response,
-					tabActive: verifyIfCreditoPFExists == -1 ? modelCredito.cadastro.cpf : newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
+					response: verifyIfDocumentExists ? [...state.response, response] : state.response,
+					tabActive: cadastro ? label : state.tabActive,
+					lastQueries: state.lastQueries,
+					type: state.type
 				}
-
-			case SEARCH_BY_CREDITO_PJ:
-				let verifyIfCreditoPJExists = searchDocument(newState.response, modelCreditoCNPJ.cadastro.cnpj);
-
-				if(verifyIfCreditoPJExists == -1) {
-					response.data = modelCreditoCNPJ;
-					response.label = modelCreditoCNPJ.cadastro.cnpj;
-					response.tipo = "CNPJ";
-					response.icon = ICON_CREDITO;
-					response.produto = COMPANY_PRODUCT_CREDITO;
-				}
-
-				return {
-					loading: false,
-					status: SUCCESS,
-					message: "",
-					response: verifyIfCreditoPJExists == -1 ? [...newState.response, response] : newState.response,
-					tabActive: verifyIfCreditoPJExists == -1 ? modelCreditoCNPJ.cadastro.cnpj : newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
-				}
-				
-			case SEARCH_BY_CPF:
-				let verifyIfCPFExists = action.payload && action.payload.cadastro && action.payload.cadastro.cpf ? searchDocument(newState.response, action.payload.cadastro.cpf) : -2;
+			}
+			case SEARCH_BY_CPF: {
+				let documento = patternCPF(action.payload.documento);
+				let responseServer = action.payload.response;
+				let tipo = action.payload.tipo;
+				let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_LOCALIZE;
+				let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
+				let verifyIfDocumentExists = isDocumentNotInArray(state.response, documento);
 
 				/*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
-				if(verifyIfCPFExists == -1) {
-					response.data = action.payload;
-					response.label = action.payload.cadastro.cpf;
-					response.tipo = "CPF";
+				if(verifyIfDocumentExists) {
+					response.data = responseServer;
+					response.label = label
+					response.tipo = tipo;
 					response.icon = ICON_LOCALIZE;
 					response.produto = COMPANY_PRODUCT_LOCALIZE;
 
-					if(action.payload.cadastro.maeNome) {
+					if(cadastro.maeNome) {
 						response.pessoasRelacionadas[0] = {
-							nome: action.payload.cadastro.maeNome,
-							documento: action.payload.cadastro.maeCpf,
+							nome: cadastro.maeNome,
+							documento: cadastro.maeCpf,
 							relacao: "Mãe"
 						}
 					}
 				}
 
 				return {
-					status: verifyIfCPFExists == -2 ? REQUEST_ERROR : SUCCESS,
-					message: verifyIfCPFExists == -2 ? NENHUM_REGISTRO : "",
+					status: cadastro ? SUCCESS : REQUEST_ERROR,
+					message: cadastro ? "": NENHUM_REGISTRO,
 					loading: false,
-					response: verifyIfCPFExists == -1 ? [...newState.response, response] : newState.response,
-					tabActive: verifyIfCPFExists == -2 ? newState.tabActive : action.payload.cadastro.cpf,
-					lastQueries: newState.lastQueries,
-					type: newState.type
-				};
-
-			case SEARCH_BY_CNPJ:
+					response: verifyIfDocumentExists ? [...state.response, response] : state.response,
+					tabActive: cadastro ? label : state.tabActive,
+					lastQueries: state.lastQueries,
+					type: state.type
+				}
+			}
+			case SEARCH_BY_CNPJ: {
 				let verifyIfCNPJExists = action.payload && action.payload.cadastro ? searchDocument(newState.response, action.payload.cadastro.cnpj) : -2;
 
 				/*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
@@ -287,8 +283,8 @@ export default function(state = initialState, action) {
 					tabActive: verifyIfCNPJExists == -2 ? newState.tabActive : action.payload.cadastro.cnpj,
 					lastQueries: newState.lastQueries,
 					type: newState.type
-				};
-
+				}
+			}
 			case SEARCH_BY_EMAIL:
 				let labelEmail = "Email: "+action.payload.cabecalho.entrada;
 				let verifyIfEmailExists = searchDocument(newState.response, labelEmail);
@@ -377,8 +373,10 @@ export default function(state = initialState, action) {
 					type: newState.type
 				};
 
-			case SEARCH_BY_PESSOAS_RELACIONADOS:
-				newState.response[searchDocument(newState.response,action.payload.cabecalho.entrada)].pessoasRelacionadas = action.payload.localizePessoasRelacionadas;
+			case SEARCH_BY_PESSOAS_RELACIONADOS: {
+				let responseServer = action.payload.response;
+				let label = action.payload.label;
+				newState.response[searchDocument(newState.response,label)].pessoasRelacionadas = responseServer.localizePessoasRelacionadas;
 
 				return {
 					status: "pessoasRelacionadas"+action.payload,
@@ -388,8 +386,8 @@ export default function(state = initialState, action) {
 					tabActive: newState.tabActive,
 					lastQueries: newState.lastQueries,
 					type: newState.type
-				};
-
+				}
+			}
 			case SEARCH_BY_TELEFONES_RELACIONADOS:
 				//busca nas documentos pesquisados no localize o documento que sera inserido os telefones relacionados
 				let posPessoaTelefone = searchDocument(newState.response,action.payload.documento);
@@ -468,6 +466,17 @@ export default function(state = initialState, action) {
 		}
 
 	return state;
+}
+
+//Busca no array das pessoas pesquisadas o documento passado
+function isDocumentNotInArray(list, doc) {
+	for(let i=0; i<list.length; i++) {
+		if(doc == list[i].label) {
+			return false;
+		}
+	}
+
+	return true;
 }
 
 /* Nome e endereco é retornado como json no cabecalho, esta funcao faz o parse neste

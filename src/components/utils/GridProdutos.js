@@ -34,19 +34,12 @@ const produtos = [
 ];
 
 class GridProdutos extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            optionsSelected: {}
-        }
-
-        this.onChecked = this.onChecked.bind(this);
-        this.search = this.search.bind(this);
-        this.handleAlertDismiss = this.handleAlertDismiss.bind(this);
+    state = {
+        optionsSelected: {}
     }
 
-    onChecked(produto, opt) {
+    onChecked = (produto, opt) => {
         let newOptions = Object.assign({}, this.state.optionsSelected);
         if(newOptions[produto] == undefined) {
             newOptions[produto] = [opt];
@@ -60,7 +53,7 @@ class GridProdutos extends Component {
         })
     }
 
-    search() {
+    search = () => {
         if(Object.keys(this.state.optionsSelected).length > 0) {
             this.props.closeModal();
             browserHistory.push("/localize");
@@ -87,7 +80,7 @@ class GridProdutos extends Component {
         }
     }
 
-    handleAlertDismiss() {
+    handleAlertDismiss = () => {
         this.setState({showMessage: false})
     }
 

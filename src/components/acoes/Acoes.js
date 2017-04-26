@@ -12,24 +12,26 @@ const title = "RECUPERAÇÕES, FALÊNCIAS E AÇÕES JUDICIAIS";
 
 export default class Acoes extends Component {
   render() {
+    let indexOfProps = this.props.index;
+    let acoes = this.props.acoes;
     return (
         <div>
-            <a name={"Recuperações, Falências e Ações Judiciais"+this.props.index}></a>
-            <a name={"Recuperação e Falências"+this.props.index}></a>
-            <a name={"Ações"+this.props.index}></a>
-            <a name={"Ações Judiciais"+this.props.index}></a>
-            {this.props.acoes && this.props.acoes.acoes && this.props.acoes.acoes.length > 0 ?
-              <Panel title={title} qtdTotal={[{icon:"fa fa-line-chart", qtd:this.props.acoes.quantidadeAcoes}]}>
+            <a name={"Recuperações, Falências e Ações Judiciais"+indexOfProps}></a>
+            <a name={"Recuperação e Falências"+indexOfProps}></a>
+            <a name={"Ações"+indexOfProps}></a>
+            <a name={"Ações Judiciais"+indexOfProps}></a>
+            {acoes && acoes.acoes && acoes.acoes.length > 0 ?
+              <Panel title={title} qtdTotal={[{icon:"fa fa-line-chart", qtd:acoes.quantidadeAcoes}]}>
                 <Col md={12}>
-                  <Col md={4}><strong>Ocorrência mais Antiga:</strong> {this.props.acoes.ocorrenciaMaisAntiga}</Col>
-                  <Col md={4}><strong>Ocorrência mais Recente:</strong> {this.props.acoes.ocorrenciaMaisRecente}</Col>
-                  <Col md={4}><strong>Valor Total:</strong> {formatCurrency(this.props.acoes.valorTotal)}</Col>
+                  <Col md={4}><strong>Ocorrência mais Antiga:</strong> {acoes.ocorrenciaMaisAntiga}</Col>
+                  <Col md={4}><strong>Ocorrência mais Recente:</strong> {acoes.ocorrenciaMaisRecente}</Col>
+                  <Col md={4}><strong>Valor Total:</strong> {formatCurrency(acoes.valorTotal)}</Col>
                 </Col>
 
                 <Col md={12}>
                   <Table fields={["Data", "Valor", "Cód. Vara", "Local (vara)", "Cidade", "Avalista"]}>
                     <tbody>
-                      {this.props.acoes.acoes.map((acao, index) => {
+                      {acoes.acoes.map((acao, index) => {
                         return (
                           <tr key={index}>
                             <td>{acao.dataAcao}</td>

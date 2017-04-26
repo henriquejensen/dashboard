@@ -23,11 +23,14 @@ import {
 		LOADING_LOCALIZE,
 		CLOSE_TAB_LOCALIZE,
 		CHANGE_TAB_LOCALIZE,
-		SEARCH_BY_CREDITO_PF,
-		SEARCH_BY_CREDITO_PJ,
+		SEARCH_BY_CREDITO_IN_LOCALIZE,
 		CLOSE_MESSAGE_ERROR_LOCALIZE,
 		GET_LOCALIZE_LAST_QUERIES
 } from "../constants/constantsLocalize";
+import {
+	URL_CREDITO_SEARCH_COMPLETA,
+	URL_CREDITO_SEARCH_COMPLETA_PJ
+} from "../constants/constantsCredito";
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
 
 import {
@@ -101,16 +104,34 @@ export function loadingLocalize() {
 	}
 }
 
-export function searchCredito(document, tipo) {
-	if(tipo == "pf") {
-		return {
-			type: SEARCH_BY_CREDITO_PF,
-			payload: "credito"
-		}
-	}
-	return {
-		type: SEARCH_BY_CREDITO_PJ,
-		payload: "credito"
+export function searchCredito(documento, tipo, search) {
+	documento = documento.replace(/[^0-9]/g,"");
+	let data = tipo === "CPF" ? {cpf:documento} : {cnpj:documento};
+	let url = tipo === "CPF" ? URL_CREDITO_SEARCH_COMPLETA : URL_CREDITO_SEARCH_COMPLETA_PJ;
+	search = search ? search : SEARCH_BY_CREDITO_IN_LOCALIZE;
+
+	return (dispatch) => {
+		ajax.post(url)
+			.send(data)
+			.set({'Content-Type': 'application/x-www-form-urlencoded',Authorization: localStorage.getItem("token")})
+			.end(function(error, response) {
+				if (response) {
+					if (response.status == 200) {
+						dispatch({
+							type: search,
+							payload: {
+								documento: documento,
+								response: response.body,
+								tipo: tipo
+							}
+						})
+					} else {
+						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
+					}
+				} else {
+					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+				}
+			})
 	}
 }
 
@@ -127,7 +148,14 @@ export function searchLocalize(documento, tipo) {
 			.end(function(error, response) {
 				if (response) {
 					if (response.status == 200) {
-						dispatch({type: search, payload: response.body})
+						dispatch({
+							type: search,
+							payload: {
+								response: response.body,
+								tipo: tipo,
+								documento: documento
+							}
+						})
 					} else {
 						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
 					}
@@ -294,7 +322,7 @@ export function searchLocalizeByTelefone(telefone) {
 	}
 }
 
-export function searchPessoasRelacionadas(cpf) {
+export function searchPessoasRelacionadas(cpf, label) {
 	return (dispatch) => {
 		ajax.post(URL_SEARCH_PESSOAS_RELACIONADAS)
 			.send({cpf})
@@ -302,7 +330,13 @@ export function searchPessoasRelacionadas(cpf) {
 			.end(function(error, response) {
 				if (response) {
 					if (response.status == 200) {
-						dispatch({type: SEARCH_BY_PESSOAS_RELACIONADOS, payload: response.body})
+						dispatch({
+							type: SEARCH_BY_PESSOAS_RELACIONADOS,
+							payload: {
+								response: response.body,
+								label: label
+							}
+						})
 					} else {
 						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
 					}
