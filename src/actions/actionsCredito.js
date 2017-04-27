@@ -97,7 +97,7 @@ export function searchCreditoCompleta(documento, tipo, search) {
 			.send(data)
 			.set({'Content-Type': 'application/x-www-form-urlencoded',Authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
-				if (response && response.body) {
+				if (response && response.body && response.body.cadastro) {
 					if (response.status == 200) {
 						dispatch({
 							type: search,

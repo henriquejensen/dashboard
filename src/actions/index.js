@@ -114,7 +114,7 @@ export function searchCredito(documento, tipo, search) {
 			.send(data)
 			.set({'Content-Type': 'application/x-www-form-urlencoded',Authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
-				if (response && response.body) {
+				if (response && response.body && response.body.cadastro) {
 					if (response.status == 200) {
 						dispatch({
 							type: search,
@@ -145,7 +145,7 @@ export function searchLocalize(documento, tipo) {
 			.send(data)
 			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
-				if (response && response.body) {
+				if (response && response.body && response.body.cadastro) {
 					if (response.status == 200) {
 						dispatch({
 							type: SEARCH_BY_DOCUMENT,
