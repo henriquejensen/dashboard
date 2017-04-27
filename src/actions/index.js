@@ -145,7 +145,7 @@ export function searchLocalize(documento, tipo) {
 			.send(data)
 			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
-				if (response) {
+				if (response && response.body) {
 					if (response.status == 200) {
 						dispatch({
 							type: SEARCH_BY_DOCUMENT,
