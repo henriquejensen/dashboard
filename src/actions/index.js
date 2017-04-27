@@ -114,7 +114,7 @@ export function searchCredito(documento, tipo, search) {
 			.send(data)
 			.set({'Content-Type': 'application/x-www-form-urlencoded',Authorization: localStorage.getItem("token")})
 			.end(function(error, response) {
-				if (response) {
+				if (response && response.body) {
 					if (response.status == 200) {
 						dispatch({
 							type: search,
