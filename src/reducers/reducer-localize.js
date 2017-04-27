@@ -5,8 +5,7 @@ import {
 		CLOSE_TAB_LOCALIZE,
 		GET_LOCALIZE_LAST_QUERIES,
 		LOADING_LOCALIZE,
-		SEARCH_BY_CPF,
-		SEARCH_BY_CNPJ,
+		SEARCH_BY_DOCUMENT,
 		SEARCH_BY_TELEFONE,
 		SEARCH_BY_EMAIL,
 		SEARCH_BY_NOME_ENDERECO,
@@ -228,13 +227,13 @@ export default function(state = initialState, action) {
 					type: state.type
 				}
 			}
-			case SEARCH_BY_CPF: {
+			case SEARCH_BY_DOCUMENT: {
 				let documento = patternCPF(action.payload.documento);
 				let responseServer = action.payload.response;
 				let tipo = action.payload.tipo;
 				let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_LOCALIZE;
 				let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
-				let verifyIfDocumentExists = isDocumentNotInArray(state.response, documento);
+				let verifyIfDocumentExists = isDocumentNotInArray(state.response, label);
 
 				/*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
 				if(verifyIfDocumentExists) {
@@ -261,28 +260,6 @@ export default function(state = initialState, action) {
 					tabActive: cadastro ? label : state.tabActive,
 					lastQueries: state.lastQueries,
 					type: state.type
-				}
-			}
-			case SEARCH_BY_CNPJ: {
-				let verifyIfCNPJExists = action.payload && action.payload.cadastro ? searchDocument(newState.response, action.payload.cadastro.cnpj) : -2;
-
-				/*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
-				if(verifyIfCNPJExists == -1) {
-					response.data = action.payload;
-					response.label = action.payload.cadastro.cnpj;
-					response.tipo = "CNPJ";
-					response.icon = ICON_LOCALIZE;
-					response.produto = COMPANY_PRODUCT_LOCALIZE;
-				}
-
-				return {
-					status: verifyIfCNPJExists == -2 ? REQUEST_ERROR : SUCCESS,
-					message: verifyIfCNPJExists == -2 ? NENHUM_REGISTRO : "",
-					loading: false,
-					response: verifyIfCNPJExists == -1 ? [...newState.response, response] : newState.response,
-					tabActive: verifyIfCNPJExists == -2 ? newState.tabActive : action.payload.cadastro.cnpj,
-					lastQueries: newState.lastQueries,
-					type: newState.type
 				}
 			}
 			case SEARCH_BY_EMAIL:

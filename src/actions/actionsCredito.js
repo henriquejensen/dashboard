@@ -2,9 +2,7 @@ import ajax from "superagent";
 
 import {
 		URL_SEARCH_CPF,
-		URL_SEARCH_CNPJ,
-		SEARCH_BY_CPF,
-		SEARCH_BY_CNPJ
+		URL_SEARCH_CNPJ
 } from "../constants/constantsLocalize";
 
 import {

@@ -8,8 +8,7 @@ import {
 		URL_SEARCH_NOME_ENDERECO,
 		URL_SEARCH_PESSOAS_RELACIONADAS,
 		URL_SEARCH_ULTIMAS_CONSULTAS_LOCALIZE,
-		SEARCH_BY_CPF,
-		SEARCH_BY_CNPJ,
+		SEARCH_BY_DOCUMENT,
 		SEARCH_BY_TELEFONE,
 		SEARCH_BY_EMAIL,
 		SEARCH_BY_NOME_ENDERECO,
@@ -136,10 +135,10 @@ export function searchCredito(documento, tipo, search) {
 }
 
 export function searchLocalize(documento, tipo) {
+	documento = documento.toString();
 	documento = documento.replace(/[^0-9]/g,"");
 	let data = tipo == "CPF" ? {cpf:documento} : {cnpj:documento};
 	let url = tipo == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
-	let search = tipo == "CPF" ? SEARCH_BY_CPF : SEARCH_BY_CNPJ;
 
 	return (dispatch) => {
 		ajax.post(url)
@@ -149,7 +148,7 @@ export function searchLocalize(documento, tipo) {
 				if (response) {
 					if (response.status == 200) {
 						dispatch({
-							type: search,
+							type: SEARCH_BY_DOCUMENT,
 							payload: {
 								response: response.body,
 								tipo: tipo,

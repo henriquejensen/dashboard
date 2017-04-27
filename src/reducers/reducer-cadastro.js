@@ -10,8 +10,7 @@ import {
 } from "../constants/constantsCadastro";
 import { ERR_CONNECTION_REFUSED, ERR_CONNECTION_REFUSED_MESSAGE, REQUEST_ERROR } from "../constants/utils";
 
-import groups from "./data/cadastro/grupos.json";
-import users from "./data/cadastro/users.json";
+//import groups from "./data/cadastro/grupos.json";
 import consultas from "./data/cadastro/consultas.json";
 import permissoesUser from "./data/cadastro/permissoesUser.json";
 
@@ -141,17 +140,6 @@ export default function(state=getInitialState, action) {
     }
 
     return state;
-}
-
-function getUsersByGroupId(users, groupId) {
-    let arrayUsers = [];
-    for(let i in users) {
-        if(users[i].grupoUsuarioVO.id == groupId) {
-            arrayUsers.push(users[i]);
-        }
-    }
-
-    return arrayUsers;
 }
 
 function getPermissoesByIdUser(permissoesList, id) {

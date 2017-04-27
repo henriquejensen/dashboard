@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path  = require("path");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -40,4 +41,5 @@ module.exports = {
     historyApiFallback: true,
     contentBase: './'
   },
+  //plugins: [new BundleAnalyzerPlugin()]
 }

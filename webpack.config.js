@@ -2,6 +2,7 @@ const webpack = require('webpack');
 var CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
+  bail: true,
   devtool: 'cheap-module-source-map',
   entry: [
     './src/index.js'
