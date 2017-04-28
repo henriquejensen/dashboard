@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import { browserHistory } from "react-router";
 import Breadcrumbs from "react-breadcrumbs";
-import { Col, Jumbotron } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 
 import Header from "./header";
 import Sidebar from "./sidebar";
+import Login from "./Login";
 
-import { IMAGE_ANY_TOKEN } from "../constants/utils";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-export default class App extends Component {
+import { LOG_OUT } from "../constants/utils";
+
+class App extends Component {
   state = {
     active: screen.width > 768 ? true : false
   }
@@ -20,24 +24,25 @@ export default class App extends Component {
   }
 
   render() {
-      if(!localStorage.getItem("token")) {
-        return (
-          <Jumbotron className="text-center">
-            <img src={IMAGE_ANY_TOKEN} style={{width:"200px"}} />
-            <h1>Você não está logado! :/</h1>
-            <p>Faça o login para ter acesso aos produtos</p>
-            <p><a href="/">Login</a></p>
-          </Jumbotron>
-        )
+      let logado = this.props.logado;
+      let active = this.state.active;
+      let message = this.props.message;
+      if(!logado) {
+        if(message == LOG_OUT)
+          location.reload();
+        else
+          return (
+            <Login />
+          )
       }
-      return (
+      return (        
         <div>
             <Header onMenuClicked={this.onMenuClicked} className="noPrint" />
-            <div className="sidebar noPrint" id={this.state.active ? {} : "menu-closed"}>
-              <Sidebar onMenuClicked={this.onMenuClicked} activedMenu={this.state.active}/>
+            <div className="sidebar noPrint" id={active ? {} : "menu-closed"}>
+              <Sidebar onMenuClicked={this.onMenuClicked} activedMenu={active}/>
             </div>
 
-            <div className="container-fluid main" id={this.state.active ? "menu-opened" : {}}>
+            <div className="container-fluid main" id={active ? "menu-opened" : {}}>
                 <Breadcrumbs
                   routes={this.props.routes}
                   params={this.props.params}
@@ -48,3 +53,12 @@ export default class App extends Component {
       )
   }
 }
+
+function mapStateToProps(state) {
+	return {
+		logado: state.auth.logado,
+    message: state.auth.msgn
+	}
+}
+
+export default connect(mapStateToProps)(App);

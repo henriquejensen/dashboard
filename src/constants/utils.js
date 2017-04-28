@@ -31,6 +31,9 @@ export const MESSAGE_SUCCESS_SMS = "Mensagem enviada com sucesso!";
 export const NENHUM_REGISTRO = "Nenhum registro encontrado";
 export const ADDRESS_NOT_FOUND = "Endereço não encontrado";
 
+export const ERROR_401_UNAUTHORIZED = "ERROR_401_UNAUTHORIZED";
+export const ERROR_401_UNAUTHORIZED_MESSAGE = "Por favor, realize a sua identificação para acessar o sistema";
+
 export const IMAGE_ANY_TOKEN = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/warning.png";
 
 export const LOADING_GIF = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/loading.gif";

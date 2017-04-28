@@ -40,9 +40,6 @@ class MenuSuperior extends Component {
 	}
 
 	changeRoute = (route) => {
-		if(route == "/login") {
-			this.props.logOut();
-		}
 		browserHistory.push(route);
 	}
 
@@ -92,7 +89,7 @@ class MenuSuperior extends Component {
 								}
 							})}
 							<MenuItem divider />
-							<MenuItem onClick={() => this.changeRoute("/login")}>
+							<MenuItem onClick={this.props.logOut}>
 								Sair
 							</MenuItem>
 						</NavDropdown>

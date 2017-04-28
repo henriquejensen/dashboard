@@ -1,9 +1,9 @@
-import { LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT, CHANGE_COLOR_MENU, AUTHENTICATION, LOADING } from "../constants/utils";
+import { ERROR_401_UNAUTHORIZED, LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT, CHANGE_COLOR_MENU, AUTHENTICATION, LOADING } from "../constants/utils";
 
 const getInitialState = {
     colorMenu: "#673ab7",
     loading: false,
-    logado: false,
+    logado: localStorage.getItem("token") ? true : false,
     error: false,
     msgn: ""
 }
@@ -41,19 +41,32 @@ export default function(state=getInitialState, action) {
             }
 
         case LOG_OUT:
-            let logout = state;
-            logout.logado = false;
-            return logout;
+            return {
+                colorMenu: state.colorMenu,
+                loading: false,
+                logado: false,
+                error: false,
+                msgn: LOG_OUT
+            }
 
         case CHANGE_COLOR_MENU:
-            let newStateColor = {
+            return {
                 colorMenu: action.payload,
                 loading: false,
                 logado: state.logado,
                 error: false,
                 msgn: state.msgn
             }
-            return newStateColor;
+
+        case ERROR_401_UNAUTHORIZED:
+            localStorage.removeItem(AUTHENTICATION);
+            return {
+                colorMenu: state.colorMenu,
+                loading: false,
+                logado: false,
+                error: true,
+                msgn: action.payload
+            }
 
     }
 

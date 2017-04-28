@@ -19,9 +19,9 @@ import {
 		loadingCredito,
 		seeModel,
 		searchCreditoCheque,
-		searchCreditoCompleta,
-		searchLocalizeInCredito
+		searchCreditoCompleta
 } from "../../actions/actionsCredito";
+import { searchLocalize } from "../../actions/index";
 import { changeProductType } from "../../actions/actionsCommon";
 import { ERR_CONNECTION_REFUSED, LOGO_CREDITO, ICON_CREDITO, LOADING_GIF, REQUEST_ERROR, SUCCESS } from "../../constants/utils";
 import {
@@ -387,7 +387,7 @@ class Credito extends Component {
 	searchInLocalize = (documento, tipo) => {
 		let search = tipo === "CPF" ? SEARCH_BY_LOCALIZE_CPF_IN_CREDITO : SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO;
 		this.props.loadingCredito();
-		this.props.searchLocalizeInCredito(documento, tipo, search);
+		this.props.searchLocalize(documento, tipo, search);
 	}
 
 	searchCreditoCompleta = (documento, tipo) => {
@@ -512,7 +512,7 @@ function mapDispatchToProps(dispatch) {
 		seeModel,
 		searchCreditoCheque,
 		searchCreditoCompleta,
-		searchLocalizeInCredito
+		searchLocalize
 	}, dispatch)
 }
 

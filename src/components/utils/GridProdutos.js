@@ -5,13 +5,13 @@ import { bindActionCreators } from "redux";
 import { browserHistory } from "react-router";
 
 import {
-        searchCredito,
         searchLocalize,
         loadingLocalize
 } from "../../actions/index";
 import { searchCreditoCompleta } from "../../actions/actionsCredito";
 
 import { ICON_LOCALIZE, ICON_CREDITO, ICON_FOCOFISCAL } from "../../constants/utils";
+import { SEARCH_BY_CREDITO_IN_LOCALIZE } from "../../constants/constantsLocalize";
 
 import Panel from "../panel/Panel";
 
@@ -71,7 +71,7 @@ class GridProdutos extends Component {
                 this.props.searchLocalize(this.props.documento, tipo)
             : ""
             this.state.optionsSelected['Crédito'] ?
-                this.props.searchCredito(this.props.documento, tipo)
+                this.props.searchCreditoCompleta(this.props.documento, tipo, SEARCH_BY_CREDITO_IN_LOCALIZE)
             : ""
         } else {
             this.setState({
@@ -148,7 +148,7 @@ class GridProdutos extends Component {
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-            searchCredito,
+            searchCreditoCompleta,
 			searchLocalize,
             loadingLocalize,
 		},
