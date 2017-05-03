@@ -8,7 +8,15 @@ import Table from "../table/Table";
 import Endereco from "../endereco/layoutEndereco";
 import Telefone from "../telefone/layoutTelefone";
 
-import { NENHUM_REGISTRO } from "../../constants/utils";
+import {
+    NENHUM_REGISTRO,
+    TOOLTIP_SEARCH_BY_ADDRESS,
+    TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE,
+    TOOLTIP_SEARCH_BY_DOCUMENT,
+    TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE,
+    TOOLTIP_SEARCH_BY_PHONE,
+    TOOLTIP_SEARCH_BY_PHONE_MESSAGE
+} from "../../constants/utils";
 
 const title = "RESULTADOS";
 
@@ -82,7 +90,7 @@ export default class BuscaPorRelacionados extends Component {
 
     renderButtons = (items, isEnderecoOrTelefone, indexArrayElements, documento, icon, isCpfOrCnpj) => {
         return (
-            <a data-tip data-for='tooltipConsultar'>
+            <a data-tip data-for={icon == "phone" ? TOOLTIP_SEARCH_BY_PHONE : TOOLTIP_SEARCH_BY_ADDRESS}>
                 <Button
                     bsSize="small"
                     bsStyle={this.state.buttonsClicked[icon][indexArrayElements] ? "danger" : "info"}
@@ -170,7 +178,7 @@ export default class BuscaPorRelacionados extends Component {
                                                     {tipo}
                                                 </td>
                                                 <td>
-                                                    <a data-tip data-for='tooltipConsultar'>
+                                                    <a data-tip data-for={TOOLTIP_SEARCH_BY_DOCUMENT}>
                                                         <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(relacionado.documento, tipo)}>
                                                             <i className='fa fa-search'/>
                                                         </Button>
@@ -199,7 +207,6 @@ export default class BuscaPorRelacionados extends Component {
                                             <tr>
                                                 {relacionado.telefones && this.state.buttonsClicked.phone[index]?
                                                     <td colSpan={6} style={{padding:0}}>
-                                                        {console.log("TELEFONES", relacionado.telefones)}
                                                         <Telefone fixos={relacionado.telefones.fixos} moveis={relacionado.telefones.moveis} />
                                                     </td>
                                                 : ""}
@@ -210,8 +217,16 @@ export default class BuscaPorRelacionados extends Component {
                         </Table>
                     </Col>
 
-                    <Tooltip id="tooltipConsultar">
-                        <span>Consultar</span>
+                    <Tooltip id={TOOLTIP_SEARCH_BY_DOCUMENT}>
+                        <span>{TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE}</span>
+                    </Tooltip>
+
+                    <Tooltip id={TOOLTIP_SEARCH_BY_PHONE}>
+                        <span>{TOOLTIP_SEARCH_BY_PHONE_MESSAGE}</span>
+                    </Tooltip>
+
+                    <Tooltip id={TOOLTIP_SEARCH_BY_ADDRESS}>
+                        <span>{TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE}</span>
                     </Tooltip>
 
                     <Modal
@@ -220,7 +235,7 @@ export default class BuscaPorRelacionados extends Component {
                         title="Busca em lote"
                         size="small"
                     >
-                        {this.confirmMessage(this.props.relacionados)}
+                        {this.confirmMessage(relacionados)}
                     </Modal>
                 </Panel>
             :   <Panel title={title}>

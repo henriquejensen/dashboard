@@ -3,6 +3,7 @@ export const COMPANY_NAME_LONG = "ASSERTIVA SOLUÇÕES EM MARKETING E CRÉDITO";
 export const COMPANY_SITE_CONTACT = "http://assertivasolucoes.com.br/contato";
 export const COMPANY_EMAIL = "atendimento@assertivasolucoes.com.br";
 
+export const COMPANY_LOGO_INVERSE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/assertiva-top-index-inverse-2.png";
 export const COMPANY_PRODUCT_LOCALIZE = "Localize";
 export const COMPANY_PRODUCT_SMS = "SMS";
 export const COMPANY_PRODUCT_BASECERTA = "Base Certa";

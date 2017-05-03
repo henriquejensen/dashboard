@@ -6,13 +6,22 @@ import { ERR_CONNECTION_REFUSED, REQUEST_ERROR } from "../../constants/utils";
 import { LocalizeDescription, CreditoDescription, FocoFiscalDescription } from "../ProductDescription";
 import UltimasConsultas from "../UltimasConsultas";
 
+import {
+    TOOLTIP_SEARCH_BY_ADDRESS,
+    TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE,
+    TOOLTIP_SEARCH_BY_DOCUMENT,
+    TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE,
+    TOOLTIP_SEARCH_BY_PHONE,
+    TOOLTIP_SEARCH_BY_PHONE_MESSAGE
+} from "../../constants/utils";
+
 export default class Form extends Component {
     render() {
 		return (
             <div className="container-form noPrint">
                 <Row>
                     <Col md={12} sm={12} className="text-center">
-                        {this.props.showLogo ? <img src={this.props.logo} className="logo-produto" />: <img className="icon-produto" src={this.props.icon} />}
+                        <img src={this.props.logo} className="logo-produto" />
                     </Col>
                     
                     <Col>
@@ -36,7 +45,7 @@ export default class Form extends Component {
                             {this.props.children}
 
                             <Col md={2} className="text-center" style={this.props.buscaAvancada == undefined ? {marginBottom:"10px"} : {}}>
-                                <a data-tip data-for='tooltipConsultar'>
+                                <a data-tip data-for={TOOLTIP_SEARCH_BY_DOCUMENT}>
                                     <button className="btn btn-info my-btn-form input-search" type="submit">
                                         <i className="glyphicon glyphicon-search"></i>
                                     </button>

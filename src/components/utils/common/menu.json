@@ -132,17 +132,17 @@
                 }
             ],
             "user": [
-                {      
-                    "label": "Contato",
-                    "link": "/contato"
+                {
+                    "label": "Cadastro Usuários",
+                    "link": "/cadastro"
                 },
                 {
                     "label": "Atualizar dados",
                     "link": "/editar"
                 },
-                {
-                    "label": "Sair",
-                    "link": "/login"
+                {      
+                    "label": "Contato",
+                    "link": "/contato"
                 }
             ]
         }

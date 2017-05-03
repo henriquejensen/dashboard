@@ -64,7 +64,7 @@ export default class Emails extends Component {
                             <tr key={i}>
                                 <td>{email.email}</td>
                                 <td>
-                                    <a data-tip data-for="tooltipCopy">
+                                    <a data-tip data-for="tooltipCopyEmail">
                                         <div className="col-md-1">
                                             <CopyToClipboard text={email.email} onCopy={() => this._addNotification("Email copiado com sucesso")}>
                                                 <i className="noPrint fa fa-clipboard icon-tel" />
@@ -128,8 +128,8 @@ export default class Emails extends Component {
 
                 </Modal>
 
-                <Tooltip id="tooltipCopy">
-                    <span>Copiar número</span>
+                <Tooltip id="tooltipCopyEmail">
+                    <span>Copiar email</span>
                 </Tooltip>
 
                 <Tooltip id="usersRelated">

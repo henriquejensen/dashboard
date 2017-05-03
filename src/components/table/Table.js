@@ -3,16 +3,19 @@ import { Table } from "react-bootstrap";
 
 export default class MyTable extends Component {
     render() {
+        let fields = this.props.fields ? this.props.fields.length > 2 ? this.props.fields.concat("#") : this.props.fields : undefined;
+        let title = this.props.title;
+        let elements = this.props.elements;
         return (
             <div>
-                {this.props.title ?
-                    <h4>{this.props.title}</h4>
+                {title ?
+                    <h4>{title}</h4>
                 : ""}
-                <Table striped hover responsive>
+                <Table className="my-table" striped hover responsive>
                     <thead>
                         <tr>
-                            {this.props.fields ? 
-                                this.props.fields.map((field, index) => {
+                            {fields ? 
+                                fields.map((field, index) => {
                                     return (
                                         <th key={index}>{field}</th>
                                     )
@@ -21,12 +24,12 @@ export default class MyTable extends Component {
                         </tr>
                     </thead>
 
-                    {this.props.elements ?
+                    {elements ?
                         <tbody>
-                            {this.props.elements.map((elements, index) => {
+                            {elements.map((element, index) => {
                                 return (
                                     <tr key={index}>
-                                        {Object.values(elements).map((el, j)=>{
+                                        {Object.values(element).map((el, j)=>{
                                             return (
                                                 <td key={j}>{el}</td>
                                             )

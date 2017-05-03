@@ -6,6 +6,15 @@ import EnderecoLayout from "../endereco/layoutEndereco";
 import Panel from "../panel/Panel";
 import Table from "../table/Table";
 
+import {
+    TOOLTIP_SEARCH_BY_ADDRESS,
+    TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE,
+    TOOLTIP_SEARCH_BY_DOCUMENT,
+    TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE,
+    TOOLTIP_SEARCH_BY_PHONE,
+    TOOLTIP_SEARCH_BY_PHONE_MESSAGE
+} from "../../constants/utils";
+
 export default class Relacionados extends Component {
     state = {
         showMessageSeeMore: true,
@@ -52,7 +61,7 @@ export default class Relacionados extends Component {
 
     renderButtons = (items, relacao, pos, documento, icon) => {
         return (
-            <a data-tip data-for='tooltipConsultar'>
+            <a data-tip data-for={icon == "phone" ? TOOLTIP_SEARCH_BY_PHONE : TOOLTIP_SEARCH_BY_ADDRESS}>
                 <Button
                     bsSize="small"
                     bsStyle={this.state.buttonsClicked[icon][documento] ? "danger" : "info"}
@@ -127,7 +136,7 @@ export default class Relacionados extends Component {
                             </a>
                         </Col>
                     : ""}
-                    
+
                 </Col>
             </Panel>
         )

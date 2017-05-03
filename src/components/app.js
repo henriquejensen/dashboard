@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import Tooltip from 'react-tooltip'
 import { browserHistory } from "react-router";
-import Breadcrumbs from "react-breadcrumbs";
 import { Col } from "react-bootstrap";
 
 import Header from "./header";
@@ -11,6 +11,14 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import { LOG_OUT } from "../constants/utils";
+import {
+    TOOLTIP_SEARCH_BY_ADDRESS,
+    TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE,
+    TOOLTIP_SEARCH_BY_DOCUMENT,
+    TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE,
+    TOOLTIP_SEARCH_BY_PHONE,
+    TOOLTIP_SEARCH_BY_PHONE_MESSAGE
+} from "../constants/utils";
 
 class App extends Component {
   state = {
@@ -43,12 +51,24 @@ class App extends Component {
             </div>
 
             <div className="container-fluid main" id={active ? "menu-opened" : {}}>
-                <Breadcrumbs
-                  routes={this.props.routes}
-                  params={this.props.params}
-                />
+              <div style={{marginTop:52}}>
                 {this.props.children}
+              </div>  
             </div>
+
+
+            <Tooltip id={TOOLTIP_SEARCH_BY_DOCUMENT}>
+                <span>{TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE}</span>
+            </Tooltip>
+
+            <Tooltip id={TOOLTIP_SEARCH_BY_PHONE}>
+                <span>{TOOLTIP_SEARCH_BY_PHONE_MESSAGE}</span>
+            </Tooltip>
+
+            <Tooltip id={TOOLTIP_SEARCH_BY_ADDRESS}>
+                <span>{TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE}</span>
+            </Tooltip>
+
         </div>
       )
   }

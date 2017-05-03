@@ -54,7 +54,6 @@ export default class BarraBuscaRapida extends Component {
                     <FormGroup bsSize="small">
                         <InputGroup>
                             <FormControl
-                                style={{minWidth:"290px"}}
                                 placeholder="Digite o CPF ou CNPJ"
                                 type="text"
                                 name="documento"

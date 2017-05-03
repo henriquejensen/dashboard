@@ -28,14 +28,15 @@ export default class CreditoView extends Component {
                 {this.props.tipo == "CPF" ?
                     <Dados dados={this.props.data.cadastro} />
                 : <DadosPj dados={this.props.data.cadastro} />}
-                <Telefones telefones={this.props.data.telefones} />
-                <Emails emails={this.props.data.emails} />
-                <Enderecos enderecos={this.props.data.enderecos} />
                 <QuadroResumo ocorrencias={this.props.data.quadroResumo} index={this.props.index} />
-                {/*<RendaPresumida rendas={this.props.data.rendasPresumidas} limiteSugerido={this.props.data.limiteSugerido} index={this.props.index}/>*/}
-                {this.props.tipo == "CNPJ" ?
-                    <CadastroCnpjCnaesSecundarias cnpjCnaesSecundarias={this.props.data.cadastroCnpjCnaesSecundarias} index={this.props.index} />
-                : ""}
+                <RegistroDebito registros={this.props.data.registrosDebitos} index={this.props.index} />
+                <Protestos protestos={this.props.data.protestosDetalhados} index={this.props.index}/>
+                <ChequesSemFundo cheques={this.props.data.cheques} index={this.props.index}/>
+                <Acoes acoes={this.props.data.acoes} index={this.props.index} />
+                <Consultas
+                    consultas={this.props.data.consultasAnteriores}
+                    index={this.props.index} 
+                    searchPerson={this.props.searchPerson} />
                 <Sociedades
                     participacoes={this.props.data.participacoesEmpresas}
                     index={this.props.index}
@@ -49,16 +50,14 @@ export default class CreditoView extends Component {
                         <Administracao administradores={this.props.data.quadroAdministrativo} index={this.props.index} />
                     </span>
                 : ""}
-                <Score scores={this.props.data.scores} index={this.props.index} />
-                <Protestos protestos={this.props.data.protestosDetalhados} index={this.props.index}/>
-                <ChequesSemFundo cheques={this.props.data.cheques} index={this.props.index}/>
-                <RegistroDebito registros={this.props.data.registrosDebitos} index={this.props.index} />
-                <Acoes acoes={this.props.data.acoes} index={this.props.index} />
+                {/*<Score scores={this.props.data.scores} index={this.props.index} />*/}
                 <OutrasGrafias grafias={this.props.data.outrasGrafias} index={this.props.index} />
-                <Consultas
-                    consultas={this.props.data.consultasAnteriores}
-                    index={this.props.index} 
-                    searchPerson={this.props.searchPerson} />
+                <Telefones telefones={this.props.data.telefones} />
+                <Emails emails={this.props.data.emails} />
+                <Enderecos enderecos={this.props.data.enderecos} />
+                {this.props.tipo == "CNPJ" ?
+                    <CadastroCnpjCnaesSecundarias cnpjCnaesSecundarias={this.props.data.cadastroCnpjCnaesSecundarias} index={this.props.index} />
+                : ""}
                 <Protocolo info={this.props.data.cabecalho} />
             </PanelGroup>
         )

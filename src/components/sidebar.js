@@ -53,7 +53,7 @@ class Sidebar extends Component {
                       <Link
                         to={opt.link}
                         onClick={() => this.activeMenuDropdown(opt.id)}
-                        activeStyle={{backgroundColor: "#E7E7E7"}}>
+                        activeStyle={{backgroundColor: opt.color}}>
                         {this.props.activedMenu ?
                           <img src={opt.image} className="sub-icon" alt={opt.alt}/>
                         : ""}
@@ -121,7 +121,7 @@ class Sidebar extends Component {
       return (      
           <aside>            
             {this.props.activedMenu ? (
-                  <CardInfoMenuUser color={this.props.color} user={this.props.user}/>
+                  <CardInfoMenuUser color="#673ab7" user={this.props.user}/>
               ) : ""}
 
               {this.renderMenu()}

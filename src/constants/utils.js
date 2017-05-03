@@ -31,6 +31,13 @@ export const MESSAGE_SUCCESS_SMS = "Mensagem enviada com sucesso!";
 export const NENHUM_REGISTRO = "Nenhum registro encontrado";
 export const ADDRESS_NOT_FOUND = "Endereço não encontrado";
 
+export const TOOLTIP_SEARCH_BY_ADDRESS = 'TOOLTIP_SEARCH_BY_ADDRESS';
+export const TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE = 'Consultar por endereço';
+export const TOOLTIP_SEARCH_BY_PHONE = 'TOOLTIP_SEARCH_BY_PHONE';
+export const TOOLTIP_SEARCH_BY_PHONE_MESSAGE = 'Consultar por telefone';
+export const TOOLTIP_SEARCH_BY_DOCUMENT = 'TOOLTIP_SEARCH_BY_DOCUMENT';
+export const TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE = 'Consultar por documento';
+
 export const ERROR_401_UNAUTHORIZED = "ERROR_401_UNAUTHORIZED";
 export const ERROR_401_UNAUTHORIZED_MESSAGE = "Por favor, realize a sua identificação para acessar o sistema";
 

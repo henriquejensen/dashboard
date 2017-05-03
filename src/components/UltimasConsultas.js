@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Tooltip from 'react-tooltip'
 import { Col, Button } from "react-bootstrap";
 
 import Panel from "./panel/Panel";
@@ -9,6 +8,15 @@ import Telefone from "./telefone/layoutTelefone";
 import Endereco from "./endereco/layoutEndereco";
 
 import Modal from "./Modal";
+
+import {
+    TOOLTIP_SEARCH_BY_ADDRESS,
+    TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE,
+    TOOLTIP_SEARCH_BY_DOCUMENT,
+    TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE,
+    TOOLTIP_SEARCH_BY_PHONE,
+    TOOLTIP_SEARCH_BY_PHONE_MESSAGE
+} from "../constants/utils";
 
 const fields = ["Tipo", "Entrada", "Data/Hora", ""];
 
@@ -84,7 +92,7 @@ export default class UltimasConsultas extends Component {
 
     renderButtons = (items, tipo, index, documento, icon) => {
         return (
-            <a data-tip data-for={'tooltip'}>
+            <a data-tip data-for={icon == "phone" ? TOOLTIP_SEARCH_BY_PHONE : TOOLTIP_SEARCH_BY_ADDRESS}>
                 <Button
                     bsSize="small"
                     bsStyle={this.state.buttonsClicked[icon][index] ? "danger" : "info"}
@@ -135,13 +143,13 @@ export default class UltimasConsultas extends Component {
 
                 <Table fields={fields} >
                     {consultas ?
-                            consultas.map((consulta,index) => {
+                            consultas.map((consulta) => {
                                 return (
-                                    <tbody key={index}>
+                                    <tbody key={consulta.entrada}>
                                         <tr>
                                             <td>{this.props.type}</td>
                                             <td>
-                                                <a data-tip data-for='tooltipConsultar'>
+                                                <a data-tip data-for={TOOLTIP_SEARCH_BY_DOCUMENT}>
                                                     <Button
                                                         bsStyle="info"
                                                         className="mapa-button"
@@ -186,16 +194,6 @@ export default class UltimasConsultas extends Component {
                         
                     : ""}
                 </Table>
-
-                <Tooltip id="tooltipConsultar">
-                    <span>Consultar</span>
-                </Tooltip>
-
-                <Tooltip id="tooltip">
-                    <span>Consultar endereços</span>
-                </Tooltip>
-
-
 
                 <Modal
                     IsModalOpen={this.state.IsModalOpen}

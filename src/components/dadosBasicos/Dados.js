@@ -75,7 +75,7 @@ export default class Dados extends Component{
 
                 <div className="col-md-6">
                   <strong>Titulo de eleitor: </strong>
-                  {this.props.dados.tituloEleitor ? this.props.dados.tituloEleitor : NENHUM_REGISTRO}
+                  {this.props.dados.tituloEleitor ? this.props.dados.tituloEleitoral : NENHUM_REGISTRO}
                 </div>
 
                 <div className="col-md-6">

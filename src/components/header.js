@@ -29,6 +29,8 @@ import {
 import Modal from "./Modal";
 import BarraBuscaRapida from "./utils/BarraBuscaRapida";
 
+import { COMPANY_LOGO_INVERSE, COMPANY_NAME_SHORT } from "../constants/constantsCompany";
+
 class MenuSuperior extends Component {
 	state = {
 		IsModalOpen: false,
@@ -59,34 +61,27 @@ class MenuSuperior extends Component {
     }
 
 	render() {
+		let onMenuClicked = this.props.onMenuClicked;
 		return (
 		<div>
-			<Navbar style={{backgroundColor: this.props.color, borderRadius: 0}} collapseOnSelect>
-				<i className="fa fa-bars menu-hamburguer" onClick={this.props.onMenuClicked} />
+			<Navbar style={{backgroundColor: "#673ab7", borderRadius: 0}} collapseOnSelect>
+				<i className="fa fa-bars menu-hamburguer" onClick={onMenuClicked} />
 				<Navbar.Header style={{marginLeft:"45px"}}>
 					<Navbar.Brand>
-						<img src="../../public/assertiva/assertiva-top-index-inverse-2.png" alt="Logo da Assertiva" className="menu-image-logo" />
+						<img src={COMPANY_LOGO_INVERSE} alt={"Logo da "+COMPANY_NAME_SHORT} className="menu-image-logo" />
 					</Navbar.Brand>
 					<Navbar.Toggle />
 				</Navbar.Header>
 
 				<Navbar.Collapse>
-					<Navbar.Form pullLeft>
-						<BarraBuscaRapida />
-					</Navbar.Form>
-
 					<Nav pullRight>
-						<NavItem onClick={() => this.changeRoute(menu.header.cadastro.link)}>{menu.header.cadastro.label}</NavItem>
-
 						<NavDropdown title={this.props.user.usuarioNome ? this.props.user.usuarioNome : "DESCONECTADO"} id="basic-nav-dropdown">
 							{menu.header.user.map((opt, index) => {
-								if(opt.label != "Sair") {
-									return (
-										<MenuItem key={index} onClick={() => this.changeRoute(opt.link)}>
-											{opt.label}
-										</MenuItem>
-									)
-								}
+								return (
+									<MenuItem key={index} onClick={() => this.changeRoute(opt.link)}>
+										{opt.label}
+									</MenuItem>
+								)
 							})}
 							<MenuItem divider />
 							<MenuItem onClick={this.props.logOut}>
@@ -94,6 +89,9 @@ class MenuSuperior extends Component {
 							</MenuItem>
 						</NavDropdown>
 					</Nav>
+					<Navbar.Form pullRight>
+						<BarraBuscaRapida />
+					</Navbar.Form>
 				</Navbar.Collapse>
 			</Navbar>
 

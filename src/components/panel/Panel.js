@@ -16,12 +16,12 @@ export default class Panel extends Component {
                     <div className="panel panel-default">
                         {this.props.title ? 
                             <div className="panel-heading" style={{position: "relative"}}>
-                                {this.props.qtdTotal ? 
+                                {/*this.props.qtdTotal ? 
                                     this.props.qtdTotal.map((total,i) => {
                                         return <span className="qtd-panel" key={i} style={{right: 39 - i*3 + 10 + "%"}}>
                                                 {total.qtd + "  "} <i className={"glyphicon "+ total.icon}/>
                                             </span>
-                                    }) : ""}
+                                    }) : ""*/}
                                 
                                 <a data-tip data-for="arrowPanel">
                                     <i className={this.state.show ? "noPrint glyphicon glyphicon-triangle-top arrow-panel" : "noPrint glyphicon glyphicon-triangle-bottom arrow-panel"} onClick={() => this.setState({show:!this.state.show})} />

@@ -81,7 +81,8 @@ input {
 }
 
 .logo-produto {
-    padding: 20px
+    padding: 20px 0;
+    max-width: 100%;
 }
 
 .icon-produto {
@@ -352,6 +353,18 @@ input {
 
 .mapa-button-close {
     background-color: red;
+}
+
+table {
+    border-collapse: separate
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    border-top: 0px solid #ddd;
+}
+
+.table-hover>tbody>tr:hover {
+    background-color: #FFF0E1
 }
 
 .my-hr {

@@ -18,7 +18,8 @@ export default class RendaEmpregador extends Component {
         super();
 
         this.state = {
-            IsModalOpen: false
+            IsModalOpen: false,
+            showMoreInfo: false
         }
 
         this._notificationSystem = null;
@@ -54,17 +55,18 @@ export default class RendaEmpregador extends Component {
         let handleSearchPerson = this.props.searchPerson;
         let isCpfOrCnpj = "CNPJ";
         let IsModalOpen = this.state.IsModalOpen;
-        let fields = ["Empregador", "Setor", "Data Referência", "CBO", "Faixa de Renda"];
+        let fields = ["Empregador", "Setor", "Data Referência"];
+        let showMoreInfo = this.state.showMoreInfo;
         return (
             <span>
                 {rendas.length > 0 ?
                     <Panel title={title} qtdTotal={[{icon:"fa fa-money", qtd:rendas.length}]}>
                         <Col md={12} sm={12}>            
                             <Table fields={fields}>
-                                <tbody>
-                                    {rendas.map((renda, index) => {
-                                        return (
-                                            <tr key={index}>
+                                {rendas.map((renda, index) => {
+                                    return (
+                                        <tbody key={index}>
+                                            <tr>
                                                 <td>
                                                     <a data-tip data-for='tooltipConsultar'>
                                                         <Button bsStyle="info" className="mapa-button" onClick={() => handleSearchPerson(renda.documentoEmpregador, isCpfOrCnpj)}>
@@ -75,12 +77,22 @@ export default class RendaEmpregador extends Component {
                                                 </td>
                                                 <td>{renda.setorEmpregador}</td>
                                                 <td>{formatDate(renda.rendaDataRef)}</td>
-                                                <td>{renda.cboDescricao}</td>
-                                                <td>{renda.faixaRenda}</td>
+                                                <td>
+                                                    <Button bsStyle="info">
+                                                        Ver detalhes
+                                                    </Button>
+                                                </td>
                                             </tr>
-                                        )
-                                    })}
-                                </tbody>
+                                            <tr>
+                                                {showMoreInfo ? 
+                                                    <td colSpan={3}>
+                                                    , "CBO", "Faixa de Renda"
+                                                    </td>
+                                                : ""}
+                                            </tr>
+                                        </tbody>
+                                    )
+                                })}
                             </Table>
                             
                             <a className="moreInfo" onClick={() => this.setState({IsModalOpen:!IsModalOpen})}>
