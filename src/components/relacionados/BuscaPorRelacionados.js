@@ -206,7 +206,7 @@ export default class BuscaPorRelacionados extends Component {
                                             
                                             <tr>
                                                 {relacionado.telefones && this.state.buttonsClicked.phone[index]?
-                                                    <td colSpan={6} style={{padding:0}}>
+                                                    <td colSpan={7} style={{padding:0}}>
                                                         <Telefone fixos={relacionado.telefones.fixos} moveis={relacionado.telefones.moveis} />
                                                     </td>
                                                 : ""}

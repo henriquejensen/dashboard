@@ -3,7 +3,7 @@ import { Table } from "react-bootstrap";
 
 export default class MyTable extends Component {
     render() {
-        let fields = this.props.fields ? this.props.fields.length > 2 ? this.props.fields.concat("#") : this.props.fields : undefined;
+        let fields = this.props.fields;
         let title = this.props.title;
         let elements = this.props.elements;
         return (

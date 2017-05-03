@@ -44,7 +44,7 @@ export default class Relacionados extends Component {
         })
     }
 
-    search = (docPessoa, docPesquisa, icon) => {
+    search = (docPessoa, docPesquisa, icon, isCpfOrCnpj) => {
         let buttonsClickedNew = Object.assign({},this.state.buttonsClicked);
         buttonsClickedNew[icon][docPesquisa] = buttonsClickedNew[icon][docPesquisa] ? !buttonsClickedNew[icon][docPesquisa] : true;
 
@@ -53,20 +53,20 @@ export default class Relacionados extends Component {
         })
 
         if(icon == "phone")
-            this.props.searchTelefonesPessoaRelacionada(docPessoa, docPesquisa);
+            this.props.searchTelefonesPessoaRelacionada(docPessoa, docPesquisa, isCpfOrCnpj);
         else
-            this.props.searchEnderecosPessoaRelacionada(docPessoa, docPesquisa);
+            this.props.searchEnderecosPessoaRelacionada(docPessoa, docPesquisa, isCpfOrCnpj);
         
     }
 
-    renderButtons = (items, relacao, pos, documento, icon) => {
+    renderButtons = (items, relacao, pos, documento, icon, isCpfOrCnpj) => {
         return (
             <a data-tip data-for={icon == "phone" ? TOOLTIP_SEARCH_BY_PHONE : TOOLTIP_SEARCH_BY_ADDRESS}>
                 <Button
                     bsSize="small"
                     bsStyle={this.state.buttonsClicked[icon][documento] ? "danger" : "info"}
                     className="my-button"
-                    onClick={items ? () => this.showMoreItems(documento, icon) : () => this.search(this.props.documento, documento, icon)} >
+                    onClick={items ? () => this.showMoreItems(documento, icon) : () => this.search(this.props.label, documento, icon, isCpfOrCnpj)} >
                     {items ?
                         this.state.buttonsClicked[icon][documento] ?
                             <i className='fa fa-times'/>
@@ -87,6 +87,7 @@ export default class Relacionados extends Component {
                 <Col md={12}>
                     <Table fields= {["Relação", "Nome", ""]} >
                         {this.props.relacionados.map((pessoa, index) => {
+                            let isCpfOrCnpj = pessoa.documento ? pessoa.documento.length > 11 ? "CNPJ" : "CPF" : "";
                             return (
                                 <tbody key={index}>
                                     <tr>
@@ -96,18 +97,20 @@ export default class Relacionados extends Component {
                                         <td>                                            
                                             {pessoa.documento ? 
                                                 <a data-tip data-for='tooltipConsultar'>
-                                                    <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(pessoa.documento, pessoa.documento.length > 11 ? "CNPJ" : "CPF")}>
+                                                    <Button bsStyle="info" className="mapa-button" onClick={() => this.props.searchPerson(pessoa.documento, isCpfOrCnpj)}>
                                                         <i className='fa fa-search'/>
                                                     </Button>
                                                 </a>
                                             : ""}
                                             {pessoa.nome}
                                         </td>
-                                        <td>
-                                            {this.renderButtons(pessoa.telefones, pessoa.relacao, index, pessoa.documento, "phone")}
-                                            {' '}
-                                            {this.renderButtons(pessoa.enderecos, pessoa.relacao, index, pessoa.documento, "home")}
-                                        </td>
+                                        {pessoa.documento ?
+                                            <td>
+                                                {this.renderButtons(pessoa.telefones, pessoa.relacao, index, pessoa.documento, "phone", isCpfOrCnpj)}
+                                                {' '}
+                                                {this.renderButtons(pessoa.enderecos, pessoa.relacao, index, pessoa.documento, "home", isCpfOrCnpj)}
+                                            </td>
+                                        : ""}
                                     </tr>
                                     
                                     <tr>

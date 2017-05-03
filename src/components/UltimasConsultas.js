@@ -143,9 +143,9 @@ export default class UltimasConsultas extends Component {
 
                 <Table fields={fields} >
                     {consultas ?
-                            consultas.map((consulta) => {
+                            consultas.map((consulta, index) => {
                                 return (
-                                    <tbody key={consulta.entrada}>
+                                    <tbody key={index}>
                                         <tr>
                                             <td>{this.props.type}</td>
                                             <td>

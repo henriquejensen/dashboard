@@ -228,9 +228,9 @@ export default function(state = initialState, action) {
 				}
 			}
 			case SEARCH_BY_DOCUMENT: {
-				let documento = patternCPF(action.payload.documento);
+				let documento = patternCPF(action.payload.parameters.documento);
 				let responseServer = action.payload.response;
-				let tipo = action.payload.tipo;
+				let tipo = action.payload.parameters.tipo;
 				let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_LOCALIZE;
 				let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
 				let verifyIfDocumentExists = isDocumentNotInArray(state.response, label);
@@ -262,19 +262,20 @@ export default function(state = initialState, action) {
 					type: state.type
 				}
 			}
-			case SEARCH_BY_EMAIL:
-				let labelEmail = "Email: "+action.payload.cabecalho.entrada;
+			case SEARCH_BY_EMAIL: {
+				let responseServer = action.payload.response;
+				let labelEmail = "Email: "+responseServer.cabecalho.entrada;
 				let verifyIfEmailExists = searchDocument(newState.response, labelEmail);
 				
 				if(verifyIfEmailExists == -1) {
 					response.data = {
-						response: action.payload.localizePorEmail,
-						cabecalho: action.payload.cabecalho
+						response: responseServer.localizePorEmail,
+						cabecalho: responseServer.cabecalho
 					}
 					response.label = labelEmail;
-					response.tipo = action.payload.tipo;
+					response.tipo = state.response.tipo;
 					response.icon = ICON_LOCALIZE;
-					response.produto = action.payload.tipo;
+					response.produto = state.response.produto;
 				}
 
 				return {
@@ -285,23 +286,25 @@ export default function(state = initialState, action) {
 					tabActive: verifyIfEmailExists == -1 ? labelEmail : newState.tabActive,
 					lastQueries: newState.lastQueries,
 					type: newState.type
-				};
+				}
+			}
 
-			case SEARCH_BY_TELEFONE:
-				let telefones = action.payload.localizePorTelefone;
+			case SEARCH_BY_TELEFONE: {
+				let responseServer = action.payload.response;
+				let telefones = responseServer.localizePorTelefone;
 				let labelTelefone, verifyIfTelefoneExists;
 				if(telefones) {
-					labelTelefone = "Tel: "+action.payload.cabecalho.entrada;
+					labelTelefone = "Tel: "+responseServer.cabecalho.entrada;
 					verifyIfTelefoneExists = searchDocument(newState.response, labelTelefone);
 					if(verifyIfTelefoneExists == -1) {
 						response.data = {
 							response: telefones,
-							cabecalho: action.payload.cabecalho
+							cabecalho: responseServer.cabecalho
 						}
 						response.label = labelTelefone;
-						response.tipo = action.payload.tipo;
+						response.tipo = state.response.tipo;
 						response.icon = ICON_LOCALIZE;
-						response.produto = action.payload.tipo;
+						response.produto = state.response.produto;
 					}
 				}
 				return {
@@ -312,7 +315,8 @@ export default function(state = initialState, action) {
 					tabActive: telefones && verifyIfTelefoneExists == -1 ? labelTelefone : newState.tabActive,
 					lastQueries: newState.lastQueries,
 					type: newState.type
-				};
+				}
+			}
 
 			case SEARCH_BY_NOME_ENDERECO:
 				/*Construcao do nome da label na tab */
@@ -323,7 +327,7 @@ export default function(state = initialState, action) {
 						nameLabel.push(v)
 				});
 				nameLabel = nameLabel.toString();
-				let label = action.payload.tipo+": "+ nameLabel;
+				let label = action.payload.parameters.tipo+": "+ nameLabel;
 
 				let nomeOuEndereco = {};
 				let verifyIfNomeOrEnderecoExists = searchDocument(newState.response, label);
@@ -352,11 +356,11 @@ export default function(state = initialState, action) {
 
 			case SEARCH_BY_PESSOAS_RELACIONADOS: {
 				let responseServer = action.payload.response;
-				let label = action.payload.label;
+				let label = action.payload.parameters.label;
 				newState.response[searchDocument(newState.response,label)].pessoasRelacionadas = responseServer.localizePessoasRelacionadas;
 
 				return {
-					status: "pessoasRelacionadas"+action.payload,
+					status: "pessoasRelacionadas"+label,
 					message: "",
 					loading: false,
 					response: newState.response,
@@ -365,40 +369,52 @@ export default function(state = initialState, action) {
 					type: newState.type
 				}
 			}
-			case SEARCH_BY_TELEFONES_RELACIONADOS:
+			case SEARCH_BY_TELEFONES_RELACIONADOS: {
+				let responseServer = action.payload.response;
+				let telefones = responseServer.telefones ? responseServer.telefones : {};
+				let documento = action.payload.parameters.documento;
+				let documentoRelacionado = action.payload.parameters.documentoRelacionado;
+
 				//busca nas documentos pesquisados no localize o documento que sera inserido os telefones relacionados
-				let posPessoaTelefone = searchDocument(newState.response,action.payload.documento);
+				let posPessoaTelefone = searchDocument(newState.response,documento);
 				//busca a pessoa relacionado que foi clicada para mostrar os telefones
-				let posPessoaRelacionadaTelefones = searchPosPessoa(newState.response[posPessoaTelefone].pessoasRelacionadas, action.payload.documentoRelacionado);
+				let posPessoaRelacionadaTelefones = searchPosPessoa(newState.response[posPessoaTelefone].pessoasRelacionadas, documentoRelacionado);
 
 				//adiciona na pessoa relacionada os telefones encontrados
-				newState.response[posPessoaTelefone].pessoasRelacionadas[posPessoaRelacionadaTelefones].telefones = action.payload.response;
+				newState.response[posPessoaTelefone].pessoasRelacionadas[posPessoaRelacionadaTelefones].telefones = telefones;
 				
 				return {
-					status: "telefones",
-					message: "",
+					status: Object.keys(telefones).length > 0 ? "telefones" : REQUEST_ERROR,
+					message: Object.keys(telefones).length > 0 ? "" : NENHUM_REGISTRO,
 					loading: false,
 					response: newState.response,
 					tabActive: newState.tabActive,
 					lastQueries: newState.lastQueries,
 					type: newState.type
-				};
+				}
+			}
 
-			case SEARCH_BY_ENDERECOS_RELACIONADOS:
-				let posPessoaEndereco = searchDocument(newState.response,action.payload.documento);
-				let posPessoaRelacionadaEndereco = searchPosPessoa(newState.response[posPessoaEndereco].pessoasRelacionadas, action.payload.documentoRelacionado);
+			case SEARCH_BY_ENDERECOS_RELACIONADOS: {
+				let responseServer = action.payload.response;
+				let enderecos = responseServer.enderecos ? responseServer.enderecos : [];
+				let documento = action.payload.parameters.documento;
+				let documentoRelacionado = action.payload.parameters.documentoRelacionado;
 
-				newState.response[posPessoaEndereco].pessoasRelacionadas[posPessoaRelacionadaEndereco].enderecos = action.payload.response;
+				let posPessoaEndereco = searchDocument(newState.response,documento);
+				let posPessoaRelacionadaEndereco = searchPosPessoa(newState.response[posPessoaEndereco].pessoasRelacionadas, documentoRelacionado);
+
+				newState.response[posPessoaEndereco].pessoasRelacionadas[posPessoaRelacionadaEndereco].enderecos = enderecos;
 
 				return {
-					status: "enderecos",
-					message: "",
+					status: enderecos.length > 0 ? "enderecos" : REQUEST_ERROR,
+					message: enderecos.length > 0 ? "" : NENHUM_REGISTRO,
 					loading: false,
 					response: newState.response,
 					tabActive: newState.tabActive,
 					lastQueries: newState.lastQueries,
 					type: newState.type
-				};
+				}
+			}
 
 			case REQUEST_ERROR:
 				return {
@@ -411,34 +427,47 @@ export default function(state = initialState, action) {
 					type: newState.type
 				};
 
-			case SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS:
-				newState.lastQueries[action.payload.consulta][action.payload.posElemento][action.payload.tipo] = action.payload.response ? action.payload.response[action.payload.tipo] : [];
+			case SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS: {
+				let consulta = action.payload.parameters.consulta;
+				let tipo = action.payload.parameters.tipo;
+				let posElemento = action.payload.parameters.posElemento;
+				let responseServer = action.payload.response;
+				responseServer = responseServer ? responseServer[tipo] ? responseServer[tipo] : [] : [];
+
+				newState.lastQueries[consulta][posElemento][tipo] = responseServer;
 
 				return {
 					loading: false,
-					status: "lastQueries"+action.payload.tipo+action.payload.posElemento+action.payload.consulta,
-					message: "",
+					status: responseServer ? "lastQueries"+tipo+posElemento+consulta : REQUEST_ERROR,
+					message: responseServer ? "" : NENHUM_REGISTRO,
 					response: state.response,
 					tabActive: state.tabActive,
 					lastQueries: newState.lastQueries,
 					type: state.type
 				}
+			}
 
-			case SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA:
+			case SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA: {
+				let indexLabel = action.payload.parameters.indexLabel;
+				let indexArrayElements = action.payload.parameters.indexArrayElements;
+				let isEnderecoOuTelefone = action.payload.parameters.isEnderecoOuTelefone;
+				let responseServer = action.payload.response;
+				responseServer = responseServer ? responseServer[isEnderecoOuTelefone] ? responseServer[isEnderecoOuTelefone] : [] : [];
 				/**indexLabel -> identifica a aba que solicitou a consulta,
 				 * indexArrayElements -> elemento do array dos resultados que solicitou a consulota
 				 */
-				newState.response[action.payload.indexLabel].data.response[action.payload.indexArrayElements][action.payload.isEnderecoOuTelefone] = action.payload.response ? action.payload.response[action.payload.isEnderecoOuTelefone] : [];
+				state.response[indexLabel].data.response[indexArrayElements][isEnderecoOuTelefone] = responseServer;
 
 				return {
 					loading: false,
-					status: "enderecosTelefones",
-					message: "",
+					status: responseServer.length > 0 ? "OK" : REQUEST_ERROR,
+					message: responseServer.length > 0 ? "" : NENHUM_REGISTRO,
 					response: state.response,
 					tabActive: state.tabActive,
 					lastQueries: state.lastQueries,
 					type: state.type
 				}
+			}
 
 		}
 

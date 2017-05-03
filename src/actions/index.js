@@ -45,6 +45,8 @@ import {
 		ERROR_401_UNAUTHORIZED_MESSAGE
 } from "../constants/utils";
 
+import { apiContentType, api } from "../api/Api";
+
 export function getLastQueries(code, tipo) {
 	return (dispatch) => {
 		ajax.post(URL_SEARCH_ULTIMAS_CONSULTAS_LOCALIZE)
@@ -89,6 +91,13 @@ export function changeTab(index) {
 	}
 }
 
+export function closeModel() {
+	return {
+		type: CLOSE_LOCALIZE_MODEL,
+		payload: "closeModel"
+	}
+}
+
 export function closeTab(index) {
 	return {
 		type: CLOSE_TAB_LOCALIZE,
@@ -100,107 +109,6 @@ export function loadingLocalize() {
 	return {
 		type: LOADING_LOCALIZE,
 		payload: "loading"
-	}
-}
-
-export function searchLocalize(documento, tipo, search) {
-	documento = documento.toString();
-	documento = documento.replace(/[^0-9]/g,"");
-	let data = tipo == "CPF" ? {cpf:documento} : {cnpj:documento};
-	let url = tipo == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
-	search = search ? search : SEARCH_BY_DOCUMENT;
-
-	return (dispatch) => {
-		ajax.post(url)
-			.send(data)
-			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response) {
-					if(response.status == 200) {
-						if(response.body.cadastro) {
-							dispatch({
-								type: search,
-								payload: {
-									response: response.body,
-									tipo: tipo,
-									documento: documento
-								}
-							})
-						} else {
-							/**alguns retornos de json são entregues com as informacoes em null e status 200, por isso a verificacao */
-							dispatch({
-								type: REQUEST_ERROR,
-								payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
-							});
-						}
-					}
-					 else if(response.status == 401) {
-						dispatch({type: ERROR_401_UNAUTHORIZED, payload: ERROR_401_UNAUTHORIZED_MESSAGE})
-					} else {
-						dispatch({
-							type: REQUEST_ERROR,
-							payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
-						});
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
-	}
-
-}
-
-export function searchLocalizeByNomeEndereco(inputLocalize, tipo, labelToTab) {
-		return (dispatch) => {
-			ajax.post(URL_SEARCH_NOME_ENDERECO)
-				.send(inputLocalize)
-				.set({authorization: localStorage.getItem("token")})
-				.end(function(error, response) {
-					if (response) {
-						if(response.status == 200) {
-							if(response.body.localizePorNomeOuEndereco) {
-								dispatch({
-									type: SEARCH_BY_NOME_ENDERECO,
-									payload: {
-										response: response.body,
-										tipo: tipo,
-										label: labelToTab
-									}
-								})
-							} else {
-								/**alguns retornos de json são entregues com as informacoes em null e status 200, por isso a verificacao */
-								dispatch({
-									type: REQUEST_ERROR,
-									payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
-								});
-							}
-						}
-						else if(response.status == 401) {
-							dispatch({type: ERROR_401_UNAUTHORIZED, payload: ERROR_401_UNAUTHORIZED_MESSAGE})
-						} else {
-							dispatch({
-								type: REQUEST_ERROR,
-								payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
-							});
-						}
-					} else {
-						dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-					}
-				})
-		}
-}
-
-export function seeModel() {
-	return {
-		type: SEE_LOCALIZE_MODEL,
-		payload: "model"
-	}
-}
-
-export function closeModel() {
-	return {
-		type: CLOSE_LOCALIZE_MODEL,
-		payload: "closeModel"
 	}
 }
 
@@ -229,163 +137,53 @@ export function userDashboard(gadgets, charts) {
 	}
 }
 
-export function searchTelefonesPessoaRelacionada(doc, docRelacionado) {
+export function searchTelefonesPessoaRelacionada(doc, documento, isCpfOrCnpj) {
+	let url = isCpfOrCnpj == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
+	let data = isCpfOrCnpj == "CPF" ? {cpf:documento} : {cnpj:documento};
+	let search = SEARCH_BY_TELEFONES_RELACIONADOS;
+
 	return (dispatch) => {
-		ajax.post(URL_SEARCH_CPF)
-			.send({cpf: docRelacionado})
-			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response) {
-					if(response.status == 200) {
-						if(response.body.telefones) {
-							dispatch({
-								type: SEARCH_BY_TELEFONES_RELACIONADOS,
-								payload: {
-									response: response.body.telefones,
-									documento: doc,
-									documentoRelacionado: docRelacionado
-								}
-							})
-						} else {
-							/**alguns retornos de json são entregues com as informacoes em null e status 200, por isso a verificacao */
-							dispatch({
-								type: REQUEST_ERROR,
-								payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
-							});
-						}
-					}
-					else if(response.status == 401) {
-						dispatch({type: ERROR_401_UNAUTHORIZED, payload: ERROR_401_UNAUTHORIZED_MESSAGE})
-					} else {
-						dispatch({
-							type: REQUEST_ERROR,
-							payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
-						});
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
+		apiContentType(dispatch, url, data, search, {documento: doc, documentoRelacionado:documento})
 	}
 }
 
-export function searchEnderecosPessoaRelacionada(doc, docRelacionado) {
+export function searchEnderecosPessoaRelacionada(doc, documento, isCpfOrCnpj) {
+	let url = isCpfOrCnpj == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
+	let data = isCpfOrCnpj == "CPF" ? {cpf:documento} : {cnpj:documento};
+	let search = SEARCH_BY_ENDERECOS_RELACIONADOS;
+
 	return (dispatch) => {
-		ajax.post(URL_SEARCH_CPF)
-			.send({cpf: docRelacionado})
-			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response) {
-					if(response.status == 200) {
-						if(response.body.enderecos) {
-							dispatch({
-								type: SEARCH_BY_ENDERECOS_RELACIONADOS,
-								payload: {
-									response: response.body.enderecos,
-									documento: doc,
-									documentoRelacionado: docRelacionado
-								}
-							})
-						} else {
-							/**alguns retornos de json são entregues com as informacoes em null e status 200, por isso a verificacao */
-							dispatch({
-								type: REQUEST_ERROR,
-								payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
-							});
-						}
-					}
-					else if(response.status == 401) {
-						dispatch({type: ERROR_401_UNAUTHORIZED, payload: ERROR_401_UNAUTHORIZED_MESSAGE})
-					} else {
-						dispatch({
-							type: REQUEST_ERROR,
-							payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
-						});
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
+		apiContentType(dispatch, url, data, search, {documento: doc, documentoRelacionado:documento})
 	}
 }
 
 export function searchLocalizeByEmail(email) {
+	let url = URL_SEARCH_EMAIL;
+	let data = {email};
+	let search = SEARCH_BY_EMAIL;
+
 	return (dispatch) => {
-		ajax.post(URL_SEARCH_EMAIL)
-			.send({email:email})
-			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response) {
-					if(response.status == 200) {
-						if(response.body.localizePorEmail) {
-							dispatch({
-								type: SEARCH_BY_EMAIL,
-								payload: response.body
-							})
-						} else {
-							/**alguns retornos de json são entregues com as informacoes em null e status 200, por isso a verificacao */
-							dispatch({
-								type: REQUEST_ERROR,
-								payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
-							});
-						}
-					}
-					else if(response.status == 401) {
-						dispatch({type: ERROR_401_UNAUTHORIZED, payload: ERROR_401_UNAUTHORIZED_MESSAGE})
-					} else {
-						dispatch({
-							type: REQUEST_ERROR,
-							payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
-						});
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
+		apiContentType(dispatch, url, data, search)
 	}
 }
 
 export function searchLocalizeByTelefone(telefone) {
+	let url = URL_SEARCH_TELEFONE;
+	let data = {telefone};
+	let search = SEARCH_BY_TELEFONE;
+
 	return (dispatch) => {
-		ajax.post(URL_SEARCH_TELEFONE)
-			.send({telefone:telefone})
-			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response) {
-					if (response.status == 200) {
-						dispatch({type: SEARCH_BY_TELEFONE, payload: response.body})
-					} else {
-						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
+		apiContentType(dispatch, url, data, search)
 	}
 }
 
 export function searchPessoasRelacionadas(cpf, label) {
+	let url = URL_SEARCH_PESSOAS_RELACIONADAS;
+	let data = {cpf};
+	let search = SEARCH_BY_PESSOAS_RELACIONADOS;
+
 	return (dispatch) => {
-		ajax.post(URL_SEARCH_PESSOAS_RELACIONADAS)
-			.send({cpf})
-			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response) {
-					if (response.status == 200) {
-						dispatch({
-							type: SEARCH_BY_PESSOAS_RELACIONADOS,
-							payload: {
-								response: response.body,
-								label: label
-							}
-						})
-					} else {
-						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
+		apiContentType(dispatch, url, data, search, {label: label})
 	}
 }
 
@@ -395,6 +193,7 @@ export function searchPessoasRelacionadas(cpf, label) {
 export function searchEnderecosTelefonesUltimasConsultas(tipo, consulta, posElemento, documento) {
 	let data = {cpf:documento};
 	let url = URL_SEARCH_CPF;
+	let search = SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS;
 
 	if(consulta == "CNPJ") {
 		data = {cnpj:documento};
@@ -402,28 +201,7 @@ export function searchEnderecosTelefonesUltimasConsultas(tipo, consulta, posElem
 	}
 
 	return (dispatch) => {
-		ajax.post(url)
-			.send(data)
-			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response) {
-					if (response.status == 200) {
-						dispatch({
-							type: SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS,
-							payload: {
-								response: response.body,
-								tipo: tipo,
-								consulta: consulta,
-								posElemento: posElemento
-							}
-						})
-					} else {
-						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
+		apiContentType(dispatch, url, data, search, {tipo: tipo, consulta:consulta, posElemento:posElemento})
 	}
 } 
 
@@ -434,6 +212,7 @@ export function searchEnderecosTelefonesResultadosBusca(searchByCpfOuCnpj, index
 
 	let data = {cpf:documento};
 	let url = URL_SEARCH_CPF;
+	let search = SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA;
 
 	if(searchByCpfOuCnpj == "CNPJ") {
 		data = {cnpj:documento};
@@ -441,28 +220,34 @@ export function searchEnderecosTelefonesResultadosBusca(searchByCpfOuCnpj, index
 	}
 
 	return (dispatch) => {
-		ajax.post(url)
-			.send(data)
-			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response) {
-					if (response.status == 200 && response.body) {
-						dispatch({
-							type: SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA,
-							payload: {
-								response: response.body,
-								searchByCpfOuCnpj: searchByCpfOuCnpj,
-								indexLabel: indexLabel,
-								indexArrayElements: indexArrayElements,
-								isEnderecoOuTelefone: isEnderecoOuTelefone
-							}
-						})
-					} else {
-						dispatch({type: REQUEST_ERROR, payload: {mensagem:NENHUM_REGISTRO}})
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
+		apiContentType(dispatch, url, data, search, {searchByCpfOuCnpj: searchByCpfOuCnpj, indexLabel:indexLabel, indexArrayElements:indexArrayElements, isEnderecoOuTelefone:isEnderecoOuTelefone})
 	}
-} 
+}
+
+export function searchLocalize(documento, tipo, search) {
+	documento = documento.toString();
+	documento = documento.replace(/[^0-9]/g,"");
+	let data = tipo == "CPF" ? {cpf:documento} : {cnpj:documento};
+	let url = tipo == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
+	search = search ? search : SEARCH_BY_DOCUMENT;
+
+	return (dispatch) => {
+		apiContentType(dispatch, url, data, search, {tipo: tipo, documento: documento})
+	}
+}
+
+export function searchLocalizeByNomeEndereco(inputLocalize, tipo, labelToTab) {
+	let url = URL_SEARCH_NOME_ENDERECO;
+	let data = inputLocalize;
+	let search = SEARCH_BY_NOME_ENDERECO;
+	return (dispatch) => {
+		api(dispatch, url, data, search, {tipo: tipo, label: labelToTab})
+	}
+}
+
+export function seeModel() {
+	return {
+		type: SEE_LOCALIZE_MODEL,
+		payload: "model"
+	}
+}

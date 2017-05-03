@@ -38,6 +38,8 @@ export const TOOLTIP_SEARCH_BY_PHONE_MESSAGE = 'Consultar por telefone';
 export const TOOLTIP_SEARCH_BY_DOCUMENT = 'TOOLTIP_SEARCH_BY_DOCUMENT';
 export const TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE = 'Consultar por documento';
 
+export const ERROR_400_UNAUTHORIZED = "ERROR_400_UNAUTHORIZED";
+export const ERROR_400_UNAUTHORIZED_MESSAGE = "Houve algum problema com a aplicação, por favor atualize a página, se não for resolvido contate o suporte para informações";
 export const ERROR_401_UNAUTHORIZED = "ERROR_401_UNAUTHORIZED";
 export const ERROR_401_UNAUTHORIZED_MESSAGE = "Por favor, realize a sua identificação para acessar o sistema";
 

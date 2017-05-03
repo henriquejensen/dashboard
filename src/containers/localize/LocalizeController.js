@@ -101,9 +101,9 @@ class LocalizeController extends Component {
 	
 	//recebe o documento da pessoa e da pessoa relacionada a esta e
 	//irá buscar pelo telefone ou endereço da pessoa
-	searchTelefonesPessoaRelacionada = (documento, docPessoaRelacionado) => {
+	searchTelefonesPessoaRelacionada = (documento, docPessoaRelacionado, isCpfOrCnpj) => {
 		this.props.loadingLocalize();
-		this.props.searchTelefonesPessoaRelacionada(documento, docPessoaRelacionado);
+		this.props.searchTelefonesPessoaRelacionada(documento, docPessoaRelacionado, isCpfOrCnpj);
 	}
 
 	//recebe o documento da pessoa e da pessoa relacionada a esta e
