@@ -594,7 +594,8 @@ class LocalizeController extends Component {
 											<CreditoView
 												data={data.data}
 												tipo={data.tipo}
-												index={index}/>
+												index={index}
+												searchPerson={this.searchLocalize}/>
 										: 	<span>
 												<BuscaPorRelacionados
 													relacionados={data.data.response ? data.data.response : data.data}
@@ -612,10 +613,6 @@ class LocalizeController extends Component {
 						</Tabs>
 					)
 				: ""}
-
-				<Tooltip id="tooltipDataNascimento">
-					<span>Data de nascimento</span>
-				</Tooltip>
 			</div>
 		)
 	}

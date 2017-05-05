@@ -69,6 +69,10 @@ class App extends Component {
                 <span>{TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE}</span>
             </Tooltip>
 
+            <Tooltip id="tooltipDataNascimento">
+              <span>Data de nascimento</span>
+            </Tooltip>
+
         </div>
       )
   }

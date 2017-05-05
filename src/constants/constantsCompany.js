@@ -12,3 +12,4 @@ export const COMPANY_PRODUCT_CREDITO = "Crédito";
 export const COMPANY_PRODUCT_VEICULOS = "Veículos";
 export const COMPANY_PRODUCT_FOCOFISCAL = "Foco Fiscal";
 export const COMPANY_PRODUCT_CONSIGMAIS = "Consig+";
+export const TITLE_HEADER = "Configurações"

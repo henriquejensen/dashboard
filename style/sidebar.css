@@ -122,12 +122,8 @@
     position: relative
 }
 
-.sidebar-item-dropdown {
-    background-color: rgba(0,0,0,.03)
-}
-
 .sidebar-item-dropdown > li > a {
-    color: #7f7f7f;
+    color: white;
 }
 
 .sidebar-item-dropdown > li {

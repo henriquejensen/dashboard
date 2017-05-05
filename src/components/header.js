@@ -29,7 +29,7 @@ import {
 import Modal from "./Modal";
 import BarraBuscaRapida from "./utils/BarraBuscaRapida";
 
-import { COMPANY_LOGO_INVERSE, COMPANY_NAME_SHORT } from "../constants/constantsCompany";
+import { COMPANY_LOGO_INVERSE, COMPANY_NAME_SHORT, TITLE_HEADER } from "../constants/constantsCompany";
 
 class MenuSuperior extends Component {
 	state = {
@@ -62,6 +62,7 @@ class MenuSuperior extends Component {
 
 	render() {
 		let onMenuClicked = this.props.onMenuClicked;
+		let user = this.props.user;
 		return (
 		<div>
 			<Navbar style={{backgroundColor: "#673ab7", borderRadius: 0}} collapseOnSelect>
@@ -75,7 +76,7 @@ class MenuSuperior extends Component {
 
 				<Navbar.Collapse>
 					<Nav pullRight>
-						<NavDropdown title={this.props.user.usuarioNome ? this.props.user.usuarioNome : "DESCONECTADO"} id="basic-nav-dropdown">
+						<NavDropdown title={TITLE_HEADER} id="basic-nav-dropdown">
 							{menu.header.user.map((opt, index) => {
 								return (
 									<MenuItem key={index} onClick={() => this.changeRoute(opt.link)}>

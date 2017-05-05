@@ -1,31 +1,25 @@
 import React, { Component } from "react";
+import ajax from "superagent";
+import { Col } from "react-bootstrap";
 import { Link, browserHistory } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import ajax from "superagent";
 
 import { authUser, loading } from "../actions/actionsCommon";
 
-import { LOADING_GIF } from "../constants/utils";
+import { LOADING_GIF, URL_GET_IP } from "../constants/utils";
+import { COMPANY_NAME_SHORT } from "../constants/constantsCompany";
 
 class Login extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            empresa: "",
-            user: "",
-            senha: "",
-            ip: ""
-        }
-
-        this.onChange = this.onChange.bind(this);
-        this.onFormSubmit = this.onFormSubmit.bind(this);
-        this.changeroute = this.changeroute.bind(this);
+    state = {
+        empresa: "",
+        user: "",
+        senha: "",
+        ip: ""
     }
 
     componentWillMount() {
-        ajax.get("https://auth.assertivasolucoes.com.br/auth/get-info-request/d9230bc071484cdd9fc721b")
+        ajax.get(URL_GET_IP)
             .then((response) => {
                 this.setState({
                     ip: JSON.parse(response.text).IP
@@ -34,17 +28,17 @@ class Login extends Component {
     }
 
 	componentDidMount() {
-		document.title = "Assertiva";
+		document.title = COMPANY_NAME_SHORT;
 	}
 
-    onFormSubmit(evt) {
+    onFormSubmit = (evt) => {
         evt.preventDefault();
 
         this.props.loading();
         this.props.authUser(this.state.empresa, this.state.user, this.state.senha);
     }
 
-    onChange(evt) {
+    onChange = (evt) => {
         this.setState({
             [evt.target.name]: evt.target.value
         })
@@ -63,7 +57,7 @@ class Login extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-sm-6 col-md-4 col-md-offset-4">
+                    <Col xs={12} sm={6} smOffset={4} md={4} mdOffset={4}>
                         <h3 className="text-center login-title">
                             <strong>Bem-vindo</strong><br/>
                             Identifique-se para acessar nossos serviços
@@ -86,11 +80,12 @@ class Login extends Component {
                                     <input type="checkbox" value="remember-me" />
                                     Lembre-me
                                 </label>
-                                <Link href="#" className="pull-right need-help">IP: {this.state.ip}</Link><span className="clearfix"></span>
+                                <span href="#" className="pull-right need-help">IP: {this.state.ip}</span>
+                                <span className="clearfix"></span>
                             </form>
                         </div>
                         <Link to="/signin" className="text-center new-account">Esqueci minha senha </Link>
-                    </div>
+                    </Col>
                 </div>
             </div>
         )

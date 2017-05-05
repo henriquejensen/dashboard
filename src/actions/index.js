@@ -1,5 +1,3 @@
-import ajax from "superagent";
-
 import {
 		URL_SEARCH_CPF,
 		URL_SEARCH_CNPJ,
@@ -47,34 +45,14 @@ import {
 
 import { apiContentType, api } from "../api/Api";
 
-export function getLastQueries(code, tipo) {
-	return (dispatch) => {
-		ajax.post(URL_SEARCH_ULTIMAS_CONSULTAS_LOCALIZE)
-			.send({consulta: code})
-			.set({'Content-Type': 'application/x-www-form-urlencoded',authorization: localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response) {
-					if (response.status == 200) {
-						dispatch({
-							type: GET_LOCALIZE_LAST_QUERIES,
-							payload: {
-								response: response.body,
-								tipo: tipo
-							}
-						})
-					} else {
-						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
-	}
+export function getLastQueries(consulta, tipo) {
+	let url = URL_SEARCH_ULTIMAS_CONSULTAS_LOCALIZE;
+	let data = {consulta};
+	let search = GET_LOCALIZE_LAST_QUERIES;
 
-    return {
-        type: GET_LOCALIZE_LAST_QUERIES,
-        payload: "lastQueries"
-    }
+	return (dispatch) => {
+		apiContentType(dispatch, url, data, search, {tipo:tipo})
+	}
 }
 
 export function closeMessageErrorLocalize() {

@@ -27,6 +27,7 @@ import {
 	ERROR_401_UNAUTHORIZED_MESSAGE
 } from "../constants/utils";
 
+import { apiContentType, api } from "../api/Api";
 
 export function changeTab(index) {
 	return {
@@ -70,69 +71,23 @@ export function loadingCredito() {
     }
 }
 
-export function searchCreditoCheque(chequeData) {
+export function searchCreditoCheque(cheque) {
+	let url = URL_CREDITO_SEARCH_CHEQUE;
+	let data = {cheque};
+	let search = GET_CREDITO_CHEQUE;
+
 	return (dispatch) => {
-		ajax.post(URL_CREDITO_SEARCH_CHEQUE)
-			.send({cheque:chequeData})
-			.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response) {
-					if (response.status == 200) {
-						dispatch({
-							type: GET_CREDITO_CHEQUE,
-							payload: chequeData
-						})
-					} else {
-						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
+		apiContentType(dispatch, url, data, search, {cheque:cheque})
 	}
 }
 
 export function searchCreditoCompleta(documento, tipo, search) {
-	documento = documento.replace(/[^0-9]/g,"");
+	documento = documento.toString().replace(/[^0-9]/g,"");
 	let data = tipo === "CPF" ? {cpf:documento} : {cnpj:documento};
 	let url = tipo === "CPF" ? URL_CREDITO_SEARCH_COMPLETA : URL_CREDITO_SEARCH_COMPLETA_PJ;
 
 	return (dispatch) => {
-		ajax.post(url)
-			.send(data)
-			.set({'Content-Type': 'application/x-www-form-urlencoded',Authorization: localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response) {
-					if(response.status == 200) {
-						if(response.body.cadastro) {
-							dispatch({
-								type: search,
-								payload: {
-									response: response.body,
-									tipo: tipo,
-									documento: documento
-								}
-							})
-						} else {
-							/**alguns retornos de json são entregues com as informacoes em null e status 200, por isso a verificacao */
-							dispatch({
-								type: REQUEST_ERROR,
-								payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
-							});
-						}
-					}
-					 else if(response.status == 401) {
-						dispatch({type: ERROR_401_UNAUTHORIZED, payload: ERROR_401_UNAUTHORIZED_MESSAGE})
-					} else {
-						dispatch({
-							type: REQUEST_ERROR,
-							payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
-						});
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
+		apiContentType(dispatch, url, data, search, {tipo, documento})
 	}
 }
 

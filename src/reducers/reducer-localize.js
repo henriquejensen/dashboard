@@ -151,13 +151,16 @@ export default function(state = initialState, action) {
 					type: newState.type
 				};
 
-			case GET_LOCALIZE_LAST_QUERIES:
-				if(action.payload.tipo == "NOMEOUENDERECO") {
-					newState.lastQueries["NOME"] = patternJsonNomeOuEndereco(action.payload.response.localizeUltimasConsultas, "NOME");
-					newState.lastQueries["ENDERECO"] = patternJsonNomeOuEndereco(action.payload.response.localizeUltimasConsultas, "ENDERECO");
+			case GET_LOCALIZE_LAST_QUERIES: {
+				let responseServer = action.payload.response;
+				let tipo = action.payload.parameters.tipo;
+				if(tipo == "NOMEOUENDERECO") {
+					newState.lastQueries["NOME"] = patternJsonNomeOuEndereco(responseServer.localizeUltimasConsultas, "NOME");
+					newState.lastQueries["ENDERECO"] = patternJsonNomeOuEndereco(responseServer.localizeUltimasConsultas, "ENDERECO");
 				} else {
-					newState.lastQueries[action.payload.tipo] = action.payload.response.localizeUltimasConsultas;
+					newState.lastQueries[tipo] = responseServer.localizeUltimasConsultas;
 				}
+
 				return {
 					loading: false,
 					status: LAST_QUERIES,
@@ -167,7 +170,7 @@ export default function(state = initialState, action) {
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				}
-
+			}
 			case LOADING_LOCALIZE:
 				return {
 					status: LOADING,
@@ -196,9 +199,9 @@ export default function(state = initialState, action) {
 				}
 
 			case SEARCH_BY_CREDITO_IN_LOCALIZE: {
-				let documento = patternCPF(action.payload.documento);
+				let documento = patternCPF(action.payload.parameters.documento);
 				let responseServer = action.payload.response;
-				let tipo = action.payload.tipo;
+				let tipo = action.payload.parameters.tipo;
 				let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_CREDITO;
 				let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
 				let verifyIfDocumentExists = isDocumentNotInArray(state.response, label);

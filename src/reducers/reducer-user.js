@@ -185,19 +185,23 @@ const user = {
 
 export default function (state = user, action) {
     switch(action.type){
-        case USER_EDIT_INFO:
-            state.nome = action.payload.nome;
-            state.telefone = action.payload.telefone;
-            state.email = action.payload.email;
-            return state;
+        case USER_EDIT_INFO: {
+            let newState = Object.assign({}, state);
+            newState.nome = action.payload.nome;
+            newState.telefone = action.payload.telefone;
+            newState.email = action.payload.email;
+            return newState;
+        }
 
-        case USER_EDIT_DASHBOARD:
-            state.gadgets = action.payload.gadgets;
-            state.charts = action.payload.charts;
-            return state;
+        case USER_EDIT_DASHBOARD: {
+            let newState = Object.assign({}, state);
+            newState.gadgets = action.payload.gadgets;
+            newState.charts = action.payload.charts;
+            return newState;
+        }
 
-        case INFO_SUCCESS:
-            let response = action.payload.response;
+        case INFO_SUCCESS: {
+            let response = action.payload.response.response;
             let newState = Object.assign({}, state);
             newState.notifications = notifications.notifications;
             newState.grupoDescricao = response.grupoDescricao;
@@ -213,6 +217,7 @@ export default function (state = user, action) {
             newState.usuarioId = response.usuarioId;
             newState.usuarioNome = response.usuarioNome;
             return newState;
+        }
         
         case INFO_ERROR:
             localStorage.removeItem("token");

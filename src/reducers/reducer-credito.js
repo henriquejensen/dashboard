@@ -132,9 +132,9 @@ export default function(state=getInitialState, action) {
             }
 
         case GET_CREDITO_COMPLETA: {
-            let documento = action.payload.documento;
+            let documento = action.payload.parameters.documento;
             let responseServer = action.payload.response;
-            let tipo = action.payload.tipo;
+            let tipo = action.payload.parameters.tipo;
             let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
             let verifyIfDocumentExists = isDocumentNotInArray(state.response, documento);
 

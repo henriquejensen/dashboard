@@ -3,6 +3,7 @@ export const INFO_URL = "https://auth.assertivasolucoes.com.br/info/get-info-use
 export const AUTHENTICATION = "token";
 export const GOOGLE_MAPS_KEY = 'AIzaSyDrjaImSSsOUSh9d5KDq9RVnHKtNSI_GJI';
 export const GOOGLE_MAPS_URL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+export const URL_GET_IP = "https://auth.assertivasolucoes.com.br/auth/get-info-request/d9230bc071484cdd9fc721b";
 
 export const REQUEST_ERROR = "REQUEST_ERROR";
 export const ERR_CONNECTION_REFUSED = "ERR_CONNECTION_REFUSED";

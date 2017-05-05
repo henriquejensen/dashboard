@@ -15,6 +15,8 @@ import {
 		ERR_CONNECTION_REFUSED,
 } from "../constants/utils";
 
+import { apiWithKeySession } from "../api/Api";
+
 /* Muda o tipo do produto, ex: Localizel, tipo cpf ao clicar em cnpj muda para cnpj */
 export function changeProductType(product, type) {
 	return {
@@ -31,31 +33,17 @@ export function changeColorMenu(color) {
 }
 
 export function getUserData() {
+	let url = INFO_URL;
+	let data = {};
+	let search = INFO_SUCCESS;
+
 	return (dispatch) => {
-		ajax.post(INFO_URL)
-            .set({keySession: localStorage.getItem("token")})
-			.end(function(err, res) {
-				if (!err && res.status == 200) {
-					dispatch({type: INFO_SUCCESS, payload: res.body})
-				} else {
-					dispatch({type: INFO_ERROR })
-				}
-			})
+		apiWithKeySession(dispatch, url, data, search)
 	}
 }
 
 export function authUser(empresa, user, senha) {
 	return (dispatch) => {
-		/*ajax.get(AUTH_URL+"?empresa="+empresa+"&usuario="+user+"&senha="+senha)
-			.end(function(err, res) {
-				if (err || !res.ok) {
-					dispatch({type: LOGIN_ERROR, payload: res.body})
-				} else {
-					localStorage.setItem(AUTHENTICATION, res.body.response);
-					dispatch({type: LOGIN_SUCCESS, payload: res.body})
-				}
-			})*/
-
 		ajax.post(AUTH_URL)
 			.type('form')
 			.send({ empresa: empresa, usuario: user, senha: senha})

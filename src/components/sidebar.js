@@ -52,8 +52,9 @@ class Sidebar extends Component {
                     onClick={() => {this.props.changeColorMenu(opt.color)}}>
                       <Link
                         to={opt.link}
+                        className="teste"
                         onClick={() => this.activeMenuDropdown(opt.id)}
-                        activeStyle={{backgroundColor: opt.color}}>
+                        activeStyle={{backgroundColor: opt.color, color:"white"}}>
                         {this.props.activedMenu ?
                           <img src={opt.image} className="sub-icon" alt={opt.alt}/>
                         : ""}
@@ -66,7 +67,8 @@ class Sidebar extends Component {
                         : ""}
                       </Link>
 
-                      <ul className={this.state.menuOpened == opt.id && this.props.activedMenu ? "sidebar-item-dropdown" : "display-none"}>
+                      <ul className={this.state.menuOpened == opt.id && this.props.activedMenu ? "sidebar-item-dropdown" : "display-none"}
+                      style={{backgroundColor:opt.colorLight}}>
                         {opt.subItems.map((subOpt, j) => {
                           return (
                               <li
