@@ -431,24 +431,30 @@ class Credito extends Component {
 	}
 
 	render() {
-		if(this.props.status == SUCCESS || this.props.status == ERR_CONNECTION_REFUSED || this.props.status == REQUEST_ERROR) {
+		let status = this.props.status;
+		let type = this.props.type;
+		let loading = this.props.loading;
+		let datas = this.props.datas;
+		let tabActive = this.props.tabActive;
+		let changeTab = this.props.changeTab;
+		if(status == SUCCESS || status == ERR_CONNECTION_REFUSED || status == REQUEST_ERROR) {
 			window.scrollTo(0, 0);
 		}
 		return (
 			<div className="container">
-				{this.form(this.props.type)}
+				{this.form(type)}
 
-				{this.props.loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
+				{loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
 
-				{this.props.datas.length > 0 ? 
+				{datas.length > 0 ? 
 					(
 						<Tabs
-							activeKey={this.props.tabActive}
-							onSelect={(key) => {this.props.changeTab(key)}}
+							activeKey={tabActive}
+							onSelect={(key) => {changeTab(key)}}
 							animation={false}
 							id="tab-credito"
 						>
-							{this.props.datas.map((data, index) => {
+							{datas.map((data, index) => {
 								return (
 									<Tab eventKey={data.label} 
 										title={

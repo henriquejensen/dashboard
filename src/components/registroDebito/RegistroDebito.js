@@ -30,18 +30,18 @@ export default class RegistroDebito extends Component {
                 <Col md={12}>
                   <Table fields={["Associado/Credor", "Data Inclusão", "Data vencimento", "Origem", "Contrato", "Comprador/Avalista", "Valor", "Cidade", "Telefone"]}>
                     <tbody>
-                      {registros.registrosDebitos.map((registro, index) => {
+                      {registros.registrosDebitos.map((reg, index) => {
                         return (
                           <tr key={index}>
-                            <td>{registro.credor}</td>
-                            <td>{registro.dataInclusao}</td>
-                            <td>{registro.dataVencimento}</td>
-                            <td>{registro.praca}</td>
-                            <td>{registro.contrato}</td>
-                            <td>{registro.avalistaComprador}</td>
-                            <td>{registro.valor}</td>                        
-                            <td>{registro.cidade}</td>
-                            <td>{registro.ddd + " " + registro.telefone}</td>
+                            <td>{reg.credor}</td>
+                            <td>{reg.dataInclusao}</td>
+                            <td>{reg.dataVencimento}</td>
+                            <td>{reg.praca}</td>
+                            <td>{reg.contrato}</td>
+                            <td>{reg.avalistaComprador}</td>
+                            <td>{reg.valor}</td>                        
+                            <td>{reg.cidade}</td>
+                            <td>{reg.ddd + " " + reg.telefone}</td>
                           </tr>
                         )
                       })}

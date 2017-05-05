@@ -20,7 +20,7 @@ export default class Socios extends Component {
                                 <tbody>
                                     {this.props.socios.map((soc,i) => {
                                         /**Alguns documentos ja veem formatados, entao retiro a formatacao para pegar o tamanho */
-                                        let documento = soc.documento.replace(/[^0-9]/g,"")
+                                        let documento = soc.documento.toString().replace(/[^0-9]/g,"")
                                         let tipo = documento.length > 11 ? "CNPJ" : "CPF";
                                         return (
                                             <tr key={i}>

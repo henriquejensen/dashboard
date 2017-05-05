@@ -15,32 +15,8 @@
                 "vara": "BBBBB BBBBB"
             }
         ],
-        "ocorrenciaMaisAntiga": {
-            "avalista": "string",
-            "cidade": "string",
-            "dataAcao": "DD/MM/AAAA",
-            "forum": "string",
-            "informacoesAdicionais": "string",
-            "posicao": "string",
-            "quantidade": "string",
-            "tipoAcao": "string",
-            "uf": "string",
-            "valor": "string",
-            "vara": "string"
-        },
-        "ocorrenciaMaisRecente": {
-            "avalista": "string",
-            "cidade": "string",
-            "dataAcao": "DD/MM/AAAA",
-            "forum": "string",
-            "informacoesAdicionais": "string",
-            "posicao": "string",
-            "quantidade": "string",
-            "tipoAcao": "string",
-            "uf": "string",
-            "valor": "string",
-            "vara": "string"
-        },
+		"ocorrenciaMaisAntiga": "DD/MM/AAAA",
+		"ocorrenciaMaisRecente": "DD/MM/AAAA",
         "quantidadeAcoes": "1",
         "valorTotal": "100,00"
     },
@@ -207,36 +183,8 @@
 	"participacoesEmpresas": [
 	],
 	"protestosDetalhados": {
-		"ocorrenciaMaisAntiga": {
-			"cartorio": "string",
-			"cidade": "string",
-			"dataProtesto": "DD/MM/AAAA",
-			"dataVencimento": "DD/MM/AAAA",
-			"grupo": "string",
-			"informacoesAdicionais": "string",
-			"natureza": "string",
-			"posicao": "string",
-			"tags": [
-				"string"
-			],
-			"uf": "string",
-			"valor": "string"
-		},
-		"ocorrenciaMaisRecente": {
-			"cartorio": "string",
-			"cidade": "string",
-			"dataProtesto": "DD/MM/AAAA",
-			"dataVencimento": "DD/MM/AAAA",
-			"grupo": "string",
-			"informacoesAdicionais": "string",
-			"natureza": "string",
-			"posicao": "string",
-			"tags": [
-				"string"
-			],
-			"uf": "string",
-			"valor": "string"
-		},
+		"ocorrenciaMaisAntiga": "DD/MM/AAAA",
+		"ocorrenciaMaisRecente": "DD/MM/AAAA",
 		"protestosDetalhados": [
 			{
 				"cartorio": "XXXXXXX",
@@ -376,50 +324,8 @@
         }
     ],
 	"registrosDebitos": {
-		"ocorrenciaMaisAntiga": {
-			"avalistaComprador": "string",
-			"cidade": "string",
-			"contrato": "string",
-			"credor": "string",
-			"dataInclusao": "string",
-			"dataVencimento": "string",
-			"ddd": "string",
-			"grupo": "string",
-			"informacoesAdicionais": "string",
-			"modalidade": "string",
-			"posicao": "string",
-			"praca": "string",
-			"situacao": "string",
-			"tags": [
-				"string"
-			],
-			"telefone": "string",
-			"tipo": "string",
-			"uf": "string",
-			"valor": "string"
-		},
-		"ocorrenciaMaisRecente": {
-			"avalistaComprador": "string",
-			"cidade": "string",
-			"contrato": "string",
-			"credor": "string",
-			"dataInclusao": "string",
-			"dataVencimento": "string",
-			"ddd": "string",
-			"grupo": "string",
-			"informacoesAdicionais": "string",
-			"modalidade": "string",
-			"posicao": "string",
-			"praca": "string",
-			"situacao": "string",
-			"tags": [
-				"string"
-			],
-			"telefone": "string",
-			"tipo": "string",
-			"uf": "string",
-			"valor": "string"
-		},
+		"ocorrenciaMaisAntiga": "DD/MM/AAAA",
+		"ocorrenciaMaisRecente": "DD/MM/AAAA",
 		"quantidadeRegistros": "2",
 		"registrosDebitos": [
 			{

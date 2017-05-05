@@ -77,11 +77,11 @@ export default class RendaEmpregador extends Component {
                                                 </td>
                                                 <td>{renda.setorEmpregador}</td>
                                                 <td>{formatDate(renda.rendaDataRef)}</td>
-                                                <td>
+                                                {/*<td>
                                                     <Button bsStyle="info">
                                                         Ver detalhes
                                                     </Button>
-                                                </td>
+                                                </td>*/}
                                             </tr>
                                             <tr>
                                                 {showMoreInfo ? 

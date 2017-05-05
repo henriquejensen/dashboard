@@ -256,13 +256,13 @@ export default function(state=getInitialState, action) {
             response.label = model.cadastro.cpf;
             response.tipo = "CPF";
             response.icon = ICON_CREDITO;
-            response.produto = "credito";
+            response.produto = COMPANY_PRODUCT_CREDITO;
 
             responseCNPJ.data = modelCNPJ;
             responseCNPJ.label = modelCNPJ.cadastro.cnpj;
             responseCNPJ.tipo = "CNPJ";
             responseCNPJ.icon = ICON_CREDITO;
-            responseCNPJ.produto = "credito";
+            responseCNPJ.produto = COMPANY_PRODUCT_CREDITO;
 
             return {
                 loading: false,
