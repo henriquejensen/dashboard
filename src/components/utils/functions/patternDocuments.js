@@ -1,7 +1,7 @@
 export function patternCPF(doc) {
     if(!doc) return doc;
 
-    let cpf = doc.toString();
+    let cpf = doc.toString().replace(/[^0-9]/g,"");
 
     for(let i=cpf.length; i<11;i++) {
         cpf = '0' + cpf;
@@ -12,7 +12,7 @@ export function patternCPF(doc) {
 
 export function patternCNPJ(doc) {
     if(!doc) return doc;
-    let cnpj = doc.toString();
+    let cnpj = doc.toString().replace(/[^0-9]/g,"");
 
     for(let i=cnpj.length; i<14;i++) {
         cnpj = '0' + cnpj;
@@ -23,7 +23,7 @@ export function patternCNPJ(doc) {
 
 export function patternRG(doc) {
     if(!doc) return doc;
-    let rg = doc.toString();
+    let rg = doc.toString().replace(/[^0-9]/g,"");
 
     return rg.substring(0,2) + "." + rg.substring(2,5) + "." + rg.substring(5,8) +  "-" + rg.substring(8);
 }

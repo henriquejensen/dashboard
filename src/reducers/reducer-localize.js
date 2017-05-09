@@ -199,14 +199,15 @@ export default function(state = initialState, action) {
 				}
 
 			case SEARCH_BY_CREDITO_IN_LOCALIZE: {
-				let documento = patternCPF(action.payload.parameters.documento);
-				let responseServer = action.payload.response;
 				let tipo = action.payload.parameters.tipo;
+				let documento = action.payload.parameters.documento;
+				documento = tipo == "CPF" ? patternCPF(documento) : patternCNPJ(documento);
+				let responseServer = action.payload.response;
 				let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_CREDITO;
 				let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
 				let verifyIfDocumentExists = isDocumentNotInArray(state.response, label);
 
-				if(verifyIfDocumentExists) {
+				if(verifyIfDocumentExists && cadastro) {
 					/**O documento esta vindo formatado do fornecedor
 					 * portanto estou salvando a entrada do cliente no lugar dele
 					 * pois formato este documento em todo o site
@@ -224,22 +225,23 @@ export default function(state = initialState, action) {
 					status: cadastro ? SUCCESS : REQUEST_ERROR,
 					message: cadastro ? "": NENHUM_REGISTRO,
 					loading: false,
-					response: verifyIfDocumentExists ? [...state.response, response] : state.response,
+					response: verifyIfDocumentExists && cadastro ? [...state.response, response] : state.response,
 					tabActive: cadastro ? label : state.tabActive,
 					lastQueries: state.lastQueries,
 					type: state.type
 				}
 			}
 			case SEARCH_BY_DOCUMENT: {
-				let documento = patternCPF(action.payload.parameters.documento);
-				let responseServer = action.payload.response;
 				let tipo = action.payload.parameters.tipo;
+				let documento = action.payload.parameters.documento;
+				documento = tipo == "CPF" ? patternCPF(documento) : patternCNPJ(documento);
+				let responseServer = action.payload.response;
 				let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_LOCALIZE;
 				let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
 				let verifyIfDocumentExists = isDocumentNotInArray(state.response, label);
 
 				/*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
-				if(verifyIfDocumentExists) {
+				if(verifyIfDocumentExists && cadastro) {
 					response.data = responseServer;
 					response.label = label
 					response.tipo = tipo;
@@ -259,7 +261,7 @@ export default function(state = initialState, action) {
 					status: cadastro ? SUCCESS : REQUEST_ERROR,
 					message: cadastro ? "": NENHUM_REGISTRO,
 					loading: false,
-					response: verifyIfDocumentExists ? [...state.response, response] : state.response,
+					response: verifyIfDocumentExists && cadastro ? [...state.response, response] : state.response,
 					tabActive: cadastro ? label : state.tabActive,
 					lastQueries: state.lastQueries,
 					type: state.type

@@ -33,6 +33,8 @@ import {
     COMPANY_PRODUCT_LOCALIZE
 } from "../constants/constantsCompany";
 
+import { patternCPF, patternCNPJ } from "../components/utils/functions/patternDocuments";
+
 import model from "./data/credito/consultaCPF.json";
 import modelCNPJ from "./data/credito/consultaCNPJ.json";
 import lastQueries from "./data/lastQueries.json";
@@ -132,13 +134,15 @@ export default function(state=getInitialState, action) {
             }
 
         case GET_CREDITO_COMPLETA: {
-            let documento = action.payload.parameters.documento;
-            let responseServer = action.payload.response;
             let tipo = action.payload.parameters.tipo;
+            let documento = action.payload.parameters.documento;
+            documento = tipo == "CPF" ? patternCPF(documento) : patternCNPJ(documento);
+            let responseServer = action.payload.response;
+            let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_CREDITO;
             let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
-            let verifyIfDocumentExists = isDocumentNotInArray(state.response, documento);
+            let verifyIfDocumentExists = isDocumentNotInArray(state.response, label);
 
-            if(verifyIfDocumentExists) {
+            if(verifyIfDocumentExists && cadastro) {
                 /**O documento esta vindo formatado do fornecedor
                  * portanto estou salvando a entrada do cliente no lugar dele
                  * pois formato este documento em todo o site
@@ -146,7 +150,7 @@ export default function(state=getInitialState, action) {
                 tipo == "CPF" ? responseServer.cadastro.cpf = documento : responseServer.cadastro.cnpj = documento;
 
                 response.data = responseServer;
-                response.label = documento;
+                response.label = label;
                 response.tipo = tipo;
                 response.icon = ICON_CREDITO;
                 response.produto = COMPANY_PRODUCT_CREDITO;
@@ -156,8 +160,8 @@ export default function(state=getInitialState, action) {
                 status: cadastro ? SUCCESS : REQUEST_ERROR,
                 message: cadastro ? "": NENHUM_REGISTRO,
                 loading: false,
-                response: verifyIfDocumentExists ? [...state.response, response] : state.response,
-                tabActive: cadastro ? documento : state.tabActive,
+                response: verifyIfDocumentExists && cadastro ? [...state.response, response] : state.response,
+                tabActive: cadastro ? label : state.tabActive,
                 lastQueries: state.lastQueries,
                 type: state.type
             }

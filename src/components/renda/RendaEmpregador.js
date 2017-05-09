@@ -1,15 +1,17 @@
 import React,  { Component } from "react";
-import { Col, Button} from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import Notification from "react-notification-system";
 
 import Panel from "../panel/Panel";
 import Table from "../table/Table";
 import Modal from "../Modal";
 import EnviarRenda from "../forms/EnviarRenda";
+import MyButton from "../button/MyButton";
+import CardToShowMoreInTable from "../table/CardToShowMoreInTable";
 
 import { formatDate, formatCurrency } from "../utils/functions/patternDocuments";
 
-import { NENHUM_REGISTRO } from "../../constants/utils";
+import { NENHUM_REGISTRO, TOOLTIP_SEARCH_BY_DOCUMENT, TOOLTIP_SEE_MORE_INFO } from "../../constants/utils";
 
 const title = "RENDA EMPREGADOR";
 
@@ -19,11 +21,13 @@ export default class RendaEmpregador extends Component {
 
         this.state = {
             IsModalOpen: false,
-            showMoreInfo: false
+            showMoreInfo: {}
         }
 
         this._notificationSystem = null;
     }
+
+
 
     _addNotification(message) {
         if (this._notificationSystem) {
@@ -50,12 +54,22 @@ export default class RendaEmpregador extends Component {
         })
     }
 
+    handleShowMoreInfo = (indexArray) => {
+        let showMoreInfo = this.state.showMoreInfo;
+        let newShowMoreInfo = Object.assign({}, this.state.showMoreInfo);
+        newShowMoreInfo[indexArray] = this.state.showMoreInfo[indexArray] ? !this.state.showMoreInfo[indexArray] : true;
+        this.setState({
+            showMoreInfo: newShowMoreInfo          
+        })
+    }
+
     render() {
         let rendas = this.props.rendas ? this.props.rendas : [];
         let handleSearchPerson = this.props.searchPerson;
+        let handleShowMoreInfo = this.handleShowMoreInfo;
         let isCpfOrCnpj = "CNPJ";
         let IsModalOpen = this.state.IsModalOpen;
-        let fields = ["Empregador", "Setor", "Data Referência"];
+        let fields = ["Empregador", "Setor", "Data Referência", "#"];
         let showMoreInfo = this.state.showMoreInfo;
         return (
             <span>
@@ -64,29 +78,47 @@ export default class RendaEmpregador extends Component {
                         <Col md={12} sm={12}>            
                             <Table fields={fields}>
                                 {rendas.map((renda, index) => {
+                                    let indexArray = index + renda.documentoEmpregador;
                                     return (
                                         <tbody key={index}>
                                             <tr>
                                                 <td>
-                                                    <a data-tip data-for='tooltipConsultar'>
-                                                        <Button bsStyle="info" className="mapa-button" onClick={() => handleSearchPerson(renda.documentoEmpregador, isCpfOrCnpj)}>
-                                                            <i className='fa fa-search'/>
-                                                        </Button>
-                                                    </a>
-                                                    {renda.empregador}
+                                                    <MyButton
+                                                        tooltip={TOOLTIP_SEARCH_BY_DOCUMENT}
+                                                        onClickButton={handleSearchPerson}
+                                                        params={[renda.documentoEmpregador, isCpfOrCnpj]}
+                                                        label={renda.empregador}
+                                                    />
                                                 </td>
                                                 <td>{renda.setorEmpregador}</td>
                                                 <td>{formatDate(renda.rendaDataRef)}</td>
-                                                {/*<td>
-                                                    <Button bsStyle="info">
-                                                        Ver detalhes
-                                                    </Button>
-                                                </td>*/}
+                                                <td>
+                                                    <MyButton
+                                                        tooltip={TOOLTIP_SEE_MORE_INFO}
+                                                        onClickButton={handleShowMoreInfo}
+                                                        params={[indexArray]}
+                                                        myButtonStyle="default"
+                                                        myButtonClass="my-btn-more-details"
+                                                        myButtonText={showMoreInfo[indexArray] ? "Menos informações" : "Mais informações"}
+                                                    />
+                                                </td>
                                             </tr>
                                             <tr>
-                                                {showMoreInfo ? 
-                                                    <td colSpan={3}>
-                                                    , "CBO", "Faixa de Renda"
+                                                {showMoreInfo[indexArray] ?
+                                                    <td colSpan={4}>
+                                                        <CardToShowMoreInTable
+                                                            elements={
+                                                                [
+                                                                    {label:"Setor empregador", value:renda.setorEmpregador},
+                                                                    {label:"Faixa de Renda", value:renda.faixaRenda},
+                                                                    {label:"Renda estimada", value:renda.rendaEstimada},
+                                                                    {label:"CBO código", value:renda.cboCodigo},
+                                                                    {label:"CBO Descrição", value:renda.cboDescricao},
+                                                                    {label:"CBO Setor", value:renda.cboSetor},
+                                                                    {label:"CBO Sinônimos", value:renda.cboSinonimos}                                                                    
+                                                                ]
+                                                            }
+                                                        />
                                                     </td>
                                                 : ""}
                                             </tr>

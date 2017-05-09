@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testando o CardToShowMoreInTable  1`] = `
+<div>
+  <div
+    className="col-md-3"
+  >
+    Label 1: 5
+  </div>
+  <div
+    className="col-md-3"
+  >
+    Label 2: 10
+  </div>
+</div>
+`;

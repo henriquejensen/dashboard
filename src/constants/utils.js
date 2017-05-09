@@ -38,6 +38,12 @@ export const TOOLTIP_SEARCH_BY_PHONE = 'TOOLTIP_SEARCH_BY_PHONE';
 export const TOOLTIP_SEARCH_BY_PHONE_MESSAGE = 'Consultar por telefone';
 export const TOOLTIP_SEARCH_BY_DOCUMENT = 'TOOLTIP_SEARCH_BY_DOCUMENT';
 export const TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE = 'Consultar por documento';
+export const TOOLTIP_SEE_MORE_INFO = 'TOOLTIP_SEE_MORE_INFO';
+export const TOOLTIP_SEE_MORE_INFO_MESSAGE = 'Ver mais informações';
+export const TOOLTIP_SEE_PRODUCT_MODEL = 'TOOLTIP_SEE_PRODUCT_MODEL';
+export const TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE = 'Ver o modelo da consulta';
+export const TOOLTIP_SEE_PRODUCT_DETAILS = 'TOOLTIP_SEE_PRODUCT_DETAILS';
+export const TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE = 'Ver detalhes do produto';
 
 export const ERROR_400_UNAUTHORIZED = "ERROR_400_UNAUTHORIZED";
 export const ERROR_400_UNAUTHORIZED_MESSAGE = "Houve algum problema com a aplicação, por favor atualize a página, se não for resolvido contate o suporte para informações";

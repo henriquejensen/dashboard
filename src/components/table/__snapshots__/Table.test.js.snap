@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MyTable/> gerando o elemento sem quebrar 1`] = `
+<div>
+  <h4>
+    Teste Title
+  </h4>
+  <div
+    className="table-responsive"
+  >
+    <table
+      className="my-table table table-striped table-hover"
+    >
+      <thead>
+        <th>
+          <th>
+            Label_1
+          </th>
+          <th>
+            Label_2
+          </th>
+          <th>
+            Label_3
+          </th>
+          <th>
+            Label_4
+          </th>
+        </th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Teste_1
+          </td>
+          <td>
+            Teste_2
+          </td>
+          <td>
+            Teste_3
+          </td>
+          <td>
+            Teste_4
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Teste_5
+          </td>
+          <td>
+            Teste_6
+          </td>
+          <td>
+            Teste_7
+          </td>
+          <td>
+            Teste_8
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Teste_9
+          </td>
+          <td>
+            Teste_10
+          </td>
+          <td>
+            Teste_12
+          </td>
+          <td>
+            Teste_13
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

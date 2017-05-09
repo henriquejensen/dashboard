@@ -13,14 +13,15 @@ const title = "RECUPERAÇÕES, FALÊNCIAS E AÇÕES JUDICIAIS";
 export default class Acoes extends Component {
   render() {
     let indexOfProps = this.props.index;
-    let acoes = this.props.acoes;
+    let acoes = this.props.acoes ? this.props.acoes : {};
+    let fields = ["Data", "Cód. Vara",  "Cidade"];
     return (
         <div>
             <a name={"Recuperações, Falências e Ações Judiciais"+indexOfProps}></a>
             <a name={"Recuperação e Falências"+indexOfProps}></a>
             <a name={"Ações"+indexOfProps}></a>
             <a name={"Ações Judiciais"+indexOfProps}></a>
-            {acoes && acoes.acoes && acoes.acoes.length > 0 ?
+            {acoes.acoes && acoes.acoes.length > 0 ?
               <Panel title={title} qtdTotal={[{icon:"fa fa-line-chart", qtd:acoes.quantidadeAcoes}]}>
                 <Col md={12}>
                   <Col md={4}><strong>Ocorrência mais Antiga:</strong> {acoes.ocorrenciaMaisAntiga}</Col>
@@ -29,17 +30,14 @@ export default class Acoes extends Component {
                 </Col>
 
                 <Col md={12}>
-                  <Table fields={["Data", "Valor", "Cód. Vara", "Local (vara)", "Cidade", "Avalista"]}>
+                  <Table fields={fields}>
                     <tbody>
                       {acoes.acoes.map((acao, index) => {
                         return (
                           <tr key={index}>
                             <td>{acao.dataAcao}</td>
-                            <td>{acao.valor}</td>
                             <td>{acao.vara}</td>
-                            <td>{acao.forum}</td>
-                            <td>{acao.cidade + " " + acao.uf}</td>
-                            <td>{acao.avalista}</td>
+                            <td>{acao.cidade + " - " + acao.uf}</td>
                           </tr>
                         )
                       })}

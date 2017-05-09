@@ -8,11 +8,13 @@ import { formatDate, formatCurrency } from "../utils/functions/patternDocuments"
 
 import { NENHUM_REGISTRO } from "../../constants/utils";
 
+const title = "CNAES SECUNDÁRIAS";
+
 export default class CadastroCnpjCnaesSecundarias extends Component {
     render() {
         return (
             this.props.cnpjCnaesSecundarias && this.props.cnpjCnaesSecundarias.length > 0 ?
-                <Panel title="CNPJ OU CNAES SECUNDÁRIAS" qtdTotal={[{icon:"fa fa-building-o", qtd:this.props.cnpjCnaesSecundarias.length}]} showPanel={false}>
+                <Panel title={title} qtdTotal={[{icon:"fa fa-building-o", qtd:this.props.cnpjCnaesSecundarias.length}]} showPanel={false}>
                     <Col md={12} sm={12}>            
                         <Table
                             fields={
@@ -34,7 +36,7 @@ export default class CadastroCnpjCnaesSecundarias extends Component {
                     </Col>
                 </Panel>
             :
-                <Panel title="CNPJ OU CNAES SECUNDÁRIAS">
+                <Panel title={title}>
                     <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
                 </Panel>
         )

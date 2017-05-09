@@ -17,7 +17,13 @@ import {
     TOOLTIP_SEARCH_BY_DOCUMENT,
     TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE,
     TOOLTIP_SEARCH_BY_PHONE,
-    TOOLTIP_SEARCH_BY_PHONE_MESSAGE
+    TOOLTIP_SEARCH_BY_PHONE_MESSAGE,
+    TOOLTIP_SEE_MORE_INFO,
+    TOOLTIP_SEE_MORE_INFO_MESSAGE,
+    TOOLTIP_SEE_PRODUCT_MODEL,
+    TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE,
+    TOOLTIP_SEE_PRODUCT_DETAILS,
+    TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE
 } from "../constants/utils";
 
 class App extends Component {
@@ -61,12 +67,24 @@ class App extends Component {
                 <span>{TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE}</span>
             </Tooltip>
 
+            <Tooltip id={TOOLTIP_SEE_PRODUCT_MODEL}>
+                <span>{TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE}</span>
+            </Tooltip>
+
             <Tooltip id={TOOLTIP_SEARCH_BY_PHONE}>
                 <span>{TOOLTIP_SEARCH_BY_PHONE_MESSAGE}</span>
             </Tooltip>
 
             <Tooltip id={TOOLTIP_SEARCH_BY_ADDRESS}>
                 <span>{TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE}</span>
+            </Tooltip>
+
+            <Tooltip id={TOOLTIP_SEE_MORE_INFO}>
+                <span>{TOOLTIP_SEE_MORE_INFO_MESSAGE}</span>
+            </Tooltip>
+
+            <Tooltip id={TOOLTIP_SEE_PRODUCT_DETAILS}>
+                <span>{TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE}</span>
             </Tooltip>
 
             <Tooltip id="tooltipDataNascimento">

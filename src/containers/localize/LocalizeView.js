@@ -61,19 +61,13 @@ export default class LocalizeView extends Component {
 
                 <Sociedades
                     participacoes={data.participacoesEmpresas}
-                    searchPerson={this.props.searchLocalize}/> {tipo == "CPF"
-                    ? <span>
-                            <RendaEmpregador
-                                rendas={data.rendaEmpregador}
-                                searchPerson={this.props.searchLocalize}/>
-
-                            <RendaEstimada rendaEstimada={data.rendaEstimada}/> {/*<BeneficioINSS beneficios={data.rendaBeneficioAssistencial} />*/}
-
-                            <RendaEntidadeClasseLiberal
-                                renda={data.rendaEntidadeClasseLiberal}
-                                searchPerson={this.props.searchLocalize}/>
-                        </span>
-                    : ""}
+                    searchPerson={this.props.searchLocalize}/>
+                    
+                {tipo == "CPF" ?
+                    <RendaEmpregador
+                        rendas={data.rendaEmpregador}
+                        searchPerson={this.props.searchLocalize}/>
+                : ""}
 
                 {/*<Veiculos veiculos={data.veiculos} />*/}
 

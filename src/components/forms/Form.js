@@ -8,11 +8,10 @@ import UltimasConsultas from "../UltimasConsultas";
 
 import {
     TOOLTIP_SEARCH_BY_ADDRESS,
-    TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE,
     TOOLTIP_SEARCH_BY_DOCUMENT,
-    TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE,
     TOOLTIP_SEARCH_BY_PHONE,
-    TOOLTIP_SEARCH_BY_PHONE_MESSAGE
+    TOOLTIP_SEE_PRODUCT_MODEL,
+    TOOLTIP_SEE_PRODUCT_DETAILS,
 } from "../../constants/utils";
 
 export default class Form extends Component {
@@ -52,14 +51,14 @@ export default class Form extends Component {
                                 </a>
                                 
                                 {this.props.showLogo ?
-                                    <a data-tip data-for='tooltipVejaModelo'>
+                                    <a data-tip data-for={TOOLTIP_SEE_PRODUCT_MODEL}>
                                         <span className="btn btn-default my-btn-form input-search" onClick={this.props.seeModelo}>
                                             <i className="fa fa-list-ul" aria-hidden="true"></i>
                                         </span>
                                     </a>
                                 : ""}
 
-                                <a data-tip data-for='tooltipVejaDetalhesProduto' href="http://assertivasolucoes.com.br/servicos/localize" target="_blank">
+                                <a data-tip data-for={TOOLTIP_SEE_PRODUCT_DETAILS} href="http://assertivasolucoes.com.br/servicos/localize" target="_blank">
                                     <span className="btn btn-warning my-btn-form">
                                         <i className="fa fa-question" aria-hidden="true"></i>
                                     </span>
@@ -78,18 +77,6 @@ export default class Form extends Component {
                             : ""}
                         </form>
                     </Col>
-
-                    <Tooltip id='tooltipConsultar'>
-                        <span>Consultar</span>
-                    </Tooltip>
-                    
-                    <Tooltip id='tooltipVejaModelo'>
-                        <span>Veja Modelo</span>
-                    </Tooltip>
-
-                    <Tooltip id='tooltipVejaDetalhesProduto'>
-                        <span>Veja Detalhes do Produto</span>
-                    </Tooltip>
 
                     {this.props.status == REQUEST_ERROR || this.props.status == ERR_CONNECTION_REFUSED ?
                         <Col md={12} sm={12}> 

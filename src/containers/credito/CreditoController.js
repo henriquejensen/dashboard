@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Tabs, Tab} from "react-bootstrap";
+import { Alert, Tabs, Tab} from "react-bootstrap";
 
 import CreditoView from "./CreditoView";
 import LocalizeView from "../localize/LocalizeView";
@@ -446,6 +446,12 @@ class Credito extends Component {
 
 				{loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
 
+				{this.props.datas.length == 0 ?
+					<Alert bsStyle="warning" className="text-center">
+						As reconsultas realizadas no mesmo dia não serão cobradas
+					</Alert>
+				: ""}
+
 				{datas.length > 0 ? 
 					(
 						<Tabs
@@ -460,8 +466,7 @@ class Credito extends Component {
 										title={
 											<Titletab
 												icon={data.icon}
-												label={data.label}
-												tipo={data.tipo}
+												label={data.label.length > 20 ? data.label.substring(0,20)+"..." : data.label}
 												close={() => this.closeTab(index)}
 											/>
 										}

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MyButton/> gerando o elemento sem quebrar 1`] = `
+<span>
+  <a
+    data-for="toolTipConsultar"
+    data-tip={true}
+  >
+    <button
+      className="mapa-button btn btn-info"
+      disabled={false}
+      type="button"
+    >
+      <i
+        className="fa fa-search"
+      />
+    </button>
+  </a>
+  Documento
+</span>
+`;

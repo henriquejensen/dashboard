@@ -42,13 +42,10 @@ export default class CreditoView extends Component {
                     index={this.props.index}
                     searchPerson={this.props.searchPerson} />
                 {this.props.tipo == "CNPJ" ?
-                    <span>
-                        <Socios 
-                            socios={this.props.data.quadroSocietario}
-                            index={this.props.index}
-                            searchPerson={this.props.searchPerson} />
-                        <Administracao administradores={this.props.data.quadroAdministrativo} index={this.props.index} />
-                    </span>
+                    <Socios 
+                        socios={this.props.data.quadroSocietario}
+                        index={this.props.index}
+                        searchPerson={this.props.searchPerson} />
                 : ""}
                 {/*<Score scores={this.props.data.scores} index={this.props.index} />*/}
                 <OutrasGrafias grafias={this.props.data.outrasGrafias} index={this.props.index} />
