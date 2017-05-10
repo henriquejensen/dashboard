@@ -3,7 +3,7 @@ import Tooltip from 'react-tooltip'
 import { Col, Button } from "react-bootstrap";
 
 import Panel from "../panel/Panel";
-import Table from "../table/Table";
+import Table from "../table/MyTable";
 import MyButton from "../button/MyButton";
 
 import { NENHUM_REGISTRO, TOOLTIP_SEARCH_BY_DOCUMENT } from "../../constants/utils";
@@ -11,22 +11,44 @@ import { NENHUM_REGISTRO, TOOLTIP_SEARCH_BY_DOCUMENT } from "../../constants/uti
 const title = "CONSULTAS";
 
 export default class Consultas extends Component {
+    state = {
+      rows: this.props.consultas ? this.props.consultas.consultasAnteriores ? this.props.consultas.consultasAnteriores : [] : []
+    }
+
+    handleSortElements = (sortColumn, sortDirection='ASC') => {
+        const comparer = (a, b) => {
+            if (sortDirection === 'ASC') {
+                return (a[sortColumn] > b[sortColumn]) ? 1 : -1;
+            } else if (sortDirection === 'DESC') {
+                return (a[sortColumn] < b[sortColumn]) ? 1 : -1;
+            }
+        }
+ 
+        const rows = sortDirection === 'NONE' ? this.state.rows.slice(0) : this.state.rows.sort(comparer);
+
+        this.setState({ rows });
+    }
+
     render() {
-        let consultas = this.props.consultas;
+        let consultas = this.props.consultas ? this.props.consultas : {};
         let index = this.props.index;
-        let fields = ["Nome do Associado", "Data da Consulta"];
+        let fields= [
+            {id:"consultante", name:"Nome do Associado"},
+            {id:"data", name:"Data da Consulta", sortable:true}
+        ];
         let handleSearchPerson = this.props.searchPerson;
         let isCpfOrCnpj = "CNPJ";
+        let rows = this.state.rows;
         return (
             <div>
                 <a name={"Consultas por Segmento"+index}></a>
                 <a name={"Consultas"+index}></a>
-                {consultas && consultas.consultasAnteriores && consultas.consultasAnteriores.length > 0 ?
-                    <Panel title={title} qtdTotal={[{icon:"fa fa-search", qtd:consultas.consultasAnteriores.length}]}>
+                {consultas.consultasAnteriores && rows.length > 0 ?
+                    <Panel title={title} qtdTotal={[{icon:"fa fa-search", qtd:rows.length}]}>
                         <Col md={12}>
-                            <Table fields={fields}>
+                            <Table fields={fields} handleSortElements={this.handleSortElements}>
                                 <tbody>
-                                    {consultas.consultasAnteriores.map((consulta,index) => {
+                                    {rows.map((consulta,index) => {
                                         return (
                                             <tr key={index}>
                                                 <td>

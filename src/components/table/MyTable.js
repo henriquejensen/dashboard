@@ -4,20 +4,29 @@ import { Table } from "react-bootstrap";
 export default class MyTable extends Component {
     render() {
         let fields = this.props.fields ? this.props.fields : [];
-        let title = this.props.title ? this.props.title : "";
+        let title = this.props.title;
         let elements = this.props.elements;
+        let handleSortElements = this.props.handleSortElements;
         return (
             <div>
-                <h4>{title}</h4>
+                {title ? <h4>{title}</h4> : ""}
                 <Table className="my-table" striped hover responsive>
                     <thead>
-                        <th>
+                        <tr>
                             {fields.map((field, index) => {
                                 return (
-                                    <th key={index}>{field.label}</th>
+                                    <th key={index}>
+                                        {field.name}
+                                        {' '}
+                                        {field.sortable ?
+                                            <span>
+                                                <i className="fa fa-chevron-up" onClick={() => handleSortElements(field.id, 'ASC')} aria-hidden="true"></i>
+                                                <i className="fa fa-chevron-down" onClick={() => handleSortElements(field.id, 'DESC')} aria-hidden="true"></i>
+                                            </span> : ""}
+                                    </th>
                                 )
                             })}
-                        </th>
+                        </tr>
                     </thead>
 
                     {elements ?

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Col } from "react-bootstrap";
 
 import Panel from "../panel/Panel";
-import Table from "../table/Table";
+import Table from "../table/MyTable";
 import MyButton from "../button/MyButton";
 import CardToShowMoreInTable from "../table/CardToShowMoreInTable";
 
@@ -12,7 +12,8 @@ const title = "PARTICIPAÇÕES EM EMPRESAS";
 
 export default class Sociedades extends Component {
     state = {
-      showMoreInfo: {}
+      showMoreInfo: {},
+      rows: this.props.participacoes ? this.props.participacoes : []
     }
 
     handleShowMoreInfo = (indexArray) => {
@@ -24,23 +25,40 @@ export default class Sociedades extends Component {
         })
     }
 
+    handleSortElements = (sortColumn, sortDirection='ASC') => {
+        const comparer = (a, b) => {
+            if (sortDirection === 'ASC') {
+                return (a[sortColumn] > b[sortColumn]) ? 1 : -1;
+            } else if (sortDirection === 'DESC') {
+                return (a[sortColumn] < b[sortColumn]) ? 1 : -1;
+            }
+        }
+ 
+        const rows = sortDirection === 'NONE' ? this.state.rows.slice(0) : this.state.rows.sort(comparer);
+
+        this.setState({ rows });
+    }
+
     render() {
-      let participacoes = this.props.participacoes ? this.props.participacoes : [];
+      let rows = this.state.rows;
       let handleSearchPerson = this.props.searchPerson;
       let isCpfOrCnpj = "CNPJ";
       let handleShowMoreInfo = this.handleShowMoreInfo;
-      let fields= ["Nome", "Cargo", "Part. %", "#"];
+      let fields= [
+            {id:"nome", name:"Nome", sortable:true},
+            {id:"participacao", name:"Participação", sortable:true},
+            {id:"btn", name:"#"}
+      ];
       let showMoreInfo = this.state.showMoreInfo;
       return (
             <div>
               <a name={"Participações em Empresas"+this.props.index}></a>
                 
-                {participacoes.length > 0 ?
-                  <Panel title={title} qtdTotal={[{icon:"fa fa-building-o", qtd:participacoes.length}]}>
-                    
+                {rows.length > 0 ?
+                  <Panel title={title} >
                     <Col md={12}>
                       <Table fields={fields}>
-                          {participacoes.map((participacao, index) => {
+                          {rows.map((participacao, index) => {
                             let indexArray = index + participacao.documento;
                             return (
                               <tbody key={index}>
@@ -53,7 +71,6 @@ export default class Sociedades extends Component {
                                         label={participacao.nome}
                                     />
                                   </td>
-                                  <td>{participacao.qualificacaoSocio ? participacao.qualificacaoSocio : NENHUM_REGISTRO}</td>
                                   <td>{participacao.participacao ? participacao.participacao : NENHUM_REGISTRO}</td>
                                   <td>
                                       <MyButton

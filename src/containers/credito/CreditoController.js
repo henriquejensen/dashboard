@@ -45,7 +45,6 @@ const tiposCheque = [
 ]
 
 class Credito extends Component {
-
 	state = {
 		tipo: "",
 		expressTipo: "CPF",

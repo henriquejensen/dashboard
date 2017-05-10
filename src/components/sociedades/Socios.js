@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Col, Button } from "react-bootstrap";
 
 import Panel from "../panel/Panel";
-import Table from "../table/Table";
+import Table from "../table/MyTable";
 import MyButton from "../button/MyButton";
 import CardToShowMoreInTable from "../table/CardToShowMoreInTable";
 
@@ -13,7 +13,8 @@ const title = "QUADRO SOCIETÁRIO";
 export default class Socios extends Component {
 
     state = {
-      showMoreInfo: {}
+      showMoreInfo: {},
+      rows: this.props.socios ? this.props.socios : []
     }
 
     handleShowMoreInfo = (indexArray) => {
@@ -25,20 +26,39 @@ export default class Socios extends Component {
         })
     }
 
+    handleSortElements = (sortColumn, sortDirection='ASC') => {
+        const comparer = (a, b) => {
+            if (sortDirection === 'ASC') {
+                return (a[sortColumn] > b[sortColumn]) ? 1 : -1;
+            } else if (sortDirection === 'DESC') {
+                return (a[sortColumn] < b[sortColumn]) ? 1 : -1;
+            }
+        }
+ 
+        const rows = sortDirection === 'NONE' ? this.state.rows.slice(0) : this.state.rows.sort(comparer);
+
+        this.setState({ rows });
+    }
+
     render() {
-        let socios = this.props.socios ? this.props.socios : [];
+        let rows = this.state.rows;
         let handleSearchPerson = this.props.searchPerson;
         let handleShowMoreInfo = this.handleShowMoreInfo;
-        let fields= ["Nome", "Qualificação", "Participação", "#"];
+        let fields= [
+            {id:"nome", name:"Nome", sortable:true},
+            {id:"qualificacaoSocio", name:"Qualificação"},
+            {id:"participacao", name:"Participação", sortable:true},
+            {id:"btn", name:"#"}
+        ];
         let showMoreInfo = this.state.showMoreInfo;
         return (
                 <div>
                     <a name={"Sócios"+this.props.index}></a>
-                    {socios.length > 0 ?
-                        <Panel title={title} qtdTotal={[{icon:"fa fa-building-o", qtd:socios.length}]}>
+                    {rows.length > 0 ?
+                        <Panel title={title} qtdTotal={[{icon:"fa fa-building-o", qtd:rows.length}]}>
                             <Col md={12}>
-                                <Table fields={fields} >
-                                    {socios.map((soc,i) => {
+                                <Table fields={fields} handleSortElements={this.handleSortElements} >
+                                    {rows.map((soc,i) => {
                                         /**Alguns documentos ja veem formatados, entao retiro a formatacao para pegar o tamanho */
                                         let documento = soc.documento.toString().replace(/[^0-9]/g,"")
                                         let isCpfOrCnpj = documento.length > 11 ? "CNPJ" : "CPF";
@@ -55,7 +75,7 @@ export default class Socios extends Component {
                                                         />
                                                     </td>
                                                     <td>{soc.qualificacaoSocio ? soc.qualificacaoSocio : NENHUM_REGISTRO}</td>
-                                                    <td className="text-center">{soc.participacao ? soc.participacao : NENHUM_REGISTRO}%</td>
+                                                    <td className="text-center">{soc.participacao ? soc.participacao : NENHUM_REGISTRO}</td>
                                                     <td>
                                                         <MyButton
                                                             tooltip={TOOLTIP_SEE_MORE_INFO}

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Col } from "react-bootstrap";
 
 import Panel from "../panel/Panel";
-import Table from "../table/Table";
+import Table from "../table/MyTable";
 import MyButton from "../button/MyButton";
 import CardToShowMoreInTable from "../table/CardToShowMoreInTable";
 
@@ -13,9 +13,9 @@ import { formatCurrency } from "../utils/functions/patternDocuments";
 const title = "PROTESTOS";
 
 export default class Protestos extends Component {
-
     state = {
-      showMoreInfo: {}
+      showMoreInfo: {},
+      rows: this.props.protestos ? this.props.protestos.protestosDetalhados ? this.props.protestos.protestosDetalhados : [] : []
     }
 
     handleShowMoreInfo = (indexArray) => {
@@ -27,26 +27,40 @@ export default class Protestos extends Component {
         })
     }
 
+    handleSortElements = (sortColumn, sortDirection='ASC') => {
+        const comparer = (a, b) => {
+            if (sortDirection === 'ASC') {
+                return (a[sortColumn] > b[sortColumn]) ? 1 : -1;
+            } else if (sortDirection === 'DESC') {
+                return (a[sortColumn] < b[sortColumn]) ? 1 : -1;
+            }
+        }
+ 
+        const rows = sortDirection === 'NONE' ? this.state.rows.slice(0) : this.state.rows.sort(comparer);
+
+        this.setState({ rows });
+    }
+
     render() {
-        let protestos = this.props.protestos  ? this.props.protestos  : {};
+        let protestos = this.props.protestos ? this.props.protestos : {};
         let handleShowMoreInfo = this.handleShowMoreInfo;
-        let fields= ["Cartório", "Cidade-UF", "Data", "Valor", "#"];
+        let fields= [
+            {id:"cartorio", name:"Cartório"},
+            {id:"cidade", name:"Cidade-UF"},
+            {id:"dataProtesto", name:"Data", sortable:true},
+            {id:"valor", name:"Valor", sortable:true},
+            {id:"btn", name:"#"}
+        ];
         let showMoreInfo = this.state.showMoreInfo;
+        let rows = this.state.rows;
         return (
             <div>
                 <a name={"Protestos"+this.props.index}></a>
                 {protestos.protestosDetalhados && protestos.quantidadeRegistros > 0 ?
                   <Panel title={title} qtdTotal={[{icon:"fa fa-ban", qtd:protestos.protestosDetalhados.length}]}>
                     <Col md={12}>
-                      <Col md={4}><strong>Ocorrência mais Antiga:</strong> {protestos.ocorrenciaMaisAntiga}</Col>
-                      <Col md={4}><strong>Ocorrência mais Recente:</strong> {protestos.ocorrenciaMaisRecente}</Col>
-                      <Col md={4}><strong>Valor Total:</strong> {formatCurrency(protestos.valorTotal)}</Col>
-                    </Col>
-
-                    <Col md={12}>
-                      <Table fields={fields}>
-                        
-                          {protestos.protestosDetalhados.map((protesto, index) => {
+                      <Table fields={fields} handleSortElements={this.handleSortElements} >
+                          {rows.map((protesto, index) => {
                             let indexArray = index;
                             return (
                               <tbody key={index}>
@@ -68,7 +82,7 @@ export default class Protestos extends Component {
                                 </tr>
                                 <tr>
                                     {showMoreInfo[indexArray] ?
-                                        <td colSpan={4}>
+                                        <td colSpan={5}>
                                             <CardToShowMoreInTable
                                                 elements={
                                                     [
