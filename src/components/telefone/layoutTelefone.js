@@ -70,7 +70,7 @@ export default class LayoutTelefone extends Component{
     render() {
         return (
                 <div>
-                    <Col md={6}>
+                    <Col md={6} xs={6}>
                         <Table>
                             <tbody>
                                 {this.props.fixos && this.props.fixos.length > 0 ?
@@ -142,7 +142,7 @@ export default class LayoutTelefone extends Component{
                         </Table>
                     </Col>
 
-                    <Col md={6}>
+                    <Col md={6} xs={6}>
                         <Table>
                             <tbody>
                                 {this.props.moveis && this.props.moveis.length > 0 ?

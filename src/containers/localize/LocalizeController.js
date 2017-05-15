@@ -22,7 +22,7 @@ import {
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Alert, ControlLabel, Checkbox, Col, Tabs, Tab, Form, FormGroup, FormControl, InputGroup } from "react-bootstrap";
+import { ControlLabel, Checkbox, Col, Tabs, Tab, Form, FormGroup, FormControl, InputGroup } from "react-bootstrap";
 
 import BuscaPorRelacionados from "../../components/relacionados/BuscaPorRelacionados";
 import Protocolo from "../../components/protocolo/Protocolo";
@@ -205,7 +205,7 @@ class LocalizeController extends Component {
 	renderForm = () => {
 		return (
 			<span>
-				<Col md={8}>
+				<Col md={7}>
 					<input
 						className="form-control"
 						type={
@@ -313,7 +313,7 @@ class LocalizeController extends Component {
 						placeholder="Digite o nome da cidade (sem abreviação)"
 					/>
 				</Col>
-				<Col md={this.state.buscaAvancada ? 5 : 3}>
+				<Col md={this.state.buscaAvancada ? 5 : 2}>
 					<input
 						className="form-control"
 						type="text"
@@ -326,7 +326,7 @@ class LocalizeController extends Component {
 
 				{/*Input da busca avançada*/}
 				{this.state.buscaAvancada ?
-					<Col md={7}>
+					<Col md={6}>
 						<input
 							className="form-control"
 							name="nome"
@@ -421,7 +421,7 @@ class LocalizeController extends Component {
 						})}
 					</select>
 				</Col>
-				<Col md={this.state.buscaAvancada ? 6 : 5}>
+				<Col md={4}>
 					<input 
 						className="form-control"
 						type="text"
@@ -458,7 +458,7 @@ class LocalizeController extends Component {
 				: ""}
 
 				{this.state.buscaAvancada ?
-					<Col md={4}>
+					<Col md={5}>
 						<input
 							className="form-control"
 							name="enderecoOuCep"
@@ -544,16 +544,10 @@ class LocalizeController extends Component {
 			window.scrollTo(0, 0);
 		}
 		return(
-			<div className="container">
+			<div className="container my-container">
 				{this.form(this.props.type)}
 
 				{this.props.loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
-
-				{this.props.datas.length == 0 ?
-					<Alert bsStyle="warning" className="text-center">
-						As reconsultas realizadas no mesmo dia não serão cobradas
-					</Alert>
-				: ""}
 
 				{this.props.datas.length > 0 ? 
 					(

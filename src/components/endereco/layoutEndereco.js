@@ -4,8 +4,9 @@ import { Form, FormControl, FormGroup, Button } from "react-bootstrap";
 
 import MapPanel from "./MapPanel";
 import Table from "../table/Table";
+import MyButton from "../button/MyButton";
 
-import { NENHUM_REGISTRO } from "../../constants/utils";
+import { NENHUM_REGISTRO, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, TOOLTIP_SEE_MAP_MESSAGE, TOOLTIP_SEARCH_RELATED_PEOPLE_COMPANY_MESSAGE_ADDRESS } from "../../constants/utils";
 
 const tooltipMap = "tooltipMap";
 const tooltipConsultarMap = "tooltipConsultarMap";
@@ -32,90 +33,75 @@ export default class Enderecos extends Component {
 
   render() {
     let enderecos = this.props.enderecos ? this.props.enderecos : [];
+    let fields = ["Endereço", "Bairro", "Cidade", "UF", "CEP", "#"];
     return (
-            <div>
-                <Table
-                  fields={
-                    ["Endereço", "Bairro", "Cidade", "UF", "CEP", ""]
-                  }
-                >
-                  {enderecos.length > 0 ?
-                      enderecos.map((end,i) => {
-                          let cep = end.cep.toString();
-                          return (
-                            <tbody key={i}>
-                              <tr>
-                                <td>
-                                  {end.endereco ?
-                                    end.endereco :
-                                    (
-                                      (end.tipoLogradouro ? end.tipoLogradouro : "")
-                                      + (end.logradouro ? " " + end.logradouro : "")
-                                      + (end.numero ? ", " + end.numero : "")
-                                      + (end.complemento ? ", " + end.complemento : "")
-                                    )
-                                  }</td>
-                                <td>{end.bairro}</td>
-                                <td>{end.cidade}</td>
-                                <td>{end.uf}</td>
-                                <td>{cep.substring(0,cep.length-3)}-{cep.substring(cep.length-3)}</td>
-                                <td>
-                                    <a data-tip data-for={tooltipMap}>
-                                        <Button
-                                          bsStyle="info"
-                                          className={this.state.mapa && this.state.idCep == i+end.cep ? "noPrint mapa-button mapa-button-close" : "noPrint mapa-button"}
-                                          onClick={() => this.mostrarMapa(i+end.cep)}>
-                                            <i className={this.state.mapa && this.state.idCep == i+end.cep ? "fa fa-times-circle": "fa fa-map-o"} />
-                                        </Button>
-                                    </a>
-
-                                    {this.props.searchEndereco ? 
-                                      <a data-tip data-for={tooltipConsultarMap}>
-                                          <Button
-                                            bsStyle="info"
-                                            className="mapa-button"
-                                            onClick={() => this.props.searchEndereco(end, "ENDERECO", "ENDERECO")}>
-                                              <i className='fa fa-home'/>
-                                          </Button>
-                                      </a>
-                                    : ""}
-                                </td>
-                              </tr>
-
-                              <tr>
-                                  {this.state.mapa && this.state.idCep == i+end.cep ?
-                                    <td colSpan="8" style={{position:"relative"}}>
-                                      <MapPanel
-                                        endereco={
-                                          end.endereco ?
-                                            end.endereco :
-                                            (end.tipoLogradouro ? end.tipoLogradouro + "." : "") +
-                                          end.logradouro + "," + end.cidade}
-                                        latitude={end.latitude}
-                                        longitude={end.longitude} />
-                                    </td>
-                                  : ""}
-                              </tr>
-                            </tbody>
-                          )
-                      })
-                      :
+        <Table fields={fields}>
+          {enderecos.length > 0 ?
+              enderecos.map((end,i) => {
+                  let cep = end.cep.toString();
+                  return (
+                    <tbody key={i}>
                       <tr>
-                        <td colSpan={6} className="text-center">
-                          <strong>{NENHUM_REGISTRO}</strong>
-                          </td>
-                        </tr>}
+                        <td>
+                          {end.endereco ?
+                            end.endereco :
+                            (
+                              (end.tipoLogradouro ? end.tipoLogradouro : "")
+                              + (end.logradouro ? " " + end.logradouro : "")
+                              + (end.numero ? ", " + end.numero : "")
+                              + (end.complemento ? ", " + end.complemento : "")
+                            )
+                          }</td>
+                        <td>{end.bairro}</td>
+                        <td>{end.cidade}</td>
+                        <td>{end.uf}</td>
+                        <td>{cep.substring(0,cep.length-3)}-{cep.substring(cep.length-3)}</td>
+                        <td>
+                            <MyButton
+                                tooltip={TOOLTIP_SEE_MAP_MESSAGE}
+                                onClickButton={this.mostrarMapa}
+                                params={[i+end.cep]}
+                                myButtonClass={this.state.mapa && this.state.idCep == i+end.cep ? "noPrint my-button" : "noPrint my-button"}
+                                myButtonStyle="default"
+                                myButtonText={<i className={this.state.mapa && this.state.idCep == i+end.cep ? "fa fa-times-circle": "fa fa-map-o"} />}
+                            />
 
-                </Table>
+                            {this.props.searchEndereco ?
+                                <MyButton
+                                    tooltip={TOOLTIP_SEARCH_RELATED_PEOPLE_COMPANY_MESSAGE_ADDRESS}
+                                    onClickButton={this.props.searchEndereco}
+                                    params={[end, "ENDERECO", "ENDERECO"]}
+                                    myButtonText={<i className='fa fa-home'/>}
+                                />
+                            : ""}
+                        </td>
+                      </tr>
 
-              <Tooltip id={tooltipMap}>
-                <span>Visualizar endereço</span>
-              </Tooltip>
-
-              <Tooltip id={tooltipConsultarMap}>
-                <span>Consulta por endereço</span>
-              </Tooltip>
-
-            </div>)
+                      <tr>
+                          {this.state.mapa && this.state.idCep == i+end.cep ?
+                            <td colSpan="8" style={{position:"relative"}}>
+                              <MapPanel
+                                endereco={
+                                  end.endereco ?
+                                    end.endereco :
+                                    (end.tipoLogradouro ? end.tipoLogradouro + "." : "") +
+                                  end.logradouro + "," + end.cidade}
+                                latitude={end.latitude}
+                                longitude={end.longitude} />
+                            </td>
+                          : ""}
+                      </tr>
+                    </tbody>
+                  )
+              })
+              :
+              <tr>
+                <td colSpan={fields.length} className="text-center">
+                  <strong>{NENHUM_REGISTRO}</strong>
+                  </td>
+                </tr>
+              }
+        </Table>
+    )
   }
 }

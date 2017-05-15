@@ -6,7 +6,7 @@ import Table from "../table/MyTable";
 import MyButton from "../button/MyButton";
 import CardToShowMoreInTable from "../table/CardToShowMoreInTable";
 
-import { NENHUM_REGISTRO, TOOLTIP_SEARCH_BY_DOCUMENT, TOOLTIP_SEE_MORE_INFO } from "../../constants/utils";
+import { NENHUM_REGISTRO, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, TOOLTIP_SEE_MORE_INFO_MESSAGE, TOOLTIP_SEE_LESS_INFO_MESSAGE } from "../../constants/utils";
 
 const title = "PARTICIPAÇÕES EM EMPRESAS";
 
@@ -51,37 +51,37 @@ export default class Sociedades extends Component {
       ];
       let showMoreInfo = this.state.showMoreInfo;
       return (
-            <div>
-              <a name={"Participações em Empresas"+this.props.index}></a>
-                
-                {rows.length > 0 ?
-                  <Panel title={title} >
-                    <Col md={12}>
-                      <Table fields={fields}>
-                          {rows.map((participacao, index) => {
+            <Panel title={title} >
+
+                <a name={"Participações em Empresas"+this.props.index}></a>
+
+                <Col md={12}>
+                    {rows.length > 0 ?
+                        <Table fields={fields} handleSortElements={this.handleSortElements}>
+                            {rows.map((participacao, index) => {
                             let indexArray = index + participacao.documento;
                             return (
-                              <tbody key={index}>
+                                <tbody key={index}>
                                 <tr>
-                                  <td>
-                                    <MyButton
-                                        tooltip={TOOLTIP_SEARCH_BY_DOCUMENT}
-                                        onClickButton={handleSearchPerson}
-                                        params={[participacao.documento, isCpfOrCnpj]}
-                                        label={participacao.nome}
-                                    />
-                                  </td>
-                                  <td>{participacao.participacao ? participacao.participacao : NENHUM_REGISTRO}</td>
-                                  <td>
-                                      <MyButton
-                                          tooltip={TOOLTIP_SEE_MORE_INFO}
-                                          onClickButton={handleShowMoreInfo}
-                                          params={[indexArray]}
-                                          myButtonStyle="default"
-                                          myButtonClass="my-btn-more-details"
-                                          myButtonText={showMoreInfo[indexArray] ? "Menos informações" : "Mais informações"}
-                                      />
-                                  </td>
+                                    <td>
+                                        <MyButton
+                                            tooltip={TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE}
+                                            onClickButton={handleSearchPerson}
+                                            params={[participacao.documento, isCpfOrCnpj]}
+                                            label={participacao.nome}
+                                        />
+                                    </td>
+                                    <td>{participacao.participacao ? participacao.participacao : NENHUM_REGISTRO}</td>
+                                    <td>
+                                        <MyButton
+                                            tooltip={showMoreInfo[indexArray] ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}
+                                            onClickButton={handleShowMoreInfo}
+                                            params={[indexArray]}
+                                            myButtonStyle="default"
+                                            myButtonClass="my-btn-more-details"
+                                            myButtonText={showMoreInfo[indexArray] ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}
+                                        />
+                                    </td>
                                 </tr>
                                 <tr>
                                     {showMoreInfo[indexArray] ?
@@ -98,20 +98,16 @@ export default class Sociedades extends Component {
                                         </td>
                                     : ""}
                                 </tr>
-                              </tbody>
+                                </tbody>
                             )
-                          })}
+                            })}
                         
-                      </Table>
-                    </Col>
-
-                  </Panel>
-                :
-                  <Panel title={title}>
-                      <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
-                  </Panel>
-                }
-            </div>
+                        </Table>
+                    :
+                        <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
+                    }
+                </Col>
+            </Panel>
         )
     }
 }

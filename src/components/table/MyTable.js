@@ -20,8 +20,8 @@ export default class MyTable extends Component {
                                         {' '}
                                         {field.sortable ?
                                             <span>
-                                                <i className="fa fa-chevron-up" onClick={() => handleSortElements(field.id, 'ASC')} aria-hidden="true"></i>
-                                                <i className="fa fa-chevron-down" onClick={() => handleSortElements(field.id, 'DESC')} aria-hidden="true"></i>
+                                                <i className="noPrint fa fa-chevron-up" onClick={() => handleSortElements(field.id, 'ASC')} aria-hidden="true"></i>
+                                                <i className="noPrint fa fa-chevron-down" onClick={() => handleSortElements(field.id, 'DESC')} aria-hidden="true"></i>
                                             </span> : ""}
                                     </th>
                                 )

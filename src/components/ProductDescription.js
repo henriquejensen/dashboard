@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import Panel from "./panel/Panel";
+import { Col } from "react-bootstrap";
+
+const title = "Detalhes da consulta";
 
 export class LocalizeDescription extends Component {
     render() {
         return (
-            <Panel title="Detalhes da consulta" showPanel={false}>
-                <div className="col-md-6">
+            <Panel title={title} showPanel={false}>
+                <Col md={6}>
                     <strong>Pessoa Jurídica:</strong>
                     <ul style={{padding:"5px 25px", listStyle:"disc"}}>
                         <li>Síntese cadastral</li>
@@ -17,9 +20,9 @@ export class LocalizeDescription extends Component {
                         <li>Ações cíveis</li>
                         <li>Consultas anteriores</li>
                     </ul>
-                </div>
+                </Col>
 
-                <div className="col-md-6">
+                <Col md={6}>
                     <strong>Pessoa Física:</strong>
                     <ul style={{padding:"5px 25px", listStyle:"disc"}}>
                         <li>Sintese cadastral</li>
@@ -31,7 +34,7 @@ export class LocalizeDescription extends Component {
                         <li>Ações cíveis</li>
                         <li>Consultas anteriores</li>
                     </ul>
-                </div>
+                </Col>
             </Panel>
         )
     }

@@ -269,7 +269,7 @@ export default function(state = initialState, action) {
 			}
 			case SEARCH_BY_EMAIL: {
 				let responseServer = action.payload.response;
-				let labelEmail = "Email: "+responseServer.cabecalho.entrada;
+				let labelEmail = "EMAIL: "+responseServer.cabecalho.entrada;
 				let verifyIfEmailExists = searchDocument(newState.response, labelEmail);
 				
 				if(verifyIfEmailExists == -1) {
@@ -299,7 +299,7 @@ export default function(state = initialState, action) {
 				let telefones = responseServer.localizePorTelefone;
 				let labelTelefone, verifyIfTelefoneExists;
 				if(telefones) {
-					labelTelefone = "Tel: "+responseServer.cabecalho.entrada;
+					labelTelefone = "TEL: "+responseServer.cabecalho.entrada;
 					verifyIfTelefoneExists = searchDocument(newState.response, labelTelefone);
 					if(verifyIfTelefoneExists == -1) {
 						response.data = {
@@ -332,7 +332,8 @@ export default function(state = initialState, action) {
 						nameLabel.push(v)
 				});
 				nameLabel = nameLabel.toString();
-				let label = action.payload.parameters.tipo+": "+ nameLabel;
+				let tipo = action.payload.parameters.tipo.substring(0,3);
+				let label = tipo+": "+ nameLabel;
 
 				let nomeOuEndereco = {};
 				let verifyIfNomeOrEnderecoExists = searchDocument(newState.response, label);
@@ -387,10 +388,12 @@ export default function(state = initialState, action) {
 
 				//adiciona na pessoa relacionada os telefones encontrados
 				newState.response[posPessoaTelefone].pessoasRelacionadas[posPessoaRelacionadaTelefones].telefones = telefones;
+
+				let verifiedResult = telefones.fixos.length > 0 || telefones.moveis.length > 0;
 				
 				return {
-					status: Object.keys(telefones).length > 0 ? "telefones" : REQUEST_ERROR,
-					message: Object.keys(telefones).length > 0 ? "" : NENHUM_REGISTRO,
+					status: verifiedResult ? "telefones" : REQUEST_ERROR,
+					message: verifiedResult ? "" : NENHUM_REGISTRO,
 					loading: false,
 					response: newState.response,
 					tabActive: newState.tabActive,
@@ -463,17 +466,18 @@ export default function(state = initialState, action) {
 				 */
 				state.response[indexLabel].data.response[indexArrayElements][isEnderecoOuTelefone] = responseServer;
 
+				let verifiedResult = responseServer.length > 0 || responseServer.fixos || responseServer.moveis ? true : false;
+
 				return {
 					loading: false,
-					status: responseServer.length > 0 ? "OK" : REQUEST_ERROR,
-					message: responseServer.length > 0 ? "" : NENHUM_REGISTRO,
+					status: verifiedResult ? "OK" : REQUEST_ERROR,
+					message: verifiedResult ? "" : NENHUM_REGISTRO,
 					response: state.response,
 					tabActive: state.tabActive,
 					lastQueries: state.lastQueries,
 					type: state.type
 				}
 			}
-
 		}
 
 	return state;

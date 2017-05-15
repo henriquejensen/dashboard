@@ -9,6 +9,8 @@ import EnviarEndereco from "../forms/EnviarEndereco";
 
 import { NENHUM_REGISTRO } from "../../constants/utils";
 
+const title = "ENDEREÇOS";
+
 export default class Endereco extends Component {
     constructor(props) {
         super(props);
@@ -48,29 +50,24 @@ export default class Endereco extends Component {
 
     render() {
         return (
-            <span>
-                {this.props.enderecos ?
-                    <Panel title="ENDEREÇOS" qtdTotal={[{icon:"fa fa-home", qtd:this.props.enderecos.length}]}>
-                        <Col md={12} xs={12}>
-                            <LayoutEndereco
-                                enderecos={this.props.enderecos}
-                                newAddress={this.state.IsModalOpen}
-                                sendNewAddress={this.sendNewAddress}
-                                searchEndereco={this.props.searchEndereco} />
-                        </Col>
-                        
-                        <Col md={12} xs={12} className="relacionados">
-                            <a className="moreInfo" onClick={() => this.setState({IsModalOpen:!this.state.IsModalOpen})}>
-                                {this.state.IsModalOpen ?
-                                    "Cancelar"
-                                : "Adicionar um novo endereço"}
-                            </a>
-                            {this.props.pessoas}
-                        </Col>
-                    </Panel> :
-                    <Panel title="ENDEREÇOS">
-                        <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
-                    </Panel>}
+            this.props.enderecos ?
+                <Panel title={title} qtdTotal={[{icon:"fa fa-home", qtd:this.props.enderecos.length}]}>
+                    <Col md={12} xs={12}>
+                        <LayoutEndereco
+                            enderecos={this.props.enderecos}
+                            newAddress={this.state.IsModalOpen}
+                            sendNewAddress={this.sendNewAddress}
+                            searchEndereco={this.props.searchEndereco} />
+                    </Col>
+                    
+                    <Col md={12} xs={12} className="relacionados">
+                        <a className="moreInfo" onClick={() => this.setState({IsModalOpen:!this.state.IsModalOpen})}>
+                            {this.state.IsModalOpen ?
+                                "Cancelar"
+                            : "Adicionar um novo endereço"}
+                        </a>
+                        {this.props.pessoas}
+                    </Col>
 
                     <Modal
                         IsModalOpen={this.state.IsModalOpen}
@@ -83,8 +80,11 @@ export default class Endereco extends Component {
                     </Modal>
 
                     <Notification ref={n => this._notificationSystem = n} />
-              
-            </span>
+
+                </Panel> :
+                <Panel title={title}>
+                    <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
+                </Panel>
         )
     }
 }

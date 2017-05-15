@@ -1,3 +1,7 @@
+/*
+color link = #1a0dab
+*/
+
 body {
     font-family: roboto;
     background-color: #e7e7e7;
@@ -42,7 +46,7 @@ input {
 }
 
 .my-btn-form {
-    width: 40px;
+    width: 100%;
 }
 
 .my-btn-more-details {
@@ -147,7 +151,8 @@ input {
 }
 
 .moreInfo {
-    cursor: pointer
+    color: #1a0dab;
+    cursor: pointer;
 }
 
 .moreInfo:hover {
@@ -169,6 +174,12 @@ input {
 
 .icon-tel-hot:hover {
     color: red
+}
+
+.my-panel-heading {
+    position: relative;
+    font-weight: bold;
+    color: #333333;
 }
 
 .qtd-panel {
@@ -211,23 +222,43 @@ input {
     top: 250px;
 }
 
-.my-form {
+.my-container {
+    max-width: 1280px;
+}
+
+.my-container-form-product {
+    margin-top: 15px
+}
+
+.my-container-form-product > form {
     position: relative;
     margin: 0 auto;
 }
 
-.my-form div {
-    margin-top: 3px;
-    margin-bottom: 3px
+.my-container-form-product > div {
+    margin-bottom: 15px
 }
 
-.my-form > select {
+.my-container-form-product > #input-fields {
+    width: 100%;
+    float: left;
+    position: relative;
+}
+
+#input-fields > form div {
+    margin-bottom: 15px
+}
+
+.my-my-container-form-product > form > select {
     display: inline-block;
 }
 
 .busca-avancada {
-    color:#1a0dab;
-    cursor:pointer;
+    color: #1a0dab;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: -22px;
 }
 
 .busca-avancada:hover {
@@ -236,10 +267,6 @@ input {
 
 .table {
     margin-bottom: 0px;
-}
-
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    line-height: 1.62857143;
 }
 
 .close-modal {
@@ -260,11 +287,6 @@ input {
     top: 2px;
     cursor: pointer;
     font-size: 12px;
-}
-
-.container-form {
-    margin: 0 auto;
-    text-align: left;
 }
 
 .stylish-input-group .input-group-addon{
@@ -315,12 +337,13 @@ input {
     margin-bottom: 0px;
 }
 
-.panel-default>.panel-heading {
-    color: #89949B;
+.panel-body {
+    padding: 4px 0px;
 }
 
-.panel-body {
-    padding: 0px;
+.panel-footer {
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 #localize-tabs {
@@ -334,20 +357,15 @@ input {
     background-color: white;
 }
 
-.row-localize {
-    margin-bottom: 10px;
-}
-
 .mapa-button {
     background-color: #5bc0de;
     color: white;
     font-weight: bold;
     text-align: center;
     cursor: pointer;
-    width: 30px;
+    min-width: 30px;
     font-size: 11px;
     padding: 3px;
-    margin: 0px 10px;
 }
 
 .my-button {
@@ -370,6 +388,8 @@ table {
 
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     border-top: 0px solid #ddd;
+    line-height: 1.62857143;
+    padding-left: 0px;
 }
 
 .table-hover>tbody>tr:hover {
@@ -394,7 +414,25 @@ table {
     background: #c9302c;
 }
 
+#logo-company-print img {
+    display: none;
+}
+
+.margin-top-app {
+    margin-top: 52px;
+}
+
 @media print {
+    .margin-top-app {
+        margin-top: 0px;
+    }
+    #logo-company-print img {
+        margin: 0 auto;
+        display: block
+    }
+    .panel-footer{
+        display: none;
+    }
     .noPrint {
         display: none;
     }
@@ -419,13 +457,8 @@ table {
 }
 
 @media(max-width: 992px) {
-    .my-form {
+    .my-container-form-product > form {
         width: 100%;
-    }
-
-    .container-form {
-        width: 100%;
-        padding: 0 15px;
     }
 
     .select-form {

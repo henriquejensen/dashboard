@@ -144,7 +144,7 @@ class VeiculosController extends Component {
 
 	render() {
 		return (
-			<div className="container">
+			<div className="container my-container">
 				{this.form(this.props.type)}
 
 				{this.props.loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}

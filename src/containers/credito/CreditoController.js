@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Alert, Tabs, Tab} from "react-bootstrap";
+import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col, Tabs, Tab} from "react-bootstrap";
 
 import CreditoView from "./CreditoView";
 import LocalizeView from "../localize/LocalizeView";
 import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
-
-import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
 
 import {
 		changeTab,
@@ -153,7 +151,7 @@ class Credito extends Component {
 	renderForm(showUF) {
 		return (
 			<span>
-				<Col md={showUF ? 6 : 8}>
+				<Col md={showUF ? 5 : 7}>
 					<input
 						className="form-control"
 						type="text"
@@ -203,7 +201,7 @@ class Credito extends Component {
 						})}
 					</select>
 				</Col>
-				<Col md={this.state.tipoCheque != "Apenas Cadastro" ? 8 : 6}>
+				<Col md={this.state.tipoCheque != "Apenas Cadastro" ? 8 : 5}>
 					<input
 						className="form-control"
 						type="text"
@@ -290,7 +288,7 @@ class Credito extends Component {
 								onChange={this.onChangeInput}/>
 						</Col>
 
-						<Col md={4}>
+						<Col md={3}>
 							<input
 								className="form-control"
 								type="text"
@@ -330,7 +328,7 @@ class Credito extends Component {
 						onChange={this.onChangeInput}/>
 				</Col>
 
-				<Col md={10} className="text-center">
+				<Col md={9} className="text-center">
 					<FormGroup>
 						<Checkbox inline checked readOnly>
 							Cadastral
@@ -440,16 +438,10 @@ class Credito extends Component {
 			window.scrollTo(0, 0);
 		}
 		return (
-			<div className="container">
+			<div className="container my-container">
 				{this.form(type)}
 
 				{loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
-
-				{this.props.datas.length == 0 ?
-					<Alert bsStyle="warning" className="text-center">
-						As reconsultas realizadas no mesmo dia não serão cobradas
-					</Alert>
-				: ""}
 
 				{datas.length > 0 ? 
 					(

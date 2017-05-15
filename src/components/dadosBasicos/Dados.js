@@ -6,7 +6,9 @@ import { patternCPF, patternRG } from "../utils/functions/patternDocuments";
 
 import Panel from "../panel/Panel";
 
-import { NENHUM_REGISTRO } from "../../constants/utils";
+import { NENHUM_REGISTRO, TOOLTIP_SEE_MORE_INFO_MESSAGE, TOOLTIP_SEE_LESS_INFO_MESSAGE } from "../../constants/utils";
+
+const title = "DADOS CADASTRAIS";
 
 export default class Dados extends Component{
 
@@ -14,9 +16,17 @@ export default class Dados extends Component{
     moreInfo: false
   }
 
+  renderFooterPanel = () => {
+    return (
+        <div className="text-center moreInfo" onClick={() => this.setState({moreInfo:!this.state.moreInfo})}>
+            {!this.state.moreInfo ? TOOLTIP_SEE_MORE_INFO_MESSAGE : TOOLTIP_SEE_LESS_INFO_MESSAGE}
+        </div>
+    )
+  }
+
   render() {
     return (            
-          <Panel title="DADOS CADASTRAIS">
+          <Panel title={title} footer={this.renderFooterPanel()}>
             <Col md={6} xs={6}>
               <strong>Documento: </strong>
               {patternCPF(this.props.dados.cpf)}
@@ -69,13 +79,13 @@ export default class Dados extends Component{
                 </Col>
 
                 <Col md={6} xs={6}>
-                  <strong>Protocolo: </strong>
-                  {this.props.dados.statusProtocolo ? this.props.dados.statusProtocolo : NENHUM_REGISTRO}
+                  <strong>Titulo de eleitor: </strong>
+                  {this.props.dados.tituloEleitor ? this.props.dados.tituloEleitor : NENHUM_REGISTRO}
                 </Col>
 
                 <Col md={6} xs={6}>
-                  <strong>Titulo de eleitor: </strong>
-                  {this.props.dados.tituloEleitor ? this.props.dados.tituloEleitoral : NENHUM_REGISTRO}
+                  <strong>Protocolo: </strong>
+                  {this.props.dados.statusProtocolo ? this.props.dados.statusProtocolo : NENHUM_REGISTRO}
                 </Col>
 
                 <Col md={6} xs={6}>
@@ -87,22 +97,7 @@ export default class Dados extends Component{
                   <strong>Estado civil: </strong>
                   {this.props.dados.estadoCivil ? this.props.dados.estadoCivil : NENHUM_REGISTRO}
                 </Col>
-              </div> : ""}
-            
-              <div className="col-md-12 moreInfo" onClick={() => this.setState({moreInfo:!this.state.moreInfo})}>
-                <a data-tip data-for="moreInfo">
-                  <i 
-                    className={this.state.moreInfo ? "fa fa-minus pull-right moreInfo" : "fa fa-plus pull-right moreInfo"}
-                    style={!this.state.moreInfo ? {color:"#4caf50"} : {color:"#f44336"}} />
-                </a>
-              </div>
-
-              <Tooltip id="moreInfo">
-                <span>Mais informações</span>
-              </Tooltip>
-              <Tooltip id="tooltipConsultar">
-                <span>Consultar</span>
-              </Tooltip>
+              </div> : ""}          
           </Panel>
     )
   }

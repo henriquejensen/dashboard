@@ -6,7 +6,7 @@ import Table from "../table/MyTable";
 import MyButton from "../button/MyButton";
 import CardToShowMoreInTable from "../table/CardToShowMoreInTable";
 
-import { NENHUM_REGISTRO, TOOLTIP_SEE_MORE_INFO } from "../../constants/utils";
+import { NENHUM_REGISTRO, TOOLTIP_SEE_MORE_INFO_MESSAGE } from "../../constants/utils";
 
 import { formatCurrency } from "../utils/functions/patternDocuments";
 
@@ -54,31 +54,31 @@ export default class Protestos extends Component {
         let showMoreInfo = this.state.showMoreInfo;
         let rows = this.state.rows;
         return (
-            <div>
+            <Panel title={title} qtdTotal={[{icon:"fa fa-ban", qtd:rows.length}]}>
                 <a name={"Protestos"+this.props.index}></a>
-                {protestos.protestosDetalhados && protestos.quantidadeRegistros > 0 ?
-                  <Panel title={title} qtdTotal={[{icon:"fa fa-ban", qtd:protestos.protestosDetalhados.length}]}>
-                    <Col md={12}>
-                      <Table fields={fields} handleSortElements={this.handleSortElements} >
-                          {rows.map((protesto, index) => {
+                
+                <Col md={12}>
+                    {rows.length > 0 ?
+                        <Table fields={fields} handleSortElements={this.handleSortElements} >
+                            {rows.map((protesto, index) => {
                             let indexArray = index;
                             return (
-                              <tbody key={index}>
+                                <tbody key={index}>
                                 <tr>
-                                  <td>{protesto.cartorio}</td>
-                                  <td>{protesto.cidade+" - "+protesto.uf}</td>
-                                  <td>{protesto.dataProtesto}</td>
-                                  <td>{protesto.valor}</td>
-                                  <td>
-                                      <MyButton
-                                          tooltip={TOOLTIP_SEE_MORE_INFO}
-                                          onClickButton={handleShowMoreInfo}
-                                          params={[indexArray]}
-                                          myButtonStyle="default"
-                                          myButtonClass="my-btn-more-details"
-                                          myButtonText={showMoreInfo[indexArray] ? "Menos informações" : "Mais informações"}
-                                      />
-                                  </td>
+                                    <td>{protesto.cartorio}</td>
+                                    <td>{protesto.cidade+" - "+protesto.uf}</td>
+                                    <td>{protesto.dataProtesto}</td>
+                                    <td>{protesto.valor}</td>
+                                    <td>
+                                        <MyButton
+                                            tooltip={showMoreInfo[indexArray] ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}
+                                            onClickButton={handleShowMoreInfo}
+                                            params={[indexArray]}
+                                            myButtonStyle="default"
+                                            myButtonClass="my-btn-more-details"
+                                            myButtonText={showMoreInfo[indexArray] ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}
+                                        />
+                                    </td>
                                 </tr>
                                 <tr>
                                     {showMoreInfo[indexArray] ?
@@ -95,17 +95,15 @@ export default class Protestos extends Component {
                                         </td>
                                     : ""}
                                 </tr>
-                              </tbody>
+                                </tbody>
                             )
-                          })}
-                      </Table>
-                    </Col>
-                  </Panel>
-                  :
-                  <Panel title={title}>
-                      <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
-                  </Panel>}
-            </div>
+                            })}
+                        </Table>
+                    :
+                        <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
+                    }
+                </Col>
+            </Panel>
         )
     }
 }

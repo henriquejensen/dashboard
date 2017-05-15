@@ -6,7 +6,7 @@ import Panel from "../panel/Panel";
 import Table from "../table/MyTable";
 import MyButton from "../button/MyButton";
 
-import { NENHUM_REGISTRO, TOOLTIP_SEARCH_BY_DOCUMENT } from "../../constants/utils";
+import { NENHUM_REGISTRO, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE } from "../../constants/utils";
 
 const title = "CONSULTAS";
 
@@ -30,7 +30,6 @@ export default class Consultas extends Component {
     }
 
     render() {
-        let consultas = this.props.consultas ? this.props.consultas : {};
         let index = this.props.index;
         let fields= [
             {id:"consultante", name:"Nome do Associado"},
@@ -40,46 +39,43 @@ export default class Consultas extends Component {
         let isCpfOrCnpj = "CNPJ";
         let rows = this.state.rows;
         return (
-            <div>
+            <Panel title={title} qtdTotal={[{icon:"fa fa-search", qtd:rows.length}]}>
                 <a name={"Consultas por Segmento"+index}></a>
                 <a name={"Consultas"+index}></a>
-                {consultas.consultasAnteriores && rows.length > 0 ?
-                    <Panel title={title} qtdTotal={[{icon:"fa fa-search", qtd:rows.length}]}>
-                        <Col md={12}>
-                            <Table fields={fields} handleSortElements={this.handleSortElements}>
-                                <tbody>
-                                    {rows.map((consulta,index) => {
-                                        return (
-                                            <tr key={index}>
-                                                <td>
-                                                    {consulta.documento ?
-                                                        <MyButton
-                                                            tooltip={TOOLTIP_SEARCH_BY_DOCUMENT}
-                                                            onClickButton={handleSearchPerson}
-                                                            params={[consulta.documento, isCpfOrCnpj]}
-                                                            label={soc.nome}
-                                                        />
-                                                    : ""}
-                                                    {consulta.consultante}
-                                                </td>
-                                                <td>{consulta.data}</td>
-                                            </tr>
-                                        )
-                                    })}
+                <Col md={12}>
+                    {rows.length > 0 ?
+                        <Table fields={fields} handleSortElements={this.handleSortElements}>
+                            <tbody>
+                                {rows.map((consulta,index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>
+                                                {consulta.documento ?
+                                                    <MyButton
+                                                        tooltip={TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE}
+                                                        onClickButton={handleSearchPerson}
+                                                        params={[consulta.documento, isCpfOrCnpj]}
+                                                        label={soc.nome}
+                                                    />
+                                                : ""}
+                                                {consulta.consultante}
+                                            </td>
+                                            <td>{consulta.data}</td>
+                                        </tr>
+                                    )
+                                })}
 
-                                </tbody>
-                            </Table>
+                            </tbody>
+                        </Table>
+                    :
+                        <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
+                    }
 
-                        </Col>
-                        <Tooltip id="tooltipConsultar">
-                            <span>Consultar</span>
-                        </Tooltip>
-                    </Panel>
-                :
-                <Panel title={title}>
-                    <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
-                </Panel>}
-            </div>
+                </Col>
+                <Tooltip id="tooltipConsultar">
+                    <span>Consultar</span>
+                </Tooltip>
+            </Panel>
         )
     }
 }

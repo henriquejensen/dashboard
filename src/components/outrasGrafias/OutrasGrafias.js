@@ -13,32 +13,30 @@ export default class OutrasGrafias extends Component {
         let grafias = this.props.grafias ? this.props.grafias : [];
         let fields= ["Grafia", "Logradouro", "Bairro", "Cidade-UF"];
         return(
-            <div>
-                <a name={"Outras grafias"+this.props.index}></a>
-                {grafias.length > 0 ?
-                <Panel title={title} qtdTotal={[{icon:"fa fa-pencil", qtd:grafias.length}]}>
-                    <Table fields={fields}>
-                    <tbody>
-                        {grafias.map((grafia, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{grafia.nome}</td>
-                                    <td>{grafia.endereco}</td>
-                                    <td>{grafia.bairro}</td>
-                                    <td>{grafia.cidade+" - " + grafia.uf}</td>
-                                </tr>
-                            )
-                        })}
-                        </tbody>
-                    </Table>
-                </Panel>
-            
-            :
             <Panel title={title}>
-                <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
-            </Panel>}
-        </div>
-            
+                <a name={"Outras grafias"+this.props.index}></a>
+
+                <Col md={12}>
+                    {grafias.length > 0 ?
+                        <Table fields={fields}>
+                            <tbody>
+                                {grafias.map((grafia, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{grafia.nome}</td>
+                                            <td>{grafia.endereco}</td>
+                                            <td>{grafia.bairro}</td>
+                                            <td>{grafia.cidade+" - " + grafia.uf}</td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </Table>
+                    :
+                        <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
+                    }
+                </Col>
+            </Panel>            
         )
     }
 }

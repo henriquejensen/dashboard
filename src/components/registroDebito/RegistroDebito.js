@@ -6,7 +6,7 @@ import Table from "../table/MyTable";
 import MyButton from "../button/MyButton";
 import CardToShowMoreInTable from "../table/CardToShowMoreInTable";
 
-import { NENHUM_REGISTRO, TOOLTIP_SEE_MORE_INFO } from "../../constants/utils";
+import { NENHUM_REGISTRO, TOOLTIP_SEE_MORE_INFO_MESSAGE, TOOLTIP_SEE_LESS_INFO_MESSAGE } from "../../constants/utils";
 
 import { formatCurrency } from "../utils/functions/patternDocuments";
 
@@ -54,12 +54,11 @@ export default class RegistroDebito extends Component {
       let handleShowMoreInfo = this.handleShowMoreInfo;
       let rows = this.state.rows;
       return (
-        <div>
+        <Panel title={title}>
             <a name={"Registro de Débitos"+index}></a>
             <a name={"Pendências e Restrições Financeiras"+index}></a>
-            {registros && registros.registrosDebitos ?
-            <Panel title={title}>
-                <Col md={12}>
+            <Col md={12}>
+                {registros && registros.registrosDebitos ?
                     <Table fields={fields} handleSortElements={this.handleSortElements} >
                         {rows.map((reg, index) => {
                             let indexArray = index;
@@ -71,12 +70,12 @@ export default class RegistroDebito extends Component {
                                     <td>{formatCurrency(reg.valor)}</td>                        
                                     <td>
                                         <MyButton
-                                            tooltip={TOOLTIP_SEE_MORE_INFO}
+                                            tooltip={showMoreInfo[indexArray] ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}
                                             onClickButton={handleShowMoreInfo}
                                             params={[indexArray]}
                                             myButtonStyle="default"
                                             myButtonClass="my-btn-more-details"
-                                            myButtonText={showMoreInfo[indexArray] ? "Menos informações" : "Mais informações"}
+                                            myButtonText={showMoreInfo[indexArray] ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}
                                         />
                                     </td>
                                     </tr>
@@ -105,13 +104,11 @@ export default class RegistroDebito extends Component {
                         })}
                         
                     </Table>
-                </Col>
-            </Panel>
-            :
-            <Panel title={title}>
-                <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
-            </Panel>}
-        </div>
+                :
+                    <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
+                }
+            </Col>
+        </Panel>
         )
     }
 }

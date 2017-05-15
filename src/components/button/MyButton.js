@@ -1,5 +1,8 @@
 import React from 'react';
+import Tooltip from 'react-tooltip'
 import { Button } from "react-bootstrap";
+
+import { NENHUM_REGISTRO } from "../../constants/utils";
 
 const MyButton = (props) => {
     let tooltip = props.tooltip ? props.tooltip : "";
@@ -16,7 +19,12 @@ const MyButton = (props) => {
                     {myButtonText}
                 </Button>
             </a>
+            {' '}
             {labelButton}
+
+            <Tooltip id={tooltip}>
+                <span>{tooltip}</span>
+            </Tooltip>
         </span>
     );
 };

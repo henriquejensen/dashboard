@@ -8,17 +8,20 @@ import Telefone from "./telefone/layoutTelefone";
 import Endereco from "./endereco/layoutEndereco";
 
 import Modal from "./Modal";
+import MyButton from "./button/MyButton";
 
 import {
-    TOOLTIP_SEARCH_BY_ADDRESS,
+    NENHUM_REGISTRO,
     TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE,
-    TOOLTIP_SEARCH_BY_DOCUMENT,
     TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE,
-    TOOLTIP_SEARCH_BY_PHONE,
-    TOOLTIP_SEARCH_BY_PHONE_MESSAGE
+    TOOLTIP_SEARCH_BY_PHONE_MESSAGE,
+    TOOLTIP_SEARCH_BY_ADDRESS_IN_BATCH_MESSAGE,
+    TOOLTIP_SEARCH_BY_PHONES_IN_BATCH_MESSAGE
 } from "../constants/utils";
 
-const fields = ["Tipo", "Entrada", "Data/Hora", ""];
+import { patternCNPJ, patternCPF } from "./utils/functions/patternDocuments";
+
+const title = "ÚLTIMAS CONSULTAS";
 
 export default class UltimasConsultas extends Component {
     state = {
@@ -92,19 +95,17 @@ export default class UltimasConsultas extends Component {
 
     renderButtons = (items, tipo, index, documento, icon) => {
         return (
-            <a data-tip data-for={icon == "phone" ? TOOLTIP_SEARCH_BY_PHONE : TOOLTIP_SEARCH_BY_ADDRESS}>
-                <Button
-                    bsSize="small"
-                    bsStyle={this.state.buttonsClicked[icon][index] ? "danger" : "info"}
-                    className="my-button"
-                    onClick={items ? () => this.showMoreItems(index, icon) : () => this.search(tipo, index, documento, icon)}>
-                    {items ?
+            <MyButton
+                tooltip={icon == "phone" ? TOOLTIP_SEARCH_BY_PHONE_MESSAGE : TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE}
+                onClickButton={items ? this.showMoreItems :  this.search}
+                params={items ? [index, icon] : [tipo, index, documento, icon]}
+                myButtonStyle={this.state.buttonsClicked[icon][index] ? "danger" : "info"}
+                myButtonText={items ?
                         this.state.buttonsClicked[icon][index] ?
                             <i className='fa fa-times'/>
                         : <i className='fa fa-eye'/>
                     :   <i className={'fa fa-'+icon} /> }
-                </Button>
-            </a>
+            />
         )
     }
 
@@ -118,93 +119,95 @@ export default class UltimasConsultas extends Component {
 
     render() {
         let consultas = this.props.consultas ? this.props.consultas : [];
+        let isCpfOrCnpj = this.props.type;
+        let handleSearchPerson = this.props.search;
+        let fields = ["Tipo", "Entrada", "Data/Hora", ""];
         return (
-            <Panel title="ÚLTIMAS CONSULTAS">
-
-                {this.props.searchEnderecosTelefonesUltimasConsultas ? 
-                    <div style={{paddingLeft:8, paddingTop:5}}>
-                        <strong>Busca em lote por:</strong>
-                        {" "}
-                        <Button
-                            bsSize="small"
-                            bsStyle="info"
-                            style={{marginRight:15}}
-                            onClick={() => this.confirmSearch("enderecos", this.props.consultas, "home")}>
-                                endereços{' '}<i className='fa fa-home'/>
-                        </Button>
-                        <Button
-                            bsSize="small"
-                            bsStyle="info"
-                            onClick={() => this.confirmSearch("telefones", this.props.consultas, "phone")}>
-                                telefones{' '}<i className='fa fa-phone'/>
-                        </Button>
-                    </div>
-                : ""}
-
-                <Table fields={fields} >
-                    {consultas ?
-                            consultas.map((consulta, index) => {
-                                return (
-                                    <tbody key={index}>
-                                        <tr>
-                                            <td>{this.props.type}</td>
-                                            <td>
-                                                <a data-tip data-for={TOOLTIP_SEARCH_BY_DOCUMENT}>
-                                                    <Button
-                                                        bsStyle="info"
-                                                        className="mapa-button"
-                                                        onClick={() => this.props.search(consulta.entrada)}>
-                                                        <i className='fa fa-search'/>
-                                                    </Button>
-                                                </a>
-                                                {consulta.entrada}
-                                            </td>
-                                            <td>{new Date(consulta.dataHora).toLocaleString()}</td>
-                                            <td>
-                                                {this.props.searchEnderecosTelefonesUltimasConsultas ?
-                                                    <span>
-                                                        {" "}
-                                                        {this.renderButtons(consulta.enderecos, "enderecos", index, consulta.entrada, "home")}
-                                                        {" "}
-                                                        {this.renderButtons(consulta.telefones, "telefones", index, consulta.entrada, "phone")}
-                                                    </span>
-                                                : ""}
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            {consulta.enderecos && this.state.buttonsClicked.home[index] ?
-                                                <td colSpan={4}>
-                                                    <Endereco enderecos={consulta.enderecos} />
-                                                </td>
-                                            : ""}
-                                        </tr>
-                                        
-                                        <tr>
-                                            {consulta.telefones && this.state.buttonsClicked.phone[index]? 
-                                                <td colSpan={4} style={{padding:0}}>
-                                                    <Telefone fixos={consulta.telefones.fixos} moveis={consulta.telefones.moveis} />
-                                                </td>
-                                            : ""}
-                                        </tr>
-                                    
-                                    </tbody>
-                                )
-                            })                       
-                        
+                <Panel title={title}>
+                    {this.props.searchEnderecosTelefonesUltimasConsultas ? 
+                        <Col md={12}>
+                            <strong>Busca em lote por:</strong>
+                            {" "}
+                            <MyButton
+                                tooltip={TOOLTIP_SEARCH_BY_ADDRESS_IN_BATCH_MESSAGE}
+                                onClickButton={this.confirmSearch}
+                                params={["enderecos", this.props.consultas, "home"]}
+                                myButtonText={<i className='fa fa-home'/>}
+                            />
+                            <span style={{paddingRight:15}}></span>
+                            <MyButton
+                                tooltip={TOOLTIP_SEARCH_BY_PHONES_IN_BATCH_MESSAGE}
+                                onClickButton={this.confirmSearch}
+                                params={["telefones", this.props.consultas, "phone"]}
+                                myButtonText={<i className='fa fa-phone'/>}
+                            />
+                        </Col>
                     : ""}
-                </Table>
 
-                <Modal
-                    IsModalOpen={this.state.IsModalOpen}
-                    closeModal={this.closeModal}
-                    title={"Busca em lote"}
-                    size="small"
-                >
-                    {this.confirmMessage(consultas)}
-                </Modal>
+                    <Col md={12}>
+                        {consultas.length > 0 ?
+                            <Table fields={fields} >
+                                {consultas.map((consulta, index) => {
+                                    return (
+                                        <tbody key={index}>
+                                            <tr>
+                                                <td>{isCpfOrCnpj}</td>
+                                                <td>
+                                                    <MyButton
+                                                        tooltip={TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE}
+                                                        onClickButton={handleSearchPerson}
+                                                        params={[consulta.entrada]}
+                                                        label={isCpfOrCnpj === "CPF" ? patternCPF(consulta.entrada) : isCpfOrCnpj === "CNPJ" ? patternCNPJ(consulta.entrada) : consulta.entrada}
+                                                    />
+                                                </td>
+                                                <td>{new Date(consulta.dataHora).toLocaleString()}</td>
+                                                <td>
+                                                    {this.props.searchEnderecosTelefonesUltimasConsultas ?
+                                                        <span>
+                                                            {this.renderButtons(consulta.enderecos, "enderecos", index, consulta.entrada, "home")}
+                                                            <span style={{paddingRight:15}}></span>
+                                                            {this.renderButtons(consulta.telefones, "telefones", index, consulta.entrada, "phone")}
+                                                        </span>
+                                                    : ""}
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                {consulta.enderecos && this.state.buttonsClicked.home[index] ?
+                                                    <td colSpan={4}>
+                                                        <Col md={12}>
+                                                            <Endereco enderecos={consulta.enderecos} />
+                                                        </Col>
+                                                    </td>
+                                                : ""}
+                                            </tr>
+                                            
+                                            <tr>
+                                                {consulta.telefones && this.state.buttonsClicked.phone[index]? 
+                                                    <td colSpan={4} style={{padding:0}}>
+                                                        <Telefone fixos={consulta.telefones.fixos} moveis={consulta.telefones.moveis} />
+                                                    </td>
+                                                : ""}
+                                            </tr>                                       
+                                        </tbody>
+                                    )
+                                })}                   
+                            </Table>
+                        :
+                            <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
+                        }   
+                    </Col>
 
-            </Panel>
+                    <Modal
+                        IsModalOpen={this.state.IsModalOpen}
+                        closeModal={this.closeModal}
+                        title={"Busca em lote"}
+                        size="small"
+                    >
+                        {this.confirmMessage(consultas)}
+                    </Modal>
+
+                </Panel>
         )
     }
 }

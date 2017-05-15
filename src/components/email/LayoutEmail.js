@@ -92,11 +92,11 @@ export default class Emails extends Component {
         let medium = Math.round(emails.length/2);
         return (
             <div>
-                <Col md={6}>
+                <Col md={6} xs={6}>
                     {this.renderEmail(emails.slice(0, medium))}
                 </Col>
                 
-                <Col md={6}>
+                <Col md={6} xs={6}>
                     {this.renderEmail(emails.slice(medium, emails.length))}
                 </Col>
 

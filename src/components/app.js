@@ -26,6 +26,8 @@ import {
     TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE
 } from "../constants/utils";
 
+import { COMPANY_LOGO, COMPANY_NAME_SHORT } from "../constants/constantsCompany";
+
 class App extends Component {
   state = {
     active: screen.width > 768 ? true : false
@@ -56,8 +58,12 @@ class App extends Component {
               <Sidebar onMenuClicked={this.onMenuClicked} activedMenu={active}/>
             </div>
 
+            <Col md={12} className="text-center" id="logo-company-print">
+              <img src={COMPANY_LOGO} alt={"Logo da "+COMPANY_NAME_SHORT} />
+            </Col>
+
             <div className="container-fluid main" id={active ? "menu-opened" : {}}>
-              <div style={{marginTop:52}}>
+              <div className="margin-top-app">
                 {this.props.children}
               </div>  
             </div>

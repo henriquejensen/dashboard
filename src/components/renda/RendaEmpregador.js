@@ -11,7 +11,7 @@ import CardToShowMoreInTable from "../table/CardToShowMoreInTable";
 
 import { formatDate, formatCurrency } from "../utils/functions/patternDocuments";
 
-import { NENHUM_REGISTRO, TOOLTIP_SEARCH_BY_DOCUMENT, TOOLTIP_SEE_MORE_INFO } from "../../constants/utils";
+import { NENHUM_REGISTRO, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, TOOLTIP_SEE_MORE_INFO_MESSAGE, TOOLTIP_SEE_LESS_INFO_MESSAGE } from "../../constants/utils";
 
 const title = "RENDA EMPREGADOR";
 
@@ -26,8 +26,6 @@ export default class RendaEmpregador extends Component {
 
         this._notificationSystem = null;
     }
-
-
 
     _addNotification(message) {
         if (this._notificationSystem) {
@@ -72,86 +70,84 @@ export default class RendaEmpregador extends Component {
         let fields = ["Empregador", "Setor", "Data Referência", "#"];
         let showMoreInfo = this.state.showMoreInfo;
         return (
-            <span>
-                {rendas.length > 0 ?
-                    <Panel title={title} qtdTotal={[{icon:"fa fa-money", qtd:rendas.length}]}>
-                        <Col md={12} sm={12}>            
-                            <Table fields={fields}>
-                                {rendas.map((renda, index) => {
-                                    let indexArray = index + renda.documentoEmpregador;
-                                    return (
-                                        <tbody key={index}>
-                                            <tr>
-                                                <td>
-                                                    <MyButton
-                                                        tooltip={TOOLTIP_SEARCH_BY_DOCUMENT}
-                                                        onClickButton={handleSearchPerson}
-                                                        params={[renda.documentoEmpregador, isCpfOrCnpj]}
-                                                        label={renda.empregador}
+            <Panel title={title} qtdTotal={[{icon:"fa fa-money", qtd:rendas.length}]}>
+                <Col md={12} sm={12}>
+                    {rendas.length > 0 ?       
+                        <Table fields={fields}>
+                            {rendas.map((renda, index) => {
+                                let indexArray = index + renda.documentoEmpregador;
+                                return (
+                                    <tbody key={index}>
+                                        <tr>
+                                            <td>
+                                                <MyButton
+                                                    tooltip={TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE}
+                                                    onClickButton={handleSearchPerson}
+                                                    params={[renda.documentoEmpregador, isCpfOrCnpj]}
+                                                    label={renda.empregador}
+                                                />
+                                            </td>
+                                            <td>{renda.setorEmpregador}</td>
+                                            <td>{formatDate(renda.rendaDataRef)}</td>
+                                            <td>
+                                                <MyButton
+                                                    tooltip={showMoreInfo[indexArray] ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}
+                                                    onClickButton={handleShowMoreInfo}
+                                                    params={[indexArray]}
+                                                    myButtonStyle="default"
+                                                    myButtonClass="my-btn-more-details"
+                                                    myButtonText={showMoreInfo[indexArray] ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}
+                                                />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            {showMoreInfo[indexArray] ?
+                                                <td colSpan={4}>
+                                                    <CardToShowMoreInTable
+                                                        elements={
+                                                            [
+                                                                {label:"Setor empregador", value:renda.setorEmpregador},
+                                                                {label:"Faixa de Renda", value:renda.faixaRenda},
+                                                                {label:"Renda estimada", value:renda.rendaEstimada},
+                                                                {label:"CBO código", value:renda.cboCodigo},
+                                                                {label:"CBO Descrição", value:renda.cboDescricao},
+                                                                {label:"CBO Setor", value:renda.cboSetor},
+                                                                {label:"CBO Sinônimos", value:renda.cboSinonimos}                                                                    
+                                                            ]
+                                                        }
                                                     />
                                                 </td>
-                                                <td>{renda.setorEmpregador}</td>
-                                                <td>{formatDate(renda.rendaDataRef)}</td>
-                                                <td>
-                                                    <MyButton
-                                                        tooltip={TOOLTIP_SEE_MORE_INFO}
-                                                        onClickButton={handleShowMoreInfo}
-                                                        params={[indexArray]}
-                                                        myButtonStyle="default"
-                                                        myButtonClass="my-btn-more-details"
-                                                        myButtonText={showMoreInfo[indexArray] ? "Menos informações" : "Mais informações"}
-                                                    />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                {showMoreInfo[indexArray] ?
-                                                    <td colSpan={4}>
-                                                        <CardToShowMoreInTable
-                                                            elements={
-                                                                [
-                                                                    {label:"Setor empregador", value:renda.setorEmpregador},
-                                                                    {label:"Faixa de Renda", value:renda.faixaRenda},
-                                                                    {label:"Renda estimada", value:renda.rendaEstimada},
-                                                                    {label:"CBO código", value:renda.cboCodigo},
-                                                                    {label:"CBO Descrição", value:renda.cboDescricao},
-                                                                    {label:"CBO Setor", value:renda.cboSetor},
-                                                                    {label:"CBO Sinônimos", value:renda.cboSinonimos}                                                                    
-                                                                ]
-                                                            }
-                                                        />
-                                                    </td>
-                                                : ""}
-                                            </tr>
-                                        </tbody>
-                                    )
-                                })}
-                            </Table>
-                            
-                            <a className="moreInfo" onClick={() => this.setState({IsModalOpen:!IsModalOpen})}>
-                                {IsModalOpen ?
-                                    "Cancelar"
-                                : "Adicionar um nova renda"}
-                            </a>
-
-                        </Col>
-                    </Panel>
-                :
-                    <Panel title={title}>
+                                            : ""}
+                                        </tr>
+                                    </tbody>
+                                )
+                            })}
+                        </Table>
+                    :
                         <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
-                    </Panel>
-                }
-                    <Modal
-                        IsModalOpen={IsModalOpen}
-                        closeModal={this.closeModal}
-                        title="Inserção de um novo endereço"
-                    >
+                    }
+                    
+                    <a className="moreInfo" onClick={() => this.setState({IsModalOpen:!IsModalOpen})}>
+                        {IsModalOpen ?
+                            "Cancelar"
+                        : "Adicionar um nova renda"}
+                    </a>
 
-                        <EnviarRenda send={this.sendNewIncome} />
+                </Col>
 
-                    </Modal>
+                <Modal
+                    IsModalOpen={IsModalOpen}
+                    closeModal={this.closeModal}
+                    title="Inserção de um novo endereço"
+                >
 
-                    <Notification ref={n => this._notificationSystem = n} />
-            </span>
+                    <EnviarRenda send={this.sendNewIncome} />
+
+                </Modal>
+
+                <Notification ref={n => this._notificationSystem = n} />
+
+            </Panel>
         )
     }
 }
