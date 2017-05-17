@@ -60,31 +60,39 @@ export const ERROR_400_UNAUTHORIZED_MESSAGE = "Houve algum problema com a aplica
 export const ERROR_401_UNAUTHORIZED = "ERROR_401_UNAUTHORIZED";
 export const ERROR_401_UNAUTHORIZED_MESSAGE = "Por favor, realize a sua identificação para acessar o sistema";
 
+/**Imagens utilizadas no portal */
 export const IMAGE_ANY_TOKEN = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/warning.png";
-
 export const LOADING_GIF = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/loading.gif";
-export const LOGO_LOCALIZE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-localiz" +
-        "e.png";
-export const ICON_LOCALIZE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-localiz" +
-        "e-new.png";
-export const LOGO_CREDITO = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-credito" +
-        ".png";
-export const ICON_CREDITO = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-new" +
-        ".png";
-export const LOGO_FOCOFISCAL = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-focofis" +
-        "cal.png";
-export const ICON_FOCOFISCAL = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-focofis" +
-        "cal-new.png";
+
+export const LOGO_LOCALIZE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-localize.png";
+export const ICON_LOCALIZE_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-localize-negative.png";
+export const ICON_LOCALIZE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-localize.png";
+
+export const LOGO_CREDITO = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-credito.png";
+export const ICON_CREDITO = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito.png";
+export const ICON_CREDITO_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png";
+
+export const LOGO_FOCOFISCAL = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-focofiscal.png";
+export const ICON_FOCOFISCAL = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-focofiscal.png";
+export const ICON_FOCOFISCAL_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-focofiscal-negative.png";
+
 export const LOGO_SMS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-sms.png";
-export const ICON_SMS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-sms-new.png";
-export const LOGO_BASECERTA = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-basecer" +
-        "ta.png";
-export const ICON_BASECERTA = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-basecer" +
-        "ta-new.png";
+export const ICON_SMS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-sms.png";
+export const ICON_SMS_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-sms-negative.png";
+
+export const LOGO_BASECERTA = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-basecerta.png";
+export const ICON_BASECERTA = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-basecerta.png";
+export const ICON_BASECERTA_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-basecerta-negative.png";
+
 export const LOGO_VENDAMAIS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-vendamais.png";
-export const ICON_VENDAMAIS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-vendamais-new.png";
+export const ICON_VENDAMAIS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-vendamais.png";
+export const ICON_VENDAMAIS_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-vendamais-negative.png";
+
 export const LOGO_VEICULOS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-veiculos.png";
-export const ICON_VEICULOS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-veiculos-new.png";
+export const ICON_VEICULOS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-veiculos.png";
+export const ICON_VEICULOS_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-veiculos-negative.png";
+
 export const LOGO_CONSIGMAIS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-consigmais.png";
-export const ICON_CONSIGMAIS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-consigmais-new.png";
+export const ICON_CONSIGMAIS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-consigmais.png";
+export const ICON_CONSIGMAIS_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-consigmais-negative.png";
 

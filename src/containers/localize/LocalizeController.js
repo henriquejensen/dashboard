@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip';
+
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { ControlLabel, Checkbox, Col, Tabs, Tab, Form, FormGroup, FormControl, InputGroup } from "react-bootstrap";
+
 import { changeProductType } from "../../actions/actionsCommon";
 import {
 		getLastQueries,
@@ -20,17 +25,13 @@ import {
 		closeMessageErrorLocalize
 } from "../../actions/index";
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { ControlLabel, Checkbox, Col, Tabs, Tab, Form, FormGroup, FormControl, InputGroup } from "react-bootstrap";
-
 import BuscaPorRelacionados from "../../components/relacionados/BuscaPorRelacionados";
 import Protocolo from "../../components/protocolo/Protocolo";
 import LocalizeView from "./LocalizeView";
 import CreditoView from "../credito/CreditoView";
-
 import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
+import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
 
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO } from "../../constants/constantsCompany";
 import { LOGO_LOCALIZE, ICON_LOCALIZE, LOADING_GIF, SUCCESS, REQUEST_ERROR, ERR_CONNECTION_REFUSED } from "../../constants/utils";
@@ -38,7 +39,6 @@ import { CPF_CODE, CNPJ_CODE, EMAIL_CODE, TELEFONE_CODE, NOME_ENDERECO_CODE } fr
 
 import estados from "../../components/utils/common/estados.json";
 import menu from "../../components/utils/common/menu.json";
-import tiposLogradouro from "../../components/utils/common/tiposLogradouro.json";
 
 class LocalizeController extends Component {
 	state = {
@@ -108,9 +108,9 @@ class LocalizeController extends Component {
 
 	//recebe o documento da pessoa e da pessoa relacionada a esta e
 	//irá buscar pelo telefone ou endereço da pessoa
-	searchEnderecosPessoaRelacionada = (documento, docPessoaRelacionado) => {
+	searchEnderecosPessoaRelacionada = (documento, docPessoaRelacionado, isCpfOrCnpj) => {
 		this.props.loadingLocalize();
-		this.props.searchEnderecosPessoaRelacionada(documento, docPessoaRelacionado);
+		this.props.searchEnderecosPessoaRelacionada(documento, docPessoaRelacionado, isCpfOrCnpj);
 	}
 
 	searchLocalize = (doc, tipo) => {
@@ -540,6 +540,7 @@ class LocalizeController extends Component {
 	}
 
 	render() {
+		let loading = this.props.loading;
 		if(this.props.status == SUCCESS || this.props.status == ERR_CONNECTION_REFUSED || this.props.status == REQUEST_ERROR) {
 			window.scrollTo(0, 0);
 		}
@@ -547,7 +548,9 @@ class LocalizeController extends Component {
 			<div className="container my-container">
 				{this.form(this.props.type)}
 
-				{this.props.loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
+				{loading ? <LoadingScreen /> : ""}
+
+				{this.props.datas.length > 0 ? <PrintScreen /> : ""}
 
 				{this.props.datas.length > 0 ? 
 					(

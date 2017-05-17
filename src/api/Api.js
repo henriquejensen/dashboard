@@ -18,7 +18,7 @@ export function apiContentType(dispatch, url, data, search, parameters) {
             if (response) {
                 if(response.status == 200) {
                     let valuesBody = response.body ? Object.keys(response.body) : [];
-                    if(!response.body.erro && valuesBody.length > 0) {
+                    if(response.body && !response.body.erro && valuesBody.length > 0) {
                         dispatch({
                             type: search,
                             payload: {
@@ -30,7 +30,7 @@ export function apiContentType(dispatch, url, data, search, parameters) {
                         /**alguns retornos de json são entregues com as informacoes em null e status 200, por isso a verificacao */
                         dispatch({
                             type: REQUEST_ERROR,
-                            payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
+                            payload: {mensagem: response.body && response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
                         });
                     }
                 } else if(response.status == 401) {
@@ -38,7 +38,7 @@ export function apiContentType(dispatch, url, data, search, parameters) {
                 } else {
                     dispatch({
                         type: REQUEST_ERROR,
-                        payload: {mensagem: response.body ? response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO : NENHUM_REGISTRO}
+                        payload: {mensagem: response.body && response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
                     });
                 }
             } else {
@@ -57,7 +57,7 @@ export function api(dispatch, url, data, search, parameters) {
                 if(response.status == 200) {
                     /**Verifica se o body possui informacao */
                     let valuesBody = response.body ? Object.keys(response.body) : [];
-                    if(!response.body.erro && valuesBody.length > 0) {
+                    if(response.body && !response.body.erro && valuesBody.length > 0) {
                         dispatch({
                             type: search,
                             payload: {
@@ -69,7 +69,7 @@ export function api(dispatch, url, data, search, parameters) {
                         /**alguns retornos de json são entregues com as informacoes em null e status 200, por isso a verificacao */
                         dispatch({
                             type: REQUEST_ERROR,
-                            payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
+                            payload: {mensagem: response.body && response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
                         });
                     }
                 } else if(response.status == 401) {
@@ -77,7 +77,7 @@ export function api(dispatch, url, data, search, parameters) {
                 } else {
                     dispatch({
                         type: REQUEST_ERROR,
-                        payload: {mensagem: response.body ? response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO : NENHUM_REGISTRO}
+                        payload: {mensagem: response.body && response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
                     });
                 }
             } else {
@@ -96,7 +96,7 @@ export function apiWithKeySession(dispatch, url, data, search, parameters) {
                 if(response.status == 200) {
                     /**Verifica se o body possui informacao */
                     let valuesBody = response.body ? Object.keys(response.body) : [];
-                    if(!response.body.erro && valuesBody.length > 0) {
+                    if(response.body && !response.body.erro && valuesBody.length > 0) {
                         dispatch({
                             type: search,
                             payload: {
@@ -108,7 +108,7 @@ export function apiWithKeySession(dispatch, url, data, search, parameters) {
                         /**alguns retornos de json são entregues com as informacoes em null e status 200, por isso a verificacao */
                         dispatch({
                             type: REQUEST_ERROR,
-                            payload: {mensagem: response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
+                            payload: {mensagem: response.body && response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
                         });
                     }
                 } else if(response.status == 401) {
@@ -116,7 +116,7 @@ export function apiWithKeySession(dispatch, url, data, search, parameters) {
                 } else {
                     dispatch({
                         type: REQUEST_ERROR,
-                        payload: {mensagem: response.body ? response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO : NENHUM_REGISTRO}
+                        payload: {mensagem: response.body && response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
                     });
                 }
             } else {

@@ -4,7 +4,7 @@ import { Col } from "react-bootstrap";
 import TelefoneLayout from "../telefone/layoutTelefone";
 import EnderecoLayout from "../endereco/layoutEndereco";
 import Panel from "../panel/Panel";
-import Table from "../table/Table";
+import Table from "../table/MyTable";
 import MyButton from "../button/MyButton";
 
 import {
@@ -13,7 +13,7 @@ import {
     TOOLTIP_SEARCH_BY_PHONE_MESSAGE
 } from "../../constants/utils";
 
-export default class Relacionados extends Component {
+export default class PessoasRelacionadas extends Component {
     state = {
         showMessageSeeMore: true,
         phone: true,
@@ -21,7 +21,8 @@ export default class Relacionados extends Component {
         buttonsClicked: {
             phone: {},
             home: {}
-        }
+        },
+        rows: this.props.relacionados ? this.props.relacionados : []
     }
 
     searchPessoasRelacionadas = (doc, label) => {
@@ -83,14 +84,21 @@ export default class Relacionados extends Component {
 
     render() {
         let handleSearchPerson = this.props.searchPerson;
+        let title = "PESSOAS RELACIONADAS";
+        let fields= [
+            {id:"relacao", name:"Relação"},
+            {id:"nome", name:"Nome"},
+            {id:"btn", name:"#"}
+        ];
+        let rows = this.props.relacionados;
         return (
             <Panel
-                title="PESSOAS RELACIONADAS"
+                title={title}
                 footer={this.state.showMessageSeeMore ? this.renderFooterPanel() : ""}
                 >
                 <Col md={12}>
-                    <Table fields= {["Relação", "Nome", ""]} >
-                        {this.props.relacionados.map((pessoa, index) => {
+                    <Table fields= {fields} handleSortElements={this.handleSortElements} >
+                        {rows.map((pessoa, index) => {
                             let isCpfOrCnpj = pessoa.documento ? pessoa.documento.length > 11 ? "CNPJ" : "CPF" : "";
                             return (
                                 <tbody key={index}>

@@ -5,24 +5,16 @@ import { connect } from "react-redux";
 
 import { changeColorMenu, changeProductType } from "../actions/actionsCommon";
 
-import menu from "./utils/common/menu.json";
-import todosProdutos from "./utils/common/produtos.json";
+import { todosProdutos } from "./utils/common/produtos.js";
 import CardInfoMenuUser from "./utils/CardInfoMenuUser";
 
 class Sidebar extends Component {
   state = {
-    tabActive: "menu",
     menuOpened: ""
   }
 
   componentDidMount() {
     this.activeMenuDropdown(location.pathname.split("/")[1]);
-  }
-
-  _changeTab(tab) {
-    this.setState({
-      tabActive: tab
-    })
   }
   
   activeMenuDropdown = (menu) => {
@@ -40,26 +32,30 @@ class Sidebar extends Component {
 
   renderMenu() {
     let produtos = this.props.produtosCliente ? this.props.produtosCliente : [];
+    let handleChangeColor = this.props.changeColorMenu;
+    let menuOpened = this.state.menuOpened;
+    let activedMenu = this.props.activedMenu; //se false o sidebar esta contraido(default para mobile)
     return (
-        <div className={this.state.tabActive == "menu" ? "tab-pane active":"tab-pane"} id="sidebar">
+        <div id="sidebar">
           <ul className="sidebar-nav">
             {produtos.map((produto, index) => {
+              produto = produto.replace(/\+/g,"MAIS"); //ex: VENDA+ -> VENDAMAIS
+              produto = produto.replace(/[^a-zA-Z]/g,""); //ex: BASE CERTA -> BASECERTA
               let opt = todosProdutos[produto];
               if(opt) {
                 return (
-                  <li
-                    key={index}
-                    onClick={() => {this.props.changeColorMenu(opt.color)}}>
+                  <li key={index} onClick={() => {handleChangeColor(opt.color)}}>
                       <Link
                         to={opt.link}
-                        className="teste"
                         onClick={() => this.activeMenuDropdown(opt.id)}
                         activeStyle={{backgroundColor: opt.color, color:"white"}}>
-                        {this.props.activedMenu ?
-                          <img src={opt.image} className="sub-icon" alt={opt.alt}/>
+                        {activedMenu ?
+                          <img src={menuOpened == opt.id ? opt.imageNegative : opt.image} className="sub-icon" alt={opt.alt}/>
                         : ""}
+
                         {opt.label}
-                        {!this.props.activedMenu ?
+
+                        {!activedMenu ?
                           <img
                             src={opt.image}
                             className="sub-icon sub-icon-open-menu"
@@ -67,7 +63,7 @@ class Sidebar extends Component {
                         : ""}
                       </Link>
 
-                      <ul className={this.state.menuOpened == opt.id && this.props.activedMenu ? "sidebar-item-dropdown" : "display-none"}
+                      <ul className={menuOpened == opt.id && activedMenu ? "sidebar-item-dropdown" : "display-none"}
                       style={{backgroundColor:opt.colorLight}}>
                         {opt.subItems.map((subOpt, j) => {
                           return (
@@ -87,33 +83,6 @@ class Sidebar extends Component {
               }
             })}
                           
-          </ul>
-        </div>
-    )
-  }
-
-  renderChat() {
-    return (
-        <div className={this.state.tabActive == "chat" ? "tab-pane active":"tab-pane"} id="sidebar">
-          <ul className="sidebar-nav">
-            <li className="sidebar-items">Online</li>
-            <li><Link to="/chat" >Jessica<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub-icon sub-icon-open-menu" alt="Icone Localize"/></Link></li>
-            <li><Link to="/chat">Roberta<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub-icon sub-icon-open-menu" alt="Icone Localize"/></Link></li>
-            <li><Link to="/chat">Nayara<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub-icon sub-icon-open-menu" alt="Icone Localize"/></Link></li>
-            
-            <li className="sidebar-items">Offline</li>
-            <li><Link to="/chat">Bruna<img src="http://media.cargocollective.com/1/0/789/headerimg/profile.png" className="sub-icon sub-icon-open-menu" alt="Icone Localize"/></Link></li>
-          </ul>
-        </div>
-    )
-  }
-
-  renderStats() {
-    return (
-        <div className={this.state.tabActive == "stats" ? "tab-pane active":"tab-pane"} id="sidebar">
-          <ul className="sidebar-nav">
-            <li className="sidebar-items">Gráficos</li>
-            <li><Link to="/dashboard">Dashboard<span className="sub_icon glyphicon glyphicon-link"></span></Link></li>   
           </ul>
         </div>
     )

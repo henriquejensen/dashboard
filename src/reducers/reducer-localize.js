@@ -387,13 +387,13 @@ export default function(state = initialState, action) {
 				let posPessoaRelacionadaTelefones = searchPosPessoa(newState.response[posPessoaTelefone].pessoasRelacionadas, documentoRelacionado);
 
 				//adiciona na pessoa relacionada os telefones encontrados
+				telefones.fixos = telefones.fixos ? telefones.fixos : [];
+				telefones.moveis = telefones.moveis ? telefones.moveis : [];
 				newState.response[posPessoaTelefone].pessoasRelacionadas[posPessoaRelacionadaTelefones].telefones = telefones;
-
-				let verifiedResult = telefones.fixos.length > 0 || telefones.moveis.length > 0;
 				
 				return {
-					status: verifiedResult ? "telefones" : REQUEST_ERROR,
-					message: verifiedResult ? "" : NENHUM_REGISTRO,
+					status: "telefones",
+					message: "",
 					loading: false,
 					response: newState.response,
 					tabActive: newState.tabActive,
@@ -414,8 +414,8 @@ export default function(state = initialState, action) {
 				newState.response[posPessoaEndereco].pessoasRelacionadas[posPessoaRelacionadaEndereco].enderecos = enderecos;
 
 				return {
-					status: enderecos.length > 0 ? "enderecos" : REQUEST_ERROR,
-					message: enderecos.length > 0 ? "" : NENHUM_REGISTRO,
+					status: "",
+					message: "",
 					loading: false,
 					response: newState.response,
 					tabActive: newState.tabActive,
@@ -437,17 +437,22 @@ export default function(state = initialState, action) {
 
 			case SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS: {
 				let consulta = action.payload.parameters.consulta;
-				let tipo = action.payload.parameters.tipo;
+				let isEnderecoOuTelefone = action.payload.parameters.tipo;
 				let posElemento = action.payload.parameters.posElemento;
 				let responseServer = action.payload.response;
-				responseServer = responseServer ? responseServer[tipo] ? responseServer[tipo] : [] : [];
+				responseServer = responseServer ? responseServer[isEnderecoOuTelefone] ? responseServer[isEnderecoOuTelefone] : [] : [];
 
-				newState.lastQueries[consulta][posElemento][tipo] = responseServer;
+
+				if(isEnderecoOuTelefone == "phone") {
+					responseServer.fixos = responseServer.fixos ? responseServer.fixos : [];
+					responseServer.moveis = responseServer.moveis ? responseServer.moveis : [];
+				}
+				newState.lastQueries[consulta][posElemento][isEnderecoOuTelefone] = responseServer;
 
 				return {
 					loading: false,
-					status: responseServer ? "lastQueries"+tipo+posElemento+consulta : REQUEST_ERROR,
-					message: responseServer ? "" : NENHUM_REGISTRO,
+					status: "",
+					message: "",
 					response: state.response,
 					tabActive: state.tabActive,
 					lastQueries: newState.lastQueries,
@@ -461,17 +466,20 @@ export default function(state = initialState, action) {
 				let isEnderecoOuTelefone = action.payload.parameters.isEnderecoOuTelefone;
 				let responseServer = action.payload.response;
 				responseServer = responseServer ? responseServer[isEnderecoOuTelefone] ? responseServer[isEnderecoOuTelefone] : [] : [];
+
+				if(isEnderecoOuTelefone == "phone") {
+					responseServer.fixos = responseServer.fixos ? responseServer.fixos : [];
+					responseServer.moveis = responseServer.moveis ? responseServer.moveis : [];
+				}
 				/**indexLabel -> identifica a aba que solicitou a consulta,
 				 * indexArrayElements -> elemento do array dos resultados que solicitou a consulota
 				 */
 				state.response[indexLabel].data.response[indexArrayElements][isEnderecoOuTelefone] = responseServer;
 
-				let verifiedResult = responseServer.length > 0 || responseServer.fixos || responseServer.moveis ? true : false;
-
 				return {
 					loading: false,
-					status: verifiedResult ? "OK" : REQUEST_ERROR,
-					message: verifiedResult ? "" : NENHUM_REGISTRO,
+					status: "",
+					message: "",
 					response: state.response,
 					tabActive: state.tabActive,
 					lastQueries: state.lastQueries,

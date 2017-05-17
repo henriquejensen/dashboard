@@ -12,8 +12,7 @@ import RendaEstimada from "../../components/renda/RendaEstimada";
 import RendaEmpregador from "../../components/renda/RendaEmpregador";
 import BeneficioINSS from "../../components/renda/BeneficioINSS";
 import RendaEntidadeClasseLiberal from "../../components/renda/RendaEntidadeClasseLiberal";
-import Relacionados from "../../components/relacionados/Relacionados";
-import Veiculos from "../../components/veiculos/Veiculos";
+import PessoasRelacionadas from "../../components/relacionados/PessoasRelacionadas";
 
 import Protocolo from "../../components/protocolo/Protocolo";
 
@@ -43,7 +42,7 @@ export default class LocalizeView extends Component {
                     searchEndereco={this.props.searchLocalizeByNomeEndereco}/>
 
                 <Emails emails={data.emails}/> {tipo == "CPF"
-                    ? <Relacionados
+                    ? <PessoasRelacionadas
                             documento={data.cadastro.cpf}
                             label={label}
                             searchPessoasRelacionadas={this.props.searchPessoasRelacionadas}
@@ -68,8 +67,6 @@ export default class LocalizeView extends Component {
                         rendas={data.rendaEmpregador}
                         searchPerson={this.props.searchLocalize}/>
                 : ""}
-
-                {/*<Veiculos veiculos={data.veiculos} />*/}
 
                 <Protocolo info={data.cabecalho}/>
             </PanelGroup>

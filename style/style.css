@@ -414,6 +414,14 @@ table {
     background: #c9302c;
 }
 
+.my-print-screen {
+    position: fixed;
+    font-size: 31px;
+    right: 8px;
+    bottom: 2px;
+    cursor: pointer;
+}
+
 #logo-company-print img {
     display: none;
 }
@@ -487,5 +495,14 @@ table {
 
     .input-form-many-small {
         width:100%;
+    }
+}
+
+@media(max-width: 768px) {
+    #input-fields {
+        float: none;
+    }
+    .my-print-screen {
+        display: none
     }
 }

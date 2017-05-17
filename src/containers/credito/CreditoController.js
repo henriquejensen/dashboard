@@ -7,6 +7,7 @@ import CreditoView from "./CreditoView";
 import LocalizeView from "../localize/LocalizeView";
 import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
+import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
 
 import {
 		changeTab,
@@ -441,7 +442,9 @@ class Credito extends Component {
 			<div className="container my-container">
 				{this.form(type)}
 
-				{loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
+				{loading ? <LoadingScreen /> : ""}
+
+				{this.props.datas.length > 0 ? <PrintScreen /> : ""}
 
 				{datas.length > 0 ? 
 					(

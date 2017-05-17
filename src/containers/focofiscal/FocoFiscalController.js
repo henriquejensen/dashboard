@@ -119,7 +119,7 @@ class FocoFiscal extends Component {
 				message = {this.props.message}
 				lastQueries = {this.props.lastQueries[this.props.type]}
 			>
-				<Col md={tipo == "UNIFICADA" || tipo == "PF" ? 6 : 8}>
+				<Col md={tipo == "UNIFICADA" || tipo == "PF" ? 5 : 7}>
 					<input
 						className="form-control"
 						type="text"

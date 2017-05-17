@@ -4,7 +4,7 @@ import { Button, Col } from "react-bootstrap";
 
 import Modal from "../Modal";
 import Panel from "../panel/Panel";
-import Table from "../table/Table";
+import Table from "../table/MyTable";
 import Endereco from "../endereco/layoutEndereco";
 import Telefone from "../telefone/layoutTelefone";
 import MyButton from "../button/MyButton";
@@ -28,7 +28,8 @@ export default class BuscaPorRelacionados extends Component {
         },
         relacionados: this.props.relacionados,
         orderByGreater: true,
-        IsModalOpen: false
+        IsModalOpen: false,
+        rows: this.props.relacionados ? this.props.relacionados : []
     }
 
     confirmMessage = (consultas) => {
@@ -70,22 +71,18 @@ export default class BuscaPorRelacionados extends Component {
         })
     }
 
-    orderTableBy = (key) => {
-        let newRelacionados = this.state.relacionados.concat();
-
-        let posFieldClicked = key == "Pessoa Relacionada" ? "pessoaRelacionada" : key == "Data nasc." ? "dataNascimento" : key.toLocaleLowerCase() ;
-        let order = this.state.orderByGreater;
-
-        newRelacionados.sort(
-            function(x,z){
-                return x[posFieldClicked] > z[posFieldClicked]
+    handleSortElements = (sortColumn, sortDirection='ASC') => {
+        const comparer = (a, b) => {
+            if (sortDirection === 'ASC') {
+                return (a[sortColumn] > b[sortColumn]) ? 1 : -1;
+            } else if (sortDirection === 'DESC') {
+                return (a[sortColumn] < b[sortColumn]) ? 1 : -1;
             }
-        )
+        }
+ 
+        const rows = sortDirection === 'NONE' ? this.state.rows.slice(0) : this.state.rows.sort(comparer);
 
-        this.setState({
-            relacionados: newRelacionados,
-            orderByGreater: !this.state.orderByGreater
-        })
+        this.setState({ rows });
     }
 
     renderButtons = (items, isEnderecoOrTelefone, indexArrayElements, documento, icon, isCpfOrCnpj) => {
@@ -135,32 +132,40 @@ export default class BuscaPorRelacionados extends Component {
     }
 
     render() {
-        let relacionados = this.props.relacionados ? this.props.relacionados : [];
+        let rows = this.state.rows;
         let handleSearchPerson = this.props.searchPerson;
-        let fields = ["Tipo", "Nome", "Data nasc.", "Pessoa Relacionada", "Cidade", "UF", ""];
+        let handleSortElements = this.handleSortElements;
+        let fields= [
+            {id:"tipo", name:"Tipo"},
+            {id:"nome", name:"Nome", sortable:true},
+            {id:"dataNascimento", name:"Nasc.", sortable:true},
+            {id:"pessoaRelacionada", name:"Pessoa Relacionada", sortable:true},
+            {id:"cidade", name:"Cidade - UF", sortable:true},
+            {id:"btn", name:"#"}
+        ];
         return (
-                <Panel title={title} qtdTotal={[{qtd:relacionados.length,icon:"fa fa-users"}]}>
+                <Panel title={title}>
                     <div style={{paddingTop:5}}>
                         <Col md={6}>
                             <strong>Resultados da busca por:</strong>
                             {this.props.headerBody}
                         </Col>
 
-                        {relacionados.length > 0 ?
+                        {rows.length > 0 ?
                             <Col md={6}>
                                 <strong>Busca em lote por:</strong>
                                 {" "}
                                 <MyButton
                                     tooltip={TOOLTIP_SEARCH_BY_ADDRESS_IN_BATCH_MESSAGE}
                                     onClickButton={this.confirmSearch}
-                                    params={["enderecos", relacionados, "home"]}
+                                    params={["enderecos", rows, "home"]}
                                     myButtonText={<i className='fa fa-home'/>}
                                 />
                                 <span style={{paddingRight:15}}></span>
                                 <MyButton
                                     tooltip={TOOLTIP_SEARCH_BY_PHONES_IN_BATCH_MESSAGE}
                                     onClickButton={this.confirmSearch}
-                                    params={["telefones", relacionados, "phone"]}
+                                    params={["telefones", rows, "phone"]}
                                     myButtonText={<i className='fa fa-phone'/>}
                                 />
                             </Col>
@@ -168,9 +173,9 @@ export default class BuscaPorRelacionados extends Component {
                     </div>
 
                     <Col md={12}>
-                        {relacionados.length > 0 ?
-                            <Table fields = {fields}>
-                                    {relacionados.map((relacionado,index) => {
+                        {rows.length > 0 ?
+                            <Table fields = {fields} handleSortElements={this.handleSortElements}>
+                                    {rows.map((relacionado,index) => {
                                         let isCpfOrCnpj = relacionado.tipo == "Pessoa Física" ? "CPF":"CNPJ";
                                         return (
                                             <tbody key={index}>
@@ -189,8 +194,7 @@ export default class BuscaPorRelacionados extends Component {
                                                     </td>
                                                     <td>{relacionado.dataNascimento}</td>
                                                     <td>{relacionado.pessoaRelacionada}</td>
-                                                    <td>{relacionado.cidade}</td>
-                                                    <td>{relacionado.uf}</td>
+                                                    <td>{relacionado.cidade + " - " + relacionado.uf}</td>
                                                     <td>
                                                         {this.renderButtons(relacionado.enderecos, "enderecos", index, relacionado.documento, "home", isCpfOrCnpj)}
                                                         <span style={{paddingRight:15}}></span>
@@ -228,7 +232,7 @@ export default class BuscaPorRelacionados extends Component {
                         title="Busca em lote"
                         size="small"
                     >
-                        {this.confirmMessage(relacionados)}
+                        {this.confirmMessage(rows)}
                     </Modal>
                 </Panel>
         )

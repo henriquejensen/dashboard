@@ -35,36 +35,48 @@ export default class Dados extends Component{
               <strong>Status CPF: </strong>
               {this.props.dados.status ?
                 <span className={this.props.dados.status == "REGULAR" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.status}</span>
-              : <span>{NENHUM_REGISTRO}</span>}
+                : NENHUM_REGISTRO
+              }
             </Col>
 
             <Col md={6} xs={6}>
               <strong>Nome: </strong>
-              {this.props.dados.nome}
+              {this.props.dados.nome ? this.props.dados.nome : NENHUM_REGISTRO}
             </Col>
             <Col md={6} xs={6}>
-              <strong>Nascimento </strong>
-              {this.props.dados.dataNascimento + " - " + this.props.dados.idade + " anos"}
+              <strong>Nascimento: </strong>
+              {this.props.dados.dataNascimento && this.props.dados.idade ?
+                this.props.dados.dataNascimento + " - " + this.props.dados.idade + " anos"
+                : this.props.dados.dataNascimento ?
+                  this.props.dados.dataNascimento
+                : NENHUM_REGISTRO
+              }
             </Col>
 
             <Col md={6} xs={6}>
               <strong>Sexo: </strong>
-              {this.props.dados.sexo}
+              {this.props.dados.sexo ? this.props.dados.sexo : NENHUM_REGISTRO}
             </Col>
             <Col md={6} xs={6}>
               <strong>Provável óbito: </strong>
               {this.props.dados.obitoProvavel ?
-              <span className={this.props.dados.obitoProvavel == "SIM" ? "destaque-desativado" : "destaque-ativado"}>{this.props.dados.obitoProvavel}</span>
-              : <span>{NENHUM_REGISTRO}</span>}
+                <span className={this.props.dados.obitoProvavel == "SIM" ? "destaque-desativado" : "destaque-ativado"}>{this.props.dados.obitoProvavel}</span>
+                : NENHUM_REGISTRO
+              }
             </Col>
 
             <Col md={6} xs={6}>
               <strong>RG: </strong>
-              {this.props.dados.rg ? patternRG(this.props.dados.rg) + "/" + this.props.dados.ufRg : NENHUM_REGISTRO}
+              {this.props.dados.rg && this.props.dados.ufRg ?
+                patternRG(this.props.dados.rg) + "/" + this.props.dados.ufRg
+                : this.props.dados.rg ? 
+                  patternRG(this.props.dados.rg)
+                : NENHUM_REGISTRO
+              }
             </Col>
             <Col md={6} xs={6}>
               <strong>Signo: </strong>
-              {this.props.dados.signo}
+              {this.props.dados.signo ? this.props.dados.signo : NENHUM_REGISTRO}
             </Col>
 
             {this.state.moreInfo ? 

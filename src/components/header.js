@@ -65,7 +65,7 @@ class MenuSuperior extends Component {
 		let user = this.props.user;
 		return (
 		<div>
-			<Navbar style={{backgroundColor: "#673ab7", borderRadius: 0}} collapseOnSelect>
+			<Navbar style={{backgroundColor: "#673ab7", borderRadius: 0}} collapseOnSelect inverse>
 				<i className="fa fa-bars menu-hamburguer" onClick={onMenuClicked} />
 				<Navbar.Header style={{marginLeft:"45px"}}>
 					<Navbar.Brand>
