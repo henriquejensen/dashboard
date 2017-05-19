@@ -1,5 +1,3 @@
-import ajax from "superagent";
-
 import {
 		URL_SEARCH_CPF,
 		URL_SEARCH_CNPJ
@@ -19,7 +17,6 @@ import {
     URL_CREDITO_SEARCH_COMPLETA,
 	URL_CREDITO_SEARCH_COMPLETA_PJ
 } from "../constants/constantsCredito";
-
 import {
 	ERR_CONNECTION_REFUSED,
 	REQUEST_ERROR,

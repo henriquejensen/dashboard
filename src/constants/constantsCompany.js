@@ -13,7 +13,10 @@ export const COMPANY_PRODUCT_SMS = "SMS";
 export const COMPANY_PRODUCT_BASECERTA = "Base Certa";
 export const COMPANY_PRODUCT_VENDAMAIS = "Venda+";
 export const COMPANY_PRODUCT_CREDITO = "Credito";
+
 export const COMPANY_PRODUCT_VEICULOS = "Veículos";
+export const COMPANY_PRODUCT_VEICULOS_LABEL = "VEICULOS";
+
 export const COMPANY_PRODUCT_FOCOFISCAL = "Foco Fiscal";
 export const COMPANY_PRODUCT_CONSIGMAIS = "Consig+";
 export const TITLE_HEADER = "Configurações"

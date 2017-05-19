@@ -1,0 +1,43 @@
+{
+  "cabecalho": {
+    "consulta": "VEICULO",
+    "dataHora": "19/05/2017 15:08:32",
+    "entrada": "{\r\n  \"cpf\" : \"21179921372\",\r\n  \"cnpj\" : \"\",\r\n  \"numeroMotor\" : null,\r\n  \"chassi\" : \"8AGCB48X0BR191442\",\r\n  \"uf\" : \"SP\",\r\n  \"placa\" : \"ETV0839\",\r\n  \"numeroCrlv\" : \"165794700\",\r\n  \"motor\" : false,\r\n  \"localizaVeiculo\" : false,\r\n  \"crlv\" : false,\r\n  \"binFederal\" : false,\r\n  \"binEstadual\" : false,\r\n  \"gravame\" : false,\r\n  \"decodificadorChassi\" : false,\r\n  \"precificador\" : false,\r\n  \"binRF\" : false,\r\n  \"binRenajud\" : false,\r\n  \"proprietariosAnteriores\" : false,\r\n  \"agregados\" : false,\r\n  \"localizaPlaca\" : true,\r\n  \"leilao\" : false,\r\n  \"indicioSinistro\" : false,\r\n  \"leilao2\" : false,\r\n  \"pt\" : false,\r\n  \"renavam\" : false,\r\n  \"decodificador2\" : false,\r\n  \"decodificadorUnion\" : false,\r\n  \"modulosSelecionados\" : [ \"VEIC2LOCALIZAPLACA\" ]\r\n}",
+    "produto": "SEARCHVEICULORGDOAUTOMOVEL",
+    "protocolo": "607e5846-db5d-47ee-8565-1175a88d7a44",
+    "flagsExecutadas": [
+      "localizaPlaca"
+    ]
+  },
+  "cadastro": {
+    "tags": null,
+    "identificadores": {
+      "numeroMotorAtual": null,
+      "chassi": "8AGCB48X0BR191442",
+      "renavam": null,
+      "placa": "ETV0839",
+      "numeroMotorOriginal": null,
+      "numeroCarroceria": null
+    },
+    "movimentacao": null,
+    "descricao": null,
+    "fichaTecnica": null
+  },
+  "comunicacaoVenda": null,
+  "dadosCondutor": null,
+  "historicoProprietarios": null,
+  "tabelaFipe": null,
+  "proprietarioAtual": null,
+  "registroDebitos": null,
+  "historicoVeiculos": null,
+  "historicoRoubo": null,
+  "restricoes": null,
+  "gravame": null,
+  "dadosHistoricos": null,
+  "decodificacaoChassi": null,
+  "historicoLeiloes": null,
+  "registroRenajud": null,
+  "indiciosSinistros": null,
+  "sinistroIrrecuperavel": null,
+  "crlv": null
+}

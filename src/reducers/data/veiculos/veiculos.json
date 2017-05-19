@@ -1,0 +1,293 @@
+{
+	"cabecalho": {
+        "consulta": "placa",
+        "dataHora": "DD/MM/AAAA HH:MM:SS",
+        "entrada": "9BD17302414024765",
+        "produto": "veiculos",
+        "protocoloTransacao": "da758c2a-e689-4759-b7d1-009e15b1f302"
+	},
+	"cadastro": {
+		"identificadores": {
+			"placa": "string",
+			"chassi": "string",
+			"renavam": "string",
+			"numeroMotorOriginal": "string",
+			"numeroMotorAtual": "string",
+			"numeroCarroceria": "string"
+		},
+		"fichaTecnica": {
+			"carroceria": "string",
+			"potencia": "string",
+			"numeroEixos": "string",
+			"numeroCaixaCambio": "string",
+			"tipoCarroceria": "string",
+			"tipoVeiculo": "string",
+			"eixoTraseiroDiferencial": "string",
+			"terceiroEixo": "string",
+			"capacidadeMaximaTracao": "string",
+			"pesoBrutoTotal": "string",
+			"capacidadeCarga": "string"
+		},
+		"descricao": {
+			"marca": "string",
+			"modelo": "string",
+			"anoModelo": "string",
+			"anoFabricacao": "string",
+			"cor": "string",
+			"combustivel": "string",
+			"cilindradas": "string",
+			"especie": "string",
+			"categoria": "string",
+			"capacidadePassageiros": "string",
+			"segmento": "string",
+			"subSegmento": "string"
+		},
+		"movimentacao": {
+			"situacaoVeiculo": "string",
+			"dataUltimaAtualizacao": "string",
+			"remarcacaoChassi": "string",
+			"situacaoChassi": "string",
+			"municipio": "string",
+			"uf": "string",
+			"ufFaturado": "string",
+			"tipoDocFaturado": "string",
+			"numeroDocFaturado": "string",
+			"procedencia": "string",
+			"dataRegistroDi": "string",
+			"numeroRegistroDi": "string",
+			"numeroImportadora": "string",
+			"tipoDocumentoImportadora": "string",
+			"dataEmissaoCrvCrvlAtual": "string",
+			"dataLicenciamento": "string",
+			"proprietarios": {
+				"proprietarioAtual": "string",
+				"proprietarioAnterior": "string"
+			}
+		},
+		"tags": [
+			"string"
+		]
+	},
+	"comunicacaoVenda": {
+		"dataVenda": "string",
+		"anoExercicioLicenciamento": "string",
+		"dataInclusaoVenda": "string",
+		"indicadorComunicacaoVenda": "string",
+		"documentoFinanciado": "string"
+	},
+	"dadosCondutor": {
+		"categoria": "string",
+		"cpf": "string",
+		"dataNascimento": "string",
+		"dataPrimeiraHabilitacao": "string",
+		"dataVencimentoCnh": "string",
+		"modeloCnh": "string",
+		"naturalidade": "string",
+		"nome": "string",
+		"nomeMae": "string",
+		"numeroCnh": "string",
+		"rg": "string",
+		"situacao": "string",
+		"uf": "string"
+	},
+	"historicoProprietarios": {
+		"proprietario": [
+			{
+				"documento": "string",
+				"nome": "string",
+				"cgcCpf": "string",
+				"dataEmissaoGuia": "string",
+				"dataProcessamento": "string",
+				"anoExercicio": "string",
+				"cidade": "string",
+				"uf": "string",
+				"numeroBanco": "string",
+				"nomeAgenteFinanceiro": "string",
+				"numeroDut": "string",
+				"idPag": "string",
+				"saldo": "string"
+			}
+		],
+		"resumo": "string"
+	},
+	"tabelaFipe": {
+		"codigoFipe": "string",
+		"precoMedio": "string",
+		"precoFipe": "string"
+	},
+	"proprietarioAtual": {
+		"documentoComprador": "string",
+		"indicadorComunicacaoVenda": "string",
+		"dataInclusaoVenda": "string",
+		"numeroNotaFiscal": "string",
+		"protocoloDetran": "string",
+		"tipoDocumentoComprador": "string",
+		"dataVenda": "string",
+		"dataEmissaoCrvCrvl": "string",
+		"anoExercicioLicenciamento": "string",
+		"dataLicenciamento": "string"
+	},
+	"registroDebitos": {
+		"debito": [
+			{
+				"situacao": "string",
+				"tipoRegistro": "string",
+				"cidade": "string",
+				"uf": "string",
+				"valor": "string"
+			}
+		],
+		"resumo": "string"
+	},
+	"historicoVeiculos": {
+		"veiculo": [
+			{
+				"dataProcessamento": "string",
+				"anoExercicio": "string",
+				"uf": "string",
+				"chassi": "string",
+				"placa": "string",
+				"dataEmissaoGuia": "string",
+				"numeroDut": "string",
+				"idPagDut": "string",
+				"saldo": "string",
+				"numeroBanco": "string",
+				"renavam": "string"
+			}
+		],
+		"resumo": "string"
+	},
+	"historicoRoubo": {
+		"roubo": [
+			{
+				"categoriaOcorrencia": "string",
+				"orgaoSeguranca": "string",
+				"numeroOcorrencia": "string",
+				"dataOcorrencia": "string",
+				"municipio": "string",
+				"uf": "string",
+				"anoDeclaracao": "string",
+				"boletim": "string",
+				"tipoDeclaracao": "string",
+				"alarme": "string"
+			}
+		],
+		"resumo": "string"
+	},
+	"restricoes": {
+		"restricao": [
+			{
+				"mensagem": "string",
+				"tribunal": "string",
+				"orgaoJudicial": "string",
+				"numeroProcesso": "string",
+				"tipoRestricao": "string"
+			}
+		],
+		"resumo": "string"
+	},
+	"gravame": {
+		"descricaoGravame": {
+			"agenteFinanceiro": "string",
+			"documentoFinanciado": "string",
+			"dataInclusao": "string",
+			"nomeFinanciado": "string",
+			"restricaoFinanceira": "string"
+		},
+		"intencaoGravame": {
+			"agenteFinanceiro": "string",
+			"documentoFinanciado": "string",
+			"dataInclusao": "string",
+			"nomeFinanciado": "string",
+			"restricaoFinanceira": "string"
+		},
+		"gravameDetalhado": {
+			"ufGravame": "string",
+			"codigoAgente": "string",
+			"descricaoGravame": "string",
+			"documentoAgente": "string",
+			"nomeAgente": "string",
+			"ufPlaca": "string",
+			"gravameAnoFabricacao": "string",
+			"numeroGravame": "string",
+			"status": "string"
+		}
+	},
+	"dadosHistoricos": {
+		"historicoConsultas": "string",
+		"mesLicenciamento": "string",
+		"ufEmplacamentoInicial": "string"
+	},
+	"decodificacaoChassi": {
+		"localizacaoFabrica": "string",
+		"tracao": "string",
+		"paisOrigem": "string",
+		"regiaoGeografica": "string",
+		"fabricante": "string",
+		"versao": "string",
+		"motor": "string",
+		"portas": "string",
+		"verificadorSerial": "string",
+		"numeroIrregularidades": "string",
+		"conclusao": "string"
+	},
+	"historicoLeiloes": {
+		"leilao": [
+			{
+				"lote": "string",
+				"patio": "string",
+				"leiloeiro": "string",
+				"data": "string",
+				"comitente": "string",
+				"condicaoGeral": "string"
+			}
+		],
+		"resumo": "string",
+		"rating": {
+				"percentualRef": "string",
+				"exigeVistoriaEspecial": "string",
+				"aceitacaoVeiculo": "string"
+		}
+	},
+	"registroRenajud": {
+		"remarcacaoChassi": "string",
+		"montagem": "string",
+		"cmt": "string",
+		"data": "string",
+		"registroAduaneiro": "string",
+		"ptb": "string",
+		"dataLimite": "string",
+		"srf": "string",
+		"numeroDi": "string",
+		"dataDi": "string",
+		"descricao": "string",
+		"restricaoJudicial": [
+			{
+				"tribunal": "string",
+				"orgaoJudicial": "string",
+				"numeroProcesso": "string",
+				"tipoRestricao": "string",
+				"mensagem": "string"
+			}
+		]
+	},
+	"indiciosSinistros": {
+		"sinistro": [
+			{
+				"descricao": "string",
+				"data": "string"
+			}
+		],
+		"resumo": "string"
+	},
+	"sinistroIrrecuperavel": {
+		"descricao": "string",
+		"data": "string"
+	},
+	"crlv": {
+		"evento": "string",
+		"data_evento": "string",
+		"observacao": "string",
+		"tipo_documento": "string"
+	}
+}

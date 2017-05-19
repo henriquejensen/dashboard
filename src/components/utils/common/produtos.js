@@ -100,13 +100,12 @@ export const todosProdutos = {
         imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-veiculos-negative.png",
         alt: "Icone Veiculos",
         subItems: [
-            {label: "Agregados", id: "agregados", link: "/veiculos"},
-            {label: "BDV Estadual", id: "bdv", link: "/veiculos"},
-            {label: "Decodificador", id: "decodificador", link: "/veiculos"},
-            {label: "Localização", id: "localizacao", link: "/veiculos"},
-            {label: "Proprietários", id: "proprietarios", link: "/veiculos"},
-            {label: "Leilão", id: "leilao", link: "/veiculos"},
-            {label: "Sinistro", id: "sinistro", link: "/veiculos"}
+            {label: "PLACA", id: "placa", link: "/veiculos"},
+            {label: "CHASSI", id: "chassi", link: "/veiculos"},
+            {label: "Nº MOTOR", id: "numeroMotor", link: "/veiculos"},
+            {label: "CPF", id: "cpf", link: "/veiculos"},
+            {label: "CNPJ", id: "cnpj", link: "/veiculos"},
+            {label: "CRLV", id: "numeroCrlv", link: "/veiculos"}
         ]
     },
     CONSIGMAIS: {
@@ -121,3 +120,24 @@ export const todosProdutos = {
         subItems: []
     }
 }
+
+/**    AGREGADO VEICULAR                            "agregados": false,
+    BIN FEDERAL                                  "binFederal": false,
+    BIN FEDERAL + ROUBO E FURTO                  "binRF": false,
+    BIN ESTADUAL                                 "binEstadual": false,
+    BIN JUDICIAL RENAJUD                         "binRenajud": false,
+    CONSULTA CRLV - DOCUMENTO                    "crlv": true,
+    DECODIFICADOR DE CHASSI                      "decodificadorChassi": false,
+    DECODIFICADOR DE CHASSI - FIPE E MOLICAR     "decodificador2": false,
+    DECODIFICADOR UNION                          "decodificadorUnion": false,
+    GRAVAME - DETALHES DO FINANCIAMENTO          "gravame": false,
+    HISTÓRICO DE PROPRIETÁRIOS ANTERIORES        "proprietariosAnteriores": false,
+    INDICIO DE SINISTRO                          "indicioSinistro": false,
+    LEILAO 2                                     "leilao2": false,
+    LOCALIZADOR DE CHASSI E MOTOR                "localizaVeiculo": false,
+    LOCALIZADOR DE PLACA                         "localizaPlaca": false,
+    LOCALIZADOR DE MOTOR                         "motor": true,
+    PRECIFICADOR                                 "precificador": false,
+    RENAVAM                                      "renavam": false,
+    SINISTRO IRRECUPERÁVEL PT                    "pt": false,
+    VEICULOS OFERTADOS A LEILÃO                  "leilao": false */

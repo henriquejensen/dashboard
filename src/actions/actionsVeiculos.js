@@ -1,4 +1,4 @@
-import ajax from "superagent";
+import { apiContentType, api } from "../api/Api";
 
 import {
     CHANGE_TAB_VEICULOS,
@@ -11,13 +11,12 @@ import {
     SEE_VEICULOS_MODEL,
     URL_VEICULOS_SEARCH
 } from "../constants/constantsVeiculos";
-
 import { ERR_CONNECTION_REFUSED, REQUEST_ERROR } from "../constants/utils";
 
-export function changeTab() {
+export function changeTab(index) {
     return {
         type: CHANGE_TAB_VEICULOS,
-        payload: ""
+        payload: index
     }
 }
 
@@ -35,10 +34,10 @@ export function closeModel() {
     }
 }
 
-export function closeTab() {
+export function closeTab(index) {
     return {
         type: CLOSE_VEICULOS_MODEL,
-        payload: ""
+        payload: index
     }
 }
 
@@ -56,31 +55,24 @@ export function loadingVeiculos() {
     }
 }
 
-export function searchByVeiculos(data) {
-	return (dispatch) => {
-		ajax.post(URL_VEICULOS_SEARCH)
-			.send({data:data})
-			.set({'Content-Type': 'application/x-www-form-urlencoded','authorization': localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response) {
-					if (response.status == 200) {
-						dispatch({
-							type: GET_FOCOFISCAL,
-							payload: data
-						})
-					} else {
-						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
-	}
+export function searchByVeiculos(tipoInput, input, dataToSend, flagsSelected) {
+    let url = URL_VEICULOS_SEARCH;
+    let data = dataToSend;
+    let search = GET_VEICULOS;
+
+    return (dispatch) => {
+        api(dispatch, url, data, search, {tipoInput, input, flagsSelected})
+    }
 }
 
-export function seeModel() {
+export function seeModel(input) {
     return {
         type: SEE_VEICULOS_MODEL,
-        payload: ""
+        payload: {
+            params: {
+                tipo: "PLACA",
+                input: "111XXX"
+            }
+        }
     }
 }

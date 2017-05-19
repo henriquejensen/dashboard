@@ -11,11 +11,16 @@ const MyButton = (props) => {
     let myButtonClass = props.myButtonClass ? props.myButtonClass : "mapa-button";
     let myButtonStyle = props.myButtonStyle ? props.myButtonStyle : "info";
     let myButtonText = props.myButtonText ? props.myButtonText : <i className='fa fa-search'/>;
+    let type = props.type ? props.type : "button";
 
     return (
         <span>
             <a data-tip data-for={tooltip}>
-                <Button bsStyle={myButtonStyle} className={myButtonClass} onClick={params ? () => props.onClickButton(...params) : props.onClickButton}>
+                <Button
+                    type={type}
+                    bsStyle={myButtonStyle}
+                    className={myButtonClass}
+                    onClick={params ? () => props.onClickButton(...params) : props.onClickButton}>
                     {myButtonText}
                 </Button>
             </a>

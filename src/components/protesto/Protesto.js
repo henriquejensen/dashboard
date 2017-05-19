@@ -6,7 +6,7 @@ import Table from "../table/MyTable";
 import MyButton from "../button/MyButton";
 import CardToShowMoreInTable from "../table/CardToShowMoreInTable";
 
-import { NENHUM_REGISTRO, TOOLTIP_SEE_MORE_INFO_MESSAGE } from "../../constants/utils";
+import { NENHUM_REGISTRO, TOOLTIP_SEE_MORE_INFO_MESSAGE, TOOLTIP_SEE_LESS_INFO_MESSAGE  } from "../../constants/utils";
 
 import { formatCurrency } from "../utils/functions/patternDocuments";
 
@@ -68,7 +68,7 @@ export default class Protestos extends Component {
                                     <td>{protesto.cartorio}</td>
                                     <td>{protesto.cidade+" - "+protesto.uf}</td>
                                     <td>{protesto.dataProtesto}</td>
-                                    <td>{protesto.valor}</td>
+                                    <td>{formatCurrency(protesto.valor)}</td>
                                     <td>
                                         <MyButton
                                             tooltip={showMoreInfo[indexArray] ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}

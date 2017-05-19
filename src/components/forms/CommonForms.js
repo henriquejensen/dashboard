@@ -6,6 +6,7 @@ export const FieldGroup = (props) => {
         <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}}>
             {props.label ? <ControlLabel>{props.label}</ControlLabel> : ""}
             <FormControl
+                required={props.required}
                 type={props.type}
                 style={props.error ? {borderColor:"red"} : {}}
                 name={props.name}
@@ -87,24 +88,60 @@ export const TextAreaGroup = (props) => {
 }
 
 export const CheckboxGroup = (props) => {
+    let id = props.id; //opcional - id utilizado pelo formgroup para identificacao
+    let center = props.center; //opcional - centraliza os elementos do checkbox
+    let label = props.label; //opcional - label que identifica os checkbox
+    let options = props.options; //opcional - array com os checkboxs que serao renderizados
+    let inline = props.inline; //opcional - quando se deseja que todos os checkbox fiquem na mesma linha
+    let values = props.values; //opcional/obrigatorio - valores (true/false ou SIM) que deixam o checkbox selecionado
+    let checked = props.checked; //opcional - utilizado para deixar um simples checkbox ativado
+    let text = props.text; //opcional/obrigatorio - texto de um simples checkbox
+    let name = props.name; //opcional - nome de uma checkbox
+    let onChange = props.onChange; //opcional/obrigatorio - modifica a selecao do checkbox
     return (
-        <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}} className={props.center ? "text-center": ""}>
-            {props.label ? <ControlLabel>{props.label}<br/></ControlLabel> : ""}
-            {props.options ? 
-                props.options.map((opt,index) => {
+        <FormGroup controlId={id} style={{marginLeft:0, marginRight:0}} className={center ? "text-center": ""}>
+            {label ? <ControlLabel>{label}<br/></ControlLabel> : ""}
+            {options ? 
+                options.map((opt,index) => {
                     return (
                         <Checkbox
-                            inline={props.inline}
-                            checked={props.values[index] || props.values[index] == "SIM"}>
+                            inline={inline}
+                            checked={values[index] || values[index] == "SIM"} >
                             {opt}
                         </Checkbox>
                     )
                 })
             :
-                <Checkbox inline={props.inline} checked={props.checked}>
-                    {props.text}
+                <Checkbox inline={inline} checked={checked} name={name} onChange={() => onChange(name)}>
+                    {text}
                 </Checkbox>
             }
+
+        </FormGroup>
+    )
+}
+
+export const MyCheckboxGroup = (props) => {
+    let id = props.id; //opcional - id utilizado pelo formgroup para identificacao
+    let center = props.center; //opcional - centraliza os elementos do checkbox
+    let label = props.label; //opcional - label que identifica os checkbox
+    let options = props.options; //obrigatorio - array com os checkboxs que serao renderizados
+    let onChange = props.onChange; //opcional/obrigatorio - modifica a selecao do checkbox
+    return (
+        <FormGroup controlId={id} style={{marginLeft:0, marginRight:0}} className={center ? "text-center": ""}>
+            {label ? <ControlLabel>{label}<br/></ControlLabel> : ""}
+                {options.map((opt,index) => {
+                    return (
+                        <Checkbox
+                            key={index}
+                            inline={opt.inline}
+                            checked={opt.checked}
+                            name={opt.name}
+                            onChange={() => onChange(opt.name,index)}>
+                            {opt.text}
+                        </Checkbox>
+                    )
+                })}
 
         </FormGroup>
     )

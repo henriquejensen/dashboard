@@ -1,5 +1,6 @@
-export const URL_VEICULOS_SEARCH = "https://managerbigdata.assertivasolucoes.com.br/veiculos/1002/consultar";
+export const URL_VEICULOS_SEARCH = "https://managerprovider.assertivasolucoes.com.br/veiculo/5053/consultar";
 
+export const CHANGE_TAB_VEICULOS = "CHANGE_TAB_VEICULOS";
 export const CLOSE_MESSAGE_ERROR_VEICULOS = "CLOSE_MESSAGE_ERROR_VEICULOS";
 export const CLOSE_VEICULOS_MODEL = "CLOSE_VEICULOS_MODEL";
 export const ICON_VEICULOS = "ICON_VEICULOS";

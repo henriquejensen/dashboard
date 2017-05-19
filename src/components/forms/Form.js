@@ -1,23 +1,40 @@
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip';
-import { Col, Row, Alert } from "react-bootstrap";
+import { Col, FormGroup, Row, Alert } from "react-bootstrap";
 
 import { LocalizeDescription, CreditoDescription, FocoFiscalDescription } from "../ProductDescription";
+import { SelectGroup } from "../../components/forms/CommonForms";
 import UltimasConsultas from "../UltimasConsultas";
+import MyButton from "../button/MyButton";
 
 import {
     ERR_CONNECTION_REFUSED,
     REQUEST_ERROR,
-    TOOLTIP_SEARCH_BY_ADDRESS,
-    TOOLTIP_SEARCH_BY_DOCUMENT,
-    TOOLTIP_SEARCH_BY_PHONE,
-    TOOLTIP_SEE_PRODUCT_MODEL,
-    TOOLTIP_SEE_PRODUCT_DETAILS,
+    TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE,
+    TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE,
+    TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE,
     RECHECK_MESSAGE
 } from "../../constants/utils";
 import { COMPANY_PRODUCT_LOCALIZE_URL_SEE_DETAILS } from "../../constants/constantsCompany";
 
 export default class Form extends Component {
+
+	renderButton = (tooltip, params, myButtonClass, myButtonStyle, myButtonText, onClickButton, type) => {
+		return (
+			<FormGroup>
+				<MyButton
+					tooltip={tooltip}
+					params={params}
+					myButtonClass={myButtonClass}
+					myButtonStyle={myButtonStyle}
+					myButtonText={myButtonText}
+					type={type}
+					onClickButton={onClickButton}					
+				/>
+			</FormGroup>
+		)
+	}
+
     render() {
 		return (
             <Row className="noPrint my-container-form-product">
@@ -46,33 +63,23 @@ export default class Form extends Component {
                         {this.props.children}
 
                         <Col md={1}>
-                            <a data-tip data-for={TOOLTIP_SEARCH_BY_DOCUMENT}>
-                                <button className="btn btn-info my-btn-form input-search" type="submit">
-                                    <i className="glyphicon glyphicon-search"></i>
-                                </button>
-                            </a>
+                            {this.renderButton(TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, "", "my-btn-form input-search", "", "", "", "submit")}
                         </Col>
-
                             
                         <Col md={1}>
-                            <a data-tip data-for={TOOLTIP_SEE_PRODUCT_MODEL}>
-                                <span className="btn btn-default my-btn-form input-search" onClick={this.props.seeModelo}>
-                                    <i className="fa fa-list-ul" aria-hidden="true"></i>
-                                </span>
-                            </a>
+                            {this.renderButton(TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, "", "my-btn-form input-search", "default", <i className="fa fa-list-ul" aria-hidden="true"></i>, this.props.seeModelo, "")}
                         </Col>
 
                         <Col md={1}>
-                            <a data-tip data-for={TOOLTIP_SEE_PRODUCT_DETAILS} href={COMPANY_PRODUCT_LOCALIZE_URL_SEE_DETAILS} target="_blank">
-                                <span className="btn btn-warning my-btn-form">
-                                    <i className="fa fa-question" aria-hidden="true"></i>
-                                </span>
-                            </a>
+                            {this.renderButton(TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE, "" , "my-btn-form input-search", "warning", <i className="fa fa-question" aria-hidden="true"></i>, () => window.open(COMPANY_PRODUCT_LOCALIZE_URL_SEE_DETAILS,"_blank"), "")}
                         </Col>
 
                         {this.props.buscaAvancada != undefined ?
                             <span className="busca-avancada" onClick={this.props.hiddenBuscaAvancada}>{!this.props.buscaAvancada ? 'Busca avançada' : 'Fechar busca'}</span>
                         : ""}
+
+                        {this.props.moreInfoToShow}
+
                     </form>
                 </span>
 
