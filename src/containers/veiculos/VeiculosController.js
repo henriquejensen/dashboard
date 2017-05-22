@@ -27,8 +27,8 @@ import { changeProductType } from "../../actions/actionsCommon";
 import { LOGO_VEICULOS, ICON_VEICULOS, LOADING_GIF, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE, TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE } from "../../constants/utils";
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_VEICULOS, COMPANY_PRODUCT_VEICULOS_LABEL } from "../../constants/constantsCompany";
 import { AGREGADOS_CODE, BDV_CODE, DECODIFICADOR_CODE, LOCALIZACAO_CODE, PROPRIETARIOS_CODE, LEILAO_CODE, SINISTRO_CODE } from "../../constants/constantsVeiculos";
+import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
 
-import menu from "../../components/utils/common/menu.json";
 import estados from "../../components/utils/common/estados.json";
 import { todosProdutos } from "../../components/utils/common/produtos.js";
 
@@ -38,6 +38,14 @@ const quantidadeCheckboxPorCol = 5;
 class VeiculosController extends Component {
 	state = {
 		input: {
+			cpf: undefined,
+			cnpj: undefined,
+			numeroMotor: undefined,
+			numeroCrlv: undefined,
+			uf: undefined,
+			placa: undefined,
+			chassi: undefined,
+			motor: false,
 			localizaVeiculo: false,
 			crlv: false,
 			binFederal: false,
@@ -215,9 +223,9 @@ class VeiculosController extends Component {
 		this.props.changeProductType(COMPANY_PRODUCT_VEICULOS_LABEL, evt.target.value);
 	}
 
-	onChangeInput = (evt) => {
+	onChangeInput = (value, nameInput) => {
 		let input = Object.assign({}, this.state.input);
-		input[evt.target.name.toLowerCase()] = evt.target.value;
+		input[nameInput] = value;
 
 		this.setState({ input })
 
@@ -245,8 +253,21 @@ class VeiculosController extends Component {
 				showCheckboxes: false
 			})
 
-			/**(tipoInput, input, dataToSend, flagsSelected) */
-			this.props.searchByVeiculos(this.props.type, this.state.input[this.props.type.toLowerCase()], this.state.input, this.state.optionsSelected);
+			/**type === tipo da consulta, ex: PLACA, CNPJ
+			 * input === entrada do dado
+			 * dataToSend === objeto com as flags e o input de entrada para ser enviado
+			 * flagsSelected === flags selecionadas pelo usuario
+			 */
+
+			//se o usuario quiser enviar somente o CRLV, verifica se o input esta vazio e seta o type para CRLV
+			let input = this.state.input[this.props.type.toLowerCase()] ? this.state.input[this.props.type.toLowerCase()] : this.state.input.numeroCrlv;
+			let tipoInput = this.state.input.numeroCrlv ? "CRLV" : this.props.type;
+
+			let dataToSend = this.state.input;
+			let flagsSelected = this.state.optionsSelected
+
+			this.props.loadingVeiculos();
+			this.props.searchByVeiculos(tipoInput, input, dataToSend, flagsSelected);
 		}
 	}
 
@@ -331,18 +352,50 @@ class VeiculosController extends Component {
 
 	renderForm = () => {
 		let type = this.props.type;
+		let isCRLVHidden = this.state.optionsSelected.indexOf("crlv") === -1 ? true : false;
+		let isUFHidden = this.state.optionsSelected.indexOf("agregados") !== -1 || this.state.optionsSelected.indexOf("binFederal") !== -1 || this.state.optionsSelected.indexOf("binEstadual") !== -1 ? false : true;
 		return (
-			<Col md={7}>
-				<FieldGroup
-					id={type}
-					type="text"
-					name={type}
-					value={this.state.input[type]}
-					onChange={this.onChangeInput}
-					required
-					placeholder={"DIGITE: " + type} />
-			</Col>
+			<div>
+				<Col md={isCRLVHidden && isUFHidden ? 7 : isCRLVHidden && !isUFHidden ? 5 : 3}>
+					<FieldGroup
+						id={type}
+						type="text"
+						name={type}
+						value={this.state.input[type]}
+						onChange={(evt) => this.onChangeInput(evt.target.value, type.toLowerCase())}
+						required={!isCRLVHidden && this.state.optionsSelected.length === 1 ? false : true}
+						placeholder={"DIGITE: " + type} />
+				</Col>
 
+				{!isUFHidden ?
+					<Col md={2}>
+						<select
+							className="form-control"
+							name="uf"
+							onChange={(evt) => this.onChangeInput(evt.target.value, "uf")}
+							value={this.state.input.uf}
+						>
+							<option value="">UF</option>
+							{estados.estados.map((estado,i) => {
+								return <option value={estado.sigla} key={i}>{estado.sigla}</option>
+							})}
+						</select>
+					</Col>
+				: ""}
+
+				{!isCRLVHidden ?
+					<Col md={isUFHidden ? 4 : 2}>
+						<FieldGroup
+							id={type}
+							type="text"
+							name="numeroCrlv"
+							value={this.state.input.numeroCrlv}
+							onChange={(evt) => this.onChangeInput(evt.target.value, "numeroCrlv")}
+							required
+							placeholder={"DIGITE: Nº CRLV"} />
+					</Col>
+				: ""}
+			</div>
 		)
 	}
 
@@ -356,9 +409,12 @@ class VeiculosController extends Component {
 
 	render() {
 		let datas = this.props.datas;
+		let loading = this.props.loading;
 		return (
 			<div className="container my-container">
 				{this.form(this.props.type)}
+
+				{loading ? <LoadingScreen /> : ""}
 
 				<div style={{marginBottom:15}} />
 

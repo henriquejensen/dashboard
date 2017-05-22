@@ -135,7 +135,7 @@ export default function(state = initialState, action) {
 					message: "",
 					loading: false,
 					response: newResponse,
-					tabActive: newResponse[newResponse.length-1].label,
+					tabActive: newResponse[newResponse.length-1] ? newResponse[newResponse.length-1].label : [],
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				}
@@ -181,6 +181,7 @@ export default function(state = initialState, action) {
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				}
+
 			case SEE_LOCALIZE_MODEL:
 				response.data = model;
 				response.label = model.cadastro.cpf;

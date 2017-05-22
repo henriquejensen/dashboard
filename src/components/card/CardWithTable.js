@@ -14,12 +14,13 @@ class CardWithTable extends Component {
             <Panel title={title}>
                 {elements.length > 0 ?
                     elements.map((element, index) => {
-                        if(element.value)
+                        if(element.value) {
                             return (
                                 <Col md={3} key={index}>
                                     <strong>{element.label}: </strong> {element.value}
                                 </Col>
                             )
+                        }
                     })
                 : ""}
                 <Col md={12}>

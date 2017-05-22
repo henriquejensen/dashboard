@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Table } from "react-bootstrap";
 
+import {NENHUM_REGISTRO} from "../../constants/utils";
+
 export default class MyTable extends Component {
     render() {
         let fields = this.props.fields ? this.props.fields : [];
@@ -15,7 +17,7 @@ export default class MyTable extends Component {
                         <tr>
                             {fields.map((field, index) => {
                                 return (
-                                    <th key={index}>
+                                    <th key={field.id}>
                                         {field.name}
                                         {' '}
                                         {field.sortable ?
@@ -32,13 +34,17 @@ export default class MyTable extends Component {
                     {elements ?
                         <tbody>
                             {elements.map((element, index) => {
-                                let keysElement = Object.keys(element);
+                                
                                 return (
                                     <tr key={index}>
-                                        {keysElement.map((key, j)=>{
-                                            return (
-                                                <td key={j}>{element[key]}</td>
-                                            )
+                                        {fields.map((field, j)=>{
+                                            
+                                            if(field.functionToApply) {
+                                                console.log("FUELD", field);
+                                                return <td key={j}>{element[field.id] ? field.functionToApply(element[field.id]) : "-"}</td>
+                                            }
+
+                                            return <td key={j}>{element[field.id] ? element[field.id] : "-"}</td>
                                         })}
                                     </tr>
                                 )

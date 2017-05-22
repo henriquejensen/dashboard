@@ -38,6 +38,7 @@ export function formatDate(date) {
 
 export function formatCurrency(currency) {
     if(!currency) return currency;
+    currency = parseInt(currency);
     let newCurrency = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
     return newCurrency.format(currency);

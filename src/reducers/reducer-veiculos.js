@@ -1,7 +1,7 @@
 import {
     CHANGE_TAB_VEICULOS,
     CLOSE_MESSAGE_ERROR_VEICULOS,
-    CLOSE_VEICULOS_MODEL,
+    CLOSE_TAB_VEICULOS,
     GET_FOCOFISCAL,
     GET_VEICULOS,
     GET_VEICULOS_LAST_QUERIES,
@@ -10,7 +10,7 @@ import {
 } from "../constants/constantsVeiculos";
 
 import { COMPANY_PRODUCT_VEICULOS } from "../constants/constantsCompany";
-import { CHANGE_VEICULOS_TYPE, CLOSE_TAB, ERR_CONNECTION_REFUSED, ERROR_503, ICON_VEICULOS, REQUEST_ERROR } from "../constants/utils";
+import { CHANGE_VEICULOS_TYPE, CLOSE_TAB, ERR_CONNECTION_REFUSED, ERROR_503, ICON_VEICULOS, LOADING, REQUEST_ERROR } from "../constants/utils";
 
 import veiculos from "./data/veiculos/veiculosPoucosDados.json";
 import lastQueries from "./data/lastQueries.json";
@@ -61,7 +61,7 @@ export default function(state=getInitialState, action) {
                 type: action.payload.toUpperCase()
             }
 
-        case CLOSE_MESSAGE_ERROR_VEICULOS:
+        case CLOSE_MESSAGE_ERROR_VEICULOS: {
             return {
                 status: "",
                 message: "",
@@ -71,17 +71,22 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: state.type
             }
+        }
 
-        case CLOSE_VEICULOS_MODEL:
+        case CLOSE_TAB_VEICULOS: {
+            let newResponse = state.response.concat();
+            newResponse.splice(action.payload, 1);
+
             return {
                 loading: false,
                 status: "closeModel",
                 message: "",
-                response: "",
-                tabActive: state.tabActive,
+                response: newResponse,
+                tabActive: newResponse[newResponse.length-1] ? newResponse[newResponse.length-1].label : [],
                 lastQueries: state.lastQueries,
                 type: state.type
             }
+        }
 
         case ERR_CONNECTION_REFUSED:
             return {
@@ -97,12 +102,13 @@ export default function(state=getInitialState, action) {
         case GET_VEICULOS: {
             let tipo = action.payload.parameters.tipoInput;
             let tab = tipo + ":" + action.payload.parameters.input;
-            let response = action.payload.response;
+            let responseServer = action.payload.response;
             //Procura no array de pesquisados se ja existe
             let pos = searchLabel(state.response, tab);
             //let newState = state.response.concat();
+            let newStateResponse = state.response.concat();
 
-            response.data = response;
+            response.data = responseServer;
             response.label = tab;
             response.tipo = tipo;
             response.icon = ICON_VEICULOS;
@@ -110,13 +116,14 @@ export default function(state=getInitialState, action) {
 
             if(pos !== -1) {
                 //newState[pos] = response;
+                newStateResponse[pos] = response;
             }
 
             return {
                 loading: false,
                 status: "model",
                 message: "",
-                response: pos === -1 ? [...state.response, response] : state.response,
+                response: pos === -1 ? [...state.response, response] : newStateResponse,
                 tabActive: tab,
                 lastQueries: state.lastQueries,
                 type: state.type
@@ -138,7 +145,7 @@ export default function(state=getInitialState, action) {
         case LOADING_VEICULOS: {
             return {
                 loading: true,
-                status: "loading",
+                status: LOADING,
                 message: "",
                 response: state.response,
                 tabActive: state.tabActive,

@@ -36,7 +36,7 @@ export function closeModel() {
 
 export function closeTab(index) {
     return {
-        type: CLOSE_VEICULOS_MODEL,
+        type: CLOSE_TAB_VEICULOS,
         payload: index
     }
 }

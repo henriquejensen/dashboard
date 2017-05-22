@@ -2,7 +2,7 @@ export const URL_VEICULOS_SEARCH = "https://managerprovider.assertivasolucoes.co
 
 export const CHANGE_TAB_VEICULOS = "CHANGE_TAB_VEICULOS";
 export const CLOSE_MESSAGE_ERROR_VEICULOS = "CLOSE_MESSAGE_ERROR_VEICULOS";
-export const CLOSE_VEICULOS_MODEL = "CLOSE_VEICULOS_MODEL";
+export const CLOSE_TAB_VEICULOS = "CLOSE_TAB_VEICULOS";
 export const ICON_VEICULOS = "ICON_VEICULOS";
 export const LOADING_VEICULOS = "LOADING_VEICULOS";
 export const GET_VEICULOS = "GET_VEICULOS";

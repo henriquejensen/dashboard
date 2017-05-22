@@ -20,16 +20,23 @@ export const FieldGroup = (props) => {
 }
 
 export const SelectGroup = (props) => {
+    let id = props.id; //opcional - id utilizado pelo formgroup para identificacao
+    let label = props.label; //opcional - label que identifica os checkbox
+    let name = props.name; //opcional - nome de uma checkbox
+    let type = props.type ? props.type : "select";
+    let onChange = props.onChange; //opcional/obrigatorio - modifica a selecao do checkbox
+    let options = props.options; //opcional - array com os checkboxs que serao renderizados
+    let value = props.value; //opcional/obrigatorio - valores (true/false ou SIM) que deixam o checkbox selecionado
     return (
-        <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}}>
-            {props.label ? <ControlLabel>{props.label}</ControlLabel> : ""}
+        <FormGroup controlId={id} style={{marginLeft:0, marginRight:0}}>
+            {label ? <ControlLabel>{label}</ControlLabel> : ""}
             <FormControl
-                name={props.name}
-                componentClass={props.type}
-                onChange={props.onChange}
+                name={name}
+                componentClass={type}
+                onChange={onChange}
             >
-                {props.options.map((opt, index) => {
-                    return <option key={index} selected={props.value == opt} value={opt.value ? opt.value : opt}>{opt.label ? opt.label : opt}</option>
+                {options.map((opt, index) => {
+                    return <option key={index} selected={value == opt} value={opt.value ? opt.value : opt}>{opt.label ? opt.label : opt}</option>
                 })}
             </FormControl>
         </FormGroup>

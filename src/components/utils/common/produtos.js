@@ -105,7 +105,6 @@ export const todosProdutos = {
             {label: "Nº MOTOR", id: "numeroMotor", link: "/veiculos"},
             {label: "CPF", id: "cpf", link: "/veiculos"},
             {label: "CNPJ", id: "cnpj", link: "/veiculos"},
-            {label: "CRLV", id: "numeroCrlv", link: "/veiculos"}
         ]
     },
     CONSIGMAIS: {
@@ -121,7 +120,8 @@ export const todosProdutos = {
     }
 }
 
-/**    AGREGADO VEICULAR                            "agregados": false,
+/**    
+ *  AGREGADO VEICULAR                            "agregados": false,
     BIN FEDERAL                                  "binFederal": false,
     BIN FEDERAL + ROUBO E FURTO                  "binRF": false,
     BIN ESTADUAL                                 "binEstadual": false,

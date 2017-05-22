@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import PanelGroup from "../../components/panel/PanelGroup";
 import CardWithTable from "../../components/card/CardWithTable";
 import Card from "../../components/card/Card";
+import Protocolo from "../../components/protocolo/Protocolo";
+
+import * as pattern from "../../components/utils/functions/patternDocuments";
 
 class VeiculosView extends Component {
     mountComunicacaoVenda = (comunicacaoVenda) => {
@@ -17,9 +20,9 @@ class VeiculosView extends Component {
 
     mountCrlv = (crlv) => {
         return [
-            {label: "Data evento", value:crlv.data_evento},
+            {label: "Data evento", value:crlv.dataEvento},
             {label: "Evento", value:crlv.evento},
-            {label: "Tipo Documento", value:crlv.tipo_documento},
+            {label: "Tipo Documento", value:crlv.tipoDocumento},
             {label: "Observação", value:crlv.observacao},
         ]
     }
@@ -164,7 +167,7 @@ class VeiculosView extends Component {
                                 {label: "Emissão CRV/CRVL atual", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.dataEmissaoCrvCrvlAtual : undefined},
                                 {label: "Data licenciamento", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.dataLicenciamento : undefined},
                                 {label: "Data registro DI", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.dataRegistroDi : undefined},
-                                {label: "Data última atualização", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.dataUltimaAtualizacao : undefined},
+                                {label: "Última atualização", value:data.cadastro.movimentacao ? pattern.formatDate(data.cadastro.movimentacao.dataUltimaAtualizacao) : undefined},
                                 {label: "Munícipio", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.municipio : undefined},
                                 {label: "Nº documento faturado", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.numeroDocFaturado : undefined},
                                 {label: "Nº importadora", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.numeroImportadora : undefined},
@@ -190,55 +193,55 @@ class VeiculosView extends Component {
                     />
                 : ""}
                 {data.comunicacaoVenda ?
-                    <Card title="COMUNICAÇÃO DE VENDA"
+                    <CardWithTable title="COMUNICAÇÃO DE VENDA"
                         elements={this.mountComunicacaoVenda(data.comunicacaoVenda)}
                         colLength={4}
                     />
                 : ""}
                 {data.crlv ?
-                    <Card title="DOCUMENTO CRLV"
+                    <CardWithTable title="DOCUMENTO CRLV"
                         elements={this.mountCrlv(data.crlv)}
                         colLength={4}
                     />
                 : ""}
                 {data.dadosCondutor ?
-                    <Card title="DADOS CONDUTOR"
+                    <CardWithTable title="DADOS CONDUTOR"
                         elements={this.mountDadosCondutor(data.dadosCondutor)}
                         colLength={4}
                     />
                 : ""}
                 {data.dadosHistoricos ?
-                    <Card title="DADOS HISTÓRICOS"
+                    <CardWithTable title="DADOS HISTÓRICOS"
                         elements={this.mountDadosHistoricos(data.dadosHistoricos)}
                         colLength={4}
                     />
                 : ""}
                 {data.decodificacaoChassi ?
-                    <Card title="DECODIFICAÇÃO DE CHASSI"
+                    <CardWithTable title="DECODIFICAÇÃO DE CHASSI"
                         elements={this.mountDecodificacaoChassi(data.decodificacaoChassi)}
                         colLength={4}
                     />
                 : ""}
                 {data.gravame ?
-                    <Card title="GRAVAME"
+                    <CardWithTable title="GRAVAME"
                         elements={this.mountGravame(data.gravame)}
                         colLength={4}
                     />
                 : ""}
                 {data.proprietarioAtual ?
-                    <Card title="PROPRIETÁRIO ATUAL"
+                    <CardWithTable title="PROPRIETÁRIO ATUAL"
                         elements={this.mountProprietarioAtual(data.proprietarioAtual)}
                         colLength={4}
                     />
                 : ""}
                 {data.sinistroIrrecuperavel ?
-                    <Card title="SINISTRO IRRECUPERÁVEL"
+                    <CardWithTable title="SINISTRO IRRECUPERÁVEL"
                         elements={this.mountSinistroIrrecuperavel(data.sinistroIrrecuperavel)}
                         colLength={6}
                     />
                 : ""}
                 {data.tabelaFipe ?
-                    <Card title="TABELA FIPE"
+                    <CardWithTable title="TABELA FIPE"
                         elements={this.mountTabelaFipe(data.tabelaFipe)}
                         colLength={4}
                     />
@@ -272,15 +275,15 @@ class VeiculosView extends Component {
                                 {id:"anoExercicio", name:"Ano exercício"},
                                 {id:"cgcCpf", name:"CGC CPF"},
                                 {id:"cidade", name:"Cidade"},
-                                {id:"dataEmissaoGuia", name:"Data Emissão Guia"},
+                                {id:"dataEmissaoGuia", name:"Data Emissão Guia", functionToApply:(val) => {return <span>{pattern.formatDate(val)}</span>}},
                                 {id:"dataProcessamento", name:"Data processamento"},
-                                {id:"documento", name:"Documento"},
+                                {id:"documento", name:"Documento", functionToApply:(val) => {return <span>{pattern.patternCPF(val)}</span>}},
                                 {id:"idPag", name:"ID Pag"},
                                 {id:"nome", name:"Nome"},
                                 {id:"nomeAgenteFinanceiro", name:"Nome agente financeiro"},
                                 {id:"numeroBanco", name:"Nº banco"},
                                 {id:"numeroDut", name:"Número Dut"},
-                                {id:"saldo", name:"Saldo"},
+                                {id:"saldo", name:"Valor", functionToApply:(val) => {return <span>{pattern.formatCurrency(val)}</span>}},
                                 {id:"uf", name:"UF"},
                             ]
                         }
@@ -371,7 +374,7 @@ class VeiculosView extends Component {
                         fields={
                             [
                                 {id:"mensagem", name:"Mensagem"},
-                                {id:"numeroProcesso", name:"Núemro processo"},
+                                {id:"numeroProcesso", name:"Número processo"},
                                 {id:"orgaoJudicial", name:"Órgão judicial"},
                                 {id:"tipoRestricao", name:"Tipo restrição"},
                                 {id:"tribunal", name:"Tribunal"}
@@ -394,6 +397,8 @@ class VeiculosView extends Component {
                         rows={data.restricoes.restricao}
                     />
                 : ""}
+
+                <Protocolo info={data.cabecalho}/>
             </PanelGroup>
         )
     }
