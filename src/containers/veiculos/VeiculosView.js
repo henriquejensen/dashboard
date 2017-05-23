@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { Alert } from "react-bootstrap";
 
 import PanelGroup from "../../components/panel/PanelGroup";
 import CardWithTable from "../../components/card/CardWithTable";
-import Card from "../../components/card/Card";
 import Protocolo from "../../components/protocolo/Protocolo";
 
 import * as pattern from "../../components/utils/functions/patternDocuments";
+
+import { INFORMATION_NOT_AVAILABLE } from "../../constants/utils";
 
 class VeiculosView extends Component {
     mountComunicacaoVenda = (comunicacaoVenda) => {
@@ -125,20 +127,42 @@ class VeiculosView extends Component {
     mountTabelaFipe = (tabelaFipe) => {
         return [
             {label: "Código FIPE", value:tabelaFipe.codigoFipe},
-            {label: "Preço FIPE", value:tabelaFipe.precoFipe},
-            {label: "Preço médio", value:tabelaFipe.precoMedio}
+            {label: "Preço FIPE", value:pattern.formatCurrency(tabelaFipe.precoFipe)},
+            {label: "Preço médio", value:pattern.formatCurrency(tabelaFipe.precoMedio)},
         ]
+    }
+
+    renderFlagsProtocol = (flagsExecuted, flags) => {
+        let countFlagsExecuted = 0;
+        const showFlagsThatDidntExecuted = flags.map((flag) => {
+            //se a flag nao for encontrada no array de executadas
+            if(flag.checked && flagsExecuted.indexOf(flag.name) === -1) {
+                countFlagsExecuted++;
+                return <div>{flag.text} - {INFORMATION_NOT_AVAILABLE} </div>
+            }
+        })
+
+        return countFlagsExecuted ?
+            <Alert bsStyle="danger" className="text-center">
+                As seguintes opções não executaram: {showFlagsThatDidntExecuted}
+            </Alert>
+            
+            : "";
     }
 
     render() {
         let data = this.props.data;
+        let flags = this.props.flags;
         console.log("DATA", data);  
         return (
             <PanelGroup>
-                {data.cadastro ?
-                    <CardWithTable title="CADASTRO"
+                {data.cadastro && data.cadastro.descricao ?
+                    <CardWithTable title="DESCRIÇÃO DO VEÍCULO"
+                        mdLength={3}
                         elements={
                             [
+                                {label: "Marca", value:data.cadastro.descricao ? data.cadastro.descricao.marca : undefined},
+                                {label: "Modelo", value:data.cadastro.descricao ? data.cadastro.descricao.modelo : undefined},
                                 {label: "Ano fabricação", value:data.cadastro.descricao ? data.cadastro.descricao.anoFabricacao : undefined},
                                 {label: "Ano modelo", value:data.cadastro.descricao ? data.cadastro.descricao.anoModelo : undefined},
                                 {label: "Capacidade de passageiros", value:data.cadastro.descricao ? data.cadastro.descricao.capacidadePassageiros : undefined},
@@ -147,11 +171,32 @@ class VeiculosView extends Component {
                                 {label: "Combustível", value:data.cadastro.descricao ? data.cadastro.descricao.combustivel : undefined},
                                 {label: "Cor", value:data.cadastro.descricao ? data.cadastro.descricao.cor : undefined},
                                 {label: "Espécie", value:data.cadastro.descricao ? data.cadastro.descricao.especie : undefined},
-                                {label: "Marca", value:data.cadastro.descricao ? data.cadastro.descricao.marca : undefined},
-                                {label: "Modelo", value:data.cadastro.descricao ? data.cadastro.descricao.modelo : undefined},
                                 {label: "Segmento", value:data.cadastro.descricao ? data.cadastro.descricao.segmento : undefined},
                                 {label: "Sub-Segmento", value:data.cadastro.descricao ? data.cadastro.descricao.subSegmento : undefined},
-
+                            ]
+                        }
+                    />
+                : ""}
+                {data.cadastro && data.cadastro.identificadores ?
+                    <CardWithTable title="IDENTIFICADORES"
+                        mdLength={3}
+                        elements={
+                            [
+                                {label: "Chassi", value:data.cadastro.identificadores ? data.cadastro.identificadores.chassi : undefined},
+                                {label: "Nº carroceira", value:data.cadastro.identificadores ? data.cadastro.identificadores.numeroCarroceria : undefined},
+                                {label: "Nº atual do motor", value:data.cadastro.identificadores ? data.cadastro.identificadores.numeroMotorAtual : undefined},
+                                {label: "Nº original do motor", value:data.cadastro.identificadores ? data.cadastro.identificadores.numeroMotorOriginal : undefined},
+                                {label: "Placa", value:data.cadastro.identificadores ? data.cadastro.identificadores.placa : undefined},
+                                {label: "Renavam", value:data.cadastro.identificadores ? data.cadastro.identificadores.renavam : undefined},
+                            ]
+                        }
+                    />
+                : ""}
+                {data.cadastro && data.cadastro.fichaTecnica ?
+                    <CardWithTable title="FICHA TÉCNICA"
+                        mdLength={3}
+                        elements={
+                            [
                                 {label: "Capacidade carga", value:data.cadastro.fichaTecnica ? data.cadastro.fichaTecnica.capacidadeCarga : undefined},
                                 {label: "Máxima tração", value:data.cadastro.fichaTecnica ? data.cadastro.fichaTecnica.capacidadeMaximaTracao : undefined},
                                 {label: "Carroceria", value:data.cadastro.fichaTecnica ? data.cadastro.fichaTecnica.carroceria : undefined},
@@ -162,12 +207,20 @@ class VeiculosView extends Component {
                                 {label: "Potência", value:data.cadastro.fichaTecnica ? data.cadastro.fichaTecnica.potencia : undefined},
                                 {label: "Terceiro eixo", value:data.cadastro.fichaTecnica ? data.cadastro.fichaTecnica.terceiroEixo : undefined},
                                 {label: "Tipo carroceira", value:data.cadastro.fichaTecnica ? data.cadastro.fichaTecnica.tipoCarroceria : undefined},
-                                {label: "Tipo veículo", value:data.cadastro.fichaTecnica ? data.cadastro.fichaTecnica.tipoVeiculo : undefined},
-
+                                {label: "Tipo veículo", value:data.cadastro.fichaTecnica ? data.cadastro.fichaTecnica.tipoVeiculo : undefined}
+                            ]
+                        }
+                    />
+                : ""}
+                {data.cadastro && data.cadastro.movimentacao ?
+                    <CardWithTable title="MOVIMENTAÇÃO"
+                        mdLength={3}
+                        elements={
+                            [
                                 {label: "Emissão CRV/CRVL atual", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.dataEmissaoCrvCrvlAtual : undefined},
                                 {label: "Data licenciamento", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.dataLicenciamento : undefined},
                                 {label: "Data registro DI", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.dataRegistroDi : undefined},
-                                {label: "Última atualização", value:data.cadastro.movimentacao ? pattern.formatDate(data.cadastro.movimentacao.dataUltimaAtualizacao) : undefined},
+                                {label: "Última atualização", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.dataUltimaAtualizacao : undefined},
                                 {label: "Munícipio", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.municipio : undefined},
                                 {label: "Nº documento faturado", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.numeroDocFaturado : undefined},
                                 {label: "Nº importadora", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.numeroImportadora : undefined},
@@ -181,13 +234,7 @@ class VeiculosView extends Component {
                                 {label: "Tipo documento faturado", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.tipoDocFaturado : undefined},
                                 {label: "Tipo documento importadora", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.tipoDocumentoImportadora : undefined},
                                 {label: "UF", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.uf : undefined},
-                                {label: "Uf faturado", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.ufFaturado : undefined},
-                                {label: "Chassi", value:data.cadastro.identificadores ? data.cadastro.identificadores.chassi : undefined},
-                                {label: "Nº carroceira", value:data.cadastro.identificadores ? data.cadastro.identificadores.numeroCarroceria : undefined},
-                                {label: "Nº atual do motor", value:data.cadastro.identificadores ? data.cadastro.identificadores.numeroMotorAtual : undefined},
-                                {label: "Nº original do motor", value:data.cadastro.identificadores ? data.cadastro.identificadores.numeroMotorOriginal : undefined},
-                                {label: "Placa", value:data.cadastro.identificadores ? data.cadastro.identificadores.placa : undefined},
-                                {label: "Renavam", value:data.cadastro.identificadores ? data.cadastro.identificadores.renavam : undefined},
+                                {label: "Uf faturado", value:data.cadastro.movimentacao ? data.cadastro.movimentacao.ufFaturado : undefined}
                             ]
                         }
                     />
@@ -195,55 +242,55 @@ class VeiculosView extends Component {
                 {data.comunicacaoVenda ?
                     <CardWithTable title="COMUNICAÇÃO DE VENDA"
                         elements={this.mountComunicacaoVenda(data.comunicacaoVenda)}
-                        colLength={4}
+                        mdLength={4}
                     />
                 : ""}
                 {data.crlv ?
                     <CardWithTable title="DOCUMENTO CRLV"
                         elements={this.mountCrlv(data.crlv)}
-                        colLength={4}
+                        mdLength={4}
                     />
                 : ""}
                 {data.dadosCondutor ?
                     <CardWithTable title="DADOS CONDUTOR"
                         elements={this.mountDadosCondutor(data.dadosCondutor)}
-                        colLength={4}
+                        mdLength={4}
                     />
                 : ""}
                 {data.dadosHistoricos ?
                     <CardWithTable title="DADOS HISTÓRICOS"
                         elements={this.mountDadosHistoricos(data.dadosHistoricos)}
-                        colLength={4}
+                        mdLength={4}
                     />
                 : ""}
                 {data.decodificacaoChassi ?
                     <CardWithTable title="DECODIFICAÇÃO DE CHASSI"
                         elements={this.mountDecodificacaoChassi(data.decodificacaoChassi)}
-                        colLength={4}
+                        mdLength={4}
                     />
                 : ""}
                 {data.gravame ?
                     <CardWithTable title="GRAVAME"
                         elements={this.mountGravame(data.gravame)}
-                        colLength={4}
+                        mdLength={4}
                     />
                 : ""}
                 {data.proprietarioAtual ?
                     <CardWithTable title="PROPRIETÁRIO ATUAL"
                         elements={this.mountProprietarioAtual(data.proprietarioAtual)}
-                        colLength={4}
+                        mdLength={4}
                     />
                 : ""}
                 {data.sinistroIrrecuperavel ?
                     <CardWithTable title="SINISTRO IRRECUPERÁVEL"
                         elements={this.mountSinistroIrrecuperavel(data.sinistroIrrecuperavel)}
-                        colLength={6}
+                        mdLength={6}
                     />
                 : ""}
                 {data.tabelaFipe ?
                     <CardWithTable title="TABELA FIPE"
                         elements={this.mountTabelaFipe(data.tabelaFipe)}
-                        colLength={4}
+                        mdLength={4}
                     />
                 : ""}
                 {data.historicoLeiloes ?
@@ -259,13 +306,13 @@ class VeiculosView extends Component {
                             [
                                 {id:"comitente", name:"Comitente"},
                                 {id:"condicaoGeral", name:"Condição geral"},
-                                {id:"data", name:"Data"},
+                                {id:"data", name:"Data", functionToApply:(val) => {return <span>{pattern.formatDate(val)}</span>}},
                                 {id:"leiloeiro", name:"Leiloeiro"},
                                 {id:"lote", name:"Lote"},
                                 {id:"patio", name:"Patio"},
                             ]
                         }
-                        rows={data.historicoLeiloes.leilao}
+                        rows={data.historicoLeiloes.leilao ? data.historicoLeiloes.leilao : []}
                     />
                 : ""}
                 {data.historicoProprietarios ?
@@ -273,40 +320,48 @@ class VeiculosView extends Component {
                         fields={
                             [
                                 {id:"anoExercicio", name:"Ano exercício"},
-                                {id:"cgcCpf", name:"CGC CPF"},
-                                {id:"cidade", name:"Cidade"},
-                                {id:"dataEmissaoGuia", name:"Data Emissão Guia", functionToApply:(val) => {return <span>{pattern.formatDate(val)}</span>}},
-                                {id:"dataProcessamento", name:"Data processamento"},
                                 {id:"documento", name:"Documento", functionToApply:(val) => {return <span>{pattern.patternCPF(val)}</span>}},
-                                {id:"idPag", name:"ID Pag"},
                                 {id:"nome", name:"Nome"},
+                                {id:"cidade", name:"Cidade"},
+                                {id:"uf", name:"UF"},
+                                {id:"dataEmissaoGuia", name:"Data Emissão Guia", functionToApply:(val) => {return <span>{pattern.formatDate(val)}</span>}},
+                            ]
+                        }
+                        rows={data.historicoProprietarios.proprietario ? data.historicoProprietarios.proprietario : []}
+                        hiddenRows={
+                            [
+                                {id:"cgcCpf", name:"CGC CPF"},
+                                {id:"dataProcessamento", name:"Data processamento"},
+                                {id:"saldo", name:"Valor", functionToApply:(val) => {return <span>{pattern.formatCurrency(val)}</span>}},
+                                {id:"idPag", name:"ID Pag"},
                                 {id:"nomeAgenteFinanceiro", name:"Nome agente financeiro"},
                                 {id:"numeroBanco", name:"Nº banco"},
                                 {id:"numeroDut", name:"Número Dut"},
-                                {id:"saldo", name:"Valor", functionToApply:(val) => {return <span>{pattern.formatCurrency(val)}</span>}},
-                                {id:"uf", name:"UF"},
                             ]
                         }
-                        rows={data.historicoProprietarios.proprietario}
                     />
                 : ""}
                 {data.historicoRoubo ?
                     <CardWithTable title="HISTÓRICO DE ROUBO"
                         fields={
                             [
-                                {id:"alarme", name:"Alarme"},
-                                {id:"anoDeclaracao", name:"Ano Declaração"},
                                 {id:"boletim", name:"Boletim"},
                                 {id:"categoriaOcorrencia", name:"Categoria Ocorrência"},
                                 {id:"dataOcorrencia", name:"Data Ocorrência"},
-                                {id:"municipio", name:"Município"},
-                                {id:"numeroOcorrencia", name:"Número Ocorrência"},
-                                {id:"orgaoSeguranca", name:"Órgão segurança"},
                                 {id:"tipoDeclaracao", name:"Tipo declaração"},
+                                {id:"municipio", name:"Município"},
                                 {id:"uf", name:"UF"},
                             ]
                         }
-                        rows={data.historicoRoubo.roubo}
+                        rows={data.historicoRoubo.roubo ? data.historicoRoubo.roubo : []}
+                        hiddenRows={
+                            [
+                                {id:"anoDeclaracao", name:"Ano Declaração"},
+                                {id:"numeroOcorrencia", name:"Número Ocorrência"},
+                                {id:"orgaoSeguranca", name:"Órgão segurança"},
+                                {id:"alarme", name:"Alarme"},
+                            ]
+                        }
                     />
                 : ""}
                 {data.historicoVeiculos ?
@@ -326,7 +381,7 @@ class VeiculosView extends Component {
                                 {id:"uf", name:"UF"},
                             ]
                         }
-                        rows={data.historicoVeiculos.veiculo}
+                        rows={data.historicoVeiculos.veiculo ? data.historicoVeiculos.veiculo : []}
                     />
                 : ""}
                 {data.indiciosSinistros ?
@@ -337,7 +392,7 @@ class VeiculosView extends Component {
                                 {id:"descricao", name:"Descrição"}
                             ]
                         }
-                        rows={data.indiciosSinistros.sinistro}
+                        rows={data.indiciosSinistros.sinistro ? data.indiciosSinistros.sinistro : []}
                     />
                 : ""}
                 {data.registroDebitos ?
@@ -348,10 +403,10 @@ class VeiculosView extends Component {
                                 {id:"situacao", name:"Situação"},
                                 {id:"tipoRegistro", name:"Tipo de registro"},
                                 {id:"uf", name:"UF"},
-                                {id:"valor", name:"Valor"},
+                                {id:"valor", name:"Valor", functionToApply:(val) => {return <span>{pattern.formatCurrency(val)}</span>}},
                             ]
                         }
-                        rows={data.registroDebitos.debito}
+                        rows={data.registroDebitos.debito ? data.registroDebitos.debito : []}
                     />
                 : ""}
                 {data.registroRenajud ?
@@ -359,9 +414,9 @@ class VeiculosView extends Component {
                         elements={
                             [
                                 {label: "CMT", value:data.registroRenajud.cmt},
-                                {label: "Data", value:data.registroRenajud.data},
+                                {label: "Data", value:data.registroRenajud.data, functionToApply:(val) => {return <span>{pattern.formatDate(val)}</span>}},
                                 {label: "Data Di", value:data.registroRenajud.dataDi},
-                                {label: "Data limite", value:data.registroRenajud.dataLimite},
+                                {label: "Data limite", value:data.registroRenajud.dataLimite, functionToApply:(val) => {return <span>{pattern.formatDate(val)}</span>}},
                                 {label: "Descrição", value:data.registroRenajud.descricao},
                                 {label: "Montagem", value:data.registroRenajud.montagem},
                                 {label: "Número DI", value:data.registroRenajud.numeroDi},
@@ -380,7 +435,7 @@ class VeiculosView extends Component {
                                 {id:"tribunal", name:"Tribunal"}
                             ]
                         }
-                        rows={data.registroRenajud.restricaoJudicial}
+                        rows={data.registroRenajud.restricaoJudicial ? data.registroRenajud.restricaoJudicial : []}
                     />
                 : ""}
                 {data.restricoes ?
@@ -394,11 +449,13 @@ class VeiculosView extends Component {
                                 {id:"tribunal", name:"tribunal"},
                             ]
                         }
-                        rows={data.restricoes.restricao}
+                        rows={data.restricoes.restricao ? data.restricoes.restricao : []}
                     />
                 : ""}
 
                 <Protocolo info={data.cabecalho}/>
+
+                {this.renderFlagsProtocol(data.cabecalho.flagsExecutadas, flags)}
             </PanelGroup>
         )
     }

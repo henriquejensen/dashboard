@@ -30,6 +30,7 @@ export const MESSAGE_SUCCESS_NUMBER_COPY = "Número copiado com sucesso";
 export const MESSAGE_SUCCESS_ADD_NEW_PHONE = "Obrigado pelo envio. Seu pedido de inserção será analisado";
 export const MESSAGE_SUCCESS_SMS = "Mensagem enviada com sucesso!";
 export const NENHUM_REGISTRO = "Nenhum registro encontrado";
+export const INFORMATION_NOT_AVAILABLE = "Informação indisponível";
 export const ADDRESS_NOT_FOUND = "Endereço não encontrado";
 export const RECHECK_MESSAGE = "As reconsultas realizadas no mesmo dia não serão cobradas";
 

@@ -56,7 +56,7 @@ export default function(state=getInitialState, action) {
                 message: "",
                 loading: false,
                 response: state.response,
-                tabActive: state.tabActiv,
+                tabActive: state.tabActive,
                 lastQueries: state.lastQueries,
                 type: action.payload.toUpperCase()
             }

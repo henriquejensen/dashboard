@@ -7,12 +7,12 @@ class Card extends Component {
     render() {
         let title = this.props.title;
         let elements = this.props.elements;
-        let colLength = this.props.colLength;
+        let mdLength = this.props.mdLength;
         return (
             <Panel title={title}>
                 {elements.map((element, index) => {
                     return (
-                        <Col md={colLength} key={index}>
+                        <Col md={mdLength} key={index}>
                             <strong>{element.label}: </strong> {element.value}
                         </Col>
                     )

@@ -10,13 +10,15 @@ class CardWithTable extends Component {
         let fields = this.props.fields;
         let elements = this.props.elements ? this.props.elements : [];
         let rows = this.props.rows;
+        let hiddenRows = this.props.hiddenRows;
+        let mdLength = this.props.mdLength ? this.props.mdLength : 3;
         return (
             <Panel title={title}>
                 {elements.length > 0 ?
                     elements.map((element, index) => {
                         if(element.value) {
                             return (
-                                <Col md={3} key={index}>
+                                <Col md={mdLength} key={index}>
                                     <strong>{element.label}: </strong> {element.value}
                                 </Col>
                             )
@@ -24,7 +26,7 @@ class CardWithTable extends Component {
                     })
                 : ""}
                 <Col md={12}>
-                    <Table fields={fields} elements={rows}/>
+                    <Table fields={fields} elements={rows} hiddenRows={hiddenRows} />
                 </Col>
             </Panel>
         );

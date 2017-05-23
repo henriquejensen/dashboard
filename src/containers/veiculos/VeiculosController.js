@@ -410,6 +410,7 @@ class VeiculosController extends Component {
 	render() {
 		let datas = this.props.datas;
 		let loading = this.props.loading;
+		let flags = this.state.options;
 		return (
 			<div className="container my-container">
 				{this.form(this.props.type)}
@@ -450,6 +451,7 @@ class VeiculosController extends Component {
 											data={data.data}
 											tipo={data.tipo}
 											index={index}
+											flags={flags}
 											searchPerson={this.searchLocalize}/>
 
 									</Tab>
