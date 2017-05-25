@@ -324,14 +324,20 @@ export default function(state = initialState, action) {
 				}
 			}
 
-			case SEARCH_BY_NOME_ENDERECO:
+			case SEARCH_BY_NOME_ENDERECO: {
 				/*Construcao do nome da label na tab */
 				let nameLabelArray = JSON.parse(action.payload.response.cabecalho.entrada);
 				let nameLabel = [];
-				Object.values(nameLabelArray).forEach((v) => {
-					if(v)
-						nameLabel.push(v)
+
+				/**IE não suporta Object.values, mas suporta Object.keys
+				 * Aqui estou verificando apenas as propriedades que possuem
+				 * algum valor
+				 */
+				Object.keys(nameLabelArray).forEach((keyOfNameLabelArray) => {
+					if(nameLabelArray[keyOfNameLabelArray])
+						nameLabel.push(nameLabelArray[keyOfNameLabelArray])
 				});
+
 				nameLabel = nameLabel.toString();
 				let tipo = action.payload.parameters.tipo.substring(0,3);
 				let label = tipo+": "+ nameLabel;
@@ -360,6 +366,7 @@ export default function(state = initialState, action) {
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				};
+			}
 
 			case SEARCH_BY_PESSOAS_RELACIONADOS: {
 				let responseServer = action.payload.response;

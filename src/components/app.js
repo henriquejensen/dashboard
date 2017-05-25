@@ -1,3 +1,5 @@
+import "./app.css";
+
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip'
 import { browserHistory } from "react-router";

@@ -34,7 +34,7 @@
     position: fixed;
     width: 100%;
     z-index: 3;
-    box-shadow: rgba(0, 0, 0, 0.137255) 0px 0px 4px, rgba(0, 0, 0, 0.278431) 0px 2px 8px
+    /*box-shadow: rgba(0, 0, 0, 0.137255) 0px 0px 4px, rgba(0, 0, 0, 0.278431) 0px 2px 8px*/
 }
 
 .navbar-inverse .navbar-nav>li>a {
@@ -85,11 +85,6 @@
     padding-left: 0;
     height: 44px;
     margin-top: 4px;
-}
-
-.menu-image-user {
-    width:35px;
-    height: 35px;
 }
 
 .notication {

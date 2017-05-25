@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router";
+import { browserHistory, Link } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
@@ -12,9 +12,6 @@ import {
 		Badge
 } from "react-bootstrap";
 
-import menu from "./utils/common/menu.json";
-import { browserHistory } from 'react-router';
-
 import {
 		logOut,
 		getUserData
@@ -23,7 +20,9 @@ import {
 import Modal from "./Modal";
 import BarraBuscaRapida from "./utils/BarraBuscaRapida";
 
-import { COMPANY_LOGO_INVERSE, COMPANY_NAME_SHORT, TITLE_HEADER } from "../constants/constantsCompany";
+import { COMPANY_LOGO_INVERSE, COMPANY_NAME_SHORT, COMPANY_OLD_SITE, TITLE_HEADER } from "../constants/constantsCompany";
+
+import menu from "./utils/common/menu.json";
 
 class MenuSuperior extends Component {
 	state = {
@@ -78,6 +77,11 @@ class MenuSuperior extends Component {
 									</MenuItem>
 								)
 							})}
+							
+							<MenuItem href={COMPANY_OLD_SITE}>
+								Voltar ao antigo portal
+							</MenuItem>
+
 							<MenuItem divider />
 							<MenuItem onClick={this.props.logOut}>
 								Sair

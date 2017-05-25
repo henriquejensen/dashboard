@@ -1,3 +1,5 @@
+import "./ElementsAtScreen.css";
+
 import React from "react";
 import { LOADING_GIF } from "../../constants/utils";
 

@@ -1,0 +1,22 @@
+.my-print-screen {
+    position: fixed;
+    font-size: 31px;
+    right: 8px;
+    bottom: 2px;
+    cursor: pointer;
+}
+
+.imgSearching > img {
+    width: 120px;
+    height: 120px;
+    position: fixed;
+    z-index: 2;
+    left: 700px;
+    top: 250px;
+}
+
+@media(max-width: 768px) {
+    .my-print-screen {
+        display: none
+    }
+}

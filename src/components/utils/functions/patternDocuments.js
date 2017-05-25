@@ -29,7 +29,9 @@ export function patternRG(doc) {
 }
 
 export function formatDate(date) {
-    if(!date) return date;
+    /**Verifica se o browser é o IE, pois na versão 10 o Intl não é suportado */
+    let isIE = /*@cc_on!@*/false || !!document.documentMode;
+    if(!date || isIE) return date;
     let newDate = new Date(date);
     let format = new Intl.DateTimeFormat("pt-BR");
 
@@ -37,7 +39,9 @@ export function formatDate(date) {
 }
 
 export function formatCurrency(currency) {
-    if(!currency) return currency;
+    /**Verifica se o browser é o IE, pois na versão 10 o Intl não é suportado */
+    let isIE = /*@cc_on!@*/false || !!document.documentMode;
+    if(!currency || isIE) return currency;
     currency = parseInt(currency);
     let newCurrency = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 

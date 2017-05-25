@@ -1,3 +1,5 @@
+import "./sidebar.css";
+
 import React, { Component } from "react";
 import { Link } from "react-router";
 import { bindActionCreators } from "redux";

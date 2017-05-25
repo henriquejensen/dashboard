@@ -10,7 +10,7 @@ import UltimasConsultas from "../../components/UltimasConsultas";
 import Titletab from "../../components/utils/Titletab";
 import Panel from "../../components/panel/Panel";
 import { VeiculoslDescription } from "../../components/ProductDescription";
-import { FieldGroup, MyCheckboxGroup, SelectGroup } from "../../components/forms/CommonForms";
+import { FieldGroup, MyCheckboxGroup } from "../../components/forms/CommonForms";
 
 import {
 		changeTab,
@@ -419,6 +419,8 @@ class VeiculosController extends Component {
 
 				<div style={{marginBottom:15}} />
 
+				{this.props.datas.length > 0 ? <PrintScreen /> : ""}
+
                 {datas.length === 0 ?
 					<span>
 						<VeiculoslDescription />
@@ -428,12 +430,12 @@ class VeiculosController extends Component {
                             type={this.props.type} />
 					</span>
                 :
-						<Tabs
+						<Tabs id="uncontrolled-tab-example"
 							activeKey={this.props.tabActive}
 							onSelect={(key) => {this.props.changeTab(key)}}
-							id="uncontrolled-tab-example"
 						>
 							{this.props.datas.map((data, index) => {
+								data.data.flags = data.data.flags ? data.data.flags : flags.concat();
 								return (
 									<Tab
 										animation={true}
@@ -451,7 +453,7 @@ class VeiculosController extends Component {
 											data={data.data}
 											tipo={data.tipo}
 											index={index}
-											flags={flags}
+											flags={data.data.flags}
 											searchPerson={this.searchLocalize}/>
 
 									</Tab>

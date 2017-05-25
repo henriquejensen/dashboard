@@ -1,3 +1,5 @@
+import "./LayoutTelefone.css";
+
 import React, { Component } from "react";
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Tooltip from "react-tooltip";
@@ -194,13 +196,13 @@ export default class LayoutTelefone extends Component{
 
                                                 <td className="noPrint">
                                                     <a data-tip data-for="tooltipWhats">
-                                                        <img src="../../../public/images/whatsapp.png" width="15"/>
+                                                        <img src="../../../public/images/whatsapp.png" className="sub-icon-tel"/>
                                                     </a>
                                                 </td>
 
                                                 <td className="noPrint">
                                                     <a data-tip data-for="tooltipViber">
-                                                        <img src="../../../public/images/viber.png" width="15"/>
+                                                        <img src="../../../public/images/viber.png" className="sub-icon-tel"/>
                                                     </a>
                                                 </td>
 

@@ -4,7 +4,7 @@ color link = #1a0dab
 
 body {
     font-family: roboto;
-    background-color: #e7e7e7;
+    background-color: #eeeeee;
     font-size: 13px;
     line-height: 1.62857143;
 }
@@ -214,14 +214,6 @@ input {
     cursor: pointer
 }
 
-.imgSearching > img {
-    height: 120px;
-    position: fixed;
-    z-index: 2;
-    left: 700px;
-    top: 250px;
-}
-
 .my-container {
     max-width: 1280px;
 }
@@ -306,18 +298,6 @@ input {
    position: absolute;
     right: 19px;
     top: 18px;
-}
-
-.sub-icon {
-    width: 22px;
-    margin-right: 15px;
-}
-
-.sub-icon-open-menu {
-    float: right;
-    position: absolute;
-    right: 0;
-    top: 11px;
 }
 
 .content-header {
@@ -409,14 +389,6 @@ table {
     background: #c9302c;
 }
 
-.my-print-screen {
-    position: fixed;
-    font-size: 31px;
-    right: 8px;
-    bottom: 2px;
-    cursor: pointer;
-}
-
 #logo-company-print img {
     display: none;
 }
@@ -496,8 +468,5 @@ table {
 @media(max-width: 768px) {
     #input-fields {
         float: none;
-    }
-    .my-print-screen {
-        display: none
     }
 }

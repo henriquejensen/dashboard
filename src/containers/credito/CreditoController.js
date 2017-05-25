@@ -7,6 +7,9 @@ import CreditoView from "./CreditoView";
 import LocalizeView from "../localize/LocalizeView";
 import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
+import Panel from "../../components/panel/Panel";
+import UltimasConsultas from "../../components/UltimasConsultas";
+import { LocalizeDescription } from "../../components/ProductDescription";
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
 
 import {
@@ -396,35 +399,35 @@ class Credito extends Component {
 
 	form = (tipo) => {
 		return (
-			<MyForm
-				icon = {ICON_CREDITO}
-				logo = {LOGO_CREDITO}
-				showLogo = {this.props.datas.length == 0 ? true : false}
-				onformSubmit = {this.onFormSubmit}
-				closeMessageError = {this.props.closeMessageErrorCredito}
-				options={menu.sidebar[4].subItems}
-				onChange={this.onChangeType}
-                type={this.props.type}
-				seeModelo = {this.props.seeModel}
-				status = {this.props.status}
-				message = {this.props.message}
-				searchUltimasConsultas={this.researchUltimasConsultas}
-				lastQueries = {this.props.lastQueries[this.props.type]}
-			>
-				{tipo ?
-					tipo == "INTERMEDIARIA" || tipo == "INTERMEDIARIAPLUS" ?
-						this.renderForm(false)
-					: 
-						tipo == "CHEQUE" ?
-							this.renderFormCheque()
-						:
-							tipo == "EXPRESS" ?
-								this.renderFormExpress()
+			<Panel>
+				<Col md={12}>
+					<MyForm
+						logo = {LOGO_CREDITO}
+						onformSubmit = {this.onFormSubmit}
+						closeMessageError = {this.props.closeMessageErrorCredito}
+						options={menu.sidebar[4].subItems}
+						onChange={this.onChangeType}
+						type={this.props.type}
+						seeModelo = {this.props.seeModel}
+						status = {this.props.status}
+						message = {this.props.message}
+					>
+						{tipo ?
+							tipo == "INTERMEDIARIA" || tipo == "INTERMEDIARIAPLUS" ?
+								this.renderForm(false)
+							: 
+								tipo == "CHEQUE" ?
+									this.renderFormCheque()
+								:
+									tipo == "EXPRESS" ?
+										this.renderFormExpress()
+									: this.renderForm(false)
 							: this.renderForm(false)
-					: this.renderForm(false)
-				}
-				
-			</MyForm>
+						}
+						
+					</MyForm>
+				</Col>
+			</Panel>
 		)
 	}
 
@@ -444,50 +447,59 @@ class Credito extends Component {
 
 				{loading ? <LoadingScreen /> : ""}
 
+				<div style={{marginBottom:15}} />
+
 				{this.props.datas.length > 0 ? <PrintScreen /> : ""}
 
-				{datas.length > 0 ? 
-					(
-						<Tabs
-							activeKey={tabActive}
-							onSelect={(key) => {changeTab(key)}}
-							animation={false}
-							id="tab-credito"
-						>
-							{datas.map((data, index) => {
-								return (
-									<Tab eventKey={data.label} 
-										title={
-											<Titletab
-												icon={data.icon}
-												label={data.label.length > 20 ? data.label.substring(0,20)+"..." : data.label}
-												close={() => this.closeTab(index)}
-											/>
-										}
-										key={index}
-									>
-										{data.produto == COMPANY_PRODUCT_CREDITO ?
-											<CreditoView
+				{datas.length === 0 ? 
+					<span>
+						<LocalizeDescription />
+						<div style={{marginBottom:15}} />
+                        <UltimasConsultas
+                            consultas={this.props.lastQueries[this.props.type]}
+                            type={this.props.type}
+                            search={this.researchUltimasConsultas} />
+					</span>
+				:
+					<Tabs id="tab-credito"
+						activeKey={tabActive}
+						onSelect={(key) => {changeTab(key)}}
+						animation={false}
+						
+					>
+						{datas.map((data, index) => {
+							return (
+								<Tab eventKey={data.label} 
+									title={
+										<Titletab
+											icon={data.icon}
+											label={data.label.length > 20 ? data.label.substring(0,20)+"..." : data.label}
+											close={() => this.closeTab(index)}
+										/>
+									}
+									key={index}
+								>
+									{data.produto == COMPANY_PRODUCT_CREDITO ?
+										<CreditoView
+											data={data.data}
+											tipo={data.tipo}
+											index={index}
+											searchPerson={this.searchCreditoCompleta}/>
+									: 
+										data.produto == COMPANY_PRODUCT_LOCALIZE ?
+											<LocalizeView
 												data={data.data}
 												tipo={data.tipo}
 												index={index}
-												searchPerson={this.searchCreditoCompleta}/>
-										: 
-											data.produto == COMPANY_PRODUCT_LOCALIZE ?
-												<LocalizeView
-													data={data.data}
-													tipo={data.tipo}
-													index={index}
-													label={data.label}
-													searchLocalize={this.searchInLocalize}
-													pessoasRelacionadas={data.pessoasRelacionadas}/>
-											: ""}
-									</Tab>
-								)
-							})}
-						</Tabs>
-					)
-				: ""}
+												label={data.label}
+												searchLocalize={this.searchInLocalize}
+												pessoasRelacionadas={data.pessoasRelacionadas}/>
+										: ""}
+								</Tab>
+							)
+						})}
+					</Tabs>
+				}
 			</div>
 		)
 	}

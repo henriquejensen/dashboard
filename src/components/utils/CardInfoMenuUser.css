@@ -1,0 +1,12 @@
+#card-info-user {
+    background-color: #777777;
+    color: white;
+    height: 72px;
+    display: flex;
+    padding: 15px 0px;
+}
+
+#menu-image-user {
+    width:35px;
+    height: 35px;
+}

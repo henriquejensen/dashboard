@@ -31,6 +31,9 @@ import LocalizeView from "./LocalizeView";
 import CreditoView from "../credito/CreditoView";
 import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
+import Panel from "../../components/panel/Panel";
+import UltimasConsultas from "../../components/UltimasConsultas";
+import { LocalizeDescription } from "../../components/ProductDescription";
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
 
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO } from "../../constants/constantsCompany";
@@ -505,37 +508,36 @@ class LocalizeController extends Component {
 
 	form = (tipo) => {
 		return (
-			<MyForm
-				icon = {ICON_LOCALIZE}
-				logo = {LOGO_LOCALIZE}
-				showLogo = {this.props.datas.length == 0 ? true : false}
-				onformSubmit = {this.onFormSubmit}
-				closeMessageError = {this.props.closeMessageErrorLocalize}
-				buscaAvancada={tipo == "NOME" || tipo == "ENDERECO" ? this.state.buscaAvancada : undefined}
-				hiddenBuscaAvancada={tipo == "NOME" || tipo == "ENDERECO" ? this.hiddenBuscaAvancada : undefined}
-				options={menu.sidebar[0].subItems}
-				onChange={this.onChangeType}
-                type={this.props.type}
-				seeModelo = {this.props.seeModel}
-				status = {this.props.status}
-				message = {this.props.message}
-				searchUltimasConsultas={this.researchUltimasConsultas}
-				searchEnderecosTelefonesUltimasConsultas={this.props.type == "CPF" || this.props.type == "CNPJ" ? this.searchEnderecosTelefonesUltimasConsultas : ""}
-				lastQueries = {this.props.lastQueries[this.props.type]}
-			>
-				{tipo ?
-					tipo == "CPF" || tipo == "CNPJ" ? 
-						this.renderForm()
-					: tipo == "NOME" ? 
-						this.renderFormNome()
-						: tipo == "TELEFONE" ?
-							this.renderForm()
-						: tipo == "EMAIL" ?
-							this.renderForm()
-						: this.renderFormEndereco()
-					: this.renderForm()
-				}
-			</MyForm>
+			<Panel>
+				<Col md={12}>
+					<MyForm
+						logo = {LOGO_LOCALIZE}
+						onformSubmit = {this.onFormSubmit}
+						closeMessageError = {this.props.closeMessageErrorLocalize}
+						buscaAvancada={tipo == "NOME" || tipo == "ENDERECO" ? this.state.buscaAvancada : undefined}
+						hiddenBuscaAvancada={tipo == "NOME" || tipo == "ENDERECO" ? this.hiddenBuscaAvancada : undefined}
+						options={menu.sidebar[0].subItems}
+						onChange={this.onChangeType}
+						type={this.props.type}
+						seeModelo = {this.props.seeModel}
+						status = {this.props.status}
+						message = {this.props.message}
+					>
+						{tipo ?
+							tipo == "CPF" || tipo == "CNPJ" ? 
+								this.renderForm()
+							: tipo == "NOME" ? 
+								this.renderFormNome()
+								: tipo == "TELEFONE" ?
+									this.renderForm()
+								: tipo == "EMAIL" ?
+									this.renderForm()
+								: this.renderFormEndereco()
+							: this.renderForm()
+						}
+					</MyForm>
+				</Col>
+			</Panel>
 		)
 	}
 
@@ -550,66 +552,76 @@ class LocalizeController extends Component {
 
 				{loading ? <LoadingScreen /> : ""}
 
+				<div style={{marginBottom:15}} />
+
 				{this.props.datas.length > 0 ? <PrintScreen /> : ""}
 
-				{this.props.datas.length > 0 ? 
-					(
-						<Tabs
-							activeKey={this.props.tabActive}
-							onSelect={(key) => {this.props.changeTab(key)}}
-							id="uncontrolled-tab-example"
-						>
-							{this.props.datas.map((data, index) => {
-								return (
-									<Tab
-										animation={true}
-										eventKey={data.label}
-										title={
-											<Titletab
-												icon={data.icon}
-												label={data.label.length > 20 ? data.label.substring(0,20)+"..." : data.label}
-												close={() => this.closeTab(index)}
+				{this.props.datas.length === 0 ? 
+					<span>
+						<LocalizeDescription />
+						<div style={{marginBottom:15}} />
+                        <UltimasConsultas
+                            consultas={this.props.lastQueries[this.props.type]}
+                            type={this.props.type}
+                            search={this.researchUltimasConsultas}
+                            searchEnderecosTelefonesUltimasConsultas={this.props.type == "CPF" || this.props.type == "CNPJ" ? this.searchEnderecosTelefonesUltimasConsultas : ""} />
+					</span>
+				:
+					<Tabs id="uncontrolled-tab-example"
+						activeKey={this.props.tabActive}
+						onSelect={(key) => {this.props.changeTab(key)}}
+						
+					>
+						{this.props.datas.map((data, index) => {
+							return (
+								<Tab
+									animation={true}
+									eventKey={data.label}
+									title={
+										<Titletab
+											icon={data.icon}
+											label={data.label.length > 20 ? data.label.substring(0,20)+"..." : data.label}
+											close={() => this.closeTab(index)}
+										/>
+									}
+									key={index}
+								>
+									{/*Verifica se o produto pesquisado é localize, pois pode ser gerado abas de outros produtos no Localize*/}
+									{data.produto == COMPANY_PRODUCT_LOCALIZE ?
+										<LocalizeView
+											data={data.data}
+											tipo={data.tipo}
+											index={index}
+											label={data.label}
+											searchLocalize={this.searchLocalize}
+											searchPessoasRelacionadas={this.searchPessoasRelacionadas}
+											pessoasRelacionadas={data.pessoasRelacionadas}
+											searchTelefonesPessoaRelacionada={this.searchTelefonesPessoaRelacionada}
+											searchEnderecosPessoaRelacionada={this.searchEnderecosPessoaRelacionada}
+											searchLocalizeByNomeEndereco={this.searchLocalizeByNomeEndereco}/>
+									:
+									data.produto == COMPANY_PRODUCT_CREDITO ?
+										<CreditoView
+											data={data.data}
+											tipo={data.tipo}
+											index={index}
+											searchPerson={this.searchLocalize}/>
+									: 	<span>
+											<BuscaPorRelacionados
+												relacionados={data.data.response ? data.data.response : data.data}
+												searchPerson={this.searchLocalize}
+												headerBody={data.label}
+												searchEnderecosTelefonesResultadosBusca={this.searchEnderecosTelefonesResultadosBusca}
+												indexLabel={index}
 											/>
-										}
-										key={index}
-									>
-										{/*Verifica se o produto pesquisado é localize, pois pode ser gerado abas de outros produtos no Localize*/}
-										{data.produto == COMPANY_PRODUCT_LOCALIZE ?
-											<LocalizeView
-												data={data.data}
-												tipo={data.tipo}
-												index={index}
-												label={data.label}
-												searchLocalize={this.searchLocalize}
-												searchPessoasRelacionadas={this.searchPessoasRelacionadas}
-												pessoasRelacionadas={data.pessoasRelacionadas}
-												searchTelefonesPessoaRelacionada={this.searchTelefonesPessoaRelacionada}
-												searchEnderecosPessoaRelacionada={this.searchEnderecosPessoaRelacionada}
-												searchLocalizeByNomeEndereco={this.searchLocalizeByNomeEndereco}/>
-										:
-										data.produto == COMPANY_PRODUCT_CREDITO ?
-											<CreditoView
-												data={data.data}
-												tipo={data.tipo}
-												index={index}
-												searchPerson={this.searchLocalize}/>
-										: 	<span>
-												<BuscaPorRelacionados
-													relacionados={data.data.response ? data.data.response : data.data}
-													searchPerson={this.searchLocalize}
-													headerBody={data.label}
-													searchEnderecosTelefonesResultadosBusca={this.searchEnderecosTelefonesResultadosBusca}
-													indexLabel={index}
-												/>
-												<Protocolo info={data.data.cabecalho} />
-											</span>
-										}
-									</Tab>
-								)
-							})}
-						</Tabs>
-					)
-				: ""}
+											<Protocolo info={data.data.cabecalho} />
+										</span>
+									}
+								</Tab>
+							)
+						})}
+					</Tabs>
+				}
 			</div>
 		)
 	}

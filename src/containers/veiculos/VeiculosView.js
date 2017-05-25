@@ -153,7 +153,6 @@ class VeiculosView extends Component {
     render() {
         let data = this.props.data;
         let flags = this.props.flags;
-        console.log("DATA", data);  
         return (
             <PanelGroup>
                 {data.cadastro && data.cadastro.descricao ?
@@ -324,7 +323,7 @@ class VeiculosView extends Component {
                                 {id:"nome", name:"Nome"},
                                 {id:"cidade", name:"Cidade"},
                                 {id:"uf", name:"UF"},
-                                {id:"dataEmissaoGuia", name:"Data Emissão Guia", functionToApply:(val) => {return <span>{pattern.formatDate(val)}</span>}},
+                                {id:"dataEmissaoGuia", name:"Data Emissão Guia"},
                             ]
                         }
                         rows={data.historicoProprietarios.proprietario ? data.historicoProprietarios.proprietario : []}

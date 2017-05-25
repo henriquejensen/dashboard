@@ -10,7 +10,7 @@ export default class Titletab extends Component {
             <span>
                 <i className="fa fa-times close-tab close" onClick={this.props.close}/>
 
-				<img src={this.props.icon} width="25" style={{padding: "0px 3px"}}/>
+				<img src={this.props.icon} className="sub-icon"/>
                 
                 {this.props.tipo == "CPF" ?
                     patternCPF(this.props.label)
