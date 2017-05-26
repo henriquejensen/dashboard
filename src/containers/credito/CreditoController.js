@@ -442,7 +442,7 @@ class Credito extends Component {
 			window.scrollTo(0, 0);
 		}
 		return (
-			<div className="container my-container">
+			<div>
 				{this.form(type)}
 
 				{loading ? <LoadingScreen /> : ""}

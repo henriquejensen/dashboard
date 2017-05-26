@@ -1,5 +1,5 @@
 #card-info-user {
-    background-color: #777777;
+    background-color: #EC870E;
     color: white;
     height: 72px;
     display: flex;
@@ -7,6 +7,6 @@
 }
 
 #menu-image-user {
-    width:35px;
-    height: 35px;
+    width: 40px;
+    height: 100%;
 }

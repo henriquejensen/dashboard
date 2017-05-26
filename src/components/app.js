@@ -55,7 +55,6 @@ class App extends Component {
       }
       return (        
         <div>
-            <Header onMenuClicked={this.onMenuClicked} className="noPrint" />
             <div className="sidebar noPrint" id={active ? {} : "menu-closed"}>
               <Sidebar onMenuClicked={this.onMenuClicked} activedMenu={active}/>
             </div>
@@ -64,8 +63,9 @@ class App extends Component {
               <img src={COMPANY_LOGO} alt={"Logo da "+COMPANY_NAME_SHORT} />
             </Col>
 
-            <div className="container-fluid main" id={active ? "menu-opened" : {}}>
-              <div className="margin-top-app">
+            <div className="main" id={active ? "menu-opened" : {}}>
+              <Header onMenuClicked={this.onMenuClicked} className="noPrint" />
+              <div className="my-container">
                 {this.props.children}
               </div>  
             </div>

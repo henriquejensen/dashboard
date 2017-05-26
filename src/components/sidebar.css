@@ -1,3 +1,23 @@
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #e7e7e7;
+}
+
+.sidebar {
+    position: fixed;
+    width: 200px;
+    top: 0px;
+    bottom: 0;
+    z-index: 1;
+    padding: 0px;
+    overflow: hidden;
+    background-color: #424242;
+    transition: .5s;
+}
+
+.sidebar:hover {
+    overflow: auto;
+}
+
 .sub-icon-open-menu {
     float: right;
     position: absolute;
@@ -15,6 +35,10 @@
     padding-left: 15px;
 }
 
+.sidebar-item-dropdown > li a:hover {
+    color: white;
+}
+
 .sidebar-item-dropdown > li {
     padding: 7px 0px;
 }
@@ -25,4 +49,20 @@
 
 .sidebar-nav li > ul > li:hover {
   background: rgba(255, 255, 255, 0.3);    
+}
+
+.menu-image {
+    background: #673ab7;
+}
+
+#menu-image-logo {
+    width: 100%;
+    padding: 18px;
+}
+
+#menu-image-icon {
+    height: 52px;
+    width: auto;
+    padding: 13px;
+    float: right;
 }

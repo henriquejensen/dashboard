@@ -1,25 +1,3 @@
- 
-.sidebar::-webkit-scrollbar-thumb {
-    background-color: #e7e7e7;
-}
-
-.sidebar {
-    position: fixed;
-    width: 200px;
-    top: 52px;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    padding: 0px;
-    overflow: hidden;
-    background-color: #ffffff;
-    transition: .5s;
-}
-
-.sidebar:hover {
-    overflow: auto;
-}
-
 #wrapper {
     padding-left: 70px;
     transition: all .4s ease 0s;
@@ -76,6 +54,10 @@
   text-decoration: none;
 }
 
+.sidebar-nav > li {
+    border-bottom: 1px solid #555555;
+}
+
 .sidebar-nav > li > a:hover {
   background: rgb(237, 236, 236);
 }
@@ -105,8 +87,7 @@
     transition: .4s;
     padding: 14px 10px 14px 15px;
     position: relative;
-    font-weight: 600;
-    color: #4c4c4c
+    color: white
 }
 
 .sidebar-items {

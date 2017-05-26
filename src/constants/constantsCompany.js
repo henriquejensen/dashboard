@@ -4,6 +4,7 @@ export const COMPANY_OLD_SITE = "https://portal.assertivasolucoes.com.br";
 export const COMPANY_SITE_CONTACT = "http://assertivasolucoes.com.br/contato";
 export const COMPANY_EMAIL = "atendimento@assertivasolucoes.com.br";
 
+export const COMPANY_ICON = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-assertiva.png";
 export const COMPANY_LOGO = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/assertiva-top-index.png";
 export const COMPANY_LOGO_INVERSE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/assertiva-top-index-inverse-2.png";
 

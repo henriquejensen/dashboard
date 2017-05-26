@@ -1,3 +1,5 @@
+import "./header.css";
+
 import React, { Component } from "react";
 import { browserHistory, Link } from "react-router";
 import { connect } from "react-redux";
@@ -58,11 +60,10 @@ class MenuSuperior extends Component {
 		let user = this.props.user;
 		return (
 		<div>
-			<Navbar style={{backgroundColor: "#673ab7", borderRadius: 0}} collapseOnSelect inverse>
+			<Navbar className="my-navbar" collapseOnSelect inverse>
 				<i className="fa fa-bars menu-hamburguer" onClick={onMenuClicked} />
-				<Navbar.Header style={{marginLeft:"45px"}}>
+				<Navbar.Header>
 					<Navbar.Brand>
-						<img src={COMPANY_LOGO_INVERSE} alt={"Logo da "+COMPANY_NAME_SHORT} className="menu-image-logo" />
 					</Navbar.Brand>
 					<Navbar.Toggle />
 				</Navbar.Header>

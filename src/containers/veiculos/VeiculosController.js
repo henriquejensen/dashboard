@@ -411,7 +411,7 @@ class VeiculosController extends Component {
 		let loading = this.props.loading;
 		let flags = this.state.options;
 		return (
-			<div className="container my-container">
+			<div>
 				{this.form(this.props.type)}
 
 				{loading ? <LoadingScreen /> : ""}

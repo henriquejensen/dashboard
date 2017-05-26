@@ -547,7 +547,7 @@ class LocalizeController extends Component {
 			window.scrollTo(0, 0);
 		}
 		return(
-			<div className="container my-container">
+			<div>
 				{this.form(this.props.type)}
 
 				{loading ? <LoadingScreen /> : ""}

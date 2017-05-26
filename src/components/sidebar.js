@@ -10,6 +10,8 @@ import { changeColorMenu, changeProductType } from "../actions/actionsCommon";
 import { todosProdutos } from "./utils/common/produtos.js";
 import CardInfoMenuUser from "./utils/CardInfoMenuUser";
 
+import { COMPANY_LOGO_INVERSE, COMPANY_NAME_SHORT, COMPANY_ICON } from "../constants/constantsCompany";
+
 class Sidebar extends Component {
   state = {
     menuOpened: "",
@@ -46,7 +48,8 @@ class Sidebar extends Component {
     return (
         <div id="sidebar">
           <ul className="sidebar-nav">
-            {produtos.map((produto, index) => {
+
+            { produtos.map((produto, index) => {
               produto = produto.replace(/\+/g,"MAIS"); //ex: VENDA+ -> VENDAMAIS
               produto = produto.replace(/[^a-zA-Z]/g,""); //ex: BASE CERTA -> BASECERTA
               let opt = todosProdutos[produto];
@@ -56,7 +59,7 @@ class Sidebar extends Component {
                       <Link
                         to={opt.link}
                         onClick={() => this.activeMenuDropdown(opt.id)}
-                        activeStyle={{backgroundColor: opt.color, color:"white"}}
+                        activeStyle={{backgroundColor: opt.color}}
                       >
                         {activedMenu ?
                           <img src={menuOpened == opt.id ? opt.imageNegative : opt.image} className="sub-icon" alt={opt.alt}/>
@@ -81,7 +84,7 @@ class Sidebar extends Component {
                                 style={this.state.subItemActived === (opt.id + subOpt.id) ? {backgroundColor: "rgba(255,255,255,0.3)"} : {}}
                                 key={j}
                               >
-                                <Link to={subOpt.link} >
+                                <Link to={subOpt.link}>
                                   {subOpt.label}
                                 </Link>
                               </li>
@@ -98,9 +101,21 @@ class Sidebar extends Component {
     )
   }
 
+              /*{!activedMenu ?
+              <li>
+                <Link>
+                  <img
+                    src={COMPANY_ICON}
+                    className="sub-icon sub-icon-open-menu" />
+                </Link>
+              </li>
+            : ""}*/
+
   render() {
       return (      
-          <aside>            
+          <aside>
+						<img src={ this.props.activedMenu ? COMPANY_LOGO_INVERSE : COMPANY_ICON } alt={"Logo da "+COMPANY_NAME_SHORT} className="menu-image" id={this.props.activedMenu ? "menu-image-logo" : "menu-image-icon"} />
+
             {this.props.activedMenu ? (
                   <CardInfoMenuUser color="#673ab7" user={this.props.user}/>
               ) : ""}

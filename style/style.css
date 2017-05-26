@@ -106,10 +106,6 @@ input {
     left: 0px;
 }
 
-.container {
-    width: 100%
-}
-
 .acoes {
     text-align: center
 }
@@ -176,12 +172,6 @@ input {
     color: red
 }
 
-.my-panel-heading {
-    position: relative;
-    font-weight: bold;
-    color: #333333;
-}
-
 .qtd-panel {
     position: absolute;
 }
@@ -216,6 +206,7 @@ input {
 
 .my-container {
     max-width: 1280px;
+    padding: 0px 15px;
 }
 
 .my-container-form-product {
