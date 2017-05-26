@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 import { authUser, loading } from "../actions/actionsCommon";
 
 import { LOADING_GIF, URL_GET_IP } from "../constants/utils";
-import { COMPANY_NAME_SHORT } from "../constants/constantsCompany";
+import { COMPANY_NAME_SHORT, COMPANY_NAME_LONG, COMPANY_LOGO } from "../constants/constantsCompany";
 
 class Login extends Component {
     state = {
@@ -69,7 +69,7 @@ class Login extends Component {
                             <div className="alert alert-danger text-center" role="alert">{this.props.auth.msgn}</div> : ""}
 
                         <div className="account-wall text-center">
-                            <img src="../public/assertiva/assertiva-top-index.png" alt="Assertiva" height="50"/>
+                            <img src={COMPANY_LOGO} alt={COMPANY_NAME_LONG} height="50" width="170" />
                             <form className="form-signin" onSubmit={this.onFormSubmit}>
                                 <input type="text" className="form-control" placeholder="Empresa" value={this.state.empresa} name="empresa" required onChange={this.onChange}/>
                                 <input type="text" className="form-control" placeholder="Usuário" value={this.state.user} name="user" required onChange={this.onChange} />

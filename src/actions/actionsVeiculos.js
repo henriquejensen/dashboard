@@ -4,7 +4,6 @@ import {
     CHANGE_TAB_VEICULOS,
     CLOSE_MESSAGE_ERROR_VEICULOS,
     CLOSE_TAB_VEICULOS,
-    CLOSE_VEICULOS_MODEL,
     LOADING_VEICULOS,
     GET_VEICULOS,
     GET_VEICULOS_LAST_QUERIES,
@@ -25,13 +24,6 @@ export function closeMessageErrorVeiculos() {
 		type: CLOSE_MESSAGE_ERROR_VEICULOS,
 		payload: "close"
 	}
-}
-
-export function closeModel() {
-    return {
-        type: CLOSE_VEICULOS_MODEL,
-        payload: ""
-    }
 }
 
 export function closeTab(index) {

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { getCentroCustoSMS } from "../../actions/index";
+import { getCentroCustoSMS } from "../../actions/actionsSMS";
 
 import Table from "../../components/table/Table";
 

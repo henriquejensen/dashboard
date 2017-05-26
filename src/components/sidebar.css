@@ -5,12 +5,14 @@
     top: 11px;
 }
 
-.sidebar-item-dropdown > li {
-    color: white;
+.sidebar-item-dropdown {
+    padding: 0px;
 }
 
 .sidebar-item-dropdown > li a {
-    color: white;
+    color: rgba(0,0,0,0.45);
+    font-weight: bold;
+    padding-left: 15px;
 }
 
 .sidebar-item-dropdown > li {
@@ -19,4 +21,8 @@
 
 .sidebar-item-dropdown > li:hover {
     font-weight: bold;
+}
+
+.sidebar-nav li > ul > li:hover {
+  background: rgba(255, 255, 255, 0.3);    
 }

@@ -1,7 +1,7 @@
 'use strict'
 
 const webpack = require('webpack');
-const { resolve }  = require("path");
+const { join }  = require("path");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const HtmlPlugin = require('html-webpack-plugin');
 
@@ -29,7 +29,7 @@ module.exports = {
 
     path: __dirname,
 
-    publicPath: `http://localhost:${port}/`,
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -81,7 +81,8 @@ module.exports = {
 
     new HtmlPlugin({
       title: 'Assertiva',
-      template: resolve(__dirname, "./index.html")
+      filename: join(__dirname, "index.html"),
+      template: join(__dirname, "html", "template.html")
     })
 
     //new BundleAnalyzerPlugin()    

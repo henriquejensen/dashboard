@@ -12,7 +12,8 @@ import CardInfoMenuUser from "./utils/CardInfoMenuUser";
 
 class Sidebar extends Component {
   state = {
-    menuOpened: ""
+    menuOpened: "",
+    subItemActived: ""
   }
 
   componentDidMount() {
@@ -30,7 +31,11 @@ class Sidebar extends Component {
     evt.preventDefault();
 
     this.props.changeColorMenu(color);
-    this.props.changeProductType(product, type)
+    this.props.changeProductType(product, type);
+
+    this.setState({
+      subItemActived: product + type
+    })
   }
 
   renderMenu() {
@@ -51,7 +56,8 @@ class Sidebar extends Component {
                       <Link
                         to={opt.link}
                         onClick={() => this.activeMenuDropdown(opt.id)}
-                        activeStyle={{backgroundColor: opt.color, color:"white"}}>
+                        activeStyle={{backgroundColor: opt.color, color:"white"}}
+                      >
                         {activedMenu ?
                           <img src={menuOpened == opt.id ? opt.imageNegative : opt.image} className="sub-icon" alt={opt.alt}/>
                         : ""}
@@ -72,15 +78,12 @@ class Sidebar extends Component {
                           return (
                               <li
                                 onClick={(evt) => this.onClickMenu(evt, opt.color, opt.id, subOpt.id)}
+                                style={this.state.subItemActived === (opt.id + subOpt.id) ? {backgroundColor: "rgba(255,255,255,0.3)"} : {}}
                                 key={j}
                               >
-                                {subOpt.link ? 
-                                  <Link to={subOpt.link}>
-                                    {subOpt.label}
-                                  </Link>
-                                :
-                                  subOpt.label
-                                }
+                                <Link to={subOpt.link} >
+                                  {subOpt.label}
+                                </Link>
                               </li>
                           )
                         })}                    

@@ -80,10 +80,6 @@
   background: rgb(237, 236, 236);
 }
 
-.sidebar-nav li > ul > li:hover {
-  background: rgb(237, 236, 236);    
-}
-
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
   text-decoration: none;

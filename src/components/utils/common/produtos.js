@@ -29,7 +29,7 @@ export const todosProdutos = {
         subItems: [
             {label: "Consulta Completa", id: "completa"},
             {label: "Consulta Intermediária", id: "intermediaria"},
-            {label: "Intermediária Plus/Pessoal Plus", id: "intermediariaPlus"},
+            {label: "Intermediária Plus", id: "intermediariaPlus"},
             {label: "Consulta Simples", id: "simples"},
             {label: "Consulta Cheque", id: "cheque"},
             {label: "Consulta Express", id: "express"},

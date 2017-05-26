@@ -13,9 +13,9 @@ Instale as dependências para o projeto:
 `npm install`
 
 Inicie o projeto:
-`npm start` -> para gerar codigo de producao
+`npm start` -> para gerar codigo de desenvolvimento
 ou
-'npm run dev' -> para gerar codigo de desenvolvimento
+'npm run deploy' -> para gerar codigo de producao
 
 projeto estará rodando na url:
 `localhost:8080`

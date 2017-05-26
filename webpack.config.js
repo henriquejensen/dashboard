@@ -4,16 +4,16 @@ const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
-const { resolve, join }  = require("path");
+const { join, resolve }  = require("path");
 
 module.exports = {
   entry: [
     './src/index.js'
   ],
   output: {
-    path: resolve(__dirname, "./public"),
-    publicPath: '/',
-    filename: '[name].[hash].js'
+    publicPath: "public", // caminho que sera usado pelos <script> <link> indejetados pelo webpack
+    path: join(__dirname, "public"), // https://github.com/webpack/docs/wiki/configuration#outputpath
+    filename: '[hash].bundle.js',
   },
   module: {
     rules: [
@@ -36,14 +36,16 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanPlugin(['public'], {
+
+    // https://github.com/johnagan/clean-webpack-plugin#example-webpack-config
+    new CleanPlugin(['public/*.js', 'public/*.gz'], {
       root: __dirname,
-      exclude: ['*.js']
     }),
 
     new HtmlPlugin({
       title: 'Assertiva',
-      template: join(__dirname, "./public", "index.html")
+      filename: join(__dirname, "index.html"),
+      template: join(__dirname, "html", "template.html")
     }),
 
     new webpack.DefinePlugin({

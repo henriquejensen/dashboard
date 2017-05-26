@@ -15,7 +15,6 @@ import { FieldGroup, MyCheckboxGroup } from "../../components/forms/CommonForms"
 import {
 		changeTab,
 		closeMessageErrorVeiculos,
-		closeModel,
 		closeTab,
 		getLastQueries,
 		loadingVeiculos,
@@ -485,7 +484,6 @@ function mapDispatchToProps(dispatch) {
 		changeProductType,
 		changeTab,
 		closeMessageErrorVeiculos,
-		closeModel,
 		closeTab,
 		getLastQueries,
 		loadingVeiculos,
