@@ -1,16 +1,31 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
-import {createStore, applyMiddleware, compose} from 'redux';
 import ReduxPromise from "redux-promise";
-import {Router, browserHistory} from "react-router";
+import thunk from "redux-thunk";
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from "react-router";
+import { createStore, applyMiddleware, compose } from 'redux';
+import { AppContainer } from 'react-hot-loader';
+
 import rootReducer from './reducers';
 import routes from "./routes";
-import thunk from "redux-thunk";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-ReactDOM.render(
-  <Provider store={store}>
-  <Router history={browserHistory} routes={routes}/>
-</Provider>, document.querySelector('.app'));
+const renderApp = (Component) => {
+  render(
+    <Provider store={store}>
+      <AppContainer>
+          <Router history={browserHistory} routes={routes}/>
+      </AppContainer>
+    </Provider>,
+    document.querySelector('.app'),
+  );
+};
+
+renderApp(routes);
+
+// Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('./routes', () => { renderApp(newRoutes) });
+}

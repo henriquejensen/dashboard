@@ -32,17 +32,11 @@ export default (
     <Route onEnter={requireAuth} component={App}>
       <Route name="Localize" path="/" component={Localize}	/>
 
-      <Route name="Localize" path="/localize" component={Localize}	>
-        <Route name="Localize" path=":tipo" component={Localize}	/>
-      </Route>
+      <Route name="Localize" path="/localize" component={Localize} />
 
-      <Route name="Crédito" path="credito" component={Credito}	>
-        <Route name="Crédito" path=":tipo" component={Credito}	/>
-      </Route>
+      <Route name="Crédito" path="credito" component={Credito} />
 
-      <Route name="Foco Fiscal" path="focofiscal" component={FocoFiscal}	>
-        <Route name="Foco Fiscal" path=":tipo" component={FocoFiscal}	/>
-      </Route>
+      <Route name="Foco Fiscal" path="focofiscal" component={FocoFiscal} />
       
       <Route name="Base Certa" path="basecerta" component={BaseCerta} />
       <Route name="SMS" path="sms" component={SMS} />
@@ -54,9 +48,7 @@ export default (
 
       <Route name="Cadastro" path="cadastro" component={Cadastro} />
 
-      <Route name="Relatórios" path="relatorios" component={Relatorios}>
-        <Route name="Consultas" path=":tipo" component={Relatorios} />
-      </Route>
+      <Route name="Relatórios" path="relatorios" component={Relatorios} />
       
       <Route name="Editar" path="editar" component={EditUser}	/>
       <Route name="Contato" path="contato" component={Contato}	/>

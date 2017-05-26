@@ -4,3 +4,19 @@
     right: 0;
     top: 11px;
 }
+
+.sidebar-item-dropdown > li {
+    color: white;
+}
+
+.sidebar-item-dropdown > li a {
+    color: white;
+}
+
+.sidebar-item-dropdown > li {
+    padding: 7px 0px;
+}
+
+.sidebar-item-dropdown > li:hover {
+    font-weight: bold;
+}

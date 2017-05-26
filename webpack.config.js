@@ -1,50 +1,62 @@
+'use strict'
+
 const webpack = require('webpack');
-var CompressionPlugin = require('compression-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const HtmlPlugin = require('html-webpack-plugin');
+const CleanPlugin = require('clean-webpack-plugin');
+const { resolve, join }  = require("path");
 
 module.exports = {
-  bail: true,
-  devtool: 'cheap-module-source-map',
   entry: [
     './src/index.js'
   ],
   output: {
-    path: "public",
+    path: resolve(__dirname, "./public"),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: '[name].[hash].js'
   },
   module: {
-    loaders: [
+    rules: [
         {
-          exclude: /node_modules/,
-          loader: 'babel',
-          query: {
-            presets: ['react', 'es2015', 'stage-1']
-          }
+          test: /\.js$/,
+          use: [
+            "babel-loader",
+          ],
+          exclude: /node_modules/
         },
         {
           test: /\.json$/,
           exclude: /node_modules/,
-          loader: "json"
+          use: "json-loader"
         },
         {
           test: /\.css$/,
-          loader: "style-loader!css-loader"
-        },
-        {
-          test: /\.scss$/,
-          loader: "style-loader!css-loader!autoprefixer-loader!sass-loader"
+          use: [ 'style-loader', 'css-loader' ]
         }
     ]
   },
   plugins: [
+    new CleanPlugin(['public'], {
+      root: __dirname,
+      exclude: ['*.js']
+    }),
+
+    new HtmlPlugin({
+      title: 'Assertiva',
+      template: join(__dirname, "./public", "index.html")
+    }),
+
     new webpack.DefinePlugin({
       'process.env': {
         // This has effect on the react lib size
         'NODE_ENV': JSON.stringify('production'),
       }
     }),
+
     new webpack.optimize.AggressiveMergingPlugin(),
+
     new webpack.optimize.OccurrenceOrderPlugin(),
+
     new CompressionPlugin({
       asset: "[path].gz[query]",
       algorithm: "gzip",
@@ -52,6 +64,7 @@ module.exports = {
       threshold: 10240,
       minRatio: 0.8
     }),
+
     new webpack.optimize.UglifyJsPlugin({
       mangle: true,
       compress: {
@@ -65,14 +78,9 @@ module.exports = {
         comments: false,
       },
       exclude: [/\.min\.js$/gi] // skip pre-minified libs
-    }),
-    new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
+    })
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx', '.css']
-  },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: './'
-  },
+    extensions: ['.js', '.jsx', '.css']
+  }
 };

@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import Tooltip from 'react-tooltip';
 import { Col, FormGroup, Row, Alert } from "react-bootstrap";
 
-import { LocalizeDescription, CreditoDescription, FocoFiscalDescription } from "../ProductDescription";
 import { SelectGroup } from "../../components/forms/CommonForms";
-import UltimasConsultas from "../UltimasConsultas";
 import MyButton from "../button/MyButton";
 
 import {
@@ -90,22 +88,6 @@ export default class Form extends Component {
                         </Alert>
                     </Col>
                 : ""}
-                
-                {this.props.showLogo ? 
-                    <Col md={12} sm={12}>
-                        <LocalizeDescription />
-                    </Col>
-                : "" }
-
-                {this.props.showLogo ?
-                    <Col md={12} sm={12}>
-                        <UltimasConsultas
-                            consultas={this.props.lastQueries}
-                            type={this.props.type}
-                            search={this.props.searchUltimasConsultas}
-                            searchEnderecosTelefonesUltimasConsultas={this.props.searchEnderecosTelefonesUltimasConsultas} />
-                    </Col>
-                : "" }
 
 				{this.props.showLogo ?
                     <Col md={12} sm={12}>

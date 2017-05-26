@@ -16,6 +16,7 @@ class Sidebar extends Component {
   }
 
   componentDidMount() {
+    /**Verifica qual a url (portal/produto) e deixa o produto aberto */
     this.activeMenuDropdown(location.pathname.split("/")[1]);
   }
   
@@ -73,9 +74,13 @@ class Sidebar extends Component {
                                 onClick={(evt) => this.onClickMenu(evt, opt.color, opt.id, subOpt.id)}
                                 key={j}
                               >
-                                <Link to={subOpt.link}>
-                                  {subOpt.label}
-                                </Link>
+                                {subOpt.link ? 
+                                  <Link to={subOpt.link}>
+                                    {subOpt.label}
+                                  </Link>
+                                :
+                                  subOpt.label
+                                }
                               </li>
                           )
                         })}                    

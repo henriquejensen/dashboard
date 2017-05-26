@@ -9,12 +9,12 @@ export const todosProdutos = {
         imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-localize-negative.png",
         alt: "Icone Localize",
         subItems: [
-            {label: "CPF", id: "cpf", link: "/localize/cpf"},
-            {label: "CNPJ", id: "cnpj", link: "/localize/cnpj"},
-            {label: "Telefone", id: "telefone", link: "/localize/telefone"},
-            {label: "Nome", id: "nome", link: "/localize/nome"},
-            {label: "Endereço", id: "endereco", link: "/localize/endereco"},
-            {label: "Email", id: "email", link: "/localize/email"}
+            {label: "CPF", id: "cpf"},
+            {label: "CNPJ", id: "cnpj"},
+            {label: "Telefone", id: "telefone"},
+            {label: "Nome", id: "nome"},
+            {label: "Endereço", id: "endereco"},
+            {label: "Email", id: "email"},
         ]
     },
     CREDITO: {
@@ -27,12 +27,12 @@ export const todosProdutos = {
         imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png",
         alt: "Icone Crédito",
         subItems: [
-            {label: "Consulta Completa", id: "completa", link: "/credito/completa"},
-            {label: "Consulta Intermediária", id: "intermediaria", link: "/credito/intermediaria"},
-            {label: "Intermediária Plus/Pessoal Plus", id: "intermediariaPlus", link: "/credito/intermediariaPlus"},
-            {label: "Consulta Simples", id: "simples", link: "/credito/simples"},
-            {label: "Consulta Cheque", id: "cheque", link: "/credito/cheque"},
-            {label: "Consulta Express", id: "express", link: "/credito/express"}
+            {label: "Consulta Completa", id: "completa"},
+            {label: "Consulta Intermediária", id: "intermediaria"},
+            {label: "Intermediária Plus/Pessoal Plus", id: "intermediariaPlus"},
+            {label: "Consulta Simples", id: "simples"},
+            {label: "Consulta Cheque", id: "cheque"},
+            {label: "Consulta Express", id: "express"},
         ]
     },
     BASECERTA: {
@@ -100,11 +100,11 @@ export const todosProdutos = {
         imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-veiculos-negative.png",
         alt: "Icone Veiculos",
         subItems: [
-            {label: "PLACA", id: "placa", link: "/veiculos"},
-            {label: "CHASSI", id: "chassi", link: "/veiculos"},
-            {label: "Nº MOTOR", id: "numeroMotor", link: "/veiculos"},
-            {label: "CPF", id: "cpf", link: "/veiculos"},
-            {label: "CNPJ", id: "cnpj", link: "/veiculos"},
+            {label: "PLACA", id: "placa"},
+            {label: "CHASSI", id: "chassi"},
+            {label: "Nº MOTOR", id: "numeroMotor"},
+            {label: "CPF", id: "cpf"},
+            {label: "CNPJ", id: "cnpj"},
         ]
     },
     CONSIGMAIS: {
