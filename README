@@ -1,5 +1,15 @@
 # Dashboard construido com React + Redux
 
+Configuração inicial
+--------------------
+
+O projeto requer algumas configurações na máquina para poder rodar:
+* node
+* npm
+* webpack - instalado globalmente na máquina
+* webpack-dev-server - instalado globalmente na máquina
+* aws cli -> Configuração https://medium.com/@omgwtfmarc/deploying-create-react-app-to-s3-or-cloudfront-48dae4ce0af(config s3/aws) && http://docs.aws.amazon.com/cli/latest/reference/cloudfront/create-invalidation.html(config cloud front invalidation)
+
 Executando o projeto
 --------------------
 
@@ -14,8 +24,8 @@ Instale as dependências para o projeto:
 
 Inicie o projeto:
 `npm start` -> para gerar codigo de desenvolvimento
-ou
-'npm run deploy' -> para gerar codigo de producao
+`npm run build` -> para gerar codigo de producao e inicia o servidor de produção
+`npm run deploy` -> faz o deploy da aplicação no s3 e inicia a invalidação no cloud front
 
 projeto estará rodando na url:
 `localhost:8080`

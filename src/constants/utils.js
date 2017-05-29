@@ -62,6 +62,9 @@ export const ERROR_401_UNAUTHORIZED = "ERROR_401_UNAUTHORIZED";
 export const ERROR_401_UNAUTHORIZED_MESSAGE = "Por favor, realize a sua identificação para acessar o sistema";
 
 /**Imagens utilizadas no portal */
+export const WHATSAPP_IMAGE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/whatsapp.png";
+export const VIBER_IMAGE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/viber.png";
+
 export const IMAGE_ANY_TOKEN = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/warning.png";
 export const LOADING_GIF = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/loading.gif";
 

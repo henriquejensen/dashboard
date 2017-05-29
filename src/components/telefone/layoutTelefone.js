@@ -11,7 +11,7 @@ import Modal from "../Modal";
 import EnviarSMS from "../forms/EnvioSMS";
 
 import { formatPhone } from "../utils/functions/patternDocuments";
-import { MESSAGE_SUCCESS_ADD_NEW_PHONE, MESSAGE_SUCCESS_NUMBER_COPY, MESSAGE_SUCCESS_SMS, NENHUM_REGISTRO, SUCCESS } from "../../constants/utils";
+import { MESSAGE_SUCCESS_ADD_NEW_PHONE, MESSAGE_SUCCESS_NUMBER_COPY, MESSAGE_SUCCESS_SMS, NENHUM_REGISTRO, SUCCESS, WHATSAPP_IMAGE, VIBER_IMAGE } from "../../constants/utils";
 
 export default class LayoutTelefone extends Component{
     constructor(props) {
@@ -196,13 +196,13 @@ export default class LayoutTelefone extends Component{
 
                                                 <td className="noPrint">
                                                     <a data-tip data-for="tooltipWhats">
-                                                        <img src="../../../public/images/whatsapp.png" className="sub-icon-tel"/>
+                                                        <img src={WHATSAPP_IMAGE} className="sub-icon-tel"/>
                                                     </a>
                                                 </td>
 
                                                 <td className="noPrint">
                                                     <a data-tip data-for="tooltipViber">
-                                                        <img src="../../../public/images/viber.png" className="sub-icon-tel"/>
+                                                        <img src={VIBER_IMAGE} className="sub-icon-tel"/>
                                                     </a>
                                                 </td>
 

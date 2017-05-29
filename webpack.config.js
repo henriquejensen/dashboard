@@ -6,14 +6,22 @@ const HtmlPlugin = require('html-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
 const { join, resolve }  = require("path");
 
+/**TO DO
+ * insert -> const ExtractTextPlugin = require('extract-text-webpack-plugin')
+ * Este plugin extrai os css em modulos para um/mais css separado, aumentando
+ * o desempenho no carregamento e o tamanho final do bundle. Usar somente quando
+ * todo o css estiver em modulo (https://github.com/webpack-contrib/extract-text-webpack-plugin)
+ */
+
 module.exports = {
-  entry: [
-    './src/index.js'
-  ],
+  entry: {
+    app: join(__dirname, 'src','index.js'),
+    vendor: ['react-router', 'react', 'react-bootstrap', 'redux', 'react-dom'] // arquivos que serao colocados em outro js(chunk)
+  },
   output: {
-    publicPath: "public", // caminho que sera usado pelos <script> <link> indejetados pelo webpack
+    publicPath: "/",         // caminho que sera usado pelos <script> <link> injetados pelo webpack
     path: join(__dirname, "public"), // https://github.com/webpack/docs/wiki/configuration#outputpath
-    filename: '[hash].bundle.js',
+    filename: '[hash].bundle.js'
   },
   module: {
     rules: [
@@ -38,16 +46,18 @@ module.exports = {
   plugins: [
 
     // https://github.com/johnagan/clean-webpack-plugin#example-webpack-config
-    new CleanPlugin(['public/*.js', 'public/*.gz'], {
+    new CleanPlugin(['public/*.js', 'public/*.gz', 'public/index.html'], {
       root: __dirname,
     }),
 
+    // cria o html a partir do template e cria o index com o bundle injetado nele dentro da pasta public
     new HtmlPlugin({
       title: 'Assertiva',
-      filename: join(__dirname, "index.html"),
+      filename: join(__dirname, "public", "index.html"),
       template: join(__dirname, "html", "template.html")
     }),
 
+    // define uma constante global na app com o valor producao
     new webpack.DefinePlugin({
       'process.env': {
         // This has effect on the react lib size
@@ -55,11 +65,15 @@ module.exports = {
       }
     }),
 
-    new webpack.optimize.AggressiveMergingPlugin(),
-
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    // quebra os arquivos da entrada vendor em outro js
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
+      filename: 'vendor.bundle.js'
+    }),
 
     new CompressionPlugin({
+      // https://webpack.js.org/plugins/compression-webpack-plugin/#components/sidebar/sidebar.jsx
       asset: "[path].gz[query]",
       algorithm: "gzip",
       test: /\.js$|\.css$|\.html$/,
@@ -83,6 +97,6 @@ module.exports = {
     })
   ],
   resolve: {
-    extensions: ['.js', '.jsx', '.css']
+    extensions: ['.js', '.css']
   }
 };
