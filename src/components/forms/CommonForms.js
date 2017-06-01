@@ -132,7 +132,7 @@ export const MyCheckboxGroup = (props) => {
     let id = props.id; //opcional - id utilizado pelo formgroup para identificacao
     let center = props.center; //opcional - centraliza os elementos do checkbox
     let label = props.label; //opcional - label que identifica os checkbox
-    let options = props.options; //obrigatorio - array com os checkboxs que serao renderizados
+    let options = props.options ? props.options : []; //obrigatorio - array com os checkboxs que serao renderizados
     let onChange = props.onChange; //opcional/obrigatorio - modifica a selecao do checkbox
     return (
         <FormGroup controlId={id} style={{marginLeft:0, marginRight:0}} className={center ? "text-center": ""}>

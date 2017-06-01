@@ -23,8 +23,8 @@ import {
 } from "../../actions/actionsVeiculos";
 import { changeProductType } from "../../actions/actionsCommon";
 
-import { LOGO_VEICULOS, ICON_VEICULOS, LOADING_GIF, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE, TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE } from "../../constants/utils";
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_VEICULOS, COMPANY_PRODUCT_VEICULOS_LABEL } from "../../constants/constantsCompany";
+import { LOADING_GIF, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE, TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE } from "../../constants/utils";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_VEICULOS, COMPANY_PRODUCT_VEICULOS_LABEL, LOGO_VEICULOS } from "../../constants/constantsCompany";
 import { AGREGADOS_CODE, BDV_CODE, DECODIFICADOR_CODE, LOCALIZACAO_CODE, PROPRIETARIOS_CODE, LEILAO_CODE, SINISTRO_CODE } from "../../constants/constantsVeiculos";
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
 
@@ -245,7 +245,8 @@ class VeiculosController extends Component {
 
 		if(optionsSelected.length === 0) {
 			this.setState({
-				showMessageErrorWhenNotSelectedAnyCheckBox: true
+				showMessageErrorWhenNotSelectedAnyCheckBox: true,
+				showCheckboxes: true
 			})
 		} else {
 			this.setState({

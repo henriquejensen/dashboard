@@ -17,7 +17,7 @@ export default class MyTable extends Component {
                             {fields ? 
                                 fields.map((field, index) => {
                                     return (
-                                        <th key={index}>{field}</th>
+                                        <th key={index+field}>{field}</th>
                                     )
                                 })
                             : ""}
@@ -31,7 +31,7 @@ export default class MyTable extends Component {
                                     <tr key={index}>
                                         {Object.values(element).map((el, j)=>{
                                             return (
-                                                <td key={j}>{el}</td>
+                                                <td key={j+el}>{el}</td>
                                             )
                                         })}
                                     </tr>

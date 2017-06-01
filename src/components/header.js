@@ -22,7 +22,8 @@ import {
 import Modal from "./Modal";
 import BarraBuscaRapida from "./utils/BarraBuscaRapida";
 
-import { COMPANY_LOGO_INVERSE, COMPANY_NAME_SHORT, COMPANY_OLD_SITE, TITLE_HEADER } from "../constants/constantsCompany";
+import { COMPANY_LOGO_INVERSE, COMPANY_MAIN_COLOR, COMPANY_NAME_SHORT, COMPANY_OLD_SITE } from "../constants/constantsCompany";
+import { TITLE_HEADER } from "../constants/utils";
 
 import menu from "./utils/common/menu.json";
 
@@ -60,7 +61,7 @@ class MenuSuperior extends Component {
 		let user = this.props.user;
 		return (
 		<div>
-			<Navbar className="my-navbar" collapseOnSelect inverse>
+			<Navbar className="my-navbar" collapseOnSelect inverse style={{backgroundColor: COMPANY_MAIN_COLOR}}>
 				<i className="fa fa-bars menu-hamburguer" onClick={onMenuClicked} />
 				<Navbar.Header>
 					<Navbar.Brand>
@@ -112,7 +113,6 @@ class MenuSuperior extends Component {
 
 function mapStateToProps(state) {
 	return {
-		color: state.auth.colorMenu,
 		user: state.user,
 		notifications: state.user.notifications
 	}

@@ -1,5 +1,7 @@
 'use strict'
 
+//const COMPANY_ICON_INVERSE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-assertiva-negative.png";
+const COMPANY_NAME_LONG = "ASSERTIVA SOLUÇÕES EM MARKETING E CRÉDITO";
 const webpack = require('webpack');
 const { join }  = require("path");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -80,7 +82,7 @@ module.exports = {
     // enable HMR globally
 
     new HtmlPlugin({
-      title: 'Assertiva',
+      title: COMPANY_NAME_LONG,
       filename: join(__dirname, "index.html"),
       template: join(__dirname, "html", "template.html")
     })

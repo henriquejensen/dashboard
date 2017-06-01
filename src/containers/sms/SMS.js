@@ -15,7 +15,8 @@ import Panel from "../../components/panel/Panel";
 import Table from "../../components/table/Table";
 import Modal from "../../components/Modal";
 
-import { LOGO_SMS, MESSAGE_SUCCESS_SMS, NENHUM_REGISTRO, SUCCESS } from "../../constants/utils";
+import { MESSAGE_SUCCESS_SMS, NENHUM_REGISTRO, SUCCESS } from "../../constants/utils";
+import { LOGO_SMS } from "../../constants/constantsCompany";
 
 class SMS extends Component {
     constructor(props) {

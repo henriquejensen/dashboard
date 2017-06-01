@@ -9,8 +9,8 @@ import {
     SEE_VEICULOS_MODEL
 } from "../constants/constantsVeiculos";
 
-import { COMPANY_PRODUCT_VEICULOS } from "../constants/constantsCompany";
-import { CHANGE_VEICULOS_TYPE, CLOSE_TAB, ERR_CONNECTION_REFUSED, ERROR_503, ICON_VEICULOS, LOADING, REQUEST_ERROR } from "../constants/utils";
+import { COMPANY_PRODUCT_VEICULOS, ICON_VEICULOS } from "../constants/constantsCompany";
+import { CHANGE_VEICULOS_TYPE, CLOSE_TAB, ERR_CONNECTION_REFUSED, ERROR_503, LOADING, REQUEST_ERROR } from "../constants/utils";
 
 import veiculos from "./data/veiculos/veiculosPoucosDados.json";
 import lastQueries from "./data/lastQueries.json";
@@ -147,6 +147,18 @@ export default function(state=getInitialState, action) {
                 loading: true,
                 status: LOADING,
                 message: "",
+                response: state.response,
+                tabActive: state.tabActive,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+        }
+
+        case REQUEST_ERROR: {
+            return {
+                loading: false,
+                status: REQUEST_ERROR,
+                message: action.payload.mensagem,
                 response: state.response,
                 tabActive: state.tabActive,
                 lastQueries: state.lastQueries,

@@ -51,18 +51,20 @@
   background: rgba(255, 255, 255, 0.3);    
 }
 
-.menu-image {
-    background: #673ab7;
+#menu-image-logo {
+    text-align: center;
+    height: 51px;
 }
 
-#menu-image-logo {
+#menu-image-logo > img {
     width: 100%;
-    padding: 18px;
+    height: 100%;
+    padding: 17px;
 }
 
 #menu-image-icon {
     height: 52px;
     width: auto;
-    padding: 13px;
+    padding: 18px;
     float: right;
 }

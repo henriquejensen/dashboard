@@ -9,6 +9,7 @@ exports[`<MyButton/> gerando o elemento sem quebrar 1`] = `
     <button
       className="mapa-button btn btn-info"
       disabled={false}
+      onClick={undefined}
       type="button"
     >
       <i
@@ -16,6 +17,13 @@ exports[`<MyButton/> gerando o elemento sem quebrar 1`] = `
       />
     </button>
   </a>
+   
   Documento
+  <div
+    className="__react_component_tooltip place-top type-dark "
+    data-id="tooltip"
+  >
+    
+  </div>
 </span>
 `;

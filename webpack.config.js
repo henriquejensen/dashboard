@@ -1,5 +1,7 @@
 'use strict'
 
+//const COMPANY_ICON_INVERSE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-assertiva-negative.png";
+const COMPANY_NAME_LONG = "ASSERTIVA SOLUÇÕES EM MARKETING E CRÉDITO";
 const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
@@ -16,7 +18,7 @@ const { join, resolve }  = require("path");
 module.exports = {
   entry: {
     app: join(__dirname, 'src','index.js'),
-    vendor: ['react-router', 'react', 'react-bootstrap', 'redux', 'react-dom'] // arquivos que serao colocados em outro js(chunk)
+    vendor: ['immutable', 'react-router', 'react', 'react-bootstrap', 'redux', 'react-dom'] // arquivos que serao colocados em outro js(chunk)
   },
   output: {
     publicPath: "/",         // caminho que sera usado pelos <script> <link> injetados pelo webpack
@@ -27,10 +29,10 @@ module.exports = {
     rules: [
         {
           test: /\.js$/,
+          exclude: /node_modules/,
           use: [
             "babel-loader",
-          ],
-          exclude: /node_modules/
+          ]
         },
         {
           test: /\.json$/,
@@ -52,7 +54,7 @@ module.exports = {
 
     // cria o html a partir do template e cria o index com o bundle injetado nele dentro da pasta public
     new HtmlPlugin({
-      title: 'Assertiva',
+      title: COMPANY_NAME_LONG,
       filename: join(__dirname, "public", "index.html"),
       template: join(__dirname, "html", "template.html")
     }),

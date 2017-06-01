@@ -1,0 +1,10 @@
+export const SHOW_CREDITOMIX_MODEL = "SHOW_CREDITOMIX_MODEL"
+export const CHANGE_CREDITOMIX_TYPE = "CHANGE_CREDITOMIX_TYPE"
+export const CHANGE_TAB_CREDITOMIX = "CHANGE_TAB_CREDITOMIX"
+export const CLOSE_TAB_CREDITOMIX = "CLOSE_TAB_CREDITOMIX"
+export const CLOSE_MESSAGE_ERROR_CREDITOMIX = "CLOSE_MESSAGE_ERROR_CREDITOMIX"
+export const FETCH_CREDITOMIX = "FETCH_CREDITOMIX"
+export const LOADING_CREDITO_MIX = "LOADING_CREDITO_MIX"
+
+export const URL_CREDITOMIX_SEARCH_CPF = "https://managerprovider.assertivasolucoes.com.br/credito/5019/consultar"
+export const URL_CREDITOMIX_SEARCH_CNPJ = "https://managerprovider.assertivasolucoes.com.br/credito/5033/consultar"

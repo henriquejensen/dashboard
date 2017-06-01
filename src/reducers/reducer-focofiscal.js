@@ -2,7 +2,6 @@ import {
     CLOSE_FOCOFISCAL_MODEL,
     CLOSE_MESSAGE_ERROR_FOCOFISCAL,
     GET_FOCOFISCAL_LAST_QUERIES,
-    ICON_FOCOFISCAL,
     LOADING_FOCOFISCAL,
     SEE_FOCOFISCAL_MODEL
 } from "../constants/constantsFocoFiscal";
@@ -15,6 +14,8 @@ import {
     ERROR_503,
     REQUEST_ERROR
 } from "../constants/utils";
+
+import { ICON_FOCOFISCAL } from "../constants/constantsCompany";
 
 import model from "./data/jsonPadrao.json";
 import lastQueries from "./data/lastQueries.json";

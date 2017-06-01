@@ -11,11 +11,12 @@ import cadastro from "./reducer-cadastro";
 import veiculos from "./reducer-veiculos";
 import vendamais from "./reducer-vendamais";
 import basecerta from "./reducer-basecerta";
-import consigmais from "./reducer-consigmais";
+import creditomix from "./creditomix/reducer-creditomix";
 
 const rootReducer = combineReducers({
   localize,
   credito,
+  creditomix,
   focofiscal,
   user,
   campanhasSMS: campanhasSMS,
@@ -25,8 +26,7 @@ const rootReducer = combineReducers({
   cadastro,
   veiculos,
   vendamais,
-  basecerta,
-  consigmais
+  basecerta
 });
 
 export default rootReducer;

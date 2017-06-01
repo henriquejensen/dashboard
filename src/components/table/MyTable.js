@@ -34,7 +34,7 @@ export default class MyTable extends Component {
                         <tr>
                             {fields.map((field, index) => {
                                 return (
-                                    <th key={field.id}>
+                                    <th key={field.id+index}>
                                         {field.name}
                                         {' '}
                                         {field.sortable ?
@@ -57,7 +57,7 @@ export default class MyTable extends Component {
                                 return (
                                     <tbody key={indexRow}>
                                         <tr>
-                                            {fields.map((field)=>{
+                                            {fields.map((field, indexElement)=>{
                                                 if(field.functionToApply) {
                                                     return <td key={field.id}>{row[field.id] ? field.functionToApply(row[field.id]) : "-"}</td>
                                                 }

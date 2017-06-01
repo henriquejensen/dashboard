@@ -12,20 +12,29 @@ exports[`<MyTable/> gerando o elemento sem quebrar 1`] = `
       className="my-table table table-striped table-hover"
     >
       <thead>
-        <th>
+        <tr>
           <th>
             Label_1
+             
+            
           </th>
           <th>
             Label_2
+             
+            
           </th>
           <th>
             Label_3
+             
+            
           </th>
           <th>
             Label_4
+             
+            
           </th>
-        </th>
+          
+        </tr>
       </thead>
       <tbody>
         <tr>
@@ -41,7 +50,13 @@ exports[`<MyTable/> gerando o elemento sem quebrar 1`] = `
           <td>
             Teste_4
           </td>
+          <td />
         </tr>
+        <tr>
+          
+        </tr>
+      </tbody>
+      <tbody>
         <tr>
           <td>
             Teste_5
@@ -55,7 +70,13 @@ exports[`<MyTable/> gerando o elemento sem quebrar 1`] = `
           <td>
             Teste_8
           </td>
+          <td />
         </tr>
+        <tr>
+          
+        </tr>
+      </tbody>
+      <tbody>
         <tr>
           <td>
             Teste_9
@@ -69,6 +90,10 @@ exports[`<MyTable/> gerando o elemento sem quebrar 1`] = `
           <td>
             Teste_13
           </td>
+          <td />
+        </tr>
+        <tr>
+          
         </tr>
       </tbody>
     </table>

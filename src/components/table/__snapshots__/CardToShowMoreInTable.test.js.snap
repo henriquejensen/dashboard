@@ -3,14 +3,22 @@
 exports[`Testando o CardToShowMoreInTable  1`] = `
 <div>
   <div
-    className="col-md-3"
+    className="col-md-4"
   >
-    Label 1: 5
+    <strong>
+      Label 1
+    </strong>
+     
+    : 5
   </div>
   <div
-    className="col-md-3"
+    className="col-md-4"
   >
-    Label 2: 10
+    <strong>
+      Label 2
+    </strong>
+     
+    : 10
   </div>
 </div>
 `;

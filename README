@@ -23,9 +23,47 @@ Instale as dependências para o projeto:
 `npm install`
 
 Inicie o projeto:
-`npm start` -> para gerar codigo de desenvolvimento
-`npm run build` -> para gerar codigo de producao e inicia o servidor de produção
+`npm start` -> para gerar codigo de desenvolvimento => `localhost:8080`
+`npm run build` -> para gerar codigo de producao e inicia o servidor de produção => `localhost:8000`
 `npm run deploy` -> faz o deploy da aplicação no s3 e inicia a invalidação no cloud front
 
-projeto estará rodando na url:
-`localhost:8080`
+Testando o projeto
+--------------------
+
+`npm run test` -> ira ativar o jest para rodar todos os testes da aplicação
+`npm run test:watch` -> vai ficar atualizando os testes automaticamente
+`npm run test:update` -> atualiza os snapshots quando ocorre uma atualização no componente
+
+
+TODO
+----
+Introduzir Immutable.js -> antes ler e entender toda a doc http://redux.js.org/docs/recipes/UsingImmutableJS.html e usar http://neilff.github.io/immutable-repl
+
+Link importantes
+----------------
+// https://www.codementor.io/vijayst/unit-testing-react-components-jest-or-enzyme-du1087lh8
+// http://academy.plot.ly/react/6-testing/ -> test redux
+
+Versões atuais do pacotes
+/*
++-- babel-core@6.24.1
++-- babel-jest@20.0.3
++-- babel-preset-es2015@6.24.1
++-- babel-preset-react@6.24.1
++-- babel-preset-stage-1@6.24.1
++-- chart.js@2.6.0
++-- css-loader@0.28.3
++-- express@4.15.3
++-- jest@20.0.4
++-- node-sass@4.5.3
++-- react@15.5.4
++-- react-bootstrap@0.30.10
++-- react-breadcrumbs@1.6.6
++-- react-copy-to-clipboard@4.3.1
++-- react-dom@15.5.4
++-- react-gmaps@1.6.0
++-- react-notification-system@0.2.14
++-- react-redux@4.4.8
++-- react-tooltip@3.3.0
++-- webpack-bundle-analyzer@2.8.2
+*/

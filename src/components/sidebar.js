@@ -10,12 +10,21 @@ import { changeColorMenu, changeProductType } from "../actions/actionsCommon";
 import { todosProdutos } from "./utils/common/produtos.js";
 import CardInfoMenuUser from "./utils/CardInfoMenuUser";
 
-import { COMPANY_LOGO_INVERSE, COMPANY_NAME_SHORT, COMPANY_ICON } from "../constants/constantsCompany";
+import { COMPANY_LOGO_INVERSE, COMPANY_MAIN_COLOR, COMPANY_NAME_SHORT, COMPANY_ICON } from "../constants/constantsCompany";
 
 class Sidebar extends Component {
   state = {
     menuOpened: "",
     subItemActived: ""
+  }
+
+  patternProdutosName = (produtos) => {
+    return produtos.map((produto) => {
+      let prod = produto.replace(/\+/g,"MAIS") // VENDA+ -> VENDAMAIS
+      prod = prod.replace(/[^a-zA-Z]/g,"") // BASE CERTA -> BASECERTA
+      
+      return prod
+    })
   }
 
   componentDidMount() {
@@ -41,19 +50,18 @@ class Sidebar extends Component {
   }
 
   renderMenu() {
-    let produtos = this.props.produtosCliente ? this.props.produtosCliente : [];
+    let produtosCliente = this.props.produtosCliente ? this.patternProdutosName(this.props.produtosCliente) : [];
+    let keysProdutos = Object.keys(todosProdutos); // retira os nomes dos produtos do objeto, ex: [Localize, Credito]
     let handleChangeColor = this.props.changeColorMenu;
     let menuOpened = this.state.menuOpened;
-    let activedMenu = this.props.activedMenu; //se false o sidebar esta contraido(default para mobile)
+    let activedMenu = this.props.activedMenu; // se false o sidebar esta contraido(default para mobile)
     return (
         <div id="sidebar">
           <ul className="sidebar-nav">
 
-            { produtos.map((produto, index) => {
-              produto = produto.replace(/\+/g,"MAIS"); //ex: VENDA+ -> VENDAMAIS
-              produto = produto.replace(/[^a-zA-Z]/g,""); //ex: BASE CERTA -> BASECERTA
-              let opt = todosProdutos[produto];
-              if(opt) {
+            { keysProdutos.map((produto, index) => {
+              if(produtosCliente.indexOf(produto) >= 0) {
+                let opt = todosProdutos[produto];
                 return (
                   <li key={index} onClick={() => {handleChangeColor(opt.color)}}>
                       <Link
@@ -101,20 +109,12 @@ class Sidebar extends Component {
     )
   }
 
-              /*{!activedMenu ?
-              <li>
-                <Link>
-                  <img
-                    src={COMPANY_ICON}
-                    className="sub-icon sub-icon-open-menu" />
-                </Link>
-              </li>
-            : ""}*/
-
   render() {
       return (      
           <aside>
-						<img src={ this.props.activedMenu ? COMPANY_LOGO_INVERSE : COMPANY_ICON } alt={"Logo da "+COMPANY_NAME_SHORT} className="menu-image" id={this.props.activedMenu ? "menu-image-logo" : "menu-image-icon"} />
+            <div style={{backgroundColor: COMPANY_MAIN_COLOR}} id={this.props.activedMenu ? "menu-image-logo" : "menu-image-icon"} >
+						  <img src={ this.props.activedMenu ? COMPANY_LOGO_INVERSE : COMPANY_ICON } alt={"Logo da "+COMPANY_NAME_SHORT} />
+            </div>
 
             {this.props.activedMenu ? (
                   <CardInfoMenuUser color="#673ab7" user={this.props.user}/>

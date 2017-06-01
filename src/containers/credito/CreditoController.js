@@ -25,7 +25,7 @@ import {
 } from "../../actions/actionsCredito";
 import { searchLocalize } from "../../actions/index";
 import { changeProductType } from "../../actions/actionsCommon";
-import { ERR_CONNECTION_REFUSED, LOGO_CREDITO, ICON_CREDITO, LOADING_GIF, REQUEST_ERROR, SUCCESS } from "../../constants/utils";
+import { ERR_CONNECTION_REFUSED, LOADING_GIF, REQUEST_ERROR, SUCCESS } from "../../constants/utils";
 import {
 	COMPLETA_CODE,
 	INTERMEDIARIA_CODE,
@@ -37,7 +37,7 @@ import {
 	EXPRESS_CODE,
 	GET_CREDITO_COMPLETA
 } from "../../constants/constantsCredito";
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO, COMPANY_PRODUCT_LOCALIZE } from "../../constants/constantsCompany";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO, COMPANY_PRODUCT_LOCALIZE, LOGO_CREDITO } from "../../constants/constantsCompany";
 
 import estados from "../../components/utils/common/estados.json";
 import menu from "../../components/utils/common/menu.json";
@@ -449,8 +449,6 @@ class Credito extends Component {
 
 				<div style={{marginBottom:15}} />
 
-				{this.props.datas.length > 0 ? <PrintScreen /> : ""}
-
 				{datas.length === 0 ? 
 					<span>
 						<LocalizeDescription />
@@ -467,6 +465,9 @@ class Credito extends Component {
 						animation={false}
 						
 					>
+
+						<PrintScreen />
+
 						{datas.map((data, index) => {
 							return (
 								<Tab eventKey={data.label} 

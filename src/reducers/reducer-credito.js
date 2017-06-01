@@ -19,8 +19,6 @@ import {
 		ERR_CONNECTION_REFUSED,
 		ERR_CONNECTION_REFUSED_MESSAGE,
         ERROR_503,
-		ICON_CREDITO,
-        ICON_LOCALIZE,
 		LAST_QUERIES,
 		LOADING,
 		NENHUM_REGISTRO,
@@ -30,7 +28,9 @@ import {
 
 import {
     COMPANY_PRODUCT_CREDITO,
-    COMPANY_PRODUCT_LOCALIZE
+    COMPANY_PRODUCT_LOCALIZE,
+    ICON_CREDITO,
+    ICON_LOCALIZE
 } from "../constants/constantsCompany";
 
 import { patternCPF, patternCNPJ } from "../components/utils/functions/patternDocuments";
@@ -71,7 +71,8 @@ export default function(state=getInitialState, action) {
                 type: action.payload.toUpperCase()
             }
 
-        case CHANGE_TAB_CREDITO:
+        case CHANGE_TAB_CREDITO: {
+            // quando se fecha a tab esta funcao é chamada, por isso se faz a verificacao
             let tab = findLabelInArray(state.response,action.payload);
             tab = tab >= 0 ? tab : 0;
 
@@ -84,6 +85,7 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: state.type
             }
+        }
 
         case CLOSE_CREDITO_MODEL:
             return {
@@ -109,7 +111,7 @@ export default function(state=getInitialState, action) {
 
         case CLOSE_TAB_CREDITO:
             let newResponse = state.response.concat();
-            let closed = newResponse.splice(action.payload, 1);
+            newResponse.splice(action.payload, 1);
 
             return {
                 status: "closeTab",

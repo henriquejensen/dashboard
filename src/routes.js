@@ -16,10 +16,10 @@ import CentroCusto from "./containers/sms/CentroCusto";
 import Respostas from "./containers/sms/Respostas";
 import BaseCerta from "./containers/basecerta/BaseCerta";
 import Credito from "./containers/credito/CreditoController";
+import CreditoMix from "./containers/creditomix/CreditoMixController";
 import Veiculos from "./containers/veiculos/VeiculosController";
 import FocoFiscal from "./containers/focofiscal/FocoFiscalController";
 import VendaMais from "./containers/vendamais/VendaMais";
-import ConsigMais from "./containers/consigmais/ConsigMais";
 
 import Relatorios from "./containers/relatorios/Relatorios";
 import Cadastro from "./containers/cadastro/Cadastro";
@@ -36,6 +36,8 @@ export default (
 
       <Route name="Crédito" path="credito" component={Credito} />
 
+      <Route name="CréditoMix" path="creditomix" component={CreditoMix} />
+
       <Route name="Foco Fiscal" path="focofiscal" component={FocoFiscal} />
       
       <Route name="Base Certa" path="basecerta" component={BaseCerta} />
@@ -44,7 +46,6 @@ export default (
       <Route name="respostas" path="sms/respostas" component={Respostas} />
       <Route name="Veiculos" path="veiculos" component={Veiculos} />
       <Route name="Venda+" path="vendamais" component={VendaMais} />
-      <Route name="Consig+" path="consigmais" component={ConsigMais} />
 
       <Route name="Cadastro" path="cadastro" component={Cadastro} />
 

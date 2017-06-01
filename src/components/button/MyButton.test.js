@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from "react-test-renderer";
+
 import MyButton from "./MyButton";
-import { shallow } from 'enzyme';
 
 describe("<MyButton/>", () => {
     let tooltip="toolTipConsultar";

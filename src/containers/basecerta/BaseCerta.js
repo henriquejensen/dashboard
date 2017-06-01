@@ -10,8 +10,8 @@ import Panel from "../../components/panel/Panel";
 import Table from "../../components/table/Table";
 import Modal from "../../components/Modal";
 
-import { LOGO_BASECERTA, NENHUM_REGISTRO } from "../../constants/utils";
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_BASECERTA } from "../../constants/constantsCompany";
+import { NENHUM_REGISTRO } from "../../constants/utils";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_BASECERTA, LOGO_BASECERTA } from "../../constants/constantsCompany";
 
 class BaseCerta extends Component {
 

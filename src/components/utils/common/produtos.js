@@ -35,6 +35,73 @@ export const todosProdutos = {
             {label: "Consulta Express", id: "express"},
         ]
     },
+    CREDITOMIX: {
+        label: "Crédito Mix",
+        id: "credito",
+        color: "#EA4335",
+        colorLight: "#E6C088",
+        link: "/creditomix",
+        image: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito.png",
+        imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png",
+        alt: "Icone Crédito Mix",
+        subItems: [
+            {label: "CPF", id: "cpf"},
+            {label: "CNPJ", id: "cnpj"},
+            {label: "CHEQUE", id: "cheque"},
+        ],
+        options: {
+            cheque: [
+                {id: "agenciaChequeInicial", label: "Agência"},
+                {id: "bancoChequeInicial", label: "Banco"},
+                {id: "cepConsumidor", label: "CEP consumidor"},
+                {id: "cepOrigem", label: "CEP Origem"},
+                {id: "chequesDetalhados", label: "Cheques Detalhados"},
+                {id: "cmc71ChequeInicial", label: "CMC 71"},
+                {id: "cmc72ChequeInicial", label: "CMC 72"},
+                {id: "cmc73ChequeInicial", label: "CMC 73"},
+                {id: "codigoEstacaoConsultante", label: "Código Estação Consultante"},
+                {id: "codigoProduto", label: "Código Produto"},
+                {id: "digitoChequeInicial", label: "Dígito Cheque"},
+                {id: "digitoContaCorrenteChequeInicial", label: "Dígito Conta Corrente"},
+                {id: "documentoConsumidor", label: "Docuemnto Consumidor"},
+                {id: "numeroChequeInicial", label: "Núemro Cheque"},
+                {id: "quantidadeCheque", label: "Quantidade Cheque"},
+                {id: "telefoneConsultar", label: "Telefone"},
+                {id: "tipoConsumidor", label: "Tipo Consumidor"},
+                {id: "utilizaCm7", label: "Utiliza CM7"}
+            ],
+            cpf: [
+                {id: "alertaIdentidade", label: "Alerta de Identidade"},
+                {id: "spcObito", label: "Alerta de Óbito"},
+                {id: "acao", label: "Ação"},
+                {id: "gastoEstimadoPF", label: "Gasto Estimado PF"},
+                {id: "indiceRelacionamentoMercadoPF", label: "Índice Relacionamento Mercado PF"},
+                {id: "limiteCreditoSugerido", label: "Limite de Crédito Sugerido"},
+                {id: "participacaoEmpresa", label: "Participações em Empresas"},
+                {id: "pendenciaFinanceira", label: "Pendências Financeiras Serasa"},
+                {id: "rendaPresumidaSpc", label: "Renda Presumida SPC"},
+                {id: "spcScore12Meses", label: "SPC Score 12 Meses"},
+                {id: "spcScore3Meses", label: "SPC Score 3 Meses"},
+                {id: "statusReceitaFederalOnline", label: "Status Receita Federal Online"},
+                {id: "telefoneVinculadoConsumidor", label: "Telefones Vinculados"}
+            ],
+            cnpj: [
+                {id: "acao", label: "Ação"},
+                {id: "participacaoEmpresa", label: "Participações em Empresas"},
+                {id: "pendenciaFinanceira", label: "Pendências Financeiras Serasa"},
+                {id: "spcScore12Meses", label: "SPC Score 12 Meses"},
+                {id: "spcScore3Meses", label: "SPC Score 3 Meses"},
+                {id: "statusReceitaFederalOnline", label: "Status Receita Federal Online"},
+                {id: "telefoneVinculadoConsumidor", label: "Telefones Vinculados"},
+                {id: "riscoCreditoPj", label: "Risco Crédito PJ"},
+                {id: "socio", label: "Sócio"},
+                {id: "quadroSocialMaisCompletoPj", label: "Quadro Social Mais Completo PJ"},
+                {id: "faturamentoPresumido", label: "Faturamento Presumido"},
+                {id: "gastoEstimadoPj", label: "Gasto Estimado PJ"},
+                {id: "limiteCreditoPj", label: "Limite de Crédito"}
+            ]
+        }
+    },
     BASECERTA: {
         label: "Base Certa",
         id: "basecerta",
@@ -106,17 +173,6 @@ export const todosProdutos = {
             {label: "CPF", id: "cpf"},
             {label: "CNPJ", id: "cnpj"},
         ]
-    },
-    CONSIGMAIS: {
-        label: "Consig+",
-        id: "consigmais",
-        link: "/consigmais",
-        color: "#ff5722",
-        colorLight: "#673ab7",
-        image: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-consigmais.png",
-        imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-consigmais-negative.png",
-        alt: "Icone Consig+",
-        subItems: []
     }
 }
 

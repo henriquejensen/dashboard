@@ -25,24 +25,18 @@ import {
 		ERR_CONNECTION_REFUSED,
 		ERR_CONNECTION_REFUSED_MESSAGE,
 		ERROR_503,
-		ICON_CREDITO,
-		ICON_LOCALIZE,
 		LAST_QUERIES,
 		LOADING,
 		NENHUM_REGISTRO,
 		REQUEST_ERROR,
 		SUCCESS
 } from "../constants/utils";
-import { COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO } from "../constants/constantsCompany";
+import { COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO, ICON_CREDITO, ICON_LOCALIZE } from "../constants/constantsCompany";
 import model from "./data/localize/modelLocalize.json";
 import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
 import relacionados from "./data/relacionados.json";
 
 import { patternCPF, patternCNPJ } from "../components/utils/functions/patternDocuments";
-
-import modelCredito from "./data/credito/consultaCPF.json";
-import modelCreditoCNPJ from "./data/credito/consultaCNPJ.json";
-import lastQueries from "./data/lastQueries.json";
 
 const initialState = {
 	status: "",
