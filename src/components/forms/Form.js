@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Tooltip from 'react-tooltip';
 import { Col, FormGroup, Row, Alert } from "react-bootstrap";
 
-import { SelectGroup } from "../../components/forms/CommonForms";
 import MyButton from "../button/MyButton";
 
 import {

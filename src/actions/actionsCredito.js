@@ -10,12 +10,22 @@ import {
     CLOSE_TAB_CREDITO,
     GET_CREDITO_CHEQUE,
     GET_CREDITO_COMPLETA,
+	GET_CREDITO_INTERMEDIARIA,
+	GET_CREDITO_INTERMEDIARIAPLUS,
+	GET_CREDITO_SIMPLES,
+	GET_CREDITO_EXPRESS,
     GET_CREDITO_LAST_QUERIES,
     LOADING_CREDITO,
     SEE_CREDITO_MODEL,
     URL_CREDITO_SEARCH_CHEQUE,
     URL_CREDITO_SEARCH_COMPLETA,
-	URL_CREDITO_SEARCH_COMPLETA_PJ
+	URL_CREDITO_SEARCH_COMPLETA_PJ,
+    URL_CREDITO_SEARCH_INTERMEDIARIA_PF,
+    URL_CREDITO_SEARCH_INTERMEDIARIA_PJ,
+    URL_CREDITO_SEARCH_INTERMEDIARIAPLUS_PF,
+    URL_CREDITO_SEARCH_INTERMEDIARIAPLUS_PJ,
+    URL_CREDITO_SEARCH_SIMPLES_PF,
+    URL_CREDITO_SEARCH_SIMPLES_PJ
 } from "../constants/constantsCredito";
 import {
 	ERR_CONNECTION_REFUSED,
@@ -87,6 +97,40 @@ export function searchCreditoCompleta(documento, tipo, search) {
 		apiContentType(dispatch, url, data, search, {tipo, documento})
 	}
 }
+
+export function searchCreditoIntermediaria(documento, uf) {
+    documento = documento.toString().replace(/[^0-9]/g,"")
+    let tipo = documento.length > 11 ? "CNPJ" : "CPF"
+	let url = documento.length > 11 ? URL_CREDITO_SEARCH_INTERMEDIARIA_PJ : URL_CREDITO_SEARCH_INTERMEDIARIA_PF
+	let data = tipo === "CPF" ? {document:documento, type:"pf", uf} : {document:documento, type:"pj", uf};
+
+	return (dispatch) => {
+		apiContentType(dispatch, url, data, GET_CREDITO_COMPLETA, {tipo, documento})
+	}
+}
+
+export function searchCreditoIntermediariaPlus(documento, uf) {
+    documento = documento.toString().replace(/[^0-9]/g,"")
+    let tipo = documento.length > 11 ? "CNPJ" : "CPF"
+	let url = documento.length > 11 ? URL_CREDITO_SEARCH_INTERMEDIARIAPLUS_PJ : URL_CREDITO_SEARCH_INTERMEDIARIAPLUS_PF
+	let data = tipo === "CPF" ? {document:documento, type:"pf", uf} : {document:documento, type:"pj", uf};
+
+	return (dispatch) => {
+		apiContentType(dispatch, url, data, GET_CREDITO_COMPLETA, {tipo, documento})
+	}
+}
+
+export function searchCreditoSimples(documento) {
+    documento = documento.toString().replace(/[^0-9]/g,"")
+    let tipo = documento.length > 11 ? "CNPJ" : "CPF"
+	let url = documento.length > 11 ? URL_CREDITO_SEARCH_SIMPLES_PJ : URL_CREDITO_SEARCH_SIMPLES_PF
+	let data = tipo === "CPF" ? {cpf:documento} : {cnpj:documento};
+
+	return (dispatch) => {
+		apiContentType(dispatch, url, data, GET_CREDITO_COMPLETA, {tipo, documento})
+	}
+}
+
 
 export function seeModel() {
     return {

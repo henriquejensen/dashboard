@@ -27,7 +27,7 @@ export const ICON_CREDITO_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.a
 // Crédito Mix
 export const COMPANY_PRODUCT_CREDITOMIX = "Crédito Mix"
 export const COMPANY_PRODUCT_CREDITOMIX_LABEL = "CREDITOMIX"
-export const LOGO_CREDITOMIX = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-credito.png"
+export const LOGO_CREDITOMIX = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-creditomix.png"
 export const ICON_CREDITOMIX = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito.png"
 export const ICON_CREDITOMIX_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png"
 

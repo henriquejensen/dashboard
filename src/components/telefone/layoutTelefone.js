@@ -8,7 +8,7 @@ import { Button, Col, Form, FormControl, FormGroup } from "react-bootstrap";
 
 import Table from "../table/Table";
 import Modal from "../Modal";
-import EnviarSMS from "../forms/EnvioSMS";
+import EnviarSMS from "../../containers/sms/EnvioSMS"
 
 import { formatPhone } from "../utils/functions/patternDocuments";
 import { MESSAGE_SUCCESS_ADD_NEW_PHONE, MESSAGE_SUCCESS_NUMBER_COPY, MESSAGE_SUCCESS_SMS, NENHUM_REGISTRO, SUCCESS, WHATSAPP_IMAGE, VIBER_IMAGE } from "../../constants/utils";
@@ -36,8 +36,7 @@ export default class LayoutTelefone extends Component{
         }
     }
 
-    sendSMS = (evt) => {
-        evt.preventDefault();
+    onSendSMS = () => {
         this.closeModal();
         this._addNotification(MESSAGE_SUCCESS_SMS);
     }
@@ -279,7 +278,7 @@ export default class LayoutTelefone extends Component{
                     >
                         <EnviarSMS
                             cancel={this.closeModal} 
-                            onSendSMS={this.sendSMS}
+                            onSendSMS={this.onSendSMS}
                             onChange={this.onChange}
                             numeros={this.state.numeros} />
                     </Modal>

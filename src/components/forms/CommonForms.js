@@ -64,11 +64,16 @@ export const RadioGroup = (props) => {
 export const RadioGroupGeneric = (props) => {
     return (
         <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}}>
-            {props.label ? <Col md={12}><ControlLabel>{props.label}</ControlLabel></Col> : ""}
+            {props.label ? <Col md={props.colLabel}><ControlLabel>{props.label}</ControlLabel></Col> : ""}
             {props.datas.map((data,index) => {
                 return (
                     <Col md={props.colRadio} key={index}>
-                        <Radio onClick={(evt) => props.onChange(index, evt.target.name)} name={props.id} checked={data.checked}>
+                        <Radio
+                            onClick={(evt) => props.onChange(index, evt.target.name)}
+                            name={props.id}
+                            checked={data.checked}
+                            style={props.style}
+                        >
                             {data.info}
                         </Radio>
                     </Col>
@@ -82,13 +87,18 @@ export const TextAreaGroup = (props) => {
     return (
         <FormGroup controlId={props.id}>
             {props.label ? <ControlLabel>{props.label}</ControlLabel> : ""}
-            <FormControl
-                style={props.error ? {borderColor:"red"} : {}}
-                componentClass="textarea"
-                name={props.name}
-                value={props.value}
-                placeholder={props.placeholder}
-                onChange={props.onChange} />
+                <textarea
+                    required={props.required}
+                    className="form-control"
+                    placeholder={props.placeholder}
+                    style={props.error ? {borderColor:"red"} : {}}
+                    name={props.name}
+                    onChange={props.onChange}
+                    rows="10" cols="50"
+                >
+                    {props.value}
+                </textarea>
+
             <HelpBlock>{props.message}</HelpBlock>
         </FormGroup>
     )

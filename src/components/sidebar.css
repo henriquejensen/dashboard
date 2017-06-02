@@ -63,8 +63,13 @@
 }
 
 #menu-image-icon {
-    height: 52px;
-    width: auto;
-    padding: 18px;
+    height: 51px;
+    width: 50px;
     float: right;
+}
+
+#menu-image-icon > img {
+    width: 100%;
+    height: auto;
+    padding: 16px;
 }

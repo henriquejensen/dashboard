@@ -17,8 +17,8 @@ const { join, resolve }  = require("path");
 
 module.exports = {
   entry: {
-    app: join(__dirname, 'src','index.js'),
-    vendor: ['immutable', 'react-router', 'react', 'react-bootstrap', 'redux', 'react-dom'] // arquivos que serao colocados em outro js(chunk)
+    vendor: ["babel-polyfill", 'immutable', 'react-router', 'react', 'react-bootstrap', 'redux', 'react-dom'], // arquivos que serao colocados em outro js(chunk)
+    app: join(__dirname, 'src','index.js')
   },
   output: {
     publicPath: "/",         // caminho que sera usado pelos <script> <link> injetados pelo webpack

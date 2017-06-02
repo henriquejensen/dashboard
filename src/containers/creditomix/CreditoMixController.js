@@ -15,8 +15,8 @@ import { LocalizeDescription } from "../../components/ProductDescription"
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 // Constants
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITOMIX_LABEL, COMPANY_PRODUCT_CREDITOMIX, LOGO_CREDITO } from "../../constants/constantsCompany";
-//import { LOGO_CREDITO } from "../../constants/utils";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITOMIX_LABEL, COMPANY_PRODUCT_CREDITOMIX, LOGO_CREDITOMIX } from "../../constants/constantsCompany";
+//import { LOGO_CREDITOMIX } from "../../constants/utils";
 
 // Actions
 import { changeProductType } from "../../actions/actionsCommon";
@@ -221,7 +221,7 @@ class CreditoMix extends Component {
 			<Panel>
 				<Col md={12}>
 					<MyForm
-						logo = {LOGO_CREDITO}
+						logo = {LOGO_CREDITOMIX}
 						onformSubmit = {this.onformSubmit}
 						closeMessageError = {this.props.closeMessageErrorCreditoMix}
 						options={produtoInformacoes.subItems}

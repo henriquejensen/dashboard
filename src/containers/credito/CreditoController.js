@@ -12,6 +12,7 @@ import UltimasConsultas from "../../components/UltimasConsultas";
 import { LocalizeDescription } from "../../components/ProductDescription";
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
 
+// Actions
 import {
 		changeTab,
 		closeModel,
@@ -21,10 +22,15 @@ import {
 		loadingCredito,
 		seeModel,
 		searchCreditoCheque,
-		searchCreditoCompleta
+		searchCreditoCompleta,
+		searchCreditoIntermediaria,
+		searchCreditoIntermediariaPlus,
+		searchCreditoSimples
 } from "../../actions/actionsCredito";
 import { searchLocalize } from "../../actions/index";
 import { changeProductType } from "../../actions/actionsCommon";
+
+// Constants
 import { ERR_CONNECTION_REFUSED, LOADING_GIF, REQUEST_ERROR, SUCCESS } from "../../constants/utils";
 import {
 	COMPLETA_CODE,
@@ -121,10 +127,33 @@ class Credito extends Component {
 
 		this.props.loadingCredito();
 
-		if(this.props.type == "CHEQUE") {
-			this.props.searchCreditoCheque(this.state.creditoInput);
-		} else {
-			this.searchCreditoCompleta(this.state.creditoInput.documento);
+		switch (this.props.type) {
+			case "CHEQUE":
+				this.props.searchCreditoCheque(this.state.creditoInput);
+				break;
+		
+			case "INTERMEDIARIA":
+				this.props.searchCreditoIntermediaria(this.state.creditoInput.documento, this.state.creditoInput.estado);
+				break;
+
+			case "INTERMEDIARIAPLUS":
+				this.props.searchCreditoIntermediariaPlus(this.state.creditoInput.documento, this.state.creditoInput.estado);
+				break;
+
+			case "EXPRESS":
+				this.props.searchCreditoExpress(this.state.creditoInput.documento);
+				break;
+
+			case "SIMPLES":
+				this.props.searchCreditoSimples(this.state.creditoInput.documento);
+				break;
+
+			case "COMPLETA":
+				this.searchCreditoCompleta(this.state.creditoInput.documento);
+				break;
+
+			default:
+				break;
 		}
 
 		this.setState({
@@ -133,7 +162,6 @@ class Credito extends Component {
 			tipoCheque: "Apenas Cadastro",
 			creditoInput: {
 				documento: "",
-				uf: "",
 				banco: "",
 				agência: "",
 				conta: "",
@@ -414,7 +442,7 @@ class Credito extends Component {
 					>
 						{tipo ?
 							tipo == "INTERMEDIARIA" || tipo == "INTERMEDIARIAPLUS" ?
-								this.renderForm(false)
+								this.renderForm(true)
 							: 
 								tipo == "CHEQUE" ?
 									this.renderFormCheque()
@@ -530,6 +558,9 @@ function mapDispatchToProps(dispatch) {
 		seeModel,
 		searchCreditoCheque,
 		searchCreditoCompleta,
+		searchCreditoIntermediaria,
+		searchCreditoIntermediariaPlus,
+		searchCreditoSimples,
 		searchLocalize
 	}, dispatch)
 }

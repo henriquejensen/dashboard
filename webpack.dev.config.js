@@ -12,6 +12,11 @@ const port = 8080;
 module.exports = {
   devtool: 'inline-source-map',
   entry: [
+    // A ORDEM DE IMPORTAÇÃO É IMPORTANTE, babel-polyfill deve ser o primeiro na ordem
+    // https://github.com/facebook/react/issues/8379#issuecomment-264858787 => resposta para o problema no IE 1
+    // https://babeljs.io/docs/usage/polyfill/
+    "babel-polyfill", // necessario para a compatibilidade com o IE
+
     'react-hot-loader/patch',
     // activate HMR for React
 
@@ -23,7 +28,8 @@ module.exports = {
     // bundle the client for hot reloading
     // only- means to only hot reload for successful updates
 
-    './src/index.js'
+    // documento de entrada
+    join(__dirname, 'src','index.js')
   ],
   output: {
     filename: '[name][hash].js',
