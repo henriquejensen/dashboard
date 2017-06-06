@@ -11,9 +11,15 @@ import Contato from "./containers/contato";
 import Localize from "./containers/localize/LocalizeController";
 import Dashboard from "./containers/dashboard/Dashboard";
 import Chat from "./containers/chat/Chat";
-import SMS from "./containers/sms/SMS";
+
+// SMS
+import SMS from "./containers/sms/SMSController";
+import MonitorEnvios from "./containers/sms/MonitorEnvios";
+import EnvioSMS from "./containers/sms/EnvioSMS";
 import CentroCusto from "./containers/sms/CentroCusto";
 import Respostas from "./containers/sms/Respostas";
+
+
 import BaseCerta from "./containers/basecerta/BaseCerta";
 import Credito from "./containers/credito/CreditoController";
 import CreditoMix from "./containers/creditomix/CreditoMixController";
@@ -41,10 +47,16 @@ export default (
       <Route name="Foco Fiscal" path="focofiscal" component={FocoFiscal} />
       
       <Route name="Base Certa" path="basecerta" component={BaseCerta} />
-      <Route name="SMS" path="sms" component={SMS} />
-      <Route name="centro de custo" path="sms/centrocusto" component={CentroCusto} />
-      <Route name="respostas" path="sms/respostas" component={Respostas} />
+
+      <Route path="sms" component={SMS} >
+        <IndexRoute component={MonitorEnvios} />
+        <Route name="EnvioRapido" path="enviorapido" component={EnvioSMS} />
+        <Route name="CentroCusto" path="centrocusto" component={CentroCusto} />
+        <Route name="Respostas" path="respostas" component={Respostas} />
+      </Route>
+
       <Route name="Veiculos" path="veiculos" component={Veiculos} />
+
       <Route name="Venda+" path="vendamais" component={VendaMais} />
 
       <Route name="Cadastro" path="cadastro" component={Cadastro} />

@@ -88,13 +88,14 @@ export const TextAreaGroup = (props) => {
         <FormGroup controlId={props.id}>
             {props.label ? <ControlLabel>{props.label}</ControlLabel> : ""}
                 <textarea
+                    maxLength={props.maxLength}
                     required={props.required}
                     className="form-control"
                     placeholder={props.placeholder}
                     style={props.error ? {borderColor:"red"} : {}}
                     name={props.name}
                     onChange={props.onChange}
-                    rows="10" cols="50"
+                    rows="2" cols="20"
                 >
                     {props.value}
                 </textarea>

@@ -24,8 +24,8 @@ import {
     URL_CREDITO_SEARCH_INTERMEDIARIA_PJ,
     URL_CREDITO_SEARCH_INTERMEDIARIAPLUS_PF,
     URL_CREDITO_SEARCH_INTERMEDIARIAPLUS_PJ,
-    URL_CREDITO_SEARCH_SIMPLES_PF,
-    URL_CREDITO_SEARCH_SIMPLES_PJ
+    URL_CREDITO_SEARCH_SIMPLES,
+	URL_CREDITO_LAST_QUERIES
 } from "../constants/constantsCredito";
 import {
 	ERR_CONNECTION_REFUSED,
@@ -64,11 +64,15 @@ export function closeTab(tab) {
     }
 }
 
-export function getLastQueries(code, tipo) {
-    return {
-        type: GET_CREDITO_LAST_QUERIES,
-        payload: "lastQueries"
-    }
+export function getLastQueries(consulta, tipo) {
+	// a busca esta sendo realizada somente dos ultimos PF, nao integrei PJ
+	let url = URL_CREDITO_LAST_QUERIES;
+	let data = {consulta};
+	let search = GET_CREDITO_LAST_QUERIES;
+
+	return (dispatch) => {
+		apiContentType(dispatch, url, data, search, {tipo:tipo})
+	}
 }
 
 export function loadingCredito() {
@@ -122,9 +126,9 @@ export function searchCreditoIntermediariaPlus(documento, uf) {
 
 export function searchCreditoSimples(documento) {
     documento = documento.toString().replace(/[^0-9]/g,"")
-    let tipo = documento.length > 11 ? "CNPJ" : "CPF"
-	let url = documento.length > 11 ? URL_CREDITO_SEARCH_SIMPLES_PJ : URL_CREDITO_SEARCH_SIMPLES_PF
-	let data = tipo === "CPF" ? {cpf:documento} : {cnpj:documento};
+    let tipo = "CPF"
+	let url = URL_CREDITO_SEARCH_SIMPLES
+	let data = {cpf:documento};
 
 	return (dispatch) => {
 		apiContentType(dispatch, url, data, GET_CREDITO_COMPLETA, {tipo, documento})

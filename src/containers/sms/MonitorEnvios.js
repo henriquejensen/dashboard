@@ -11,20 +11,21 @@ import SMSRapido from "./SMSRapido";
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_SMS } from "../../constants/constantsCompany";
 
 import { FieldGroup } from "../../components/forms/CommonForms";
+import PanelGroup from "../../components/panel/PanelGroup";
 import Panel from "../../components/panel/Panel";
 import Table from "../../components/table/Table";
 import Modal from "../../components/Modal";
 
 import { MESSAGE_SUCCESS_SMS, NENHUM_REGISTRO, SUCCESS } from "../../constants/utils";
-import { LOGO_SMS } from "../../constants/constantsCompany";
 
-class SMS extends Component {
+class MonitorEnvios extends Component {
     constructor(props) {
       super(props);
 
       this.state = {
         campanhasSMS: this.props.campanhasSMS,
-        IsModalOpen: false
+        IsModalOpen: false,
+        showBuscaAvancada: false
       }
 
       this._notificationSystem = null;
@@ -45,10 +46,19 @@ class SMS extends Component {
         })
     }
 
+    onClickBuscaAvancada = (evt) => {
+      evt.preventDefault()
+
+      this.setState({
+        showBuscaAvancada: !this.state.showBuscaAvancada
+      })
+    }
+
     renderForm = () => {
         return (
+          <Panel>
             <Form onSubmit={this.onFormSubmit} className="my-form">
-                <Col md={2}>
+                <Col md={this.state.showBuscaAvancada ? 8 : 10}>
                     <FieldGroup
                       id="smsCampanha"
                       label="Campanha"
@@ -56,43 +66,53 @@ class SMS extends Component {
                       name="campanha" />
                 </Col>
 
-                <Col md={2}>
-                    <FieldGroup
-                      id="smsDataInicio"
-                      label="Data Início"
-                      type="date"
-                      name="dataInicio" />
-                </Col>
+                {this.state.showBuscaAvancada ?
+                  <span>
+                    <Col md={2}>
+                        <FieldGroup
+                          id="smsDataInicio"
+                          label="Data Início"
+                          type="date"
+                          name="dataInicio" />
+                    </Col>
+
+                    <Col md={2}>
+                        <FieldGroup
+                          id="smsDataFim"
+                          label="Data Fim"
+                          type="date"
+                          name="dataFim" />
+                    </Col>
+
+                    <Col md={5}>
+                        <FieldGroup
+                          id="smsCliente"
+                          label="Cliente"
+                          type="text"
+                          name="cliente" />
+                    </Col>
+
+                    <Col md={5}>
+                        <FieldGroup
+                          id="smsUsuario"
+                          label="Usuário"
+                          type="text"
+                          name="usuario" />
+                    </Col>
+                  </span>
+                : ""}
 
                 <Col md={2}>
-                    <FieldGroup
-                      id="smsDataFim"
-                      label="Data Fim"
-                      type="date"
-                      name="dataFim" />
-                </Col>
-
-                <Col md={2}>
-                    <FieldGroup
-                      id="smsCliente"
-                      label="Cliente"
-                      type="text"
-                      name="cliente" />
-                </Col>
-
-                <Col md={2}>
-                    <FieldGroup
-                      id="smsUsuario"
-                      label="Usuário"
-                      type="text"
-                      name="usuario" />
-                </Col>
-
-                <Col md={2}>
-                    <label htmlFor="">.</label>
+                    <label htmlFor="">
+                      <a href="#" onClick={this.onClickBuscaAvancada} >
+                        {!this.state.showBuscaAvancada ? 'Busca avançada' : 'Fechar busca'}
+                      </a>
+                    </label>
                     <Button style={{width:"100%"}} bsStyle="info">Buscar</Button>
                 </Col>
+
             </Form>
+          </Panel>
         )
     }
 
@@ -119,21 +139,11 @@ class SMS extends Component {
     render() {
       return (
       <section>
-
-        <Col md={12} sm={12} className="text-center">
-          <img src={LOGO_SMS} className="logo-produto" />
-
-          <Col md={2} style={{position:"absolute", right:24, top:0}}>
-            <DropdownButton bsStyle={"primary"} title="Enviar SMS" id={'dropdown-basic-0'} style={{float:"right"}}>
-              <MenuItem eventKey="1" onClick={() => this.openModal("SMS Rápido")}>Rápido</MenuItem>
-              <MenuItem eventKey="2" onClick={() => this.openModal("SMS por Arquivo")}>Arquivo</MenuItem>
-            </DropdownButton>
-          </Col>
-        </Col>
-
         {this.renderForm()}
 
-        <Col md={12}>
+        <div style={{marginBottom:15}} />
+
+        <PanelGroup>
           {this.props.campanhas.length > 0 ? 
             this.props.campanhas.map((campanha,index) => {
               return (
@@ -141,10 +151,10 @@ class SMS extends Component {
                   <Col md={4}>
                     <strong>Campanha: </strong>{campanha.campanha}
                   </Col>
-                  <Col md={3}>
+                  <Col md={4}>
                     <strong>Cadastro: </strong>{campanha.cadastro}
                   </Col>
-                  <Col md={3}>
+                  <Col md={4}>
                     <strong>Centro de Custo: </strong>{campanha.centroCusto}
                   </Col>
 
@@ -172,7 +182,7 @@ class SMS extends Component {
                 <Panel title="Ticket">
                   <Col md={12} className="text-center">{NENHUM_REGISTRO}</Col>
                 </Panel>}
-        </Col>
+        </PanelGroup>
 
         <Modal
             IsModalOpen={this.state.IsModalOpen}
@@ -195,7 +205,7 @@ class SMS extends Component {
 
 function mapStateToProps(state) {
   return {
-    campanhas: state.campanhasSMS
+    campanhas: state.sms.response
   }
 }
 
@@ -204,4 +214,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(SMS);
+export default connect(mapStateToProps, mapDispatchToProps)(MonitorEnvios);

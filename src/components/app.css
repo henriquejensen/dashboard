@@ -1,3 +1,9 @@
+/*Aqui se encontram as classes ou ids comuns na aplicação inteira*/
+
+.logo-produto {
+    padding: 15px 0px
+}
+
 .sub-icon {
     width: 22px;
     height: 22px;

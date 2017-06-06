@@ -4,7 +4,7 @@ import user from "./reducer-user";
 import localize from "./reducer-localize";
 import credito from "./reducer-credito";
 import focofiscal from "./reducer-focofiscal";
-import campanhasSMS from "./reducer-sms";
+import sms from "./reducer-sms";
 //import chartData from "./reducer-chart-data";
 import auth from "./reducer-application";
 import cadastro from "./reducer-cadastro";
@@ -19,9 +19,7 @@ const rootReducer = combineReducers({
   creditomix,
   focofiscal,
   user,
-  campanhasSMS: campanhasSMS,
-  centroCustoSMS: campanhasSMS,
-  respostasSMS: campanhasSMS,
+  sms,
   auth,
   cadastro,
   veiculos,

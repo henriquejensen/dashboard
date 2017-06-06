@@ -11,7 +11,7 @@ import Modal from "../Modal";
 import EnviarSMS from "../../containers/sms/EnvioSMS"
 
 import { formatPhone } from "../utils/functions/patternDocuments";
-import { MESSAGE_SUCCESS_ADD_NEW_PHONE, MESSAGE_SUCCESS_NUMBER_COPY, MESSAGE_SUCCESS_SMS, NENHUM_REGISTRO, SUCCESS, WHATSAPP_IMAGE, VIBER_IMAGE } from "../../constants/utils";
+import { MESSAGE_SUCCESS_ADD_NEW_PHONE, MESSAGE_SUCCESS_NUMBER_COPY, NENHUM_REGISTRO, SUCCESS, WHATSAPP_IMAGE, VIBER_IMAGE } from "../../constants/utils";
 
 export default class LayoutTelefone extends Component{
     constructor(props) {
@@ -34,11 +34,6 @@ export default class LayoutTelefone extends Component{
                 level: SUCCESS.toLocaleLowerCase()
             });
         }
-    }
-
-    onSendSMS = () => {
-        this.closeModal();
-        this._addNotification(MESSAGE_SUCCESS_SMS);
     }
 
     sendNewPhone = (evt) => {
@@ -278,8 +273,6 @@ export default class LayoutTelefone extends Component{
                     >
                         <EnviarSMS
                             cancel={this.closeModal} 
-                            onSendSMS={this.onSendSMS}
-                            onChange={this.onChange}
                             numeros={this.state.numeros} />
                     </Modal>
 

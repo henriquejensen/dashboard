@@ -1,13 +1,18 @@
 import React, { Component } from "react";
-import { Col, Button, Well } from "react-bootstrap";
-import { bindActionCreators } from "redux"
+import Notification from "react-notification-system";
+import { Alert, Button, Col, Well } from "react-bootstrap";
 import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
 
 // Components
 import { FieldGroup, RadioGroupGeneric, SelectGroup, TextAreaGroup } from "../../components/forms/CommonForms";
 
 // Actions
-import { sendSMSRapido } from "../../actions/actionsSMS";
+import { closeSMSMessage, loadingSMS, sendSMSRapido } from "../../actions/actionsSMS";
+
+// Constants
+import { SUCCESS } from "../../constants/utils"
+import { MESSAGE_SUCCESS_SMS, MESSAGE_ERROR_SMS } from "../../constants/constantsSMS"
 
 export class EnviarSMS extends Component {
 
@@ -25,11 +30,15 @@ export class EnviarSMS extends Component {
                 {checked: false, info:"Carta"}
             ],
             rota: 1, // 1 curto 2 longo
-            numeros: Array.isArray(this.props.numeros) ? this.props.numeros : [this.props.numeros],
+            id: this.props.id,
+            numeros: this.props.numeros,
+            conteudoSMS: "",
             caracteresRestantes: this.maximoCaracteres,
             limiteCaracteres: this.maximoCaracteres,
             totalSMS: 0
         }
+
+        this._notificationSystem = null;
     }
 
     onChangeRadio = (indexRadioClicked, name) => {
@@ -45,7 +54,7 @@ export class EnviarSMS extends Component {
         this.setState({
             tipoRotaSMS,
             limiteCaracteres: isCarta ? this.maximoCaracteresCarta : this.maximoCaracteres,
-            caracteresRestantes: isCarta ? this.maximoCaracteresCarta - this.state.caracteresRestantes : this.state.caracteresRestantes,
+            caracteresRestantes: isCarta ? this.maximoCaracteresCarta - this.state.conteudoSMS.length : this.maximoCaracteres - this.state.conteudoSMS.length,
             rota: isLongo ? 2 : 1
         })
     }
@@ -62,38 +71,36 @@ export class EnviarSMS extends Component {
         let requestMessage = {
             nome: this.state.nome,
             rota: this.state.rota,
-            smsList: this.state.numeros.map(num => {
+            smsList: this.state.numeros.split(",").map(num => {
                 return {
                     numero: num,
-                    mensagem: this.state.conteudoSMS
+                    mensagem: this.state.conteudoSMS,
+                    id: this.state.id ? this.state.id : ""
                 }
             })
         }
 
+        this.props.loadingSMS()
         this.props.sendSMSRapido(requestMessage)
-        // chamada da funcao do componente que solicitou o EnvioSMS
-        this.props.onSendSMS ? this.props.onSendSMS() : ""
+
     }
     
     onChangeConteudoSMS = (evt) => {
+        
         let limiteCaracteres = this.state.limiteCaracteres
         let caracteres = evt.target.value.length
         let totalSMS = parseInt(caracteres / limiteCaracteres)
 
-        if(caracteres <= limiteCaracteres) {
+        if(caracteres <= limiteCaracteres) {            
             this.setState({
-                [evt.target.name]: evt.target.value.slice(0,limiteCaracteres),
+                conteudoSMS: evt.target.value.slice(0, limiteCaracteres),
                 caracteresRestantes: limiteCaracteres - caracteres,
                 totalSMS: totalSMS
-            })
-        } else {
-            this.setState({
-                [evt.target.name]: this.state[evt.target.name].slice(0,limiteCaracteres)
             })
         }
     }
 
-    render() {
+    renderForm = () => {
         return (
             <form onSubmit={this.onSendSMS}>
                 <RadioGroupGeneric
@@ -109,11 +116,12 @@ export class EnviarSMS extends Component {
                 <Col md={12}>
                     <FieldGroup
                         id="numeros"
+                        required
                         label="* Celular(es)"
                         type="text"
                         name="numeros"
                         value={this.state.numeros}
-                        placeholder="Números para envio da mensagem"
+                        placeholder="Números para envio da mensagem(DDD+Numero). Ex: 119999999,3540404040"
                         message="Limite máximo: 1000"
                         onChange={this.onChange} />
                 </Col>
@@ -124,6 +132,7 @@ export class EnviarSMS extends Component {
                         id="conteudoSMS"
                         label="* Conteúdo do SMS"
                         name="conteudoSMS"
+                        maxLength={this.state.limiteCaracteres}
                         value={this.state.conteudoSMS}
                         placeholder="Escreva o conteúdo do seu SMS"
                         onChange={this.onChangeConteudoSMS} />
@@ -136,7 +145,7 @@ export class EnviarSMS extends Component {
                         name="nome"
                         value={this.state.nome}
                         placeholder="Escreva o nome da campanha"
-                        onChange={this.onChange} />
+                         />
                 </Col>
 
                 <Col md={6}>
@@ -169,14 +178,48 @@ export class EnviarSMS extends Component {
                 <Col md={6}>
                     <Button type="submit" className="pull-right" bsStyle="primary">Enviar</Button>
                 </Col>
+
             </form>
+        )
+    }
+
+    render() {
+        return (
+            <span>
+                {this.props.message ?
+                    <Col md={12} sm={12}> 
+                        <Alert
+                            bsStyle={this.props.status === SUCCESS ? "success" : "danger"}
+                            className="text-center"
+                            onDismiss={this.props.closeSMSMessage}>
+
+                            {this.props.message}
+
+                        </Alert>
+                    </Col>
+                : ""}
+
+                {this.renderForm()}
+
+            </span>
         )
     }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ sendSMSRapido }, dispatch)
+function mapStateToProps(state) {
+    console.log("STATE", state)
+    return {
+        message: state.sms.message,
+        status: state.sms.status
+    }
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+        closeSMSMessage,
+        loadingSMS,
+        sendSMSRapido
+    }, dispatch)
+}
 
-export default connect(null, mapDispatchToProps)(EnviarSMS);
+export default connect(mapStateToProps, mapDispatchToProps)(EnviarSMS);

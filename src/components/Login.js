@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 import { authUser, loading } from "../actions/actionsCommon";
 
 import { LOADING_GIF, URL_GET_IP } from "../constants/utils";
-import { COMPANY_NAME_SHORT, COMPANY_NAME_LONG, COMPANY_LOGO } from "../constants/constantsCompany";
+import { COMPANY_NAME_LONG, COMPANY_LOGO } from "../constants/constantsCompany";
 
 class Login extends Component {
     state = {
@@ -26,10 +26,6 @@ class Login extends Component {
                 })
             })
     }
-
-	componentDidMount() {
-		document.title = COMPANY_NAME_SHORT;
-	}
 
     onFormSubmit = (evt) => {
         evt.preventDefault();

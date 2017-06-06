@@ -17,7 +17,7 @@ const { join, resolve }  = require("path");
 
 module.exports = {
   entry: {
-    vendor: ["babel-polyfill", 'immutable', 'react-router', 'react', 'react-bootstrap', 'redux', 'react-dom'], // arquivos que serao colocados em outro js(chunk)
+    vendor: ['react-router', 'react', 'react-bootstrap', 'redux', 'react-dom'], // arquivos que serao colocados em outro js(chunk)
     app: join(__dirname, 'src','index.js')
   },
   output: {

@@ -39,6 +39,8 @@ TODO
 ----
 Introduzir Immutable.js -> antes ler e entender toda a doc http://redux.js.org/docs/recipes/UsingImmutableJS.html e usar http://neilff.github.io/immutable-repl
 
+Babel-Polyfill -> introduzi-lo no codigo, fiz uma primeira tentativa, funciona localmente (build e dev) porem nao funciona no S3
+
 Link importantes
 ----------------
 // https://www.codementor.io/vijayst/unit-testing-react-components-jest-or-enzyme-du1087lh8

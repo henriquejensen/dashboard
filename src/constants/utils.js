@@ -29,7 +29,7 @@ export const MESSAGE_FIELD_CONTEUDO_EMPTY = "O campo conteúdo é obrigatório";
 export const ERROR_503 = "Serviço temporariamente indisponível, tente novamente mais tarde"
 export const MESSAGE_SUCCESS_NUMBER_COPY = "Número copiado com sucesso";
 export const MESSAGE_SUCCESS_ADD_NEW_PHONE = "Obrigado pelo envio. Seu pedido de inserção será analisado";
-export const MESSAGE_SUCCESS_SMS = "Mensagem enviada com sucesso!";
+
 export const NENHUM_REGISTRO = "Nenhum registro encontrado";
 export const INFORMATION_NOT_AVAILABLE = "Informação indisponível";
 export const ADDRESS_NOT_FOUND = "Endereço não encontrado";

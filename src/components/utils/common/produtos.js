@@ -50,7 +50,7 @@ export const todosProdutos = {
             {label: "CHEQUE", id: "cheque"},
         ],
         options: {
-            cheque: [
+            /*cheque: [
                 {id: "agenciaChequeInicial", label: "Agência"},
                 {id: "bancoChequeInicial", label: "Banco"},
                 {id: "cepConsumidor", label: "CEP consumidor"},
@@ -69,7 +69,7 @@ export const todosProdutos = {
                 {id: "telefoneConsultar", label: "Telefone"},
                 {id: "tipoConsumidor", label: "Tipo Consumidor"},
                 {id: "utilizaCm7", label: "Utiliza CM7"}
-            ],
+            ],*/
             cpf: [
                 {id: "alertaIdentidade", label: "Alerta de Identidade"},
                 {id: "spcObito", label: "Alerta de Óbito"},
@@ -105,7 +105,7 @@ export const todosProdutos = {
     BASECERTA: {
         label: "Base Certa",
         id: "basecerta",
-        color: "#f44336",
+        color: "#AC6240",
         colorLight: "#673ab7",
         link: "/basecerta",
         image: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-basecerta.png",
@@ -123,10 +123,11 @@ export const todosProdutos = {
         imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-sms-negative.png",
         alt: "Icone SMS",
         subItems: [
+            {label: "Enviar SMS", id: "envioSMS", link: "/sms/enviorapido"},
             {label: "Monitor de envios", id: "envioSMS", link: "/sms"},
             {label: "Centro de Custo", id: "centroCusto", link: "/sms/centrocusto"},
-            {label: "Respostas", id: "respostas", link: "/sms/respostas"},
-            {label: "Relatório", id: "relatorio", link: "/sms"}
+            {label: "Respostas", id: "respostas", link: "/sms/respostas"}
+            //{label: "Relatório", id: "relatorio", link: "/sms"}
         ]
     },
     VENDAMAIS: {

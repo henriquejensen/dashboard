@@ -45,7 +45,7 @@ const getInitialState = {
     message: "",
     response: [],
     tabActive: "",
-    lastQueries: [],
+    lastQueries: {},
     type: ""
 }
 
@@ -168,16 +168,21 @@ export default function(state=getInitialState, action) {
                 type: state.type
             }
         }
-        case GET_CREDITO_LAST_QUERIES:
+        case GET_CREDITO_LAST_QUERIES: {
+            // tipo > { COMPLETA, INTERMEDIARIA ...}
+            let tipoConsulta = action.payload.parameters.tipo
+            let responseServer = action.payload.response.creditoUltimasConsultas
+
             return {
                 loading: false,
                 status: "lastQueries",
                 message: "",
                 response: state.response,
                 tabActive: state.tabActive,
-                lastQueries: lastQueries.credito,
+                lastQueries: {...state.lastQueries, [tipoConsulta]: responseServer},
                 type: state.type
             }
+        }
 
         case LOADING_CREDITO:
             return {
