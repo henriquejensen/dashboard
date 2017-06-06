@@ -5,13 +5,14 @@ import { bindActionCreators } from 'redux';
 import { Button, Col, Form } from "react-bootstrap";
 
 // Actions
-import { getCampanhasSMS } from "../../actions/actionsSMS";
+import { getCampanhasSMS, loadingSMS } from "../../actions/actionsSMS";
 
 // Components
 import MonitorEnviosView from "./MonitorEnviosView"
 import PanelGroup from "../../components/panel/PanelGroup"
 import Panel from "../../components/panel/Panel"
 import Table from "../../components/table/Table"
+import { LoadingScreen } from "../../components/utils/ElementsAtScreen";
 import { FieldGroup } from "../../components/forms/CommonForms"
 
 // Constants
@@ -23,17 +24,14 @@ class MonitorEnvios extends Component {
       super(props);
 
       this.state = {
-        campanhasSMS: this.props.campanhasSMS,
         showBuscaAvancada: false
       }
     }
 
-    componentWillMount() {
-      this.props.getCampanhasSMS();
-    }
-
     componentDidMount() {
       document.title = COMPANY_PRODUCT_SMS + " > " + COMPANY_NAME_SHORT;
+      this.props.loadingSMS()
+      this.props.getCampanhasSMS()
     }
 
     onClickBuscaAvancada = (evt) => {
@@ -116,23 +114,26 @@ class MonitorEnvios extends Component {
 
     render() {
       return (
-      <section>
-        {this.renderForm()}
+        <section>
+          {this.renderForm()}
 
-        <div style={{marginBottom:15}} />
+          {this.props.loading ? <LoadingScreen /> : ""}
 
-        <PanelGroup>
-          {this.props.campanhas.length > 0 ? 
-            this.props.campanhas.map((campanha,index) => {
-              return (
-                <MonitorEnviosView
-                  campanha={campanha}
-                  key={index} />
-              )
-            })
-          : ""}
-        </PanelGroup>
-    </section>)
+          <div style={{marginBottom:15}} />
+
+          <PanelGroup>
+            {this.props.campanhas.length > 0 ? 
+              this.props.campanhas.map((campanha,index) => {
+                return (
+                  <MonitorEnviosView
+                    campanha={campanha}
+                    key={index} />
+                )
+              })
+            : ""}
+          </PanelGroup>
+        </section>
+      )
     }
 }
 
@@ -140,12 +141,16 @@ class MonitorEnvios extends Component {
 function mapStateToProps(state) {
   console.log("ACTIONS", state)
   return {
-    campanhas: state.sms.response
+    campanhas: state.sms.response,
+    loading: state.sms.loading
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getCampanhasSMS }, dispatch)
+  return bindActionCreators({
+      getCampanhasSMS,
+      loadingSMS
+  }, dispatch)
 }
 
 

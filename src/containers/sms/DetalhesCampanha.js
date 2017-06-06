@@ -11,8 +11,24 @@ import CardWithTable from "../../components/card/CardWithTable"
 import {getDetalhesCampanha} from "../../actions/actionsSMS"
 
 class DetalhesCampanha extends Component {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        showBuscaAvancada: false
+      }
+    }
+
     componentWillMount() {
         this.props.getDetalhesCampanha(this.props.id)
+    }
+
+    onClickBuscaAvancada = (evt) => {
+      evt.preventDefault()
+
+      this.setState({
+        showBuscaAvancada: !this.state.showBuscaAvancada
+      })
     }
 
     render() {

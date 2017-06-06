@@ -2,6 +2,7 @@ import * as sms from "../constants/constantsSMS"
 import { SUCCESS } from "../constants/utils"
 
 import campanhasSMS from "./data/sms/campanhas.json"
+import respostas from "./data/sms/respostas.json"
 import campanha from "./data/sms/campanhaDetalhes.json"
 
 const initialState = {
@@ -46,7 +47,7 @@ export default function(state = initialState, action) {
             }
         }
 
-        case sms.GET_CENTRO_CUSTO_SMS:
+        case sms.GET_CENTRO_CUSTO_SMS: {
             return {
                 status: "",
                 message: "",
@@ -54,15 +55,17 @@ export default function(state = initialState, action) {
                 loading: false,
                 campanhaDetalhes: state.campanhaDetalhes
             }
+        }
 
-        case sms.GET_RESPOSTAS_SMS:
+        case sms.GET_RESPOSTAS_SMS: {
             return {
                 status: "",
                 message: "",
-                response: state.response,
+                response: respostas.respostas,
                 loading: false,
                 campanhaDetalhes: state.campanhaDetalhes
             }
+        }
 
         case sms.SMS_LOADING: {
             return {
