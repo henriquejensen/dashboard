@@ -6,7 +6,6 @@ export function closeSMSMessage() {
 	}
 }
 
-
 export function getCampanhasSMS() {
 	return {
 		type: sms.GET_CAMPANHAS_SMS,
@@ -20,6 +19,14 @@ export function getCentroCustoSMS() {
 		payload: ""
 	}
 }
+
+export function getDetalhesCampanha(idCampanha) {
+	return {
+		type: sms.GET_DETALHES_CAMPANHA,
+		payload: idCampanha
+	}
+}
+
 
 export function getRespostasSMS() {
 	return {

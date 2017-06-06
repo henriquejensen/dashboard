@@ -8,12 +8,12 @@
 }
 
 .imgSearching > img {
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
     position: fixed;
     z-index: 2;
-    left: 700px;
-    top: 250px;
+    left: 50%;
+    top: 50%;
 }
 
 @media(max-width: 768px) {

@@ -2,20 +2,20 @@ import React, {Component} from "react";
 import Notification from "react-notification-system";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { Button, Col, Form, DropdownButton, MenuItem, ProgressBar } from "react-bootstrap";
+import { Button, Col, Form } from "react-bootstrap";
 
+// Actions
 import { getCampanhasSMS } from "../../actions/actionsSMS";
 
-import SMSRapido from "./SMSRapido";
+// Components
+import MonitorEnviosView from "./MonitorEnviosView"
+import PanelGroup from "../../components/panel/PanelGroup"
+import Panel from "../../components/panel/Panel"
+import Table from "../../components/table/Table"
+import { FieldGroup } from "../../components/forms/CommonForms"
 
+// Constants
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_SMS } from "../../constants/constantsCompany";
-
-import { FieldGroup } from "../../components/forms/CommonForms";
-import PanelGroup from "../../components/panel/PanelGroup";
-import Panel from "../../components/panel/Panel";
-import Table from "../../components/table/Table";
-import Modal from "../../components/Modal";
-
 import { MESSAGE_SUCCESS_SMS, NENHUM_REGISTRO, SUCCESS } from "../../constants/utils";
 
 class MonitorEnvios extends Component {
@@ -24,26 +24,16 @@ class MonitorEnvios extends Component {
 
       this.state = {
         campanhasSMS: this.props.campanhasSMS,
-        IsModalOpen: false,
         showBuscaAvancada: false
       }
-
-      this._notificationSystem = null;
     }
 
-    _addNotification(message) {
-        if (this._notificationSystem) {
-                this._notificationSystem.addNotification({
-                message: message,
-                level: SUCCESS.toLocaleLowerCase()
-            });
-        }
+    componentWillMount() {
+      this.props.getCampanhasSMS();
     }
 
-    closeModal = () => {
-        this.setState({
-            IsModalOpen: false
-        })
+    componentDidMount() {
+      document.title = COMPANY_PRODUCT_SMS + " > " + COMPANY_NAME_SHORT;
     }
 
     onClickBuscaAvancada = (evt) => {
@@ -84,7 +74,15 @@ class MonitorEnvios extends Component {
                           name="dataFim" />
                     </Col>
 
-                    <Col md={5}>
+                    <Col md={2}>
+                        <FieldGroup
+                          id="idCampanha"
+                          label="Id"
+                          type="text"
+                          name="id" />
+                    </Col>
+
+                    <Col md={4}>
                         <FieldGroup
                           id="smsCliente"
                           label="Cliente"
@@ -92,7 +90,7 @@ class MonitorEnvios extends Component {
                           name="cliente" />
                     </Col>
 
-                    <Col md={5}>
+                    <Col md={4}>
                         <FieldGroup
                           id="smsUsuario"
                           label="Usuário"
@@ -116,26 +114,6 @@ class MonitorEnvios extends Component {
         )
     }
 
-    componentWillMount() {
-      this.props.getCampanhasSMS();
-    }
-
-    componentDidMount() {
-      document.title = COMPANY_PRODUCT_SMS + " > " + COMPANY_NAME_SHORT;
-    }
-
-    openModal = (text) => {
-      this.setState({
-        modalTitle: text,
-        IsModalOpen: true
-      })
-    }
-
-    sendSMS = () => {
-        this.closeModal();
-        this._addNotification(MESSAGE_SUCCESS_SMS);
-    }
-
     render() {
       return (
       <section>
@@ -147,63 +125,20 @@ class MonitorEnvios extends Component {
           {this.props.campanhas.length > 0 ? 
             this.props.campanhas.map((campanha,index) => {
               return (
-                <Panel title={"Ticket: "+campanha.id} key={index} >
-                  <Col md={4}>
-                    <strong>Campanha: </strong>{campanha.campanha}
-                  </Col>
-                  <Col md={4}>
-                    <strong>Cadastro: </strong>{campanha.cadastro}
-                  </Col>
-                  <Col md={4}>
-                    <strong>Centro de Custo: </strong>{campanha.centroCusto}
-                  </Col>
-
-                  <Col md={4}>
-                    <strong>Cliente: </strong>{campanha.cliente}
-                  </Col>
-                  <Col md={4}>
-                    <strong>Grupo: </strong>{campanha.grupo}
-                  </Col>
-                  <Col md={4}>
-                    <strong>Usuário: </strong>{campanha.usuario}
-                  </Col>
-
-                  <Col md={12}>
-                    <strong>Rota: </strong>{campanha.rota}
-                  </Col>
-
-                  <Col md={6}>
-                    <ProgressBar now={campanha.status} label={`${campanha.status}%`} active bsStyle={campanha.status == 100 ? "success" : "warning"} />
-                  </Col>
-                </Panel>
+                <MonitorEnviosView
+                  campanha={campanha}
+                  key={index} />
               )
             })
-          :
-                <Panel title="Ticket">
-                  <Col md={12} className="text-center">{NENHUM_REGISTRO}</Col>
-                </Panel>}
+          : ""}
         </PanelGroup>
-
-        <Modal
-            IsModalOpen={this.state.IsModalOpen}
-            closeModal={this.closeModal}
-            title={this.state.modalTitle}
-        >
-
-          <SMSRapido
-            cancel={this.closeModal}
-            sendSMS={this.sendSMS} />
-          
-        </Modal>
-
-        <Notification ref={n => this._notificationSystem = n} />
-
     </section>)
     }
 }
 
 
 function mapStateToProps(state) {
+  console.log("ACTIONS", state)
   return {
     campanhas: state.sms.response
   }

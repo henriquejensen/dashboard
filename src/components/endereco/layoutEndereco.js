@@ -14,8 +14,7 @@ const tooltipConsultarMap = "tooltipConsultarMap";
 export default class Enderecos extends Component {
   state = {
     mapa: false,
-    idCep: "",
-    IsModalOpen: false
+    idCep: ""
   }
 
   fecharMapa() {

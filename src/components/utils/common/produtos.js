@@ -125,7 +125,7 @@ export const todosProdutos = {
         subItems: [
             {label: "Enviar SMS", id: "envioSMS", link: "/sms/enviorapido"},
             {label: "Monitor de envios", id: "envioSMS", link: "/sms"},
-            {label: "Centro de Custo", id: "centroCusto", link: "/sms/centrocusto"},
+            //{label: "Centro de Custo", id: "centroCusto", link: "/sms/centrocusto"},
             {label: "Respostas", id: "respostas", link: "/sms/respostas"}
             //{label: "Relatório", id: "relatorio", link: "/sms"}
         ]

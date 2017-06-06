@@ -7,7 +7,7 @@ import { NENHUM_REGISTRO } from "../../constants/utils";
 const MyButton = (props) => {
     let tooltip = props.tooltip ? props.tooltip : "";
     let labelButton = props.label ? props.label : "";
-    let params = props.params;
+    let params = props.params; // Array com os parametros
     let myButtonClass = props.myButtonClass ? props.myButtonClass : "mapa-button";
     let myButtonStyle = props.myButtonStyle ? props.myButtonStyle : "info";
     let myButtonText = props.myButtonText ? props.myButtonText : <i className='fa fa-search'/>;
