@@ -38,7 +38,7 @@ export default (
     <Route onEnter={requireAuth} component={App}>
       <Route name="Localize" path="/" component={Localize}	/>
 
-      <Route name="Localize" path="/localize" component={Localize} />
+      <Route name="Localize" path="localize" component={Localize} />
 
       <Route name="Crédito" path="credito" component={Credito} />
 

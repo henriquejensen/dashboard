@@ -33,6 +33,7 @@ export const ICON_CREDITOMIX_NEGATIVE = "https://s3-us-west-2.amazonaws.com/fron
 
 // Foco Fiscal
 export const COMPANY_PRODUCT_FOCOFISCAL = "Foco Fiscal"
+export const COMPANY_PRODUCT_FOCOFISCAL_LABEL = "FOCOFISCAL"
 export const LOGO_FOCOFISCAL = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-focofiscal.png"
 export const ICON_FOCOFISCAL = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-focofiscal.png"
 export const ICON_FOCOFISCAL_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-focofiscal-negative.png"

@@ -47,7 +47,7 @@ export const todosProdutos = {
         subItems: [
             {label: "CPF", id: "cpf"},
             {label: "CNPJ", id: "cnpj"},
-            {label: "CHEQUE", id: "cheque"},
+            //{label: "CHEQUE", id: "cheque"},
         ],
         options: {
             /*cheque: [
@@ -130,7 +130,7 @@ export const todosProdutos = {
             //{label: "Relatório", id: "relatorio", link: "/sms"}
         ]
     },
-    VENDAMAIS: {
+    /*VENDAMAIS: {
         label: "Venda+",
         id: "vendamais",
         color: "#2196F3",
@@ -140,7 +140,7 @@ export const todosProdutos = {
         imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-vendamais-negative.png",
         alt: "Icone Venda+",
         subItems: []
-    },
+    },*/
     FOCOFISCAL: {
         label: "Foco Fiscal",
         id: "focofiscal",
@@ -151,11 +151,11 @@ export const todosProdutos = {
         imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-focofiscal-negative.png",
         alt: "Icone Foco Fiscal",
         subItems: [
-            {label: "Receita PF", id: "pf", link: "/focofiscal/receitaPf"},
-            {label: "Receita PJ", id: "pj", link: "/focofiscal/receitaPj"},
-            {label: "Receita PJ Sintegra", id: "sintegra", link: "/focofiscal/receitaSintegra"},
-            {label: "Sintegra Unificada", id: "unificada", link: "/focofiscal/sintegraUnificada"},
-            {label: "Simples Nacional", id: "simples", link: "/focofiscal/simplesNacional"}
+            {label: "Receita PF", id: "pf"},
+            {label: "Receita PJ", id: "pj"},
+            {label: "Receita PJ Sintegra", id: "sintegra"},
+            {label: "Sintegra Unificada", id: "unificada"},
+            {label: "Simples Nacional", id: "simples"}
             ]
     },
     VEICULOS: {

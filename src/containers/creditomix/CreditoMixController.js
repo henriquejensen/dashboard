@@ -130,7 +130,7 @@ class CreditoMix extends Component {
         let type = this.props.type.toLowerCase()
         let request = {}
         
-        produtoInformacoes.options.cheque.map(cheque => request[cheque.id] = null) // seta todos os parametros de cheque
+        //produtoInformacoes.options.cheque.map(cheque => request[cheque.id] = null) // seta todos os parametros de cheque
         this.state.options[type].map(option => request[option.name] = option.checked) // seta todos os parametros de de options
         request[type] = this.state.documento.replace(/[^0-9]/g,"") // seta o documento para o objeto
         this.state.cepConsumidor ? request["cepConsumidor"] = this.state.cepConsumidor.replace(/[^0-9]/g,"") : "" // seta o cep para o objeto
@@ -258,17 +258,30 @@ class CreditoMix extends Component {
 
 				<div style={{marginBottom:15}} />
 
-                {values.length > 0 ?
-					<Tabs id="tab-credito"
+                {values.length === 0 ?
+					<span>
+						<LocalizeDescription />
+						<div style={{marginBottom:15}} />
+                        <UltimasConsultas
+                            consultas={this.props.lastQueries[type]}
+                            type={type}
+                            search={this.researchUltimasConsultas}
+                        />
+					</span>
+                :
+					<Tabs
+                        id="tab-credito"
 						activeKey={tabActive}
 						onSelect={(key) => {changeTab(key)}}
-						animation={false} >
+						animation={false}
+                    >
 
                         <PrintScreen />
 
 						{values.map((dataKey) =>{
 							return (
-								<Tab eventKey={data[dataKey].label} 
+								<Tab 
+                                    eventKey={data[dataKey].label} 
 									title={
 										<Titletab
 											icon={data[dataKey].icon}
@@ -280,21 +293,13 @@ class CreditoMix extends Component {
 								>
 									{data[dataKey].produto == COMPANY_PRODUCT_CREDITOMIX_LABEL ?
 										<CreditoMixView
-                                            data={data[dataKey]} />
+                                            data={data[dataKey]}
+                                        />
 									: ""}
 								</Tab>
 							)
 						})}
 					</Tabs>
-                :  
-					<span>
-						<LocalizeDescription />
-						<div style={{marginBottom:15}} />
-                        <UltimasConsultas
-                            consultas={this.props.lastQueries[this.props.type]}
-                            type={this.props.type}
-                            search={this.researchUltimasConsultas} />
-					</span>
                 }
 
             </div>
@@ -303,7 +308,7 @@ class CreditoMix extends Component {
 }
 
 function mapStateToProps(state) {
-    //console.log("STATE", state)
+    console.log("STATE", state)
     return {
         data: state.creditomix.response,
         type: state.creditomix.type,

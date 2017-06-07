@@ -1,46 +1,45 @@
-import {
-    CLOSE_FOCOFISCAL_MODEL,
-    CLOSE_MESSAGE_ERROR_FOCOFISCAL,
-    GET_FOCOFISCAL_LAST_QUERIES,
-    LOADING_FOCOFISCAL,
-    SEE_FOCOFISCAL_MODEL
-} from "../constants/constantsFocoFiscal";
+import * as focofiscal from "../constants/constantsFocoFiscal";
 
-import { 
+import {
     CHANGE_FOCOFISCAL_TYPE,
-    CHANGE_TAB,
-    CLOSE_TAB,
     ERR_CONNECTION_REFUSED,
     ERROR_503,
     REQUEST_ERROR
 } from "../constants/utils";
 
-import { ICON_FOCOFISCAL } from "../constants/constantsCompany";
+import { COMPANY_PRODUCT_FOCOFISCAL_LABEL, ICON_FOCOFISCAL } from "../constants/constantsCompany";
 
-import model from "./data/jsonPadrao.json";
-import lastQueries from "./data/lastQueries.json";
+import focoFiscalPF from "./data/focofiscal/responsePF.json"
+import focoFiscalPJ from "./data/focofiscal/responsePJ.json"
+import lastQueries from "./data/lastQueries.json"
 
 const getInitialState = {
     loading: false,
     status: "",
     message: "",
-    response: "",
+    response: {},
     tabActive: "",
     lastQueries: [],
     type: ""
 }
 
 export default function(state=getInitialState, action) {
-    let response = {
-        data: "",
-        label: "",
-        tipo: "",
-        icon: "",
-        produto: ""
-    }
-
     switch(action.type) {
-        case CHANGE_FOCOFISCAL_TYPE:
+        case focofiscal.CHANGE_TAB_FOCOFISCAL: {
+            // verifica se a tab passada existe no array, se nao, entao busca a primeira tab e a retorna
+            let newTabActive = state.response[action.payload] ? action.payload : state.response[Object.keys(state.response)[0]] ? state.response[Object.keys(state.response)[0]].label : ""
+            return {
+                status: "changeTab",
+                message: "",
+                loading: false,
+                response: state.response,
+                tabActive: newTabActive,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+        }
+
+        case focofiscal.CHANGE_FOCOFISCAL_TYPE: {
             return {
                 status: "changeType",
                 message: "",
@@ -50,8 +49,9 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: action.payload.toUpperCase()
             }
+        }
 
-        case CLOSE_MESSAGE_ERROR_FOCOFISCAL:
+        case focofiscal.CLOSE_MESSAGE_ERROR_FOCOFISCAL: {
             return {
                 status: "",
                 message: "",
@@ -61,30 +61,43 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: state.type
             }
+        }
 
-        case CLOSE_FOCOFISCAL_MODEL:
+        case focofiscal.CLOSE_TAB_FOCOFISCAL: {
+            delete state.response[action.payload]
             return {
                 loading: false,
                 status: "closeModel",
                 message: "",
-                response: "",
+                response: { ...state.response },
                 tabActive: state.tabActive,
                 lastQueries: state.lastQueries,
                 type: state.type
             }
+        }
 
-        case ERR_CONNECTION_REFUSED:
+        case focofiscal.FETCH_FOCOFISCAL: {
+            let documento = action.payload.response.cadastro.cpf ? action.payload.response.cadastro.cpf : action.payload.response.cadastro.cnpj
+            documento = documento.toString()
+            let newResponse = action.payload.response
+
+            newResponse['label'] = documento;
+            newResponse['tipo'] = action.payload.parameters.tipo;
+            newResponse['icon'] = ICON_FOCOFISCAL;
+            newResponse['produto'] = COMPANY_PRODUCT_FOCOFISCAL_LABEL;
+
             return {
-                status: ERR_CONNECTION_REFUSED,
-                message: ERROR_503,
                 loading: false,
-                response: state.response,
-                tabActive: state.tabActive,
+                status: "",
+                message: "",
+                response: {...state.response, [documento]:newResponse },
+                tabActive: documento,
                 lastQueries: state.lastQueries,
                 type: state.type
             }
+        }
 
-        case GET_FOCOFISCAL_LAST_QUERIES:
+        case focofiscal.GET_FOCOFISCAL_LAST_QUERIES: {
             return {
                 loading: false,
                 status: "lastQueries",
@@ -94,8 +107,9 @@ export default function(state=getInitialState, action) {
                 lastQueries: lastQueries.focofiscal,
                 type: state.type
             }
+        }
 
-        case LOADING_FOCOFISCAL:
+        case focofiscal.LOADING_FOCOFISCAL: {
             return {
                 loading: true,
                 status: "loading",
@@ -105,23 +119,57 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: state.type
             }
+        }
 
-        case SEE_FOCOFISCAL_MODEL:
-            response.data = model;
-            response.label = model.cadastroPf.cpf;
-            response.tipo = "CPF";
-            response.icon = ICON_FOCOFISCAL;
-            response.produto = "focofiscal";
+        case focofiscal.SEE_FOCOFISCAL_MODEL: {
+            let responsePF = focoFiscalPF
+            responsePF['label'] = "modelPF"
+            responsePF['tipo'] = "CPF"
+            responsePF['icon'] = ICON_FOCOFISCAL
+            responsePF['produto'] = COMPANY_PRODUCT_FOCOFISCAL_LABEL
+
+            let responsePJ = focoFiscalPJ
+            responsePJ['label'] = "modelPJ"
+            responsePJ['tipo'] = "CNPJ"
+            responsePJ['icon'] = ICON_FOCOFISCAL
+            responsePJ['produto'] = COMPANY_PRODUCT_FOCOFISCAL_LABEL
+
             return {
                 loading: false,
-                status: "model",
+                status: "",
                 message: "",
-                response: [response],
-                tabActive: model.cadastroPf.cpf,
+                response: {...state.response, ["modelPF"]:responsePF, ["modelPJ"]:responsePJ },
+                tabActive: "modelPF",
                 lastQueries: state.lastQueries,
                 type: state.type
             }
-    }
+        }
 
-    return state;
+        case REQUEST_ERROR: {
+            return {
+                loading: false,
+                status: REQUEST_ERROR,
+                message: action.payload.mensagem,
+                response: state.response,
+                tabActive: state.tabActive,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+        }
+
+        case ERR_CONNECTION_REFUSED: {
+            return {
+                status: ERR_CONNECTION_REFUSED,
+                message: ERROR_503,
+                loading: false,
+                response: state.response,
+                tabActive: state.tabActive,
+                lastQueries: state.lastQueries,
+                type: state.type
+            }
+        }
+
+        default:
+            return state
+    }
 }

@@ -3,15 +3,17 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Alert, Col, Form, FormGroup, Tabs, Tab, } from "react-bootstrap";
 
+//Components
 import VeiculosView from "./VeiculosView";
 import MyForm from "../../components/forms/Form";
-import MyButton from "../../components/button/MyButton";
 import UltimasConsultas from "../../components/UltimasConsultas";
 import Titletab from "../../components/utils/Titletab";
 import Panel from "../../components/panel/Panel";
 import { VeiculoslDescription } from "../../components/ProductDescription";
 import { FieldGroup, MyCheckboxGroup } from "../../components/forms/CommonForms";
+import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
 
+//Actions
 import {
 		changeTab,
 		closeMessageErrorVeiculos,
@@ -23,167 +25,172 @@ import {
 } from "../../actions/actionsVeiculos";
 import { changeProductType } from "../../actions/actionsCommon";
 
+//Constants
 import { LOADING_GIF, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE, TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE } from "../../constants/utils";
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_VEICULOS, COMPANY_PRODUCT_VEICULOS_LABEL, LOGO_VEICULOS } from "../../constants/constantsCompany";
 import { AGREGADOS_CODE, BDV_CODE, DECODIFICADOR_CODE, LOCALIZACAO_CODE, PROPRIETARIOS_CODE, LEILAO_CODE, SINISTRO_CODE } from "../../constants/constantsVeiculos";
-import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
+
 
 import estados from "../../components/utils/common/estados.json";
 import { todosProdutos } from "../../components/utils/common/produtos.js";
 
-const produtoInformacoes = todosProdutos[COMPANY_PRODUCT_VEICULOS_LABEL];
-const quantidadeCheckboxPorCol = 5;
-
 class VeiculosController extends Component {
-	state = {
-		input: {
-			cpf: undefined,
-			cnpj: undefined,
-			numeroMotor: undefined,
-			numeroCrlv: undefined,
-			uf: undefined,
-			placa: undefined,
-			chassi: undefined,
-			motor: false,
-			localizaVeiculo: false,
-			crlv: false,
-			binFederal: false,
-			binEstadual: false,
-			gravame: false,
-			decodificadorChassi: false,
-			precificador: false,
-			binRF: false,
-			binRenajud: false,
-			proprietariosAnteriores: false,
-			agregados: false,
-			localizaPlaca: false,
-			leilao: false,
-			indicioSinistro: false,
-			leilao2: false,
-			pt: false,
-			renavam: false,
-			decodificador2: false,
-			decodificadorUnion: false
-		},
-		showMessageErrorWhenNotSelectedAnyCheckBox: false,
-		showCheckboxes: true,
-		optionsSelected: [],
-		options:[
-			{
-				inline: false,
-				checked: false,
-				name: "binEstadual",
-				text: "BIN ESTADUAL"
+	constructor(props) {
+		super(props)
+
+		this.produtoInformacoes = todosProdutos[COMPANY_PRODUCT_VEICULOS_LABEL]
+		this.quantidadeCheckboxPorCol = 5; //Quantidade de checkbox que terao em cada col do bootstrap
+
+		this.state = {
+			input: {
+				cpf: undefined,
+				cnpj: undefined,
+				numeroMotor: undefined,
+				numeroCrlv: undefined,
+				uf: undefined,
+				placa: undefined,
+				chassi: undefined,
+				motor: false,
+				localizaVeiculo: false,
+				crlv: false,
+				binFederal: false,
+				binEstadual: false,
+				gravame: false,
+				decodificadorChassi: false,
+				precificador: false,
+				binRF: false,
+				binRenajud: false,
+				proprietariosAnteriores: false,
+				agregados: false,
+				localizaPlaca: false,
+				leilao: false,
+				indicioSinistro: false,
+				leilao2: false,
+				pt: false,
+				renavam: false,
+				decodificador2: false,
+				decodificadorUnion: false
 			},
-			{
-				inline: false,
-				checked: false,
-				name: "binFederal",
-				text: "BIN FEDERAL"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "binRF",
-				text: "BIN FEDERAL + ROUBO E FURTO"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "binRenajud",
-				text: "BIN JUDICIAL RENAJUD"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "decodificadorUnion",
-				text: "DECODIFICADOR UNION"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "leilao2",
-				text: "LEILÃO 2"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "leilao",
-				text: "VEICULOS OFERTADOS A LEILÃO"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "pt",
-				text: "SINISTRO IRRECUPERÁVEL PT"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "gravame",
-				text: "GRAVAME - DETALHES DO FINANCIAMENTO"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "decodificadorChassi",
-				text: "DECODIFICADOR DE CHASSI"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "agregados",
-				text: "AGREGADO VEICULAR"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "proprietariosAnteriores",
-				text: "HISTÓRICO DE PROPRIETÁRIOS ANTERIORES"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "localizaVeiculo",
-				text: "LOCALIZADOR DE CHASSI E MOTOR"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "crlv",
-				text: "CONSULTA CRLV - DOCUMENTO"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "localizaPlaca",
-				text: "LOCALIZADOR DE PLACA"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "precificador",
-				text: "PRECIFICADOR"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "indicioSinistro",
-				text: "INDICIO DE SINISTRO"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "motor",
-				text: "LOCALIZADOR DE MOTOR"
-			},
-			{
-				inline: false,
-				checked: false,
-				name: "decodificador2",
-				text: "DECODIFICADOR DE CHASSI - FIPE E MOLICAR"
-			}
-		]
+			showMessageErrorWhenNotSelectedAnyCheckBox: false,
+			showCheckboxes: true,
+			optionsSelected: [],
+			options:[
+				{
+					inline: false,
+					checked: false,
+					name: "binEstadual",
+					text: "BIN ESTADUAL"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "binFederal",
+					text: "BIN FEDERAL"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "binRF",
+					text: "BIN FEDERAL + ROUBO E FURTO"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "binRenajud",
+					text: "BIN JUDICIAL RENAJUD"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "decodificadorUnion",
+					text: "DECODIFICADOR UNION"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "leilao2",
+					text: "LEILÃO 2"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "leilao",
+					text: "VEICULOS OFERTADOS A LEILÃO"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "pt",
+					text: "SINISTRO IRRECUPERÁVEL PT"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "gravame",
+					text: "GRAVAME - DETALHES DO FINANCIAMENTO"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "decodificadorChassi",
+					text: "DECODIFICADOR DE CHASSI"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "agregados",
+					text: "AGREGADO VEICULAR"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "proprietariosAnteriores",
+					text: "HISTÓRICO DE PROPRIETÁRIOS ANTERIORES"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "localizaVeiculo",
+					text: "LOCALIZADOR DE CHASSI E MOTOR"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "crlv",
+					text: "CONSULTA CRLV - DOCUMENTO"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "localizaPlaca",
+					text: "LOCALIZADOR DE PLACA"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "precificador",
+					text: "PRECIFICADOR"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "indicioSinistro",
+					text: "INDICIO DE SINISTRO"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "motor",
+					text: "LOCALIZADOR DE MOTOR"
+				},
+				{
+					inline: false,
+					checked: false,
+					name: "decodificador2",
+					text: "DECODIFICADOR DE CHASSI - FIPE E MOLICAR"
+				}
+			]
+		}
 	}
 
 	componentDidMount() {
@@ -196,7 +203,7 @@ class VeiculosController extends Component {
 		let input = Object.assign({}, this.state.input);
 		let pos = 0;
 
-		for(let i=index; i<options.length; i+=quantidadeCheckboxPorCol) {
+		for(let i=index; i<options.length; i+=this.quantidadeCheckboxPorCol) {
 			if(options[i].name == name) {
 				pos = i;
 				i = options.length;
@@ -329,10 +336,9 @@ class VeiculosController extends Component {
 				<Col md={12}>
 					<MyForm
 						logo = {LOGO_VEICULOS}
-						showLogo = {false}
 						onformSubmit = {this.onFormSubmit}
 						closeMessageError = {this.props.closeMessageErrorVeiculos}
-						options={produtoInformacoes.subItems}
+						options={this.produtoInformacoes.subItems}
 						onChange={this.onChangeType}
 						type={this.props.type}
 						seeModelo = {this.seeModelSearch}
@@ -430,7 +436,8 @@ class VeiculosController extends Component {
                             type={this.props.type} />
 					</span>
                 :
-						<Tabs id="uncontrolled-tab-example"
+						<Tabs
+							id="uncontrolled-tab-example"
 							activeKey={this.props.tabActive}
 							onSelect={(key) => {this.props.changeTab(key)}}
 						>
@@ -460,7 +467,6 @@ class VeiculosController extends Component {
 								)
 							})}
 						</Tabs>
-					
 				}
 				
 			</div>

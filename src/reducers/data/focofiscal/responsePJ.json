@@ -1,0 +1,72 @@
+{
+	"cabecalho": {
+		"consulta": "string",
+		"dataHora": "string",
+		"entrada": "string",
+		"produto": "string",
+		"protocoloTransacao": "string"
+	},
+	"cadastro": {
+		"numeroInscricaoEstadual": "string",
+		"cnpj": "string",
+		"dataAbertura": "string",
+		"razaoSocial": "string",
+		"nomeFantasia": "string",
+		"enteFederativoResponsavel": "string",
+		"enderecoEletronico": "string",
+		"matrizFilial": "string",
+		"capitalSocial": "string",
+		"porteEmpresa": "string",
+
+		"naturezaJuridica": {
+			"codigo": "string",
+			"descricao": "string"
+		},
+		"cnaePrincipal": {
+			"codigo": "string",
+			"descricao": "string"
+		},
+		"cnaesSecundarias": [
+			{
+				"codigo": "string",
+				"descricao": "string"
+			}
+		]
+	},
+	"endereco": {
+		"logradouro": "string",
+		"numero": "string",
+		"complemento": "string",
+		"bairroDistrito": "string",
+		"municipio": "string",
+		"uf": "string",
+		"cep": "string"
+	},
+	"situacaoReceita": {
+		"situacaoCadastral": "string",
+		"dataSituacaoCadastral": "string",
+		"motivoSituacaoCadastral": "string",
+		"situacaoEspecial": "string",
+		"dataSituacaoEspecial": "string",
+		"dataEmissao": "string"
+	},
+	"situacaoSintegra": {
+		"situacaoContribuinte": "string",
+		"substituicaoTributaria": "string"
+	},
+	"socios": [
+		{
+			"nome": "string",
+			"qualificacaoCodigo": "string",
+			"qualificacaoDescricao": "string"
+		}
+	],
+	"telefones": [
+		{
+			"telefone": "string"
+		}
+	],
+	"erro": {
+		"mensagemErro": "string"
+	}
+}

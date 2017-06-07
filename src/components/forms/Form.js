@@ -9,8 +9,7 @@ import {
     REQUEST_ERROR,
     TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE,
     TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE,
-    TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE,
-    RECHECK_MESSAGE
+    TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE
 } from "../../constants/utils";
 import { COMPANY_PRODUCT_LOCALIZE_URL_SEE_DETAILS } from "../../constants/constantsCompany";
 
@@ -87,14 +86,6 @@ export default class Form extends Component {
                         </Alert>
                     </Col>
                 : ""}
-
-				{this.props.showLogo ?
-                    <Col md={12} sm={12}>
-                        <Alert bsStyle="warning" className="text-center">
-                            {RECHECK_MESSAGE}
-                        </Alert>
-                    </Col>
-				: ""}
             </Row>
         )
     }

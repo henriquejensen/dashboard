@@ -37,7 +37,7 @@ export default class Enderecos extends Component {
         <Table fields={fields}>
           {enderecos.length > 0 ?
               enderecos.map((end,i) => {
-                  let cep = end.cep.toString();
+                  let cep = end.cep ? end.cep.toString() : end.cep;
                   return (
                     <tbody key={i}>
                       <tr>

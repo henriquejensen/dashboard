@@ -1,0 +1,37 @@
+
+{
+  "cabecalho": {
+    "produto": "string",
+    "entrada": "string",
+    "protocoloTransacao": "string",
+    "dataHora": "string",
+    "consulta": "string"
+  },
+  "cadastro": {
+    "nome": "string",
+    "cpf": "string",
+    "dataNascimento": "string",
+    "anoObito": "string",
+    "mensagemObito": "string"
+  },
+  "situacaoReceita": {
+    "codigoComprovante": "string",
+    "dataEmissao": "string",
+    "dataInscricao": "string",
+    "digitoVerificador": "string",
+    "situacao": "string"
+  },
+  "situacaoSintegra": {
+    "situacaoContribuinte": "string",
+    "substituicaoTributaria": "string"
+  },
+  "telefones": [
+		{
+			"telefone": "string"
+		}
+	],
+  "erro": {
+    "mensagemErro": "string"
+  }
+}
+

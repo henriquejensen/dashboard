@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Tabs, Tab } from "react-bootstrap";
+import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col, Tabs, Tab} from "react-bootstrap";
 
+//Actions
 import {
 		changeTab,
 		closeMessageErrorFocoFiscal,
-		closeModel,
 		closeTab,
 		getLastQueries,
 		loadingFocoFiscal,
@@ -20,21 +20,28 @@ import {
 		changeMenu
 } from "../../actions/actionsCommon";
 
+//Components
+
 import FocoFiscalView from "./FocoFiscalView";
 import MyForm from "../../components/forms/Form";
+import Panel from "../../components/panel/Panel";
 import Titletab from "../../components/utils/Titletab";
+import UltimasConsultas from "../../components/UltimasConsultas";
+import { FocoFiscalDescription } from "../../components/ProductDescription";
+import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
 
-import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col} from "react-bootstrap";
-
+//Constants
 import { LOADING_GIF } from "../../constants/utils";
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_FOCOFISCAL, LOGO_FOCOFISCAL } from "../../constants/constantsCompany";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_FOCOFISCAL, COMPANY_PRODUCT_FOCOFISCAL_LABEL, LOGO_FOCOFISCAL } from "../../constants/constantsCompany";
 
 import estados from "../../components/utils/common/estados.json";
-import menu from "../../components/utils/common/menu.json";
+import { todosProdutos } from "../../components/utils/common/produtos.js";
 
 class FocoFiscal extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
+
+		this.produtoInformacoes = todosProdutos[COMPANY_PRODUCT_FOCOFISCAL_LABEL]
 
 		this.state = {
 			focofiscalInput: {
@@ -43,7 +50,6 @@ class FocoFiscal extends Component {
 				estado: ""
 			}
 		}
-
 	}
 
 	componentWillMount() {
@@ -52,15 +58,6 @@ class FocoFiscal extends Component {
 
 	componentDidMount() {
 		document.title = COMPANY_PRODUCT_FOCOFISCAL + " > " + COMPANY_NAME_SHORT;
-	}
-
-	closeTab = (index) => {
-		{/*Fecha as abas, quando sobrar um chama a funcao para fechar tudo (closeModel)*/}
-		if(this.props.datas.length > 1) {
-			this.props.closeTab(index);
-		} else {
-			this.props.closeModel();
-		}
 	}
 
 	onChangeInput = (evt) => {
@@ -72,7 +69,7 @@ class FocoFiscal extends Component {
 	}
 
 	onChangeType = (evt) => {
-		this.props.changeProductType("focofiscal", evt.target.value)
+		this.props.changeProductType(COMPANY_PRODUCT_FOCOFISCAL_LABEL, evt.target.value)
 	}
 
 	onChange = (evt) => {
@@ -86,12 +83,15 @@ class FocoFiscal extends Component {
 
 		this.props.loadingFocoFiscal();
 
-		if(this.props.type == "PF") {
-			this.props.searchByReceitaPF(this.state.focofiscalInput.documento, this.state.focofiscalInput.dataNascimento);
-		} else if(this.props.type == "UNIFICADA") {
-			this.props.searchBySintegraUnificada(this.state.focofiscalInput.documento, this.state.focofiscalInput.estado);
-		} else {
-			this.props.searchByFocoFiscal(this.state.focofiscalInput.documento);
+		switch(this.props.type) {
+			case "PF":
+				this.props.searchByReceitaPF(this.state.focofiscalInput.documento,this.state.focofiscalInput.dataNascimento)
+				break
+			case "UNIFICADA":
+				this.props.searchBySintegraUnificada(this.state.focofiscalInput.documento, this.state.focofiscalInput.estado)
+				break
+			default:
+				this.props.searchByFocoFiscal(this.state.focofiscalInput.documento)
 		}
 		
 		this.setState({
@@ -105,105 +105,129 @@ class FocoFiscal extends Component {
 
 	form = (tipo) => {
 		return (
-			<MyForm
-				logo = {LOGO_FOCOFISCAL}
-				showLogo = {this.props.datas.length == 0 ? true : false}
-				onformSubmit = {this.onFormSubmit}
-				closeMessageError = {this.props.closeMessageErrorFocoFiscal}
-				options={menu.sidebar[6].subItems}
-				onChange={this.onChangeType}
-                type={this.props.type}
-				seeModelo = {this.props.seeModel}
-				status = {this.props.status}
-				message = {this.props.message}
-				lastQueries = {this.props.lastQueries[this.props.type]}
-			>
-				<Col md={tipo == "UNIFICADA" || tipo == "PF" ? 5 : 7}>
-					<input
-						className="form-control"
-						type="text"
-						placeholder={
-							this.props.type == "PF" ?
-								"CPF"
-							: "CNPJ"
-						}
-						value={this.state.focofiscalInput.documento}
-						name="documento"
-						onChange={this.onChangeInput}
-						style={{width:'100%'}}
-						required/>
+			<Panel>
+				<Col md={12}>
+					<MyForm
+						logo = {LOGO_FOCOFISCAL}
+						onformSubmit = {this.onFormSubmit}
+						closeMessageError = {this.props.closeMessageErrorFocoFiscal}
+						options={this.produtoInformacoes.subItems}
+						onChange={this.onChangeType}
+						type={this.props.type}
+						seeModelo = {this.props.seeModel}
+						status = {this.props.status}
+						message = {this.props.message}
+						lastQueries = {this.props.lastQueries[this.props.type]}
+					>
+						<Col md={tipo == "UNIFICADA" || tipo == "PF" ? 5 : 7}>
+							<input
+								className="form-control"
+								type="text"
+								placeholder={
+									this.props.type == "PF" ?
+										"CPF"
+									: "CNPJ"
+								}
+								value={this.state.focofiscalInput.documento}
+								name="documento"
+								onChange={this.onChangeInput}
+								style={{width:'100%'}}
+								required/>
+						</Col>
+
+						{tipo == "UNIFICADA" ?
+							<Col md={2}>
+								<select
+									className="form-control"
+									name="estado"
+									onChange={this.onChangeInput}
+									value={this.state.focofiscalInput.estado}
+									required>
+									<option value="">Selecione UF</option>
+									{estados.estados.map((estado,i) => {
+										return <option value={estado.sigla} key={i}>{estado.sigla}</option>
+									})}
+								</select>
+							</Col>
+						: ""}
+
+						{tipo == "PF" ?
+							<Col md={2}>
+								<input
+									className="form-control"
+									type="date"
+									name="dataNascimento"
+									value={this.state.focofiscalInput.dataNascimento}
+									onChange={this.onChangeInput}
+								/>
+							</Col>
+						: ""}
+						
+					</MyForm>
 				</Col>
-
-				{tipo == "UNIFICADA" ?
-					<Col md={2}>
-						<select
-							className="form-control"
-							name="estado"
-							onChange={this.onChangeInput}
-							value={this.state.focofiscalInput.estado}
-							required>
-							<option value="">Selecione UF</option>
-							{estados.estados.map((estado,i) => {
-								return <option value={estado.sigla} key={i}>{estado.sigla}</option>
-							})}
-						</select>
-					</Col>
-				: ""}
-
-				{tipo == "PF" ?
-					<Col md={2}>
-						<input
-							className="form-control"
-							type="date"
-							name="dataNascimento"
-							value={this.state.focofiscalInput.dataNascimento}
-							onChange={this.onChangeInput}
-						/>
-					</Col>
-				: ""}
-				
-			</MyForm>
+			</Panel>
 		)
 	}
 
 	render() {
+        let type = this.props.type
+        let data = this.props.datas
+        let tabActive = this.props.tabActive
+        let changeTab = this.props.changeTab
+        let loading = this.props.loading
+        let values = Object.keys(data)
 		return (
 			<div>
-				{this.form(this.props.type)}
+				{this.form(type)}
 
-				{this.props.loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
+				{loading ? <LoadingScreen /> : ""}
 
-				{this.props.datas.length > 0 ? 
-					(
-						<Tabs
-							defaultActiveKey={this.props.datas[0].label}
-							animation={false}
-							id="tab-credito"
-						>
-							{this.props.datas.map((data, index) => {
-								return (
-									<Tab eventKey={data.label} 
-										title={
-											<Titletab
-												icon={data.icon}
-												label={data.label}
-												close={() => this.closeTab(index)}
-											/>
-										}
-										key={index}
-									>
-										{data.produto == "focofiscal" ?
-											<FocoFiscalView
-												data={data.data}
-												tipo={data.tipo}
-												index={index}/>
-										: ""}
-									</Tab>
-								)
-							})}
-						</Tabs>
-					)
-				: ""}
+				<div style={{marginBottom:15}} />
+
+				{values.length === 0 ?
+					<span>
+						<FocoFiscalDescription />
+						<div style={{marginBottom:15}} />
+                        <UltimasConsultas
+                            consultas={this.props.lastQueries[type]}
+                            type={type}
+                            search={this.researchUltimasConsultas}
+						/>
+					</span>
+				:				
+					<Tabs
+						id="tab-focofiscal"
+						activeKey={tabActive}
+						onSelect={(key) => {changeTab(key)}}
+						animation={false}
+					>
+
+						<PrintScreen />
+
+						{values.map((dataKey) => {
+							console.log("RENDER", tabActive, dataKey)
+							return (
+								<Tab
+                                    eventKey={data[dataKey].label} 
+									title={
+										<Titletab
+											icon={data[dataKey].icon}
+											label={data[dataKey].label}
+											close={() => this.props.closeTab(dataKey)}
+										/>
+									}
+									key={dataKey}
+								>
+									{data[dataKey].produto == COMPANY_PRODUCT_FOCOFISCAL_LABEL ?
+										<FocoFiscalView
+											data={data[dataKey]}
+										/>
+									: ""}
+								</Tab>
+							)
+						})}
+					</Tabs>
+				}
 			</div>
 		)
 	}
@@ -225,7 +249,6 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		changeProductType,
 		closeMessageErrorFocoFiscal,
-		closeModel,
 		changeTab,
 		closeTab,
 		getLastQueries,

@@ -4,7 +4,6 @@ import {
 		CHANGE_TAB,
 		CLOSE_TAB,
 		ERR_CONNECTION_REFUSED,
-		ERR_CONNECTION_REFUSED_MESSAGE,
         ERROR_503,
 		LAST_QUERIES,
 		LOADING,
@@ -21,7 +20,7 @@ const getInitialState = {
     message: "",
     response: {},
     tabActive: "",
-    lastQueries: {},
+    lastQueries: [],
     type: ""
 }
 
@@ -112,6 +111,25 @@ export default function(state=getInitialState, action) {
             }  
         }
 
+        case constants.SHOW_CREDITOMIX_MODEL: {
+            let newResponse = model
+
+            newResponse['label'] = "model"
+            newResponse['tipo'] = "CPF"
+            newResponse['icon'] = ICON_CREDITOMIX
+            newResponse['produto'] = COMPANY_PRODUCT_CREDITOMIX_LABEL
+
+            return {
+                loading: false,
+                status: "",
+                message: "",
+                response: {...state.response, ["model"]:newResponse },
+                tabActive: "model",
+                lastQueries: state.lastQueries,
+                type: state.type,
+             }
+        }
+
         case REQUEST_ERROR: {
             return {
                 loading: false,
@@ -124,23 +142,16 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case constants.SHOW_CREDITOMIX_MODEL: {
-            let newResponse = model
-
-            newResponse['label'] = "model"
-            newResponse['tipo'] = "CPF"
-            newResponse['icon'] = ICON_CREDITOMIX
-            newResponse['produto'] = COMPANY_PRODUCT_CREDITOMIX_LABEL
-
+        case ERR_CONNECTION_REFUSED: {
             return {
+                status: ERR_CONNECTION_REFUSED,
+                message: ERROR_503,
                 loading: false,
-                status: state.status,
-                message: state.message,
-                response: {...state.response, ["model"]:newResponse },
-                tabActive: "model",
+                response: state.response,
+                tabActive: state.tabActive,
                 lastQueries: state.lastQueries,
-                type: state.type,
-             }
+                type: state.type
+            }
         }
 
         default:
