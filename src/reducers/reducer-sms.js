@@ -26,6 +26,18 @@ export default function(state = initialState, action) {
             }
         }
 
+        case sms.FILTER_RESPONSE_SMS: {
+            let propertyToFilter = Object.keys(action.payload)[0]
+            let parameterToFilter = action.payload[propertyToFilter]
+            return {
+                status: "",
+                message: "",
+                response: state.response.filter(response => response[propertyToFilter] == parameterToFilter),
+                loading: false,
+                campanhaDetalhes: state.campanhaDetalhes
+            }
+        }
+
         case sms.GET_CAMPANHAS_SMS: {
             return {
                 status: "",

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Button, Col, Form } from "react-bootstrap";
 
 // Actions
-import { getCampanhasSMS, loadingSMS } from "../../actions/actionsSMS";
+import { filterResponseSMS, getCampanhasSMS, loadingSMS } from "../../actions/actionsSMS";
 
 // Components
 import MonitorEnviosView from "./MonitorEnviosView"
@@ -34,12 +34,31 @@ class MonitorEnvios extends Component {
       this.props.getCampanhasSMS()
     }
 
-    onClickBuscaAvancada = (evt) => {
-      evt.preventDefault()
-
+    onClickBuscaAvancada = () => {
       this.setState({
         showBuscaAvancada: !this.state.showBuscaAvancada
       })
+    }
+
+    onChange = (evt) => {
+      this.setState({
+        [evt.target.name]: evt.target.value
+      })
+    }
+
+    onFormSubmit = (evt) => {
+      evt.preventDefault()
+
+      let request = {}
+      this.state.id ? request["id"] = this.state.id : "",
+      this.state.campanha ? request["campanha"] = this.state.campanha : "",
+      this.state.dataInicio ? request["dataInicio"] = this.state.dataInicio : "",
+      this.state.dataFim ? request["dataFim"] = this.state.dataFim : "",
+      this.state.cliente ? request["cliente"] = this.state.cliente : "",
+      this.state.usuario ? request["usuario"] = this.state.usuario : "",
+
+      this.props.filterResponseSMS(request)
+      console.log("SUBMIT", request)
     }
 
     renderForm = () => {
@@ -51,7 +70,8 @@ class MonitorEnvios extends Component {
                       id="smsCampanha"
                       label="Campanha"
                       type="text"
-                      name="campanha" />
+                      name="campanha"
+                      onChange={this.onChange} />
                 </Col>
 
                 {this.state.showBuscaAvancada ?
@@ -61,7 +81,8 @@ class MonitorEnvios extends Component {
                           id="smsDataInicio"
                           label="Data Início"
                           type="date"
-                          name="dataInicio" />
+                          name="dataInicio"
+                          onChange={this.onChange} />
                     </Col>
 
                     <Col md={2}>
@@ -69,7 +90,8 @@ class MonitorEnvios extends Component {
                           id="smsDataFim"
                           label="Data Fim"
                           type="date"
-                          name="dataFim" />
+                          name="dataFim"
+                          onChange={this.onChange} />
                     </Col>
 
                     <Col md={2}>
@@ -77,7 +99,8 @@ class MonitorEnvios extends Component {
                           id="idCampanha"
                           label="Id"
                           type="text"
-                          name="id" />
+                          name="id"
+                          onChange={this.onChange} />
                     </Col>
 
                     <Col md={4}>
@@ -85,7 +108,8 @@ class MonitorEnvios extends Component {
                           id="smsCliente"
                           label="Cliente"
                           type="text"
-                          name="cliente" />
+                          name="cliente"
+                          onChange={this.onChange} />
                     </Col>
 
                     <Col md={4}>
@@ -93,7 +117,8 @@ class MonitorEnvios extends Component {
                           id="smsUsuario"
                           label="Usuário"
                           type="text"
-                          name="usuario" />
+                          name="usuario"
+                          onChange={this.onChange} />
                     </Col>
                   </span>
                 : ""}
@@ -104,7 +129,7 @@ class MonitorEnvios extends Component {
                         {!this.state.showBuscaAvancada ? 'Busca avançada' : 'Fechar busca'}
                       </a>
                     </label>
-                    <Button style={{width:"100%"}} bsStyle="info">Buscar</Button>
+                    <Button style={{width:"100%"}} type="submit" bsStyle="info">Buscar</Button>
                 </Col>
 
             </Form>
@@ -148,6 +173,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+      filterResponseSMS,
       getCampanhasSMS,
       loadingSMS
   }, dispatch)

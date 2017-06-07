@@ -6,6 +6,13 @@ export function closeSMSMessage() {
 	}
 }
 
+export function filterResponseSMS(request) {
+	return {
+		type: sms.FILTER_RESPONSE_SMS,
+		payload: request
+	}
+}
+
 export function getCampanhasSMS() {
 	return {
 		type: sms.GET_CAMPANHAS_SMS,

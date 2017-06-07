@@ -21,7 +21,7 @@ module.exports = {
     app: join(__dirname, 'src','index.js')
   },
   output: {
-    publicPath: "/",         // caminho que sera usado pelos <script> <link> injetados pelo webpack
+    //publicPath: "/",         // caminho que sera usado pelos <script> <link> injetados pelo webpack
     path: join(__dirname, "public"), // https://github.com/webpack/docs/wiki/configuration#outputpath
     filename: '[hash].bundle.js'
   },
