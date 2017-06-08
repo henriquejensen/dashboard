@@ -9,6 +9,7 @@ import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
 import Panel from "../../components/panel/Panel";
 import UltimasConsultas from "../../components/UltimasConsultas";
+import { FieldGroup } from "../../components/forms/CommonForms"
 import { LocalizeDescription } from "../../components/ProductDescription";
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
 
@@ -23,6 +24,7 @@ import {
 		seeModel,
 		searchCreditoCheque,
 		searchCreditoCompleta,
+		searchCreditoExpress,
 		searchCreditoIntermediaria,
 		searchCreditoIntermediariaPlus,
 		searchCreditoSimples
@@ -48,31 +50,34 @@ import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO, COMPANY_PRODUCT_LOCALIZE, 
 import estados from "../../components/utils/common/estados.json";
 import menu from "../../components/utils/common/menu.json";
 
-const tiposCheque = [
-	"Apenas Cadastro", "Digitando dados do Cheque", "Por Código de Barras (CMC-7)", 
-]
-
 class Credito extends Component {
-	state = {
-		tipo: "",
-		expressTipo: "CPF",
-		tipoCheque: "Apenas Cadastro",
-		creditoInput: {
-			documento: "",
-			uf: "",
-			banco: "",
-			agência: "",
-			conta: "",
-			digitoConta: "",
-			chequeInicial: "",
-			digitoChequeInicial: "",
-			CMC7: "",
-			folhas: "",
-			servico: [],
-			receitaFederal: false,
-			ccf: false,
-			protestoPublico: false,
-			sintegra: false
+	constructor(props) {
+		super(props)
+
+		this.tiposCheque = ["Apenas Cadastro", "Digitando dados do Cheque", "Por Código de Barras (CMC-7)"]
+
+		this.state = {
+			tipo: "",
+			tipoCheque: "Apenas Cadastro",
+			creditoInput: {
+				documento: "",
+				dataNascimento: "",
+				expressTipo: "CPF",
+				uf: "",
+				banco: "",
+				agência: "",
+				conta: "",
+				digitoConta: "",
+				chequeInicial: "",
+				digitoChequeInicial: "",
+				CMC7: "",
+				folhas: "",
+				servico: [],
+				receitaFederal: false,
+				ccf: false,
+				protestoPublico: false,
+				sintegra: false
+			}
 		}
 	}
 
@@ -123,61 +128,74 @@ class Credito extends Component {
 	}
 
 	onFormSubmit = (evt) => {
-		evt.preventDefault();
+		evt.preventDefault()
 
-		this.props.loadingCredito();
+		this.props.loadingCredito()
+		const creditoFields = this.state.creditoInput
 
 		switch (this.props.type) {
 			case "CHEQUE":
-				this.props.searchCreditoCheque(this.state.creditoInput);
+				this.props.searchCreditoCheque(creditoFields);
 				break;
 		
 			case "INTERMEDIARIA":
-				this.props.searchCreditoIntermediaria(this.state.creditoInput.documento, this.state.creditoInput.estado);
+				this.props.searchCreditoIntermediaria(creditoFields.documento, creditoFields.estado);
 				break;
 
 			case "INTERMEDIARIAPLUS":
-				this.props.searchCreditoIntermediariaPlus(this.state.creditoInput.documento, this.state.creditoInput.estado);
+				this.props.searchCreditoIntermediariaPlus(creditoFields.documento, creditoFields.estado);
 				break;
 
 			case "EXPRESS":
-				this.props.searchCreditoExpress(this.state.creditoInput.documento);
-				break;
+				let documento = creditoFields.documento.toString().replace(/[^0-9]/g,"")
+				let requestExpress = {}
+				requestExpress["receitaFederal"] = creditoFields.receitaFederal
+				requestExpress["ccf"] = creditoFields.ccf
+				requestExpress["protestoPublico"] = creditoFields.protestoPublico
+
+				console.log("creditoFields.expressTipo", creditoFields.expressTipo)
+				if(creditoFields.expressTipo === "CPF") {
+					console.log("INPUT", creditoFields)
+					requestExpress["cpf"] = documento
+					requestExpress["dataNascimento"] = creditoFields.dataNascimento
+				} else {
+					requestExpress["cnpj"] = documento
+					requestExpress["uf"] = creditoFields.uf
+					requestExpress["sintegra"] = creditoFields.sintegra
+				}
+				this.props.searchCreditoExpress(requestExpress, documento, creditoFields.expressTipo)
+				break
 
 			case "SIMPLES":
-				this.props.searchCreditoSimples(this.state.creditoInput.documento);
+				this.props.searchCreditoSimples(creditoFields.documento);
 				break;
 
 			case "COMPLETA":
-				this.searchCreditoCompleta(this.state.creditoInput.documento);
+				this.searchCreditoCompleta(creditoFields.documento);
 				break;
 
 			default:
 				break;
 		}
+	}
 
-		this.setState({
-			tipo: "",
-			expressTipo: "CPF",
-			tipoCheque: "Apenas Cadastro",
-			creditoInput: {
-				documento: "",
-				banco: "",
-				agência: "",
-				conta: "",
-				digitoConta: "",
-				chequeInicial: "",
-				digitoChequeInicial: "",
-				CMC7: "",
-				folhas: "",
-				servico: [],
-				receitaFederal: false,
-				ccf: false,
-				protestoPublico: false,
-				sintegra: false
-			}
-		})
-
+	renderUF = () => {
+		return (
+			<Col md={2}>
+				<select
+					className="form-control"
+					name="estado"
+					onChange={this.onChangeInput}
+					value={this.state.creditoInput.estado}
+					required
+				>
+					<option value="">Selecione UF</option>
+					{estados.estados.map((estado,i) => {
+						return <option value={estado.sigla} key={i}>{estado.sigla}</option>
+					})}
+				</select>
+			</Col>
+		)
 	}
 
 	renderForm(showUF) {
@@ -200,19 +218,7 @@ class Credito extends Component {
 				</Col>
 
 				{showUF ?
-					<Col md={2}>
-						<select
-							className="form-control"
-							name="estado"
-							onChange={this.onChangeInput}
-							value={this.state.creditoInput.estado}
-							required>
-							<option value="">Selecione UF</option>
-							{estados.estados.map((estado,i) => {
-								return <option value={estado.sigla} key={i}>{estado.sigla}</option>
-							})}
-						</select>
-					</Col>
+					this.renderUF()
 				: ""}
 			</span>
 		)
@@ -228,7 +234,7 @@ class Credito extends Component {
 						onChange={this.onChange}
 						value={this.state.tipoCheque}
 						required>
-						{tiposCheque.map((tipo,i) => {
+						{this.tiposCheque.map((tipo,i) => {
 							return <option value={tipo} key={i}>{tipo}</option>
 						})}
 					</select>
@@ -337,34 +343,67 @@ class Credito extends Component {
 	}
 
 	renderFormExpress() {
+		let showDataNascimento = this.state.creditoInput.receitaFederal && this.state.creditoInput.expressTipo === "CPF"
+		let showUF = this.state.creditoInput.sintegra && this.state.creditoInput.expressTipo === "CNPJ"
 		return (
-			<span>
+			<div>
 				<Col md={2}>
 					<select
 						className="form-control"
 						name="expressTipo"
-						onChange={this.onChange}
-						value={this.state.expressTipo}
+						onChange={this.onChangeInput}
+						value={this.state.creditoInput.expressTipo}
 						required>
 						<option value='CPF'>CPF</option>
 						<option value='CNPJ'>CNPJ</option>
 					</select>
 				</Col>
-				<Col md={8}>
-					<input
-						className="form-control"
+				<Col md={showDataNascimento || showUF ? 6 : 8}>
+
+					<FieldGroup
+						id="documento"
 						type="text"
-						placeholder="CPF ou CNPJ"
-						value={this.state.creditoInput.documento}
 						name="documento"
-						onChange={this.onChangeInput}/>
+						value={this.state.creditoInput.documento}
+						onChange={this.onChangeInput}
+						placeholder="CPF ou CNPJ"
+						required
+					/>
 				</Col>
+
+				{showDataNascimento ? 
+					<Col md={2}>
+						<FieldGroup
+							id="dataNascimento"
+							type="date"
+							name="dataNascimento"
+							value={this.state.creditoInput.dataNascimento}
+							onChange={this.onChangeInput}
+							placeholder="Data nascimento"
+							required
+						/>
+					</Col>
+				: ""}
+
+				{showUF ? 
+					this.renderUF()
+				: ""}
 
 				<Col md={9} className="text-center">
 					<FormGroup>
 						<Checkbox inline checked readOnly>
 							Cadastral
 						</Checkbox>
+						{' '}
+						{this.state.creditoInput.expressTipo == "CNPJ" ?
+							<Checkbox
+								inline
+								name="protestoPublico"
+								onChange={this.onChangeInputCheckBox}
+								checked={this.state.creditoInput.protestoPublico}>
+								Protesto Público 
+							</Checkbox>
+						: ""}
 						{' '}
 						<Checkbox
 							inline
@@ -388,18 +427,9 @@ class Credito extends Component {
 							checked={this.state.creditoInput.ccf}>
 							CCF
 						</Checkbox>
-						{this.state.expressTipo == "CNPJ" ?
-							<Checkbox
-								inline
-								name="protestoPublico"
-								onChange={this.onChangeInputCheckBox}
-								checked={this.state.creditoInput.protestoPublico}>
-								Protesto Público 
-							</Checkbox>
-						: ""}
 					</FormGroup>
 				</Col>
-			</span>
+			</div>
 		)
 	}
 
@@ -558,6 +588,7 @@ function mapDispatchToProps(dispatch) {
 		seeModel,
 		searchCreditoCheque,
 		searchCreditoCompleta,
+		searchCreditoExpress,
 		searchCreditoIntermediaria,
 		searchCreditoIntermediariaPlus,
 		searchCreditoSimples,

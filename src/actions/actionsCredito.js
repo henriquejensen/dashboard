@@ -20,6 +20,7 @@ import {
     URL_CREDITO_SEARCH_CHEQUE,
     URL_CREDITO_SEARCH_COMPLETA,
 	URL_CREDITO_SEARCH_COMPLETA_PJ,
+	URL_CREDITO_SEARCH_EXPRESS,
     URL_CREDITO_SEARCH_INTERMEDIARIA_PF,
     URL_CREDITO_SEARCH_INTERMEDIARIA_PJ,
     URL_CREDITO_SEARCH_INTERMEDIARIAPLUS_PF,
@@ -135,6 +136,14 @@ export function searchCreditoSimples(documento) {
 	}
 }
 
+export function searchCreditoExpress(requestExpress, documento, tipo) {
+	let url = URL_CREDITO_SEARCH_EXPRESS
+	let data = requestExpress;
+
+	return (dispatch) => {
+		api(dispatch, url, data, GET_CREDITO_COMPLETA, {tipo, documento})
+	}
+}
 
 export function seeModel() {
     return {
