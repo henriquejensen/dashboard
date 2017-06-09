@@ -40,9 +40,9 @@ export function loadingFocoFiscal() {
     }
 }
 
-export function searchByFocoFiscal(documento) {
-	let data = {documento}
-	let url = focofiscal.URL_FOCOFISCAL_SEARCH
+export function searchByFocoFiscalSimplesNacional(documento) {
+	let data = {document:documento}
+	let url = focofiscal.URL_FOCOFISCAL_SEARCH_SIMPLES_NACIONAL
 
 	return (dispatch) => {
 		apiContentType(dispatch, url, data, focofiscal.FETCH_FOCOFISCAL, {tipo:"CNPJ"})
@@ -50,17 +50,26 @@ export function searchByFocoFiscal(documento) {
 }
 
 export function searchByReceitaPF(documento, dataNascimento) {
-	let data = {documento,dataNascimento}
-	let url = focofiscal.URL_FOCOFISCAL_SEARCH_RECEITAPF
+	let data = {document:documento,dataNascimento}
+	let url = focofiscal.URL_FOCOFISCAL_SEARCH_RECEITA_PF
 
 	return (dispatch) => {
 		apiContentType(dispatch, url, data, focofiscal.FETCH_FOCOFISCAL, {tipo:"CPF"})
 	}
 }
 
-export function searchBySintegraUnificada(documento, estado) {
-	let data = {documento,"uf":estado}
-	let url = focofiscal.URL_FOCOFISCAL_SEARCH_SINTEGRAUNIFICADA
+export function searchByReceitaPJ(documento) {
+	let data = {document:documento}
+	let url = focofiscal.URL_FOCOFISCAL_SEARCH_RECEITA_PJ
+
+	return (dispatch) => {
+		apiContentType(dispatch, url, data, focofiscal.FETCH_FOCOFISCAL, {tipo:"CNPJ"})
+	}
+}
+
+export function searchByReceitaPJSintegra(documento) {
+	let data = {document:documento}
+	let url = focofiscal.URL_FOCOFISCAL_SEARCH_RECEITA_PJ_SINTEGRA
 
 	return (dispatch) => {
 		apiContentType(dispatch, url, data, focofiscal.FETCH_FOCOFISCAL, {tipo:"CNPJ"})

@@ -2,6 +2,13 @@ import * as basecerta from "../constants/constantsBaseCerta";
 
 import { apiFileUpload } from "../api/Api";
 
+export function getLayoutsBaseCerta() {
+    return {
+        type: basecerta.GET_LAYOUTS_BASECERTA,
+        payload: "tickets"
+    }
+}
+
 export function getTicketsBaseCerta() {
     return {
         type: basecerta.GET_TICKETS_BASECERTA,

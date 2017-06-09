@@ -4,7 +4,7 @@ import {connect} from "react-redux"
 import { Alert, Col, Form } from "react-bootstrap"
 
 //Actions
-import {closeMessageErrorBaseCerta, getTicketsBaseCerta, postNovoEnriquecimento} from "../../actions/actionsBaseCerta"
+import {closeMessageErrorBaseCerta, getLayoutsBaseCerta, postNovoEnriquecimento} from "../../actions/actionsBaseCerta"
 
 //Components
 import { MyFileUpload, MyFieldGroup, SelectGroup, TextAreaGroup } from "../../components/forms/CommonForms"
@@ -17,9 +17,13 @@ class NovoEnriquecimento extends Component {
         this.filesExtensionAccept = ".csv,.rem,.zip,.txt"
 
         this.state = {
-            layoutBaseCertaSelected: this.props.layouts,
+            layoutBaseCertaSelected: [],
             error: false
         }
+    }
+
+    componentDidMount() {
+        this.props.getLayoutsBaseCerta()
     }
 
     onSendEnriquecimento = (evt) => {
@@ -68,7 +72,7 @@ class NovoEnriquecimento extends Component {
                         name="layoutsBaseCerta"
                         onChange={this.onChange}
                         value={this.state.layoutBaseCertaSelected}
-                        options={[{label:"360iu", value:"360"}, {label:"A1 VOX", value:"165"}, {label:"311", value:"ABRAZ"},]}
+                        options={this.props.layouts}
                     />
                 </Col>
 
@@ -136,6 +140,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         closeMessageErrorBaseCerta,
+        getLayoutsBaseCerta,
         postNovoEnriquecimento
     }, dispatch)
 }

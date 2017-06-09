@@ -11,9 +11,10 @@ import {
 		getLastQueries,
 		loadingFocoFiscal,
 		seeModel,
-		searchByFocoFiscal,
+		searchByFocoFiscalSimplesNacional,
 		searchByReceitaPF,
-		searchBySintegraUnificada
+		searchByReceitaPJ,
+		searchByReceitaPJSintegra
 } from "../../actions/actionsFocoFiscal";
 import {
 		changeProductType,
@@ -27,6 +28,7 @@ import MyForm from "../../components/forms/Form";
 import Panel from "../../components/panel/Panel";
 import Titletab from "../../components/utils/Titletab";
 import UltimasConsultas from "../../components/UltimasConsultas";
+import { MyFieldGroup } from "../../components/forms/CommonForms"
 import { FocoFiscalDescription } from "../../components/ProductDescription";
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
 
@@ -87,11 +89,8 @@ class FocoFiscal extends Component {
 			case "PF":
 				this.props.searchByReceitaPF(this.state.focofiscalInput.documento,this.state.focofiscalInput.dataNascimento)
 				break
-			case "UNIFICADA":
-				this.props.searchBySintegraUnificada(this.state.focofiscalInput.documento, this.state.focofiscalInput.estado)
-				break
 			default:
-				this.props.searchByFocoFiscal(this.state.focofiscalInput.documento)
+				this.props.searchByFocoFiscalSimplesNacional(this.state.focofiscalInput.documento)
 		}
 		
 		this.setState({
@@ -119,9 +118,8 @@ class FocoFiscal extends Component {
 						message = {this.props.message}
 						lastQueries = {this.props.lastQueries[this.props.type]}
 					>
-						<Col md={tipo == "UNIFICADA" || tipo == "PF" ? 5 : 7}>
-							<input
-								className="form-control"
+						<Col md={tipo == "PF" ? 5 : 7}>
+							<MyFieldGroup
 								type="text"
 								placeholder={
 									this.props.type == "PF" ?
@@ -131,32 +129,16 @@ class FocoFiscal extends Component {
 								value={this.state.focofiscalInput.documento}
 								name="documento"
 								onChange={this.onChangeInput}
-								style={{width:'100%'}}
 								required/>
 						</Col>
 
-						{tipo == "UNIFICADA" ?
-							<Col md={2}>
-								<select
-									className="form-control"
-									name="estado"
-									onChange={this.onChangeInput}
-									value={this.state.focofiscalInput.estado}
-									required>
-									<option value="">Selecione UF</option>
-									{estados.estados.map((estado,i) => {
-										return <option value={estado.sigla} key={i}>{estado.sigla}</option>
-									})}
-								</select>
-							</Col>
-						: ""}
-
 						{tipo == "PF" ?
 							<Col md={2}>
-								<input
-									className="form-control"
+								<MyFieldGroup
+									id="dataNascimento"
 									type="date"
 									name="dataNascimento"
+									required
 									value={this.state.focofiscalInput.dataNascimento}
 									onChange={this.onChangeInput}
 								/>
@@ -254,9 +236,10 @@ function mapDispatchToProps(dispatch) {
 		getLastQueries,
 		loadingFocoFiscal,
 		seeModel,
-		searchByFocoFiscal,
+		searchByFocoFiscalSimplesNacional,
 		searchByReceitaPF,
-		searchBySintegraUnificada
+		searchByReceitaPJ,
+		searchByReceitaPJSintegra
 	}, dispatch)
 }
 
