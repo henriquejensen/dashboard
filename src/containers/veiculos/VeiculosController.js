@@ -10,7 +10,7 @@ import UltimasConsultas from "../../components/UltimasConsultas";
 import Titletab from "../../components/utils/Titletab";
 import Panel from "../../components/panel/Panel";
 import { VeiculoslDescription } from "../../components/ProductDescription";
-import { FieldGroup, MyCheckboxGroup } from "../../components/forms/CommonForms";
+import { MyFieldGroup, MyCheckboxGroup } from "../../components/forms/CommonForms";
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
 
 //Actions
@@ -363,7 +363,7 @@ class VeiculosController extends Component {
 		return (
 			<div>
 				<Col md={isCRLVHidden && isUFHidden ? 7 : isCRLVHidden && !isUFHidden ? 5 : 3}>
-					<FieldGroup
+					<MyFieldGroup
 						id={type}
 						type="text"
 						name={type}
@@ -391,7 +391,7 @@ class VeiculosController extends Component {
 
 				{!isCRLVHidden ?
 					<Col md={isUFHidden ? 4 : 2}>
-						<FieldGroup
+						<MyFieldGroup
 							id={type}
 							type="text"
 							name="numeroCrlv"

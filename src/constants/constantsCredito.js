@@ -6,7 +6,8 @@ export const INTERMEDIARIA_PLUS_CODE_PF = "5052"
 export const INTERMEDIARIA_PLUS_CODE_PJ = "5051"
 export const SIMPLES_CODE = "5070"
 export const CHEQUE_CODE = "1006"
-export const EXPRESS_CODE = "5072"
+export const EXPRESS_CODE_PF = "5072"
+export const EXPRESS_CODE_PJ = "5075"
 export const LAST_QUERIES = "ultimas-consultas"
 
 export const URL_CREDITO_SEARCH_CHEQUE = `https://managerprovider.assertivasolucoes.com.br/credito/${CHEQUE_CODE}/consultar`
@@ -17,7 +18,8 @@ export const URL_CREDITO_SEARCH_INTERMEDIARIA_PJ = `https://managerprovider.asse
 export const URL_CREDITO_SEARCH_INTERMEDIARIAPLUS_PF = `https://managerprovider.assertivasolucoes.com.br/credito/${INTERMEDIARIA_PLUS_CODE_PF}/consultar`
 export const URL_CREDITO_SEARCH_INTERMEDIARIAPLUS_PJ = `https://managerprovider.assertivasolucoes.com.br/credito/${INTERMEDIARIA_PLUS_CODE_PJ}/consultar`
 export const URL_CREDITO_SEARCH_SIMPLES = `https://managerprovider.assertivasolucoes.com.br/credito/${SIMPLES_CODE}/consultar`
-export const URL_CREDITO_SEARCH_EXPRESS = `https://managerprovider.assertivasolucoes.com.br/credito/${EXPRESS_CODE}/consultar`
+export const URL_CREDITO_SEARCH_EXPRESS_PF = `https://managerprovider.assertivasolucoes.com.br/credito/${EXPRESS_CODE_PF}/consultar`
+export const URL_CREDITO_SEARCH_EXPRESS_PJ = `https://managerprovider.assertivasolucoes.com.br/credito/${EXPRESS_CODE_PJ}/consultar`
 export const URL_CREDITO_LAST_QUERIES = `https://managerprovider.assertivasolucoes.com.br/credito/${LAST_QUERIES}/consultar`
 
 export const SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO = "SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO"

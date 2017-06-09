@@ -10,7 +10,7 @@ import MyForm from "../../components/forms/Form"
 import CreditoMixView from "./CreditoMixView"
 import Titletab from "../../components/utils/Titletab"
 import UltimasConsultas from "../../components/UltimasConsultas"
-import { FieldGroup, MyCheckboxGroup, SelectGroup } from "../../components/forms/CommonForms"
+import { MyFieldGroup, MyCheckboxGroup } from "../../components/forms/CommonForms"
 import { LocalizeDescription } from "../../components/ProductDescription"
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
@@ -151,7 +151,7 @@ class CreditoMix extends Component {
         return (
             <div>
                 <Col md={showCep ? 4 : 7}>
-                    <FieldGroup
+                    <MyFieldGroup
                         id="documento"
                         type="text"
                         name="documento"
@@ -163,7 +163,7 @@ class CreditoMix extends Component {
 
                 {showCep ?
                     <Col md={3}>
-                        <FieldGroup
+                        <MyFieldGroup
                             id="cepConsumidor"
                             type="text"
                             name="cepConsumidor"
@@ -181,7 +181,7 @@ class CreditoMix extends Component {
         return (
             <div>
                 <Col md={2}>
-                    <FieldGroup
+                    <MyFieldGroup
                         id="cmc71ChequeInicial"
                         type="text"
                         name="cmc71ChequeInicial"
@@ -192,7 +192,7 @@ class CreditoMix extends Component {
                 </Col>
 
                 <Col md={2}>
-                    <FieldGroup
+                    <MyFieldGroup
                         id="cmc72ChequeInicial"
                         type="text"
                         name="cmc72ChequeInicial"
@@ -203,7 +203,7 @@ class CreditoMix extends Component {
                 </Col>
 
                 <Col md={3}>
-                    <FieldGroup
+                    <MyFieldGroup
                         id="cmc73ChequeInicial"
                         type="text"
                         name="cmc73ChequeInicial"

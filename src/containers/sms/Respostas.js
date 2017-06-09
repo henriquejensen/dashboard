@@ -11,7 +11,7 @@ import Panel from "../../components/panel/Panel"
 import Filtro from "../../components/Filtro";
 import Table from "../../components/table/Table";
 import CardWithTable from "../../components/card/CardWithTable"
-import { FieldGroup } from "../../components/forms/CommonForms"
+import { MyFieldGroup } from "../../components/forms/CommonForms"
 
 class Respostas extends Component {
     constructor(props) {
@@ -59,7 +59,7 @@ class Respostas extends Component {
           <Panel>
             <Form onSubmit={this.onFormSubmit} className="my-form">
                 <Col md={this.state.showBuscaAvancada ? 8 : 10}>
-                    <FieldGroup
+                    <MyFieldGroup
                       id="smsCampanha"
                       label="Campanha"
                       type="text"
@@ -70,7 +70,7 @@ class Respostas extends Component {
                 {this.state.showBuscaAvancada ?
                   <span>
                     <Col md={2}>
-                        <FieldGroup
+                        <MyFieldGroup
                           id="smsDataInicio"
                           label="Data Início"
                           type="date"
@@ -79,7 +79,7 @@ class Respostas extends Component {
                     </Col>
 
                     <Col md={2}>
-                        <FieldGroup
+                        <MyFieldGroup
                           id="smsDataFim"
                           label="Data Fim"
                           type="date"
@@ -88,7 +88,7 @@ class Respostas extends Component {
                     </Col>
 
                     <Col md={2}>
-                        <FieldGroup
+                        <MyFieldGroup
                           id="idCampanha"
                           label="Id"
                           type="text"
@@ -97,7 +97,7 @@ class Respostas extends Component {
                     </Col>
 
                     <Col md={4}>
-                        <FieldGroup
+                        <MyFieldGroup
                           id="smsCliente"
                           label="Cliente"
                           type="text"
@@ -106,7 +106,7 @@ class Respostas extends Component {
                     </Col>
 
                     <Col md={4}>
-                        <FieldGroup
+                        <MyFieldGroup
                           id="smsUsuario"
                           label="Usuário"
                           type="text"

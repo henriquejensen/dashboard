@@ -9,7 +9,7 @@ import MyForm from "../../components/forms/Form";
 import Titletab from "../../components/utils/Titletab";
 import Panel from "../../components/panel/Panel";
 import UltimasConsultas from "../../components/UltimasConsultas";
-import { FieldGroup } from "../../components/forms/CommonForms"
+import { MyFieldGroup } from "../../components/forms/CommonForms"
 import { LocalizeDescription } from "../../components/ProductDescription";
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
 
@@ -36,13 +36,14 @@ import { changeProductType } from "../../actions/actionsCommon";
 import { ERR_CONNECTION_REFUSED, LOADING_GIF, REQUEST_ERROR, SUCCESS } from "../../constants/utils";
 import {
 	COMPLETA_CODE,
-	INTERMEDIARIA_CODE,
-	INTERMEDIARIA_PLUS_CODE,
+	INTERMEDIARIA_CODE_PF,
+	INTERMEDIARIA_PLUS_CODE_PF,
+	CHEQUE_CODE,
+	EXPRESS_CODE_PF,
+	SIMPLES_CODE,
 	SEARCH_BY_LOCALIZE_CPF_IN_CREDITO,
 	SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO,
-	SIMPLES_CODE,
-	CHEQUE_CODE,
-	EXPRESS_CODE,
+
 	GET_CREDITO_COMPLETA
 } from "../../constants/constantsCredito";
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO, COMPANY_PRODUCT_LOCALIZE, LOGO_CREDITO } from "../../constants/constantsCompany";
@@ -85,11 +86,11 @@ class Credito extends Component {
 		document.title = COMPANY_PRODUCT_CREDITO + " > " + COMPANY_NAME_SHORT;
 		this.props.loadingCredito();
 		this.props.getLastQueries(COMPLETA_CODE, "COMPLETA");
-		this.props.getLastQueries(INTERMEDIARIA_CODE, "INTERMEDIARIA");
-		this.props.getLastQueries(INTERMEDIARIA_PLUS_CODE, "INTERMEDIARIAPLUS");
+		this.props.getLastQueries(INTERMEDIARIA_CODE_PF, "INTERMEDIARIA");
+		this.props.getLastQueries(INTERMEDIARIA_PLUS_CODE_PF, "INTERMEDIARIAPLUS");
 		this.props.getLastQueries(SIMPLES_CODE, "SIMPLES");
 		this.props.getLastQueries(CHEQUE_CODE, "CHEQUE");
-		this.props.getLastQueries(EXPRESS_CODE, "EXPRESS");
+		this.props.getLastQueries(EXPRESS_CODE_PF, "EXPRESS");
 	}
 
 	closeTab = (index) => {
@@ -360,7 +361,7 @@ class Credito extends Component {
 				</Col>
 				<Col md={showDataNascimento || showUF ? 6 : 8}>
 
-					<FieldGroup
+					<MyFieldGroup
 						id="documento"
 						type="text"
 						name="documento"
@@ -373,7 +374,7 @@ class Credito extends Component {
 
 				{showDataNascimento ? 
 					<Col md={2}>
-						<FieldGroup
+						<MyFieldGroup
 							id="dataNascimento"
 							type="date"
 							name="dataNascimento"

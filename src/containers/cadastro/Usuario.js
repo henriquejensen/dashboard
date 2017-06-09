@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 import { Button, Col, ControlLabel, Form, FormGroup, Label,  Radio, Tabs, Tab } from "react-bootstrap";
 
-import { FieldGroup, SelectGroup, RadioGroup, TextAreaGroup } from "../../components/forms/CommonForms";
+import { MyFieldGroup, SelectGroup, RadioGroup, TextAreaGroup } from "../../components/forms/CommonForms";
 
 const Grupo = (props) => {
     return (
         <Col md={12}>
-            <FieldGroup
+            <MyFieldGroup
                 id="inputUser"
                 type="text"
                 label="Nome do Cliente"
                 value={props.cliente} />
 
-            <FieldGroup
+            <MyFieldGroup
                 id="inputUser"
                 type="text"
                 label="Login do Cliente"
                 value={props.login} />
 
-            <FieldGroup
+            <MyFieldGroup
                 id="inputUser"
                 type="text"
                 label="Nome do grupo"
@@ -31,7 +31,7 @@ const DadosBasicos = (props) => {
     return (
         <span>
             <Col md={12}>
-                <FieldGroup
+                <MyFieldGroup
                     id="usuario"
                     type="text"
                     label="Usuário"
@@ -44,7 +44,7 @@ const DadosBasicos = (props) => {
             </Col>
 
             <Col md={6}>
-                <FieldGroup
+                <MyFieldGroup
                     id="email1"
                     type="email"
                     label="Email principal"
@@ -57,7 +57,7 @@ const DadosBasicos = (props) => {
             </Col>
 
             <Col md={6}>
-                <FieldGroup
+                <MyFieldGroup
                     id="email2"
                     type="email"
                     label="Email 2"
@@ -118,7 +118,7 @@ const Limitacao = (props) => {
     return (
         <span>
             <Col md={4}>
-                <FieldGroup
+                <MyFieldGroup
                     id="limiteValorString"
                     type="number"
                     label="Limite de quantidade"

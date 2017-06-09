@@ -154,7 +154,7 @@ export const todosProdutos = {
             {label: "Receita PF", id: "pf"},
             {label: "Receita PJ", id: "pj"},
             {label: "Receita PJ Sintegra", id: "sintegra"},
-            {label: "Sintegra Unificada", id: "unificada"},
+            //{label: "Sintegra Unificada", id: "unificada"},
             {label: "Simples Nacional", id: "simples"}
             ]
     },

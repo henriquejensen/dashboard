@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, ButtonToolbar, Col, Image } from "react-bootstrap";
 
-import { FieldGroup, RadioGroupGeneric, TextAreaGroup, SelectGroup } from "../../components/forms/CommonForms";
+import { MyFieldGroup, RadioGroupGeneric, TextAreaGroup, SelectGroup } from "../../components/forms/CommonForms";
 import { MESSAGE_FIELD_CELULARES_EMPTY, MESSAGE_FIELD_CONTEUDO_EMPTY, MESSAGE_HELP_CELULARES } from "../../constants/utils";
 
 export default class SMSRapido extends Component {
@@ -75,7 +75,7 @@ export default class SMSRapido extends Component {
                 </Col>
 
                 <Col md={12}>
-                    <FieldGroup
+                    <MyFieldGroup
                         id="nomeRemetente"
                         type="text"
                         label="Nome Remetente"
@@ -84,7 +84,7 @@ export default class SMSRapido extends Component {
                 </Col>
 
                 <Col md={6}>
-                    <FieldGroup
+                    <MyFieldGroup
                         id="campanha"
                         type="text"
                         label="Campanha"
@@ -111,7 +111,7 @@ export default class SMSRapido extends Component {
             <span>
                 <Col md={7}>
                     <Col md={6}>
-                        <FieldGroup
+                        <MyFieldGroup
                             id="validos"
                             type="text"
                             label="Válidos"
@@ -120,7 +120,7 @@ export default class SMSRapido extends Component {
                     </Col>
 
                     <Col md={6}>
-                        <FieldGroup
+                        <MyFieldGroup
                             id="duplicados"
                             type="text"
                             label="Duplicados"
@@ -129,7 +129,7 @@ export default class SMSRapido extends Component {
                     </Col>
                             
                     <Col md={6}>
-                        <FieldGroup
+                        <MyFieldGroup
                             id="invalidos"
                             type="text"
                             label="Inválidos"
@@ -138,7 +138,7 @@ export default class SMSRapido extends Component {
                     </Col>
 
                     <Col md={6}>
-                        <FieldGroup
+                        <MyFieldGroup
                             id="total"
                             type="text"
                             label="total"
@@ -147,7 +147,7 @@ export default class SMSRapido extends Component {
                     </Col>
 
                     <Col md={12}>
-                        <FieldGroup
+                        <MyFieldGroup
                             id="totalCobrado"
                             type="text"
                             label="Total de SMS cobrados"

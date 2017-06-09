@@ -5,7 +5,7 @@ import { Alert, Button, Col, Form, InputGroup, Pagination } from "react-bootstra
 
 import { addNewUser, closeMessageError, getGruposCadastro, getUsersCadastro, getUsersByGroupId, getConsultasGrupo, getPermissoesUser, loadingCadastro, updateUser } from "../../actions/actionsCadastro";
 
-import { FieldGroup, SelectGroup } from "../../components/forms/CommonForms";
+import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms";
 
 import { ADD_NEW_USER, MESSAGE_ADD_USER_SUCCESS } from "../../constants/constantsCadastro";
 import { LOADING_GIF, NENHUM_REGISTRO } from "../../constants/utils";
@@ -118,7 +118,7 @@ class Cadastro extends Component {
         return (
             <Form onSubmit={this.onFormSubmit} className="my-form">
                 <Col md={this.state.showAdvancedSearch ? 12: 10}>
-                    <FieldGroup
+                    <MyFieldGroup
                         id="nome"
                         type="text"
                         name="nome"
@@ -129,7 +129,7 @@ class Cadastro extends Component {
                 {this.state.showAdvancedSearch ?
                     <span>
                         <Col md={2}>
-                            <FieldGroup
+                            <MyFieldGroup
                                 id="grupo"
                                 type="text"
                                 name="grupo"
@@ -138,7 +138,7 @@ class Cadastro extends Component {
                                 onChange={this.onChangeUser} />
                         </Col>
                         <Col md={2}>
-                            <FieldGroup
+                            <MyFieldGroup
                                 id="clienteLogin"
                                 type="text"
                                 name="clienteLogin"
@@ -147,7 +147,7 @@ class Cadastro extends Component {
                                 onChange={this.onChangeUser} />
                         </Col>
                         <Col md={2}>
-                            <FieldGroup
+                            <MyFieldGroup
                                 id="razaoSocial"
                                 type="text"
                                 name="razaoSocial"

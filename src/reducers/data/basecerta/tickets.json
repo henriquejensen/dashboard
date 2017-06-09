@@ -1,7 +1,7 @@
 {
     "tickets": [
         {
-            "ticket": 56564,
+            "id": 56564,
             "layout": "Intervalor",
             "arquivo": "Arquivo",
             "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",
@@ -11,23 +11,23 @@
             "telefones": [],
             "relatorio": {
                 "cpf": {
-                    "entrada": 58,
-                    "saida": 16
+                    "entrada": 100,
+                    "saida": 100
                 },
                 "cnpj": {
-                    "entrada": 0,
-                    "saida": 0
+                    "entrada": 50,
+                    "saida": 49
                 },
-                "invalidos": 0,
+                "invalidos": 1,
                 "total": {
-                    "entrada": 58,
-                    "saida": 16
+                    "entrada": 150,
+                    "saida": 149
                 }
             }
 
         },
         {
-            "ticket": 56563,
+            "id": 56563,
             "layout": "Assertiva",
             "arquivo": "Arquivo",
             "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",
@@ -52,7 +52,7 @@
             }
         },
         {
-            "ticket": 56562,
+            "id": 56562,
             "layout": "Rennov",
             "arquivo": "Arquivo",
             "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",
@@ -77,7 +77,7 @@
             }
         },
         {
-            "ticket": 56561,
+            "id": 56561,
             "layout": "Rennov",
             "arquivo": "Arquivo",
             "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",
@@ -102,7 +102,7 @@
             }
         },
         {
-            "ticket": 56560,
+            "id": 56560,
             "layout": "Assertiva V2",
             "arquivo": "Arquivo",
             "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",

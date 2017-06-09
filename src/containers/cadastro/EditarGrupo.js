@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Tabs, Tab, Col, Button, Form } from "react-bootstrap";
 
-import { FieldGroup, SelectGroup, TextAreaGroup, CheckboxGroup } from "../../components/forms/CommonForms";
+import { MyFieldGroup, SelectGroup, TextAreaGroup, CheckboxGroup } from "../../components/forms/CommonForms";
 import Table from "../../components/table/Table";
 
 const Cliente = (props) => {
     return (
         <span>
             <Col md={6}>
-                <FieldGroup
+                <MyFieldGroup
                     id="razaoSocial"
                     type="text"
                     label="Razão social"
@@ -18,7 +18,7 @@ const Cliente = (props) => {
             </Col>
 
             <Col md={6}>
-                <FieldGroup
+                <MyFieldGroup
                     id="inputUser"
                     type="text"
                     label="Cliente Login"
@@ -34,7 +34,7 @@ const DadosBasicos = (props) => {
     return (
         <span>
             <Col md={4}>
-                <FieldGroup
+                <MyFieldGroup
                     id="nomeGrupo"
                     type="text"
                     label="Nome do grupo"
@@ -44,7 +44,7 @@ const DadosBasicos = (props) => {
             </Col>
 
             <Col md={4}>
-                <FieldGroup
+                <MyFieldGroup
                     id="inicioConsumo"
                     type="date"
                     label="Início do consumo"
@@ -54,7 +54,7 @@ const DadosBasicos = (props) => {
             </Col>
 
             <Col md={4}>
-                <FieldGroup
+                <MyFieldGroup
                     id="fimConsumo"
                     type="date"
                     label="Fim do consumo"
@@ -97,7 +97,7 @@ const DadosBasicos = (props) => {
             </Col>
 
             <Col md={12}>
-                <FieldGroup
+                <MyFieldGroup
                     id="ipAcesso"
                     type="text"
                     label="Ip's de acesso"
@@ -127,7 +127,7 @@ const Horario = (props) => {
             {props.bloquearHorario == "SIM" ?
                 <span>
                     <Col md={4}>
-                        <FieldGroup
+                        <MyFieldGroup
                             id="acessarDas"
                             type="time"
                             label="Acessar das 00:00"
@@ -137,7 +137,7 @@ const Horario = (props) => {
                     </Col>
 
                     <Col md={4}>
-                        <FieldGroup
+                        <MyFieldGroup
                             id="acessarAte"
                             type="time"
                             label="Acessar até às 00:00"
@@ -167,7 +167,7 @@ const LimitacaoTotal = (props) => {
     return (
         <span>
             <Col md={4}>
-                <FieldGroup
+                <MyFieldGroup
                     id="limite"
                     type="number"
                     label="Limite de quantidade"
@@ -220,7 +220,7 @@ const LimitacaoProduto = (props) => {
                             <tr key={index}>
                                 <td><h3>{produto.label}</h3></td>
                                 <td>
-                                    <FieldGroup
+                                    <MyFieldGroup
                                         id="produtoQuantidade"
                                         type="number"
                                         label="Quantidade"

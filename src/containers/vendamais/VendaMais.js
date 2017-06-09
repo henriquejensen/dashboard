@@ -5,7 +5,7 @@ import { Button, Col, Form, DropdownButton, MenuItem, ProgressBar } from "react-
 
 import { getTicketsVendaMais } from "../../actions/actionsVendaMais";
 
-import { FieldGroup, SelectGroup } from "../../components/forms/CommonForms";
+import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms";
 import Panel from "../../components/panel/Panel";
 
 import Modal from "../../components/Modal";
@@ -22,7 +22,7 @@ class VendaMais extends Component {
       return (
           <Form onSubmit={this.onFormSubmit} className="my-form">
               <Col md={2}>
-                  <FieldGroup
+                  <MyFieldGroup
                     id="ticket"
                     label="Ticket"
                     type="number"
@@ -30,7 +30,7 @@ class VendaMais extends Component {
               </Col>
 
               <Col md={3}>
-                  <FieldGroup
+                  <MyFieldGroup
                     id="nome"
                     label="Nome"
                     type="text"
@@ -38,7 +38,7 @@ class VendaMais extends Component {
               </Col>
 
               <Col md={2}>
-                  <FieldGroup
+                  <MyFieldGroup
                     id="cliente"
                     label="Cliente"
                     type="text"
@@ -46,7 +46,7 @@ class VendaMais extends Component {
               </Col>
 
               <Col md={2}>
-                  <FieldGroup
+                  <MyFieldGroup
                     id="solicitante"
                     label="Solicitante"
                     type="text"

@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 
 // Components
-import { FieldGroup, RadioGroupGeneric, SelectGroup, TextAreaGroup } from "../../components/forms/CommonForms";
+import { MyFieldGroup, RadioGroupGeneric, SelectGroup, TextAreaGroup } from "../../components/forms/CommonForms";
 
 // Actions
 import { closeSMSMessage, loadingSMS, sendSMSRapido } from "../../actions/actionsSMS";
@@ -114,7 +114,7 @@ export class EnviarSMS extends Component {
                 />
 
                 <Col md={12}>
-                    <FieldGroup
+                    <MyFieldGroup
                         id="numeros"
                         required
                         label="* Celular(es)"
@@ -139,7 +139,7 @@ export class EnviarSMS extends Component {
                 </Col>
 
                 <Col md={12}>
-                    <FieldGroup
+                    <MyFieldGroup
                         id="nome"
                         label="Campanha"
                         name="nome"
@@ -159,7 +159,7 @@ export class EnviarSMS extends Component {
                 </Col>
 
                 <Col md={6}>
-                    <FieldGroup
+                    <MyFieldGroup
                         id="remetente"
                         label="Nome Remetente"
                         name="remetente"

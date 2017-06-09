@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, FormGroup, Col, FormControl, Label, ControlLabel, Button, Radio, Checkbox, HelpBlock } from "react-bootstrap";
 
-export const FieldGroup = (props) => {
+export const MyFieldGroup = (props) => {
     return (
         <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}}>
             {props.label ? <ControlLabel>{props.label}</ControlLabel> : ""}
@@ -10,6 +10,7 @@ export const FieldGroup = (props) => {
                 type={props.type}
                 style={props.error ? {borderColor:"red"} : {}}
                 name={props.name}
+                accept={props.accept}
                 value={props.value ? props.value : undefined}
                 placeholder={props.placeholder}
                 onChange={props.onChange}

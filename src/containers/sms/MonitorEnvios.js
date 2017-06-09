@@ -13,7 +13,7 @@ import PanelGroup from "../../components/panel/PanelGroup"
 import Panel from "../../components/panel/Panel"
 import Table from "../../components/table/Table"
 import { LoadingScreen } from "../../components/utils/ElementsAtScreen";
-import { FieldGroup } from "../../components/forms/CommonForms"
+import { MyFieldGroup } from "../../components/forms/CommonForms"
 
 // Constants
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_SMS } from "../../constants/constantsCompany";
@@ -58,7 +58,6 @@ class MonitorEnvios extends Component {
       this.state.usuario ? request["usuario"] = this.state.usuario : "",
 
       this.props.filterResponseSMS(request)
-      console.log("SUBMIT", request)
     }
 
     renderForm = () => {
@@ -66,7 +65,7 @@ class MonitorEnvios extends Component {
           <Panel>
             <Form onSubmit={this.onFormSubmit} className="my-form">
                 <Col md={this.state.showBuscaAvancada ? 8 : 10}>
-                    <FieldGroup
+                    <MyFieldGroup
                       id="smsCampanha"
                       label="Campanha"
                       type="text"
@@ -77,7 +76,7 @@ class MonitorEnvios extends Component {
                 {this.state.showBuscaAvancada ?
                   <span>
                     <Col md={2}>
-                        <FieldGroup
+                        <MyFieldGroup
                           id="smsDataInicio"
                           label="Data Início"
                           type="date"
@@ -86,7 +85,7 @@ class MonitorEnvios extends Component {
                     </Col>
 
                     <Col md={2}>
-                        <FieldGroup
+                        <MyFieldGroup
                           id="smsDataFim"
                           label="Data Fim"
                           type="date"
@@ -95,7 +94,7 @@ class MonitorEnvios extends Component {
                     </Col>
 
                     <Col md={2}>
-                        <FieldGroup
+                        <MyFieldGroup
                           id="idCampanha"
                           label="Id"
                           type="text"
@@ -104,7 +103,7 @@ class MonitorEnvios extends Component {
                     </Col>
 
                     <Col md={4}>
-                        <FieldGroup
+                        <MyFieldGroup
                           id="smsCliente"
                           label="Cliente"
                           type="text"
@@ -113,7 +112,7 @@ class MonitorEnvios extends Component {
                     </Col>
 
                     <Col md={4}>
-                        <FieldGroup
+                        <MyFieldGroup
                           id="smsUsuario"
                           label="Usuário"
                           type="text"

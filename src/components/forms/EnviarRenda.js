@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FieldGroup, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export default class EnviarRenda extends Component {
     constructor() {
