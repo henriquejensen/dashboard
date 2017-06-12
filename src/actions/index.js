@@ -28,20 +28,6 @@ import {
 	URL_CREDITO_SEARCH_COMPLETA_PJ
 } from "../constants/constantsCredito";
 import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
-import {
-		LOGIN_SUCCESS,
-		LOGIN_ERROR,
-		LOG_OUT,
-		LOADING,
-		CLOSE_TAB,
-		AUTH_URL,
-		AUTHENTICATION,
-		REQUEST_ERROR,
-		ERR_CONNECTION_REFUSED,
-		NENHUM_REGISTRO,
-		ERROR_401_UNAUTHORIZED,
-		ERROR_401_UNAUTHORIZED_MESSAGE
-} from "../constants/utils";
 
 import { apiContentType, api } from "../api/Api";
 

@@ -1,39 +1,38 @@
-import React from 'react';
-import { Route, IndexRoute } from "react-router";
+import React from 'react'
+import { Route, IndexRoute } from "react-router"
 
-import App from "./components/app";
-import Login from "./components/Login";
-import Signin from "./components/Signin";
+import App from "./components/app"
+import Login from "./components/Login"
+import ChangePassword from "./components/ChangePassword"
 
-import EditUser from "./containers/user/EditUser";
-import Contato from "./containers/contato";
+import EditUser from "./containers/user/EditUser"
+import Contato from "./containers/contato"
 
-import Localize from "./containers/localize/LocalizeController";
-import Dashboard from "./containers/dashboard/Dashboard";
-import Chat from "./containers/chat/Chat";
+import Localize from "./containers/localize/LocalizeController"
+import Dashboard from "./containers/dashboard/Dashboard"
+import Chat from "./containers/chat/Chat"
 
 // SMS
-import SMS from "./containers/sms/SMSController";
-import MonitorEnvios from "./containers/sms/MonitorEnvios";
-import EnvioSMS from "./containers/sms/EnvioSMS";
-import CentroCusto from "./containers/sms/CentroCusto";
-import Respostas from "./containers/sms/Respostas";
+import SMS from "./containers/sms/SMSController"
+import MonitorEnvios from "./containers/sms/MonitorEnvios"
+import EnvioSMS from "./containers/sms/EnvioSMS"
+import CentroCusto from "./containers/sms/CentroCusto"
+import Respostas from "./containers/sms/Respostas"
 
+import BaseCerta from "./containers/basecerta/BaseCerta"
+import Credito from "./containers/credito/CreditoController"
+import CreditoMix from "./containers/creditomix/CreditoMixController"
+import Veiculos from "./containers/veiculos/VeiculosController"
+import FocoFiscal from "./containers/focofiscal/FocoFiscalController"
+//import VendaMais from "./containers/vendamais/VendaMais"
 
-import BaseCerta from "./containers/basecerta/BaseCerta";
-import Credito from "./containers/credito/CreditoController";
-import CreditoMix from "./containers/creditomix/CreditoMixController";
-import Veiculos from "./containers/veiculos/VeiculosController";
-import FocoFiscal from "./containers/focofiscal/FocoFiscalController";
-import VendaMais from "./containers/vendamais/VendaMais";
-
-import Relatorios from "./containers/relatorios/Relatorios";
-import Cadastro from "./containers/cadastro/Cadastro";
+import Relatorios from "./containers/relatorios/Relatorios"
+import Cadastro from "./containers/cadastro/Cadastro"
 
 export default (
   <Route>
     <Route path='/login' component={Login} />
-    <Route path='/signin' component={Signin} />
+    <Route path='/password' component={ChangePassword} />
 
     <Route onEnter={requireAuth} component={App}>
       <Route name="Localize" path="/" component={Localize}	/>
@@ -57,8 +56,6 @@ export default (
 
       <Route name="Veiculos" path="veiculos" component={Veiculos} />
 
-      <Route name="Venda+" path="vendamais" component={VendaMais} />
-
       <Route name="Cadastro" path="cadastro" component={Cadastro} />
 
       <Route name="Relatórios" path="relatorios" component={Relatorios} />
@@ -72,7 +69,7 @@ export default (
     <Route name="Erro" path="*" component={Login} />
 
   </Route>
-);
+)
 
 function requireAuth(nextState, replace) {  
   if (!localStorage.token) {

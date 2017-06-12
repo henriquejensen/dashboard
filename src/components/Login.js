@@ -1,21 +1,33 @@
+import "./Login.css"
+
 import React, { Component } from "react";
 import ajax from "superagent";
-import { Col } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { Link, browserHistory } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
+//Actions
 import { authUser, loading } from "../actions/actionsCommon";
 
+//Components
+import MyButton from "./button/MyButton"
+import { MyFieldGroup } from "./forms/CommonForms"
+
+//Constants
 import { LOADING_GIF, URL_GET_IP } from "../constants/utils";
 import { COMPANY_NAME_LONG, COMPANY_LOGO } from "../constants/constantsCompany";
 
 class Login extends Component {
-    state = {
-        empresa: "",
-        user: "",
-        senha: "",
-        ip: ""
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            cliente: "",
+            user: "",
+            senha: "",
+            ip: ""
+        }
     }
 
     componentWillMount() {
@@ -31,7 +43,7 @@ class Login extends Component {
         evt.preventDefault();
 
         this.props.loading();
-        this.props.authUser(this.state.empresa, this.state.user, this.state.senha);
+        this.props.authUser(this.state.cliente, this.state.usuario, this.state.senha);
     }
 
     onChange = (evt) => {
@@ -44,6 +56,51 @@ class Login extends Component {
         browserHistory.push("/localize");
     }
 
+    renderForm = () => {
+        return (
+            <form className="form-signin" onSubmit={this.onFormSubmit}>
+                <MyFieldGroup
+                    type="text"
+                    id="cliente"
+                    name="cliente"
+                    label="Cliente"
+                    placeholder="Digite o cliente"
+                    required
+                    value={this.state.cliente}
+                    onChange={this.onChange}
+                />
+                <MyFieldGroup
+                    type="text"
+                    id="usuario"
+                    name="usuario"
+                    label="Usuário"
+                    placeholder="Digite o usuário"
+                    required
+                    value={this.state.usuario}
+                    onChange={this.onChange}
+                />
+
+                <MyFieldGroup
+                    type="password"
+                    id="senha"
+                    name="senha"
+                    label="Senha"
+                    placeholder="*******"
+                    required
+                    value={this.state.senha}
+                    onChange={this.onChange}
+                />
+
+                <MyButton
+                    type="submit"
+                    myButtonClass="btn-lg btn-primary btn-block"
+                    myButtonStyle="primary"
+                    myButtonText="Entrar"
+                />
+            </form>
+        )
+    }
+
     render() {
         if(this.props.auth.logado) {
             return (
@@ -52,7 +109,7 @@ class Login extends Component {
         }
         return (
             <div className="container">
-                <div className="row">
+                <Row>
                     <Col xs={12} sm={6} smOffset={4} md={4} mdOffset={4}>
                         <h3 className="text-center login-title">
                             <strong>Bem-vindo</strong><br/>
@@ -64,25 +121,24 @@ class Login extends Component {
                         {this.props.auth.error ? 
                             <div className="alert alert-danger text-center" role="alert">{this.props.auth.msgn}</div> : ""}
 
-                        <div className="account-wall text-center">
-                            <img src={COMPANY_LOGO} alt={COMPANY_NAME_LONG} height="50" width="170" />
-                            <form className="form-signin" onSubmit={this.onFormSubmit}>
-                                <input type="text" className="form-control" placeholder="Empresa" value={this.state.empresa} name="empresa" required onChange={this.onChange}/>
-                                <input type="text" className="form-control" placeholder="Usuário" value={this.state.user} name="user" required onChange={this.onChange} />
-                                <input type="password" className="form-control" placeholder="Senha" value={this.state.senha} name="senha" required onChange={this.onChange}/>
-                                <button className="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-                                
-                                <label className="checkbox pull-left">
-                                    <input type="checkbox" value="remember-me" />
-                                    Lembre-me
-                                </label>
-                                <span href="#" className="pull-right need-help">IP: {this.state.ip}</span>
-                                <span className="clearfix"></span>
-                            </form>
+                        <div className="account-wall">
+                            <Col md={12} className="text-center">
+                                <img src={COMPANY_LOGO} alt={COMPANY_NAME_LONG} height="50" width="170" />
+                            </Col>
+
+                            {this.renderForm()}
+
+                            <Col md={12}>
+                                <span
+                                    className="pull-right need-help">
+                                    IP: {this.state.ip}
+                                </span>
+                            </Col>
+                            <span className="clearfix"></span>
                         </div>
-                        <Link to="/signin" className="text-center new-account">Esqueci minha senha </Link>
+                        <Link to="/password" className="text-center new-account">Esqueci minha senha </Link>
                     </Col>
-                </div>
+                </Row>
             </div>
         )
     }

@@ -1,4 +1,4 @@
-import { ERROR_401_UNAUTHORIZED, LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT, CHANGE_COLOR_MENU, AUTHENTICATION, LOADING } from "../constants/utils";
+import { ERROR_401_UNAUTHORIZED, LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT, CHANGE_COLOR_MENU, AUTHENTICATION, LOADING, CHANGE_PASSWORD, CLOSE_MESSAGE_CHANGE_PASSWORD, USER_CHANGED_PASSWORD } from "../constants/utils";
 
 const getInitialState = {
     colorMenu: "#673ab7",
@@ -10,55 +10,85 @@ const getInitialState = {
 
 export default function(state=getInitialState, action) {
     switch(action.type) {
-        case LOGIN_SUCCESS:
+        case LOGIN_SUCCESS: {
             localStorage.setItem(AUTHENTICATION, action.payload.response);
-            let newState = {
+            return {
                 colorMenu: state.colorMenu,
                 loading: false,
                 logado: true,
                 error: false,
+                status: state.status,
                 msgn: "logado",
             }
-            return newState;
+        }
 
-        case LOGIN_ERROR:
-            let newStateError = {
+        case LOGIN_ERROR: {
+            return {
                 colorMenu: state.colorMenu,
                 loading: false,
                 logado: false,
                 error: true,
+                status: state.status,
                 msgn: action.payload.erro.mensagem
             }
-            return newStateError;
+        }
 
-        case LOADING:
+        case LOADING: {
             return {
                 colorMenu: state.colorMenu,
                 loading: true,
                 logado: state.logado,
                 error: false,
+                status: state.status,
                 msgn: state.msgn
             }
+        }        
 
-        case LOG_OUT:
+        case LOG_OUT: {
             return {
                 colorMenu: state.colorMenu,
                 loading: false,
                 logado: false,
                 error: false,
+                status: state.status,
                 msgn: LOG_OUT
             }
+        }
 
-        case CHANGE_COLOR_MENU:
+        case CHANGE_PASSWORD: {
+            return {
+                colorMenu: state.colorMenu,
+                loading: false,
+                logado: false,
+                error: false,
+                status: USER_CHANGED_PASSWORD,
+                msgn: action.payload.email
+            }
+        }
+
+        case CLOSE_MESSAGE_CHANGE_PASSWORD: {
+            return {
+                colorMenu: state.colorMenu,
+                loading: false,
+                logado: false,
+                error: false,
+                status: "",
+                msgn: ""
+            }
+        }
+        
+        case CHANGE_COLOR_MENU: {
             return {
                 colorMenu: action.payload,
                 loading: false,
                 logado: state.logado,
                 error: false,
+                status: state.status,
                 msgn: state.msgn
             }
+        }
 
-        case ERROR_401_UNAUTHORIZED:
+        case ERROR_401_UNAUTHORIZED: {
             localStorage.removeItem(AUTHENTICATION);
             return {
                 colorMenu: state.colorMenu,
@@ -67,8 +97,10 @@ export default function(state=getInitialState, action) {
                 error: true,
                 msgn: action.payload
             }
+        }
+
+        default:
+            return state
 
     }
-
-    return state;
 }

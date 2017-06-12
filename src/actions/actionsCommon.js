@@ -1,7 +1,9 @@
 import ajax from "superagent";
 
 import {
+		CHANGE_PASSWORD,
 		CHANGE_COLOR_MENU,
+		CLOSE_MESSAGE_CHANGE_PASSWORD,
 		INFO_URL,
 		INFO_ERROR,
 		INFO_SUCCESS,
@@ -11,8 +13,6 @@ import {
 		LOADING,
 		AUTH_URL,
 		AUTHENTICATION,
-		REQUEST_ERROR,
-		ERR_CONNECTION_REFUSED,
 } from "../constants/utils";
 
 import { apiWithKeySession } from "../api/Api";
@@ -25,10 +25,23 @@ export function changeProductType(product, type) {
 	}
 }
 
+export function changePassword(cliente, usuario) {
+	return {
+		type: CHANGE_PASSWORD,
+		payload: { email: "tes*****ario@assertivasolucoes.com.br" }
+	}
+}
+
 export function changeColorMenu(color) {
     return {
         type: CHANGE_COLOR_MENU,
         payload: color
+    }
+}
+
+export function closeChangePasswordMessage(color) {
+    return {
+        type: CLOSE_MESSAGE_CHANGE_PASSWORD
     }
 }
 

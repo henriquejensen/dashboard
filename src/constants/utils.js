@@ -5,6 +5,8 @@ export const GOOGLE_MAPS_KEY = 'AIzaSyDrjaImSSsOUSh9d5KDq9RVnHKtNSI_GJI'
 export const GOOGLE_MAPS_URL = "https://maps.googleapis.com/maps/api/geocode/json?address="
 export const URL_GET_IP = "https://auth.assertivasolucoes.com.br/auth/get-info-request/d9230bc071484cdd9fc721b"
 
+export const CHANGE_PASSWORD = "CHANGE_PASSWORD"
+export const CLOSE_MESSAGE_CHANGE_PASSWORD = "CLOSE_MESSAGE_CHANGE_PASSWORD"
 export const TITLE_HEADER = "Configurações"
 export const REQUEST_ERROR = "REQUEST_ERROR"
 export const ERR_CONNECTION_REFUSED = "ERR_CONNECTION_REFUSED"
@@ -21,6 +23,8 @@ export const CHANGE_LOCALIZE_TYPE = "CHANGE_LOCALIZE_TYPE"
 export const CHANGE_CREDITO_TYPE = "CHANGE_CREDITO_TYPE"
 export const CHANGE_VEICULOS_TYPE = "CHANGE_VEICULOS_TYPE"
 export const LAST_QUERIES = "LAST_QUERIES"
+export const USER_CHANGED_PASSWORD = "USER_CHANGED_PASSWORD"
+export const USER_CHANGED_PASSWORD_MESSAGE = "Verifique o email:"
 
 export const MESSAGE_HELP_CELULARES = "Formato: DDD Sem o zero + Número, separado por vírgula ou quebra de linha"
 export const MESSAGE_FIELD_CELULARES_EMPTY = "Preencha pelo menos 1 celular válido"
