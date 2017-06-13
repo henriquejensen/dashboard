@@ -1,22 +1,48 @@
 import React, { Component} from "react";
-import { Col } from "react-bootstrap";
+import { Col, Form, Image } from "react-bootstrap";
+
+//Components
+import Panel from "../../components/panel/Panel"
+import { MyFieldGroup } from "../../components/forms/CommonForms"
+import MyButton from "../../components/button/MyButton"
 
 export default class Info extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            nome: this.props.user.usuarioNome,
-            telefone: this.props.user.telefone,
-            email: this.props.user.email
-        }
+        this.filesExtensionAccept = ".png,.jpg,.jpeg"
 
-        this.onSubmitUser = this.onSubmitUser.bind(this);
-        this.onChange = this.onChange.bind(this);
-        this.sendInfoUser = this.sendInfoUser.bind(this);
+        this.state = {}
     }
 
-    onSubmitUser(e) {
+    onChangeFileUpload = (evt) => {
+        let fileExtensionFound = evt.target.value.split(".")
+        fileExtensionFound = fileExtensionFound[fileExtensionFound.length-1].toLowerCase()
+        //retira os pontos da extensao do arquivo, os tranforma num array e procura no array o arquivo do upload
+        let isFileAccept = this.filesExtensionAccept.replace(/[~./]/g,"").split(",").indexOf(fileExtensionFound)
+
+        if(isFileAccept === -1) {
+            this.setState({
+                messageErrorFileUpload: `Tipo de arquivo(${fileExtensionFound}) não suportado, entre em contato com o suporte`,
+                error: true
+            })
+        } else {
+            let reader = new FileReader();
+            let file = evt.target.files[0];
+
+            reader.onloadend = () => {
+                this.setState({
+                    fileUpload: file,
+                    error: false,
+                    usuarioImagem: reader.result
+                });
+            }
+
+            reader.readAsDataURL(file)
+        }
+    }
+
+    onSubmitUser = (e) => {
         e.preventDefault();
         e.stopPropagation();
 
@@ -26,71 +52,86 @@ export default class Info extends Component {
 
     }
 
-   onSubmitFirm(e) {
+    onSubmitForm = (e) => {
         e.preventDefault();
-        e.stopPropagation();
 
-        console.log("Submit Form")
+        this.props.userEditInfo({
+            usuarioNome: this.state.usuarioNome,
+            usuarioTelefone: this.state.usuarioTelefone,
+            usuarioEmail: this.state.usuarioEmail,
+            usuarioImagem: this.state.fileUpload,
+            usuarioImagemPreview: this.state.usuarioImagem
+        });
     }
 
-    onChange(evt) {
+    onChange = (evt) => {
         this.setState({
             [evt.target.name]: evt.target.value
         })
     }
 
-    sendInfoUser(e) {
-        this.props.userEditInfo(this.state.nome, this.state.telefone, this.state.email);
-    }
-
     render() {
+        let usuarioNome = this.state.usuarioNome !== undefined ? this.state.usuarioNome : this.props.user.usuarioNome
+        let usuarioEmail = this.state.usuarioEmail !== undefined ? this.state.usuarioEmail : this.props.user.usuarioEmail
+        let usuarioTelefone = this.state.usuarioTelefone !== undefined ? this.state.usuarioTelefone : this.props.user.usuarioTelefone
+        let usuarioImagem = this.state.usuarioImagem !== undefined ? this.state.usuarioImagem : this.props.user.usuarioImagem
         return (
             <Col md={12}>
-                <div className="panel panel-default">
-                    <div className="panel-heading text-center">
-                        DADOS PESSOAIS
-                    </div>
-                    <div className="panel-body">
-                        <div className="col-md-12">
-                            <div className="col-md-12" style={{margin:"15px 0"}}>
-                                <label>Nome completo</label>
-                                <input
-                                    placeholder="Digite seu nome aqui"
+                <Panel title="DADOS PESSOAIS">
+                    <Col md={12}>
+                        <Form onSubmit={this.onSubmitForm}>
+                                <MyFieldGroup
+                                    id="usuarioNome"
                                     type="text"
-                                    value={this.state.nome}
+                                    label="Nome completo"
+                                    name="usuarioNome"
+                                    placeholder="Digite seu nome"
+                                    value={usuarioNome}
                                     onChange={this.onChange}
-                                    name="nome"
-                                    style={{width:"99%", padding:"5px 10px"}}/>
-                            </div>
-                            <div className="col-md-12" style={{margin:"15px 0"}}>
-                                <label>Email</label>
-                                <input
-                                    placeholder="Digite seu email aqui"
-                                    type="email"
-                                    value={this.state.email}
-                                    onChange={this.onChange}
-                                    name="email"
-                                    style={{width:"99%", padding:"5px 10px"}}/>
-                            </div>
-                            <div className="col-md-12" style={{margin:"15px 0"}}>
-                                <label>Telefone</label>
-                                <input
-                                    placeholder="Digite seu telefone"
-                                    type="tel"
-                                    value={this.state.telefone}
-                                    onChange={this.onChange}
-                                    name="telefone"
-                                    style={{width:"99%", padding:"5px 10px"}}/>
-                            </div>
-                        </div>
+                                />
 
-                        <div className="col-md-12">
-                            <div className="col-md-12">
-                                <button className="btn btn-primary pull-right" type="submit" onClick={this.sendInfoUser}>Atualizar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                <MyFieldGroup
+                                    id="usuarioEmail"
+                                    type="email"
+                                    label="Email"
+                                    name="usuarioEmail"
+                                    placeholder="Digite seu email"
+                                    value={usuarioEmail}
+                                    onChange={this.onChange}
+                                />
+
+                                <MyFieldGroup
+                                    id="usuarioTelefone"
+                                    type="tel"
+                                    label="Telefone"
+                                    name="usuarioTelefone"
+                                    placeholder="Digite seu telefone"
+                                    value={usuarioTelefone}
+                                    onChange={this.onChange}
+                                />
+
+                                <Image src={usuarioImagem} id="menu-image-user"/>
+
+                                <MyFieldGroup
+                                    id="usuarioImagem"
+                                    type="file"
+                                    label={"Arquivo("+this.filesExtensionAccept+")"}
+                                    name="usuarioImagem"
+                                    message={this.state.error ? this.state.messageErrorFileUpload : ""}
+                                    accept={`file_extension/${this.filesExtensionAccept}`}
+                                    onChange={this.onChangeFileUpload}
+                                />
+
+                                <MyButton
+                                    type="submit"
+                                    myButtonClass="btn pull-right"
+                                    myButtonStyle="primary"
+                                    myButtonText="Atualizar dados"
+                                />
+                        </Form>
+                    </Col>
+
+                </Panel>
             </Col>)
     }
 }

@@ -3,32 +3,35 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Notification from "react-notification-system";
 
+//Actions
 import { userEditInfo, userDashboard } from "../../actions/index";
 
+//Components
 import InfoUser from "./InfoUser";
 import ImagesUser from "./ImagesUser";
 import DashboardUser from "./DashboardUser";
+
+//Constants
+import { COMPANY_NAME_SHORT } from "../../constants/constantsCompany"
+import { EDIT_USER_PROFILE, EDIT_USER_PROFILE_SUCCESS, SUCCESS } from "../../constants/utils"
 
 class EditUser extends Component {
     constructor(props) {
         super(props);
 
         this._notificationSystem = null;
-
-        this.userEditInfo = this.userEditInfo.bind(this);
-        this.userDashboard = this.userDashboard.bind(this);
     }
 
-	componentDidMount() {
-		document.title = "Editar Usuário > Assertiva";
-	}
-
-    userEditInfo(nome, email, telefone) {
-        this._addNotification("Informações do usuário atualizadas com sucesso");
-        this.props.userEditInfo(nome, email, telefone);
+    componentDidMount() {
+        document.title = EDIT_USER_PROFILE + " > " + COMPANY_NAME_SHORT;
     }
 
-    userDashboard(gadgets, chart) {
+    userEditInfo = ({ usuarioNome, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview }) => {
+        this._addNotification(EDIT_USER_PROFILE_SUCCESS);
+        this.props.userEditInfo(usuarioNome, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview);
+    }
+
+    userDashboard = (gadgets, chart) => {
         this._addNotification("Informações do dashboard atualizadas com sucesso");
         this.props.userDashboard(gadgets, chart);
     }
@@ -37,14 +40,14 @@ class EditUser extends Component {
         if (this._notificationSystem) {
                 this._notificationSystem.addNotification({
                 message: message,
-                level: 'success'
+                level: SUCCESS.toLocaleLowerCase()
             });
         }
     }
 
     render() {
         return (
-            <div className="container">
+            <div>
                 <InfoUser user={this.props.user} userEditInfo={this.userEditInfo} />
 
                 <Notification ref={n => this._notificationSystem = n} />
@@ -54,6 +57,7 @@ class EditUser extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log("STATE", state)
     return {
         user: state.user
     }

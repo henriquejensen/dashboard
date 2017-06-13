@@ -28,10 +28,6 @@ import { TITLE_HEADER } from "../constants/utils";
 import menu from "./utils/common/menu.json";
 
 class MenuSuperior extends Component {
-	state = {
-		IsModalOpen: false,
-		indexNotification: 0
-	}
 
 	componentWillMount() {
 		this.props.getUserData()
@@ -40,21 +36,6 @@ class MenuSuperior extends Component {
 	changeRoute = (route) => {
 		browserHistory.push(route);
 	}
-
-	onOpenNotification = (evt, index) => {
-		evt.preventDefault();
-
-		this.setState({
-			IsModalOpen: true,
-			indexNotification: index
-		})
-	}
-
-    closeModal() {
-        this.setState({
-            IsModalOpen: false
-        })
-    }
 
 	render() {
 		let onMenuClicked = this.props.onMenuClicked;
@@ -95,17 +76,6 @@ class MenuSuperior extends Component {
 					</Navbar.Form>
 				</Navbar.Collapse>
 			</Navbar>
-
-			{this.state.IsModalOpen ?
-				<Modal
-					IsModalOpen={this.state.IsModalOpen}
-					closeModal={this.closeModal.bind(this)}
-					title={this.props.notifications[this.state.indexNotification].assunto}
-				>
-					<Col md={12}>{this.props.notifications[this.state.indexNotification].mensagem}</Col>
-				</Modal>
-			: ""}
-				
 		</div>
 		)
 	}
@@ -113,8 +83,7 @@ class MenuSuperior extends Component {
 
 function mapStateToProps(state) {
 	return {
-		user: state.user,
-		notifications: state.user.notifications
+		user: state.user
 	}
 }
 

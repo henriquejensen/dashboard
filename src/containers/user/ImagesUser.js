@@ -7,7 +7,7 @@ export default class ImagesUser extends Component {
         this.state = {
             nome: this.props.user.nome,
             telefone: this.props.user.telefone,
-            avatar_url: this.props.user.avatar_url,
+            usuarioImagem: this.props.user.usuarioImagem,
             background_url: this.props.user.background_url,
             firm_url: this.props.user.firm_url
         }
@@ -48,7 +48,7 @@ export default class ImagesUser extends Component {
     }
 
     sendInfoUser(e) {
-        this.props.userEditInfo(this.state.nome, this.state.telefone, this.state.avatar_url, this.state.firm_url);
+        this.props.userEditInfo(this.state.nome, this.state.telefone, this.state.usuarioImagem, this.state.firm_url);
     }
 
     render() {
@@ -75,7 +75,7 @@ export default class ImagesUser extends Component {
                         <div className="col-md-12 col-xs-12">
                             <div className="col-md-4 col-xs-6 text-center">
                                 <div className="col-md-12 col-xs-12">
-                                    <img src={this.props.user.avatar_url} className="img-uploaded" />
+                                    <img src={this.props.user.usuarioImagem} className="img-uploaded" />
                                 </div>
                                 <div className="col-md-12 col-xs-12">
                                     <form method="post" encType="multipart/form-data" onSubmit={this.onSubmitUser} ref="imageUpload" name="avatar">

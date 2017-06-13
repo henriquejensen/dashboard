@@ -76,16 +76,12 @@ export function loadingLocalize() {
 	}
 }
 
-export function userEditInfo(nome, telefone, email) {
-	const info = {
-		nome: nome,
-		telefone: telefone,
-		email: email
-	}
-
+export function userEditInfo(usuarioNome, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview) {
 	return {
 		type: USER_EDIT_INFO,
-		payload: info
+		payload: {
+			usuarioNome, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview
+		}
 	}
 }
 

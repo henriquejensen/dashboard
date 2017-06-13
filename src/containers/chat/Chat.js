@@ -39,7 +39,7 @@ class Chat extends Component {
                                           } else {
                                               return <li className="right clearfix" key={index}>
                                                         <span className="chat-img pull-right">
-                                                            <img src={this.props.user.avatar_url} alt="User Avatar" width="40" />
+                                                            <img src={this.props.user.usuarioImagem} alt="User Avatar" width="40" />
                                                         </span>
                                                         <div className="chat-body clearfix">
                                                             <div className="header">

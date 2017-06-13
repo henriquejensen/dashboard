@@ -22,7 +22,7 @@ class CentroCusto extends Component {
 
   render() {
     return (
-    <div className="container">
+    <div>
       <div className="row">
         <div className="col-md-12">
 

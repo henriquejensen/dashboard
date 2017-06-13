@@ -13,7 +13,6 @@ import Protocolo from "../../components/protocolo/Protocolo";
 import * as pattern from "../../components/utils/functions/patternDocuments";
 
 const FocoFiscalView = (props) => {
-    console.log("VIEW FOCO FISCAL", props)
     let data = props.data
     return (
         <PanelGroup>

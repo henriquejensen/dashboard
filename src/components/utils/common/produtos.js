@@ -151,11 +151,11 @@ export const todosProdutos = {
         imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-focofiscal-negative.png",
         alt: "Icone Foco Fiscal",
         subItems: [
-            {label: "Receita PF", id: "pf"},
-            {label: "Receita PJ", id: "pj"},
-            {label: "Receita PJ Sintegra", id: "sintegra"},
+            {label: "Receita PF", id: "receitapf"},
+            {label: "Receita PJ", id: "receitapj"},
+            {label: "Receita PJ Sintegra", id: "pjsintegra"},
             //{label: "Sintegra Unificada", id: "unificada"},
-            {label: "Simples Nacional", id: "simples"}
+            {label: "Simples Nacional", id: "simplesnacional"}
             ]
     },
     VEICULOS: {

@@ -1,12 +1,19 @@
 #card-info-user {
-    background-color: #EC870E;
+    background-color: #666666;
     color: white;
     height: 72px;
     display: flex;
-    padding: 15px 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
 }
 
 #menu-image-user {
     width: 40px;
-    height: 100%;
+    height: 40px;
+    border-radius: 0px 9px
+}
+
+#card-info-text {
+    margin-left: 10px
 }

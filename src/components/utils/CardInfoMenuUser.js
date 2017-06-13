@@ -5,15 +5,18 @@ import { Image, Col } from "react-bootstrap";
 
 export default class CardInfoMenuUser extends Component {
     render() {
+        let  { usuarioImagem, usuarioNome, perfilDescricao } = this.props.user
+        usuarioNome = usuarioNome ? usuarioNome : ""
+
         return (
             <div id="card-info-user">
-                <Col md={3} sm={12} >
-                    <Image src={this.props.user.avatar_url} id="menu-image-user" rounded/>
-                </Col>
-                <Col md={9} sm={12} >
-                    <div>{this.props.user.usuarioNome}</div>
-                    <div>{this.props.user.perfilDescricao}</div>
-                </Col>
+                <div>
+                    <Image src={usuarioImagem} id="menu-image-user" />
+                </div>
+                <div id="card-info-text">
+                    <div>{usuarioNome.substring(0,17)}</div>
+                    <div>{perfilDescricao}</div>
+                </div>
             </div>
         )
     }

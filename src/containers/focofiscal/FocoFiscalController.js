@@ -85,19 +85,28 @@ class FocoFiscal extends Component {
 
 		this.props.loadingFocoFiscal();
 
+		let documento = this.state.focofiscalInput.documento
+		documento = documento.replace(/[^0-9]/g, "")
+
 		switch(this.props.type) {
-			case "PF":
-				this.props.searchByReceitaPF(this.state.focofiscalInput.documento,this.state.focofiscalInput.dataNascimento)
+			case "RECEITAPF":
+				this.props.searchByReceitaPF(documento,this.state.focofiscalInput.dataNascimento)
+				break
+			case "RECEITAPJ":
+				this.props.searchByReceitaPJ(documento)
+				break
+			case "PJSINTEGRA":
+				this.props.searchByReceitaPJSintegra(documento)
 				break
 			default:
-				this.props.searchByFocoFiscalSimplesNacional(this.state.focofiscalInput.documento)
+				this.props.searchByFocoFiscalSimplesNacional(documento)
 		}
 		
 		this.setState({
 			focofiscalInput: {
-				documento: "",
-				dataNascimento: "",
-				estado: ""
+				documento: [],
+				dataNascimento: this.state.dataNascimento,
+				estado: this.state.estado
 			}
 		})
 	}
@@ -118,11 +127,11 @@ class FocoFiscal extends Component {
 						message = {this.props.message}
 						lastQueries = {this.props.lastQueries[this.props.type]}
 					>
-						<Col md={tipo == "PF" ? 5 : 7}>
+						<Col md={tipo == "RECEITAPF" ? 5 : 7}>
 							<MyFieldGroup
 								type="text"
 								placeholder={
-									this.props.type == "PF" ?
+									this.props.type == "RECEITAPF" ?
 										"CPF"
 									: "CNPJ"
 								}
@@ -132,7 +141,7 @@ class FocoFiscal extends Component {
 								required/>
 						</Col>
 
-						{tipo == "PF" ?
+						{tipo == "RECEITAPF" ?
 							<Col md={2}>
 								<MyFieldGroup
 									id="dataNascimento"

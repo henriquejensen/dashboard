@@ -17,9 +17,10 @@ export function apiContentType(dispatch, url, data, search, parameters) {
         .set('authorization', localStorage.getItem("token"))
         .end(function(error, response) {
             if (response) {
+                console.log("API RESPONSE", response, parameters)
                 if(response.status == 200) {
                     let valuesBody = response.body ? Object.keys(response.body) : [];
-                    if(response.body && !response.body.erro && valuesBody.length > 0) {
+                    if(response.body && valuesBody.length > 0) {
                         dispatch({
                             type: search,
                             payload: {
@@ -58,7 +59,7 @@ export function api(dispatch, url, data, search, parameters) {
                 if(response.status == 200) {
                     /**Verifica se o body possui informacao */
                     let valuesBody = response.body ? Object.keys(response.body) : [];
-                    if(response.body && !response.body.erro && valuesBody.length > 0) {
+                    if(response.body && valuesBody.length > 0) {
                         dispatch({
                             type: search,
                             payload: {
@@ -97,7 +98,7 @@ export function apiWithKeySession(dispatch, url, data, search, parameters) {
                 if(response.status == 200) {
                     /**Verifica se o body possui informacao */
                     let valuesBody = response.body ? Object.keys(response.body) : [];
-                    if(response.body && !response.body.erro && valuesBody.length > 0) {
+                    if(response.body && valuesBody.length > 0) {
                         dispatch({
                             type: search,
                             payload: {
@@ -136,7 +137,7 @@ export function apiFileUpload(dispatch, url, data, search, parameters) {
             if (response) {
                 if(response.status == 200) {
                     let valuesBody = response.body ? Object.keys(response.body) : [];
-                    if(response.body && !response.body.erro && valuesBody.length > 0) {
+                    if(response.body && valuesBody.length > 0) {
                         dispatch({
                             type: search,
                             payload: {

@@ -45,7 +45,7 @@ class NovoEnriquecimento extends Component {
 
     onChangeFileUpload = (evt) => {
         let fileExtensionFound = evt.target.value.split(".")
-        fileExtensionFound = fileExtensionFound[fileExtensionFound.length-1]
+        fileExtensionFound = fileExtensionFound[fileExtensionFound.length-1].toLowerCase()
         //retira os pontos da extensao do arquivo, os tranforma num array e procura no array o arquivo do upload
         let isFileAccept = this.filesExtensionAccept.replace(/[~./]/g,"").split(",").indexOf(fileExtensionFound)
 
@@ -91,11 +91,10 @@ class NovoEnriquecimento extends Component {
                     <MyFieldGroup
                         id="formControlsFile"
                         type="file"
-                        label="Arquivo(.txt, .csv, .rem ou zip)"
+                        label={"Arquivo("+this.filesExtensionAccept+")"}
                         required
                         name="uploadEnriquecimentoBaseCerta"
-                        message={this.state.messageErrorFileUpload}
-                        error={this.state.error}
+                        message={this.state.error ? this.state.messageErrorFileUpload : ""}
                         accept={`file_extension/${this.filesExtensionAccept}`}
                         onChange={this.onChangeFileUpload}
                     />

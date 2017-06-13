@@ -4,6 +4,7 @@ import {
     CHANGE_FOCOFISCAL_TYPE,
     ERR_CONNECTION_REFUSED,
     ERROR_503,
+    NENHUM_REGISTRO,
     REQUEST_ERROR
 } from "../constants/utils";
 
@@ -77,21 +78,26 @@ export default function(state=getInitialState, action) {
         }
 
         case focofiscal.FETCH_FOCOFISCAL: {
-            let documento = action.payload.response.cadastro.cpf ? action.payload.response.cadastro.cpf : action.payload.response.cadastro.cnpj
-            documento = documento.toString()
-            let newResponse = action.payload.response
+            let responseIsNull = !action.payload.response.cadastro
+            let documento, newResponse
 
-            newResponse['label'] = documento;
-            newResponse['tipo'] = action.payload.parameters.tipo;
-            newResponse['icon'] = ICON_FOCOFISCAL;
-            newResponse['produto'] = COMPANY_PRODUCT_FOCOFISCAL_LABEL;
+            if(!responseIsNull) {
+                documento = action.payload.response.cadastro.cpf ? action.payload.response.cadastro.cpf : action.payload.response.cadastro.cnpj
+                documento = documento.toString()
+                newResponse = action.payload.response
+
+                newResponse['label'] = documento;
+                newResponse['tipo'] = action.payload.parameters.tipo;
+                newResponse['icon'] = ICON_FOCOFISCAL;
+                newResponse['produto'] = COMPANY_PRODUCT_FOCOFISCAL_LABEL
+            }
 
             return {
                 loading: false,
-                status: "",
-                message: "",
-                response: {...state.response, [documento]:newResponse },
-                tabActive: documento,
+                status: !responseIsNull ? "" : REQUEST_ERROR,
+                message: !responseIsNull ? "" : NENHUM_REGISTRO,
+                response: !responseIsNull ? {...state.response, [documento]:newResponse } : state.response,
+                tabActive: !responseIsNull ? documento : state.tabActive,
                 lastQueries: state.lastQueries,
                 type: state.type
             }
