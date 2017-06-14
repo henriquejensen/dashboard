@@ -24,8 +24,8 @@ import Credito from "./containers/credito/CreditoController"
 import CreditoMix from "./containers/creditomix/CreditoMixController"
 import Veiculos from "./containers/veiculos/VeiculosController"
 import FocoFiscal from "./containers/focofiscal/FocoFiscalController"
-//import VendaMais from "./containers/vendamais/VendaMais"
 
+import Consumo from "./containers/relatorios/Consumo"
 import Relatorios from "./containers/relatorios/Relatorios"
 import Cadastro from "./containers/cadastro/Cadastro"
 
@@ -59,7 +59,8 @@ export default (
       <Route name="Cadastro" path="cadastro" component={Cadastro} />
 
       <Route name="Relatórios" path="relatorios" component={Relatorios} />
-      
+      <Route name="Consumo" path="consumo" component={Consumo} />
+
       <Route name="Editar" path="editar" component={EditUser}	/>
       <Route name="Contato" path="contato" component={Contato}	/>
 

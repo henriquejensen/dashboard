@@ -1,57 +1,82 @@
-import React, { Component } from "react";
-import Form from "../../components/forms/Form";
-import Panel from "../../components/panel/Panel";
-import Table from "../../components/table/Table";
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
+import { Col } from "react-bootstrap"
 
-export default class Relatorios extends Component {
-    render(){
+//Actions
+import { getRelatorios } from "../../actions/actionsRelatorios"
+
+//Constants
+import Modal from "../../components/Modal"
+import { LOADING_GIF } from "../../constants/utils"
+import { COMPANY_NAME_SHORT } from "../../constants/constantsCompany"
+import { TITLE_REPORTS } from "../../constants/utils"
+
+//Components
+import RelatoriosView from "./RelatoriosView"
+import Filtro from "./Filtro"
+
+class Relatorios extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            IsModalOpen: false
+        }
+    }
+
+	componentDidMount() {
+		document.title = TITLE_REPORTS + " > " + COMPANY_NAME_SHORT
+        this.props.getRelatorios()
+	}
+
+    closeModal = () => {
+        this.setState({
+            IsModalOpen: false
+        })
+    }
+
+    showModal = (relatorioId) => {
+        this.setState({
+            IsModalOpen: true,
+            relatorioId: relatorioId
+        })
+    }
+
+    render() {
+        let relatorio = this.props.relatorios[this.state.relatorioId]
         return (
-            <div className="col-md-12">
-                <Panel title="LISTA DE RELATÓRIOS" qtdTotal={[{icon:"fa fa-file-o", qtd:6}]}>
-                    <Table fields={
-                        ["Tipo", "Descrição", "Extrair", "Sobre"]
-                    }>
-                    <tbody>
-                        <tr>
-                            <td>R6</td>
-                            <td>Consultas de Localize, Crédito, Veículos e Foco Fiscal</td>
-                            <td>Extrair</td>
-                            <td>Veja mais</td>
-                        </tr>
-                         <tr>
-                            <td>R7</td>
-                            <td>Envio de SMS</td>
-                            <td>Extrair</td>
-                            <td>Veja mais</td>
-                        </tr>
-                        <tr>
-                            <td>R8</td>
-                            <td>Consumo do Base Certa</td>
-                            <td>Extrair</td>
-                            <td>Veja mais</td>
-                        </tr>
-                         <tr>
-                            <td>R9</td>
-                            <td>Consumo total de todos os produtos</td>
-                            <td>Extrair</td>
-                            <td>Veja mais</td>
-                        </tr>
-                        <tr>
-                            <td>R12</td>
-                            <td>Consultas de Localize, Crédito e Veículos em tela</td>
-                            <td>Consulta</td>
-                            <td></td>
-                        </tr>
-                         <tr>
-                            <td>R17</td>
-                            <td>Consumo de Venda+</td>
-                            <td>Extrair</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                    </Table>
-                </Panel>
-            </div>
+            <Col md={12}>
+                <RelatoriosView
+                    relatorios={this.props.relatorios}
+                    showModal={this.showModal}
+                />
+
+                <Modal
+                    IsModalOpen={this.state.IsModalOpen}
+                    closeModal={this.closeModal}
+                    size="lg"
+                    title="Extrair as informações"
+                >
+                    <Filtro relatorio={relatorio} />
+                    
+                </Modal>
+            </Col>
         )
     }
 }
+
+function mapStateToProps(state) {
+    console.log("mapStateToProps", state)
+    return {
+        relatorios: state.relatorios.relatorios
+    }
+}
+
+function mapDispatchProps(dispatch) {
+    return bindActionCreators({
+        getRelatorios
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchProps)(Relatorios)

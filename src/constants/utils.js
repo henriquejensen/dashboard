@@ -9,6 +9,8 @@ export const URL_GET_IP = "https://auth.assertivasolucoes.com.br/auth/get-info-r
 export const EDIT_USER_PROFILE = "Editar perfil"
 export const EDIT_USER_PROFILE_SUCCESS = "Informações do usuário atualizadas com sucesso"
 export const TITLE_HEADER = "Configurações"
+export const TITLE_REPORTS = "Relatórios"
+export const TITLE_CONSUME = "Consumo"
 export const ERR_CONNECTION_REFUSED_MESSAGE = "Serviço temporariamente indisponível, tente novamente mais tarde"
 export const USER_CHANGED_PASSWORD_MESSAGE = "Verifique o email:"
 

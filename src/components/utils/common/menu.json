@@ -148,6 +148,10 @@
                     "label": "Editar perfil",
                     "link": "/editar"
                 },
+                {
+                    "label": "Relatórios",
+                    "link": "/relatorios"
+                },
                 {      
                     "label": "Contato",
                     "link": "/contato"

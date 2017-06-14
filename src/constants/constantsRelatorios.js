@@ -1,0 +1,1 @@
+export const GET_RELATORIOS = "GET_RELATORIOS"

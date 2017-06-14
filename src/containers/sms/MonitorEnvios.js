@@ -63,7 +63,7 @@ class MonitorEnvios extends Component {
     renderForm = () => {
         return (
           <Panel>
-            <Form onSubmit={this.onFormSubmit} className="my-form">
+            <Form onSubmit={this.onFormSubmit}>
                 <Col md={this.state.showBuscaAvancada ? 8 : 10}>
                     <MyFieldGroup
                       id="smsCampanha"
