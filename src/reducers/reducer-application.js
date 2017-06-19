@@ -1,4 +1,16 @@
-import { ERROR_401_UNAUTHORIZED, LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT, CHANGE_COLOR_MENU, AUTHENTICATION, LOADING, CHANGE_PASSWORD, CLOSE_MESSAGE_CHANGE_PASSWORD, USER_CHANGED_PASSWORD } from "../constants/utils";
+import {
+    ERROR_401_UNAUTHORIZED,
+    LOGIN_SUCCESS,
+    LOGIN_ERROR,
+    LOG_OUT,
+    CHANGE_COLOR_MENU,
+    AUTHENTICATION,
+    LOADING,
+    REQUEST_CHANGE_PASSWORD,
+    RESET_CHANGE_PASSWORD,
+    CLOSE_MESSAGE_CHANGE_PASSWORD,
+    USER_CHANGED_PASSWORD
+} from "../constants/utils";
 
 const getInitialState = {
     colorMenu: "#673ab7",
@@ -55,7 +67,18 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case CHANGE_PASSWORD: {
+        case REQUEST_CHANGE_PASSWORD: {
+            return {
+                colorMenu: state.colorMenu,
+                loading: false,
+                logado: false,
+                error: false,
+                status: USER_CHANGED_PASSWORD,
+                msgn: action.payload.email
+            }
+        }
+
+        case RESET_CHANGE_PASSWORD: {
             return {
                 colorMenu: state.colorMenu,
                 loading: false,

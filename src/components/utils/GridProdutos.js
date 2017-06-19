@@ -10,7 +10,7 @@ import {
 } from "../../actions/index";
 import { searchCreditoCompleta } from "../../actions/actionsCredito";
 
-import { ICON_LOCALIZE, ICON_CREDITO, ICON_FOCOFISCAL } from "../../constants/utils";
+import { ICON_LOCALIZE, ICON_CREDITO, ICON_FOCOFISCAL } from "../../constants/constantsCompany";
 import { SEARCH_BY_CREDITO_IN_LOCALIZE } from "../../constants/constantsLocalize";
 
 import Panel from "../panel/Panel";

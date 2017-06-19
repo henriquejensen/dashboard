@@ -1,7 +1,8 @@
 import ajax from "superagent";
 
+import { apiContentType, api } from "../api/Api";
+
 import {
-		CHANGE_PASSWORD,
 		CHANGE_COLOR_MENU,
 		CLOSE_MESSAGE_CHANGE_PASSWORD,
 		INFO_URL,
@@ -13,6 +14,10 @@ import {
 		LOADING,
 		AUTH_URL,
 		AUTHENTICATION,
+		REQUEST_CHANGE_PASSWORD,
+		RESET_CHANGE_PASSWORD,
+		URL_REQUEST_CHANGE_PASSWORD,
+		URL_RESET_CHANGE_PASSWORD
 } from "../constants/utils";
 
 import { apiWithKeySession } from "../api/Api";
@@ -22,13 +27,6 @@ export function changeProductType(product, type) {
 	return {
 		type: "CHANGE_" + product.toUpperCase() + "_TYPE",
 		payload: type
-	}
-}
-
-export function changePassword(cliente, usuario) {
-	return {
-		type: CHANGE_PASSWORD,
-		payload: { email: "tes*****ario@assertivasolucoes.com.br" }
 	}
 }
 
@@ -83,5 +81,23 @@ export function loading() {
 	return {
 		type: LOADING,
 		payload: "loading"
+	}
+}
+
+export function requestChangePassword(empresa, usuario) {
+	let url = URL_REQUEST_CHANGE_PASSWORD
+	let data = { usuario, empresa }
+	let search = REQUEST_CHANGE_PASSWORD
+	return (dispatch) => {
+		apiContentType(dispatch, url, data, search)
+	}
+}
+
+export function resetChangePassword({ empresa, usuario, password, key }) {
+	let url = URL_RESET_CHANGE_PASSWORD
+	let data = { empresa, usuario, password, key }
+	let search = RESET_CHANGE_PASSWORD
+	return (dispatch) => {
+		apiContentType(dispatch, url, data, search)
 	}
 }

@@ -1,5 +1,7 @@
 export const AUTH_URL = "https://auth.assertivasolucoes.com.br/auth/get-key-session-user"
 export const INFO_URL = "https://auth.assertivasolucoes.com.br/info/get-info-user"
+export const URL_REQUEST_CHANGE_PASSWORD = "https://auth.assertivasolucoes.com.br/pwd/request"
+export const URL_RESET_CHANGE_PASSWORD = "https://auth.assertivasolucoes.com.br/pwd/reset"
 export const AUTHENTICATION = "token"
 export const GOOGLE_MAPS_KEY = 'AIzaSyDrjaImSSsOUSh9d5KDq9RVnHKtNSI_GJI'
 export const GOOGLE_MAPS_URL = "https://maps.googleapis.com/maps/api/geocode/json?address="
@@ -14,7 +16,8 @@ export const TITLE_CONSUME = "Consumo"
 export const ERR_CONNECTION_REFUSED_MESSAGE = "Serviço temporariamente indisponível, tente novamente mais tarde"
 export const USER_CHANGED_PASSWORD_MESSAGE = "Verifique o email:"
 
-export const CHANGE_PASSWORD = "CHANGE_PASSWORD"
+export const REQUEST_CHANGE_PASSWORD = "REQUEST_CHANGE_PASSWORD"
+export const RESET_CHANGE_PASSWORD = "RESET_CHANGE_PASSWORD"
 export const CLOSE_MESSAGE_CHANGE_PASSWORD = "CLOSE_MESSAGE_CHANGE_PASSWORD"
 export const REQUEST_ERROR = "REQUEST_ERROR"
 export const ERR_CONNECTION_REFUSED = "ERR_CONNECTION_REFUSED"

@@ -136,7 +136,7 @@ class Login extends Component {
                             </Col>
                             <span className="clearfix"></span>
                         </div>
-                        <Link to="/password" className="text-center new-account">Esqueci minha senha </Link>
+                        <Link to="/senha" className="text-center new-account">Esqueci minha senha </Link>
                     </Col>
                 </Row>
             </div>

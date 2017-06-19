@@ -4,6 +4,7 @@ import { Route, IndexRoute } from "react-router"
 import App from "./components/app"
 import Login from "./components/Login"
 import ChangePassword from "./components/ChangePassword"
+import ResetPassword from "./components/ResetPassword"
 
 import EditUser from "./containers/user/EditUser"
 import Contato from "./containers/contato"
@@ -32,7 +33,8 @@ import Cadastro from "./containers/cadastro/Cadastro"
 export default (
   <Route>
     <Route path='/login' component={Login} />
-    <Route path='/password' component={ChangePassword} />
+    <Route path='/senha' component={ChangePassword} />
+    <Route path='/novasenha' component={ResetPassword} />
 
     <Route onEnter={requireAuth} component={App}>
       <Route name="Localize" path="/" component={Localize}	/>

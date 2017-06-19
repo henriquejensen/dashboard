@@ -7,7 +7,7 @@ import { Alert, Col, Row } from "react-bootstrap"
 import { Link } from "react-router"
 
 //Actions
-import { requestChangePassword, closeChangePasswordMessage } from "../actions/actionsCommon"
+import { resetChangePassword, closeChangePasswordMessage } from "../actions/actionsCommon"
 
 //Components
 import MyButton from "./button/MyButton"
@@ -17,9 +17,15 @@ import { MyFieldGroup } from "./forms/CommonForms"
 import { USER_CHANGED_PASSWORD_MESSAGE, USER_CHANGED_PASSWORD } from "../constants/utils"
 import { COMPANY_NAME_SHORT, COMPANY_NAME_LONG, COMPANY_LOGO } from "../constants/constantsCompany"
 
-class ChangePassword extends Component {
+class ResetPassword extends Component {
     constructor(props) {
         super(props)
+
+        this.dadosUrl = "?keyUpdateSenha=7f1cbbf7-62ef-46c7-a027-b580364a7c19b665d81e-e876-4fcd-8d24-0f2ff0f7f68f&email=henrique.teixeira@assertivasolucoes.com.br&cliente=ASSERTIVA&usuario=HENRIQUE.TEIXEIRA".split("&")
+        this.key = this.dadosUrl[0].split("=")[1]
+        this.email = this.dadosUrl[1].split("=")[1]
+        this.cliente = this.dadosUrl[2].split("=")[1]
+        this.usuario = this.dadosUrl[3].split("=")[1]
 
         this.state={}
     }
@@ -33,10 +39,11 @@ class ChangePassword extends Component {
     onFormSubmit = evt => {
         evt.preventDefault()
 
-        this.props.requestChangePassword(this.state.cliente, this.state.usuario)
+        this.props.resetChangePassword( { usuario:this.usuario, empresa:this.cliente, password:this.state.password, key:this.key })
     }
 
-    renderForm = ({ cliente, usuario }) => {
+    renderForm = () => {
+        let { password, confirmPassword } = this.state
         return (
             <form className="form-signin" onSubmit={this.onFormSubmit}>
                 {this.props.status === USER_CHANGED_PASSWORD ?
@@ -54,52 +61,42 @@ class ChangePassword extends Component {
                 : ""}
 
                 <MyFieldGroup
-                    type="text"
-                    id="cliente"
-                    name="cliente"
-                    label="Cliente (O mesmo utilizado na tela de login)"
-                    placeholder="Digite o cliente"
+                    type="password"
+                    id="password"
+                    name="password"
+                    label="Nova senha"
                     required
-                    value={cliente}
+                    value={password}
                     onChange={this.onChange}
                 />
 
                 <MyFieldGroup
-                    type="text"
-                    id="usuario"
-                    name="usuario"
-                    label="Usuário"
-                    placeholder="Digite o usuário"
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    label="Confirme a nova senha"
                     required
-                    value={usuario}
+                    value={confirmPassword}
                     onChange={this.onChange}
                 />
 
-                <div className="btn-group btn-password">
-                    <Link to="/login" className="btn btn-default">
-                        Voltar ao Login
-                    </Link>
-                    <MyButton
-                        type="submit"
-                        myButtonClass="btn pull-right"
-                        myButtonStyle="primary"
-                        myButtonText="Solicitar Troca"
-                    />
-                </div>
+                <MyButton
+                    type="submit"
+                    myButtonClass="btn-block"
+                    myButtonStyle="primary"
+                    myButtonText="Alterar senha"
+                />
             </form>
         )
     }
     
     render() {
-        let cliente = this.state.cliente || this.props.cliente
-        let usuario = this.state.usuario || this.props.usuario
         return (
             <div className="container">
                 <Row>
                     <Col md={4} mdOffset={4} sm={12}>
                         <h3 className="text-center login-title">
-                            <strong>Solicitação de troca de senha</strong><br/>
-                            Os dados serão enviados ao email cadastrado
+                            <strong>Formulário de Alteração de Senha</strong>
                         </h3>
 
                         <div className="account-wall">
@@ -107,7 +104,13 @@ class ChangePassword extends Component {
                                 <img src={COMPANY_LOGO} alt={COMPANY_NAME_LONG} height="50" width="170" />
                             </Col>
 
-                            {this.renderForm({ cliente, usuario })}
+                            <Col md={12}>
+                                <div>Cliente: {this.cliente}</div>
+                                <div>Usuário: {this.usuario}</div>
+                                <div>Email: {this.email}</div>
+                            </Col>
+
+                            {this.renderForm()}
 
                         </div>
                     </Col>
@@ -117,21 +120,11 @@ class ChangePassword extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        cliente: state.user.pessoaDescricao,
-        usuario: state.user.usuarioNome,
-        status: state.auth.status,
-        message: state.auth.msgn
-    }
-}
-
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-			requestChangePassword,
-            closeChangePasswordMessage
+			resetChangePassword
 		},
 		dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword)
+export default connect(null, mapDispatchToProps)(ResetPassword)

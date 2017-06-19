@@ -3,8 +3,10 @@ import { Col, Form, Image } from "react-bootstrap";
 
 //Components
 import Panel from "../../components/panel/Panel"
-import { MyFieldGroup } from "../../components/forms/CommonForms"
 import MyButton from "../../components/button/MyButton"
+import ChangePassword from "../../components/ChangePassword"
+import { MyFieldGroup } from "../../components/forms/CommonForms"
+
 
 export default class Info extends Component {
     constructor(props) {
@@ -80,57 +82,63 @@ export default class Info extends Component {
                 <Panel title="DADOS PESSOAIS">
                     <Col md={12}>
                         <Form onSubmit={this.onSubmitForm}>
-                                <MyFieldGroup
-                                    id="usuarioNome"
-                                    type="text"
-                                    label="Nome completo"
-                                    name="usuarioNome"
-                                    placeholder="Digite seu nome"
-                                    value={usuarioNome}
-                                    onChange={this.onChange}
-                                />
+                            <MyFieldGroup
+                                id="usuarioNome"
+                                type="text"
+                                label="Nome completo"
+                                name="usuarioNome"
+                                placeholder="Digite seu nome"
+                                value={usuarioNome}
+                                onChange={this.onChange}
+                            />
 
-                                <MyFieldGroup
-                                    id="usuarioEmail"
-                                    type="email"
-                                    label="Email"
-                                    name="usuarioEmail"
-                                    placeholder="Digite seu email"
-                                    value={usuarioEmail}
-                                    onChange={this.onChange}
-                                />
+                            <MyFieldGroup
+                                id="usuarioEmail"
+                                type="email"
+                                label="Email"
+                                name="usuarioEmail"
+                                placeholder="Digite seu email"
+                                value={usuarioEmail}
+                                onChange={this.onChange}
+                            />
 
-                                <MyFieldGroup
-                                    id="usuarioTelefone"
-                                    type="tel"
-                                    label="Telefone"
-                                    name="usuarioTelefone"
-                                    placeholder="Digite seu telefone"
-                                    value={usuarioTelefone}
-                                    onChange={this.onChange}
-                                />
+                            <MyFieldGroup
+                                id="usuarioTelefone"
+                                type="tel"
+                                label="Telefone"
+                                name="usuarioTelefone"
+                                placeholder="Digite seu telefone"
+                                value={usuarioTelefone}
+                                onChange={this.onChange}
+                            />
 
-                                <Image src={usuarioImagem} id="menu-image-user"/>
+                            <Image src={usuarioImagem} id="menu-image-user"/>
 
-                                <MyFieldGroup
-                                    id="usuarioImagem"
-                                    type="file"
-                                    label={"Arquivo("+this.filesExtensionAccept+")"}
-                                    name="usuarioImagem"
-                                    message={this.state.error ? this.state.messageErrorFileUpload : ""}
-                                    accept={`file_extension/${this.filesExtensionAccept}`}
-                                    onChange={this.onChangeFileUpload}
-                                />
+                            <MyFieldGroup
+                                id="usuarioImagem"
+                                type="file"
+                                label={"Arquivo("+this.filesExtensionAccept+")"}
+                                name="usuarioImagem"
+                                message={this.state.error ? this.state.messageErrorFileUpload : ""}
+                                accept={`file_extension/${this.filesExtensionAccept}`}
+                                onChange={this.onChangeFileUpload}
+                            />
 
-                                <MyButton
-                                    type="submit"
-                                    myButtonClass="btn pull-right"
-                                    myButtonStyle="primary"
-                                    myButtonText="Atualizar dados"
-                                />
+                            <MyButton
+                                type="submit"
+                                myButtonClass="btn btn-block"
+                                myButtonStyle="primary"
+                                myButtonText="Atualizar dados"
+                            />
                         </Form>
                     </Col>
 
+                </Panel>
+
+                <div style={{marginBottom:15}} />
+
+                <Panel title="TROCA DE SENHA">
+                    <ChangePassword />
                 </Panel>
             </Col>)
     }
