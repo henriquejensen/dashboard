@@ -1,3 +1,5 @@
+import "./Panel.css"
+
 import React, { Component } from "react";
 import Tooltip from 'react-tooltip';
 
@@ -12,7 +14,7 @@ export default class Panel extends Component {
         return (
             <div className="panel panel-default">
                 {this.props.title ? 
-                    <div className="panel-heading my-panel-heading" style={{position: "relative"}}>
+                    <div className="panel-heading my-panel-heading" onClick={() => this.setState({show:!this.state.show})} >
                         {/*this.props.qtdTotal ? 
                             this.props.qtdTotal.map((total,i) => {
                                 return <span className="qtd-panel" key={i} style={{right: 39 - i*3 + 10 + "%"}}>

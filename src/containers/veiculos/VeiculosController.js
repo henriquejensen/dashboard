@@ -362,7 +362,7 @@ class VeiculosController extends Component {
 		let isUFHidden = this.state.optionsSelected.indexOf("agregados") !== -1 || this.state.optionsSelected.indexOf("binFederal") !== -1 || this.state.optionsSelected.indexOf("binEstadual") !== -1 ? false : true;
 		return (
 			<div>
-				<Col md={isCRLVHidden && isUFHidden ? 7 : isCRLVHidden && !isUFHidden ? 5 : 3}>
+				<Col md={isCRLVHidden && isUFHidden ? 8 : isCRLVHidden && !isUFHidden ? 6 : 4}>
 					<MyFieldGroup
 						id={type}
 						type="text"

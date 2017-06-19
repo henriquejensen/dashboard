@@ -18,6 +18,10 @@
     overflow: auto;
 }
 
+.sidebar-nav > li > a:hover {
+    background: rgba(0, 0, 0,0.2);
+}
+
 .sub-icon-open-menu {
     float: right;
     position: absolute;
@@ -35,16 +39,16 @@
     padding-left: 15px;
 }
 
-.sidebar-item-dropdown > li a:hover {
-    color: white;
-}
-
 .sidebar-item-dropdown > li {
     padding: 7px 0px;
 }
 
 .sidebar-item-dropdown > li:hover {
     font-weight: bold;
+}
+
+.sidebar-nav li > ul > li {
+    cursor: pointer
 }
 
 .sidebar-nav li > ul > li:hover {

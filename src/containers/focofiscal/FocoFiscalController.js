@@ -127,7 +127,7 @@ class FocoFiscal extends Component {
 						message = {this.props.message}
 						lastQueries = {this.props.lastQueries[this.props.type]}
 					>
-						<Col md={tipo == "RECEITAPF" ? 5 : 7}>
+						<Col md={tipo == "RECEITAPF" ? 6 : 8}>
 							<MyFieldGroup
 								type="text"
 								placeholder={

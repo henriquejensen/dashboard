@@ -150,7 +150,7 @@ class CreditoMix extends Component {
         let showCep = this.state.showCep
         return (
             <div>
-                <Col md={showCep ? 4 : 7}>
+                <Col md={showCep ? 5 : 8}>
                     <MyFieldGroup
                         id="documento"
                         type="text"

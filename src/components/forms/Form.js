@@ -63,11 +63,7 @@ export default class Form extends Component {
                         </Col>
                             
                         <Col md={1}>
-                            {this.renderButton(TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, "", "my-btn-form input-search", "default", <i className="fa fa-list-ul" aria-hidden="true"></i>, this.props.seeModelo, "")}
-                        </Col>
-
-                        <Col md={1}>
-                            {this.renderButton(TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE, "" , "my-btn-form input-search", "warning", <i className="fa fa-question" aria-hidden="true"></i>, () => window.open(COMPANY_PRODUCT_LOCALIZE_URL_SEE_DETAILS,"_blank"), "")}
+                            {this.renderButton(TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE, "", "my-btn-form input-search", "default", <i className="fa fa-list-ul" aria-hidden="true"></i>, this.props.seeModelo, "")}
                         </Col>
 
                         {this.props.buscaAvancada != undefined ?

@@ -208,7 +208,7 @@ class LocalizeController extends Component {
 	renderForm = () => {
 		return (
 			<span>
-				<Col md={7}>
+				<Col md={8}>
 					<input
 						className="form-control"
 						type={
@@ -316,7 +316,7 @@ class LocalizeController extends Component {
 						placeholder="Digite o nome da cidade (sem abreviação)"
 					/>
 				</Col>
-				<Col md={this.state.buscaAvancada ? 5 : 2}>
+				<Col md={this.state.buscaAvancada ? 5 : 3}>
 					<input
 						className="form-control"
 						type="text"
@@ -353,7 +353,7 @@ class LocalizeController extends Component {
 				: ""}
 
 				{this.state.buscaAvancada ?
-					<Col md={1}>
+					<Col md={2}>
 						<select
 							className="form-control"
 							name="sexo"
@@ -435,7 +435,7 @@ class LocalizeController extends Component {
 					
 					/>
 				</Col>
-				<Col md={this.state.buscaAvancada ? 4 : 3}>
+				<Col md={4}>
 					<input
 						className="form-control"
 						type="text"
@@ -461,7 +461,7 @@ class LocalizeController extends Component {
 				: ""}
 
 				{this.state.buscaAvancada ?
-					<Col md={5}>
+					<Col md={6}>
 						<input
 							className="form-control"
 							name="enderecoOuCep"

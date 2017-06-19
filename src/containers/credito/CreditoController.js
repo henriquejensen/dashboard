@@ -46,7 +46,7 @@ import {
 
 	GET_CREDITO_COMPLETA
 } from "../../constants/constantsCredito";
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO, COMPANY_PRODUCT_LOCALIZE, LOGO_CREDITO } from "../../constants/constantsCompany";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO, COMPANY_PRODUCT_CREDITO_LABEL, COMPANY_PRODUCT_LOCALIZE, LOGO_CREDITO } from "../../constants/constantsCompany";
 
 import estados from "../../components/utils/common/estados.json";
 import menu from "../../components/utils/common/menu.json";
@@ -119,7 +119,7 @@ class Credito extends Component {
 	}
 
 	onChangeType = (evt) => {
-		this.props.changeProductType("credito", evt.target.value)
+		this.props.changeProductType(COMPANY_PRODUCT_CREDITO_LABEL, evt.target.value)
 	}
 
 	onChange = (evt) => {
@@ -202,7 +202,7 @@ class Credito extends Component {
 	renderForm(showUF) {
 		return (
 			<span>
-				<Col md={showUF ? 5 : 7}>
+				<Col md={showUF ? 6 : 8}>
 					<input
 						className="form-control"
 						type="text"
@@ -240,7 +240,7 @@ class Credito extends Component {
 						})}
 					</select>
 				</Col>
-				<Col md={this.state.tipoCheque != "Apenas Cadastro" ? 8 : 5}>
+				<Col md={this.state.tipoCheque != "Apenas Cadastro" ? 8 : 6}>
 					<input
 						className="form-control"
 						type="text"
@@ -252,7 +252,7 @@ class Credito extends Component {
 				</Col>
 
 				{this.state.tipoCheque != "Apenas Cadastro" ?
-					<span>
+					<div>						
 						{this.state.tipoCheque != "Por Código de Barras (CMC-7)" ?
 							<span>
 								<Col md={2}>
@@ -317,7 +317,7 @@ class Credito extends Component {
 							</span>
 						: ""}
 
-						<Col md={6}>
+						<Col md={7}>
 							<input
 								className="form-control"
 								type="text"
@@ -336,7 +336,7 @@ class Credito extends Component {
 								name="folhas"
 								onChange={this.onChangeInput}/>
 						</Col>
-					</span>
+					</div>
 				: ""}
 						
 			</span>
@@ -390,7 +390,7 @@ class Credito extends Component {
 					this.renderUF()
 				: ""}
 
-				<Col md={9} className="text-center">
+				<Col md={10} className="text-center">
 					<FormGroup>
 						<Checkbox inline checked readOnly>
 							Cadastral

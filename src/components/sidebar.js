@@ -111,7 +111,7 @@ class Sidebar extends Component {
 
   render() {
       return (      
-          <aside>
+          <div>
             <div style={{backgroundColor: COMPANY_MAIN_COLOR}} id={this.props.activedMenu ? "menu-image-logo" : "menu-image-icon"} >
 						  <img src={ this.props.activedMenu ? COMPANY_LOGO_INVERSE : COMPANY_ICON } alt={"Logo da "+COMPANY_NAME_SHORT} />
             </div>
@@ -121,7 +121,7 @@ class Sidebar extends Component {
               ) : ""}
 
               {this.renderMenu()}
-          </aside>
+          </div>
       )
 
   }

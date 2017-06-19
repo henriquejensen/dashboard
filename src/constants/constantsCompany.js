@@ -19,7 +19,7 @@ export const ICON_LOCALIZE = "https://s3-us-west-2.amazonaws.com/front.assertiva
 
 // Crédito
 export const COMPANY_PRODUCT_CREDITO = "Credito"
-export const COMPANY_PRODUCT_CREDITO_LABEL = "CRÉDITO"
+export const COMPANY_PRODUCT_CREDITO_LABEL = "CREDITO"
 export const LOGO_CREDITO = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-credito.png"
 export const ICON_CREDITO = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito.png"
 export const ICON_CREDITO_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png"
