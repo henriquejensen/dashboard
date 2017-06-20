@@ -1,15 +1,16 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import Notification from "react-notification-system";
+import React, { Component } from "react"
+import { bindActionCreators } from "redux"
+import { connect } from "react-redux"
+import Notification from "react-notification-system"
 
 //Actions
-import { userEditInfo, userDashboard } from "../../actions/index";
+import { userEditInfo, userDashboard } from "../../actions/index"
+import { requestChangePassword, closeChangePasswordMessage } from "../../actions/actionsCommon"
 
 //Components
-import InfoUser from "./InfoUser";
-import ImagesUser from "./ImagesUser";
-import DashboardUser from "./DashboardUser";
+import InfoUser from "./InfoUser"
+import ImagesUser from "./ImagesUser"
+import DashboardUser from "./DashboardUser"
 
 //Constants
 import { COMPANY_NAME_SHORT } from "../../constants/constantsCompany"
@@ -17,9 +18,7 @@ import { EDIT_USER_PROFILE, EDIT_USER_PROFILE_SUCCESS, SUCCESS } from "../../con
 
 class EditUser extends Component {
     constructor(props) {
-        super(props);
-
-        this._notificationSystem = null;
+        super(props)
     }
 
     componentDidMount() {
@@ -48,7 +47,10 @@ class EditUser extends Component {
     render() {
         return (
             <div>
-                <InfoUser user={this.props.user} userEditInfo={this.userEditInfo} />
+                <InfoUser
+                    {...this.props}
+                    userEditInfo={this.userEditInfo}
+                />
 
                 <Notification ref={n => this._notificationSystem = n} />
             </div>
@@ -57,14 +59,18 @@ class EditUser extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log("STATE", state)
     return {
         user: state.user
     }
 }
 
 function mapDispatchToProps(dispacth) {
-    return bindActionCreators({ userEditInfo, userDashboard }, dispacth);
+    return bindActionCreators({
+        userEditInfo,
+        userDashboard,
+        requestChangePassword,
+        closeChangePasswordMessage
+    }, dispacth);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditUser);

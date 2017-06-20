@@ -3,7 +3,7 @@ import { Route, IndexRoute } from "react-router"
 
 import App from "./components/app"
 import Login from "./components/Login"
-import ChangePassword from "./components/ChangePassword"
+import ChangePassword from "./containers/utils/ChangePasswordController"
 import ResetPassword from "./components/ResetPassword"
 
 import EditUser from "./containers/user/EditUser"

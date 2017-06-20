@@ -6,10 +6,16 @@ import {
     CHANGE_COLOR_MENU,
     AUTHENTICATION,
     LOADING,
+    SUCCESS,
+    ERROR,
+    REQUEST_ERROR,
     REQUEST_CHANGE_PASSWORD,
     RESET_CHANGE_PASSWORD,
     CLOSE_MESSAGE_CHANGE_PASSWORD,
-    USER_CHANGED_PASSWORD
+    USER_CHANGED_PASSWORD,
+    USER_RESET_PASSWORD,
+    USER_RESET_PASSWORD_MESSAGE,
+    USER_CHANGED_PASSWORD_MESSAGE
 } from "../constants/utils";
 
 const getInitialState = {
@@ -17,6 +23,7 @@ const getInitialState = {
     loading: false,
     logado: localStorage.getItem("token") ? true : false,
     error: false,
+    status: "",
     msgn: ""
 }
 
@@ -68,13 +75,14 @@ export default function(state=getInitialState, action) {
         }
 
         case REQUEST_CHANGE_PASSWORD: {
+            let { response } = action.payload.response
             return {
                 colorMenu: state.colorMenu,
                 loading: false,
                 logado: false,
                 error: false,
-                status: USER_CHANGED_PASSWORD,
-                msgn: action.payload.email
+                status: SUCCESS,
+                msgn: USER_CHANGED_PASSWORD_MESSAGE + " " + response
             }
         }
 
@@ -84,8 +92,8 @@ export default function(state=getInitialState, action) {
                 loading: false,
                 logado: false,
                 error: false,
-                status: USER_CHANGED_PASSWORD,
-                msgn: action.payload.email
+                status: SUCCESS,
+                msgn: USER_RESET_PASSWORD_MESSAGE
             }
         }
 
@@ -119,6 +127,17 @@ export default function(state=getInitialState, action) {
                 logado: false,
                 error: true,
                 msgn: action.payload
+            }
+        }
+
+        case REQUEST_ERROR: {
+            return {
+                colorMenu: state.colorMenu,
+                loading: false,
+                logado: false,
+                error: false,
+                status: ERROR,
+                msgn: action.payload.mensagem
             }
         }
 

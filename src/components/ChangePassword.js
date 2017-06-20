@@ -1,27 +1,25 @@
 import "./Login.css"
 
 import React, { Component } from "react"
-import { connect } from "react-redux"
-import { bindActionCreators } from "redux"
 import { Alert, Col, Row } from "react-bootstrap"
 import { Link } from "react-router"
-
-//Actions
-import { requestChangePassword, closeChangePasswordMessage } from "../actions/actionsCommon"
 
 //Components
 import MyButton from "./button/MyButton"
 import { MyFieldGroup } from "./forms/CommonForms"
 
 //Constants
-import { USER_CHANGED_PASSWORD_MESSAGE, USER_CHANGED_PASSWORD } from "../constants/utils"
-import { COMPANY_NAME_SHORT, COMPANY_NAME_LONG, COMPANY_LOGO } from "../constants/constantsCompany"
+import { CHANGE_PASSWORD, ERROR } from "../constants/utils"
+import { COMPANY_NAME_SHORT, COMPANY_NAME_LONG, COMPANY_LOGO, URL_LOGIN } from "../constants/constantsCompany"
 
 class ChangePassword extends Component {
     constructor(props) {
         super(props)
 
-        this.state={}
+        this.state={
+            cliente: this.props.cliente,
+            usuario: this.props.usuario
+        }
     }
 
     onChange = evt => {
@@ -33,21 +31,25 @@ class ChangePassword extends Component {
     onFormSubmit = evt => {
         evt.preventDefault()
 
-        this.props.requestChangePassword(this.state.cliente, this.state.usuario)
+        let { cliente, usuario } = this.state
+
+        this.props.requestChangePassword(cliente, usuario)
     }
 
     renderForm = ({ cliente, usuario }) => {
+        let status = this.props.status
+        status = status === ERROR ? "danger" : status
         return (
-            <form className="form-signin" onSubmit={this.onFormSubmit}>
-                {this.props.status === USER_CHANGED_PASSWORD ?
+            <form className="form-signin" onSubmit={this.onFormSubmit} >
+                {status ?
                     <Col md={12} sm={12}> 
                         <Alert
-                            bsStyle="success"
+                            bsStyle={status.toLocaleLowerCase()}
                             className="text-center"
                             onDismiss={this.props.closeChangePasswordMessage}
                         >
 
-                            {USER_CHANGED_PASSWORD_MESSAGE + " " + this.props.message}
+                            {this.props.message}
 
                         </Alert>
                     </Col>
@@ -76,14 +78,14 @@ class ChangePassword extends Component {
                 />
 
                 <div className="btn-group btn-password">
-                    <Link to="/login" className="btn btn-default">
+                    <Link to={URL_LOGIN} className="btn btn-default">
                         Voltar ao Login
                     </Link>
                     <MyButton
                         type="submit"
                         myButtonClass="btn pull-right"
                         myButtonStyle="primary"
-                        myButtonText="Solicitar Troca"
+                        myButtonText={CHANGE_PASSWORD}
                     />
                 </div>
             </form>
@@ -91,8 +93,8 @@ class ChangePassword extends Component {
     }
     
     render() {
-        let cliente = this.state.cliente || this.props.cliente
-        let usuario = this.state.usuario || this.props.usuario
+        let { cliente, usuario } = this.state
+
         return (
             <div className="container">
                 <Row>
@@ -117,21 +119,4 @@ class ChangePassword extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        cliente: state.user.pessoaDescricao,
-        usuario: state.user.usuarioNome,
-        status: state.auth.status,
-        message: state.auth.msgn
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({
-			requestChangePassword,
-            closeChangePasswordMessage
-		},
-		dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword)
+export default ChangePassword

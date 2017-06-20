@@ -10,7 +10,14 @@ export const COMPANY_ICON_INVERSE = "https://s3-us-west-2.amazonaws.com/front.as
 export const COMPANY_LOGO = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/assertiva-top-index.png"
 export const COMPANY_LOGO_INVERSE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/assertiva-top-index-inverse-2.png"
 
+//URL gerais
+export const URL_LOGIN = "/login"
+export const URL_SENHA= "/senha"
+export const URL_NOVASENHA = "/novasenha"
+export const URL_EDITAR = "/editar"
+
 // Localize
+export const URL_LOCALIZE = "/localize"
 export const COMPANY_PRODUCT_LOCALIZE = "Localize"
 export const COMPANY_PRODUCT_LOCALIZE_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"
 export const LOGO_LOCALIZE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-localize.png"
@@ -18,6 +25,7 @@ export const ICON_LOCALIZE_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.
 export const ICON_LOCALIZE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-localize.png"
 
 // Crédito
+export const URL_CREDITO = "/credito"
 export const COMPANY_PRODUCT_CREDITO = "Credito"
 export const COMPANY_PRODUCT_CREDITO_LABEL = "CREDITO"
 export const LOGO_CREDITO = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-credito.png"
@@ -25,6 +33,7 @@ export const ICON_CREDITO = "https://s3-us-west-2.amazonaws.com/front.assertiva/
 export const ICON_CREDITO_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png"
 
 // Crédito Mix
+export const URL_CREDITOMIX = "/creditomix"
 export const COMPANY_PRODUCT_CREDITOMIX = "Crédito Mix"
 export const COMPANY_PRODUCT_CREDITOMIX_LABEL = "CREDITOMIX"
 export const LOGO_CREDITOMIX = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-creditomix.png"

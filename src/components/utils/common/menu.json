@@ -149,6 +149,10 @@
                     "link": "/editar"
                 },
                 {
+                    "label": "Trocar senha",
+                    "link": "/senha"
+                },
+                {
                     "label": "Relatórios",
                     "link": "/relatorios"
                 },

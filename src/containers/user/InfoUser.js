@@ -1,16 +1,14 @@
-import React, { Component} from "react";
-import { Col, Form, Image } from "react-bootstrap";
+import React, { Component} from "react"
+import { Col, Form, Image } from "react-bootstrap"
 
 //Components
 import Panel from "../../components/panel/Panel"
 import MyButton from "../../components/button/MyButton"
-import ChangePassword from "../../components/ChangePassword"
 import { MyFieldGroup } from "../../components/forms/CommonForms"
-
 
 export default class Info extends Component {
     constructor(props) {
-        super(props);
+        super(props)
 
         this.filesExtensionAccept = ".png,.jpg,.jpeg"
 
@@ -29,15 +27,15 @@ export default class Info extends Component {
                 error: true
             })
         } else {
-            let reader = new FileReader();
-            let file = evt.target.files[0];
+            let reader = new FileReader()
+            let file = evt.target.files[0]
 
             reader.onloadend = () => {
                 this.setState({
                     fileUpload: file,
                     error: false,
                     usuarioImagem: reader.result
-                });
+                })
             }
 
             reader.readAsDataURL(file)
@@ -45,25 +43,17 @@ export default class Info extends Component {
     }
 
     onSubmitUser = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault()
+        e.stopPropagation()
 
-        var form = this.refs.user.files[0];
+        var form = this.refs.user.files[0]
 
-        console.log(e.target);
+        console.log(e.target)
 
     }
 
     onSubmitForm = (e) => {
-        e.preventDefault();
-
-        this.props.userEditInfo({
-            usuarioNome: this.state.usuarioNome,
-            usuarioTelefone: this.state.usuarioTelefone,
-            usuarioEmail: this.state.usuarioEmail,
-            usuarioImagem: this.state.fileUpload,
-            usuarioImagemPreview: this.state.usuarioImagem
-        });
+        e.preventDefault()
     }
 
     onChange = (evt) => {
@@ -133,12 +123,6 @@ export default class Info extends Component {
                         </Form>
                     </Col>
 
-                </Panel>
-
-                <div style={{marginBottom:15}} />
-
-                <Panel title="TROCA DE SENHA">
-                    <ChangePassword />
                 </Panel>
             </Col>)
     }

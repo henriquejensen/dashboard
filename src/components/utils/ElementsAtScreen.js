@@ -11,6 +11,6 @@ export const PrintScreen = () => {
 
 export const LoadingScreen = () => {
     return (
-        <div className="imgSearching"><img src={LOADING_GIF} /></div>
+        <div className="no-print imgSearching"><img src={LOADING_GIF} /></div>
     )
 }
