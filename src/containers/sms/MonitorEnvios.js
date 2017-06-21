@@ -31,6 +31,9 @@ class MonitorEnvios extends Component {
     componentDidMount() {
       document.title = COMPANY_PRODUCT_SMS + " > " + COMPANY_NAME_SHORT;
       this.props.loadingSMS()
+
+      console.log("CAMPANHAS", this.props)
+
       this.props.getCampanhasSMS()
     }
 
@@ -137,6 +140,7 @@ class MonitorEnvios extends Component {
     }
 
     render() {
+      console.log("CAMPANHAS", this.props)
       return (
         <section>
           {this.renderForm()}
@@ -165,7 +169,7 @@ class MonitorEnvios extends Component {
 function mapStateToProps(state) {
   console.log("ACTIONS", state)
   return {
-    campanhas: state.sms.response,
+    campanhas: state.sms.campanhas,
     loading: state.sms.loading
   }
 }

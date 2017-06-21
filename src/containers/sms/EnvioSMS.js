@@ -5,6 +5,7 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 
 // Components
+import MyButton from "../../components/button/MyButton"
 import { MyFieldGroup, RadioGroupGeneric, SelectGroup, TextAreaGroup } from "../../components/forms/CommonForms";
 
 // Actions
@@ -15,7 +16,6 @@ import { SUCCESS } from "../../constants/utils"
 import { MESSAGE_SUCCESS_SMS, MESSAGE_ERROR_SMS } from "../../constants/constantsSMS"
 
 export class EnviarSMS extends Component {
-
     constructor(props) {
         super(props)
 
@@ -114,15 +114,14 @@ export class EnviarSMS extends Component {
                 />
 
                 <Col md={12}>
-                    <MyFieldGroup
-                        id="numeros"
+                    <TextAreaGroup
                         required
+                        id="numeros"
                         label="* Celular(es)"
-                        type="text"
                         name="numeros"
                         value={this.state.numeros}
                         placeholder="Números para envio da mensagem(DDD+Numero). Ex: 119999999,3540404040"
-                        message="Limite máximo: 1000"
+                        message="Limite máximo: 1000 celulares"
                         onChange={this.onChange} />
                 </Col>
 
@@ -148,35 +147,17 @@ export class EnviarSMS extends Component {
                          />
                 </Col>
 
-                <Col md={6}>
-                    <SelectGroup
-                        id="centroCusto"
-                        type="select"
-                        name="centroCusto"
-                        label="* Centro de Custo"
-                        options={this.props.optionsCentroCusto ? this.props.optionsCentroCusto : ["Padrão"]}
-                        onChange={this.onChange} />
-                </Col>
-
-                <Col md={6}>
-                    <MyFieldGroup
-                        id="remetente"
-                        label="Nome Remetente"
-                        name="remetente"
-                        value={this.state.remetente}
-                        placeholder="Escreva o nome do remetente"
-                        onChange={this.onChange} />
-                </Col>
-
                 <Col md={12}>
                     <Well bsSize="small" className="text-center">Caracteres Restantes: {this.state.caracteresRestantes} || Total de SMS's: {this.state.totalSMS}</Well>
                 </Col>
-                
-                <Col md={6}>
-                    <Button onClick={this.props.cancel} >Cancelar</Button>
-                </Col>
-                <Col md={6}>
-                    <Button type="submit" className="pull-right" bsStyle="primary">Enviar</Button>
+
+                <Col md={12}>
+                    <MyButton
+                        type="submit"
+                        myButtonStyle="primary"
+                        myButtonClass="btn-block"
+                        myButtonText="Enviar"
+                    />
                 </Col>
 
             </form>
@@ -207,7 +188,6 @@ export class EnviarSMS extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log("STATE", state)
     return {
         message: state.sms.message,
         status: state.sms.status

@@ -134,7 +134,7 @@ export default function(state=getInitialState, action) {
             return {
                 colorMenu: state.colorMenu,
                 loading: false,
-                logado: false,
+                logado: true,
                 error: false,
                 status: ERROR,
                 msgn: action.payload.mensagem

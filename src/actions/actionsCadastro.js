@@ -15,6 +15,8 @@ import {
 	URL_UPDATE_USER
 } from "../constants/constantsCadastro";
 
+import { api, apiGetWithKeySession } from "../api/Api";
+
 import { ERR_CONNECTION_REFUSED, REQUEST_ERROR } from "../constants/utils";
 
 export function addNewUser(usuario) {
@@ -92,39 +94,25 @@ export function loadingCadastro() {
     }
 }
 
-export function getGruposCadastro(quantidade) {
+export function getGruposCadastro(maxResult) {
+	let url = URL_GET_GRUPOS_CADASTRO
+
+	let search = GET_GROUPS_CADASTRO
+	let data = `?maxResult=${maxResult}`
+
 	return (dispatch) => {
-		ajax.get(URL_GET_GRUPOS_CADASTRO+"?maxResult="+quantidade)
-			.set({keySession: localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response.body) {
-					if (response.status == 200 && !response.body.erro) {
-						dispatch({type: GET_GROUPS_CADASTRO, payload: response.body})
-					} else {
-						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
+		apiGetWithKeySession(dispatch, url, data, search)
 	}
 }
 
 export function getUsersCadastro() {
+	let url = URL_GET_USERS_CADASTRO
+
+	let search = GET_USERS_CADASTRO
+	let data = ""
+
 	return (dispatch) => {
-		ajax.get(URL_GET_USERS_CADASTRO)
-			.set({keySession: localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response.body) {
-					if (response.status == 200 && !response.body.erro) {
-						dispatch({type: GET_USERS_CADASTRO, payload: response.body})
-					} else {
-						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
+		apiGetWithKeySession(dispatch, url, data, search)
 	}
 }
 
@@ -143,20 +131,12 @@ export function getPermissoesUser(userId) {
 }
 
 export function getUsersByGroupId(groupId, groupDescription) {
-	let params = groupId ? ("?usuario.grupoUsuarioVO.id=" + groupId) : ("?usuario.usuario=" + groupDescription)
+	let url = URL_GET_USERS_BY_GROUP_ID
+
+	let search = GET_USERS_BY_GROUP_ID
+	let data = groupId ? ("?usuario.grupoUsuarioVO.id=" + groupId) : ("?usuario.usuario=" + groupDescription)
+
 	return (dispatch) => {
-		ajax.get(URL_GET_USERS_BY_GROUP_ID + params)
-			.set({keySession: localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response.body) {
-					if (response.status == 200 && !response.body.erro) {
-						dispatch({type: GET_USERS_BY_GROUP_ID, payload: response.body})
-					} else {
-						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
+		apiGetWithKeySession(dispatch, url, data, search)
 	}
 }

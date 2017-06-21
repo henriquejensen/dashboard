@@ -49,6 +49,8 @@ export const MESSAGE_SUCCESS_ADD_NEW_PHONE = "Obrigado pelo envio. Seu pedido de
 export const MESSAGE_SUCCES_FILE_UPLOAD = "Arquivo enviado com sucesso"
 
 export const NENHUM_REGISTRO = "Nenhum registro encontrado"
+export const ADVANCED_SEARCH = "Busca avançada"
+export const IN_PROCESS = "Processando"
 export const INFORMATION_NOT_AVAILABLE = "Informação indisponível"
 export const ADDRESS_NOT_FOUND = "Endereço não encontrado"
 export const RECHECK_MESSAGE = "As reconsultas realizadas no mesmo dia não serão cobradas"
@@ -81,8 +83,7 @@ export const ERROR_401_UNAUTHORIZED = "ERROR_401_UNAUTHORIZED"
 export const ERROR_401_UNAUTHORIZED_MESSAGE = "Por favor, realize a sua identificação para acessar o sistema"
 
 /**Imagens utilizadas no portal */
-export const WHATSAPP_IMAGE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/whatsapp.png"
-export const VIBER_IMAGE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/viber.png"
+export const URL_IMAGES_S3 = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/"
 
 export const IMAGE_ANY_TOKEN = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/warning.png"
 export const LOADING_GIF = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/loading.gif"

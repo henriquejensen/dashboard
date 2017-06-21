@@ -42,18 +42,16 @@ export default class Info extends Component {
         }
     }
 
-    onSubmitUser = (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-
-        var form = this.refs.user.files[0]
-
-        console.log(e.target)
-
-    }
-
     onSubmitForm = (e) => {
         e.preventDefault()
+
+        this.props.userEditInfo({
+            usuarioNome: this.state.usuarioNome,
+            usuarioTelefone: this.state.usuarioTelefone,
+            usuarioEmail: this.state.usuarioEmail,
+            usuarioImagem: this.state.fileUpload,
+            usuarioImagemPreview: this.state.usuarioImagem
+        });
     }
 
     onChange = (evt) => {

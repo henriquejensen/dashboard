@@ -59,7 +59,7 @@ export default class MyTable extends Component {
                                         <tr>
                                             {fields.map((field)=>{
                                                 if(field.functionToApply) {
-                                                    return <td key={field.id}>{row[field.id] ? field.functionToApply(row[field.id], indexRow) : "-"}</td>
+                                                    return <td key={field.id}>{field.functionToApply(row[field.id], indexRow)}</td>
                                                 }
 
                                                 return <td key={field.id}>{row[field.id] ? row[field.id] : "-"}</td>

@@ -1,5 +1,7 @@
 import * as sms from "../constants/constantsSMS";
 
+import { api, apiGet } from "../api/Api";
+
 export function closeSMSMessage() {
 	return {
 		type: sms.CLOSE_SMS_MESSAGE,
@@ -16,14 +18,12 @@ export function filterResponseSMS(request) {
 export function getCampanhasSMS() {
 	return {
 		type: sms.GET_CAMPANHAS_SMS,
-		payload: ""
 	}
 }
 
 export function getCentroCustoSMS() {
 	return {
 		type: sms.GET_CENTRO_CUSTO_SMS,
-		payload: ""
 	}
 }
 
@@ -49,8 +49,15 @@ export function loadingSMS() {
 }
 
 export function sendSMSRapido(request) {
+    /*let url = sms.URL_SEND_SMS
+    let data = request
+    let search = sms.SEND_SMS_RAPIDO
+
+    return (dispatch) => {
+        api(dispatch, url, data, search)
+    }*/
+
 	return {
-		type: sms.SEND_SMS_RAPIDO,
-		payload: request
+		type: sms.SEND_SMS_RAPIDO
 	}
 }

@@ -7,8 +7,10 @@ import { Button, Col, Form } from "react-bootstrap";
 import { filterResponseSMS, getRespostasSMS } from "../../actions/actionsSMS";
 
 //Components
+import EnviarSMS from "./EnvioSMS"
 import Panel from "../../components/panel/Panel"
 import Filtro from "../../components/Filtro";
+import Modal from "../../components/Modal";
 import Table from "../../components/table/Table";
 import CardWithTable from "../../components/card/CardWithTable"
 import { MyFieldGroup } from "../../components/forms/CommonForms"
@@ -18,7 +20,8 @@ class Respostas extends Component {
       super(props);
 
       this.state = {
-        showBuscaAvancada: false
+        showBuscaAvancada: false,
+        IsModalOpen: false
       }
     }
 
@@ -51,7 +54,12 @@ class Respostas extends Component {
       this.state.usuario ? request["usuario"] = this.state.usuario : "",
 
       this.props.filterResponseSMS(request)
-      console.log("SUBMIT", request)
+    }
+
+    closeModal = () => {
+        this.setState({
+            IsModalOpen: false
+        })
     }
 
     renderForm = () => {
@@ -140,14 +148,30 @@ class Respostas extends Component {
           <CardWithTable
               fields={
                   [
-                      {id:"idExterno", name:"Id Externo"},
-                      {id:"recebimento", name:"Data do Envio"},
+                      {id:"dataEnvio", name:"Envio"},
                       {id:"numero", name:"Número"},
-                      {id:"mensagem", name:"Mensagem"}
+                      {id:"mensagem", name:"Mensagem"},
+                      {id:"acoes", name:"Ações", functionToApply:(val, indexRow) => {
+                        return <i
+                          className="fa fa-reply icon-tel"
+                          onClick={()=>this.setState({ IsModalOpen: true, numeros: [this.props.respostas[indexRow].numero]})}
+                        />
+                      }}
                   ]
               }
               rows={this.props.respostas}
           />
+
+          <Modal
+              IsModalOpen={this.state.IsModalOpen}
+              closeModal={this.closeModal}
+              title="Envio de SMS"
+          >
+              <EnviarSMS
+                cancel={this.closeModal}
+                numeros={this.state.numeros}
+              />
+          </Modal>
         </span>
 
 
@@ -158,7 +182,7 @@ class Respostas extends Component {
 
 function mapStateToProps(state) {
   return {
-    respostas: state.sms.response
+    respostas: state.sms.respostas
   }
 }
 

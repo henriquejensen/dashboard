@@ -1,48 +1,326 @@
 {
     "campanhas": [
         {
-            "id": 1077907,
-            "cliente": "ASS_INTERNO_API_SP", 
-            "grupo": "API_SP",
-            "usuario": "GMX-ADM",
+            "id": 1922213,
             "campanha": "SMS Web Service",
-            "cadastro": "22/12/16 12:39",
-            "centroCusto": "Padrão",
-            "rota": "Curto, Web Service",
-            "status": 100
+            "dataCadastro": "21/06/2017 09:04:54",
+            "dataEnvio": "21/06/2017 09:04:54",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.7"
         },
         {
-            "id": 1077752,
-            "cliente": "ASS_INTERNO_API_SP", 
-            "grupo": "API_SP",
-            "usuario": "GMX-ADM",
+            "id": 1922211,
             "campanha": "SMS Web Service",
-            "cadastro": "22/12/16 12:39",
-            "centroCusto": "Padrão",
-            "rota": "Curto, Web Service",
-            "status": 50
+            "dataCadastro": "21/06/2017 09:04:42",
+            "dataEnvio": "21/06/2017 09:04:42",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 0,
+            "ip": "177.157.131.168, 54.182.233.51"
         },
         {
-            "id": 1077648,
-            "cliente": "ASS_INTERNO_API_SP", 
-            "grupo": "API_SP",
-            "usuario": "GMX-ADM",
+            "id": 1922210,
             "campanha": "SMS Web Service",
-            "cadastro": "22/12/16 12:39",
-            "centroCusto": "Padrão",
-            "rota": "Curto, Web Service",
-            "status": 100
+            "dataCadastro": "21/06/2017 09:04:36",
+            "dataEnvio": "21/06/2017 09:04:36",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.7"
         },
         {
-            "id": 1077549,
-            "cliente": "ASS_INTERNO_API_SP", 
-            "grupo": "API_SP",
-            "usuario": "GMX-ADM",
+            "id": 1922209,
             "campanha": "SMS Web Service",
-            "cadastro": "22/12/16 12:39",
-            "centroCusto": "Padrão",
-            "rota": "Curto, Web Service",
-            "status": 100
+            "dataCadastro": "21/06/2017 09:04:30",
+            "dataEnvio": "21/06/2017 09:04:30",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.7"
+        },
+        {
+            "id": 1922208,
+            "campanha": "SMS Web Service",
+            "dataCadastro": "21/06/2017 09:04:24",
+            "dataEnvio": "21/06/2017 09:04:24",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.7"
+        },
+        {
+            "id": 1922207,
+            "campanha": "1498057175973_HONDA SMS_21.06.2017",
+            "dataCadastro": "21/06/2017 09:04:11",
+            "dataEnvio": "21/06/2017 06:20:00",
+            "tipoEnvio": 2,
+            "limiteEnvioHora": 1,
+            "status": 0,
+            "user": {
+                "id": 595105,
+                "usuario": "FORUMCOB-SMS",
+                "grupo": "SMS",
+                "clienteLogin": "FORUMCOB"
+            },
+            "fornecedor": 2
+        },
+        {
+            "id": 1922206,
+            "campanha": "SMS Web Service",
+            "dataCadastro": "21/06/2017 09:04:14",
+            "dataEnvio": "21/06/2017 09:04:14",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.7"
+        },
+        {
+            "id": 1922205,
+            "campanha": "SMS Web Service",
+            "dataCadastro": "21/06/2017 09:04:10",
+            "dataEnvio": "21/06/2017 09:04:10",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.51"
+        },
+        {
+            "id": 1922204,
+            "campanha": "SMS Web Service",
+            "dataCadastro": "21/06/2017 09:04:04",
+            "dataEnvio": "21/06/2017 09:04:04",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.7"
+        },
+        {
+            "id": 1922203,
+            "campanha": "SMS Web Service",
+            "dataCadastro": "21/06/2017 09:04:01",
+            "dataEnvio": "21/06/2017 09:04:01",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.7"
+        },
+        {
+            "id": 1922202,
+            "campanha": "SMS Web Service",
+            "dataCadastro": "21/06/2017 09:03:55",
+            "dataEnvio": "21/06/2017 09:03:55",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.51"
+        },
+        {
+            "id": 1922201,
+            "campanha": "SMS Web Service",
+            "dataCadastro": "21/06/2017 09:03:47",
+            "dataEnvio": "21/06/2017 09:03:47",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.7"
+        },
+        {
+            "id": 1922200,
+            "campanha": "SMS Web Service",
+            "dataCadastro": "21/06/2017 09:03:42",
+            "dataEnvio": "21/06/2017 09:03:42",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.51"
+        },
+        {
+            "id": 1922199,
+            "campanha": "SMS Web Service",
+            "dataCadastro": "21/06/2017 09:03:35",
+            "dataEnvio": "21/06/2017 09:03:35",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.7"
+        },
+        {
+            "id": 1922198,
+            "campanha": "SMS Web Service",
+            "dataCadastro": "21/06/2017 09:03:29",
+            "dataEnvio": "21/06/2017 09:03:29",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.7"
+        },
+        {
+            "id": 1922197,
+            "campanha": "SMS Web Service",
+            "dataCadastro": "21/06/2017 09:03:21",
+            "dataEnvio": "21/06/2017 09:03:21",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.51"
+        },
+        {
+            "id": 1922196,
+            "campanha": "SMS Web Service",
+            "dataCadastro": "21/06/2017 09:03:16",
+            "dataEnvio": "21/06/2017 09:03:16",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.51"
+        },
+        {
+            "id": 1922195,
+            "campanha": "SMS Web Service",
+            "dataCadastro": "21/06/2017 09:03:10",
+            "dataEnvio": "21/06/2017 09:03:10",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.51"
+        },
+        {
+            "id": 1922194,
+            "campanha": "SMS Web Service",
+            "dataCadastro": "21/06/2017 09:03:08",
+            "dataEnvio": "21/06/2017 09:03:08",
+            "tipoEnvio": 3,
+            "status": 2,
+            "user": {
+                "id": 624559,
+                "usuario": "VERAN-WS",
+                "grupo": "WS",
+                "clienteLogin": "VERAN"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "177.157.131.168, 54.182.233.7"
         }
     ]
 }

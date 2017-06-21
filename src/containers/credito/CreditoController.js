@@ -35,10 +35,10 @@ import { changeProductType } from "../../actions/actionsCommon";
 // Constants
 import { ERR_CONNECTION_REFUSED, LOADING_GIF, REQUEST_ERROR, SUCCESS } from "../../constants/utils";
 import {
-	COMPLETA_CODE,
+	COMPLETA_CODE_PF,
 	INTERMEDIARIA_CODE_PF,
 	INTERMEDIARIA_PLUS_CODE_PF,
-	CHEQUE_CODE,
+	CHEQUE_CODE_PF,
 	EXPRESS_CODE_PF,
 	SIMPLES_CODE,
 	SEARCH_BY_LOCALIZE_CPF_IN_CREDITO,
@@ -85,12 +85,14 @@ class Credito extends Component {
 	componentDidMount() {
 		document.title = COMPANY_PRODUCT_CREDITO + " > " + COMPANY_NAME_SHORT;
 		this.props.loadingCredito();
-		this.props.getLastQueries(COMPLETA_CODE, "COMPLETA");
+		
+		this.props.getLastQueries(COMPLETA_CODE_PF, "COMPLETA");
 		this.props.getLastQueries(INTERMEDIARIA_CODE_PF, "INTERMEDIARIA");
 		this.props.getLastQueries(INTERMEDIARIA_PLUS_CODE_PF, "INTERMEDIARIAPLUS");
 		this.props.getLastQueries(SIMPLES_CODE, "SIMPLES");
-		this.props.getLastQueries(CHEQUE_CODE, "CHEQUE");
+		this.props.getLastQueries(CHEQUE_CODE_PF, "CHEQUE");
 		this.props.getLastQueries(EXPRESS_CODE_PF, "EXPRESS");
+		
 	}
 
 	closeTab = (index) => {
@@ -132,11 +134,33 @@ class Credito extends Component {
 		evt.preventDefault()
 
 		this.props.loadingCredito()
-		const creditoFields = this.state.creditoInput
 
 		switch (this.props.type) {
 			case "CHEQUE":
-				this.props.searchCreditoCheque(creditoFields);
+				let cheque =  {
+					documento : this.state.creditoInput.documento.replace(/[^0-9]/g,""),
+					tipo : this.state.creditoInput.documento.length > 11 ? "pj" : "pf", 
+					cep : "",
+					"telefone": {
+						"ddd": "",
+						"numero": ""
+					},
+					"utilizaCMC7": false,
+					"cmc71Inicial": "",
+					"cmc72Inicial": "",
+					"cmc73Inicial": "",
+					"quantidadeCheque": "",
+					"chequeDetalhado": [{
+						"numero": "",
+						"digito": "",
+						"dataDeposito": "",
+						"valor": ""
+					}
+					],
+					"cepOrigem": ""
+				}
+
+				this.props.searchCreditoCheque(cheque);
 				break;
 		
 			case "INTERMEDIARIA":
@@ -221,124 +245,6 @@ class Credito extends Component {
 				{showUF ?
 					this.renderUF()
 				: ""}
-			</span>
-		)
-	}
-
-	renderFormCheque() {
-		return (
-			<span>
-				<Col md={2}>
-					<select
-						className="form-control"
-						name="tipoCheque"
-						onChange={this.onChange}
-						value={this.state.tipoCheque}
-						required>
-						{this.tiposCheque.map((tipo,i) => {
-							return <option value={tipo} key={i}>{tipo}</option>
-						})}
-					</select>
-				</Col>
-				<Col md={this.state.tipoCheque != "Apenas Cadastro" ? 8 : 6}>
-					<input
-						className="form-control"
-						type="text"
-						placeholder="CPF ou CNPJ"
-						value={this.state.creditoInput.documento}
-						name="documento"
-						required
-						onChange={this.onChangeInput}/>
-				</Col>
-
-				{this.state.tipoCheque != "Apenas Cadastro" ?
-					<div>						
-						{this.state.tipoCheque != "Por Código de Barras (CMC-7)" ?
-							<span>
-								<Col md={2}>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="Banco"
-										value={this.state.creditoInput.banco}
-										name="banco"
-										onChange={this.onChangeInput}/>
-								</Col>
-
-								<Col md={2}>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="Agência"
-										value={this.state.creditoInput.agencia}
-										name="agencia"
-										onChange={this.onChangeInput}/>
-								</Col>
-
-								<Col md={2}>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="conta"
-										value={this.state.creditoInput.conta}
-										name="conta"
-										onChange={this.onChangeInput}/>
-								</Col>
-
-								<Col md={2}>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="Conta"
-										value={this.state.creditoInput.digitoConta}
-										name="digitoConta"
-										onChange={this.onChangeInput}/>
-								</Col>
-
-								<Col md={2}>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="Cheque Inicial"
-										value={this.state.creditoInput.chequeInicial}
-										name="chequeInicial"
-										onChange={this.onChangeInput}/>
-								</Col>
-
-								<Col md={2}>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="Dígito Cheque Inicial"
-										value={this.state.creditoInput.digitoChequeInicial}
-										name="digitoChequeInicial"
-										onChange={this.onChangeInput}/>
-								</Col>
-							</span>
-						: ""}
-
-						<Col md={7}>
-							<input
-								className="form-control"
-								type="text"
-								placeholder="CMC7"
-								value={this.state.creditoInput.CMC7}
-								name="CMC7"
-								onChange={this.onChangeInput}/>
-						</Col>
-
-						<Col md={3}>
-							<input
-								className="form-control"
-								type="text"
-								placeholder="Folhas"
-								value={this.state.creditoInput.folhas}
-								name="folhas"
-								onChange={this.onChangeInput}/>
-						</Col>
-					</div>
-				: ""}
-						
 			</span>
 		)
 	}
@@ -474,13 +380,10 @@ class Credito extends Component {
 						{tipo ?
 							tipo == "INTERMEDIARIA" || tipo == "INTERMEDIARIAPLUS" ?
 								this.renderForm(true)
-							: 
-								tipo == "CHEQUE" ?
-									this.renderFormCheque()
-								:
-									tipo == "EXPRESS" ?
-										this.renderFormExpress()
-									: this.renderForm(false)
+							:
+								tipo == "EXPRESS" ?
+									this.renderFormExpress()
+								: this.renderForm(false)
 							: this.renderForm(false)
 						}
 						

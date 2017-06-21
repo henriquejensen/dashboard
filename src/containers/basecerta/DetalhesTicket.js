@@ -9,24 +9,27 @@ import CardWithTable from "../../components/card/CardWithTable"
 
 class DetalhesTicket extends Component {
     render() {
-        let ticket = this.props.ticket
+        let { ticket } = this.props
+        let { cpfEnviados, cpfEntregues, cnpjEnviados, cnpjEntregues, documentosInvalidosEnviados, documentosEntregues, documentosEnviados } = ticket
         return (
             ticket === undefined ?
                 <LoadingScreen />
             :
-                <CardWithTable title={`RELATÓRIO - TICKET ${ticket.id}`}
-                    mdLength={6}
-                    elements={
-                        [
-                            {label: "QUANTIDADE CPF ENTRADA", value:ticket.relatorio.cpf ? ticket.relatorio.cpf.entrada ? ticket.relatorio.cpf.entrada : undefined : undefined},
-                            {label: "QUANTIDADE CPF SAÍDA", value:ticket.relatorio.cpf ? ticket.relatorio.cpf.saida ? ticket.relatorio.cpf.saida : undefined : undefined},
-                            {label: "QUANTIDADE CNPJ ENTRADA", value:ticket.relatorio.cnpj ? ticket.relatorio.cnpj.entrada ? ticket.relatorio.cnpj.entrada : undefined : undefined},
-                            {label: "QUANTIDADE CNPJ SAÍDA", value:ticket.relatorio.cnpj ? ticket.relatorio.cnpj.saida ? ticket.relatorio.cnpj.saida : undefined : undefined},
-                            {label: "INVÁLIDOS", value:ticket.relatorio.invalidos ? ticket.relatorio.invalidos : undefined},
-                            {label: "TOTAL ENTRADA/SAÍDA", value:ticket.relatorio.total ? ticket.relatorio.total.entrada ? `${ticket.relatorio.total.entrada}/${ticket.relatorio.total.saida}` : undefined : undefined},
-                        ]
-                    }
-                />
+                <Col md={12}>
+                    <CardWithTable title={`RELATÓRIO - TICKET ${ticket.id}`}
+                        mdLength={6}
+                        elements={
+                            [
+                                {label: "QUANTIDADE CPF ENTRADA", value:cpfEnviados ? cpfEnviados : undefined},
+                                {label: "QUANTIDADE CPF SAÍDA", value:cpfEntregues ? cpfEntregues : undefined},
+                                {label: "QUANTIDADE CNPJ ENTRADA", value:cnpjEnviados ? cnpjEnviados : undefined},
+                                {label: "QUANTIDADE CNPJ SAÍDA", value:cnpjEntregues ? cnpjEntregues : undefined},
+                                {label: "INVÁLIDOS", value:documentosInvalidosEnviados ? documentosInvalidosEnviados : undefined},
+                                {label: "TOTAL ENTRADA/SAÍDA", value:documentosEntregues && documentosEnviados ? `${documentosEnviados}/${documentosEntregues}` : undefined},
+                            ]
+                        }
+                    />
+                </Col>
         )
     }
 }

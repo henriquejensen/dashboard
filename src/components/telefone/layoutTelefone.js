@@ -11,7 +11,7 @@ import Modal from "../Modal";
 import EnviarSMS from "../../containers/sms/EnvioSMS"
 
 import { formatPhone } from "../utils/functions/patternDocuments";
-import { MESSAGE_SUCCESS_ADD_NEW_PHONE, MESSAGE_SUCCESS_NUMBER_COPY, NENHUM_REGISTRO, SUCCESS, WHATSAPP_IMAGE, VIBER_IMAGE } from "../../constants/utils";
+import { MESSAGE_SUCCESS_ADD_NEW_PHONE, MESSAGE_SUCCESS_NUMBER_COPY, NENHUM_REGISTRO, SUCCESS, URL_IMAGES_S3 } from "../../constants/utils";
 
 export default class LayoutTelefone extends Component{
     constructor(props) {
@@ -188,23 +188,22 @@ export default class LayoutTelefone extends Component{
                                                     </a>
                                                 </td>
 
-                                                <td className="noPrint">
-                                                    <a data-tip data-for="tooltipWhats">
-                                                        <img src={WHATSAPP_IMAGE} className="sub-icon-tel"/>
-                                                    </a>
-                                                </td>
-
-                                                <td className="noPrint">
-                                                    <a data-tip data-for="tooltipViber">
-                                                        <img src={VIBER_IMAGE} className="sub-icon-tel"/>
-                                                    </a>
-                                                </td>
-
                                                 <td>
                                                     <a data-tip data-for="tooltipOperadora">
                                                         {tel.operadora ? tel.operadora.split("-")[0] : ""}
                                                     </a>
                                                 </td>
+
+                                                {tel.tags && tel.tags.map(tag => {
+                                                    return (
+                                                        <td className="noPrint">
+                                                            <a data-tip data-for={tag}>
+                                                                <img src={URL_IMAGES_S3 + tag + ".png"} className="sub-icon-tel"/>
+                                                            </a>
+                                                        </td>
+                                                    )
+                                                })}
+
                                             </tr>)
                                     })
                                 : <tr><td colSpan={9}className="text-center"><strong>{NENHUM_REGISTRO + " de telefone móvel"}</strong></td></tr>}
@@ -258,12 +257,12 @@ export default class LayoutTelefone extends Component{
                         <span>Número importante</span>
                     </Tooltip>
 
-                    <Tooltip id="tooltipWhats">
-                        <span>Enviar mensagem pelo Whatsapp</span>
+                    <Tooltip id="whatsapp">
+                        <span>Número possui Whatsapp</span>
                     </Tooltip>
 
-                    <Tooltip id="tooltipViber">
-                        <span>Enviar mensagem pelo Viber</span>
+                    <Tooltip id="viber">
+                        <span>Número possui Viber</span>
                     </Tooltip>
 
                     <Modal
@@ -273,7 +272,8 @@ export default class LayoutTelefone extends Component{
                     >
                         <EnviarSMS
                             cancel={this.closeModal} 
-                            numeros={this.state.numeros} />
+                            numeros={this.state.numeros}
+                        />
                     </Modal>
 
                     <Notification ref={n => this._notificationSystem = n} />

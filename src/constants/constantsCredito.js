@@ -5,12 +5,14 @@ export const INTERMEDIARIA_CODE_PJ = "5049"
 export const INTERMEDIARIA_PLUS_CODE_PF = "5052"
 export const INTERMEDIARIA_PLUS_CODE_PJ = "5051"
 export const SIMPLES_CODE = "5070"
-export const CHEQUE_CODE = "1006"
+export const CHEQUE_CODE_PF = "5077"
+export const CHEQUE_CODE_PJ = "5078"
 export const EXPRESS_CODE_PF = "5072"
 export const EXPRESS_CODE_PJ = "5075"
 export const LAST_QUERIES = "ultimas-consultas"
 
-export const URL_CREDITO_SEARCH_CHEQUE = `https://managerprovider.assertivasolucoes.com.br/credito/${CHEQUE_CODE}/consultar`
+export const URL_CREDITO_SEARCH_CHEQUE_PF = `https://managerprovider.assertivasolucoes.com.br/credito/${CHEQUE_CODE_PF}/consultar`
+export const URL_CREDITO_SEARCH_CHEQUE_PJ = `https://managerprovider.assertivasolucoes.com.br/credito/${CHEQUE_CODE_PJ}/consultar`
 export const URL_CREDITO_SEARCH_COMPLETA = `https://managerprovider.assertivasolucoes.com.br/credito/${COMPLETA_CODE_PF}/consultar`
 export const URL_CREDITO_SEARCH_COMPLETA_PJ = `https://managerprovider.assertivasolucoes.com.br/credito/${COMPLETA_CODE_PJ}/consultar`
 export const URL_CREDITO_SEARCH_INTERMEDIARIA_PF = `https://managerprovider.assertivasolucoes.com.br/credito/${INTERMEDIARIA_CODE_PF}/consultar`

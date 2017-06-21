@@ -11,6 +11,41 @@ const getInitialState = {
     layouts: []
 }
 
+let layouts = [
+    {
+        idLayout: 310,
+        descricaoLayout: "360iu"
+    },
+    {
+        idLayout: 165,
+        descricaoLayout: "A1 VOX"
+    },
+    {
+        idLayout: 311,
+        descricaoLayout: "ABRAZ"
+    },
+    {
+        idLayout: 7,
+        descricaoLayout: "Acao-Nectar"
+    },
+    {
+        idLayout: 113,
+        descricaoLayout: "Acert Digital"
+    },
+    {
+        idLayout: 421,
+        descricaoLayout: "Almeida_Ferraz_Celular_Email"
+    },
+    {
+        idLayout: 391,
+        descricaoLayout: "Almeida_Ferraz_Emails"
+    },
+    {
+        idLayout: 415,
+        descricaoLayout: "Almeida_Ferraz_PF_Celular_Relacionadas"
+    }
+]
+
 export default function(state=getInitialState, action) {
     switch(action.type) {
         case basecerta.CLOSE_MESSAGE_ERROR_BASECERTA: {
@@ -27,7 +62,7 @@ export default function(state=getInitialState, action) {
                 status:"",
                 message:"",
                 tickets: tickets.tickets,
-                layouts: [{label:"360iu", value:"360"}, {label:"A1 VOX", value:"165"}, {label:"311", value:"ABRAZ"}]
+                layouts: layouts.map((layout) => {return { label: layout.descricaoLayout, value: layout.idLayout }})
             }
         }
 
@@ -69,4 +104,8 @@ export default function(state=getInitialState, action) {
     }
 
     return state;
+}
+
+function patternLayoutsToLabelAndValue(layouts) {
+    return 
 }

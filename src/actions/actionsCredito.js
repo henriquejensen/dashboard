@@ -17,7 +17,8 @@ import {
     GET_CREDITO_LAST_QUERIES,
     LOADING_CREDITO,
     SEE_CREDITO_MODEL,
-    URL_CREDITO_SEARCH_CHEQUE,
+    URL_CREDITO_SEARCH_CHEQUE_PF,
+	URL_CREDITO_SEARCH_CHEQUE_PJ,
     URL_CREDITO_SEARCH_COMPLETA,
 	URL_CREDITO_SEARCH_COMPLETA_PJ,
 	URL_CREDITO_SEARCH_EXPRESS_PF,
@@ -85,12 +86,12 @@ export function loadingCredito() {
 }
 
 export function searchCreditoCheque(cheque) {
-	let url = URL_CREDITO_SEARCH_CHEQUE;
-	let data = {cheque};
-	let search = GET_CREDITO_CHEQUE;
+	let data = cheque;
+	let url = cheque.tipo === "pf" ? URL_CREDITO_SEARCH_CHEQUE_PF : URL_CREDITO_SEARCH_CHEQUE_PJ;
+	let search = GET_CREDITO_COMPLETA;
 
 	return (dispatch) => {
-		apiContentType(dispatch, url, data, search, {cheque:cheque})
+		api(dispatch, url, data, search, {cheque})
 	}
 }
 

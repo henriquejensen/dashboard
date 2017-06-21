@@ -8,19 +8,20 @@ import campanha from "./data/sms/campanhaDetalhes.json"
 const initialState = {
 	status: "",
 	message: "",
-	response: [],
+    respostas: [],
+	campanhas: [],
 	loading: false,
     campanhaDetalhes: undefined
 }
 
 export default function(state = initialState, action) {
-    console.log("REDUCERS", action)
     switch(action.type) {
         case sms.CLOSE_SMS_MESSAGE: {
             return {
                 status: "",
                 message: "",
-                response: state.response,
+                respostas: state.respostas,
+                campanhas: state.campanhas,
                 loading: false,
                 campanhaDetalhes: state.campanhaDetalhes
             }
@@ -32,7 +33,8 @@ export default function(state = initialState, action) {
             return {
                 status: "",
                 message: "",
-                response: state.response.filter(response => response[propertyToFilter] == parameterToFilter),
+                respostas: state.response.filter(response => response[propertyToFilter] == parameterToFilter),
+                campanhas: state.campanhas,
                 loading: false,
                 campanhaDetalhes: state.campanhaDetalhes
             }
@@ -42,18 +44,19 @@ export default function(state = initialState, action) {
             return {
                 status: "",
                 message: "",
-                response: campanhasSMS.campanhas,
+                respostas: state.respostas,
+                campanhas: campanhasSMS.campanhas,
                 loading: false,
                 campanhaDetalhes: state.campanhaDetalhes
             }
         }
 
         case sms.GET_DETALHES_CAMPANHA: {
-            console.log("GET_DETALHES_CAMPANHA", campanha, action.payload)
             return {
                 status: "",
                 message: "",
-                response: state.response,
+                respostas: state.respostas,
+                campanhas: state.campanhas,
                 loading: false,
                 campanhaDetalhes: campanha[action.payload] !== undefined ? campanha[action.payload] : []
             }
@@ -63,7 +66,8 @@ export default function(state = initialState, action) {
             return {
                 status: "",
                 message: "",
-                response: state.response,
+                respostas: state.respostas,
+                campanhas: state.campanhas,
                 loading: false,
                 campanhaDetalhes: state.campanhaDetalhes
             }
@@ -73,7 +77,8 @@ export default function(state = initialState, action) {
             return {
                 status: "",
                 message: "",
-                response: respostas.respostas,
+                respostas: respostas.respostas,
+                campanhas: state.campanhas,
                 loading: false,
                 campanhaDetalhes: state.campanhaDetalhes
             }
@@ -83,7 +88,8 @@ export default function(state = initialState, action) {
             return {
                 status: "",
                 message: "",
-                response: state.response,
+                respostas: state.respostas,
+                campanhas: state.campanhas,
                 loading: true,
                 campanhaDetalhes: state.campanhaDetalhes
             }
@@ -93,7 +99,8 @@ export default function(state = initialState, action) {
             return {
                 status: SUCCESS,
                 message: sms.MESSAGE_SUCCESS_SMS,
-                response: state.response,
+                respostas: state.respostas,
+                campanhas: state.campanhas,
                 loading: false,
                 campanhaDetalhes: state.campanhaDetalhes
             }

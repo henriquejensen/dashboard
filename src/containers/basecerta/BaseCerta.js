@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Button, Col, Form, DropdownButton, MenuItem, ProgressBar } from "react-bootstrap";
 
 //Actions
-import { getTicketsBaseCerta } from "../../actions/actionsBaseCerta";
+import { filterBaseCerta, getTicketsBaseCerta } from "../../actions/actionsBaseCerta";
 
 //Components
 import Panel from "../../components/panel/Panel"
@@ -17,7 +17,7 @@ import MyButton from "../../components/button/MyButton"
 import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms";
 
 //Constants
-import { NENHUM_REGISTRO } from "../../constants/utils";
+import { NENHUM_REGISTRO, ADVANCED_SEARCH } from "../../constants/utils";
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_BASECERTA, LOGO_BASECERTA } from "../../constants/constantsCompany";
 
 class BaseCerta extends Component {
@@ -30,66 +30,75 @@ class BaseCerta extends Component {
     }
   }
 
+  componentWillMount() {
+    this.props.getTicketsBaseCerta();
+  }
+
+  componentDidMount() {
+    document.title = COMPANY_PRODUCT_BASECERTA + " > " + COMPANY_NAME_SHORT;
+  }
+
   onClickBuscaAvancada = () => {
     this.setState({
       showBuscaAvancada: !this.state.showBuscaAvancada
     })
   }
 
+  onFormSubmit = (evt) => {
+    evt.preventDefault()
+    
+    let { ticket, layout, clienteLogin, nomeGrupo, usuario, limitar } = this.state
+
+    let inputFilter = { ticket, layout, clienteLogin, nomeGrupo, usuario, limitar }
+
+    this.props.filterBaseCerta(inputFilter)
+  }
+
   renderForm = () => {
       return (
         <Panel>
           <Form onSubmit={this.onFormSubmit} >
-              <Col md={this.state.showBuscaAvancada ? 8 : 10}>
+              <Col md={this.state.showBuscaAvancada ? 4 : 8}>
                   <MyFieldGroup
-                    id="smsCampanha"
-                    label="Campanha"
+                    id="ticket"
+                    label="Ticket"
                     type="text"
-                    name="campanha"
+                    name="ticket"
                     onChange={this.onChange} />
               </Col>
 
               {this.state.showBuscaAvancada ?
                 <span>
-                  <Col md={2}>
+                  <Col md={4}>
                       <MyFieldGroup
-                        id="smsDataInicio"
-                        label="Data Início"
-                        type="date"
-                        name="dataInicio"
-                        onChange={this.onChange} />
-                  </Col>
-
-                  <Col md={2}>
-                      <MyFieldGroup
-                        id="smsDataFim"
-                        label="Data Fim"
-                        type="date"
-                        name="dataFim"
-                        onChange={this.onChange} />
-                  </Col>
-
-                  <Col md={2}>
-                      <MyFieldGroup
-                        id="idCampanha"
-                        label="Id"
+                        id="layout"
+                        label="Layout"
                         type="text"
-                        name="id"
+                        name="layout"
                         onChange={this.onChange} />
                   </Col>
 
                   <Col md={4}>
                       <MyFieldGroup
-                        id="smsCliente"
-                        label="Cliente"
+                        id="clienteLogin"
+                        label="Cliente Login"
                         type="text"
-                        name="cliente"
+                        name="clienteLogin"
                         onChange={this.onChange} />
                   </Col>
 
                   <Col md={4}>
                       <MyFieldGroup
-                        id="smsUsuario"
+                        id="nomeGrupo"
+                        label="Nome do Grupo"
+                        type="text"
+                        name="nomeGrupo"
+                        onChange={this.onChange} />
+                  </Col>
+
+                  <Col md={4}>
+                      <MyFieldGroup
+                        id="usuario"
                         label="Usuário"
                         type="text"
                         name="usuario"
@@ -99,9 +108,20 @@ class BaseCerta extends Component {
               : ""}
 
               <Col md={2}>
+                  <SelectGroup
+                    id="limitar"
+                    label="Limitar"
+                    type="select"
+                    name="limitar"
+                    options={["10", "20","30", "40","50", "60","70", "80","90","Todos"]}
+                    value="10"
+                    onChange={this.onChange} />
+              </Col>
+
+              <Col md={2}>
                   <label htmlFor="">
                     <a href="#" onClick={this.onClickBuscaAvancada} >
-                      {!this.state.showBuscaAvancada ? 'Busca avançada' : 'Fechar busca'}
+                      {!this.state.showBuscaAvancada ? ADVANCED_SEARCH : 'Fechar busca'}
                     </a>
                   </label>
                   <Button style={{width:"100%"}} type="submit" bsStyle="info">Buscar</Button>
@@ -110,77 +130,6 @@ class BaseCerta extends Component {
           </Form>
         </Panel>
       )
-  }
-
-  /*renderForm = () => {
-      return (
-          <Form onSubmit={this.onFormSubmit} className="my-form">
-              <Col md={1}>
-                  <MyFieldGroup
-                    id="ticket"
-                    label="Ticket"
-                    type="number"
-                    name="ticket" />
-              </Col>
-
-              <Col md={2}>
-                  <MyFieldGroup
-                    id="layout"
-                    label="Layout"
-                    type="text"
-                    name="layout" />
-              </Col>
-
-              <Col md={2}>
-                  <MyFieldGroup
-                    id="clienteLogin"
-                    label="Cliente Login"
-                    type="text"
-                    name="clienteLogin" />
-              </Col>
-
-              <Col md={2}>
-                  <MyFieldGroup
-                    id="nomeGrupo"
-                    label="Nome do Grupo"
-                    type="text"
-                    name="nomeGrupo" />
-              </Col>
-
-              <Col md={2}>
-                  <MyFieldGroup
-                    id="usuario"
-                    label="Usuário"
-                    type="text"
-                    name="usuario" />
-              </Col>
-
-              <Col md={1}>
-                  <SelectGroup
-                    id="limitar"
-                    label="Usuário"
-                    type="select"
-                    name="usuario"
-                    options={["10", "20","30", "40","50", "60","70", "80","90","Todos"]}
-                    value="50"
-                    onChange={this.onChange} />
-              </Col>
-
-              <Col md={2}>
-                  <label htmlFor="">.</label>
-                  <Button style={{width:"100%"}} bsStyle="info">Buscar</Button>
-              </Col>
-          </Form>
-      )
-  }*/
-
-  componentWillMount() {
-    this.props.getTicketsBaseCerta();
-    //this.props.getLayouts();
-  }
-
-  componentDidMount() {
-    document.title = COMPANY_PRODUCT_BASECERTA + " > " + COMPANY_NAME_SHORT;
   }
 
   openModal = (text) => {
@@ -237,7 +186,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getTicketsBaseCerta }, dispatch)
+  return bindActionCreators({
+      filterBaseCerta,
+      getTicketsBaseCerta
+  }, dispatch)
 }
 
 

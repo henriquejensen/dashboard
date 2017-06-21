@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, ProgressBar } from "react-bootstrap";
+import { Col, DropdownButton, MenuItem, ProgressBar } from "react-bootstrap";
 
 // Components
 import MyButton from "../../components/button/MyButton"
@@ -8,7 +8,7 @@ import Modal from "../../components/Modal"
 import DetalhesTicket from "./DetalhesTicket"
 
 // Constants
-import { TOOLTIP_SEE_MORE_INFO_MESSAGE } from "../../constants/utils"
+import { IN_PROCESS, TOOLTIP_SEE_MORE_INFO_MESSAGE } from "../../constants/utils"
 
 class BaseCertaView extends Component {
     state = {
@@ -26,25 +26,64 @@ class BaseCertaView extends Component {
     render() {
         let ticket = this.props.ticket
         return (
-            <Panel title={"Ticket: " + ticket.id + " - Layout: " + ticket.layout} >
+            <Panel title={"Ticket: " + ticket.id} >
                 <Col md={4}>
-                    <strong>Solicitante: </strong>{ticket.solicitante}
+                    <strong>Solicitante: </strong>{ticket.usuario.usuario}
                 </Col>
                 <Col md={4}>
-                    <strong>Layout: </strong>{ticket.solicitante}
+                    <strong>Layout: </strong>{ticket.descricaoLayout}
                 </Col>
                 <Col md={4}>
-                    <strong>Arquivo: </strong>{ticket.arquivo}
+                    <strong>Arquivo: </strong>{ticket.nomeArquivo}
+                </Col>
+
+                <Col md={4}>
+                    <strong>Total entrada/saída: </strong>{ticket.documentosEntregues + "/" + ticket.documentosEnviados}
                 </Col>
 
                 <Col md={4}>
-                    <strong>Início: </strong>{ticket.inicio}
+                    <strong>Início: </strong>{ticket.dataPostagem}
                 </Col>
                 <Col md={4}>
-                    <strong>Fim: </strong>{ticket.fim}
+                    <strong>Fim: </strong>{ticket.dataEntrega ? ticket.dataEntrega : IN_PROCESS }
                 </Col>
 
-                <Col md={3}>
+                <Col md={8}>
+                    <ProgressBar
+                        now={ticket.porcentagem}
+                        label={`${ticket.porcentagem}%`}
+                        bsStyle={ticket.porcentagem === 100 ? "success" : "warning"}
+                        style={{marginBottom:0}}
+                    />
+                    <div className="text-center">
+                        <strong>STATUS:</strong> {ticket.statusTela}
+                    </div>
+                </Col>
+
+                <Col md={2}>
+                    <DropdownButton title="Ações" id="bg-nested-dropdown">
+                        <MenuItem
+                            download
+                            href={ticket.s3Entrada}
+                            eventKey="1"
+                            target="_blank"
+                        >
+                            Baixar entrada
+                        </MenuItem>
+                        {ticket.porcentagem === 100 && ticket.statusTela === "PROCESSADO" && ticket.s3Saida ?
+                            <MenuItem
+                                download
+                                href={ticket.s3Saida}
+                                eventKey="2"
+                                target="_blank"
+                            >
+                                Baixar saída
+                            </MenuItem>
+                        : ""}
+                    </DropdownButton>
+                </Col>
+
+                <Col md={2}>
                     <MyButton
                         tooltip={TOOLTIP_SEE_MORE_INFO_MESSAGE}
                         onClickButton={this.showOrCloseModal}
@@ -54,11 +93,6 @@ class BaseCertaView extends Component {
                         myButtonText={TOOLTIP_SEE_MORE_INFO_MESSAGE}
                     />
                 </Col>
-
-                <Col md={8}>
-                    <ProgressBar now={ticket.status} label={`${ticket.status}%`} active bsStyle={ticket.status == 100 ? "success" : "warning"} />
-                </Col>
-
 
                 <Modal
                     IsModalOpen={this.state.IsModalOpen}

@@ -85,6 +85,8 @@ export const RadioGroupGeneric = (props) => {
 }
 
 export const TextAreaGroup = (props) => {
+    let rows = props.rows || "2"
+    let cols = props.cols || "20"
     return (
         <FormGroup controlId={props.id}>
             {props.label ? <ControlLabel>{props.label}</ControlLabel> : ""}
@@ -96,7 +98,8 @@ export const TextAreaGroup = (props) => {
                     style={props.error ? {borderColor:"red"} : {}}
                     name={props.name}
                     onChange={props.onChange}
-                    rows="2" cols="20"
+                    rows={rows}
+                    cols={cols}
                 >
                     {props.value}
                 </textarea>

@@ -124,7 +124,7 @@ export default function(state=getInitialState, action) {
             }
             
 
-        case ERR_CONNECTION_REFUSED:
+        case ERR_CONNECTION_REFUSED: {
             return {
                 status: ERR_CONNECTION_REFUSED,
                 message: ERROR_503,
@@ -134,15 +134,16 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: state.type
             }
+        }
 
         case GET_CREDITO_COMPLETA: {
-            let tipo = action.payload.parameters.tipo;
-            let documento = action.payload.parameters.documento;
-            documento = tipo == "CPF" ? patternCPF(documento) : patternCNPJ(documento);
-            let responseServer = action.payload.response;
-            let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_CREDITO;
-            let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
-            let verifyIfDocumentExists = isDocumentNotInArray(state.response, label);
+            let tipo = action.payload.parameters.tipo
+            let documento = action.payload.parameters.documento
+            documento = tipo == "CPF" ? patternCPF(documento) : patternCNPJ(documento)
+            let responseServer = action.payload.response
+            let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_CREDITO
+            let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined
+            let verifyIfDocumentExists = isDocumentNotInArray(state.response, label)
 
             if(verifyIfDocumentExists && cadastro) {
                 /**O documento esta vindo formatado do fornecedor
@@ -168,6 +169,7 @@ export default function(state=getInitialState, action) {
                 type: state.type
             }
         }
+        
         case GET_CREDITO_LAST_QUERIES: {
             // tipo > { COMPLETA, INTERMEDIARIA ...}
             let tipoConsulta = action.payload.parameters.tipo

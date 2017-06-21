@@ -2,129 +2,39 @@
     "tickets": [
         {
             "id": 56564,
-            "layout": "Intervalor",
-            "arquivo": "Arquivo",
-            "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",
-            "inicio": "23/03/2017 - 15:54",
-            "fim": "23/03/2017 - 15:54",
-            "status": 100,
-            "telefones": [],
-            "relatorio": {
-                "cpf": {
-                    "entrada": 100,
-                    "saida": 100
-                },
-                "cnpj": {
-                    "entrada": 50,
-                    "saida": 49
-                },
-                "invalidos": 1,
-                "total": {
-                    "entrada": 150,
-                    "saida": 149
-                }
-            }
-
-        },
-        {
-            "id": 56563,
-            "layout": "Assertiva",
-            "arquivo": "Arquivo",
-            "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",
-            "inicio": "23/03/2017 - 15:54",
-            "fim": "23/03/2017 - 15:54",
-            "status": 80,
-            "telefones": [],
-            "relatorio": {
-                "cpf": {
-                    "entrada": 58,
-                    "saida": 16
-                },
-                "cnpj": {
-                    "entrada": 0,
-                    "saida": 0
-                },
-                "invalidos": 0,
-                "total": {
-                    "entrada": 58,
-                    "saida": 16
-                }
-            }
-        },
-        {
-            "id": 56562,
-            "layout": "Rennov",
-            "arquivo": "Arquivo",
-            "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",
-            "inicio": "23/03/2017 - 15:54",
-            "fim": "23/03/2017 - 15:54",
-            "status": 100,
-            "telefones": [],
-            "relatorio": {
-                "cpf": {
-                    "entrada": 58,
-                    "saida": 16
-                },
-                "cnpj": {
-                    "entrada": 0,
-                    "saida": 0
-                },
-                "invalidos": 0,
-                "total": {
-                    "entrada": 58,
-                    "saida": 16
-                }
-            }
-        },
-        {
-            "id": 56561,
-            "layout": "Rennov",
-            "arquivo": "Arquivo",
-            "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",
-            "inicio": "23/03/2017 - 15:54",
-            "fim": "23/03/2017 - 15:54",
-            "status": 35,
-            "telefones": [],
-            "relatorio": {
-                "cpf": {
-                    "entrada": 58,
-                    "saida": 16
-                },
-                "cnpj": {
-                    "entrada": 0,
-                    "saida": 0
-                },
-                "invalidos": 0,
-                "total": {
-                    "entrada": 58,
-                    "saida": 16
-                }
-            }
-        },
-        {
-            "id": 56560,
-            "layout": "Assertiva V2",
-            "arquivo": "Arquivo",
-            "solicitante": "FINANCEIRO MASSIVAS MAPGOMES",
-            "inicio": "23/03/2017 - 15:54",
-            "fim": "23/03/2017 - 15:54",
-            "status": 100,
-            "telefones": [],
-            "relatorio": {
-                "cpf": {
-                    "entrada": 58,
-                    "saida": 16
-                },
-                "cnpj": {
-                    "entrada": 0,
-                    "saida": 0
-                },
-                "invalidos": 0,
-                "total": {
-                    "entrada": 58,
-                    "saida": 16
-                }
-            }
+            "descricaoLayout": "Intervalor",
+            "nomeArquivo": "Arquivo",
+            "dataPostagem": "2017-06-20",
+            "dataEntrega": "2017-06-20",
+            "usuario": {
+                "id": 630186,
+                "usuario": "FINANCEIRO MASSIVAS MAPGOMES",
+                "grupo": "ASS_INTERNO",
+                "clienteLogin": "ASSERTIVA"
+            },
+            "idLayout": 5,
+            "protocolo": "ba77b836-14cb-43c9-a4fe-b2f75296aaf8",
+            "caminhoArquivo": "P:portal\\files\\basecerta\\ASSERTIVA\\1\\entrada\\TESTESMS.txt",
+            "caminhoSaida": "P:portal\\files\\basecerta\\ASSERTIVA\\1\\saida\\",
+            "documentosEnviados": 150,
+            "cpfEnviados": 100,
+            "cnpjEnviados": 50,
+            "documentosInvalidosEnviados": 1,
+            "documentosEntregues": 149,
+            "cpfEntregues": 100,
+            "cnpjEntregues": 49,
+            "status": 0,
+            "statusTela": "PROCESSADO",
+            "porcentagem": 100,
+            "pergunta": null,
+            "resposta": null,
+            "s3Entrada": "https://s3-us-west-2.amazonaws.com/assdonline/portal/files/basecerta/ASSERTIVA/1/entrada/ticket_1.txt",
+            "s3Saida": "https://s3-us-west-2.amazonaws.com/assdonline/portal/files/basecerta/ASSERTIVA/1/entrada/ticket_1.txt",
+            "statusSms": null,
+            "campainha": null,
+            "hash": "",
+            "duplicado": 0,
+            "idDuplicado": null
         }
     ]
 }

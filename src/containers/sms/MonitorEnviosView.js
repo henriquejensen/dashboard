@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, ProgressBar } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 
 // Components
 import MyButton from "../../components/button/MyButton"
@@ -9,11 +9,16 @@ import DetalhesCampanha from "./DetalhesCampanha"
 
 // Constants
 import { TOOLTIP_SEE_MORE_INFO_MESSAGE } from "../../constants/utils"
+import { STATUS_SMS } from "../../constants/constantsSMS"
 
 class MonitorEnviosView extends Component {
-    state = {
-        IsModalOpen: false,
-        id: ""
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            IsModalOpen: false,
+            id: ""
+        }
     }
 
     showOrCloseModal = (id) => {
@@ -23,27 +28,35 @@ class MonitorEnviosView extends Component {
         })
     }
 
-    render() {
+    renderTitlePanel(campanha) {
         return (
-            <Panel title={"Ticket: " + this.props.campanha.id + " - Campanha: " + this.props.campanha.campanha} >
+            <span>
+                ID: <strong>{campanha.id}</strong> - STATUS: <span style={{color:STATUS_SMS[campanha.status].color}}>
+                    {STATUS_SMS[campanha.status].label}
+                </span>
+            </span>
+        )
+    }
+
+    render() {
+        let { user } = this.props.campanha
+        return (
+            <Panel title={this.renderTitlePanel(this.props.campanha) } >
                 <Col md={3}>
                     <strong>Campanha: </strong>{this.props.campanha.campanha}
                 </Col>
                 <Col md={3}>
                     <strong>Cadastro: </strong>{this.props.campanha.cadastro}
                 </Col>
-                <Col md={3}>
-                    <strong>Centro de Custo: </strong>{this.props.campanha.centroCusto}
-                </Col>
 
                 <Col md={3}>
-                    <strong>Cliente: </strong>{this.props.campanha.cliente}
+                    <strong>Cliente: </strong>{user.clienteLogin}
                 </Col>
                 <Col md={3}>
-                    <strong>Grupo: </strong>{this.props.campanha.grupo}
+                    <strong>Grupo: </strong>{user.grupo}
                 </Col>
                 <Col md={3}>
-                    <strong>Usuário: </strong>{this.props.campanha.usuario}
+                    <strong>Usuário: </strong>{user.usuario}
                 </Col>
 
                 <Col md={3}>
@@ -60,11 +73,6 @@ class MonitorEnviosView extends Component {
                         myButtonText={TOOLTIP_SEE_MORE_INFO_MESSAGE}
                     />
                 </Col>
-
-                <Col md={8}>
-                    <ProgressBar now={this.props.campanha.status} label={`${this.props.campanha.status}%`} active bsStyle={this.props.campanha.status == 100 ? "success" : "warning"} />
-                </Col>
-
 
                 <Modal
                     IsModalOpen={this.state.IsModalOpen}
