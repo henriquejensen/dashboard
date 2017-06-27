@@ -1,5 +1,5 @@
 {
-    "1077907": [
+    "1922213": [
         {
             "id": 42235297,
             "idExterno": 42235297,
@@ -7,34 +7,16 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
         },
         {
             "id": 42235296,
             "idExterno": 42235296,
             "dataEnvio": "06/06/17 10:37",
-            "numero": 19982282250,
+            "numero": 1111,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
-        },
-        {
-            "id": 42235297,
-            "idExterno": 42235297,
-            "dataEnvio": "06/06/17 10:37",
-            "numero": 19982282250,
-            "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
-            "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
-        },
-        {
-            "id": 42235296,
-            "idExterno": 42235296,
-            "dataEnvio": "06/06/17 10:37",
-            "numero": 19982282250,
-            "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
-            "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 1
         },
         {
             "id": 42235297,
@@ -43,7 +25,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
         },
         {
             "id": 42235296,
@@ -52,7 +34,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
         },
         {
             "id": 42235297,
@@ -61,7 +43,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
         },
         {
             "id": 42235296,
@@ -70,7 +52,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 1
         },
         {
             "id": 42235297,
@@ -79,7 +61,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
         },
         {
             "id": 42235296,
@@ -88,7 +70,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 1
         },
         {
             "id": 42235297,
@@ -97,7 +79,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
         },
         {
             "id": 42235296,
@@ -106,7 +88,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
         },
         {
             "id": 42235297,
@@ -115,7 +97,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
         },
         {
             "id": 42235296,
@@ -124,7 +106,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
         },
         {
             "id": 42235297,
@@ -133,7 +115,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
         },
         {
             "id": 42235296,
@@ -142,7 +124,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
         },
         {
             "id": 42235297,
@@ -151,7 +133,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
         },
         {
             "id": 42235296,
@@ -160,7 +142,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
         },
         {
             "id": 42235297,
@@ -169,7 +151,7 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
         },
         {
             "id": 42235296,
@@ -178,10 +160,28 @@
             "numero": 19982282250,
             "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
             "remetente": "",
-            "status": "ENVIADO COM CONFIRMAÇÂO"
+            "status": 2
+        },
+        {
+            "id": 42235297,
+            "idExterno": 42235297,
+            "dataEnvio": "06/06/17 10:37",
+            "numero": 19982282250,
+            "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
+            "remetente": "",
+            "status": 2
+        },
+        {
+            "id": 42235296,
+            "idExterno": 42235296,
+            "dataEnvio": "06/06/17 10:37",
+            "numero": 19982282250,
+            "mensagem": "sdv sunf dÃ¡ RT aqui pra share",
+            "remetente": "",
+            "status": 2
         }
     ],
-    "1077752": [
+    "1922211": [
         {
             "id": 42274865,
             "idExterno": "",
@@ -189,10 +189,10 @@
             "numero": 11975057502,
             "mensagem": "ANDREIA, voce tem disponivel ate R$ 19.211,55 para credito consignado INSS. Ligue agora 11-27300485 e informe o protocolo: 016.507.271. JENYFFER",
             "remetente": "",
-            "status": "ENVIANDO"
+            "status": 0
         }
     ],
-    "1077648": [
+    "1922210": [
         {
             "id": 42274865,
             "idExterno": "",
@@ -200,7 +200,29 @@
             "numero": 11975057502,
             "mensagem": "ANDREIA, voce tem disponivel ate R$ 19.211,55 para credito consignado INSS. Ligue agora 11-27300485 e informe o protocolo: 016.507.271. JENYFFER",
             "remetente": "",
-            "status": "ENVIANDO"
+            "status": 0
+        }
+    ],
+    "1922209": [
+        {
+            "id": 42274865,
+            "idExterno": "",
+            "dataEnvio": "06/06/17 15:24",
+            "numero": 11975057502,
+            "mensagem": "ANDREIA, voce tem disponivel ate R$ 19.211,55 para credito consignado INSS. Ligue agora 11-27300485 e informe o protocolo: 016.507.271. JENYFFER",
+            "remetente": "",
+            "status": 0
+        }
+    ],
+    "1922208": [
+        {
+            "id": 42274865,
+            "idExterno": "",
+            "dataEnvio": "06/06/17 15:24",
+            "numero": 11975057502,
+            "mensagem": "ANDREIA, voce tem disponivel ate R$ 19.211,55 para credito consignado INSS. Ligue agora 11-27300485 e informe o protocolo: 016.507.271. JENYFFER",
+            "remetente": "",
+            "status": 0
         }
     ]
 }

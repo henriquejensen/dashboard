@@ -2,20 +2,21 @@ import React from "react";
 import { Form, FormGroup, Col, FormControl, Label, ControlLabel, Button, Radio, Checkbox, HelpBlock } from "react-bootstrap";
 
 export const MyFieldGroup = (props) => {
+    let { id, bsSize, label, required, type, error, name, accept, value, placeholder, onChange, message } = props
     return (
-        <FormGroup controlId={props.id} style={{marginLeft:0, marginRight:0}}>
-            {props.label ? <ControlLabel>{props.label}</ControlLabel> : ""}
+        <FormGroup controlId={id} style={{marginLeft:0, marginRight:0}} bsSize={bsSize} >
+            {label ? <ControlLabel>{label}</ControlLabel> : ""}
             <FormControl
-                required={props.required}
-                type={props.type}
-                style={props.error ? {borderColor:"red"} : {}}
-                name={props.name}
-                accept={props.accept}
-                value={props.value ? props.value : undefined}
-                placeholder={props.placeholder}
-                onChange={props.onChange}
+                required={required}
+                type={type}
+                style={error ? {borderColor:"red"} : {}}
+                name={name}
+                accept={accept}
+                value={value ? value : undefined}
+                placeholder={placeholder}
+                onChange={onChange}
             />
-            <HelpBlock>{props.message}</HelpBlock>
+            <HelpBlock>{message}</HelpBlock>
         </FormGroup>
     )
 }

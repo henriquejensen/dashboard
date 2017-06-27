@@ -15,6 +15,20 @@ export function filterResponseSMS(request) {
 	}
 }
 
+export function filterCampanhasSMS(request) {
+	return {
+		type: sms.FILTER_CAMPANHAS_SMS,
+		payload: request
+	}
+}
+
+export function filterDetalhesCampanha({numero=null, status=null, id}) {
+	return {
+		type: sms.FILTER_DETALHES_CAMPANHA,
+		payload: { numero, status, id }
+	}
+}
+
 export function getCampanhasSMS() {
 	return {
 		type: sms.GET_CAMPANHAS_SMS,

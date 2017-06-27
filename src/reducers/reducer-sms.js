@@ -28,15 +28,65 @@ export default function(state = initialState, action) {
         }
 
         case sms.FILTER_RESPONSE_SMS: {
-            let propertyToFilter = Object.keys(action.payload)[0]
-            let parameterToFilter = action.payload[propertyToFilter]
+            let id = action.payload.id
+            let respostaResponse = respostas.respostas
+
+            if(id) {
+                respostaResponse = respostaResponse.filter(resposta => resposta.campanha.id == id)
+            }
+
             return {
                 status: "",
                 message: "",
-                respostas: state.response.filter(response => response[propertyToFilter] == parameterToFilter),
+                respostas: respostaResponse,
                 campanhas: state.campanhas,
                 loading: false,
                 campanhaDetalhes: state.campanhaDetalhes
+            }
+        }
+
+        case sms.FILTER_CAMPANHAS_SMS: {
+            let id = action.payload.id
+            let campanhasResponse = campanhasSMS.campanhas
+
+            if(id) {
+                campanhasResponse = campanhasResponse.filter(campanha => campanha.id == id)
+            }
+            
+            return {
+                status: "",
+                message: "",
+                respostas: state.respostas,
+                campanhas: campanhasResponse,
+                loading: false,
+                campanhaDetalhes: state.campanhaDetalhes
+            }
+        }
+
+        case sms.FILTER_DETALHES_CAMPANHA: {
+            let { numero, status, id } = action.payload
+            let campanhaDetalhes = campanha[id]
+            let campanhaDetalhesResponse = []
+
+            if(!numero && !status)
+                campanhaDetalhesResponse = campanhaDetalhes
+
+            else {
+                if(numero && status)
+                    campanhaDetalhesResponse = campanhaDetalhes.filter(camp => camp.numero == numero && camp.status == status)
+                else if (numero)
+                    campanhaDetalhesResponse = campanhaDetalhes.filter(camp => camp.numero == numero)
+                else if (status)
+                    campanhaDetalhesResponse = campanhaDetalhes.filter(camp => camp.status == status)
+            }
+
+            return {
+                status: "",
+                message: "",
+                respostas: state.respostas,
+                campanhas: state.campanhas,
+                loading: false,
+                campanhaDetalhes: campanhaDetalhesResponse
             }
         }
 

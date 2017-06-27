@@ -1,3 +1,7 @@
+.panel {
+    border: none;
+}
+
 .my-panel-heading {
     position: relative;
     background-color: #dcdcdc !important;

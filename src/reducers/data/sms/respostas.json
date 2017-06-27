@@ -28,6 +28,35 @@
         "operadora": "S/O",
         "numeroSms": 1,
         "prioridade": 1
+    },
+    {
+        "id": 44001113,
+        "idFornecedor": "e2c98533-9384-4455-a8ef-28613b9c4e6c",
+        "numero": "19992596226",
+        "mensagem": "Sr. Leandro dos Santos, solicitamos seu contato urgente com nossa central (11) 4431-5502 Whatsapp (11) 99889-1315 Lojas HOT POINT/PLANET GIRLS.",
+        "dataEnvio": 1498052138210,
+        "status": 0,
+        "campanha": {
+            "id": 1922947,
+            "campanha": "SMS Rápido",
+            "dataCadastro": "21/06/2017 10:35:38",
+            "dataEnvio": "21/06/2017 10:35:38",
+            "tipoEnvio": 1,
+            "status": 2,
+            "user": {
+                "id": 7617,
+                "usuario": "WEST",
+                "grupo": "GERENTE",
+                "clienteLogin": "WEST"
+            },
+            "fornecedor": 2,
+            "numeroSms": 1,
+            "ip": "10.41.3.12, 201.16.178.157, 54.182.233.51"
+        },
+        "fornecedor": 2,
+        "operadora": "S/O",
+        "numeroSms": 1,
+        "prioridade": 1
     }
   ]
 }

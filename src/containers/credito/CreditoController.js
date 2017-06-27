@@ -61,19 +61,20 @@ class Credito extends Component {
 			tipo: "",
 			tipoCheque: "Apenas Cadastro",
 			creditoInput: {
-				documento: "",
-				dataNascimento: "",
+				documento: null,
+				dataNascimento: null,
 				expressTipo: "CPF",
-				uf: "",
-				banco: "",
-				agência: "",
-				conta: "",
-				digitoConta: "",
-				chequeInicial: "",
-				digitoChequeInicial: "",
-				CMC7: "",
-				folhas: "",
+				uf: null,
+				banco: null,
+				agência: null,
+				conta: null,
+				digitoConta: null,
+				chequeInicial: null,
+				digitoChequeInicial: null,
+				CMC7: null,
+				folhas: null,
 				servico: [],
+				cadastral: true,
 				receitaFederal: false,
 				ccf: false,
 				protestoPublico: false,
@@ -135,68 +136,69 @@ class Credito extends Component {
 
 		this.props.loadingCredito()
 
+		let { creditoInput } = this.state
+
 		switch (this.props.type) {
 			case "CHEQUE":
 				let cheque =  {
 					documento : this.state.creditoInput.documento.replace(/[^0-9]/g,""),
 					tipo : this.state.creditoInput.documento.length > 11 ? "pj" : "pf", 
-					cep : "",
+					cep : null,
 					"telefone": {
-						"ddd": "",
-						"numero": ""
+						"ddd": null,
+						"numero": null
 					},
 					"utilizaCMC7": false,
-					"cmc71Inicial": "",
-					"cmc72Inicial": "",
-					"cmc73Inicial": "",
-					"quantidadeCheque": "",
+					"cmc71Inicial": null,
+					"cmc72Inicial": null,
+					"cmc73Inicial": null,
+					"quantidadeCheque": null,
 					"chequeDetalhado": [{
-						"numero": "",
-						"digito": "",
-						"dataDeposito": "",
-						"valor": ""
+						"numero": null,
+						"digito": null,
+						"dataDeposito": null,
+						"valor": null
 					}
 					],
-					"cepOrigem": ""
+					"cepOrigem": null
 				}
 
 				this.props.searchCreditoCheque(cheque);
 				break;
 		
 			case "INTERMEDIARIA":
-				this.props.searchCreditoIntermediaria(creditoFields.documento, creditoFields.estado);
+				this.props.searchCreditoIntermediaria(creditoInput.documento, creditoInput.estado);
 				break;
 
 			case "INTERMEDIARIAPLUS":
-				this.props.searchCreditoIntermediariaPlus(creditoFields.documento, creditoFields.estado);
+				this.props.searchCreditoIntermediariaPlus(creditoInput.documento, creditoInput.estado);
 				break;
 
 			case "EXPRESS":
-				let documento = creditoFields.documento.toString().replace(/[^0-9]/g,"")
+				let documento = creditoInput.documento.toString().replace(/[^0-9]/g,"")
 				let requestExpress = {}
-				requestExpress["receitaFederal"] = creditoFields.receitaFederal
-				requestExpress["ccf"] = creditoFields.ccf
-				requestExpress["protestoPublico"] = creditoFields.protestoPublico
+				requestExpress["receitaFederal"] = creditoInput.receitaFederal
+				requestExpress["ccf"] = creditoInput.ccf
+				requestExpress["protestoPublico"] = creditoInput.protestoPublico
+				requestExpress["cadastral"] = creditoInput.cadastral
 
-				console.log("creditoFields.expressTipo", creditoFields.expressTipo)
-				if(creditoFields.expressTipo === "CPF") {
-					console.log("INPUT", creditoFields)
+				if(creditoInput.expressTipo === "CPF") {
 					requestExpress["cpf"] = documento
-					requestExpress["dataNascimento"] = creditoFields.dataNascimento
+					requestExpress["dataNascimento"] = creditoInput.dataNascimento
 				} else {
 					requestExpress["cnpj"] = documento
-					requestExpress["uf"] = creditoFields.uf
-					requestExpress["sintegra"] = creditoFields.sintegra
+					requestExpress["uf"] = creditoInput.uf
+					requestExpress["sintegra"] = creditoInput.sintegra
 				}
-				this.props.searchCreditoExpress(requestExpress, documento, creditoFields.expressTipo)
+				this.props.searchCreditoExpress(requestExpress, documento, creditoInput.expressTipo)
 				break
 
 			case "SIMPLES":
-				this.props.searchCreditoSimples(creditoFields.documento);
+				this.props.searchCreditoSimples(creditoInput.documento);
 				break;
 
 			case "COMPLETA":
-				this.searchCreditoCompleta(creditoFields.documento);
+				this.searchCreditoCompleta(creditoInput.documento);
 				break;
 
 			default:
@@ -265,8 +267,8 @@ class Credito extends Component {
 						<option value='CNPJ'>CNPJ</option>
 					</select>
 				</Col>
+				
 				<Col md={showDataNascimento || showUF ? 6 : 8}>
-
 					<MyFieldGroup
 						id="documento"
 						type="text"
@@ -298,20 +300,24 @@ class Credito extends Component {
 
 				<Col md={10} className="text-center">
 					<FormGroup>
-						<Checkbox inline checked readOnly>
+						<Checkbox
+							inline
+							checked
+							name="cadastral"
+							onChange={this.onChangeInputCheckBox}
+							checked={this.state.creditoInput.cadastral}
+						>
 							Cadastral
 						</Checkbox>
-						{' '}
-						{this.state.creditoInput.expressTipo == "CNPJ" ?
-							<Checkbox
-								inline
-								name="protestoPublico"
-								onChange={this.onChangeInputCheckBox}
-								checked={this.state.creditoInput.protestoPublico}>
-								Protesto Público 
-							</Checkbox>
-						: ""}
-						{' '}
+						
+						<Checkbox
+							inline
+							name="protestoPublico"
+							onChange={this.onChangeInputCheckBox}
+							checked={this.state.creditoInput.protestoPublico}>
+							Protesto Público 
+						</Checkbox>
+						
 						<Checkbox
 							inline
 							name="receitaFederal"
@@ -319,14 +325,7 @@ class Credito extends Component {
 							checked={this.state.creditoInput.receitaFederal}>
 							Receita Federal
 						</Checkbox>
-						{' '}
-						<Checkbox
-							inline
-							name="sintegra"
-							onChange={this.onChangeInputCheckBox}
-							checked={this.state.creditoInput.sintegra}>
-							Sintegra
-						</Checkbox>
+
 						<Checkbox
 							inline
 							name="ccf"
@@ -334,6 +333,16 @@ class Credito extends Component {
 							checked={this.state.creditoInput.ccf}>
 							CCF
 						</Checkbox>
+
+						{this.state.creditoInput.expressTipo == "CNPJ" ?
+							<Checkbox
+								inline
+								name="sintegra"
+								onChange={this.onChangeInputCheckBox}
+								checked={this.state.creditoInput.sintegra}>
+								Sintegra
+							</Checkbox>
+						: ""}
 					</FormGroup>
 				</Col>
 			</div>

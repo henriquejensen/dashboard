@@ -13,7 +13,7 @@ import Filtro from "../../components/Filtro";
 import Modal from "../../components/Modal";
 import Table from "../../components/table/Table";
 import CardWithTable from "../../components/card/CardWithTable"
-import { MyFieldGroup } from "../../components/forms/CommonForms"
+import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
 
 class Respostas extends Component {
     constructor(props) {
@@ -44,16 +44,9 @@ class Respostas extends Component {
     onFormSubmit = (evt) => {
       evt.preventDefault()
 
+      let { id=null, campanha=null, dataInicio=null, dataFim=null, cliente=null, usuario=null } = this.state
 
-      let request = {}
-      this.state.id ? request["id"] = this.state.id : "",
-      this.state.campanha ? request["campanha"] = this.state.campanha : "",
-      this.state.dataInicio ? request["dataInicio"] = this.state.dataInicio : "",
-      this.state.dataFim ? request["dataFim"] = this.state.dataFim : "",
-      this.state.cliente ? request["cliente"] = this.state.cliente : "",
-      this.state.usuario ? request["usuario"] = this.state.usuario : "",
-
-      this.props.filterResponseSMS(request)
+      this.props.filterResponseSMS({ id, campanha, dataInicio, dataFim, cliente, usuario })
     }
 
     closeModal = () => {
@@ -65,8 +58,17 @@ class Respostas extends Component {
     renderForm = () => {
         return (
           <Panel>
-            <Form onSubmit={this.onFormSubmit} className="my-form">
-                <Col md={this.state.showBuscaAvancada ? 8 : 10}>
+            <Form onSubmit={this.onFormSubmit}>
+                <Col md={this.state.showBuscaAvancada ? 6 : 4}>
+                    <MyFieldGroup
+                      id="idCampanha"
+                      label="Id"
+                      type="text"
+                      name="id"
+                      onChange={this.onChange} />
+                </Col>
+
+                <Col md={3}>
                     <MyFieldGroup
                       id="smsCampanha"
                       label="Campanha"
@@ -75,9 +77,18 @@ class Respostas extends Component {
                       onChange={this.onChange} />
                 </Col>
 
+                <Col md={3}>
+                    <MyFieldGroup
+                      id="numero"
+                      label="Número"
+                      type="text"
+                      name="numero"
+                      onChange={this.onChange} />
+                </Col>
+
                 {this.state.showBuscaAvancada ?
                   <span>
-                    <Col md={2}>
+                    <Col md={3}>
                         <MyFieldGroup
                           id="smsDataInicio"
                           label="Data Início"
@@ -86,7 +97,7 @@ class Respostas extends Component {
                           onChange={this.onChange} />
                     </Col>
 
-                    <Col md={2}>
+                    <Col md={3}>
                         <MyFieldGroup
                           id="smsDataFim"
                           label="Data Fim"
@@ -95,30 +106,14 @@ class Respostas extends Component {
                           onChange={this.onChange} />
                     </Col>
 
-                    <Col md={2}>
-                        <MyFieldGroup
-                          id="idCampanha"
-                          label="Id"
-                          type="text"
-                          name="id"
-                          onChange={this.onChange} />
-                    </Col>
-
                     <Col md={4}>
-                        <MyFieldGroup
-                          id="smsCliente"
-                          label="Cliente"
-                          type="text"
-                          name="cliente"
-                          onChange={this.onChange} />
-                    </Col>
-
-                    <Col md={4}>
-                        <MyFieldGroup
-                          id="smsUsuario"
-                          label="Usuário"
-                          type="text"
-                          name="usuario"
+                        <SelectGroup
+                          id="limitar"
+                          label="Limitar"
+                          type="select"
+                          name="limitar"
+                          options={["10", "20","30", "40","50", "60","70", "80","90","100","200","500","1000","Todos"]}
+                          value="20"
                           onChange={this.onChange} />
                     </Col>
                   </span>

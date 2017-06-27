@@ -52,11 +52,35 @@ class Filtro extends Component {
             {label: "Cerquilha", value: "cerquilha"},
         ]
 
-        this.state = {}
+        this.state = {
+            pessoaDescricao : "",    
+            pessoaNome : "",
+            grupo : "",
+            usuario : "",
+            campanha : "",
+            resultado : "",
+            dataIni : "",
+            dataFim : "",
+            idPessoaPai : "",
+            idPessoa : "",
+            idGrupo : "",
+            idUsuario : "",
+            idUsuarioPosVenda: "",
+            delimitador : "",
+            tipoRelatorio : ""
+        }
     }
 
     onFormSubmit = (evt) => {
         evt.preventDefault()
+
+        console.log("SUBMIT", this.state)
+    }
+
+    onChange = (evt) => {
+        this.setState({
+            [evt.target.name]: evt.target.value
+        })
     }
 
     render() {
@@ -87,10 +111,11 @@ class Filtro extends Component {
 
                 <Col md={3}>
                     <MyFieldGroup
-                        id="dataInicio"
+                        id="dataIni"
                         label="Data Início"
                         type="date"
-                        name="dataInicio"
+                        name="dataIni"
+                        value={this.state.dataIni}
                         onChange={this.onChange} />
                 </Col>
                 <Col md={3}>
@@ -99,25 +124,31 @@ class Filtro extends Component {
                         label="Data Final"
                         type="date"
                         name="dataFim"
-                        onChange={this.onChange} />
+                        value={this.state.dataFim}
+                        onChange={this.onChange}
+                    />
                 </Col>
 
                 <Col md={6}>
                     <MyFieldGroup
-                        id="razaoSocial"
+                        id="pessoaDescricao"
                         label="Razão social do cliente"
                         type="text"
-                        name="razaoSocial"
+                        name="pessoaDescricao"
                         placeholder="Digite a razão social do cliente"
+                        value={this.state.pessoaDescricao}
+                        onChange={this.onChange}
                     />
                 </Col>
                 <Col md={6}>
                     <MyFieldGroup
-                        id="clienteLogin"
+                        id="pessoaNome"
                         label="Cliente Login"
                         type="text"
-                        name="clienteLogin"
+                        name="pessoaNome"
                         placeholder="Digite o login do cliente"
+                        value={this.state.pessoaNome}
+                        onChange={this.onChange}
                     />
                 </Col>
 
@@ -128,8 +159,11 @@ class Filtro extends Component {
                         type="text"
                         name="grupo"
                         placeholder="Digite o nome do grupo"
+                        value={this.state.grupo}
+                        onChange={this.onChange}
                     />
                 </Col>
+
                 <Col md={6}>
                     <MyFieldGroup
                         id="usuario"
@@ -137,6 +171,8 @@ class Filtro extends Component {
                         type="text"
                         name="usuario"
                         placeholder="Digite o nome do usuário"
+                        value={this.state.usuario}
+                        onChange={this.onChange}
                     />
                 </Col>
 
@@ -148,9 +184,12 @@ class Filtro extends Component {
                             type="text"
                             name="campanha"
                             placeholder="Digite a campanha do SMS"
+                            value={this.state.campanha}
+                            onChange={this.onChange}
                         />
                     </Col>
                 : ""}
+
                 {tipo !== "R9" ?
                     <Col md={6}>
                         <SelectGroup
@@ -162,6 +201,7 @@ class Filtro extends Component {
                         />
                     </Col>
                 : ""}
+                
                 <Col md={12} >
                     <MyButton
                         myButtonText="Exportar"

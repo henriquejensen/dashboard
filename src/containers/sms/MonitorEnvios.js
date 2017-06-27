@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Button, Col, Form } from "react-bootstrap";
 
 // Actions
-import { filterResponseSMS, getCampanhasSMS, loadingSMS } from "../../actions/actionsSMS";
+import { filterCampanhasSMS, getCampanhasSMS, loadingSMS } from "../../actions/actionsSMS";
 
 // Components
 import MonitorEnviosView from "./MonitorEnviosView"
@@ -31,9 +31,6 @@ class MonitorEnvios extends Component {
     componentDidMount() {
       document.title = COMPANY_PRODUCT_SMS + " > " + COMPANY_NAME_SHORT;
       this.props.loadingSMS()
-
-      console.log("CAMPANHAS", this.props)
-
       this.props.getCampanhasSMS()
     }
 
@@ -52,22 +49,25 @@ class MonitorEnvios extends Component {
     onFormSubmit = (evt) => {
       evt.preventDefault()
 
-      let request = {}
-      this.state.id ? request["id"] = this.state.id : "",
-      this.state.campanha ? request["campanha"] = this.state.campanha : "",
-      this.state.dataInicio ? request["dataInicio"] = this.state.dataInicio : "",
-      this.state.dataFim ? request["dataFim"] = this.state.dataFim : "",
-      this.state.cliente ? request["cliente"] = this.state.cliente : "",
-      this.state.usuario ? request["usuario"] = this.state.usuario : "",
+      let { id=null, campanha=null, dataInicio=null, dataFim=null, cliente=null, usuario=null } = this.state
 
-      this.props.filterResponseSMS(request)
+      this.props.filterCampanhasSMS({ id, campanha, dataInicio, dataFim, cliente, usuario })
     }
 
     renderForm = () => {
         return (
           <Panel>
             <Form onSubmit={this.onFormSubmit}>
-                <Col md={this.state.showBuscaAvancada ? 8 : 10}>
+                <Col md={this.state.showBuscaAvancada ? 6 : 4}>
+                    <MyFieldGroup
+                      id="idCampanha"
+                      label="Id"
+                      type="text"
+                      name="id"
+                      onChange={this.onChange} />
+                </Col>
+
+                <Col md={3}>
                     <MyFieldGroup
                       id="smsCampanha"
                       label="Campanha"
@@ -76,9 +76,18 @@ class MonitorEnvios extends Component {
                       onChange={this.onChange} />
                 </Col>
 
+                <Col md={3}>
+                    <MyFieldGroup
+                      id="smsUsuario"
+                      label="Usuário"
+                      type="text"
+                      name="usuario"
+                      onChange={this.onChange} />
+                </Col>
+
                 {this.state.showBuscaAvancada ?
                   <span>
-                    <Col md={2}>
+                    <Col md={3}>
                         <MyFieldGroup
                           id="smsDataInicio"
                           label="Data Início"
@@ -87,21 +96,12 @@ class MonitorEnvios extends Component {
                           onChange={this.onChange} />
                     </Col>
 
-                    <Col md={2}>
+                    <Col md={3}>
                         <MyFieldGroup
                           id="smsDataFim"
                           label="Data Fim"
                           type="date"
                           name="dataFim"
-                          onChange={this.onChange} />
-                    </Col>
-
-                    <Col md={2}>
-                        <MyFieldGroup
-                          id="idCampanha"
-                          label="Id"
-                          type="text"
-                          name="id"
                           onChange={this.onChange} />
                     </Col>
 
@@ -111,15 +111,6 @@ class MonitorEnvios extends Component {
                           label="Cliente"
                           type="text"
                           name="cliente"
-                          onChange={this.onChange} />
-                    </Col>
-
-                    <Col md={4}>
-                        <MyFieldGroup
-                          id="smsUsuario"
-                          label="Usuário"
-                          type="text"
-                          name="usuario"
                           onChange={this.onChange} />
                     </Col>
                   </span>
@@ -140,7 +131,6 @@ class MonitorEnvios extends Component {
     }
 
     render() {
-      console.log("CAMPANHAS", this.props)
       return (
         <section>
           {this.renderForm()}
@@ -176,7 +166,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-      filterResponseSMS,
+      filterCampanhasSMS,
       getCampanhasSMS,
       loadingSMS
   }, dispatch)

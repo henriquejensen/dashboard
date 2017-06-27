@@ -21,10 +21,12 @@ class MonitorEnviosView extends Component {
         }
     }
 
-    showOrCloseModal = (id) => {
+    showOrCloseModal = ({ id, campanha }) => {
         this.setState({
             IsModalOpen: !this.state.IsModalOpen,
-            id: id
+            id: id,
+            campanha: campanha,
+
         })
     }
 
@@ -67,7 +69,7 @@ class MonitorEnviosView extends Component {
                     <MyButton
                         tooltip={TOOLTIP_SEE_MORE_INFO_MESSAGE}
                         onClickButton={this.showOrCloseModal}
-                        params={[this.props.campanha.id]}
+                        params={[this.props.campanha]}
                         myButtonStyle="default"
                         myButtonClass="my-btn-more-details"
                         myButtonText={TOOLTIP_SEE_MORE_INFO_MESSAGE}
@@ -76,8 +78,8 @@ class MonitorEnviosView extends Component {
 
                 <Modal
                     IsModalOpen={this.state.IsModalOpen}
-                    closeModal={this.showOrCloseModal}
-                    title={"Detalhes da campanha"}
+                    closeModal={() => this.setState({IsModalOpen: false})}
+                    title={`Campanha ${this.state.campanha} - id ${this.state.id}`}
                 >
                     <DetalhesCampanha id={this.state.id} />
                 </Modal>
