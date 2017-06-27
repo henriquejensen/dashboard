@@ -55,6 +55,7 @@ export const ICON_SMS_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.asser
 
 // Base certa
 export const COMPANY_PRODUCT_BASECERTA = "Base Certa"
+export const COMPANY_PRODUCT_BASECERTA_LABEL = "BASECERTA"
 export const LOGO_BASECERTA = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-basecerta.png"
 export const ICON_BASECERTA = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-basecerta.png"
 export const ICON_BASECERTA_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-basecerta-negative.png"

@@ -28,11 +28,13 @@ export default class Info extends Component {
             })
         } else {
             let reader = new FileReader()
+            let formData = new FormData()
             let file = evt.target.files[0]
+            formData.append('avatar', file, file.name);
 
             reader.onloadend = () => {
                 this.setState({
-                    fileUpload: file,
+                    fileUpload: formData,
                     error: false,
                     usuarioImagem: reader.result
                 })

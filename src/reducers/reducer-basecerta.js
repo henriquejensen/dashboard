@@ -11,42 +11,8 @@ const getInitialState = {
     layouts: []
 }
 
-let layouts = [
-    {
-        idLayout: 310,
-        descricaoLayout: "360iu"
-    },
-    {
-        idLayout: 165,
-        descricaoLayout: "A1 VOX"
-    },
-    {
-        idLayout: 311,
-        descricaoLayout: "ABRAZ"
-    },
-    {
-        idLayout: 7,
-        descricaoLayout: "Acao-Nectar"
-    },
-    {
-        idLayout: 113,
-        descricaoLayout: "Acert Digital"
-    },
-    {
-        idLayout: 421,
-        descricaoLayout: "Almeida_Ferraz_Celular_Email"
-    },
-    {
-        idLayout: 391,
-        descricaoLayout: "Almeida_Ferraz_Emails"
-    },
-    {
-        idLayout: 415,
-        descricaoLayout: "Almeida_Ferraz_PF_Celular_Relacionadas"
-    }
-]
-
 export default function(state=getInitialState, action) {
+    console.log("Action", action)
     switch(action.type) {
         case basecerta.CLOSE_MESSAGE_ERROR_BASECERTA: {
             return {
@@ -57,11 +23,25 @@ export default function(state=getInitialState, action) {
             }
         }
 
+        case basecerta.GET_DOCUMENTO_ENTRADA_BASECERTA: {
+            console.log("GET_DOCUMENTO_ENTRADA_BASECERTA", action.payload)
+            return {
+                documentoSaida: action.payload.response,
+                status: "",
+                message: "",
+                tickets: state.tickets,
+                layouts: state.layouts
+            }
+        }
+
         case basecerta.GET_LAYOUTS_BASECERTA: {
+            let layouts = action.payload.response.response
+            localStorage.setItem(basecerta.GET_LAYOUTS_BASECERTA, JSON.stringify(layouts))
+            
             return {
                 status:"",
                 message:"",
-                tickets: tickets.tickets,
+                tickets: state.tickets,
                 layouts: layouts.map((layout) => {return { label: layout.descricaoLayout, value: layout.idLayout }})
             }
         }
@@ -70,7 +50,7 @@ export default function(state=getInitialState, action) {
             return {
                 status:"",
                 message:"",
-                tickets: tickets.tickets,
+                tickets: action.payload.response.response,
                 layouts: state.layouts
             }
         }
@@ -79,7 +59,7 @@ export default function(state=getInitialState, action) {
             return {
                 status: SUCCESS,
                 message: MESSAGE_SUCCES_FILE_UPLOAD,
-                tickets: state.tickets,
+                tickets: action.payload.response.response,
                 layouts: state.layouts
             }
         }

@@ -17,7 +17,6 @@ class NovoEnriquecimento extends Component {
         this.filesExtensionAccept = ".csv,.rem,.zip,.txt"
 
         this.state = {
-            layoutBaseCertaSelected: [],
             error: false
         }
     }
@@ -29,9 +28,11 @@ class NovoEnriquecimento extends Component {
     onSendEnriquecimento = (evt) => {
         evt.preventDefault()
 
+        console.log("EVT", this.state)
+
         if(!this.state.error)
             this.props.postNovoEnriquecimento({
-                layout: this.state.layoutBaseCertaSelected,
+                layout: this.state.layoutBaseCertaSelected || this.props.layouts[0].value,
                 description: this.state.modelosDescricao,
                 file: this.state.fileUpload
             })
@@ -39,7 +40,7 @@ class NovoEnriquecimento extends Component {
 
     onChange = (evt) => {
         this.setState({
-            [evt.target.name]: evt.target.name
+            [evt.target.name]: evt.target.value
         })
     }
 
@@ -67,9 +68,9 @@ class NovoEnriquecimento extends Component {
             <Form onSubmit={this.onSendEnriquecimento}>
                 <Col md={12} >
                     <SelectGroup
-                        id="layoutsBaseCerta"
+                        id="layoutBaseCertaSelected"
                         label="Layout"
-                        name="layoutsBaseCerta"
+                        name="layoutBaseCertaSelected"
                         onChange={this.onChange}
                         value={this.state.layoutBaseCertaSelected}
                         options={this.props.layouts}

@@ -34,7 +34,6 @@ export function getDetalhesCampanha(idCampanha) {
 	}
 }
 
-
 export function getRespostasSMS() {
 	return {
 		type: sms.GET_RESPOSTAS_SMS,
@@ -49,15 +48,15 @@ export function loadingSMS() {
 }
 
 export function sendSMSRapido(request) {
-    /*let url = sms.URL_SEND_SMS
+    let url = sms.URL_SEND_SMS
     let data = request
     let search = sms.SEND_SMS_RAPIDO
 
     return (dispatch) => {
         api(dispatch, url, data, search)
-    }*/
+    }
 
-	return {
+	/*return {
 		type: sms.SEND_SMS_RAPIDO
-	}
+	}*/
 }

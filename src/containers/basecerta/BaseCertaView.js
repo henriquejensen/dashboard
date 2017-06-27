@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Col, DropdownButton, MenuItem, ProgressBar } from "react-bootstrap";
+import React, { Component } from 'react'
+import { Col, DropdownButton, MenuItem, ProgressBar } from "react-bootstrap"
 
 // Components
 import MyButton from "../../components/button/MyButton"
@@ -9,11 +9,16 @@ import DetalhesTicket from "./DetalhesTicket"
 
 // Constants
 import { IN_PROCESS, TOOLTIP_SEE_MORE_INFO_MESSAGE } from "../../constants/utils"
+import { URL_DOWNLOAD_ENTRADA, URL_DOWNLOAD_SAIDA } from "../../constants/constantsBaseCerta"
 
 class BaseCertaView extends Component {
-    state = {
-        IsModalOpen: false,
-        id: ""
+    constructor(props) {
+        super(props)
+        
+        this.state = {
+            IsModalOpen: false,
+            id: ""
+        }
     }
 
     showOrCloseModal = (id) => {
@@ -21,6 +26,13 @@ class BaseCertaView extends Component {
             IsModalOpen: !this.state.IsModalOpen,
             id: id
         })
+    }
+
+    downloadDocument = (tipo) => {
+        if(tipo === "SAIDA")
+            this.props.getDocumentoSaidaBaseCerta(this.props.ticket.id)
+        else
+            this.props.getDocumentoEntradaBaseCerta(this.props.ticket.id)
     }
 
     render() {
@@ -64,16 +76,17 @@ class BaseCertaView extends Component {
                     <DropdownButton title="Ações" id="bg-nested-dropdown">
                         <MenuItem
                             download
-                            href={ticket.s3Entrada}
+                            onClick={this.downloadDocument}
                             eventKey="1"
                             target="_blank"
                         >
                             Baixar entrada
                         </MenuItem>
-                        {ticket.porcentagem === 100 && ticket.statusTela === "PROCESSADO" && ticket.s3Saida ?
+
+                        {ticket.porcentagem === 100 && ticket.status === 17 ?
                             <MenuItem
                                 download
-                                href={ticket.s3Saida}
+                                onClick={() => this.downloadDocument("SAIDA")}
                                 eventKey="2"
                                 target="_blank"
                             >
@@ -97,7 +110,7 @@ class BaseCertaView extends Component {
                 <Modal
                     IsModalOpen={this.state.IsModalOpen}
                     closeModal={this.showOrCloseModal}
-                    title={"Detalhes da campanha"}
+                    title={"Detalhes do Ticket"}
                 >
                     <DetalhesTicket ticket={ticket} />
                 </Modal>

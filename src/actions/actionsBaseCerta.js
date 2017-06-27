@@ -1,44 +1,77 @@
 import * as basecerta from "../constants/constantsBaseCerta";
+import { COMPANY_PRODUCT_BASECERTA_LABEL } from "../constants/constantsCompany";
 
-import { apiFileUpload, apiGet } from "../api/Api";
+import { apiFileUpload, apiFileDownload, apiGet, api } from "../api/Api";
 
-export function filterBaseCerta(inputFilter) {
-    return {
-        type: basecerta.GET_LAYOUTS_BASECERTA
+export function filterBaseCerta({ ticket="", layout="", clienteLogin="", usuario="", nomeArquivo="", numPage="", limitar="" }) {
+    let data = `?ticket=${ticket}&layout=${layout}&clienteLogin=${clienteLogin}&usuario=${usuario}&nomeArquivo=${nomeArquivo}&numPage=${numPage}&numPageSize=${limitar}`
+    let url = basecerta.URL_FILTER_BASECERTA
+    let search = basecerta.GET_TICKETS_BASECERTA
+
+    return (dispatch) => {
+        apiGet(dispatch, url, data, search)
+    }
+}
+
+export function getDocumentoSaidaBaseCerta(id) {
+    let data = `${id}`
+    let url = basecerta.URL_DOWNLOAD_SAIDA+data
+    let search = basecerta.GET_DOCUMENTO_SAIDA_BASECERTA
+
+    return (dispatch) => {
+        apiFileDownload(dispatch, url, COMPANY_PRODUCT_BASECERTA_LABEL, search)
+    }
+}
+
+export function getDocumentoEntradaBaseCerta(id) {
+    let data = `${id}`
+    let url = basecerta.URL_DOWNLOAD_ENTRADA+data
+    let search = basecerta.GET_DOCUMENTO_ENTRADA_BASECERTA
+
+    return (dispatch) => {
+        apiFileDownload(dispatch, url, COMPANY_PRODUCT_BASECERTA_LABEL, search)
     }
 }
 
 export function getLayoutsBaseCerta() {
-    /*let url = basecerta.URL_GET_LAYOUTS_BASECERTA
+    let url = basecerta.URL_GET_LAYOUTS_BASECERTA
     let data = ""
     let search = basecerta.GET_LAYOUTS_BASECERTA
+    let layouts = JSON.parse(localStorage.getItem(basecerta.GET_LAYOUTS_BASECERTA)) || null
 
-    return (dispatch) => {
-        apiGet(dispatch, url, data, search)
-    }*/
+    if(!layouts) {
+        return (dispatch) => {
+            apiGet(dispatch, url, data, search)
+        }
+    }
 
     return {
-        type: basecerta.GET_LAYOUTS_BASECERTA
+        type: basecerta.GET_LAYOUTS_BASECERTA,
+        payload: {
+            response: {
+                response: layouts
+            }
+        }
     }
 }
 
 export function getTicketsBaseCerta() {
-    /*let url = basecerta.URL_GET_TICKETS_BASECERTA
+    let url = basecerta.URL_GET_TICKETS_BASECERTA
     let data = ""
     let search = basecerta.GET_TICKETS_BASECERTA
 
     return (dispatch) => {
         apiGet(dispatch, url, data, search)
-    }*/
-
-    return {
-        type: basecerta.GET_TICKETS_BASECERTA
     }
 }
 
 export function postNovoEnriquecimento({layout, description, file}) {
-    return {
-        type: basecerta.UPLOAD_NOVO_ENRIQUECIMENTO
+    let url = basecerta.URL_UPLOAD_NOVO_ENRIQUECIMENTO
+    let data = {layout, description}
+    let search = basecerta.UPLOAD_NOVO_ENRIQUECIMENTO
+
+    return (dispatch) => {
+        apiFileUpload(dispatch, url, {name:"file", file:file}, data, search)
     }
 }
 

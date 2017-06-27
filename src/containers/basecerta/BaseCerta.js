@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Button, Col, Form, DropdownButton, MenuItem, ProgressBar } from "react-bootstrap";
 
 //Actions
-import { filterBaseCerta, getTicketsBaseCerta } from "../../actions/actionsBaseCerta";
+import { filterBaseCerta, getDocumentoSaidaBaseCerta, getDocumentoEntradaBaseCerta, getTicketsBaseCerta } from "../../actions/actionsBaseCerta";
 
 //Components
 import Panel from "../../components/panel/Panel"
@@ -38,6 +38,12 @@ class BaseCerta extends Component {
     document.title = COMPANY_PRODUCT_BASECERTA + " > " + COMPANY_NAME_SHORT;
   }
 
+  onChange = (evt) => {
+    this.setState({
+      [evt.target.name]: evt.target.value
+    })
+  } 
+
   onClickBuscaAvancada = () => {
     this.setState({
       showBuscaAvancada: !this.state.showBuscaAvancada
@@ -47,9 +53,9 @@ class BaseCerta extends Component {
   onFormSubmit = (evt) => {
     evt.preventDefault()
     
-    let { ticket, layout, clienteLogin, nomeGrupo, usuario, limitar } = this.state
+    let { ticket, layout, clienteLogin, nomeArquivo, usuario, limitar } = this.state
 
-    let inputFilter = { ticket, layout, clienteLogin, nomeGrupo, usuario, limitar }
+    let inputFilter = { ticket, layout, clienteLogin, nomeArquivo, usuario, limitar }
 
     this.props.filterBaseCerta(inputFilter)
   }
@@ -89,10 +95,10 @@ class BaseCerta extends Component {
 
                   <Col md={4}>
                       <MyFieldGroup
-                        id="nomeGrupo"
-                        label="Nome do Grupo"
+                        id="nomeArquivo"
+                        label="Nome do Arquivo"
                         type="text"
-                        name="nomeGrupo"
+                        name="nomeArquivo"
                         onChange={this.onChange} />
                   </Col>
 
@@ -114,7 +120,7 @@ class BaseCerta extends Component {
                     type="select"
                     name="limitar"
                     options={["10", "20","30", "40","50", "60","70", "80","90","Todos"]}
-                    value="10"
+                    value="20"
                     onChange={this.onChange} />
               </Col>
 
@@ -161,7 +167,14 @@ class BaseCerta extends Component {
       <div style={{marginBottom:15}} />
 
       <PanelGroup>
-        {this.props.tickets.map(ticket => <BaseCertaView ticket={ticket} key={ticket.id} />)}
+        {this.props.tickets.map(ticket => 
+          <BaseCertaView
+            ticket={ticket}
+            key={ticket.id}
+            getDocumentoSaidaBaseCerta={this.props.getDocumentoSaidaBaseCerta}
+            getDocumentoEntradaBaseCerta={this.props.getDocumentoEntradaBaseCerta}
+          />)
+        }
       </PanelGroup>
       
       <Modal
@@ -188,6 +201,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
       filterBaseCerta,
+      getDocumentoSaidaBaseCerta,
+      getDocumentoEntradaBaseCerta,
       getTicketsBaseCerta
   }, dispatch)
 }

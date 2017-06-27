@@ -1,4 +1,5 @@
-import request from "superagent";
+import request from "superagent"
+import FileSaver from "file-saver"
 
 import {
 		REQUEST_ERROR,
@@ -33,7 +34,7 @@ export function apiGet(dispatch, url, data, search, parameters) {
     request.get(url+`${data}`)
         .set({authorization: localStorage.getItem("token")})
         .end(function(error, response) {
-            onEndRequest(error, response, dispatch, search, parameters)
+            onEndRequestFunction(error, response, dispatch, search, parameters)
         })
 }
 
@@ -54,13 +55,27 @@ export function apiWithKeySession(dispatch, url, data, search, parameters) {
         })
 }
 
-export function apiFileUpload(dispatch, url, data, search, parameters) {
+export function apiFileUpload(dispatch, url, file, data, search, parameters) {
     request
         .post(url)
         .field(data)
+        .attach(file.name, file.file)
         .set('authorization', localStorage.getItem("token"))
         .end(function(error, response) {
             onEndRequest(error, response, dispatch, search, parameters)
+        })
+}
+
+export function apiFileDownload(dispatch, url, filename, search) {
+    request
+        .get(url)
+        .responseType('blob')
+        .set('authorization', localStorage.getItem("token"))
+        .end(function(error, response) {
+            FileSaver.saveAs(response.body, `${filename}.zip`)
+            dispatch({
+                type: search
+            })
         })
 }
 
@@ -84,6 +99,33 @@ function onEndRequest(error, response, dispatch, search, parameters) {
                     payload: {mensagem: response.body && response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
                 });
             }
+        } /*else if(response.status === 400) {
+            dispatch({type: "ERROR_400_UNAUTHORIZED", payload: "ERROR_400_UNAUTHORIZED_MESSAGE"})
+        }*/ else if(response.status === 401) {
+            dispatch({type: ERROR_401_UNAUTHORIZED, payload: ERROR_401_UNAUTHORIZED_MESSAGE})
+        } else {
+            dispatch({
+                type: REQUEST_ERROR,
+                payload: {mensagem: response.body && response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
+            });
+        }
+    } else {
+        dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+    }
+}
+
+//Funcao que não verifica se existe um body, apenas o retorno 200
+function onEndRequestFunction(error, response, dispatch, search, parameters) {
+    if (response) {
+        console.log("RESPONSe", response)
+        if(response.status === 200) {
+            dispatch({
+                type: search,
+                payload: {
+                    response: response.body || window.open(response, "_blank"),
+                    parameters: parameters
+                }
+            })
         } /*else if(response.status === 400) {
             dispatch({type: "ERROR_400_UNAUTHORIZED", payload: "ERROR_400_UNAUTHORIZED_MESSAGE"})
         }*/ else if(response.status === 401) {

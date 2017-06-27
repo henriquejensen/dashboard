@@ -20,12 +20,12 @@ class DetalhesTicket extends Component {
                         mdLength={6}
                         elements={
                             [
-                                {label: "QUANTIDADE CPF ENTRADA", value:cpfEnviados ? cpfEnviados : undefined},
-                                {label: "QUANTIDADE CPF SAÍDA", value:cpfEntregues ? cpfEntregues : undefined},
-                                {label: "QUANTIDADE CNPJ ENTRADA", value:cnpjEnviados ? cnpjEnviados : undefined},
-                                {label: "QUANTIDADE CNPJ SAÍDA", value:cnpjEntregues ? cnpjEntregues : undefined},
-                                {label: "INVÁLIDOS", value:documentosInvalidosEnviados ? documentosInvalidosEnviados : undefined},
-                                {label: "TOTAL ENTRADA/SAÍDA", value:documentosEntregues && documentosEnviados ? `${documentosEnviados}/${documentosEntregues}` : undefined},
+                                {label: "QUANTIDADE CPF ENTRADA", value:`${cpfEnviados}`},
+                                {label: "QUANTIDADE CPF SAÍDA", value:`${cpfEntregues}`},
+                                {label: "QUANTIDADE CNPJ ENTRADA", value:`${cnpjEnviados}`},
+                                {label: "QUANTIDADE CNPJ SAÍDA", value:`${cnpjEntregues}`},
+                                {label: "INVÁLIDOS", value:`${documentosInvalidosEnviados}`},
+                                {label: "TOTAL ENTRADA/SAÍDA", value:`${documentosEnviados}/${documentosEntregues}`},
                             ]
                         }
                     />
