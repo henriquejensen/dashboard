@@ -101,9 +101,8 @@ class BaseCertaView extends Component {
                         tooltip={TOOLTIP_SEE_MORE_INFO_MESSAGE}
                         onClickButton={this.showOrCloseModal}
                         params={[ticket.id]}
-                        myButtonStyle="default"
-                        myButtonClass="my-btn-more-details"
-                        myButtonText={TOOLTIP_SEE_MORE_INFO_MESSAGE}
+                        myButtonClass="my-button-circle"
+                        myButtonText={<i className="fa fa-plus" aria-hidden="true"></i>}
                     />
                 </Col>
 

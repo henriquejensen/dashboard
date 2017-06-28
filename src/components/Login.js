@@ -93,8 +93,8 @@ class Login extends Component {
 
                 <MyButton
                     type="submit"
-                    myButtonClass="btn-lg btn-primary btn-block"
-                    myButtonStyle="primary"
+                    myButtonClass="btn-lg btn-block"
+                    myButtonStyle="info"
                     myButtonText="Entrar"
                 />
             </form>

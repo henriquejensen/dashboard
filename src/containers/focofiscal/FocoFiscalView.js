@@ -120,7 +120,7 @@ const FocoFiscalView = (props) => {
                 <Enderecos enderecos={[props.data.endereco]} />
             : ""}
 
-            <Protocolo info={props.data.cabecalho.protocoloTransacao} />
+            <Protocolo info={props.data.cabecalho} />
 
             {data.erro ?
                 <CardWithTable title="MENSAGEM DE ALERTA"

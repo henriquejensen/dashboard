@@ -1,7 +1,45 @@
 /*Aqui se encontram as classes ou ids comuns na aplicação inteira*/
 
+.color-payement {
+    background-color: #337AB7;
+    border-color: #337AB7;
+    color: white;
+}
+
+.color-payement:hover {
+    background-color: #31b0d5;
+    border-color: #269abc;
+    color: white;
+}
+
+.color-payement:active {
+    background-color: #31b0d5;
+    border-color: #269abc;
+    color: white;
+}
+
+.color-payement:focus {
+    background-color: #31b0d5;
+    border-color: #269abc;
+    color: white;
+}
+
+.input-search {
+    margin-right: 10px;
+    width: 100%
+}
+
 .logo-produto {
     padding: 15px 0px
+}
+
+.my-button {
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    min-width: 30px;
+    font-size: 11px;
+    padding: 3px;
 }
 
 .sub-icon {

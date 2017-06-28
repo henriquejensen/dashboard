@@ -84,7 +84,7 @@ class ChangePassword extends Component {
                     <MyButton
                         type="submit"
                         myButtonClass="btn pull-right"
-                        myButtonStyle="primary"
+                        myButtonStyle="info"
                         myButtonText={CHANGE_PASSWORD}
                     />
                 </div>

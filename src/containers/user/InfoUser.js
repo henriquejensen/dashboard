@@ -116,8 +116,8 @@ export default class Info extends Component {
 
                             <MyButton
                                 type="submit"
-                                myButtonClass="btn btn-block"
-                                myButtonStyle="primary"
+                                myButtonClass="btn"
+                                myButtonStyle="info"
                                 myButtonText="Atualizar dados"
                             />
                         </Form>

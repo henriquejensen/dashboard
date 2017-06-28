@@ -155,7 +155,7 @@ class BaseCerta extends Component {
             onClickButton={this.openModal}
             params={["Novo enriquecimento"]}
             myButtonText="Novo enriquecimento"
-            myButtonClass="pull-right"
+            myButtonClass="pull-right color-payement"
         />
         
         <img src={LOGO_BASECERTA} className="logo-produto" />

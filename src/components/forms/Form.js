@@ -59,11 +59,11 @@ export default class Form extends Component {
                         {this.props.children}
 
                         <Col md={1}>
-                            {this.renderButton(TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, "", "my-btn-form input-search", "", "", "", "submit")}
+                            {this.renderButton(TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, "", "input-search color-payement", "", "", "", "submit")}
                         </Col>
                             
                         <Col md={1}>
-                            {this.renderButton(TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE, "", "my-btn-form input-search", "default", <i className="fa fa-list-ul" aria-hidden="true"></i>, this.props.seeModelo, "")}
+                            {this.renderButton(TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE, "", "input-search", "default", <i className="fa fa-list-ul" aria-hidden="true"></i>, this.props.seeModelo, "")}
                         </Col>
 
                         {this.props.buscaAvancada != undefined ?

@@ -71,9 +71,8 @@ export default class MyTable extends Component {
                                                         tooltip={showMoreInfo[indexRow] ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}
                                                         onClickButton={this.handleShowMoreInfo}
                                                         params={[indexRow]}
-                                                        myButtonStyle="default"
-                                                        myButtonClass="my-btn-more-details"
-                                                        myButtonText={showMoreInfo[indexRow] ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}
+                                                        myButtonClass="my-button-circle"
+                                                        myButtonText={showMoreInfo[indexRow] ? <i className="fa fa-minus" aria-hidden="true"></i> : <i className="fa fa-plus" aria-hidden="true"></i>}
                                                     />
                                                 </td>
                                             : <td></td>}

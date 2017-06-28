@@ -60,8 +60,7 @@ export default class Enderecos extends Component {
                                 tooltip={TOOLTIP_SEE_MAP_MESSAGE}
                                 onClickButton={this.mostrarMapa}
                                 params={[i+end.cep]}
-                                myButtonClass={this.state.mapa && this.state.idCep == i+end.cep ? "noPrint my-button" : "noPrint my-button"}
-                                myButtonStyle="default"
+                                myButtonClass="noPrint my-button-circle"
                                 myButtonText={<i className={this.state.mapa && this.state.idCep == i+end.cep ? "fa fa-times-circle": "fa fa-map-o"} />}
                             />
 

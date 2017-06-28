@@ -70,7 +70,7 @@ export default class EnviarEmail extends Component {
                                 name="submit"
                                 type="submit"
                                 value="Enviar"
-                                className="btn btn-primary" />
+                                className="btn btn-info" />
                         </div>
                     </div>
                     <div className="form-group">

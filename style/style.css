@@ -45,24 +45,12 @@ input {
     text-decoration: underline
 }
 
-.my-btn-form {
-    width: 100%;
-}
-
-.my-btn-more-details {
-    padding: 3px 7px;
-}
-
 .display-none {
     display: none
 }
 
 .select-form {
     width: 120px;
-}
-
-.input-search {
-    margin-right: 10px;
 }
 
 .input-form {
@@ -323,27 +311,6 @@ input {
     background-color: white;
 }
 
-.mapa-button {
-    background-color: #5bc0de;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    min-width: 30px;
-    font-size: 11px;
-    padding: 3px;
-}
-
-.my-button {
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    width: 30px;
-    font-size: 11px;
-    padding: 3px;
-    margin: 1px 10px;
-}
-
 .mapa-button-close {
     background-color: red;
 }
@@ -351,7 +318,6 @@ input {
 table {
     border-collapse: separate
 }
-
 
 .table-hover>tbody>tr:hover {
     background-color: #FFF0E1

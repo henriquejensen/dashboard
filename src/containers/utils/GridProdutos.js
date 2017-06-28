@@ -13,7 +13,7 @@ import { searchCreditoCompleta } from "../../actions/actionsCredito";
 import { ICON_LOCALIZE, ICON_CREDITO, ICON_FOCOFISCAL } from "../../constants/constantsCompany";
 import { SEARCH_BY_CREDITO_IN_LOCALIZE } from "../../constants/constantsLocalize";
 
-import Panel from "../panel/Panel";
+import Panel from "../../components/panel/Panel";
 
 const produtos = [
     {label: "Localize", icon: ICON_LOCALIZE, options: {
@@ -138,7 +138,7 @@ class GridProdutos extends Component {
                     </Col>
 
                     <Col md={6}>
-                        <Button bsStyle="primary" onClick={this.search} block>Consultar</Button>
+                        <Button bsStyle="info" onClick={this.search} block>Consultar</Button>
                     </Col>
                 </div>
             </div>

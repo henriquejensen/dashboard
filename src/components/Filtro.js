@@ -20,7 +20,7 @@ export default class Filtro extends Component {
                         placeholder={input.placeholder}/>
                 })}
 
-                <button className="btn btn-primary btn-block">{this.props.titleBtn}</button>
+                <button className="btn btn-info btn-block">{this.props.titleBtn}</button>
             </div>
         )
     }

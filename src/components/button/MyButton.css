@@ -1,0 +1,19 @@
+.my-button-circle {
+    padding: 1px 5px;
+    background: #F0AD4E;
+    color: white;
+    border-color: #F0AD4E;
+    border-radius: 15px;
+}
+
+.my-button-circle:hover {
+    color: white;
+    background: #f9cd8f;
+    border-color: #f9cd8f;
+}
+
+.my-button-circle:focus {
+    color: white;
+    background: #f9cd8f;
+    border-color: #f9cd8f;
+}

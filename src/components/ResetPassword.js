@@ -106,7 +106,7 @@ class ResetPassword extends Component {
                     <MyButton
                         type="submit"
                         myButtonClass="btn pull-right"
-                        myButtonStyle="primary"
+                        myButtonStyle="info"
                         myButtonText="Trocar senha"
                     />
                 </div>

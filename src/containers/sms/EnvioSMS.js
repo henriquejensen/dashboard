@@ -154,8 +154,7 @@ export class EnviarSMS extends Component {
                 <Col md={12}>
                     <MyButton
                         type="submit"
-                        myButtonStyle="primary"
-                        myButtonClass="btn-block"
+                        myButtonClass="btn-block color-payement"
                         myButtonText="Enviar"
                     />
                 </Col>

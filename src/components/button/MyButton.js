@@ -1,3 +1,5 @@
+import "./MyButton.css"
+
 import React from 'react';
 import Tooltip from 'react-tooltip'
 import { Button } from "react-bootstrap";
@@ -5,13 +7,14 @@ import { Button } from "react-bootstrap";
 import { NENHUM_REGISTRO } from "../../constants/utils";
 
 const MyButton = (props) => {
-    let tooltip = props.tooltip ? props.tooltip : "";
-    let labelButton = props.label ? props.label : "";
-    let params = props.params; // Array com os parametros
-    let myButtonClass = props.myButtonClass ? props.myButtonClass : "mapa-button";
-    let myButtonStyle = props.myButtonStyle ? props.myButtonStyle : "info";
-    let myButtonText = props.myButtonText ? props.myButtonText : <i className='fa fa-search'/>;
-    let type = props.type ? props.type : "button";
+    let tooltip = props.tooltip ? props.tooltip : ""
+    let labelButton = props.label ? props.label : ""
+    let params = props.params // Array com os parametros
+    let myButtonClass = props.myButtonClass ? props.myButtonClass : "my-button color-payement"
+    let myButtonStyle = props.myButtonStyle
+    let myButtonSize = props.myButtonSize
+    let myButtonText = props.myButtonText ? props.myButtonText : <i className='fa fa-search'/>
+    let type = props.type
 
     return (
         <span>
@@ -19,6 +22,7 @@ const MyButton = (props) => {
                 <Button
                     type={type}
                     bsStyle={myButtonStyle}
+                    bsSize={myButtonSize}
                     className={myButtonClass}
                     onClick={params ? () => props.onClickButton(...params) : props.onClickButton}>
                     {myButtonText}

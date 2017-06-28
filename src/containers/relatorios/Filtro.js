@@ -206,6 +206,7 @@ class Filtro extends Component {
                 
                 <Col md={12} >
                     <MyButton
+                        myButtonStyle="info"
                         myButtonText="Exportar"
                         type="submit"
                         myButtonClass="pull-right"

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col } from "react-bootstrap";
+import { Col, Button } from "react-bootstrap";
 
 import Panel from "../panel/Panel";
 import Table from "../table/MyTable";
@@ -77,9 +77,8 @@ export default class Sociedades extends Component {
                                             tooltip={showMoreInfo[indexArray] ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}
                                             onClickButton={handleShowMoreInfo}
                                             params={[indexArray]}
-                                            myButtonStyle="default"
-                                            myButtonClass="my-btn-more-details"
-                                            myButtonText={showMoreInfo[indexArray] ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}
+                                            myButtonClass="my-button-circle"
+                                            myButtonText={showMoreInfo[indexArray] ? <i className="fa fa-minus" aria-hidden="true"></i> : <i className="fa fa-plus" aria-hidden="true"></i>}
                                         />
                                     </td>
                                 </tr>

@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import { FormGroup, FormControl, InputGroup, Button } from "react-bootstrap";
+import { FormGroup, FormControl, InputGroup } from "react-bootstrap";
 
-import Modal from "../Modal";
+//Components
+import MyButton from "../../components/button/MyButton"
+import Modal from "../../components/Modal";
 import GridProdutos from "./GridProdutos";
-import { patternCPF, patternCNPJ } from "./functions/patternDocuments";
+
+//utils
+import { patternCPF, patternCNPJ } from "../../components/utils/functions/patternDocuments";
 
 export default class BarraBuscaRapida extends Component {
 
@@ -61,10 +65,13 @@ export default class BarraBuscaRapida extends Component {
                                 onChange={this.onChange}
                                 required />
                             <InputGroup.Button>
-                                <Button
+                                <MyButton
+                                    tooltip="Consulta rápida"
+                                    myButtonClass="color-payement"
+                                    myButtonText="Consultar"
+                                    myButtonSize="small"
                                     type="submit"
-                                    bsSize="small"
-                                    bsStyle="info">Consultar</Button>
+                                />
                             </InputGroup.Button>
                       </InputGroup>
                     </FormGroup>

@@ -105,7 +105,7 @@ class NovoEnriquecimento extends Component {
                     <MyButton
                         myButtonText="Enviar enriquecimento"
                         type="submit"
-                        myButtonClass="pull-right"
+                        myButtonClass="pull-right color-payement"
                     />
                 </Col>
             </Form>

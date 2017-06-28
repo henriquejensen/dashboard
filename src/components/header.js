@@ -20,7 +20,7 @@ import {
 } from "../actions/actionsCommon";
 
 import Modal from "./Modal";
-import BarraBuscaRapida from "./utils/BarraBuscaRapida";
+import BarraBuscaRapida from "../containers/utils/BarraBuscaRapida";
 
 import { COMPANY_LOGO_INVERSE, COMPANY_MAIN_COLOR, COMPANY_NAME_SHORT, COMPANY_OLD_SITE } from "../constants/constantsCompany";
 import { TITLE_HEADER } from "../constants/utils";

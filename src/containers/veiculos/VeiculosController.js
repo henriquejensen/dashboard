@@ -284,7 +284,7 @@ class VeiculosController extends Component {
 		
 		if(showCheckboxes) {
 			return (
-				<span>
+				<span style={{float:"left"}}>
 					{this.state.showMessageErrorWhenNotSelectedAnyCheckBox ?
 						<Col md={12}>
 							<Alert bsStyle="danger" className="text-center" onDismiss={() => this.setState({
