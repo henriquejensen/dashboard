@@ -1,4 +1,4 @@
-import { GET_RELATORIOS } from "../constants/constantsRelatorios";
+import * as constants from "../constants/constantsRelatorios";
 
 const getInitialState = {
     relatorios: [],
@@ -6,7 +6,7 @@ const getInitialState = {
 
 export default function(state=getInitialState, action) {
     switch(action.type) {
-        case GET_RELATORIOS: {
+        case constants.GET_RELATORIOS: {
             return {
                 relatorios: [
                     {id:120, tipo:"R6", descricao:"Consultas de Localize, Crédito, Veículos e Foco Fiscal"},

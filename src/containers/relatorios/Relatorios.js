@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux"
 import { Col } from "react-bootstrap"
 
 //Actions
-import { getRelatorios } from "../../actions/actionsRelatorios"
+import { filterRelatorio, getRelatorios } from "../../actions/actionsRelatorios"
 
 //Constants
 import Modal from "../../components/Modal"
@@ -58,7 +58,7 @@ class Relatorios extends Component {
                     size="lg"
                     title="Extrair as informações"
                 >
-                    <Filtro relatorio={relatorio} />
+                    <Filtro relatorio={relatorio} filterRelatorio={this.props.filterRelatorio} />
                     
                 </Modal>
             </Col>
@@ -67,7 +67,6 @@ class Relatorios extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log("mapStateToProps", state)
     return {
         relatorios: state.relatorios.relatorios
     }
@@ -75,6 +74,7 @@ function mapStateToProps(state) {
 
 function mapDispatchProps(dispatch) {
     return bindActionCreators({
+        filterRelatorio,
         getRelatorios
     }, dispatch)
 }

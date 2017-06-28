@@ -1,7 +1,7 @@
-import * as basecerta from "../constants/constantsBaseCerta";
-import { COMPANY_PRODUCT_BASECERTA_LABEL } from "../constants/constantsCompany";
+import * as basecerta from "../constants/constantsBaseCerta"
+import { COMPANY_PRODUCT_BASECERTA_LABEL } from "../constants/constantsCompany"
 
-import { apiFileUpload, apiFileDownload, apiGet, api } from "../api/Api";
+import { apiFileUpload, apiFileDownload, apiGet, api } from "../api/Api"
 
 export function filterBaseCerta({ ticket="", layout="", clienteLogin="", usuario="", nomeArquivo="", numPage="", limitar="" }) {
     let data = `?ticket=${ticket}&layout=${layout}&clienteLogin=${clienteLogin}&usuario=${usuario}&nomeArquivo=${nomeArquivo}&numPage=${numPage}&numPageSize=${limitar}`
@@ -17,9 +17,10 @@ export function getDocumentoSaidaBaseCerta(id) {
     let data = `${id}`
     let url = basecerta.URL_DOWNLOAD_SAIDA+data
     let search = basecerta.GET_DOCUMENTO_SAIDA_BASECERTA
+    let filename = COMPANY_PRODUCT_BASECERTA_LABEL + ".zip"
 
     return (dispatch) => {
-        apiFileDownload(dispatch, url, COMPANY_PRODUCT_BASECERTA_LABEL, search)
+        apiFileDownload(dispatch, url, filename, search)
     }
 }
 

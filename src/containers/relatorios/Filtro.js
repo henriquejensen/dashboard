@@ -11,14 +11,14 @@ class Filtro extends Component {
 
         this.resultadoOpcoes = {
             R6: [
-                {label: "Todos"},
+                {label: "Todos", value: "todos"},
                 {label: "Localizado", value: "OK"},
                 {label: "Não localizado", value: "NAO LOC"},
                 {label: "Erro", value: "ERROR"},
                 {label: "Reconsulta", value: "REC"},
             ],
             R7: [
-                {label: "Todos"},
+                {label: "Todos", value: "todos"},
                 {label: "Enviando", value: 0},
                 {label: "Enviado", value: 1},
                 {label: "Recebido", value: 2},
@@ -26,7 +26,7 @@ class Filtro extends Component {
                 {label: "Cancelado", value: 99}
             ],
             R8: [
-                {label: "Todos"},
+                {label: "Todos", value: "todos"},
                 {label: "Processados", value: 17},
                 {label: "Cancelados", value: 18}
             ]
@@ -58,7 +58,7 @@ class Filtro extends Component {
             grupo : "",
             usuario : "",
             campanha : "",
-            resultado : "",
+            resultado : this.resultadoOpcoes.R6[0].value,
             dataIni : "",
             dataFim : "",
             idPessoaPai : "",
@@ -66,15 +66,17 @@ class Filtro extends Component {
             idGrupo : "",
             idUsuario : "",
             idUsuarioPosVenda: "",
-            delimitador : "",
-            tipoRelatorio : ""
+            delimitador : this.separadorOpcoes[0].value,
+            tipoRelatorio : this.relatorioOpcoes.R6[0].value
         }
     }
 
     onFormSubmit = (evt) => {
         evt.preventDefault()
 
-        console.log("SUBMIT", this.state)
+        let filters = { ...this.state, idRelatorio:this.props.relatorio.tipo }
+
+        this.props.filterRelatorio(filters)
     }
 
     onChange = (evt) => {

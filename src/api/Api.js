@@ -72,18 +72,17 @@ export function apiFileDownload(dispatch, url, filename, search) {
         .responseType('blob')
         .set('authorization', localStorage.getItem("token"))
         .end(function(error, response) {
-            FileSaver.saveAs(response.body, `${filename}.zip`)
-            dispatch({
-                type: search
-            })
+            try{
+                onEndRequest(error, response, dispatch, search, FileSaver.saveAs(response.body, filename))
+            } catch(e) {
+                onEndRequest(error, response, dispatch, search, e)
+            }
         })
 }
 
 function onEndRequest(error, response, dispatch, search, parameters) {
     if (response) {
         if(response.status === 200) {
-            /**Verifica se o body possui informacao */
-            //let valuesBody = response.body ? Object.keys(response.body) : [];
             if(response.body) {
                 dispatch({
                     type: search,
@@ -117,7 +116,6 @@ function onEndRequest(error, response, dispatch, search, parameters) {
 //Funcao que não verifica se existe um body, apenas o retorno 200
 function onEndRequestFunction(error, response, dispatch, search, parameters) {
     if (response) {
-        console.log("RESPONSe", response)
         if(response.status === 200) {
             dispatch({
                 type: search,

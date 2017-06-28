@@ -1,7 +1,20 @@
-import { GET_RELATORIOS } from "../constants/constantsRelatorios";
+import * as constants from "../constants/constantsRelatorios"
+import { TI } from "../constants/utils"
+
+import { apiFileDownload } from "../api/Api"
 
 export function getRelatorios() {
     return {
-        type: GET_RELATORIOS
+        type: constants.GET_RELATORIOS
+    }
+}
+
+export function filterRelatorio(filters) {
+    let url = constants.URL_DOWNLOAD_RELATORIOS
+    let search = "FILTER_RELATORIO"
+    let filename = filters.idRelatorio + ".csv"
+
+    return (dispatch) => {
+        apiFileDownload(dispatch, url, filename, search)
     }
 }
