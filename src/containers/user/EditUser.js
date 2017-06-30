@@ -25,9 +25,9 @@ class EditUser extends Component {
         document.title = EDIT_USER_PROFILE + " > " + COMPANY_NAME_SHORT;
     }
 
-    userEditInfo = ({ usuarioNome, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview }) => {
+    userEditInfo = ({ usuario, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview }) => {
         this._addNotification(EDIT_USER_PROFILE_SUCCESS);
-        this.props.userEditInfo(usuarioNome, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview);
+        this.props.userEditInfo({ usuario, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview });
     }
 
     userDashboard = (gadgets, chart) => {

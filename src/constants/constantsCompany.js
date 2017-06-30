@@ -3,6 +3,7 @@ export const COMPANY_NAME_LONG = "ASSERTIVA SOLUÇÕES EM MARKETING E CRÉDITO"
 export const COMPANY_OLD_SITE = "https://portal.assertivasolucoes.com.br"
 export const COMPANY_SITE_CONTACT = "http://assertivasolucoes.com.br/contato"
 export const COMPANY_EMAIL = "atendimento@assertivasolucoes.com.br"
+export const COMPANY_PHONE = ["(11) 3197 0719", "0800 878 1179"]
 
 export const COMPANY_MAIN_COLOR = "#673ab7"
 export const COMPANY_ICON = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-assertiva.png"

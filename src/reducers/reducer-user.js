@@ -12,19 +12,23 @@ import {
 import notifications from "./data/notifications.json";
 
 const user = {
-    usuarioImagem: "http://i1.wp.com/www.bombeiros.pt/classificados/oc-content/themes/osclasswizards/images/default.gif",
+    usuario: {
+        avatar: "http://i1.wp.com/www.bombeiros.pt/classificados/oc-content/themes/osclasswizards/images/default.gif",
+    }
 }
 
 export default function (state = user, action) {
     switch(action.type){
         case USER_EDIT_INFO: {
-            let  { usuarioNome, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview } = action.payload
+            let  { usuario, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview } = action.payload.parameters
             return {
                 ...state,
-                usuarioImagem: usuarioImagemPreview ? usuarioImagemPreview : state.usuarioImagem,
-                usuarioNome: usuarioNome ? usuarioNome : state.usuarioNome,
-                usuarioEmail: usuarioEmail ? usuarioEmail : state.usuarioEmail,
-                usuarioTelefone : usuarioTelefone  ? usuarioTelefone  : state.usuarioTelefone
+                usuario: {
+                    avatar: usuarioImagemPreview ? usuarioImagemPreview : state.usuario.avatar,
+                    usuario: usuario ? usuario : state.usuario.usuario,
+                    email2: usuarioEmail ? usuarioEmail : state.usuario.email2,
+                    telefone : usuarioTelefone  ? usuarioTelefone  : state.usuario.telefone
+                }
             }
         }
 

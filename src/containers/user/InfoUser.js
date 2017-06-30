@@ -48,11 +48,11 @@ export default class Info extends Component {
         e.preventDefault()
 
         this.props.userEditInfo({
-            usuarioNome: this.state.usuarioNome,
-            usuarioTelefone: this.state.usuarioTelefone,
-            usuarioEmail: this.state.usuarioEmail,
+            usuario: this.state.usuario ? this.state.usuario : this.props.user.usuario.usuario,
+            usuarioTelefone: this.state.usuarioTelefone ? this.state.usuarioTelefone : this.props.user.usuario.telefone,
+            usuarioEmail: this.state.usuarioEmail ? this.state.usuarioEmail : this.props.user.usuario.email2,
             usuarioImagem: this.state.fileUpload,
-            usuarioImagemPreview: this.state.usuarioImagem
+            usuarioImagemPreview: this.state.usuarioImagem ? this.state.usuarioImagem : this.props.user.usuario.avatar
         });
     }
 
@@ -63,22 +63,23 @@ export default class Info extends Component {
     }
 
     render() {
-        let usuarioNome = this.state.usuarioNome !== undefined ? this.state.usuarioNome : this.props.user.usuarioNome
-        let usuarioEmail = this.state.usuarioEmail !== undefined ? this.state.usuarioEmail : this.props.user.usuarioEmail
-        let usuarioTelefone = this.state.usuarioTelefone !== undefined ? this.state.usuarioTelefone : this.props.user.usuarioTelefone
-        let usuarioImagem = this.state.usuarioImagem !== undefined ? this.state.usuarioImagem : this.props.user.usuarioImagem
+        console.log("HAAPAPA", this.props)
+        let usuario = this.state.usuario !== undefined ? this.state.usuario : this.props.user.usuario.usuario
+        let usuarioEmail = this.state.usuarioEmail !== undefined ? this.state.usuarioEmail : this.props.user.usuario.email2
+        let usuarioTelefone = this.state.usuarioTelefone !== undefined ? this.state.usuarioTelefone : this.props.user.usuario.telefone
+        let usuarioImagem = this.state.usuarioImagem !== undefined ? this.state.usuarioImagem : this.props.user.usuario.avatar
         return (
             <Col md={12}>
                 <Panel title="DADOS PESSOAIS">
                     <Col md={12}>
                         <Form onSubmit={this.onSubmitForm}>
                             <MyFieldGroup
-                                id="usuarioNome"
+                                id="usuario"
                                 type="text"
                                 label="Nome completo"
-                                name="usuarioNome"
+                                name="usuario"
                                 placeholder="Digite seu nome"
-                                value={usuarioNome}
+                                value={usuario}
                                 onChange={this.onChange}
                             />
 

@@ -28,12 +28,16 @@ class NovoEnriquecimento extends Component {
     onSendEnriquecimento = (evt) => {
         evt.preventDefault()
 
-        if(!this.state.error)
+        if(!this.state.error) {
             this.props.postNovoEnriquecimento({
                 layout: this.state.layoutBaseCertaSelected || this.props.layouts[0].value,
                 description: this.state.modelosDescricao,
-                file: this.state.fileUpload
+                file: this.state.fileUpload,
+                mailDNS: location.origin + "/basecerta?ticket="
             })
+        }
+
+        this.props.closeNovoEnriquecimento()
     }
 
     onChange = (evt) => {

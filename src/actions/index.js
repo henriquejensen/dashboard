@@ -22,19 +22,19 @@ import {
 		CHANGE_TAB_LOCALIZE,
 		CLOSE_MESSAGE_ERROR_LOCALIZE,
 		GET_LOCALIZE_LAST_QUERIES
-} from "../constants/constantsLocalize";
+} from "../constants/constantsLocalize"
 import {
 	URL_CREDITO_SEARCH_COMPLETA,
 	URL_CREDITO_SEARCH_COMPLETA_PJ
-} from "../constants/constantsCredito";
-import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
+} from "../constants/constantsCredito"
+import { USER_EDIT_INFO, USER_EDIT_DASHBOARD, URL_EDIT_USER } from "../constants/constantsUser"
 
-import { apiContentType, api } from "../api/Api";
+import { apiContentType, api, apiPut } from "../api/Api"
 
 export function getLastQueries(consulta, tipo) {
-	let url = URL_SEARCH_ULTIMAS_CONSULTAS_LOCALIZE;
-	let data = {consulta};
-	let search = GET_LOCALIZE_LAST_QUERIES;
+	let url = URL_SEARCH_ULTIMAS_CONSULTAS_LOCALIZE
+	let data = {consulta}
+	let search = GET_LOCALIZE_LAST_QUERIES
 
 	return (dispatch) => {
 		apiContentType(dispatch, url, data, search, {tipo:tipo})
@@ -76,12 +76,14 @@ export function loadingLocalize() {
 	}
 }
 
-export function userEditInfo(usuarioNome, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview) {
-	return {
-		type: USER_EDIT_INFO,
-		payload: {
-			usuarioNome, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview
-		}
+export function userEditInfo({ usuario, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview }) {
+	debugger
+	let url = URL_EDIT_USER
+	let data = { nome: usuario, email2: usuarioEmail, telefone: usuarioTelefone }
+	let search = USER_EDIT_INFO
+
+	return (dispatch) => {
+		apiPut(dispatch, url, data, search, { usuario, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview })
 	}
 }
 
@@ -89,7 +91,7 @@ export function userDashboard(gadgets, charts) {
 	const dashboardPreferences = {
 		gadgets: gadgets,
 		charts: charts
-	};
+	}
 
 	return {
 		type: USER_EDIT_DASHBOARD,
@@ -98,9 +100,9 @@ export function userDashboard(gadgets, charts) {
 }
 
 export function searchTelefonesPessoaRelacionada(doc, documento, isCpfOrCnpj) {
-	let url = isCpfOrCnpj == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
-	let data = isCpfOrCnpj == "CPF" ? {cpf:documento} : {cnpj:documento};
-	let search = SEARCH_BY_TELEFONES_RELACIONADOS;
+	let url = isCpfOrCnpj == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ
+	let data = isCpfOrCnpj == "CPF" ? {cpf:documento} : {cnpj:documento}
+	let search = SEARCH_BY_TELEFONES_RELACIONADOS
 
 	return (dispatch) => {
 		apiContentType(dispatch, url, data, search, {documento: doc, documentoRelacionado:documento})
@@ -108,9 +110,9 @@ export function searchTelefonesPessoaRelacionada(doc, documento, isCpfOrCnpj) {
 }
 
 export function searchEnderecosPessoaRelacionada(doc, documento, isCpfOrCnpj) {
-	let url = isCpfOrCnpj == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
-	let data = isCpfOrCnpj == "CPF" ? {cpf:documento} : {cnpj:documento};
-	let search = SEARCH_BY_ENDERECOS_RELACIONADOS;
+	let url = isCpfOrCnpj == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ
+	let data = isCpfOrCnpj == "CPF" ? {cpf:documento} : {cnpj:documento}
+	let search = SEARCH_BY_ENDERECOS_RELACIONADOS
 
 	return (dispatch) => {
 		apiContentType(dispatch, url, data, search, {documento: doc, documentoRelacionado:documento})
@@ -118,9 +120,9 @@ export function searchEnderecosPessoaRelacionada(doc, documento, isCpfOrCnpj) {
 }
 
 export function searchLocalizeByEmail(email) {
-	let url = URL_SEARCH_EMAIL;
-	let data = {email};
-	let search = SEARCH_BY_EMAIL;
+	let url = URL_SEARCH_EMAIL
+	let data = {email}
+	let search = SEARCH_BY_EMAIL
 
 	return (dispatch) => {
 		apiContentType(dispatch, url, data, search)
@@ -128,9 +130,9 @@ export function searchLocalizeByEmail(email) {
 }
 
 export function searchLocalizeByTelefone(telefone) {
-	let url = URL_SEARCH_TELEFONE;
-	let data = {telefone};
-	let search = SEARCH_BY_TELEFONE;
+	let url = URL_SEARCH_TELEFONE
+	let data = {telefone}
+	let search = SEARCH_BY_TELEFONE
 
 	return (dispatch) => {
 		apiContentType(dispatch, url, data, search)
@@ -138,9 +140,9 @@ export function searchLocalizeByTelefone(telefone) {
 }
 
 export function searchPessoasRelacionadas(cpf, label) {
-	let url = URL_SEARCH_PESSOAS_RELACIONADAS;
-	let data = {cpf};
-	let search = SEARCH_BY_PESSOAS_RELACIONADOS;
+	let url = URL_SEARCH_PESSOAS_RELACIONADAS
+	let data = {cpf}
+	let search = SEARCH_BY_PESSOAS_RELACIONADOS
 
 	return (dispatch) => {
 		apiContentType(dispatch, url, data, search, {label: label})
@@ -151,13 +153,13 @@ export function searchPessoasRelacionadas(cpf, label) {
  * o documento da pessoa a ser buscada
  */
 export function searchEnderecosTelefonesUltimasConsultas(tipo, consulta, posElemento, documento) {
-	let data = {cpf:documento};
-	let url = URL_SEARCH_CPF;
-	let search = SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS;
+	let data = {cpf:documento}
+	let url = URL_SEARCH_CPF
+	let search = SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS
 
 	if(consulta == "CNPJ") {
-		data = {cnpj:documento};
-		url = URL_SEARCH_CNPJ;
+		data = {cnpj:documento}
+		url = URL_SEARCH_CNPJ
 	}
 
 	return (dispatch) => {
@@ -170,13 +172,13 @@ export function searchEnderecosTelefonesUltimasConsultas(tipo, consulta, posElem
  */
 export function searchEnderecosTelefonesResultadosBusca(searchByCpfOuCnpj, indexLabel, indexArrayElements, isEnderecoOuTelefone, documento) {
 
-	let data = {cpf:documento};
-	let url = URL_SEARCH_CPF;
-	let search = SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA;
+	let data = {cpf:documento}
+	let url = URL_SEARCH_CPF
+	let search = SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA
 
 	if(searchByCpfOuCnpj == "CNPJ") {
-		data = {cnpj:documento};
-		url = URL_SEARCH_CNPJ;
+		data = {cnpj:documento}
+		url = URL_SEARCH_CNPJ
 	}
 
 	return (dispatch) => {
@@ -185,11 +187,11 @@ export function searchEnderecosTelefonesResultadosBusca(searchByCpfOuCnpj, index
 }
 
 export function searchLocalize(documento, tipo, search) {
-	documento = documento.toString();
-	documento = documento.replace(/[^0-9]/g,"");
-	let data = tipo == "CPF" ? {cpf:documento} : {cnpj:documento};
-	let url = tipo == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ;
-	search = search ? search : SEARCH_BY_DOCUMENT;
+	documento = documento.toString()
+	documento = documento.replace(/[^0-9]/g,"")
+	let data = tipo == "CPF" ? {cpf:documento} : {cnpj:documento}
+	let url = tipo == "CPF" ? URL_SEARCH_CPF : URL_SEARCH_CNPJ
+	search = search ? search : SEARCH_BY_DOCUMENT
 
 	return (dispatch) => {
 		apiContentType(dispatch, url, data, search, {tipo: tipo, documento: documento})
@@ -197,9 +199,9 @@ export function searchLocalize(documento, tipo, search) {
 }
 
 export function searchLocalizeByNomeEndereco(inputLocalize, tipo, labelToTab) {
-	let url = URL_SEARCH_NOME_ENDERECO;
-	let data = inputLocalize;
-	let search = SEARCH_BY_NOME_ENDERECO;
+	let url = URL_SEARCH_NOME_ENDERECO
+	let data = inputLocalize
+	let search = SEARCH_BY_NOME_ENDERECO
 	return (dispatch) => {
 		api(dispatch, url, data, search, {tipo: tipo, label: labelToTab})
 	}

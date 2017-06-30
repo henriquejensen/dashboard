@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { Button, Col, Form, DropdownButton, MenuItem, ProgressBar } from "react-bootstrap";
+import { Alert, Button, Col, Form, DropdownButton, MenuItem, ProgressBar } from "react-bootstrap";
 
 //Actions
-import { filterBaseCerta, getDocumentoSaidaBaseCerta, getDocumentoEntradaBaseCerta, getTicketsBaseCerta } from "../../actions/actionsBaseCerta";
+import { closeMessageErrorBaseCerta, filterBaseCerta, getDocumentoSaidaBaseCerta, getDocumentoEntradaBaseCerta, getTicketsBaseCerta } from "../../actions/actionsBaseCerta";
 
 //Components
 import Panel from "../../components/panel/Panel"
@@ -133,8 +133,15 @@ class BaseCerta extends Component {
                   </label>
                   <Button style={{width:"100%"}} type="submit" bsStyle="info">Buscar</Button>
               </Col>
-
           </Form>
+          
+          {this.props.status ?
+              <Col md={12} sm={12}> 
+                  <Alert bsStyle="success" className="text-center" onDismiss={this.props.closeMessageErrorBaseCerta}>
+                      {this.props.message}
+                  </Alert>
+              </Col>
+          :""}
         </Panel>
       )
   }
@@ -148,7 +155,7 @@ class BaseCerta extends Component {
 
   render() {
     return (
-    <section>
+    <div>
 
       <Col md={12} sm={12} className="text-center">
         <div style={{marginBottom:15}} />
@@ -184,23 +191,26 @@ class BaseCerta extends Component {
           title={this.state.modalTitle}
       >
 
-        <NovoEnriquecimento />        
+        <NovoEnriquecimento closeNovoEnriquecimento={() => this.setState({IsModalOpen: false})} />        
 
       </Modal>
 
-   </section>)
+   </div>)
   }
 }
 
 
 function mapStateToProps(state) {
   return {
-    tickets: state.basecerta.tickets
+    tickets: state.basecerta.tickets,
+    message: state.basecerta.message,
+    status: state.basecerta.status
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+      closeMessageErrorBaseCerta,
       filterBaseCerta,
       getDocumentoSaidaBaseCerta,
       getDocumentoEntradaBaseCerta,

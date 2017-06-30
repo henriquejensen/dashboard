@@ -3,7 +3,7 @@ import { Alert, Col } from "react-bootstrap";
 
 import Panel from "../../components/panel/Panel";
 
-import { COMPANY_NAME_LONG, COMPANY_SITE_CONTACT, COMPANY_EMAIL } from "../../constants/constantsCompany";
+import { COMPANY_NAME_LONG, COMPANY_SITE_CONTACT, COMPANY_EMAIL,COMPANY_PHONE } from "../../constants/constantsCompany";
 
 export default class Contato extends Component {
 
@@ -33,7 +33,20 @@ export default class Contato extends Component {
                         {" "}
                         <a href={"mailto:"+COMPANY_EMAIL} target="_blank">{COMPANY_EMAIL}</a>
                     </Col>
+
+                    {COMPANY_PHONE.map(phone => {
+                        return (
+                            <Col md={12} style={{fontSize:16, textAlign:"center", padding:5}}>
+                                <i className="fa fa-phone" />
+                                {" "}
+                                {phone}
+                            </Col>
+                        )
+                    })}
+
                 </Panel>
+
+                <div style={{marginBottom:15}} />
 
                 {this.renderAlert()}
             </Col>
