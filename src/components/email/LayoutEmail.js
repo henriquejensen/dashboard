@@ -72,11 +72,11 @@ export default class Emails extends Component {
                                         </div>
                                     </a>
                                 </td>
-                                <td>
+                                {/*<td>
                                     <a data-tip data-for="tooltipEmail">
                                         <i className="noPrint glyphicon glyphicon-envelope icon-tel icon-tel-msg" onClick={() => this.setState({isModalOpen: true, emailEnviar: email.email})}/>
                                     </a>
-                                </td>
+                                </td>*/}
                             </tr>
                         )
                     })}

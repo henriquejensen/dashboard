@@ -86,23 +86,23 @@ export default class LayoutTelefone extends Component{
                                                     </a>
                                                 </td>
 
-                                                <td className="noPrint">
+                                                {/*<td className="noPrint">
                                                     <a data-tip data-for="tooltipMessageVoice">
                                                         <i className="fa fa-microphone icon-tel icon-tel-msg" />
                                                     </a>
-                                                </td>
+                                                </td>*/}
 
-                                                <td className="noPrint">
+                                                {/*<td className="noPrint">
                                                     <a data-tip data-for="tooltipCall">
                                                         <i className="fa fa-phone icon-tel icon-tel-phone" />
                                                     </a>
-                                                </td>
+                                                </td>*/}
 
-                                                <td className="noPrint">
+                                                {/*<td className="noPrint">
                                                     <a data-tip data-for="tooltipHot">
                                                         <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
                                                     </a>
-                                                </td>
+                                                </td>*/}
 
                                                 <td>
                                                     <a data-tip data-for="tooltipOperadora">
@@ -170,23 +170,23 @@ export default class LayoutTelefone extends Component{
                                                     </a>
                                                 </td>
 
-                                                <td className="noPrint">
+                                                {/*<td className="noPrint">
                                                     <a data-tip data-for="tooltipMessageVoice">
                                                         <i className="fa fa-microphone icon-tel icon-tel-msg" />
                                                     </a>
-                                                </td>
+                                                </td>*/}
 
-                                                <td className="noPrint">
+                                                {/*<td className="noPrint">
                                                     <a data-tip data-for="tooltipCall">
                                                         <i className="fa fa-mobile icon-tel icon-tel-phone" />
                                                     </a>
-                                                </td>
+                                                </td>*/}
 
-                                                <td className="noPrint">
+                                                {/*<td className="noPrint">
                                                     <a data-tip data-for="tooltipHot">
                                                         <i className="glyphicon glyphicon-fire icon-tel icon-tel-hot" />
                                                     </a>
-                                                </td>
+                                                </td>*/}
 
                                                 <td>
                                                     <a data-tip data-for="tooltipOperadora">

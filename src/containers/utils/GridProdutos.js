@@ -24,6 +24,7 @@ import { SEARCH_BY_CREDITO_IN_LOCALIZE } from "../../constants/constantsLocalize
 
 //Components
 import Panel from "../../components/panel/Panel"
+import MyButton from "../../components/button/MyButton"
 
 //Utils
 import { todosProdutos } from "../../components/utils/common/produtos"
@@ -133,11 +134,20 @@ class GridProdutos extends Component {
 
                 <div>
                     <Col md={6}>
-                        <Button bsStyle="default" onClick={this.props.closeModal} block>Cancelar</Button>
+                        <MyButton
+                            onClickButton={this.props.closeModal}
+                            myButtonStyle="default"
+                            myButtonClass="btn-block"
+                            myButtonText="Cancelar"
+                        />
                     </Col>
 
                     <Col md={6}>
-                        <Button bsStyle="info" onClick={this.search} block>Consultar</Button>
+                        <MyButton
+                            onClickButton={this.search}
+                            myButtonClass="btn-block color-payement"
+                            myButtonText="Consultar"
+                        />
                     </Col>
                 </div>
             </div>
