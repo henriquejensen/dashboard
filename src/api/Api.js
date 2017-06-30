@@ -89,6 +89,21 @@ export function apiFileDownload(dispatch, url, filename, search) {
         })
 }
 
+export function apiPostFileDownload(dispatch, url, data, filename, search) {
+    request
+        .post(url)
+        .send(data)
+        .responseType('blob')
+        .set('authorization', localStorage.getItem("token"))
+        .end(function(error, response) {
+            try{
+                onEndRequest(error, response, dispatch, search, FileSaver.saveAs(response.body, filename))
+            } catch(e) {
+                onEndRequest(error, response, dispatch, search, e)
+            }
+        })
+}
+
 function onEndRequest(error, response, dispatch, search, parameters) {
     if (response) {
         if(response.status === 200) {

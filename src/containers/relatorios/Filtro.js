@@ -46,35 +46,35 @@ class Filtro extends Component {
         }
 
         this.separadorOpcoes = [
-            {label: "Ponto e Vírgula", value: "pontoVirgula"},
-            {label: "Vírgula", value: "virgula"},
-            {label: "Cifrão", value: "cifrao"},
-            {label: "Cerquilha", value: "cerquilha"},
+            {label: "Ponto e Vírgula", value: ";"},
+            {label: "Vírgula", value: ","},
+            {label: "Cifrão", value: "$"},
+            {label: "Cerquilha", value: "#"},
         ]
 
         this.state = {
-            pessoaDescricao : "",    
-            pessoaNome : "",
-            grupo : "",
-            usuario : "",
-            campanha : "",
-            resultado : this.resultadoOpcoes.R6[0].value,
-            dataIni : "",
-            dataFim : "",
-            idPessoaPai : "",
-            idPessoa : "",
-            idGrupo : "",
-            idUsuario : "",
-            idUsuarioPosVenda: "",
+            pessoaDescricao : null,    
+            pessoaNome : null,
+            grupo : null,
+            usuario : null,
+            campanha : null,
+            resultado : null,
+            dataIni : null,
+            dataFim : null,
+            idPessoaPai : null,
+            idPessoa : null,
+            idGrupo : null,
+            idUsuario : null,
+            idUsuarioPosVenda: null,
             delimitador : this.separadorOpcoes[0].value,
-            tipoRelatorio : this.relatorioOpcoes.R6[0].value
+            tipoRelatorio : null
         }
     }
 
     onFormSubmit = (evt) => {
         evt.preventDefault()
 
-        let filters = { ...this.state, idRelatorio:this.props.relatorio.tipo }
+        let filters = { ...this.state, idRelatorio:this.props.relatorio.id }
 
         this.props.filterRelatorio(filters)
     }

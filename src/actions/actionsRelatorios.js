@@ -1,7 +1,7 @@
 import * as constants from "../constants/constantsRelatorios"
 import { TI } from "../constants/utils"
 
-import { apiFileDownload } from "../api/Api"
+import { apiPostFileDownload } from "../api/Api"
 
 export function getRelatorios() {
     return {
@@ -12,9 +12,10 @@ export function getRelatorios() {
 export function filterRelatorio(filters) {
     let url = constants.URL_DOWNLOAD_RELATORIOS
     let search = "FILTER_RELATORIO"
+    let data = filters
     let filename = filters.idRelatorio + ".csv"
 
     return (dispatch) => {
-        apiFileDownload(dispatch, url, filename, search)
+        apiPostFileDownload(dispatch, url, data, filename, search)
     }
 }
