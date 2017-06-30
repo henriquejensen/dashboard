@@ -40,9 +40,9 @@ export default function (state = user, action) {
         }
 
         case INFO_SUCCESS: {
-            let response = action.payload.response.response;
-            let newState = Object.assign({}, state, response);
-            return newState;
+            let { response } = action.payload.response
+            let newState = Object.assign({}, state, response)
+            return newState
         }
         
         case INFO_ERROR:

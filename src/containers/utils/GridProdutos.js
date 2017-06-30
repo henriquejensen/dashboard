@@ -4,39 +4,37 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { browserHistory } from "react-router";
 
+//Actions
 import {
         searchLocalize,
         loadingLocalize
 } from "../../actions/index";
 import { searchCreditoCompleta } from "../../actions/actionsCredito";
 
-import { ICON_LOCALIZE, ICON_CREDITO, ICON_FOCOFISCAL } from "../../constants/constantsCompany";
+//Constants
+import {
+    ICON_LOCALIZE,
+    COMPANY_PRODUCT_LOCALIZE_LABEL,
+    ICON_CREDITO,
+    COMPANY_PRODUCT_CREDITO_LABEL,
+    ICON_FOCOFISCAL,
+    COMPANY_PRODUCT_FOCOFISCAL_LABEL
+} from "../../constants/constantsCompany";
 import { SEARCH_BY_CREDITO_IN_LOCALIZE } from "../../constants/constantsLocalize";
 
-import Panel from "../../components/panel/Panel";
+//Components
+import Panel from "../../components/panel/Panel"
 
-const produtos = [
-    {label: "Localize", icon: ICON_LOCALIZE, options: {
-        cpf: ["CPF"],
-        cnpj: ["CNPJ"],
-        all: ["CPF", "CNPJ", "Telefone", "Nome", "Endereço", "Email"]
-    }},
-    {label: "Crédito", icon: ICON_CREDITO, options: {
-        cpf: ["Consulta Completa", "Consulta Intermediária", "Intermediária Plus/Pessoal Plus", "Consulta Simples", "Consulta Express"],
-        cnpj: ["Consulta Completa", "Consulta Intermediária", "Intermediária Plus/Pessoal Plus", "Consulta Express"],
-        all: ["Consulta Completa", "Consulta Intermediária", "Intermediária Plus/Pessoal Plus", "Consulta Simples", "consulta Cheque", "Consulta Express"]
-    }},
-    {label: "Foco Fiscal", icon: ICON_FOCOFISCAL, options: {
-        cpf: ["Receita PF"],
-        cnpj: ["Receita PJ", "Receita PJ Sintegra", "Sintegra Unificada", "Simples Nacional"],
-        all: ["Receita PF", "Receita PJ", "Receita PJ Sintegra", "Sintegra Unificada", "Simples Nacional"]
-    }}
-];
+//Utils
+import { todosProdutos } from "../../components/utils/common/produtos"
 
 class GridProdutos extends Component {
+    constructor(props) {
+        super(props)
 
-    state = {
-        optionsSelected: {}
+        this.state = {
+            optionsSelected: {}
+        }
     }
 
     onChecked = (produto, opt) => {
@@ -84,6 +82,29 @@ class GridProdutos extends Component {
         this.setState({showMessage: false})
     }
 
+    renderPanelProduto = (produto) => {
+        return (
+            <Panel>
+                <Col xs={12} md={12}>
+                    <Image src={produto.imageNegative} className="icon-produto" rounded />{" "}
+                    {produto.label}
+                </Col>
+                <Col xs={12} md={12}>
+                    {produto.subItems.map((opt,j) => {
+                        if(this.props.isCPF && opt.tipo === "pf" ||
+                            !this.props.isCPF && opt.tipo === "pj" ||
+                                opt.tipo === "pfpj")
+                            return (
+                                <Checkbox key={j} onClick={evt => this.onChecked(produto.label, opt.label)}>
+                                    {opt.label}
+                                </Checkbox>
+                            )
+                    })}
+                </Col>
+            </Panel>
+        )
+    }
+
     render() {
         return (
             <div>
@@ -100,34 +121,12 @@ class GridProdutos extends Component {
                         Selecione pelo menos 1 opção
                     </Alert>
                 : ""}
-                {produtos.map((produto, index) => {
+
+                {this.props.produtosUsuario.map((produto, index) => {
+                    if(produto === "FOCO FISCAL") produto = COMPANY_PRODUCT_FOCOFISCAL_LABEL
                     return (
                         <Col md={4} key={index}>
-                            <Panel>
-                                <Col xs={12} md={12}>
-                                    <Image src={produto.icon} className="icon-produto" rounded />{" "}
-                                    {produto.label}
-                                </Col>
-                                <Col xs={12} md={12}>
-                                    {this.props.isCPF ? 
-                                        produto.options.cpf.map((opt,j) => {
-                                            return (
-                                                <Checkbox key={j} onClick={evt => this.onChecked(produto.label, opt)}>
-                                                    {opt}
-                                                </Checkbox>
-                                            )
-                                        })
-                                    :
-                                        produto.options.cnpj.map((opt,j) => {
-                                            return (
-                                                <Checkbox key={j} onClick={evt => this.onChecked(produto.label, opt)}>
-                                                    {opt}
-                                                </Checkbox>
-                                            )
-                                        })
-                                    }
-                                </Col>
-                            </Panel>
+                            {this.renderPanelProduto(todosProdutos[produto])}
                         </Col>
                     )
                 })}
@@ -146,6 +145,20 @@ class GridProdutos extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        produtosUsuario: state.user.mapProdutos ? state.user.mapProdutos.filter(produto => {
+            produto = produto.replace(/\+/g,"MAIS")
+            produto = produto.replace(/[^a-zA-Z]/g,"")
+            if(produto === COMPANY_PRODUCT_LOCALIZE_LABEL ||
+            produto === COMPANY_PRODUCT_CREDITO_LABEL ||
+            produto === COMPANY_PRODUCT_FOCOFISCAL_LABEL) {
+                return produto
+            }
+        }) : []
+    }
+}
+
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
             searchCreditoCompleta,
@@ -155,4 +168,4 @@ function mapDispatchToProps(dispatch) {
 		dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(GridProdutos);
+export default connect(mapStateToProps, mapDispatchToProps)(GridProdutos);

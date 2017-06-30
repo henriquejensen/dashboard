@@ -9,8 +9,8 @@ export const todosProdutos = {
         imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-localize-negative.png",
         alt: "Icone Localize",
         subItems: [
-            {label: "CPF", id: "cpf"},
-            {label: "CNPJ", id: "cnpj"},
+            {label: "CPF", id: "cpf", tipo: "pf"},
+            {label: "CNPJ", id: "cnpj", tipo: "pj"},
             {label: "Telefone", id: "telefone"},
             {label: "Nome", id: "nome"},
             {label: "Endereço", id: "endereco"},
@@ -27,12 +27,12 @@ export const todosProdutos = {
         imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png",
         alt: "Icone Crédito",
         subItems: [
-            {label: "Consulta Completa", id: "completa"},
-            {label: "Consulta Intermediária", id: "intermediaria"},
-            {label: "Intermediária Plus", id: "intermediariaPlus"},
-            {label: "Consulta Simples", id: "simples"},
-            {label: "Consulta Cheque", id: "cheque"},
-            {label: "Consulta Express", id: "express"},
+            {label: "Consulta Completa", id: "completa", tipo: "pfpj"},
+            {label: "Consulta Intermediária", id: "intermediaria", tipo: "pfpj"},
+            {label: "Intermediária Plus", id: "intermediariaPlus", tipo: "pfpj"},
+            {label: "Consulta Simples", id: "simples", tipo: "pf"},
+            {label: "Consulta Cheque", id: "cheque", tipo: "pfpj"},
+            {label: "Consulta Express", id: "express", tipo: "pfpj"},
         ]
     },
     CREDITOMIX: {
@@ -151,11 +151,11 @@ export const todosProdutos = {
         imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-focofiscal-negative.png",
         alt: "Icone Foco Fiscal",
         subItems: [
-            {label: "Receita PF", id: "receitapf"},
-            {label: "Receita PJ", id: "receitapj"},
-            {label: "Receita PJ Sintegra", id: "pjsintegra"},
+            {label: "Receita PF", id: "receitapf", tipo: "pf"},
+            {label: "Receita PJ", id: "receitapj", tipo: "pj"},
+            {label: "Receita PJ Sintegra", id: "pjsintegra", tipo: "pj"},
             //{label: "Sintegra Unificada", id: "unificada"},
-            {label: "Simples Nacional", id: "simplesnacional"}
+            {label: "Simples Nacional", id: "simplesnacional", tipo: "pj"}
             ]
     },
     VEICULOS: {

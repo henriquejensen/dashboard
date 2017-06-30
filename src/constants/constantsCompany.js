@@ -20,6 +20,7 @@ export const URL_EDITAR = "/editar"
 // Localize
 export const URL_LOCALIZE = "/localize"
 export const COMPANY_PRODUCT_LOCALIZE = "Localize"
+export const COMPANY_PRODUCT_LOCALIZE_LABEL = "LOCALIZE"
 export const COMPANY_PRODUCT_LOCALIZE_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"
 export const LOGO_LOCALIZE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-localize.png"
 export const ICON_LOCALIZE_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-localize-negative.png"
