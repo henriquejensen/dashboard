@@ -196,7 +196,6 @@ class FocoFiscal extends Component {
 						<PrintScreen />
 
 						{values.map((dataKey) => {
-							console.log("RENDER", tabActive, dataKey)
 							return (
 								<Tab
                                     eventKey={data[dataKey].label} 

@@ -25,7 +25,6 @@ const getInitialState = {
 }
 
 export default function(state=getInitialState, action) {
-    //console.log("ACTIONS", action)
     switch (action.type) {
         case constants.CHANGE_TAB_CREDITOMIX: {
             // verifica se a tab passada existe no array, se nao, entao busca a primeira tab e a retorna

@@ -42,15 +42,17 @@ class BaseCertaView extends Component {
                 <Col md={4}>
                     <strong>Solicitante: </strong>{ticket.usuario.usuario}
                 </Col>
+
                 <Col md={4}>
-                    <strong>Layout: </strong>{ticket.descricaoLayout}
+                    <strong>Total entrada/saída: </strong>{ticket.documentosEntregues + "/" + ticket.documentosEnviados}
                 </Col>
+
                 <Col md={4}>
                     <strong>Arquivo: </strong>{ticket.nomeArquivo}
                 </Col>
 
                 <Col md={4}>
-                    <strong>Total entrada/saída: </strong>{ticket.documentosEntregues + "/" + ticket.documentosEnviados}
+                    <strong>Layout: </strong>{ticket.descricaoLayout}
                 </Col>
 
                 <Col md={4}>

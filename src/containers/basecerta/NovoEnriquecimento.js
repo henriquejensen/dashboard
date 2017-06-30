@@ -28,8 +28,6 @@ class NovoEnriquecimento extends Component {
     onSendEnriquecimento = (evt) => {
         evt.preventDefault()
 
-        console.log("EVT", this.state)
-
         if(!this.state.error)
             this.props.postNovoEnriquecimento({
                 layout: this.state.layoutBaseCertaSelected || this.props.layouts[0].value,

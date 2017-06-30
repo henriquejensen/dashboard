@@ -30,6 +30,15 @@ export function api(dispatch, url, data, search, parameters) {
         })
 }
 
+export function apiPut(dispatch, url, data, search, parameters) {
+    request.put(url)
+        .send(data)
+        .set({authorization: localStorage.getItem("token")})
+        .end(function(error, response) {
+            onEndRequest(error, response, dispatch, search, parameters)
+        })
+}
+
 export function apiGet(dispatch, url, data, search, parameters) {
     request.get(url+`${data}`)
         .set({authorization: localStorage.getItem("token")})

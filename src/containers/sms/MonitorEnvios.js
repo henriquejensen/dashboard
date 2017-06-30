@@ -155,9 +155,7 @@ class MonitorEnvios extends Component {
     }
 }
 
-
 function mapStateToProps(state) {
-  console.log("ACTIONS", state)
   return {
     campanhas: state.sms.campanhas,
     loading: state.sms.loading

@@ -43,8 +43,6 @@ export default class RendaEmpregador extends Component {
     }
 
     sendNewIncome = (newIncome) => {
-        console.log("NEW INCOME", newIncome);
-
         this._addNotification("Obrigado pelo envio. Seu pedido de inserção será analisado");
 
         this.setState({
@@ -126,11 +124,11 @@ export default class RendaEmpregador extends Component {
                         <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>
                     }
                     
-                    <a className="moreInfo" onClick={() => this.setState({IsModalOpen:!IsModalOpen})}>
+                    {/*<a className="moreInfo" onClick={() => this.setState({IsModalOpen:!IsModalOpen})}>
                         {IsModalOpen ?
                             "Cancelar"
                         : "Adicionar um nova renda"}
-                    </a>
+                    </a>*/}
 
                 </Col>
 

@@ -12,7 +12,7 @@ import { ERR_CONNECTION_REFUSED, ERR_CONNECTION_REFUSED_MESSAGE, REQUEST_ERROR }
 
 //import groups from "./data/cadastro/grupos.json";
 import consultas from "./data/cadastro/consultas.json";
-import permissoesUser from "./data/cadastro/permissoesUser.json";
+//import permissoesUser from "./data/cadastro/permissoesUser.json";
 
 const getInitialState = {
     grupos: [],
@@ -25,8 +25,9 @@ const getInitialState = {
 }
 
 export default function(state=getInitialState, action) {
+    console.log("Action", action.type, action.payload)
     switch(action.type) {
-        case ADD_NEW_USER:
+        case ADD_NEW_USER: {
             return {
                 grupos: state.grupos,
                 users: state.users,
@@ -36,8 +37,9 @@ export default function(state=getInitialState, action) {
                 error: false,
                 message: ADD_NEW_USER,
             }
+        }
 
-        case CLOSE_MESSAGE_ERROR:
+        case CLOSE_MESSAGE_ERROR: {
             return {
                 grupos: state.grupos,
                 users: state.users,
@@ -47,8 +49,9 @@ export default function(state=getInitialState, action) {
                 error: false,
                 message: "close message",
             }
+        }
 
-        case ERR_CONNECTION_REFUSED:
+        case ERR_CONNECTION_REFUSED: {
             return {
                 grupos: state.grupos,
                 users: state.users,
@@ -58,10 +61,11 @@ export default function(state=getInitialState, action) {
                 error: true,
                 message: ERR_CONNECTION_REFUSED_MESSAGE,
             }
+        }
 
-        case GET_GROUPS_CADASTRO:
+        case GET_GROUPS_CADASTRO: {
             return {
-                grupos: action.payload.response,
+                grupos: action.payload.response.response,
                 users: state.users,
                 consultas: state.consultas,
                 permissoes: state.permissoes,
@@ -69,30 +73,33 @@ export default function(state=getInitialState, action) {
                 error: false,
                 message: "groups",
             }
+        }
 
-        case GET_USERS_CADASTRO:
+        case GET_USERS_CADASTRO: {
             return {
                 grupos: state.grupos,
-                users: action.payload.response,
+                users: action.payload.response.response,
                 consultas: state.consultas,
                 permissoes: state.permissoes,
                 loading: false,
                 error: false,
                 message: "users",
             }
+        }
 
-        case GET_USERS_BY_GROUP_ID:
+        case GET_USERS_BY_GROUP_ID: {
             return {
                 grupos: state.grupos,
-                users: action.payload.response,
+                users: action.payload.response.response,
                 consultas: state.consultas,
                 permissoes: state.permissoes,
                 loading: false,
                 error: false,
                 message: "usersGroup",
             }
+        }
             
-        case GET_CONSULTAS_GRUPO:
+        case GET_CONSULTAS_GRUPO: {
             let responseConsultas = getConsultaByIdGrupo(consultas.consultas, action.payload);
             return {
                 grupos: state.grupos,
@@ -103,20 +110,21 @@ export default function(state=getInitialState, action) {
                 error: false,
                 message: "users",
             }
+        }
 
-        case GET_PERMISSOES_USER:
-            let responsePermissoes = getPermissoesByIdUser(permissoesUser.permissoes, action.payload);
+        case GET_PERMISSOES_USER: {
             return {
                 grupos: state.grupos,
                 users: state.users,
                 consultas: state.consultas,
-                permissoes: responsePermissoes.permissoes,
+                permissoes: action.payload.response.response,
                 loading: false,
                 error: false,
                 message: "users",
             }
+        }
 
-        case LOADING_CADASTRO:
+        case LOADING_CADASTRO: {
             return {
                 grupos: state.grupos,
                 users: state.users,
@@ -126,8 +134,9 @@ export default function(state=getInitialState, action) {
                 error: false,
                 message: "loading",
             }
+        }
 
-        case REQUEST_ERROR:
+        case REQUEST_ERROR: {
             return {
                 grupos: state.grupos,
                 users: state.users,
@@ -137,6 +146,7 @@ export default function(state=getInitialState, action) {
                 error: true,
                 message: action.payload.mensagem,
             }
+        }
     }
 
     return state;

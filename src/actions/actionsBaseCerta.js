@@ -56,9 +56,9 @@ export function getLayoutsBaseCerta() {
     }
 }
 
-export function getTicketsBaseCerta() {
+export function getTicketsBaseCerta(ticket) {
     let url = basecerta.URL_GET_TICKETS_BASECERTA
-    let data = ""
+    let data =  ticket ? `/filter?ticket=${ticket}` : ""
     let search = basecerta.GET_TICKETS_BASECERTA
 
     return (dispatch) => {

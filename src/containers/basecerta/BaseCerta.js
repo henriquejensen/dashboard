@@ -31,7 +31,8 @@ class BaseCerta extends Component {
   }
 
   componentWillMount() {
-    this.props.getTicketsBaseCerta();
+    let ticket = location.search.split("=")[1]
+    this.props.getTicketsBaseCerta(ticket);
   }
 
   componentDidMount() {

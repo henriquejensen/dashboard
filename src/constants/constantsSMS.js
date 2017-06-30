@@ -1,7 +1,7 @@
-export const URL_SEND_SMS = "http://manager-sms-env.us-east-1.elasticbeanstalk.com/sms"
-export const URL_GET_CAMPANHAS = "http://manager-sms-env.us-east-1.elasticbeanstalk.com/campanhas"
-export const URL_GET_DETALHES_CAMPANHA = "http://manager-sms-env.us-east-1.elasticbeanstalk.com/sms"
-export const URL_GET_RESPOSTAS = "http://manager-sms-env.us-east-1.elasticbeanstalk.com/respostas"
+export const URL_SEND_SMS = "https://managersms.assertivasolucoes.com.br/sms"
+export const URL_GET_CAMPANHAS = "https://managersms.assertivasolucoes.com.br/campanhas"
+export const URL_GET_DETALHES_CAMPANHA = "https://managersms.assertivasolucoes.com.br/sms"
+export const URL_GET_RESPOSTAS = "https://managersms.assertivasolucoes.com.br/respostas"
 
 export const STATUS_SMS = {
     99: {

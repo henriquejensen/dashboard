@@ -1,62 +1,104 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { Alert, Button, Col, Form, InputGroup, Pagination } from "react-bootstrap";
+import React, { Component } from "react"
+import { bindActionCreators } from "redux"
+import { connect } from "react-redux"
+import { Alert, Button, ButtonGroup, Col, Form, InputGroup, Pagination } from "react-bootstrap"
 
-import { addNewUser, closeMessageError, getGruposCadastro, getUsersCadastro, getUsersByGroupId, getConsultasGrupo, getPermissoesUser, loadingCadastro, updateUser } from "../../actions/actionsCadastro";
+import { addNewUser, addNewGroup, closeMessageError, editGroup, getGruposCadastro, getUsersCadastro, getUsersByGroupId, getConsultasGrupo, getPermissoesUser, loadingCadastro, updateUser } from "../../actions/actionsCadastro"
 
-import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms";
+import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
 
-import { ADD_NEW_USER, MESSAGE_ADD_USER_SUCCESS } from "../../constants/constantsCadastro";
-import { LOADING_GIF, NENHUM_REGISTRO } from "../../constants/utils";
+import { ADD_NEW_USER, MESSAGE_ADD_USER_SUCCESS } from "../../constants/constantsCadastro"
+import { LOADING_GIF, NENHUM_REGISTRO } from "../../constants/utils"
 
-import Modal from "../../components/Modal";
-import Panel from "../../components/panel/Panel";
-import Table from "../../components/table/Table";
+import Modal from "../../components/Modal"
+import Panel from "../../components/panel/Panel"
+import Table from "../../components/table/Table"
+import { LoadingScreen } from "../../components/utils/ElementsAtScreen";
 
 {/*Funções para o Usuario*/}
-import ConfigurarPermissoes from "./ConfigurarPermissoes";
+import ConfigurarPermissoes from "./ConfigurarPermissoes"
 
 {/*Funções para o Grupo*/}
-import EditarGrupo from "./EditarGrupo";
-import Usuario from "./Usuario";
-import AtivarConsultas from "./AtivarConsultas";
+import EditarGrupo from "./EditarGrupo"
+import Usuario from "./Usuario"
+import AtivarConsultas from "./AtivarConsultas"
 
 const perfilOptions = [
     {value: 14, label: "OPERADOR"},
     {value: 13, label: "GERENTE"}
 ]
 
-const quantidadeGrupos = 10;
+const quantidadeGrupos = 10
 
 class Cadastro extends Component {
     state = {
         usuario: {
-            nome: undefined,
-            grupo: undefined,
-            razaoSocial: undefined,
-            clienteLogin: undefined,
-            status: undefined,
-            perfilVO: undefined
+            usuario: null,
+            grupo: null,
+            statusAtivo: null,
+            perfilVO: null
         },
         showAdvancedSearch: false,
         showModal: false,
-        screenToShow: undefined,
-        screenTitle: undefined,
-        sizeModal: undefined,
+        screenToShow: null,
+        screenTitle: null,
+        sizeModal: null,
         activePage: 1,
         maxUsersShown: 10,
         groupInfo: {
             color: "#CBE6F3",
             id: -1,
-            groupName: undefined
+            groupName: null
+        },
+        newGroup: {
+            accessTimeDom: "NÃO",
+            accessTimeQua: "NÃO",
+            accessTimeQui: "NÃO",
+            accessTimeSab: "NÃO",
+            accessTimeSeg: "NÃO",
+            accessTimeSex: "NÃO",
+            accessTimeTer: "NÃO",
+            bcLimiteValor: 0,
+            bcPeriodoLimitacao: "AVULSO",
+            bcTipoLimitacao: "INATIVO",
+            consigLimiteValor: 0,
+            consigPeriodoLimitacao: "AVULSO",
+            consigTipoLimitacao: "INATIVO",
+            creditoLimiteValor: 0,
+            creditoPeriodoLimitacao: "AVULSO",
+            creditoTipoLimitacao: "INATIVO",
+            dataInicio: "30/06/2017",
+            descricao: "",
+            focofiscalLimiteValor: 0,
+            focofiscalPeriodoLimitacao: "AVULSO",
+            focofiscalTipoLimitacao: "INATIVO",
+            id: null,
+            localizeLimiteValor: 0,
+            localizePeriodoLimitacao: "AVULSO",
+            localizeTipoLimitacao: "INATIVO",
+            periodoLimitacao: "AVULSO",
+            pessoaVO: {id: null, descricao: null, razaoSocial: null},
+            smsLimiteValor: 0,
+            smsPeriodoLimitacao: "AVULSO",
+            smsTipoLimitacao: "INATIVO",
+            statusAccessTime: "NÃO",
+            statusBloqueado: "NÃO",
+            tipo: "CLIENTE",
+            tipoLimitacao: "INATIVO",
+            veiculosLimiteValor: 0,
+            veiculosPeriodoLimitacao: "AVULSO",
+            veiculosTipoLimitacao: "INATIVO",
+            vendaMaisLimiteContagem: 0,
+            vendaMaisLimiteExportacao: 0,
+            vendaMaisTipoContagem: "SIM",
+            vendaMaisTipoExportacao: "SIM",
         }
     }
 
     componentWillMount() {
-        this.props.loadingCadastro();
-        this.props.getGruposCadastro(20);
-        this.props.getUsersCadastro();
+        this.props.loadingCadastro()
+        this.props.getGruposCadastro(20)
+        this.props.getUsersCadastro()
     }
 
     addNewUser = (user) => {
@@ -94,7 +136,8 @@ class Cadastro extends Component {
     onFormSubmit = (evt) => {
         evt.preventDefault();
         this.props.loadingCadastro();
-        this.props.getUsersByGroupId("", this.state.usuario.nome);
+
+        this.props.getUsersByGroupId(this.state.usuario);
     }
 
     openModal = (screen, title, size="") => {
@@ -119,61 +162,41 @@ class Cadastro extends Component {
             <Form onSubmit={this.onFormSubmit} className="my-form">
                 <Col md={this.state.showAdvancedSearch ? 12: 10}>
                     <MyFieldGroup
-                        id="nome"
+                        id="usuario"
                         type="text"
-                        name="nome"
+                        name="usuario"
                         placeholder="Digite o nome do usuário"
-                        value={this.state.usuario.nome}
+                        value={this.state.usuario.usuario}
                         onChange={this.onChangeUser} />
                 </Col>
                 {this.state.showAdvancedSearch ?
                     <span>
-                        <Col md={2}>
+                        <Col md={4}>
                             <MyFieldGroup
                                 id="grupo"
                                 type="text"
                                 name="grupo"
-                                placeholder="Nome grupo"
+                                placeholder="Nome grupo do usuário"
                                 value={this.state.usuario.grupo}
                                 onChange={this.onChangeUser} />
                         </Col>
-                        <Col md={2}>
-                            <MyFieldGroup
-                                id="clienteLogin"
-                                type="text"
-                                name="clienteLogin"
-                                placeholder="Cliente login"
-                                value={this.state.usuario.clienteLogin}
-                                onChange={this.onChangeUser} />
-                        </Col>
-                        <Col md={2}>
-                            <MyFieldGroup
-                                id="razaoSocial"
-                                type="text"
-                                name="razaoSocial"
-                                placeholder="Razão social"
-                                value={this.state.usuario.razaoSocial}
-                                onChange={this.onChangeUser} />
-                        </Col>
-                        <Col md={2}>
+                        <Col md={3}>
                             <SelectGroup
                                 id="perfilVO"
                                 type="select"
                                 name="perfilVO"
-                                label={undefined}
-                                value={this.state.perfilVO}
+                                value={this.state.usuario.perfilVO}
                                 options={perfilOptions}
-                                onChange={this.onChange} />
+                                onChange={this.onChangeUser} />
                         </Col>
-                        <Col md={2}>
+                        <Col md={3}>
                             <SelectGroup
-                                id="perfilVO"
+                                id="statusAtivo"
                                 type="select"
-                                name="perfilVO"
-                                label={undefined}
-                                value={this.state.status}
-                                options={["ATIVO", "INATIVO"]}
-                                onChange={this.onChange} />
+                                name="statusAtivo"
+                                value={this.state.usuario.statusAtivo}
+                                options={[{value:"SIM", label:"ATIVO"}, {value:"NÃO", label:"INATIVO"}]}
+                                onChange={this.onChangeUser} />
                         </Col>
                     </span>
                 : ""}
@@ -201,7 +224,7 @@ class Cadastro extends Component {
             }
         });
 
-        this.props.getUsersByGroupId(groupId, "");
+        this.props.getUsersByGroupId({ groupId });
     }
 
     showAllUsers = () => {
@@ -239,7 +262,14 @@ class Cadastro extends Component {
                                     </td>
                                     <td>{group.descricao}</td>
                                     <td>
-                                        <Button bsSize="xsmall" onClick={() => this.openModal(<EditarGrupo cancel={this.closeModal} grupoInfo={group} />, "Editar grupo " + group.descricao, "large")}>
+                                        <Button
+                                            bsSize="xsmall"
+                                            onClick={() => this.openModal(
+                                                <EditarGrupo
+                                                    editGroup={this.props.editGroup}
+                                                    cancel={this.closeModal}
+                                                    grupoInfo={group}
+                                                />, "Editar grupo " + group.descricao, "large")}>
                                             <i className="fa fa-pencil" />
                                         </Button>
                                         {'   '}
@@ -247,10 +277,10 @@ class Cadastro extends Component {
                                             <i className="fa fa-user-plus" />
                                         </Button>
                                         {'   '}
-                                        {/*<Button bsSize="xsmall" onClick={() => this.openModal(<AtivarConsultas cancel={this.closeModal} getConsultasGrupo={this.props.getConsultasGrupo} grupoId={group.id} consultas={this.props.consultas}/>, "Ativar consultas")}>
+                                        <Button bsSize="xsmall" onClick={() => this.openModal(<AtivarConsultas cancel={this.closeModal} getConsultasGrupo={this.props.getConsultasGrupo} grupoId={group.id} consultas={this.props.consultas}/>, "Ativar consultas")}>
                                             <i className="fa fa-gear" />
                                         </Button>
-                                        {'   '}*/}
+                                        {'   '}
                                         <Button bsSize="xsmall" onClick={() => this.clickedOnUsersGroup(group.id, group.descricao)}>
                                             <i className="fa fa-users" />
                                         </Button>
@@ -271,10 +301,11 @@ class Cadastro extends Component {
     }
 
     renderUsersPanel = () => {
-        const users = this.props.users ? this.props.users : [];
-        const totalPages = (users.length/this.state.maxUsersShown);
+        const users = this.props.users ? this.props.users : []
+        const totalPages = (users.length/this.state.maxUsersShown)
+        const groupName = this.state.groupInfo.groupName || ""
         return (
-            <Panel title={"USUÁRIOS "+this.state.groupInfo.groupName}  qtdTotal={[{qtd:users.length, icon:"fa fa-user"}]}>
+            <Panel title={"USUÁRIOS "+ groupName}  qtdTotal={[{qtd:users.length, icon:"fa fa-user"}]}>
                 <Table  fields={["ID - Status", "Usuário", "Grupo", "Ações"]}>
                     <tbody>
                         {users.length > 0 ?
@@ -361,13 +392,36 @@ class Cadastro extends Component {
                     </Col>
                 : ""}
 
-                {this.props.loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
+                {this.props.loading  ? <LoadingScreen /> : ""}
 
                 <Col md={6}>
-                    <Button bsSize="small" onClick={this.showAllUsers} block>
-                        Mostrar todos os usuários
-                    </Button>
-                    <br/>
+                    <ButtonGroup block>
+                        <Button
+                            bsStyle="info"
+                            bsSize="small"
+                            onClick={() => this.openModal(
+                                <EditarGrupo
+                                    editGroup={this.props.addNewGroup}
+                                    cancel={this.closeModal}
+                                    grupoInfo={{
+                                        ...this.state.newGroup,
+                                        pessoaVO: {
+                                            id: this.props.pessoaVO.id,
+                                        }
+                                    }}
+                                />, "Novo grupo", "large")}>
+                            Criar um novo grupo
+                        </Button>
+                        <Button
+                            bsSize="small"
+                            className="pull-right"
+                            onClick={this.showAllUsers}>
+                            Mostrar todos os usuários
+                        </Button>
+                    </ButtonGroup>
+
+                    <div style={{marginBottom:15}} />
+
                     {this.renderGroupPanel()}
                 </Col>
 
@@ -391,6 +445,11 @@ class Cadastro extends Component {
 
 function mapStateToProps(state) {
 	return {
+        pessoaVO: {
+            descricao: state.user.pessoaDescricao,
+            id: state.user.pessoaId,
+            razaoSocial: ""
+        },
         grupos: state.cadastro.grupos,
         consultas: state.cadastro.consultas,
         permissoes: state.cadastro.permissoes,
@@ -404,7 +463,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
             addNewUser,
+            addNewGroup,
             closeMessageError,
+            editGroup,
 			getGruposCadastro,
             getUsersCadastro,
             getUsersByGroupId,

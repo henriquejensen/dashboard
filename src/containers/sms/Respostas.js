@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Button, Col, Form } from "react-bootstrap";
 
 //Actions
-import { filterResponseSMS, getRespostasSMS } from "../../actions/actionsSMS";
+import { filterResponstasSMS, getRespostasSMS } from "../../actions/actionsSMS";
 
 //Components
 import EnviarSMS from "./EnvioSMS"
@@ -46,7 +46,7 @@ class Respostas extends Component {
 
       let { id=null, campanha=null, dataInicio=null, dataFim=null, cliente=null, usuario=null } = this.state
 
-      this.props.filterResponseSMS({ id, campanha, dataInicio, dataFim, cliente, usuario })
+      this.props.filterResponstasSMS({ id, campanha, dataInicio, dataFim, cliente, usuario })
     }
 
     closeModal = () => {
@@ -134,6 +134,7 @@ class Respostas extends Component {
     }
 
     render() {
+      const { respostas } = this.props
       return (
         <span>
           {this.renderForm()}
@@ -143,18 +144,18 @@ class Respostas extends Component {
           <CardWithTable
               fields={
                   [
-                      {id:"dataEnvio", name:"Envio"},
-                      {id:"numero", name:"Número"},
+                      {id:"dataRecebimento", name:"Recebimento"},
+                      {id:"numero", name:"Número", functionToApply:(val, indexRow) => respostas[indexRow].sms.numero},
                       {id:"mensagem", name:"Mensagem"},
                       {id:"acoes", name:"Ações", functionToApply:(val, indexRow) => {
                         return <i
                           className="fa fa-reply icon-tel"
-                          onClick={()=>this.setState({ IsModalOpen: true, numeros: [this.props.respostas[indexRow].numero]})}
+                          onClick={()=>this.setState({ IsModalOpen: true, numeros: [respostas[indexRow].sms.numero]})}
                         />
                       }}
                   ]
               }
-              rows={this.props.respostas}
+              rows={respostas}
           />
 
           <Modal
@@ -183,7 +184,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-      filterResponseSMS,
+      filterResponstasSMS,
       getRespostasSMS
   }, dispatch)
 }

@@ -8,31 +8,59 @@ export function closeSMSMessage() {
 	}
 }
 
-export function filterResponseSMS(request) {
-	return {
-		type: sms.FILTER_RESPONSE_SMS,
-		payload: request
+export function filterResponstasSMS({ id, campanha, dataInicio, dataFim, cliente, usuario }) {
+    let url = sms.URL_GET_RESPOSTAS
+	let data = "?"
+	data = data + ( id ? `id=${id}` : "" )
+	data = data + ( campanha ? (data.length > 1 ? "&" : "") + `campanha=${campanha}` : "" )
+	data = data + ( dataInicio ? (data.length > 1 ? "&" : "") + `dataInicio=${dataInicio}` : "" )
+	data = data + ( dataFim ? (data.length > 1 ? "&" : "") + `dataFim=${dataFim}` : "" )
+	data = data + ( cliente ? (data.length > 1 ? "&" : "") + `cliente=${cliente}` : "" )
+	data = data + ( usuario ? (data.length > 1 ? "&" : "") + `usuario=${usuario}` : "" )
+    let search = sms.FILTER_RESPONSE_SMS
+
+    return (dispatch) => {
+        apiGet(dispatch, url, data, search)
 	}
 }
 
-export function filterCampanhasSMS(request) {
-	return {
-		type: sms.FILTER_CAMPANHAS_SMS,
-		payload: request
+export function filterCampanhasSMS({ id, campanha, dataInicio, dataFim, cliente, usuario }) {
+    let url = sms.URL_GET_CAMPANHAS
+    let data = "?"
+	data = data + ( id ? `id=${id}` : "" )
+	data = data + ( campanha ? (data.length > 1 ? "&" : "") + `campanha=${campanha}` : "" )
+	data = data + ( dataInicio ? (data.length > 1 ? "&" : "") + `dataInicio=${dataInicio}` : "" )
+	data = data + ( dataFim ? (data.length > 1 ? "&" : "") + `dataFim=${dataFim}` : "" )
+	data = data + ( cliente ? (data.length > 1 ? "&" : "") + `cliente=${cliente}` : "" )
+	data = data + ( usuario ? (data.length > 1 ? "&" : "") + `usuario=${usuario}` : "" )
+    let search = sms.FILTER_CAMPANHAS_SMS
+
+    return (dispatch) => {
+        apiGet(dispatch, url, data, search)
 	}
 }
 
 export function filterDetalhesCampanha({numero=null, status=null, id}) {
-	return {
-		type: sms.FILTER_DETALHES_CAMPANHA,
-		payload: { numero, status, id }
+    let url = sms.URL_GET_DETALHES_CAMPANHA
+    let data = "?"
+	data = data + ( id ? `id=${id}` : "" )
+	data = data + ( numero ? (data.length > 1 ? "&" : "") + `numero=${numero}` : "" )
+	data = data + ( status ? (data.length > 1 ? "&" : "") + `status=${status}` : "" )
+    let search = sms.FILTER_DETALHES_CAMPANHA
+
+    return (dispatch) => {
+        apiGet(dispatch, url, data, search)
 	}
 }
 
 export function getCampanhasSMS() {
-	return {
-		type: sms.GET_CAMPANHAS_SMS,
-	}
+    let url = sms.URL_GET_CAMPANHAS
+    let data = ""
+    let search = sms.GET_CAMPANHAS_SMS
+
+    return (dispatch) => {
+        apiGet(dispatch, url, data, search)
+    }
 }
 
 export function getCentroCustoSMS() {
@@ -42,17 +70,23 @@ export function getCentroCustoSMS() {
 }
 
 export function getDetalhesCampanha(idCampanha) {
-	return {
-		type: sms.GET_DETALHES_CAMPANHA,
-		payload: idCampanha
-	}
+    let url = sms.URL_GET_DETALHES_CAMPANHA
+    let data = `?id=${idCampanha}`
+    let search = sms.GET_DETALHES_CAMPANHA
+
+    return (dispatch) => {
+        apiGet(dispatch, url, data, search)
+    }
 }
 
 export function getRespostasSMS() {
-	return {
-		type: sms.GET_RESPOSTAS_SMS,
-		payload: ""
-	}
+    let url = sms.URL_GET_RESPOSTAS
+    let data = ""
+    let search = sms.GET_RESPOSTAS_SMS
+
+    return (dispatch) => {
+        apiGet(dispatch, url, data, search)
+    }
 }
 
 export function loadingSMS() {

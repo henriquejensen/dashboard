@@ -35,41 +35,38 @@ const DadosBasicos = (props) => {
         <span>
             <Col md={4}>
                 <MyFieldGroup
-                    id="nomeGrupo"
+                    id="descricao"
                     type="text"
                     label="Nome do grupo"
-                    name="nomeGrupo"
-                    value={props.nomeGrupo}
+                    name="descricao"
+                    value={props.descricao}
                     onChange={props.onChange} />
             </Col>
 
             <Col md={4}>
                 <MyFieldGroup
-                    id="inicioConsumo"
+                    id="dataInicio"
                     type="date"
                     label="Início do consumo"
-                    name="inicioConsumo"
-                    value={props.inicioConsumo}
+                    name="dataInicio"
                     onChange={props.onChange} />
             </Col>
 
             <Col md={4}>
                 <MyFieldGroup
-                    id="fimConsumo"
+                    id="dataFim"
                     type="date"
                     label="Fim do consumo"
-                    name="fimConsumo"
-                    value={props.fimConsumo}
+                    name="dataFim"
                     onChange={props.onChange} />
             </Col>
 
             <Col md={4}>
                 <SelectGroup
-                    id="bloqueado"
+                    id="statusBloqueado"
                     type="select"
                     label="Bloqueado"
-                    name="bloqueado"
-                    value={props.bloqueado}
+                    name="statusBloqueado"
                     options={["SIM", "NAO"]}
                     onChange={props.onChange} />
             </Col>
@@ -274,10 +271,19 @@ const Observacoes = (props) => {
 }
 
 export default class EditarGrupo extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {}
+    }
+    
     onFormSubmit = (evt) => {
         evt.preventDefault();
 
-        console.log(this.state);
+        let { grupoInfo } = this.props
+
+        this.props.editGroup({ ...grupoInfo, ...this.state })
+        this.props.cancel()
     }
 
     onChange = (evt) => {
@@ -290,7 +296,7 @@ export default class EditarGrupo extends Component {
         const grupo = this.props.grupoInfo;
         const editar = [
             {label: "Cliente", form: <Cliente onChange={this.onChange} razaoSocial={grupo.pessoaVO.razaoSocial} login={grupo.pessoaVO.descricao} />},
-            {label: "Dados Básicos", form: <DadosBasicos onChange={this.onChange} nomeGrupo={grupo.descricao} inicioConsumo={grupo.dataInicio} fimConsumo={grupo.dataFinal} bloqueado={grupo.statusBloqueado} status={grupo.statusAtivo} webService={grupo.wsStatus}
+            {label: "Dados Básicos", form: <DadosBasicos onChange={this.onChange} descricao={grupo.descricao} inicioConsumo={grupo.dataInicio} fimConsumo={grupo.dataFinal} statusBloqueado={grupo.statusBloqueado} status={grupo.statusAtivo} webService={grupo.wsStatus}
             ips={grupo.ipAcesso}/>},
             {
                 label: "Horário",
@@ -333,9 +339,7 @@ export default class EditarGrupo extends Component {
                     </Tabs>
 
                     <Col md={6}>
-                        <Button
-                            type="submit"
-                            onClick={this.props.cancel}>Cancelar</Button>
+                        <Button onClick={this.props.cancel}>Cancelar</Button>
                     </Col>
                     <Col md={6}>
                         <Button

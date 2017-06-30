@@ -12,7 +12,6 @@ const getInitialState = {
 }
 
 export default function(state=getInitialState, action) {
-    console.log("Action", action)
     switch(action.type) {
         case basecerta.CLOSE_MESSAGE_ERROR_BASECERTA: {
             return {
@@ -24,7 +23,6 @@ export default function(state=getInitialState, action) {
         }
 
         case basecerta.GET_DOCUMENTO_ENTRADA_BASECERTA: {
-            console.log("GET_DOCUMENTO_ENTRADA_BASECERTA", action.payload)
             return {
                 documentoSaida: action.payload.response,
                 status: "",

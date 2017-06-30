@@ -29,10 +29,11 @@ export class EnviarSMS extends Component {
                 {checked: false, info:"Longo"},
                 {checked: false, info:"Carta"}
             ],
-            rota: 1, // 1 curto 2 longo
+            nome: null,
+            rota: "1", // 1 curto 2 longo
             id: this.props.id,
             numeros: this.props.numeros,
-            conteudoSMS: "",
+            conteudoSMS: null,
             caracteresRestantes: this.maximoCaracteres,
             limiteCaracteres: this.maximoCaracteres,
             totalSMS: 0

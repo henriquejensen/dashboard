@@ -12,8 +12,6 @@ export default class Telefone extends Component {
     }
 
     sendNewPhone = (newTel) => {
-        console.log("NEW PHONE", newTel);
-
         this.setState({
             newPhone: false
         })
@@ -32,11 +30,11 @@ export default class Telefone extends Component {
                         newPhone={this.state.newPhone}
                         sendNewPhone={this.sendNewPhone}/>
                     <div className="col-md-12 col-sm-12 relacionados">
-                        <a className="moreInfo" onClick={() => this.setState({newPhone:!this.state.newPhone})}>
+                        {/*<a className="moreInfo" onClick={() => this.setState({newPhone:!this.state.newPhone})}>
                             {this.state.newPhone ?
                                 "Cancelar"
                             : "Adicionar um novo telefone"}
-                        </a>
+                        </a>*/}
                         {fixos.length > 4 || moveis.length > 4 ? 
                             <a data-tip data-for="moreInfo" onClick={() => this.setState({showMoreTel: !this.state.showMoreTel})}>
                                 {this.state.showMoreTel ?

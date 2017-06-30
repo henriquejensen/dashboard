@@ -1,26 +1,12 @@
 import ajax from "superagent";
-import {
-    ADD_NEW_USER,
-    CLOSE_MESSAGE_ERROR,
-    GET_USERS_CADASTRO,
-    GET_USERS_BY_GROUP_ID,
-    GET_PERMISSOES_USER,
-    GET_GROUPS_CADASTRO,
-    GET_CONSULTAS_GRUPO,
-    LOADING_CADASTRO,
-    URL_GET_GRUPOS_CADASTRO,
-    URL_GET_USERS_BY_GROUP_ID,
-    URL_GET_USERS_CADASTRO,
-    URL_ADD_NEW_USER,
-	URL_UPDATE_USER
-} from "../constants/constantsCadastro";
+import * as cadastro from "../constants/constantsCadastro";
 
-import { api, apiGetWithKeySession } from "../api/Api";
+import { api, apiPut, apiGetWithKeySession } from "../api/Api";
 
 import { ERR_CONNECTION_REFUSED, REQUEST_ERROR } from "../constants/utils";
 
 export function addNewUser(usuario) {
-	let url = URL_ADD_NEW_USER
+	let url = cadastro.URL_ADD_NEW_USER
 		+"?usuario.grupoUsuarioVO.id="+usuario.grupoUsuarioVO.id
 		+"&usuario.perfilVO.id="+usuario.perfilVO.id
 		+"&usuario.usuario="+usuario.usuario
@@ -38,7 +24,7 @@ export function addNewUser(usuario) {
 			.end(function(error, response) {
 				if (response.body) {
 					if (response.status == 200 && !response.body.erro) {
-						dispatch({type: ADD_NEW_USER, payload: response.body})
+						dispatch({type: cadastro.ADD_NEW_USER, payload: response.body})
 					} else {
 						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
 					}
@@ -49,8 +35,19 @@ export function addNewUser(usuario) {
 	}
 }
 
+export function addNewGroup(grupo) {
+	let url = cadastro.URL_ADD_NEW_GRUPO
+	let search = cadastro.GET_GROUPS_CADASTRO
+	let data = grupo
+
+	return (dispatch) => {
+		api(dispatch, url, data, search)
+	}
+
+}
+
 export function updateUser(usuario, tipo) {
-	let url = URL_UPDATE_USER
+	let url = cadastro.URL_UPDATE_USER
 		+"?usuario.id="+usuario.id
 		+"&usuario.grupoUsuarioVO.id="+usuario.grupoUsuarioVO.id
 		+"&usuario.perfilVO.id="+usuario.perfilVO.id
@@ -69,7 +66,7 @@ export function updateUser(usuario, tipo) {
 			.end(function(error, response) {
 				if (response.body) {
 					if (response.status == 200 && !response.body.erro) {
-						dispatch({type: ADD_NEW_USER, payload: response.body})
+						dispatch({type: cadastro.ADD_NEW_USER, payload: response.body})
 					} else {
 						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
 					}
@@ -82,22 +79,33 @@ export function updateUser(usuario, tipo) {
 
 export function closeMessageError() {
     return {
-        type: CLOSE_MESSAGE_ERROR,
+        type: cadastro.CLOSE_MESSAGE_ERROR,
         payload: "closemessage"
     }
 }
 
+export function editGroup(grupo) {
+	let url = cadastro.URL_UPDATE_GRUPO
+	let search = cadastro.GET_GROUPS_CADASTRO
+	let data = grupo
+
+	return (dispatch) => {
+		apiPut(dispatch, url, data, search)
+	}
+
+}
+
 export function loadingCadastro() {
     return {
-        type: LOADING_CADASTRO,
+        type: cadastro.LOADING_CADASTRO,
         payload: "loading"
     }
 }
 
 export function getGruposCadastro(maxResult) {
-	let url = URL_GET_GRUPOS_CADASTRO
+	let url = cadastro.URL_GET_GRUPOS_CADASTRO
 
-	let search = GET_GROUPS_CADASTRO
+	let search = cadastro.GET_GROUPS_CADASTRO
 	let data = `?maxResult=${maxResult}`
 
 	return (dispatch) => {
@@ -106,9 +114,9 @@ export function getGruposCadastro(maxResult) {
 }
 
 export function getUsersCadastro() {
-	let url = URL_GET_USERS_CADASTRO
+	let url = cadastro.URL_GET_USERS_CADASTRO
 
-	let search = GET_USERS_CADASTRO
+	let search = cadastro.GET_USERS_CADASTRO
 	let data = ""
 
 	return (dispatch) => {
@@ -118,23 +126,32 @@ export function getUsersCadastro() {
 
 export function getConsultasGrupo(grupoId) {
     return {
-        type: GET_CONSULTAS_GRUPO,
+        type: cadastro.GET_CONSULTAS_GRUPO,
         payload: grupoId
     }
 }
 
 export function getPermissoesUser(userId) {
-    return {
-        type: GET_PERMISSOES_USER,
-        payload: userId
-    }
+	let url = cadastro.URL_GET_GROUP_PERMISSIONS
+
+	let search = cadastro.GET_PERMISSOES_USER
+	let data = userId
+
+	return (dispatch) => {
+		apiGetWithKeySession(dispatch, url, data, search)
+	}
 }
 
-export function getUsersByGroupId(groupId, groupDescription) {
-	let url = URL_GET_USERS_BY_GROUP_ID
+export function getUsersByGroupId({ groupId=null, usuario=null, grupo=null, statusAtivo=null, perfilVO=null }) {
+	let url = cadastro.URL_GET_USERS_BY_GROUP_ID
 
-	let search = GET_USERS_BY_GROUP_ID
-	let data = groupId ? ("?usuario.grupoUsuarioVO.id=" + groupId) : ("?usuario.usuario=" + groupDescription)
+	let search = cadastro.GET_USERS_BY_GROUP_ID
+	let data = "?"
+	data = data + ( groupId ? `usuario.grupoUsuarioVO.id=${groupId}` : "" )
+	data = data + ( usuario ? `&usuario.usuario=${usuario}` : "" )
+	data = data + ( grupo ? `&usuario.grupoUsuarioVO.descricao=${grupo}` : "" )
+	data = data + ( perfilVO ? `&usuario.perfilVO.id=${perfilVO}` : "" )
+	data = data + ( statusAtivo ? `&usuario.statusAtivo=${statusAtivo}` : "" )
 
 	return (dispatch) => {
 		apiGetWithKeySession(dispatch, url, data, search)

@@ -61,11 +61,11 @@ export default class Endereco extends Component {
                     </Col>
                     
                     <Col md={12} xs={12} className="relacionados">
-                        <a className="moreInfo" onClick={() => this.setState({IsModalOpen:!this.state.IsModalOpen})}>
+                        {/*<a className="moreInfo" onClick={() => this.setState({IsModalOpen:!this.state.IsModalOpen})}>
                             {this.state.IsModalOpen ?
                                 "Cancelar"
                             : "Adicionar um novo endereço"}
-                        </a>
+                        </a>*/}
                         {this.props.pessoas}
                     </Col>
 

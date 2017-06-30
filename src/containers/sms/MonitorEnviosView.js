@@ -48,7 +48,7 @@ class MonitorEnviosView extends Component {
                     <strong>Campanha: </strong>{this.props.campanha.campanha}
                 </Col>
                 <Col md={3}>
-                    <strong>Cadastro: </strong>{this.props.campanha.cadastro}
+                    <strong>Envio: </strong>{this.props.campanha.dataEnvio}
                 </Col>
 
                 <Col md={3}>
