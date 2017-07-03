@@ -27,12 +27,12 @@ export const todosProdutos = {
         imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png",
         alt: "Icone Crédito",
         subItems: [
-            {label: "Consulta Completa", id: "completa", tipo: "pfpj"},
-            {label: "Consulta Intermediária", id: "intermediaria", tipo: "pfpj"},
+            {label: "Completa", id: "completa", tipo: "pfpj"},
+            {label: "Intermediária", id: "intermediaria", tipo: "pfpj"},
             {label: "Intermediária Plus", id: "intermediariaPlus", tipo: "pfpj"},
-            {label: "Consulta Simples", id: "simples", tipo: "pf"},
-            {label: "Consulta Cheque", id: "cheque", tipo: "pfpj"},
-            {label: "Consulta Express", id: "express", tipo: "pfpj"},
+            {label: "Simples", id: "simples", tipo: "pf"},
+            {label: "Cheque", id: "cheque", tipo: "pfpj"},
+            {label: "Express", id: "express", tipo: "pfpj"},
         ]
     },
     CREDITOMIX: {

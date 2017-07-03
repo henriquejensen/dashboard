@@ -68,8 +68,8 @@ export default class Cadastro extends Component{
 
                 <Col md={6} xs={6}>
                     <strong>Situação sintegra: </strong>
-                    {this.props.dados.sintegraSituacao ?
-                        this.props.dados.sintegraSituacao
+                    {this.props.dados.sintegraSituacao ? 
+                        <span className={this.props.dados.sintegraSituacao == "ATIVO" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.sintegraSituacao}</span>
                         : NENHUM_REGISTRO
                     }
                 </Col>

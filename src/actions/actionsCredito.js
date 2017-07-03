@@ -85,20 +85,20 @@ export function loadingCredito() {
     }
 }
 
-export function searchCreditoCheque(cheque) {
-	let data = cheque;
-	let url = cheque.tipo === "pf" ? URL_CREDITO_SEARCH_CHEQUE_PF : URL_CREDITO_SEARCH_CHEQUE_PJ;
-	let search = GET_CREDITO_COMPLETA;
+export function searchCreditoCheque(cheque, tipo) {
+	let data = cheque
+	let url = tipo === "CPF" ? URL_CREDITO_SEARCH_CHEQUE_PF : URL_CREDITO_SEARCH_CHEQUE_PJ
+	let search = GET_CREDITO_COMPLETA
 
 	return (dispatch) => {
-		api(dispatch, url, data, search, {cheque})
+		api(dispatch, url, data, search, {cheque, tipo})
 	}
 }
 
 export function searchCreditoCompleta(documento, tipo, search) {
-	documento = documento.toString().replace(/[^0-9]/g,"");
-	let data = tipo === "CPF" ? {cpf:documento} : {cnpj:documento};
-	let url = tipo === "CPF" ? URL_CREDITO_SEARCH_COMPLETA : URL_CREDITO_SEARCH_COMPLETA_PJ;
+	documento = documento.toString().replace(/[^0-9]/g,"")
+	let data = tipo === "CPF" ? {cpf:documento} : {cnpj:documento}
+	let url = tipo === "CPF" ? URL_CREDITO_SEARCH_COMPLETA : URL_CREDITO_SEARCH_COMPLETA_PJ
 
 	return (dispatch) => {
 		apiContentType(dispatch, url, data, search, {tipo, documento})

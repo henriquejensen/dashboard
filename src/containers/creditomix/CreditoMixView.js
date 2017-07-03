@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'
 
 // Components
-import PanelGroup from "../../components/panel/PanelGroup";
-import CardWithTable from "../../components/card/CardWithTable";
-import Enderecos from "../../components/endereco/Endereco";
-import Telefones from "../../components/telefone/Telefone";
+import PanelGroup from "../../components/panel/PanelGroup"
+import CardWithTable from "../../components/card/CardWithTable"
+import Enderecos from "../../components/endereco/Endereco"
+import Telefones from "../../components/telefone/Telefone"
 
 // funcoes de apoio
-import * as pattern from "../../components/utils/functions/patternDocuments";
+import * as pattern from "../../components/utils/functions/patternDocuments"
 
 const CreditoViewMix = (props) => {
     let data = props.data

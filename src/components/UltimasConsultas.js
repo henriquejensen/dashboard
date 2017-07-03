@@ -110,18 +110,17 @@ export default class UltimasConsultas extends Component {
     }
 
     searchAll = () => {
-        this.closeModal();
+        this.closeModal()
         
         for(let i=0; i<this.state.data.length; i++) {
-            this.search(this.state.tipo, i, this.state.data[i].entrada, this.state.icon);
+            this.search(this.state.tipo, i, this.state.data[i].entrada, this.state.icon)
         }
     }
 
     render() {
-        let consultas = this.props.consultas ? this.props.consultas : [];
-        let isCpfOrCnpj = this.props.type;
-        let handleSearchPerson = this.props.search;
-        let fields = ["Tipo", "Entrada", "Data/Hora", ""];
+        let consultas = this.props.consultas ? this.props.consultas : []
+        let handleSearchPerson = this.props.search
+        let fields = ["Tipo", "Entrada", "Data/Hora", ""]
         return (
                 <Panel title={title}>
                     {this.props.searchEnderecosTelefonesUltimasConsultas ? 
@@ -148,15 +147,16 @@ export default class UltimasConsultas extends Component {
                         {consultas.length > 0 ?
                             <Table fields={fields} >
                                 {consultas.map((consulta, index) => {
+                                    let isCpfOrCnpj = consulta.entrada.length <= 11 ? "CPF" : "CNPJ"
                                     return (
                                         <tbody key={index}>
                                             <tr>
-                                                <td>{isCpfOrCnpj}</td>
+                                                <td>{this.props.type}</td>
                                                 <td>
                                                     <MyButton
                                                         tooltip={TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE}
                                                         onClickButton={handleSearchPerson}
-                                                        params={[consulta.entrada]}
+                                                        params={[consulta.entrada, isCpfOrCnpj]}
                                                         label={isCpfOrCnpj === "CPF" ? patternCPF(consulta.entrada) : isCpfOrCnpj === "CNPJ" ? patternCNPJ(consulta.entrada) : consulta.entrada}
                                                     />
                                                 </td>

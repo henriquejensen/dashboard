@@ -96,6 +96,31 @@ class Credito extends Component {
 		
 	}
 
+	renderChequeObject = () => {
+		return {
+			documento : null,
+			tipo : null, 
+			cep : null,
+			"telefone": {
+				"ddd": null,
+				"numero": null
+			},
+			"utilizaCMC7": false,
+			"cmc71Inicial": null,
+			"cmc72Inicial": null,
+			"cmc73Inicial": null,
+			"quantidadeCheque": null,
+			"chequeDetalhado": [{
+				"numero": null,
+				"digito": null,
+				"dataDeposito": null,
+				"valor": null
+			}
+			],
+			"cepOrigem": null
+		}
+	}	
+
 	closeTab = (index) => {
 		{/*Fecha as abas, quando sobrar um chama a funcao para fechar tudo (closeModel)*/}
 		if(this.props.datas.length > 1) {
@@ -131,40 +156,16 @@ class Credito extends Component {
 		})
 	}
 
-	onFormSubmit = (evt) => {
-		evt.preventDefault()
+	switchCaseCreditoOptions = (type, creditoInput) => {
+		switch (type) {
+			case "CHEQUE": {
+				let cheque = this.renderChequeObject()
+				cheque.documento = creditoInput.documento.replace(/[^0-9]/g,"")
+				cheque.tipo = creditoInput.documento.length > 11 ? "pj" : "pf"
 
-		this.props.loadingCredito()
-
-		let { creditoInput } = this.state
-
-		switch (this.props.type) {
-			case "CHEQUE":
-				let cheque =  {
-					documento : this.state.creditoInput.documento.replace(/[^0-9]/g,""),
-					tipo : this.state.creditoInput.documento.length > 11 ? "pj" : "pf", 
-					cep : null,
-					"telefone": {
-						"ddd": null,
-						"numero": null
-					},
-					"utilizaCMC7": false,
-					"cmc71Inicial": null,
-					"cmc72Inicial": null,
-					"cmc73Inicial": null,
-					"quantidadeCheque": null,
-					"chequeDetalhado": [{
-						"numero": null,
-						"digito": null,
-						"dataDeposito": null,
-						"valor": null
-					}
-					],
-					"cepOrigem": null
-				}
-
-				this.props.searchCreditoCheque(cheque);
-				break;
+				this.props.searchCreditoCheque(cheque, cheque.tipo === "pf" ? "CPF" : "CNPJ");
+				break
+			}
 		
 			case "INTERMEDIARIA":
 				this.props.searchCreditoIntermediaria(creditoInput.documento, creditoInput.estado);
@@ -187,7 +188,7 @@ class Credito extends Component {
 					requestExpress["dataNascimento"] = creditoInput.dataNascimento
 				} else {
 					requestExpress["cnpj"] = documento
-					requestExpress["uf"] = creditoInput.uf
+					requestExpress["uf"] = creditoInput.estado
 					requestExpress["sintegra"] = creditoInput.sintegra
 				}
 				this.props.searchCreditoExpress(requestExpress, documento, creditoInput.expressTipo)
@@ -204,6 +205,16 @@ class Credito extends Component {
 			default:
 				break;
 		}
+	}
+
+	onFormSubmit = (evt) => {
+		evt.preventDefault()
+
+		this.props.loadingCredito()
+
+		let { creditoInput } = this.state
+
+		this.switchCaseCreditoOptions(this.props.type, creditoInput)
 	}
 
 	renderUF = () => {
@@ -349,14 +360,13 @@ class Credito extends Component {
 		)
 	}
 
-	researchUltimasConsultas = (entrada) => {
-		this.props.loadingCredito();
+	researchUltimasConsultas = (entrada, tipo) => {
+		this.props.loadingCredito()
 
-		if(this.props.type == "CHEQUE") {
-			this.props.searchCreditoCheque(entrada);
-		} else {
-			this.searchCreditoCompleta(entrada);
-		}
+		let { creditoInput } = this.state
+		creditoInput.documento = entrada
+
+		this.switchCaseCreditoOptions(this.props.type, creditoInput)
 	}
 
 	searchInLocalize = (documento, tipo) => {
@@ -366,9 +376,9 @@ class Credito extends Component {
 	}
 
 	searchCreditoCompleta = (documento, tipo) => {
-		tipo = tipo ? tipo : documento.length <= 11 ? "CPF" : "CNPJ";
-		this.props.loadingCredito();
-		this.props.searchCreditoCompleta(documento, tipo, GET_CREDITO_COMPLETA);
+		tipo = tipo ? tipo : documento.length <= 11 ? "CPF" : "CNPJ"
+		this.props.loadingCredito()
+		this.props.searchCreditoCompleta(documento, tipo, GET_CREDITO_COMPLETA)
 	}
 
 	form = (tipo) => {
