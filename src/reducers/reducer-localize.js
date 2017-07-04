@@ -17,7 +17,8 @@ import {
 		SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS,
 		SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA,
 		SEE_LOCALIZE_MODEL,
-} from "../constants/constantsLocalize";
+} from "../constants/constantsLocalize"
+import * as localize from "../constants/constantsLocalize"
 import {
 		CHANGE_LOCALIZE_TYPE,
 		CHANGE_TAB,
@@ -30,13 +31,13 @@ import {
 		NENHUM_REGISTRO,
 		REQUEST_ERROR,
 		SUCCESS
-} from "../constants/utils";
-import { COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO, ICON_CREDITO, ICON_LOCALIZE } from "../constants/constantsCompany";
-import model from "./data/localize/modelLocalize.json";
-import pessoasRelacionadas from "./data/pessoasRelacionadas.json";
-import relacionados from "./data/relacionados.json";
+} from "../constants/utils"
+import { COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO, ICON_CREDITO, ICON_LOCALIZE } from "../constants/constantsCompany"
+import model from "./data/localize/modelLocalize.json"
+import pessoasRelacionadas from "./data/pessoasRelacionadas.json"
+import relacionados from "./data/relacionados.json"
 
-import { patternCPF, patternCNPJ } from "../components/utils/functions/patternDocuments";
+import { patternCPF, patternCNPJ } from "../components/utils/functions/patternDocuments"
 
 const initialState = {
 	status: "",
@@ -65,11 +66,11 @@ export default function(state = initialState, action) {
 			pessoasRelacionadas: []
 		}
 
-		let newState = Object.assign({},state);
+		let newState = Object.assign({},state)
 
 		/*Verifica se existem 6 elementos */
 		if(state.response.length > 5) {
-			newState.response.shift();
+			newState.response.shift()
 		}
 
 		switch(action.type) {
@@ -165,7 +166,7 @@ export default function(state = initialState, action) {
 					type: newState.type
 				}
 			}
-			case LOADING_LOCALIZE:
+			case LOADING_LOCALIZE: {
 				return {
 					status: LOADING,
 					message: "",
@@ -175,13 +176,26 @@ export default function(state = initialState, action) {
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				}
+			}
 
-			case SEE_LOCALIZE_MODEL:
-				response.data = model;
-				response.label = model.cadastro.cpf;
-				response.tipo = "CPF";
-				response.icon = ICON_LOCALIZE;
-				response.produto = COMPANY_PRODUCT_LOCALIZE;
+			case localize.REVER_CONSULTA_LOCALIZE: {
+				return {
+					status: "",
+					message: "",
+					loading: false,
+					response: action.payload,
+					tabActive: state.tabActive,
+					lastQueries: state.lastQueries,
+					type: state.type
+				}
+			}
+
+			case SEE_LOCALIZE_MODEL: {
+				response.data = model
+				response.label = model.cadastro.cpf
+				response.tipo = "CPF"
+				response.icon = ICON_LOCALIZE
+				response.produto = COMPANY_PRODUCT_LOCALIZE
 
 				return {
 					status: "model",
@@ -192,6 +206,7 @@ export default function(state = initialState, action) {
 					lastQueries: newState.lastQueries,
 					type: newState.type
 				}
+			}
 
 			case SEARCH_BY_CREDITO_IN_LOCALIZE: {
 				let tipo = action.payload.parameters.tipo;
@@ -226,6 +241,7 @@ export default function(state = initialState, action) {
 					type: state.type
 				}
 			}
+
 			case SEARCH_BY_DOCUMENT: {
 				let tipo = action.payload.parameters.tipo;
 				let documento = action.payload.parameters.documento;
@@ -262,6 +278,7 @@ export default function(state = initialState, action) {
 					type: state.type
 				}
 			}
+
 			case SEARCH_BY_EMAIL: {
 				let responseServer = action.payload.response;
 				let labelEmail = "EMAIL: "+responseServer.cabecalho.entrada;
@@ -377,6 +394,7 @@ export default function(state = initialState, action) {
 					type: newState.type
 				}
 			}
+
 			case SEARCH_BY_TELEFONES_RELACIONADOS: {
 				let responseServer = action.payload.response;
 				let telefones = responseServer.telefones ? responseServer.telefones : {};
@@ -426,7 +444,7 @@ export default function(state = initialState, action) {
 				}
 			}
 
-			case REQUEST_ERROR:
+			case REQUEST_ERROR: {
 				return {
 					status: REQUEST_ERROR,
 					message: action.payload.mensagem,
@@ -435,7 +453,8 @@ export default function(state = initialState, action) {
 					tabActive: newState.tabActive,
 					lastQueries: newState.lastQueries,
 					type: newState.type
-				};
+				}
+			}
 
 			case SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS: {
 				let consulta = action.payload.parameters.consulta;

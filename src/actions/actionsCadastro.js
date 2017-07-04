@@ -1,13 +1,13 @@
 import ajax from "superagent";
 import * as cadastro from "../constants/constantsCadastro";
 
-import { api, apiPut, apiGetWithKeySession } from "../api/Api";
+import { api, apiWithKeySession, apiGet, apiPut, apiGetWithKeySession } from "../api/Api";
 
 import { ERR_CONNECTION_REFUSED, REQUEST_ERROR } from "../constants/utils";
 
 export function addNewUser(usuario) {
 	let url = cadastro.URL_ADD_NEW_USER
-		+"?usuario.grupoUsuarioVO.id="+usuario.grupoUsuarioVO.id
+		/*+"?usuario.grupoUsuarioVO.id="+usuario.grupoUsuarioVO.id
 		+"&usuario.perfilVO.id="+usuario.perfilVO.id
 		+"&usuario.usuario="+usuario.usuario
 		+"&usuario.email1="+usuario.email1
@@ -16,22 +16,13 @@ export function addNewUser(usuario) {
 		+"&usuario.tipoLimitacao="+usuario.tipoLimitacao
 		+"&usuario.periodoLimitacao"+usuario.periodoLimitacao
 		+"&usuario.limiteValorString="+parseInt(usuario.limiteValorString)
-		+"&usuario.obs="+usuario.obs;
+		+"&usuario.obs="+usuario.obs*/
+
+	let search = cadastro.ADD_NEW_USER
+	let data = usuario
 
 	return (dispatch) => {
-		ajax.post(url)
-			.set({keySession: localStorage.getItem("token")})
-			.end(function(error, response) {
-				if (response.body) {
-					if (response.status == 200 && !response.body.erro) {
-						dispatch({type: cadastro.ADD_NEW_USER, payload: response.body})
-					} else {
-						dispatch({type: REQUEST_ERROR, payload: response.body.erro})
-					}
-				} else {
-					dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
-				}
-			})
+		apiWithKeySession(dispatch, url, data, search)
 	}
 }
 
@@ -43,7 +34,6 @@ export function addNewGroup(grupo) {
 	return (dispatch) => {
 		api(dispatch, url, data, search)
 	}
-
 }
 
 export function updateUser(usuario, tipo) {

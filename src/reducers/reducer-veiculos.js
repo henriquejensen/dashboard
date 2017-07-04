@@ -179,7 +179,7 @@ export default function(state=getInitialState, action) {
                 loading: false,
                 status: "model",
                 message: "",
-                response: [response],
+                response: [...state.response, response],
                 tabActive: tab,
                 lastQueries: state.lastQueries,
                 type: state.type

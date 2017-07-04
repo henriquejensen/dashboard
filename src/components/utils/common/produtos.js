@@ -45,9 +45,16 @@ export const todosProdutos = {
         imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png",
         alt: "Icone Crédito Mix",
         subItems: [
-            {label: "CPF", id: "cpf"},
-            {label: "CNPJ", id: "cnpj"},
-            //{label: "CHEQUE", id: "cheque"},
+            {label: "Cred CPF", id: "cpf"},
+            {label: "Cred CNPJ", id: "cnpj"},
+            {label: "Master", id: "master"},
+            {label: "Premium", id: "premium"},
+            {label: "Gold", id: "gold"},
+            {label: "Max", id: "max"},
+            {label: "Completa", id: "completa"},
+            {label: "IntermediáriaPlus", id: "intermediariaPlus"},
+            {label: "Intermediária", id: "intermediaria"},
+            //{label: "Sintética", id: "sintetica"}
         ],
         options: {
             /*cheque: [

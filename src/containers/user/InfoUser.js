@@ -63,7 +63,6 @@ export default class Info extends Component {
     }
 
     render() {
-        console.log("HAAPAPA", this.props)
         let usuario = this.state.usuario !== undefined ? this.state.usuario : this.props.user.usuario.usuario
         let usuarioEmail = this.state.usuarioEmail !== undefined ? this.state.usuarioEmail : this.props.user.usuario.email2
         let usuarioTelefone = this.state.usuarioTelefone !== undefined ? this.state.usuarioTelefone : this.props.user.usuario.telefone
@@ -111,7 +110,7 @@ export default class Info extends Component {
                                 label={"Arquivo("+this.filesExtensionAccept+")"}
                                 name="usuarioImagem"
                                 message={this.state.error ? this.state.messageErrorFileUpload : ""}
-                                accept={`file_extension/${this.filesExtensionAccept}`}
+                                accept={this.filesExtensionAccept}
                                 onChange={this.onChangeFileUpload}
                             />
 

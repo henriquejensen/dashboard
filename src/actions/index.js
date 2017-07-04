@@ -23,6 +23,7 @@ import {
 		CLOSE_MESSAGE_ERROR_LOCALIZE,
 		GET_LOCALIZE_LAST_QUERIES
 } from "../constants/constantsLocalize"
+import * as localize from "../constants/constantsLocalize"
 import {
 	URL_CREDITO_SEARCH_COMPLETA,
 	URL_CREDITO_SEARCH_COMPLETA_PJ
@@ -73,6 +74,13 @@ export function loadingLocalize() {
 	return {
 		type: LOADING_LOCALIZE,
 		payload: "loading"
+	}
+}
+
+export function reverConsultaLocalize(entrada) {
+	return {
+		type: localize.REVER_CONSULTA_LOCALIZE,
+		payload: entrada
 	}
 }
 

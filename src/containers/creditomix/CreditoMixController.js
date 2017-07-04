@@ -10,7 +10,7 @@ import MyForm from "../../components/forms/Form"
 import CreditoMixView from "./CreditoMixView"
 import Titletab from "../../components/utils/Titletab"
 import UltimasConsultas from "../../components/UltimasConsultas"
-import { MyFieldGroup, MyCheckboxGroup } from "../../components/forms/CommonForms"
+import { MyFieldGroup, MyCheckboxGroup, SelectGroup } from "../../components/forms/CommonForms"
 import { LocalizeDescription } from "../../components/ProductDescription"
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
@@ -20,7 +20,21 @@ import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITOMIX_LABEL, COMPANY_PRODUCT_C
 
 // Actions
 import { changeProductType } from "../../actions/actionsCommon";
-import { changeTab, closeTab, closeMessageErrorCreditoMix, loadingCreditoMix, searchCreditoMix, showCreditoMixModel } from "../../actions/creditomix/actionsCreditoMix"
+import {
+    changeTab,
+    closeTab,
+    closeMessageErrorCreditoMix,
+    loadingCreditoMix,
+    searchCreditoMix,
+    showCreditoMixModel,
+    searchCreditoMixMaster,
+    searchCreditoMixCompleta,
+    searchCreditoMixGold,
+    searchCreditoMixIntermediaria,
+    searchCreditoMixIntermediariaPlus,
+    searchCreditoMixMax,
+    searchCreditoMixPremium
+} from "../../actions/creditomix/actionsCreditoMix"
 import { todosProdutos } from "../../components/utils/common/produtos"
 
 const produtoInformacoes = todosProdutos[COMPANY_PRODUCT_CREDITOMIX_LABEL];
@@ -46,8 +60,8 @@ class CreditoMix extends Component {
 
     state = {
         options: optionsNormalized,
+        isCpfOrCnpj: "CPF",
         documento: "",
-        cepConsumidor: "",
         showCheckboxes: true,
         showCep: false
     }
@@ -127,91 +141,132 @@ class CreditoMix extends Component {
     onformSubmit = (evt) => {
         evt.preventDefault()
 
-        let type = this.props.type.toLowerCase()
+        let type = this.props.type
+        let {cepConsumidor, documento, isCpfOrCnpj, options, cep} = this.state
+        documento = documento.replace(/[^0-9]/g,"")
         let request = {}
-        
-        //produtoInformacoes.options.cheque.map(cheque => request[cheque.id] = null) // seta todos os parametros de cheque
-        this.state.options[type].map(option => request[option.name] = option.checked) // seta todos os parametros de de options
-        request[type] = this.state.documento.replace(/[^0-9]/g,"") // seta o documento para o objeto
-        this.state.cepConsumidor ? request["cepConsumidor"] = this.state.cepConsumidor.replace(/[^0-9]/g,"") : "" // seta o cep para o objeto
 
-        this.props.loadingCreditoMix();
-        this.props.searchCreditoMix(request, this.props.type);
+        this.props.loadingCreditoMix()
+
+        switch (type) {
+            case "MASTER": {
+                this.props.searchCreditoMixMaster({documento, isCpfOrCnpj, cep:cepConsumidor})
+                break
+            }
+
+            case "PREMIUM": {
+                this.props.searchCreditoMixPremium({documento, isCpfOrCnpj, cep:cepConsumidor})
+                break
+            }
+
+            case "GOLD": {
+                this.props.searchCreditoMixGold({documento, isCpfOrCnpj, cep:cepConsumidor})
+                break
+            }
+
+            case "MAX": {
+                this.props.searchCreditoMixMax({documento, isCpfOrCnpj, cep:cepConsumidor})
+                break
+            }
+
+            case "COMPLETA": {
+                this.props.searchCreditoMixCompleta({documento, isCpfOrCnpj})
+                break
+            }
+
+            case "INTERMEDIARIAPLUS": {
+                this.props.searchCreditoMixIntermediariaPlus({documento, isCpfOrCnpj})
+                break
+            }
+
+            case "INTERMEDIARIA": {
+                this.props.searchCreditoMixIntermediaria({documento, isCpfOrCnpj})
+                break
+            }
+
+            default: {
+                debugger
+                //produtoInformacoes.options.cheque.map(cheque => request[cheque.id] = null) // seta todos os parametros de cheque
+                options[type.toLowerCase()].map(option => request[option.name] = option.checked) // seta todos os parametros de de options
+                request[type.toLowerCase()] = documento // seta o documento para o objeto
+                cepConsumidor ? request["cepConsumidor"] = cepConsumidor.replace(/[^0-9]/g,"") : "" // seta o cep para o objeto
+
+                this.props.searchCreditoMix(request, type)
+                break
+            }
+        }
 
         this.setState({
             documento: [],
-            cepConsumidor: "",
+            cepConsumidor: [],
             showCheckboxes: false
         })
     }
 
+    renderCep = (mdLength) => {
+        return (
+            <Col md={mdLength}>
+                <MyFieldGroup
+                    id="cepConsumidor"
+                    type="text"
+                    name="cepConsumidor"
+                    value={this.state.cepConsumidor}
+                    onChange={this.onChange}
+                    required
+                    placeholder="CEP" />
+            </Col>
+        )
+    }
+
+    renderDocumentInput = (mdLength) => {
+        return (
+            <Col md={mdLength}>
+                <MyFieldGroup
+                    id="documento"
+                    type="text"
+                    name="documento"
+                    value={this.state.documento}
+                    onChange={this.onChange}
+                    required
+                    placeholder="Digite o documento" />
+            </Col>
+        )
+    }
+
     renderInput = () => {
-        let type = this.props.type
         let showCep = this.state.showCep
         return (
             <div>
-                <Col md={showCep ? 5 : 8}>
-                    <MyFieldGroup
-                        id="documento"
-                        type="text"
-                        name="documento"
-                        value={this.state.documento}
-                        onChange={this.onChange}
-                        required
-                        placeholder="Digite o documento" />
-                </Col>
+                {this.renderDocumentInput(showCep ? 5 : 8)}
 
                 {showCep ?
-                    <Col md={3}>
-                        <MyFieldGroup
-                            id="cepConsumidor"
-                            type="text"
-                            name="cepConsumidor"
-                            value={this.state.cepConsumidor}
-                            onChange={this.onChange}
-                            required
-                            placeholder="CEP" />
-                    </Col>
+                    this.renderCep(3)
                 : ""}
             </div>
         )
     }
 
-    renderInputCheque = () => {
+    renderInputCommon = () => {
+        let {type} = this.props
+        let {isCpfOrCnpj} = this.state
+        let showCep = type === "MASTER" || type === "PREMIUM" || type === "GOLD" || (type === "MAX" && isCpfOrCnpj === "CPF")
         return (
             <div>
                 <Col md={2}>
-                    <MyFieldGroup
-                        id="cmc71ChequeInicial"
-                        type="text"
-                        name="cmc71ChequeInicial"
-                        value={this.state.cmc71ChequeInicial}
+                    <SelectGroup
+                        id="isCpfOrCnpj"
+                        type="select"
+                        name="isCpfOrCnpj"
+                        options={[{value:"CPF", label:"CPF"},{value:"CNPJ", label:"CNPJ"}]}
                         onChange={this.onChange}
-                        required
-                        placeholder="1ª Parte do CMC7" />
+                    />
                 </Col>
+                
+                {this.renderDocumentInput(showCep ? 3 : 6)}
 
-                <Col md={2}>
-                    <MyFieldGroup
-                        id="cmc72ChequeInicial"
-                        type="text"
-                        name="cmc72ChequeInicial"
-                        value={this.state.cmc72ChequeInicial}
-                        onChange={this.onChange}
-                        required
-                        placeholder="2ª Parte do CMC7" />
-                </Col>
-
-                <Col md={3}>
-                    <MyFieldGroup
-                        id="cmc73ChequeInicial"
-                        type="text"
-                        name="cmc73ChequeInicial"
-                        value={this.state.cmc73ChequeInicial}
-                        onChange={this.onChange}
-                        required
-                        placeholder="3ª Parte do CMC7" />
-                </Col>
+                {showCep ?
+                    this.renderCep(3)
+                : ""}
             </div>
         )
     }
@@ -230,12 +285,12 @@ class CreditoMix extends Component {
 						seeModelo = {this.props.showCreditoMixModel}
 						status = {this.props.status}
 						message = {this.props.message}
-                        moreInfoToShow={this.props.type === "CHEQUE" ? "" : this.renderCheckboxes(this.state.options)}
+                        moreInfoToShow={this.props.type === "CPF" || this.props.type === "CNPJ" ? this.renderCheckboxes(this.state.options) : ""}
 					>
 
-                        {this.props.type !== "CHEQUE" ?
+                        {this.props.type === "CPF" || this.props.type === "CNPJ" ?
 						    this.renderInput()
-                        :   this.renderInputCheque()}
+                        :   this.renderInputCommon()}
 						
 					</MyForm>
 				</Col>
@@ -327,7 +382,14 @@ function mapDispatchToProps(dispatch) {
         closeMessageErrorCreditoMix,
         loadingCreditoMix,
         searchCreditoMix,
-        showCreditoMixModel
+        showCreditoMixModel,
+        searchCreditoMixMaster,
+        searchCreditoMixCompleta,
+        searchCreditoMixGold,
+        searchCreditoMixIntermediaria,
+        searchCreditoMixIntermediariaPlus,
+        searchCreditoMixMax,
+        searchCreditoMixPremium
     }, dispatch)
 }
 

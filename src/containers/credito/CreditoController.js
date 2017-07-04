@@ -364,7 +364,14 @@ class Credito extends Component {
 		this.props.loadingCredito()
 
 		let { creditoInput } = this.state
-		creditoInput.documento = entrada
+
+		if(this.props.type === "EXPRESS") {
+			entrada = JSON.parse(entrada)
+
+			creditoInput = { ...creditoInput, ...entrada, documento: entrada.cpf || entrada.cnpj }
+		} else {
+			creditoInput.documento = entrada
+		}
 
 		this.switchCaseCreditoOptions(this.props.type, creditoInput)
 	}

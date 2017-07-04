@@ -37,6 +37,7 @@ const DadosBasicos = (props) => {
                     label="Usuário"
                     name="usuario"
                     placeholder="Digite o nome do usuario"
+                    required
                     error={props.isFieldUsuarioFilled}
                     message={props.isFieldUsuarioFilled ? "Campo obrigatório" : ""}
                     value={props.usuario}
@@ -50,6 +51,7 @@ const DadosBasicos = (props) => {
                     label="Email principal"
                     name="email1"
                     placeholder="Digite o email principal"
+                    required
                     error={props.isFieldEmail1Filled}
                     message={props.isFieldEmail1Filled ? "Campo obrigatório" : ""}
                     value={props.email1}
@@ -195,7 +197,7 @@ class Usuario extends Component {
 
             let usuario = {
                     grupoUsuarioVO: {
-                        id: 49908
+                        id: this.props.grupo.id
                     },
                     perfilVO: {
                         id: this.state.perfilVO
@@ -203,12 +205,12 @@ class Usuario extends Component {
                     id: this.props.usuarioId,
                     usuario: this.state.usuario,
                     email1: this.state.email1,
-                    email2: this.state.email2,
-                    statusAtivo: this.state.statusAtivo,
-                    tipoLimitacao: this.state.tipoLimitacao,
-                    periodoLimitacao: this.state.periodoLimitacao,
-                    limiteValorString: this.state.limiteValorString,
-                    obs: this.state.obs
+                    email2: this.state.email2 ? this.state.email2 : null,
+                    statusAtivo: this.state.statusAtivo ? this.state.statusAtivo : "SIM",
+                    tipoLimitacao: this.state.tipoLimitacao ? this.state.tipoLimitacao : "INATIVO",
+                    periodoLimitacao: this.state.periodoLimitacao ? this.state.periodoLimitacao : null,
+                    limiteValorString: this.state.limiteValorString ? this.state.limiteValorString : null,
+                    obs: this.state.obs ? this.state.obs : null
             }
 
             this.props.addNewUser(usuario);
@@ -265,7 +267,9 @@ class Usuario extends Component {
             },
             {label: "Limitação", form: <Limitacao onChange={this.onChange} limiteValorString={this.state.limiteValorString} tipoLimitacao={this.state.tipoLimitacao} periodoLimitacao={this.state.periodoLimitacao} />},
             {label: "Observações", form: <Observacoes onChange={this.onChange} obs={this.state.obs} />}
-        ];
+        ]
+
+        console.log("PROPS", this.props)
 
         return (
             <Col md={12}>

@@ -98,7 +98,7 @@ class NovoEnriquecimento extends Component {
                         required
                         name="uploadEnriquecimentoBaseCerta"
                         message={this.state.error ? this.state.messageErrorFileUpload : ""}
-                        accept={`file_extension/${this.filesExtensionAccept}`}
+                        accept={this.filesExtensionAccept}
                         onChange={this.onChangeFileUpload}
                     />
                 </Col>

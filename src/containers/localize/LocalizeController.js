@@ -23,25 +23,25 @@ import {
 		closeTab,
 		changeTab,
 		closeMessageErrorLocalize
-} from "../../actions/index";
+} from "../../actions/index"
 
-import BuscaPorRelacionados from "../../components/relacionados/BuscaPorRelacionados";
-import Protocolo from "../../components/protocolo/Protocolo";
-import LocalizeView from "./LocalizeView";
-import CreditoView from "../credito/CreditoView";
-import MyForm from "../../components/forms/Form";
-import Titletab from "../../components/utils/Titletab";
-import Panel from "../../components/panel/Panel";
-import UltimasConsultas from "../../components/UltimasConsultas";
-import { LocalizeDescription } from "../../components/ProductDescription";
-import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
+import BuscaPorRelacionados from "../../components/relacionados/BuscaPorRelacionados"
+import Protocolo from "../../components/protocolo/Protocolo"
+import LocalizeView from "./LocalizeView"
+import CreditoView from "../credito/CreditoView"
+import MyForm from "../../components/forms/Form"
+import Titletab from "../../components/utils/Titletab"
+import Panel from "../../components/panel/Panel"
+import UltimasConsultas from "../../components/UltimasConsultas"
+import { LocalizeDescription } from "../../components/ProductDescription"
+import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO, LOGO_LOCALIZE } from "../../constants/constantsCompany";
-import { SUCCESS, REQUEST_ERROR, ERR_CONNECTION_REFUSED } from "../../constants/utils";
-import { CPF_CODE, CNPJ_CODE, EMAIL_CODE, TELEFONE_CODE, NOME_ENDERECO_CODE } from "../../constants/constantsLocalize";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO, LOGO_LOCALIZE } from "../../constants/constantsCompany"
+import { SUCCESS, REQUEST_ERROR, ERR_CONNECTION_REFUSED } from "../../constants/utils"
+import { CPF_CODE, CNPJ_CODE, EMAIL_CODE, TELEFONE_CODE, NOME_ENDERECO_CODE } from "../../constants/constantsLocalize"
 
-import estados from "../../components/utils/common/estados.json";
-import menu from "../../components/utils/common/menu.json";
+import estados from "../../components/utils/common/estados.json"
+import menu from "../../components/utils/common/menu.json"
 
 class LocalizeController extends Component {
 	state = {
@@ -61,8 +61,7 @@ class LocalizeController extends Component {
 	}
 
 	componentWillMount() {
-		document.title = COMPANY_PRODUCT_LOCALIZE + " > " + COMPANY_NAME_SHORT;
-		this.props.loadingLocalize();
+		document.title = COMPANY_PRODUCT_LOCALIZE + " > " + COMPANY_NAME_SHORT
 		this.props.getLastQueries(CPF_CODE, "CPF");
 		this.props.getLastQueries(CNPJ_CODE, "CNPJ");
 		this.props.getLastQueries(TELEFONE_CODE, "TELEFONE");

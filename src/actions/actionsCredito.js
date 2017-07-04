@@ -91,7 +91,7 @@ export function searchCreditoCheque(cheque, tipo) {
 	let search = GET_CREDITO_COMPLETA
 
 	return (dispatch) => {
-		api(dispatch, url, data, search, {cheque, tipo})
+		api(dispatch, url, data, search, {tipo, documento:cheque.documento})
 	}
 }
 

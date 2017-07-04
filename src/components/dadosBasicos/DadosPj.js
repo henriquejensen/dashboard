@@ -91,9 +91,9 @@ export default class Cadastro extends Component{
                 </Col>
 
                 <Col md={6} xs={6}>
-                    <strong>Faixa de idade: </strong>
-                    {this.props.dados.faixaIdade ? 
-                        this.props.dados.faixaIdade
+                    <strong>Idade: </strong>
+                    {this.props.dados.idadeEmpresa ? 
+                        this.props.dados.idadeEmpresa + " anos"
                         : NENHUM_REGISTRO
                     }
                 </Col>
@@ -165,9 +165,9 @@ export default class Cadastro extends Component{
                         </Col>
 
                         <Col md={6} xs={6}>
-                            <strong>Idade: </strong>
-                            {this.props.dados.idadeEmpresa ? 
-                                this.props.dados.idadeEmpresa + " anos"
+                            <strong>Faixa de idade: </strong>
+                            {this.props.dados.faixaIdade ? 
+                                this.props.dados.faixaIdade
                                 : NENHUM_REGISTRO
                             }
                         </Col>

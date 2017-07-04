@@ -273,7 +273,15 @@ class Cadastro extends Component {
                                             <i className="fa fa-pencil" />
                                         </Button>
                                         {'   '}
-                                        <Button bsSize="xsmall" onClick={() => this.openModal(<Usuario cancel={this.closeModal} grupoId={group.id} addNewUser={this.addNewUser} options={perfilOptions} />, "Novo usuário do grupo " + group.descricao)}>
+                                        <Button
+                                            bsSize="xsmall"
+                                            onClick={() => this.openModal(
+                                                <Usuario
+                                                    cancel={this.closeModal}
+                                                    grupo={group}
+                                                    addNewUser={this.addNewUser}
+                                                    options={perfilOptions}
+                                                />, "Novo usuário do grupo " + group.descricao)}>
                                             <i className="fa fa-user-plus" />
                                         </Button>
                                         {'   '}
@@ -330,7 +338,7 @@ class Cadastro extends Component {
                                                     <Usuario
                                                         cancel={this.closeModal}
                                                         usuarioId={user.id}
-                                                        grupoId={user.grupoUsuarioVO.id}
+                                                        grupo={user.grupoUsuarioVO}
                                                         perfilVO={user.perfilVO.id}
                                                         usuario={user.usuario}
                                                         email1={user.email1}

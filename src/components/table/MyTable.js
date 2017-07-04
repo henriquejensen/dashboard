@@ -83,7 +83,7 @@ export default class MyTable extends Component {
                                                 <td colSpan={fields.length}>
                                                     {hiddenRows.map((hiddenElement, j) => {
                                                         if(row[hiddenElement.id]) {
-                                                            return (                                                                
+                                                            return (                                                            
                                                                 <Col md={hiddenElement.mdLength ? hiddenElement.mdLength : 4} key={hiddenElement.id+j}>
                                                                     <strong>{hiddenElement.name}: </strong> {row[hiddenElement.id]}
                                                                 </Col>                                                                

@@ -65,7 +65,6 @@ class Filtro extends Component {
             idPessoa : null,
             idGrupo : null,
             idUsuario : null,
-            idUsuarioPosVenda: null,
             delimitador : this.separadorOpcoes[0].value,
             tipoRelatorio : null
         }
@@ -117,6 +116,7 @@ class Filtro extends Component {
                         label="Data Início"
                         type="date"
                         name="dataIni"
+                        required
                         value={this.state.dataIni}
                         onChange={this.onChange} />
                 </Col>
@@ -126,6 +126,7 @@ class Filtro extends Component {
                         label="Data Final"
                         type="date"
                         name="dataFim"
+                        required
                         value={this.state.dataFim}
                         onChange={this.onChange}
                     />

@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux"
 import { Col } from "react-bootstrap"
 
 //Actions
-import { filterRelatorio, getRelatorios } from "../../actions/actionsRelatorios"
+import { filterRelatorio, getRelatorios, loadingRelatorio } from "../../actions/actionsRelatorios"
 
 //Constants
 import Modal from "../../components/Modal"
@@ -15,6 +15,7 @@ import { TITLE_REPORTS } from "../../constants/utils"
 //Components
 import RelatoriosView from "./RelatoriosView"
 import Filtro from "./Filtro"
+import { LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 class Relatorios extends Component {
     constructor(props) {
@@ -36,6 +37,12 @@ class Relatorios extends Component {
         })
     }
 
+    filterRelatorio = (filters) => {
+        this.closeModal()
+        this.props.loadingRelatorio()
+        this.props.filterRelatorio(filters)
+    }
+
     showModal = (relatorioId) => {
         this.setState({
             IsModalOpen: true,
@@ -45,8 +52,12 @@ class Relatorios extends Component {
 
     render() {
         let relatorio = this.props.relatorios[this.state.relatorioId]
+        let loading = this.props.loading
         return (
             <Col md={12}>
+
+                {loading ? <LoadingScreen /> : ""}
+
                 <RelatoriosView
                     relatorios={this.props.relatorios}
                     showModal={this.showModal}
@@ -58,7 +69,7 @@ class Relatorios extends Component {
                     size="lg"
                     title="Extrair as informações"
                 >
-                    <Filtro relatorio={relatorio} filterRelatorio={this.props.filterRelatorio} />
+                    <Filtro relatorio={relatorio} filterRelatorio={this.filterRelatorio} />
                     
                 </Modal>
             </Col>
@@ -68,14 +79,16 @@ class Relatorios extends Component {
 
 function mapStateToProps(state) {
     return {
-        relatorios: state.relatorios.relatorios
+        relatorios: state.relatorios.relatorios,
+        loading: state.relatorios.loading
     }
 }
 
 function mapDispatchProps(dispatch) {
     return bindActionCreators({
         filterRelatorio,
-        getRelatorios
+        getRelatorios,
+        loadingRelatorio
     }, dispatch)
 }
 
