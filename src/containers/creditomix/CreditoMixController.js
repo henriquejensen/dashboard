@@ -61,6 +61,7 @@ class CreditoMix extends Component {
     state = {
         options: optionsNormalized,
         isCpfOrCnpj: "CPF",
+        cepConsumidor: "",
         documento: "",
         showCheckboxes: true,
         showCep: false
@@ -127,6 +128,22 @@ class CreditoMix extends Component {
 			)
 		}
 	}
+
+	onClickDocument = (documento) => {
+        documento = documento.replace(/[^0-9]/g,"")
+        debugger
+        this.setState({
+            documento,
+            destaqueInputDocumento: true,
+            isCpfOrCnpj: documento.length <= 11 ? "CPF" : "CNPJ"
+        })
+		
+		this.scrollPage(0, 0)
+	}
+
+    scrollPage(posX, posY) {
+        window.scrollTo(posX, posY)
+    }
 
 	onChangeType = (evt) => {
 		this.props.changeProductType(COMPANY_PRODUCT_CREDITOMIX_LABEL, evt.target.value)
@@ -197,9 +214,10 @@ class CreditoMix extends Component {
         }
 
         this.setState({
-            documento: [],
-            cepConsumidor: [],
-            showCheckboxes: false
+            documento: "",
+            cepConsumidor: "",
+            showCheckboxes: false,
+            destaqueInputDocumento: false
         })
     }
 
@@ -227,6 +245,8 @@ class CreditoMix extends Component {
                     name="documento"
                     value={this.state.documento}
                     onChange={this.onChange}
+                    inputStyle={{borderColor:"orange"}}
+                    error={this.state.destaqueInputDocumento}
                     required
                     placeholder="Digite o documento" />
             </Col>
@@ -257,6 +277,7 @@ class CreditoMix extends Component {
                         id="isCpfOrCnpj"
                         type="select"
                         name="isCpfOrCnpj"
+                        value={this.state.isCpfOrCnpj}
                         options={[{value:"CPF", label:"CPF"},{value:"CNPJ", label:"CNPJ"}]}
                         onChange={this.onChange}
                     />
@@ -349,6 +370,7 @@ class CreditoMix extends Component {
 									{data[dataKey].produto == COMPANY_PRODUCT_CREDITOMIX_LABEL ?
 										<CreditoMixView
                                             data={data[dataKey]}
+                                            onClickDocument={this.onClickDocument}
                                         />
 									: ""}
 								</Tab>

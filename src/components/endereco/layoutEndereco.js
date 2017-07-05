@@ -54,7 +54,7 @@ export default class Enderecos extends Component {
                         <td>{end.bairro}</td>
                         <td>{end.cidade}</td>
                         <td>{end.uf}</td>
-                        <td>{cep.substring(0,cep.length-3)}-{cep.substring(cep.length-3)}</td>
+                        <td>{cep ? (cep.substring(0,cep.length-3) + "-" + cep.substring(cep.length-3)) : cep}</td>
                         <td>
                             <MyButton
                                 tooltip={TOOLTIP_SEE_MAP_MESSAGE}

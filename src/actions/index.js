@@ -85,7 +85,6 @@ export function reverConsultaLocalize(entrada) {
 }
 
 export function userEditInfo({ usuario, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview }) {
-	debugger
 	let url = URL_EDIT_USER
 	let data = { nome: usuario, email2: usuarioEmail, telefone: usuarioTelefone }
 	let search = USER_EDIT_INFO

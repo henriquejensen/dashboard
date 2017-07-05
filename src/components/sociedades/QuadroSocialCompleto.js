@@ -5,7 +5,7 @@ import { Col } from "react-bootstrap"
 import Panel from "../panel/Panel"
 import Table from "../table/MyTable"
 import MyButton from "../button/MyButton"
-import Enderecos from "../../components/endereco/Endereco"
+import Enderecos from "../../components/endereco/layoutEndereco"
 
 //Constants
 import { NENHUM_REGISTRO, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, TOOLTIP_SEE_MORE_INFO_MESSAGE, TOOLTIP_SEE_LESS_INFO_MESSAGE } from "../../constants/utils"
@@ -52,7 +52,12 @@ class QuadroSocialCompleto extends Component {
                                         {pessoa.cpf}
                                     </td>
                                     <td>
-                                        {pessoa.nome}
+                                        <MyButton
+                                            tooltip={TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE}
+                                            onClickButton={this.props.search}
+                                            label={pessoa.nome}
+                                            params={[pessoa.cpf]}
+                                        />                                        
                                     </td>
                                     <td>
                                         {pessoa.dataEntrada}
@@ -66,7 +71,7 @@ class QuadroSocialCompleto extends Component {
                                 </tr>
                                 <tr>
                                     <td colSpan={fields.length}>
-                                        <Panel title="Restrições" >
+                                        <Panel title={`Restrições - ${pessoa.nome}`} titleColor >
                                             <Table fields={fieldsRestricoes} elements={pessoa.restricoes} />
                                         </Panel>
                                     </td>
@@ -74,7 +79,9 @@ class QuadroSocialCompleto extends Component {
 
                                 <tr>
                                     <td colSpan={fields.length}>
-                                        <Enderecos enderecos={[pessoa.endereco]} />
+                                        <Panel title={`Endereço - ${pessoa.nome}`} titleColor >
+                                            <Enderecos enderecos={[pessoa.endereco]} />
+                                        </Panel>
                                     </td>
                                 </tr>
                             </tbody>

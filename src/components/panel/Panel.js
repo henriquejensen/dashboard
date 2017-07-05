@@ -11,10 +11,14 @@ export default class Panel extends Component {
 
     render() {
         let footer = this.props.footer;
+        let titleColor = this.props.titleColor
         return (
             <div className="panel panel-default">
                 {this.props.title ? 
-                    <div className="panel-heading my-panel-heading" onClick={() => this.setState({show:!this.state.show})} >
+                    <div
+                        className={titleColor ? "panel-heading my-panel-heading-inner" : "panel-heading my-panel-heading"} 
+                        onClick={() => this.setState({show:!this.state.show})}
+                    >
                         {/*this.props.qtdTotal ? 
                             this.props.qtdTotal.map((total,i) => {
                                 return <span className="qtd-panel" key={i} style={{right: 39 - i*3 + 10 + "%"}}>

@@ -5,10 +5,25 @@ import PanelGroup from "../../components/panel/PanelGroup"
 import CardWithTable from "../../components/card/CardWithTable"
 import QuadroSocialCompleto from "../../components/sociedades/QuadroSocialCompleto"
 import Enderecos from "../../components/endereco/Endereco"
+import MyButton from "../../components/button/MyButton"
 import Telefones from "../../components/telefone/Telefone"
+
+//Constants
+import { TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE } from "../../constants/utils"
 
 // funcoes de apoio
 import * as pattern from "../../components/utils/functions/patternDocuments"
+
+const ButtonSearchDocument = (props) => {
+    return (
+        <MyButton
+            tooltip={TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE}
+            onClickButton={props.search}
+            label={props.label}
+            params={props.parameters}
+        />
+    )
+}
 
 const CreditoViewMix = (props) => {
     let data = props.data
@@ -115,7 +130,7 @@ const CreditoViewMix = (props) => {
                     />
                 : ""}
 
-                {data.cheques && data.cheques.cheque ?
+                {data.cheques && data.cheques.cheques ?
                     <CardWithTable title="CHEQUES"
                         mdLength={6}
                         elements={
@@ -135,7 +150,7 @@ const CreditoViewMix = (props) => {
                                 {id:"ultimoEm", name:"Data Último"}
                             ]
                         }
-                        rows={data.cheques.cheque}
+                        rows={data.cheques.cheques}
                     />
                 : ""}
 
@@ -208,7 +223,12 @@ const CreditoViewMix = (props) => {
                     <CardWithTable title="PARTICIPAÇÕES EM EMPRESAS"
                         fields={
                             [
-                                {id:"nome", name:"Nome"},
+                                {id:"nome", name:"Nome", functionToApply:(nome, indexRow) => {
+                                    return <ButtonSearchDocument
+                                        search={props.onClickDocument}
+                                        label={nome}
+                                        parameters={[data.quadroSocietario[indexRow].documento]} />}
+                                },
                                 {id:"participacao", name:"Participação"}
                             ]
                         }
@@ -228,7 +248,12 @@ const CreditoViewMix = (props) => {
                     <CardWithTable title="QUADRO SOCIETÁRIO"
                         fields={
                             [
-                                {id:"nome", name:"Nome"},
+                                {id:"nome", name:"Nome", functionToApply:(nome, indexRow) => {
+                                    return <ButtonSearchDocument
+                                        search={props.onClickDocument}
+                                        label={nome}
+                                        parameters={[data.quadroSocietario[indexRow].documento]} />}
+                                },
                                 {id:"participacao", name:"Participação"}
                             ]
                         }
@@ -260,7 +285,7 @@ const CreditoViewMix = (props) => {
                 : ""*/}
 
                 {data.quadroSocialCompleto ?
-                    <QuadroSocialCompleto quadroSocialCompleto={data.quadroSocialCompleto} />
+                    <QuadroSocialCompleto quadroSocialCompleto={data.quadroSocialCompleto} search={props.onClickDocument} />
                 : ""}
 
                 {data.spcs ?
@@ -351,6 +376,19 @@ const CreditoViewMix = (props) => {
                                 {id:"informacoesAdicionais", name:"Informações"}
                             ]
                         }
+                    />
+                : ""}
+
+                {data.cadastroCnpjCnaesSecundarias ?
+                    <CardWithTable title="CNAES SECUNDÁRIAS"
+                        fields={
+                            [
+                                {id:"cnae", name:"CNAE"},
+                                {id:"descricao", name:"Descrição"},
+                                {id:"grupo", name:"Grupo"}
+                            ]
+                        }
+                        rows={data.cadastroCnpjCnaesSecundarias}
                     />
                 : ""}
 

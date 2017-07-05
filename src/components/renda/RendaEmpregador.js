@@ -1,19 +1,19 @@
-import React,  { Component } from "react";
-import { Col } from "react-bootstrap";
-import Notification from "react-notification-system";
+import React,  { Component } from "react"
+import { Col } from "react-bootstrap"
+import Notification from "react-notification-system"
 
-import Panel from "../panel/Panel";
-import Table from "../table/Table";
-import Modal from "../Modal";
-import EnviarRenda from "../forms/EnviarRenda";
-import MyButton from "../button/MyButton";
-import CardToShowMoreInTable from "../table/CardToShowMoreInTable";
+import Panel from "../panel/Panel"
+import Table from "../table/Table"
+import Modal from "../Modal"
+import EnviarRenda from "../forms/EnviarRenda"
+import MyButton from "../button/MyButton"
+import CardToShowMoreInTable from "../table/CardToShowMoreInTable"
 
-import { formatDate, formatCurrency } from "../utils/functions/patternDocuments";
+import { formatDate, formatCurrency } from "../utils/functions/patternDocuments"
 
-import { NENHUM_REGISTRO, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, TOOLTIP_SEE_MORE_INFO_MESSAGE, TOOLTIP_SEE_LESS_INFO_MESSAGE } from "../../constants/utils";
+import { NENHUM_REGISTRO, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, TOOLTIP_SEE_MORE_INFO_MESSAGE, TOOLTIP_SEE_LESS_INFO_MESSAGE } from "../../constants/utils"
 
-const title = "RENDA EMPREGADOR";
+const title = "RENDA EMPREGADOR"
 
 export default class RendaEmpregador extends Component {
     constructor() {

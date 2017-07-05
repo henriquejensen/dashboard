@@ -66,8 +66,36 @@ export default class CreditoView extends Component {
                     <RegistroDebito registros={this.props.data.registrosDebitos} index={this.props.index} />
                 : ""}
 
+                {this.props.data.protestos ?
+                    <Protestos protestos={this.props.data.protestos} index={this.props.index}/>
+                : ""}
+
                 {this.props.data.protestosDetalhados ?
-                    <Protestos protestos={this.props.data.protestosDetalhados} index={this.props.index}/>
+                    <CardWithTable title="PROTESTOS DETALHADOS"
+                        fields={
+                            [
+                                {id:"nome", name:"Nome"},
+                                {id:"endereco", name:"Endereço"},
+                                {id:"telefone", name:"Telefone"},
+                                {id:"comarca", name:"Comarca"},
+                            ]
+                        }
+                        rows={this.props.data.protestosDetalhados}
+                    />
+                : ""}
+
+                {this.props.data.protestosPublicos ?
+                    <CardWithTable title="PROTESTOS PÚBLICOS"
+                        mdLength={2}
+                        elements={
+                            this.props.data.protestosPublicos.map((estado) => {
+                                return {
+                                    label: estado.estado,
+                                    value: estado.situacao === "true" ? <span className="destaque-ativado">SIM</span> : <span>NÃO</span>
+                                }
+                            })
+                        }
+                    />
                 : ""}
 
                 {this.props.data.ccf ?

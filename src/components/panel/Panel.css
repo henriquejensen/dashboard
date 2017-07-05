@@ -2,7 +2,16 @@
     border: none;
 }
 
+.panel-group .panel+.panel {
+    margin-top: 15px;
+}
+
 .my-panel-heading {
     position: relative;
-    background-color: #dcdcdc !important;
+    background-color: #D1C6DC !important;
+}
+
+.my-panel-heading-inner {
+    position: relative;
+    background-color: #dcdcdc  !important;
 }

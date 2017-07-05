@@ -66,7 +66,7 @@ class BaseCertaView extends Component {
                     <ProgressBar
                         now={ticket.porcentagem}
                         label={`${ticket.porcentagem}%`}
-                        bsStyle={ticket.porcentagem === 100 ? "success" : "warning"}
+                        bsStyle={ticket.porcentagem === 100 && ticket.statusTela === "Processado" ? "success" : ticket.porcentagem === 100 ? "danger" : "warning"}
                         style={{marginBottom:0}}
                     />
                     <div className="text-center">
@@ -85,7 +85,7 @@ class BaseCertaView extends Component {
                             Baixar entrada
                         </MenuItem>
 
-                        {ticket.porcentagem === 100 && ticket.status === 17 ?
+                        {ticket.porcentagem === 100 && ticket.statusTela === "Processado" ?
                             <MenuItem
                                 download
                                 onClick={() => this.downloadDocument("SAIDA")}
