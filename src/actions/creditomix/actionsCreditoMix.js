@@ -1,5 +1,5 @@
 import * as constants from "../../constants/constantsCreditoMix"
-import { api, apiContentType } from "../../api/Api";
+import { api } from "../../api/Api";
 
 export function changeTab(index) {
 	return {
@@ -45,64 +45,64 @@ export function searchCreditoMix(request, tipo) {
 }
 
 export function searchCreditoMixMaster({documento, isCpfOrCnpj, cep}) {
-	let data = {document: documento, cep}
+	let data = {documento, cep}
 	let url = isCpfOrCnpj === "CPF" ? constants.URL_CREDITOMIX_SEARCH_MASTER_PF : constants.URL_CREDITOMIX_SEARCH_MASTER_PJ
 
 	return (dispatch) => {
-		apiContentType(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
+		api(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
 	}
 }
 
 export function searchCreditoMixPremium({documento, isCpfOrCnpj, cep}) {
-	let data = {document: documento, cep}
+	let data = {documento, cep}
 	let url = isCpfOrCnpj === "CPF" ? constants.URL_CREDITOMIX_SEARCH_PREMIUM_PF : constants.URL_CREDITOMIX_SEARCH_PREMIUM_PJ
 
 	return (dispatch) => {
-		apiContentType(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
+		api(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
 	}
 }
 
 export function searchCreditoMixGold({documento, isCpfOrCnpj, cep}) {
-	let data = {document: documento, cep}
+	let data = {documento, cep}
 	let url = isCpfOrCnpj === "CPF" ? constants.URL_CREDITOMIX_SEARCH_GOLD_PF : constants.URL_CREDITOMIX_SEARCH_GOLD_PJ
 
 	return (dispatch) => {
-		apiContentType(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
+		api(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
 	}
 }
 
 export function searchCreditoMixMax({documento, isCpfOrCnpj, cep}) {
-	let data = {document: documento, cep}
+	let data = {documento, cep}
 	let url = isCpfOrCnpj === "CPF" ? constants.URL_CREDITOMIX_SEARCH_MAX_PF : constants.URL_CREDITOMIX_SEARCH_MAX_PJ
 
 	return (dispatch) => {
-		apiContentType(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
+		api(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
 	}
 }
 
 export function searchCreditoMixCompleta({documento, isCpfOrCnpj}) {
-	let data = {document: documento}
+	let data = {documento}
 	let url = isCpfOrCnpj === "CPF" ? constants.URL_CREDITOMIX_SEARCH_COMPLETA_PF : constants.URL_CREDITOMIX_SEARCH_COMPLETA_PJ
 
 	return (dispatch) => {
-		apiContentType(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
+		api(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
 	}
 }
 
 export function searchCreditoMixIntermediariaPlus({documento, isCpfOrCnpj}) {
-	let data = {document: documento}
+	let data = {documento}
 	let url = isCpfOrCnpj === "CPF" ? constants.URL_CREDITOMIX_SEARCH_INTERMEDIARIAPLUS_PF : constants.URL_CREDITOMIX_SEARCH_INTERMEDIARIAPLUS_PJ
 
 	return (dispatch) => {
-		apiContentType(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
+		api(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
 	}
 }
 
 export function searchCreditoMixIntermediaria({documento, isCpfOrCnpj}) {
-	let data = {document: documento}
+	let data = {documento}
 	let url = isCpfOrCnpj === "CPF" ? constants.URL_CREDITOMIX_SEARCH_INTERMEDIARIA_PF : constants.URL_CREDITOMIX_SEARCH_INTERMEDIARIA_PJ
 
 	return (dispatch) => {
-		apiContentType(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
+		api(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
 	}
 }

@@ -87,7 +87,7 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case ERR_CONNECTION_REFUSED:
+        case ERR_CONNECTION_REFUSED: {
             return {
                 status: ERR_CONNECTION_REFUSED,
                 message: ERROR_503,
@@ -96,26 +96,29 @@ export default function(state=getInitialState, action) {
                 tabActive: state.tabActive,
                 lastQueries: state.lastQueries,
                 type: state.type
-            }    
+            }
+        }
 
         case GET_VEICULOS: {
-            let tipo = action.payload.parameters.tipoInput;
-            let tab = tipo + ":" + action.payload.parameters.input;
-            let responseServer = action.payload.response;
+            let tipo = action.payload.parameters.tipoInput
+            let tab = tipo + ":" + action.payload.parameters.input
+            let responseServer = action.payload.response
             //Procura no array de pesquisados se ja existe
-            let pos = searchLabel(state.response, tab);
-            //let newState = state.response.concat();
-            let newStateResponse = state.response.concat();
+            let pos = searchLabel(state.response, tab)
+            //let newState = state.response.concat()
+            let newStateResponse = state.response.concat()
 
-            response.data = responseServer;
-            response.label = tab;
-            response.tipo = tipo;
-            response.icon = ICON_VEICULOS;
-            response.produto = COMPANY_PRODUCT_VEICULOS;
+            responseServer.cabecalho.flagsSelecionadas = action.payload.parameters.flagsSelected
+
+            response.data = responseServer
+            response.label = tab
+            response.tipo = tipo
+            response.icon = ICON_VEICULOS
+            response.produto = COMPANY_PRODUCT_VEICULOS
 
             if(pos !== -1) {
-                //newState[pos] = response;
-                newStateResponse[pos] = response;
+                //newState[pos] = response
+                newStateResponse[pos] = response
             }
 
             return {
@@ -166,8 +169,7 @@ export default function(state=getInitialState, action) {
         }
 
         case SEE_VEICULOS_MODEL: {
-            let tipo = action.payload.params.tipo;
-            let tab = tipo + ":" + action.payload.params.input;
+            let tipo = action.payload.params.tipo
 
             response.data = veiculos;
             response.label = tab;

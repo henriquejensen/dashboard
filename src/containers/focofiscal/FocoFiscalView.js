@@ -92,6 +92,23 @@ const FocoFiscalView = (props) => {
                 />
             : ""}
 
+            {data.simplesNacional ?
+                <CardWithTable title="SIMPLES NACIONAL"
+                    mdLength={6}
+                    elements={
+                        [
+                            {label: "Situação no Simples Nacional", value:data.simplesNacional.optanteSimples.situacao ? data.simplesNacional.optanteSimples.situacao : undefined},
+                            {label: "Situação no SIMEI", value:data.simplesNacional.optanteSimei.situacao ? data.simplesNacional.optanteSimei.situacao : undefined},
+                            {label: "Simples Nacional em Períodos Anteriores", value:data.simplesNacional.optanteSimples.periodoAnterior ? data.simplesNacional.optanteSimples.periodoAnterior : undefined},
+                            {label: "SIMEI em Períodos Anteriores", value:data.simplesNacional.optanteSimei.periodosAnteriores ? data.simplesNacional.optanteSimei.periodosAnteriores : undefined},
+                            {label: "Agendamentos no Simples Nacional", value:data.simplesNacional.optanteSimples.agendamento ? data.simplesNacional.optanteSimples.agendamento : undefined},
+                            {label: "Eventos Futuros no Simples Nacional:", value:data.simplesNacional.optanteSimples.eventosFuturos ? data.simplesNacional.optanteSimples.eventosFuturos : undefined},
+                            {label: "Eventos Futuros no SIMEI", value:data.simplesNacional.optanteSimei.eventosFuturos ? data.simplesNacional.optanteSimei.eventosFuturos : undefined}
+                        ]
+                    }
+                />
+            : ""}
+
             {data.socios ?
                 <CardWithTable title="SÓCIOS"
                     fields={

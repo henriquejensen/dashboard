@@ -4,7 +4,14 @@ import { bindActionCreators } from 'redux';
 import { Alert, Button, Col, Form, DropdownButton, MenuItem, ProgressBar } from "react-bootstrap";
 
 //Actions
-import { closeMessageErrorBaseCerta, filterBaseCerta, getDocumentoSaidaBaseCerta, getDocumentoEntradaBaseCerta, getTicketsBaseCerta } from "../../actions/actionsBaseCerta";
+import {
+  closeMessageErrorBaseCerta,
+  filterBaseCerta,
+  getDocumentoSaidaBaseCerta,
+  getDocumentoEntradaBaseCerta,
+  getTicketsBaseCerta,
+  loadingBaseCerta
+} from "../../actions/actionsBaseCerta";
 
 //Components
 import Panel from "../../components/panel/Panel"
@@ -14,11 +21,12 @@ import PanelGroup from "../../components/panel/PanelGroup"
 import BaseCertaView from "./BaseCertaView"
 import NovoEnriquecimento from "./NovoEnriquecimento"
 import MyButton from "../../components/button/MyButton"
-import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms";
+import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
+import { LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 //Constants
-import { NENHUM_REGISTRO, ADVANCED_SEARCH } from "../../constants/utils";
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_BASECERTA, LOGO_BASECERTA } from "../../constants/constantsCompany";
+import { NENHUM_REGISTRO, ADVANCED_SEARCH } from "../../constants/utils"
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_BASECERTA, LOGO_BASECERTA } from "../../constants/constantsCompany"
 
 class BaseCerta extends Component {
   constructor(props) {
@@ -32,7 +40,8 @@ class BaseCerta extends Component {
 
   componentWillMount() {
     let ticket = location.search.split("=")[1]
-    this.props.getTicketsBaseCerta(ticket);
+    this.props.loadingBaseCerta()
+    this.props.getTicketsBaseCerta(ticket)
   }
 
   componentDidMount() {
@@ -58,6 +67,7 @@ class BaseCerta extends Component {
 
     let inputFilter = { ticket, layout, clienteLogin, nomeArquivo, usuario, limitar }
 
+    this.props.loadingBaseCerta()
     this.props.filterBaseCerta(inputFilter)
   }
 
@@ -154,6 +164,7 @@ class BaseCerta extends Component {
   }
 
   render() {
+    let loading = this.props.loading
     return (
     <div>
 
@@ -172,16 +183,23 @@ class BaseCerta extends Component {
 
       {this.renderForm()}
 
+      {loading ? <LoadingScreen /> : ""}
+
       <div style={{marginBottom:15}} />
 
       <PanelGroup>
-        {this.props.tickets.map(ticket => 
-          <BaseCertaView
-            ticket={ticket}
-            key={ticket.id}
-            getDocumentoSaidaBaseCerta={this.props.getDocumentoSaidaBaseCerta}
-            getDocumentoEntradaBaseCerta={this.props.getDocumentoEntradaBaseCerta}
-          />)
+        {this.props.tickets.length > 0 ?
+          this.props.tickets.map(ticket => 
+            <BaseCertaView
+              ticket={ticket}
+              key={ticket.id}
+              getDocumentoSaidaBaseCerta={this.props.getDocumentoSaidaBaseCerta}
+              getDocumentoEntradaBaseCerta={this.props.getDocumentoEntradaBaseCerta}
+            />)
+          :
+          <Panel>
+            <Col md={12} className="text-center">{NENHUM_REGISTRO}</Col>
+          </Panel>
         }
       </PanelGroup>
       
@@ -204,7 +222,8 @@ function mapStateToProps(state) {
   return {
     tickets: state.basecerta.tickets,
     message: state.basecerta.message,
-    status: state.basecerta.status
+    status: state.basecerta.status,
+    loading: state.basecerta.loading
   }
 }
 
@@ -214,9 +233,9 @@ function mapDispatchToProps(dispatch) {
       filterBaseCerta,
       getDocumentoSaidaBaseCerta,
       getDocumentoEntradaBaseCerta,
-      getTicketsBaseCerta
+      getTicketsBaseCerta,
+      loadingBaseCerta
   }, dispatch)
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(BaseCerta);

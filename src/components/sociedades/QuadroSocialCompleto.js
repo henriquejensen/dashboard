@@ -28,7 +28,7 @@ class QuadroSocialCompleto extends Component {
         let isCpfOrCnpj = "CNPJ"
         let handleShowMoreInfo = this.handleShowMoreInfo
         let fields = [
-                {id:"cpf", name:"Documento"},
+                {id:"documento", name:"Documento"},
                 {id:"nome", name:"Nome"},
                 {id:"dataEntrada", name:"Data Entrada"},
                 {id:"percentual", name:"Porcentagem"},
@@ -49,14 +49,14 @@ class QuadroSocialCompleto extends Component {
                             <tbody key={index}>
                                 <tr>
                                     <td>
-                                        {pessoa.cpf}
+                                        {pessoa.documento}
                                     </td>
                                     <td>
                                         <MyButton
                                             tooltip={TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE}
                                             onClickButton={this.props.search}
                                             label={pessoa.nome}
-                                            params={[pessoa.cpf]}
+                                            params={[pessoa.documento]}
                                         />                                        
                                     </td>
                                     <td>

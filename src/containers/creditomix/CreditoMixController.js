@@ -91,34 +91,40 @@ class CreditoMix extends Component {
 
 		if(showCheckboxes) {
 			return (
-				<span>
-					{this.state.showMessageErrorWhenNotSelectedAnyCheckBox ?
-						<Col md={12}>
-							<Alert bsStyle="danger" className="text-center" onDismiss={() => this.setState({
-								showMessageErrorWhenNotSelectedAnyCheckBox:false
-							})}>
-								Selecione ao menos uma opção no checkbox
-							</Alert>
-						</Col>
-					: ""}
+                <span>
+                    <span>
+                        {this.state.showMessageErrorWhenNotSelectedAnyCheckBox ?
+                            <Col md={12}>
+                                <Alert bsStyle="danger" className="text-center" onDismiss={() => this.setState({
+                                    showMessageErrorWhenNotSelectedAnyCheckBox:false
+                                })}>
+                                    Selecione ao menos uma opção abaixo
+                                </Alert>
+                            </Col>
+                        : ""}
 
-                    {type ?
-                        options[type].map((opt, index) => {
-                            let step = index * 5
-                            /**Percorre o array de options e gera 5 elementos por coluna */
-                            if(step < options[type].length )
-                                return (
-                                    <Col md={4} key={index}>
-                                        <MyCheckboxGroup
-                                            options={options[type].slice(step,step+5)}
-                                            onChange={this.onChangeCheckBox}
-                                        />
-                                    </Col>
-                                )
-                        })
-                    : ""}
+                        {type ?
+                            options[type].map((opt, index) => {
+                                let step = index * 5
+                                /**Percorre o array de options e gera 5 elementos por coluna */
+                                if(step < options[type].length )
+                                    return (
+                                        <Col md={4} key={index}>
+                                            <MyCheckboxGroup
+                                                options={options[type].slice(step,step+5)}
+                                                onChange={this.onChangeCheckBox}
+                                            />
+                                        </Col>
+                                    )
+                            })
+                        : ""}
 
-				</span>
+                        <Col md={12}  className="text-center">
+                            <a href="#" onClick={() => this.setState({showCheckboxes: false})}>Esconder filtros da busca</a>
+                        </Col>
+
+                    </span>
+                </span>
 			)
 		} else {
 			return (

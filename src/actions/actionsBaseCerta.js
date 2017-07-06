@@ -66,6 +66,12 @@ export function getTicketsBaseCerta(ticket) {
     }
 }
 
+export function loadingBaseCerta() {
+    return {
+        type: basecerta.LOADING_BASECERTA
+    }
+}
+
 export function postNovoEnriquecimento({layout, description, file, mailDNS}) {
     let url = basecerta.URL_UPLOAD_NOVO_ENRIQUECIMENTO
     let data = {layout, description, mailDNS}

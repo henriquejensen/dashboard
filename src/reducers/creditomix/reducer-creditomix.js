@@ -10,7 +10,7 @@ import {
 		NENHUM_REGISTRO,
 		REQUEST_ERROR,
 		SUCCESS
-} from "../../constants/utils";
+} from "../../constants/utils"
 import { ICON_CREDITOMIX, COMPANY_PRODUCT_CREDITOMIX_LABEL } from "../../constants/constantsCompany"
 import model from "../data/creditomix/consultaCreditoMix.json"
 
@@ -77,22 +77,23 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case constants.FETCH_CREDITOMIX: {            
-            let documento = action.payload.response.cadastro.cpf ? action.payload.response.cadastro.cpf : action.payload.response.cadastro.cnpj
+        case constants.FETCH_CREDITOMIX: {          
+            let documento = action.payload.response.cadastro.documento
             documento = documento.toString()
             let newResponse = action.payload.response
+            let label = action.payload.parameters.tipo + ":" + documento
 
-            newResponse['label'] = documento;
-            newResponse['tipo'] = action.payload.parameters.tipo;
-            newResponse['icon'] = ICON_CREDITOMIX;
-            newResponse['produto'] = COMPANY_PRODUCT_CREDITOMIX_LABEL;
+            newResponse['label'] = label
+            newResponse['tipo'] = action.payload.parameters.tipo
+            newResponse['icon'] = ICON_CREDITOMIX
+            newResponse['produto'] = COMPANY_PRODUCT_CREDITOMIX_LABEL
 
             return {
                 loading: false,
                 status: state.status,
                 message: state.message,
                 response: {...state.response, [documento]:newResponse },
-                tabActive: documento,
+                tabActive: label,
                 lastQueries: state.lastQueries,
                 type: state.type,
              }

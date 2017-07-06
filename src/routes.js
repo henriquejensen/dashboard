@@ -58,7 +58,6 @@ export default (
 
       <Route name="Veiculos" path="veiculos" component={Veiculos} />
 
-      <Route name="Cadastro" path="cadastro" component={Cadastro} />
 
       <Route name="Relatórios" path="relatorios" component={Relatorios} />
       <Route name="Consumo" path="consumo" component={Consumo} />

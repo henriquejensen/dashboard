@@ -141,10 +141,6 @@
             ],
             "user": [
                 {
-                    "label": "Cadastro Usuários",
-                    "link": "/cadastro"
-                },
-                {
                     "label": "Editar perfil",
                     "link": "/editar"
                 },

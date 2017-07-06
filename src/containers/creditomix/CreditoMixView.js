@@ -33,10 +33,10 @@ const CreditoViewMix = (props) => {
                     <CardWithTable title="DADOS CADASTRAIS"
                         mdLength={6}
                         elements={
-                            data.cadastro.cpf ?
                             [
-                                {label: "Documento", value:data.cadastro.cpf ? pattern.patternCPF(data.cadastro.cpf) : undefined},
-                                {label: "Status CPF", value:data.cadastro.receitaStatus ? data.cadastro.receitaStatus : undefined},
+                                {label: "Documento", value:data.cadastro.documento ? data.cadastro.documento.length === 11 ? pattern.patternCPF(data.cadastro.documento) : pattern.patternCNPJ(data.cadastro.documento) : undefined},
+                                {label: "Status Documento", value:data.cadastro.receitaStatus ? 
+                                    <span className={data.cadastro.receitaStatus == "ATIVA" || data.cadastro.receitaStatus == "REGULAR" ? "destaque-ativado" : "destaque-desativado"}>{data.cadastro.receitaStatus}</span> : undefined},
                                 {label: "Nome", value:data.cadastro.nome ? data.cadastro.nome : undefined},
                                 {label: "Nascimento", value:data.cadastro.dataNascimento ? `${data.cadastro.dataNascimento} - ${data.cadastro.idade} anos` : undefined},
                                 {label: "Sexo", value:data.cadastro.sexo ? data.cadastro.sexo : undefined},
@@ -54,10 +54,8 @@ const CreditoViewMix = (props) => {
                                 {label: "Índice Relacionamento Mercado", value:data.cadastro.indiceRelacionamentoMercado ? data.cadastro.indiceRelacionamentoMercado : undefined},
                                 {label: "Email", value:data.cadastro.email ? data.cadastro.email : undefined},
                                 {label: "Nome Mãe", value:data.cadastro.nomeMae ? data.cadastro.nomeMae : undefined},
-                            ] :
-                            [
-                                {label: "Documento", value:data.cadastro.cnpj ? pattern.patternCNPJ(data.cadastro.cnpj) : undefined},
-                                {label: "Status CNPJ", value:data.cadastro.receitaStatus ? data.cadastro.receitaStatus : undefined},
+
+                                //CNPJ
                                 {label: "Razão social", value:data.cadastro.razaoSocial ? data.cadastro.razaoSocial : undefined},
                                 {label: "Quantidade de funcionários", value:data.cadastro.quantidadeFuncionarios ? data.cadastro.quantidadeFuncionarios : undefined},
                                 {label: "Nome Fantasia", value:data.cadastro.nomeFantasia ? data.cadastro.nomeFantasia : undefined},
@@ -68,10 +66,6 @@ const CreditoViewMix = (props) => {
                                 {label: "Abertura", value:data.cadastro.dataAbertura ? data.cadastro.dataAbertura : undefined},
                                 {label: "Idade", value:data.cadastro.idadeEmpresa ? data.cadastro.idadeEmpresa : undefined},
                                 {label: "Tipo Empresa", value:data.cadastro.tipoEmpresa ? data.cadastro.tipoEmpresa : undefined},
-                                {label: "CNAE", value:data.cadastro.cnae ? data.cadastro.cnae : undefined},
-                                {label: "Descrição CNAE", value:data.cadastro.cnaeDescricao ? data.cadastro.cnaeDescricao : undefined},
-                                {label: "Grupo CNAE", value:data.cadastro.cnaeGrupo ? data.cadastro.cnaeGrupo : undefined},
-                                {label: "Subgrupo CNAE", value:data.cadastro.cnaeSubgrupo ? data.cadastro.cnaeSubgrupo : undefined},
                                 {label: "Nire", value:data.cadastro.nire ? data.cadastro.nire : undefined},
                                 {label: "Regime Tributário", value:data.cadastro.regimeTributario ? data.cadastro.regimeTributario : undefined},
                                 {label: "Natureza Jurídica", value:data.cadastro.naturezaJuridica ? data.cadastro.naturezaJuridica : undefined},
@@ -81,6 +75,10 @@ const CreditoViewMix = (props) => {
                                 {label: "Faixa de idade", value:data.cadastro.faixaIdade ? data.cadastro.faixaIdade : undefined},
                                 {label: "Site", value:data.cadastro.site ? data.cadastro.site : undefined},
                                 {label: "Capital Social", value:data.capitalSocial ? data.capitalSocial : undefined},
+                                {label: "CNAE", value:data.cadastro.cnae ? data.cadastro.cnae : undefined},
+                                {label: "Grupo CNAE", value:data.cadastro.cnaeGrupo ? data.cadastro.cnaeGrupo : undefined},
+                                {label: "Subgrupo CNAE", value:data.cadastro.cnaeSubgrupo ? data.cadastro.cnaeSubgrupo : undefined},
+                                {label: "Descrição CNAE", value:data.cadastro.cnaeDescricao ? data.cadastro.cnaeDescricao : undefined},
                             ]
                         }
                     />
@@ -288,12 +286,12 @@ const CreditoViewMix = (props) => {
                     <QuadroSocialCompleto quadroSocialCompleto={data.quadroSocialCompleto} search={props.onClickDocument} />
                 : ""}
 
-                {data.spcs ?
+                {data.spc ?
                     <CardWithTable title="SPC"
                         mdLength={12}
                         elements={
                             [
-                               {label: "Total", value:data.spcs.valorTotal ? pattern.formatCurrency(data.spcs.valorTotal) : undefined},
+                               {label: "Total", value:data.spc.valorTotal ? pattern.formatCurrency(data.spc.valorTotal) : undefined},
                             ]
                         }
                         fields={
@@ -310,7 +308,7 @@ const CreditoViewMix = (props) => {
                                 {id:"valor", name:"Valor", functionToApply:(val) => {return <span>{pattern.formatCurrency(val)}</span>}},
                             ]
                         }
-                        rows={data.spcs.spc}
+                        rows={data.spc.listaSpc}
                     />
                 : ""}
 

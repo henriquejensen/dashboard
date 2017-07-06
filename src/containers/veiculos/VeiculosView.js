@@ -132,7 +132,7 @@ class VeiculosView extends Component {
         ]
     }
 
-    renderFlagsProtocol = (flagsExecuted, flags) => {
+    /*renderFlagsProtocol = (flagsExecuted, flags) => {
         let countFlagsExecuted = 0;
         const showFlagsThatDidntExecuted = flags.map((flag) => {
             //se a flag nao for encontrada no array de executadas
@@ -148,13 +148,25 @@ class VeiculosView extends Component {
             </Alert>
             
             : "";
-    }
+    }*/
 
     render() {
         let data = this.props.data;
-        let flags = this.props.flags;
         return (
             <PanelGroup>
+                {data.cabecalho && data.cabecalho.flagsExecutadas ?
+                    <CardWithTable title="RESUMO DA CONSULTA"
+                        mdLength={12}
+                        elements={
+                            [
+                                {label: "Opções selecionadas", value: data.cabecalho.flagsSelecionadas.sort((flagAnt, flagPost) => flagAnt>flagPost).toString()},
+                                {label: "Opções executadas", value: data.cabecalho.flagsExecutadas.toString()},
+
+                            ]
+                        }
+                    />
+                : ""}
+
                 {data.cadastro && data.cadastro.descricao ?
                     <CardWithTable title="DESCRIÇÃO DO VEÍCULO"
                         mdLength={3}
@@ -211,7 +223,8 @@ class VeiculosView extends Component {
                         }
                     />
                 : ""}
-                {data.cadastro && data.cadastro.movimentacao ?
+
+                {/*data.cadastro && data.cadastro.movimentacao ?
                     <CardWithTable title="MOVIMENTAÇÃO"
                         mdLength={3}
                         elements={
@@ -237,13 +250,15 @@ class VeiculosView extends Component {
                             ]
                         }
                     />
-                : ""}
+                : ""*/}
+
                 {data.comunicacaoVenda ?
                     <CardWithTable title="COMUNICAÇÃO DE VENDA"
                         elements={this.mountComunicacaoVenda(data.comunicacaoVenda)}
                         mdLength={4}
                     />
                 : ""}
+
                 {data.crlv ?
                     <CardWithTable title="DOCUMENTO CRLV"
                         elements={this.mountCrlv(data.crlv)}
@@ -376,11 +391,11 @@ class VeiculosView extends Component {
                                 {id:"numeroDut", name:"Número Dut"},
                                 {id:"placa", name:"Placa"},
                                 {id:"renavam", name:"Renavam"},
-                                {id:"saldo", name:"Saldo"},
+                                {id:"saldo", name:"Saldo", functionToApply:(val) => {return <span>{pattern.formatCurrency(val)}</span>}},
                                 {id:"uf", name:"UF"},
                             ]
                         }
-                        rows={data.historicoVeiculos.veiculo ? data.historicoVeiculos.veiculo : []}
+                        rows={data.historicoVeiculos.veiculos}
                     />
                 : ""}
                 {data.indiciosSinistros ?
@@ -454,7 +469,6 @@ class VeiculosView extends Component {
 
                 <Protocolo info={data.cabecalho}/>
 
-                {this.renderFlagsProtocol(data.cabecalho.flagsExecutadas, flags)}
             </PanelGroup>
         )
     }

@@ -8,7 +8,8 @@ const getInitialState = {
     status:"",
     message:"",
     tickets: [],
-    layouts: []
+    layouts: [],
+    loading: false
 }
 
 export default function(state=getInitialState, action) {
@@ -18,7 +19,8 @@ export default function(state=getInitialState, action) {
                 status:"",
                 message:"",
                 tickets: state.tickets,
-                layouts: state.layouts
+                layouts: state.layouts,
+                loading: false
             }
         }
 
@@ -28,7 +30,8 @@ export default function(state=getInitialState, action) {
                 status: "",
                 message: "",
                 tickets: state.tickets,
-                layouts: state.layouts
+                layouts: state.layouts,
+                loading: false
             }
         }
 
@@ -40,7 +43,8 @@ export default function(state=getInitialState, action) {
                 status:"",
                 message:"",
                 tickets: state.tickets,
-                layouts: layouts.map((layout) => {return { label: layout.descricaoLayout, value: layout.idLayout }})
+                layouts: layouts.map((layout) => {return { label: layout.descricaoLayout, value: layout.idLayout }}),
+                loading: false
             }
         }
 
@@ -49,7 +53,18 @@ export default function(state=getInitialState, action) {
                 status:"",
                 message:"",
                 tickets: action.payload.response.response,
-                layouts: state.layouts
+                layouts: state.layouts,
+                loading: false
+            }
+        }
+
+        case basecerta.LOADING_BASECERTA: {
+            return {
+                status:"",
+                message:"",
+                tickets: state.response,
+                layouts: state.layouts,
+                loading: true
             }
         }
 
@@ -58,7 +73,8 @@ export default function(state=getInitialState, action) {
                 status: SUCCESS,
                 message: MESSAGE_SUCCES_FILE_UPLOAD,
                 tickets: action.payload.response.response,
-                layouts: state.layouts
+                layouts: state.layouts,
+                loading: false
             }
         }
 
@@ -67,7 +83,8 @@ export default function(state=getInitialState, action) {
                 status: REQUEST_ERROR,
                 message: action.payload.mensagem,
                 tickets: state.tickets,
-                layouts: state.layouts
+                layouts: state.layouts,
+                loading: false
             }
         }
 
@@ -76,7 +93,8 @@ export default function(state=getInitialState, action) {
                 status: ERR_CONNECTION_REFUSED,
                 message: ERROR_503,
                 tickets: state.tickets,
-                layouts: state.layouts
+                layouts: state.layouts,
+                loading: false
             }
         }
     }

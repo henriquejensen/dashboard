@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { Alert, Col, Form, FormGroup, Tabs, Tab, } from "react-bootstrap";
+import React, { Component } from "react"
+import { bindActionCreators } from "redux"
+import { connect } from "react-redux"
+import { Alert, Col, Form, FormGroup, Tabs, Tab, } from "react-bootstrap"
 
 //Components
-import VeiculosView from "./VeiculosView";
-import MyForm from "../../components/forms/Form";
-import UltimasConsultas from "../../components/UltimasConsultas";
-import Titletab from "../../components/utils/Titletab";
-import Panel from "../../components/panel/Panel";
-import { VeiculoslDescription } from "../../components/ProductDescription";
-import { MyFieldGroup, MyCheckboxGroup } from "../../components/forms/CommonForms";
-import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
+import VeiculosView from "./VeiculosView"
+import MyForm from "../../components/forms/Form"
+import UltimasConsultas from "../../components/UltimasConsultas"
+import Titletab from "../../components/utils/Titletab"
+import Panel from "../../components/panel/Panel"
+import { VeiculoslDescription } from "../../components/ProductDescription"
+import { MyFieldGroup, MyCheckboxGroup } from "../../components/forms/CommonForms"
+import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 //Actions
 import {
@@ -22,24 +22,24 @@ import {
 		loadingVeiculos,
 		searchByVeiculos,
 		seeModel
-} from "../../actions/actionsVeiculos";
-import { changeProductType } from "../../actions/actionsCommon";
+} from "../../actions/actionsVeiculos"
+import { changeProductType } from "../../actions/actionsCommon"
 
 //Constants
-import { LOADING_GIF, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE, TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE } from "../../constants/utils";
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_VEICULOS, COMPANY_PRODUCT_VEICULOS_LABEL, LOGO_VEICULOS } from "../../constants/constantsCompany";
-import { AGREGADOS_CODE, BDV_CODE, DECODIFICADOR_CODE, LOCALIZACAO_CODE, PROPRIETARIOS_CODE, LEILAO_CODE, SINISTRO_CODE } from "../../constants/constantsVeiculos";
+import { LOADING_GIF, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE, TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE } from "../../constants/utils"
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_VEICULOS, COMPANY_PRODUCT_VEICULOS_LABEL, LOGO_VEICULOS } from "../../constants/constantsCompany"
+import { AGREGADOS_CODE, BDV_CODE, DECODIFICADOR_CODE, LOCALIZACAO_CODE, PROPRIETARIOS_CODE, LEILAO_CODE, SINISTRO_CODE } from "../../constants/constantsVeiculos"
 
 
-import estados from "../../components/utils/common/estados.json";
-import { todosProdutos } from "../../components/utils/common/produtos.js";
+import estados from "../../components/utils/common/estados.json"
+import { todosProdutos } from "../../components/utils/common/produtos.js"
 
 class VeiculosController extends Component {
 	constructor(props) {
 		super(props)
 
 		this.produtoInformacoes = todosProdutos[COMPANY_PRODUCT_VEICULOS_LABEL]
-		this.quantidadeCheckboxPorCol = 5; //Quantidade de checkbox que terao em cada col do bootstrap
+		this.quantidadeCheckboxPorCol = 5 //Quantidade de checkbox que terao em cada col do bootstrap
 
 		this.state = {
 			input: {
@@ -50,7 +50,7 @@ class VeiculosController extends Component {
 				uf: undefined,
 				placa: undefined,
 				chassi: undefined,
-				motor: false,
+				//motor: false,
 				localizaVeiculo: false,
 				crlv: false,
 				binFederal: false,
@@ -62,7 +62,7 @@ class VeiculosController extends Component {
 				binRenajud: false,
 				proprietariosAnteriores: false,
 				agregados: false,
-				localizaPlaca: false,
+				//localizaPlaca: false,
 				leilao: false,
 				indicioSinistro: false,
 				leilao2: false,
@@ -99,12 +99,12 @@ class VeiculosController extends Component {
 					name: "binRenajud",
 					text: "BIN JUDICIAL RENAJUD"
 				},
-				{
+				/*{
 					inline: false,
 					checked: false,
 					name: "decodificadorUnion",
 					text: "DECODIFICADOR UNION"
-				},
+				},*/
 				{
 					inline: false,
 					checked: false,
@@ -159,12 +159,12 @@ class VeiculosController extends Component {
 					name: "crlv",
 					text: "CONSULTA CRLV - DOCUMENTO"
 				},
-				{
+				/*{
 					inline: false,
 					checked: false,
 					name: "localizaPlaca",
 					text: "LOCALIZADOR DE PLACA"
-				},
+				},*/
 				{
 					inline: false,
 					checked: false,
@@ -177,30 +177,30 @@ class VeiculosController extends Component {
 					name: "indicioSinistro",
 					text: "INDICIO DE SINISTRO"
 				},
-				{
+				/*{
 					inline: false,
 					checked: false,
 					name: "motor",
 					text: "LOCALIZADOR DE MOTOR"
-				},
-				{
+				},*/
+				/*{
 					inline: false,
 					checked: false,
 					name: "decodificador2",
 					text: "DECODIFICADOR DE CHASSI - FIPE E MOLICAR"
-				}
+				}*/
 			]
 		}
 	}
 
 	componentDidMount() {
-		document.title = COMPANY_PRODUCT_VEICULOS + " > " + COMPANY_NAME_SHORT;
+		document.title = COMPANY_PRODUCT_VEICULOS + " > " + COMPANY_NAME_SHORT
 	}
 
 	onChangeCheckBox = (name,index) => {
-		let options = this.state.options.concat();
-		let optionsSelected = this.state.optionsSelected.concat();
-		let input = Object.assign({}, this.state.input);
+		let options = this.state.options.concat()
+		let optionsSelected = this.state.optionsSelected.concat()
+		let input = Object.assign({}, this.state.input)
 		let pos = 0;
 
 		for(let i=index; i<options.length; i+=this.quantidadeCheckboxPorCol) {
@@ -256,10 +256,6 @@ class VeiculosController extends Component {
 				showCheckboxes: true
 			})
 		} else {
-			this.setState({
-				showCheckboxes: false
-			})
-
 			/**type === tipo da consulta, ex: PLACA, CNPJ
 			 * input === entrada do dado
 			 * dataToSend === objeto com as flags e o input de entrada para ser enviado
@@ -267,14 +263,19 @@ class VeiculosController extends Component {
 			 */
 
 			//se o usuario quiser enviar somente o CRLV, verifica se o input esta vazio e seta o type para CRLV
-			let input = this.state.input[this.props.type.toLowerCase()] ? this.state.input[this.props.type.toLowerCase()] : this.state.input.numeroCrlv;
+			let input = this.state.input[this.props.type.toLowerCase()]
+			input = input || this.state.input.numeroCrlv
 			let tipoInput = this.state.input.numeroCrlv ? "CRLV" : this.props.type;
 
 			let dataToSend = this.state.input;
 			let flagsSelected = this.state.optionsSelected
 
-			this.props.loadingVeiculos();
-			this.props.searchByVeiculos(tipoInput, input, dataToSend, flagsSelected);
+			this.props.loadingVeiculos()
+			this.props.searchByVeiculos(tipoInput, input, dataToSend, flagsSelected)
+
+			this.setState({
+				showCheckboxes: false
+			})
 		}
 	}
 
@@ -284,41 +285,41 @@ class VeiculosController extends Component {
 		
 		if(showCheckboxes) {
 			return (
-				<span style={{float:"left"}}>
-					{this.state.showMessageErrorWhenNotSelectedAnyCheckBox ?
-						<Col md={12}>
-							<Alert bsStyle="danger" className="text-center" onDismiss={() => this.setState({
-								showMessageErrorWhenNotSelectedAnyCheckBox:false
-							})}>
-								Selecione ao menos uma opção no checkbox
-							</Alert>
-						</Col>
-					: ""}
+				<span>
+					<span> {/*Span gambiarra de layout*/}
+						{this.state.showMessageErrorWhenNotSelectedAnyCheckBox ?
+							<Col md={12}>
+								<Alert bsStyle="danger" className="text-center" onDismiss={() => this.setState({
+									showMessageErrorWhenNotSelectedAnyCheckBox:false
+								})}>
+									Selecione ao menos uma opção abaixo
+								</Alert>
+							</Col>
+						: ""}
 
-					<Col md={3} sm={6}>
-						<MyCheckboxGroup
-							options={options.slice(0,5)}
-							onChange={this.onChangeCheckBox}
-						/>
-					</Col>
-					<Col md={3} sm={6}>
-						<MyCheckboxGroup
-							options={options.slice(5,10)}
-							onChange={this.onChangeCheckBox}
-						/>
-					</Col>
-					<Col md={3} sm={6}>
-						<MyCheckboxGroup
-							options={options.slice(10,15)}
-							onChange={this.onChangeCheckBox}
-						/>
-					</Col>
-					<Col md={3} sm={6}>
-						<MyCheckboxGroup
-							options={options.slice(15,20)}
-							onChange={this.onChangeCheckBox}
-						/>
-					</Col>
+						<Col md={4} sm={6}>
+							<MyCheckboxGroup
+								options={options.slice(0,5)}
+								onChange={this.onChangeCheckBox}
+							/>
+						</Col>
+						<Col md={4} sm={6}>
+							<MyCheckboxGroup
+								options={options.slice(5,10)}
+								onChange={this.onChangeCheckBox}
+							/>
+						</Col>
+						<Col md={4} sm={6}>
+							<MyCheckboxGroup
+								options={options.slice(10,15)}
+								onChange={this.onChangeCheckBox}
+							/>
+						</Col>
+					
+						<Col md={12}  className="text-center">
+							<a href="#" onClick={() => this.setState({showCheckboxes: false})}>Esconder filtros da busca</a>
+						</Col>
+					</span>
 				</span>
 			)
 		} else {
@@ -416,7 +417,6 @@ class VeiculosController extends Component {
 	render() {
 		let datas = this.props.datas;
 		let loading = this.props.loading;
-		let flags = this.state.options;
 		return (
 			<div>
 				{this.form(this.props.type)}
@@ -442,7 +442,6 @@ class VeiculosController extends Component {
 							onSelect={(key) => {this.props.changeTab(key)}}
 						>
 							{this.props.datas.map((data, index) => {
-								data.data.flags = data.data.flags ? data.data.flags : flags.concat();
 								return (
 									<Tab
 										animation={true}
@@ -460,7 +459,6 @@ class VeiculosController extends Component {
 											data={data.data}
 											tipo={data.tipo}
 											index={index}
-											flags={data.data.flags}
 											searchPerson={this.searchLocalize}/>
 
 									</Tab>
