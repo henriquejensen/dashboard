@@ -9,7 +9,7 @@ import DetalhesCampanha from "./DetalhesCampanha"
 
 // Constants
 import { TOOLTIP_SEE_MORE_INFO_MESSAGE } from "../../constants/utils"
-import { STATUS_SMS } from "../../constants/constantsSMS"
+import { STATUS_SMS, STATUS_SMS_CAMPANHA } from "../../constants/constantsSMS"
 
 class MonitorEnviosView extends Component {
     constructor(props) {
@@ -33,8 +33,9 @@ class MonitorEnviosView extends Component {
     renderTitlePanel(campanha) {
         return (
             <span>
-                ID: <strong>{campanha.id}</strong> - STATUS: <span style={{color:STATUS_SMS[campanha.status].color}}>
-                    {STATUS_SMS[campanha.status].label}
+                <strong>ID:</strong> {campanha.id} - <strong>STATUS:</strong>
+                <span style={{backgroundColor:STATUS_SMS_CAMPANHA[campanha.status].color, padding:5, margin:"0 5px", color:"gainsboro"}}>
+                    {STATUS_SMS_CAMPANHA[campanha.status].label}
                 </span>
             </span>
         )

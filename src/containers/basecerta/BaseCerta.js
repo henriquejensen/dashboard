@@ -26,7 +26,7 @@ import { LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 //Constants
 import { NENHUM_REGISTRO, ADVANCED_SEARCH } from "../../constants/utils"
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_BASECERTA, LOGO_BASECERTA } from "../../constants/constantsCompany"
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_BASECERTA } from "../../constants/constantsCompany"
 
 class BaseCerta extends Component {
   constructor(props) {
@@ -165,55 +165,57 @@ class BaseCerta extends Component {
 
   render() {
     let loading = this.props.loading
+    let tickets = this.props.tickets || []
+
+    if(tickets.length > 0 && tickets.find(ticket => ticket.porcentagem < 100)) {
+      setTimeout(() => this.props.getTicketsBaseCerta(), 10000)
+    }
+
     return (
-    <div>
+      <div>
+        <Col md={12} sm={12} className="text-center">
+          <MyButton
+              onClickButton={this.openModal}
+              params={["Novo enriquecimento"]}
+              myButtonText="Novo enriquecimento"
+              myButtonClass="pull-right color-payement"
+          />
+        </Col>
 
-      <Col md={12} sm={12} className="text-center">
+        {this.renderForm()}
+
+        {loading ? <LoadingScreen /> : ""}
+
         <div style={{marginBottom:15}} />
-        <MyButton
-            onClickButton={this.openModal}
-            params={["Novo enriquecimento"]}
-            myButtonText="Novo enriquecimento"
-            myButtonClass="pull-right color-payement"
-        />
+
+        <PanelGroup>
+          {tickets.length > 0 ?
+            tickets.map(ticket => 
+              <BaseCertaView
+                ticket={ticket}
+                key={ticket.id}
+                getDocumentoSaidaBaseCerta={this.props.getDocumentoSaidaBaseCerta}
+                getDocumentoEntradaBaseCerta={this.props.getDocumentoEntradaBaseCerta}
+              />)
+            :
+            <Panel>
+              <Col md={12} className="text-center">{NENHUM_REGISTRO}</Col>
+            </Panel>
+          }
+        </PanelGroup>
         
-        <img src={LOGO_BASECERTA} className="logo-produto" />
+        <Modal
+            IsModalOpen={this.state.IsModalOpen}
+            closeModal={() => this.setState({IsModalOpen: false})}
+            title={this.state.modalTitle}
+        >
 
-      </Col>
+          <NovoEnriquecimento closeNovoEnriquecimento={() => this.setState({IsModalOpen: false})} />        
 
-      {this.renderForm()}
+        </Modal>
 
-      {loading ? <LoadingScreen /> : ""}
-
-      <div style={{marginBottom:15}} />
-
-      <PanelGroup>
-        {this.props.tickets.length > 0 ?
-          this.props.tickets.map(ticket => 
-            <BaseCertaView
-              ticket={ticket}
-              key={ticket.id}
-              getDocumentoSaidaBaseCerta={this.props.getDocumentoSaidaBaseCerta}
-              getDocumentoEntradaBaseCerta={this.props.getDocumentoEntradaBaseCerta}
-            />)
-          :
-          <Panel>
-            <Col md={12} className="text-center">{NENHUM_REGISTRO}</Col>
-          </Panel>
-        }
-      </PanelGroup>
-      
-      <Modal
-          IsModalOpen={this.state.IsModalOpen}
-          closeModal={() => this.setState({IsModalOpen: false})}
-          title={this.state.modalTitle}
-      >
-
-        <NovoEnriquecimento closeNovoEnriquecimento={() => this.setState({IsModalOpen: false})} />        
-
-      </Modal>
-
-   </div>)
+      </div>
+    )
   }
 }
 

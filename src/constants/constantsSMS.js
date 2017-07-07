@@ -6,7 +6,8 @@ export const URL_GET_RESPOSTAS = "https://managersms.assertivasolucoes.com.br/re
 export const STATUS_SMS = {
     99: {
         label: "CANCELADO",
-        color: "red"
+        color: "red",
+        value: 99
     },
     2: {
         label: "ENVIADO COM CONFIRMAÇÃO",
@@ -14,17 +15,36 @@ export const STATUS_SMS = {
     },
     1: {
         label: "ENVIADO SEM CONFIRMAÇÃO",
-        color: "green"
+        color: "green",
+        value: 1
     },
     7: {
         label: "PAUSADOS",
-        color: "yellow"
+        color: "yellow",
+        value: 7
     },
     0: {
         label: "ENVIANDO",
-        color: "yellow"
+        color: "yellow",
+        value: 0
     }
 }
+
+export const STATUS_SMS_CAMPANHA = {
+    99: {
+        label: "CANCELADO",
+        color: "red"
+    },
+    2: {
+        label: "PROCESSADO",
+        color: "#4caf50"
+    },
+    1: {
+        label: "EM PROGRESSO",
+        color: "#ff9800"
+    }
+}
+
 
 export const GET_CAMPANHAS_SMS = "GET_CAMPANHAS_SMS"
 export const GET_CENTRO_CUSTO_SMS = "GET_CENTRO_CUSTO_SMS"

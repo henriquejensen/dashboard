@@ -20,7 +20,9 @@ import EnvioSMS from "./containers/sms/EnvioSMS"
 import CentroCusto from "./containers/sms/CentroCusto"
 import Respostas from "./containers/sms/Respostas"
 
+import BaseCertaController from "./containers/basecerta/BaseCertaController"
 import BaseCerta from "./containers/basecerta/BaseCerta"
+import NovoEnriquecimento from "./containers/basecerta/NovoEnriquecimento"
 import Credito from "./containers/credito/CreditoController"
 import CreditoMix from "./containers/creditomix/CreditoMixController"
 import Veiculos from "./containers/veiculos/VeiculosController"
@@ -47,12 +49,14 @@ export default (
 
       <Route name="Foco Fiscal" path="focofiscal" component={FocoFiscal} />
       
-      <Route name="Base Certa" path="basecerta" component={BaseCerta} />
+      <Route path="basecerta" component={BaseCertaController} >
+        <IndexRoute component={BaseCerta} />
+        <Route name="NovoEnriquecimento" path="novoenriquecimento" component={NovoEnriquecimento} />
+      </Route>
 
       <Route path="sms" component={SMS} >
         <IndexRoute component={MonitorEnvios} />
         <Route name="EnvioRapido" path="enviorapido" component={EnvioSMS} />
-        <Route name="CentroCusto" path="centrocusto" component={CentroCusto} />
         <Route name="Respostas" path="respostas" component={Respostas} />
       </Route>
 

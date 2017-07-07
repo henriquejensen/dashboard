@@ -8,7 +8,7 @@ export function closeSMSMessage() {
 	}
 }
 
-export function filterResponstasSMS({ id, campanha, dataInicio, dataFim, cliente, usuario }) {
+export function filterResponstasSMS({ id, campanha, dataInicio, dataFim, cliente, usuario, limitar }) {
     let url = sms.URL_GET_RESPOSTAS
 	let data = "?"
 	data = data + ( id ? `id=${id}` : "" )
@@ -17,6 +17,7 @@ export function filterResponstasSMS({ id, campanha, dataInicio, dataFim, cliente
 	data = data + ( dataFim ? (data.length > 1 ? "&" : "") + `dataFim=${dataFim}` : "" )
 	data = data + ( cliente ? (data.length > 1 ? "&" : "") + `cliente=${cliente}` : "" )
 	data = data + ( usuario ? (data.length > 1 ? "&" : "") + `usuario=${usuario}` : "" )
+    data = data + ( limitar ? (data.length > 1 ? "&" : "") + `numPageSize=${limitar}` : "" )
     let search = sms.FILTER_RESPONSE_SMS
 
     return (dispatch) => {
@@ -24,7 +25,7 @@ export function filterResponstasSMS({ id, campanha, dataInicio, dataFim, cliente
 	}
 }
 
-export function filterCampanhasSMS({ id, campanha, dataInicio, dataFim, cliente, usuario }) {
+export function filterCampanhasSMS({ id, campanha, dataInicio, dataFim, cliente, usuario, limitar }) {
     let url = sms.URL_GET_CAMPANHAS
     let data = "?"
 	data = data + ( id ? `id=${id}` : "" )
@@ -33,6 +34,7 @@ export function filterCampanhasSMS({ id, campanha, dataInicio, dataFim, cliente,
 	data = data + ( dataFim ? (data.length > 1 ? "&" : "") + `dataFim=${dataFim}` : "" )
 	data = data + ( cliente ? (data.length > 1 ? "&" : "") + `cliente=${cliente}` : "" )
 	data = data + ( usuario ? (data.length > 1 ? "&" : "") + `usuario=${usuario}` : "" )
+    data = data + ( limitar ? (data.length > 1 ? "&" : "") + `numPageSize=${limitar}` : "" )
     let search = sms.FILTER_CAMPANHAS_SMS
 
     return (dispatch) => {

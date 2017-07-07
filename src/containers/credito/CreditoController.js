@@ -157,10 +157,11 @@ class Credito extends Component {
 	}
 
 	switchCaseCreditoOptions = (type, creditoInput) => {
+		let documento = creditoInput.documento.replace(/[^0-9]/g,"")
 		switch (type) {
 			case "CHEQUE": {
 				let cheque = this.renderChequeObject()
-				cheque.documento = creditoInput.documento.replace(/[^0-9]/g,"")
+				cheque.documento = documento
 				cheque.tipo = creditoInput.documento.length > 11 ? "pj" : "pf"
 
 				this.props.searchCreditoCheque(cheque, cheque.tipo === "pf" ? "CPF" : "CNPJ");
@@ -168,15 +169,14 @@ class Credito extends Component {
 			}
 		
 			case "INTERMEDIARIA":
-				this.props.searchCreditoIntermediaria(creditoInput.documento, creditoInput.estado);
+				this.props.searchCreditoIntermediaria(documento, creditoInput.estado);
 				break;
 
 			case "INTERMEDIARIAPLUS":
-				this.props.searchCreditoIntermediariaPlus(creditoInput.documento, creditoInput.estado);
+				this.props.searchCreditoIntermediariaPlus(documento, creditoInput.estado);
 				break;
 
 			case "EXPRESS":
-				let documento = creditoInput.documento.toString().replace(/[^0-9]/g,"")
 				let requestExpress = {}
 				requestExpress["receitaFederal"] = creditoInput.receitaFederal
 				requestExpress["ccf"] = creditoInput.ccf
@@ -195,11 +195,11 @@ class Credito extends Component {
 				break
 
 			case "SIMPLES":
-				this.props.searchCreditoSimples(creditoInput.documento);
+				this.props.searchCreditoSimples(documento);
 				break;
 
 			case "COMPLETA":
-				this.searchCreditoCompleta(creditoInput.documento);
+				this.searchCreditoCompleta(documento);
 				break;
 
 			default:

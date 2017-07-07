@@ -13,7 +13,7 @@ import PanelGroup from "../../components/panel/PanelGroup"
 import Panel from "../../components/panel/Panel"
 import Table from "../../components/table/Table"
 import { LoadingScreen } from "../../components/utils/ElementsAtScreen";
-import { MyFieldGroup } from "../../components/forms/CommonForms"
+import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
 
 // Constants
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_SMS } from "../../constants/constantsCompany";
@@ -49,16 +49,17 @@ class MonitorEnvios extends Component {
     onFormSubmit = (evt) => {
       evt.preventDefault()
 
-      let { id=null, campanha=null, dataInicio=null, dataFim=null, cliente=null, usuario=null } = this.state
+      let { id=null, campanha=null, dataInicio=null, dataFim=null, cliente=null, usuario=null, limitar=null } = this.state
 
-      this.props.filterCampanhasSMS({ id, campanha, dataInicio, dataFim, cliente, usuario })
+      this.props.loadingSMS()
+      this.props.filterCampanhasSMS({ id, campanha, dataInicio, dataFim, cliente, usuario, limitar })
     }
 
     renderForm = () => {
         return (
           <Panel>
             <Form onSubmit={this.onFormSubmit}>
-                <Col md={this.state.showBuscaAvancada ? 6 : 4}>
+                <Col md={4}>
                     <MyFieldGroup
                       id="idCampanha"
                       label="Id"
@@ -76,12 +77,25 @@ class MonitorEnvios extends Component {
                       onChange={this.onChange} />
                 </Col>
 
-                <Col md={3}>
-                    <MyFieldGroup
-                      id="smsUsuario"
-                      label="Usuário"
-                      type="text"
-                      name="usuario"
+                {this.state.showBuscaAvancada ?
+                  <Col md={3}>
+                      <MyFieldGroup
+                        id="smsUsuario"
+                        label="Usuário"
+                        type="text"
+                        name="usuario"
+                        onChange={this.onChange} />
+                  </Col>
+                : ""}
+
+                <Col md={this.state.showBuscaAvancada ? 2 : 3}>
+                    <SelectGroup
+                      id="limitar"
+                      label="Limitar"
+                      type="select"
+                      name="limitar"
+                      options={["10", "20","30", "40","50", "60","70", "80","90","100","200","500","1000","Todos"]}
+                      value="20"
                       onChange={this.onChange} />
                 </Col>
 
@@ -132,7 +146,7 @@ class MonitorEnvios extends Component {
 
     render() {
       return (
-        <section>
+        <div>
           {this.renderForm()}
 
           {this.props.loading ? <LoadingScreen /> : ""}
@@ -148,9 +162,13 @@ class MonitorEnvios extends Component {
                     key={index} />
                 )
               })
-            : ""}
+            :
+            <Panel>
+              <Col md={12} className="text-center">{NENHUM_REGISTRO}</Col>
+            </Panel>
+          }
           </PanelGroup>
-        </section>
+        </div>
       )
     }
 }

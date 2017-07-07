@@ -113,12 +113,15 @@ export const todosProdutos = {
         label: "Base Certa",
         id: "basecerta",
         color: "#AC6240",
-        colorLight: "#673ab7",
+        colorLight: "#BD8F79",
         link: "/basecerta",
         image: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-basecerta.png",
         imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-basecerta-negative.png",
         alt: "Icone Base Certa",
-        subItems: []
+        subItems: [
+            {label: "Novo Enriquecimento", id: "novoEnriquecimento", link: "/basecerta/novoenriquecimento"},
+            {label: "Monitor Base Certa", id: "monitorBaseCerta", link: "/basecerta"}
+        ]
     },
     SMS: {
         label: "SMS",
@@ -178,8 +181,8 @@ export const todosProdutos = {
             {label: "PLACA", id: "placa"},
             {label: "CHASSI", id: "chassi"},
             {label: "Nº MOTOR", id: "numeroMotor"},
-            {label: "CPF", id: "cpf"},
-            {label: "CNPJ", id: "cnpj"},
+            //{label: "CPF", id: "cpf"},
+            //{label: "CNPJ", id: "cnpj"},
         ]
     }
 }

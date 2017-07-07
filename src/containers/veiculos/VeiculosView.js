@@ -160,7 +160,7 @@ class VeiculosView extends Component {
                         elements={
                             [
                                 {label: "Opções selecionadas", value: data.cabecalho.flagsSelecionadas.sort((flagAnt, flagPost) => flagAnt>flagPost).toString()},
-                                {label: "Opções executadas", value: data.cabecalho.flagsExecutadas.toString()},
+                                {label: "Opções executadas", value: data.cabecalho.flagsExecutadas.sort((flagAnt, flagPost) => flagAnt>flagPost).toString()},
 
                             ]
                         }

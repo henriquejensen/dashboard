@@ -11,7 +11,7 @@ import { LoadingScreen } from "../../components/utils/ElementsAtScreen";
 import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms";
 
 //Actions
-import {getDetalhesCampanha, filterDetalhesCampanha} from "../../actions/actionsSMS"
+import {getDetalhesCampanha, filterDetalhesCampanha, loadingSMS} from "../../actions/actionsSMS"
 
 //Constants
 import { STATUS_SMS } from "../../constants/constantsSMS"
@@ -26,12 +26,13 @@ class DetalhesCampanha extends Component {
     }
 
     componentWillMount() {
+        this.props.loadingSMS()
         this.props.getDetalhesCampanha(this.props.id)
     }
 
     onChange = (evt) => {
         this.setState({
-        [evt.target.name]: evt.target.value
+            [evt.target.name]: evt.target.value
         })
     }
 
@@ -40,6 +41,9 @@ class DetalhesCampanha extends Component {
 
         let { numero, status } = this.state
 
+        console.log("STATUS", status)
+
+        this.props.loadingSMS()
         this.props.filterDetalhesCampanha({ numero, status, id:this.props.id })
     }
 
@@ -67,40 +71,42 @@ class DetalhesCampanha extends Component {
 
     render() {
         let campanha = this.props.campanha
+        let loading = this.props.loading
+        let values = Object.keys(STATUS_SMS)
+        let status = values.map(val => {return{label:STATUS_SMS[val].label, value:val}})
         return (
-            campanha === undefined ?
-                <LoadingScreen />
-            :
-                <span>
-                    <Form onSubmit={this.onFormSubmit} >
-                        <Col md={5}>
-                            <MyFieldGroup
-                                bsSize="small"
-                                id="numero"
-                                label="Número"
-                                type="text"
-                                name="numero"
-                                onChange={this.onChange} />
-                        </Col>
+            <span>
+                <Form onSubmit={this.onFormSubmit} >
+                    <Col md={5}>
+                        <MyFieldGroup
+                            bsSize="small"
+                            id="numero"
+                            label="Número"
+                            type="text"
+                            name="numero"
+                            onChange={this.onChange} />
+                    </Col>
 
-                        <Col md={5}>
-                            <MyFieldGroup
-                                bsSize="small"
-                                id="status"
-                                label="Status"
-                                type="text"
-                                name="status"
-                                onChange={this.onChange} />
-                        </Col>
+                    <Col md={5}>
+                        <SelectGroup
+                            id="status"
+                            label="Status"
+                            type="select"
+                            name="status"
+                            options={status}
+                            value="20"
+                            onChange={this.onChange} />
+                    </Col>
 
-                        <Col md={2}>
-                            <label htmlFor="">
-                                &nbsp;
-                            </label>
-                            <Button style={{width:"100%"}} type="submit" bsSize="small" bsStyle="info">Buscar</Button>
-                        </Col>
-                    </Form>
+                    <Col md={2}>
+                        <label htmlFor="">
+                            &nbsp;
+                        </label>
+                        <Button style={{width:"100%"}} type="submit" bsSize="small" bsStyle="info">Buscar</Button>
+                    </Col>
+                </Form>
 
+                {!loading ?
                     <CardWithTable
                         fields={
                             [
@@ -116,21 +122,26 @@ class DetalhesCampanha extends Component {
                         }
                         rows={campanha}
                     />
-                </span>
+                :
+                    <LoadingScreen />
+                }
+            </span>
         )
     }
 }
 
 function mapStateToProps(state) {
   return {
-    campanha: state.sms.campanhaDetalhes
+    campanha: state.sms.campanhaDetalhes,
+    loading: state.sms.loading
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
         filterDetalhesCampanha,
-        getDetalhesCampanha
+        getDetalhesCampanha,
+        loadingSMS
     }, dispatch)
 }
 

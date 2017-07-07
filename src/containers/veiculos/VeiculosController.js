@@ -234,7 +234,6 @@ class VeiculosController extends Component {
 		input[nameInput] = value;
 
 		this.setState({ input })
-
 	}
 
 	onCloseTab = (index) => {
@@ -269,6 +268,11 @@ class VeiculosController extends Component {
 
 			let dataToSend = this.state.input;
 			let flagsSelected = this.state.optionsSelected
+
+			if(this.state.optionsSelected.indexOf("localizaVeiculo") !== -1) {
+				let tipo = this.state.documento <= 11 ? "cpf" : "cnpj"
+				dataToSend[tipo] = this.state.documento
+			}
 
 			this.props.loadingVeiculos()
 			this.props.searchByVeiculos(tipoInput, input, dataToSend, flagsSelected)
@@ -359,11 +363,16 @@ class VeiculosController extends Component {
 
 	renderForm = () => {
 		let type = this.props.type;
-		let isCRLVHidden = this.state.optionsSelected.indexOf("crlv") === -1 ? true : false;
-		let isUFHidden = this.state.optionsSelected.indexOf("agregados") !== -1 || this.state.optionsSelected.indexOf("binFederal") !== -1 || this.state.optionsSelected.indexOf("binEstadual") !== -1 ? false : true;
+		let isCRLVHidden = this.state.optionsSelected.indexOf("crlv") === -1 ? true : false
+
+		let isUFHidden = this.state.optionsSelected.indexOf("agregados") !== -1 || this.state.optionsSelected.indexOf("binFederal") !== -1 ||this.state.optionsSelected.indexOf("binEstadual") !== -1 ? false : true
+
+		let isLocalizaVeiculoHidden = this.state.optionsSelected.indexOf("localizaVeiculo") === -1 && (type !== "CPF" || type !== "CNPJ")
+
 		return (
 			<div>
-				<Col md={isCRLVHidden && isUFHidden ? 8 : isCRLVHidden && !isUFHidden ? 6 : 4}>
+				<Col md={!isUFHidden && (!isCRLVHidden || !isLocalizaVeiculoHidden) ? 8 :
+						isUFHidden && (!isCRLVHidden || !isLocalizaVeiculoHidden) ? 10 : 8}>
 					<MyFieldGroup
 						id={type}
 						type="text"
@@ -390,8 +399,21 @@ class VeiculosController extends Component {
 					</Col>
 				: ""}
 
+				{!isLocalizaVeiculoHidden ?
+					<Col md={isCRLVHidden ? 10 : 5}>
+						<MyFieldGroup
+							id="cpf"
+							type="text"
+							name="cpf"
+							value={this.state.documento}
+							onChange={(evt) => this.onChangeInput(evt.target.value, "cpf")}
+							required
+							placeholder="Digite o CPF ou CNPJ" />
+					</Col>
+				: ""}	
+
 				{!isCRLVHidden ?
-					<Col md={isUFHidden ? 4 : 2}>
+					<Col md={isLocalizaVeiculoHidden ? 10 : 5}>
 						<MyFieldGroup
 							id={type}
 							type="text"

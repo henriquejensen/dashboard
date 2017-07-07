@@ -94,7 +94,7 @@ export default class Info extends Component {
 
                             <MyFieldGroup
                                 id="usuarioTelefone"
-                                type="tel"
+                                type="number"
                                 label="Telefone"
                                 name="usuarioTelefone"
                                 placeholder="Digite seu telefone"

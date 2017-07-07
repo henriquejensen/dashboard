@@ -33,7 +33,7 @@ export class EnviarSMS extends Component {
             rota: "1", // 1 curto 2 longo
             id: this.props.id,
             numeros: this.props.numeros,
-            conteudoSMS: null,
+            conteudoSMS: "",
             caracteresRestantes: this.maximoCaracteres,
             limiteCaracteres: this.maximoCaracteres,
             totalSMS: 0
@@ -44,8 +44,12 @@ export class EnviarSMS extends Component {
 
     onChangeRadio = (indexRadioClicked, name) => {
         let tipoRotaSMS = this.state.tipoRotaSMS.concat()
-        let isCarta = this.state.tipoRotaSMS[indexRadioClicked].info === "Carta" ? true : false
-        let isLongo = this.state.tipoRotaSMS[indexRadioClicked].info === "Longo" ? true : false
+        let isCarta = tipoRotaSMS[indexRadioClicked].info === "Carta" ? true : false
+        let isLongo = tipoRotaSMS[indexRadioClicked].info === "Longo" ? true : false
+        let isFlash = tipoRotaSMS[indexRadioClicked].info === "Flash" ? true : false
+        let caracteresRestantes = isCarta ? 
+            ((this.maximoCaracteresCarta - this.state.conteudoSMS.length) <= 0 ? 0 : this.maximoCaracteresCarta - this.state.conteudoSMS.length) :
+            ((this.maximoCaracteres - this.state.conteudoSMS.length) <= 0 ? 0 : this.maximoCaracteres - this.state.conteudoSMS.length)
 
         tipoRotaSMS.map((tipo, index) => {
             indexRadioClicked === index ? tipo.checked = true : tipo.checked = false
@@ -55,8 +59,8 @@ export class EnviarSMS extends Component {
         this.setState({
             tipoRotaSMS,
             limiteCaracteres: isCarta ? this.maximoCaracteresCarta : this.maximoCaracteres,
-            caracteresRestantes: isCarta ? this.maximoCaracteresCarta - this.state.conteudoSMS.length : this.maximoCaracteres - this.state.conteudoSMS.length,
-            rota: isLongo ? 2 : 1
+            caracteresRestantes: caracteresRestantes,
+            rota: isLongo ? 2 : isFlash ? 4 : isCarta ? 3 : 1
         })
     }
 
@@ -83,18 +87,17 @@ export class EnviarSMS extends Component {
 
         this.props.loadingSMS()
         this.props.sendSMSRapido(requestMessage)
-
     }
     
     onChangeConteudoSMS = (evt) => {
-        
         let limiteCaracteres = this.state.limiteCaracteres
         let caracteres = evt.target.value.length
-        let totalSMS = parseInt(caracteres / limiteCaracteres)
+        let totalSMS = Math.ceil(caracteres / this.maximoCaracteres)
+        let conteudoSMS = evt.target.value.slice(0, limiteCaracteres)
 
         if(caracteres <= limiteCaracteres) {            
             this.setState({
-                conteudoSMS: evt.target.value.slice(0, limiteCaracteres),
+                conteudoSMS: conteudoSMS,
                 caracteresRestantes: limiteCaracteres - caracteres,
                 totalSMS: totalSMS
             })

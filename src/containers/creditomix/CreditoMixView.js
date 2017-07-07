@@ -198,11 +198,46 @@ const CreditoViewMix = (props) => {
                     />
                 : ""}
 
-                <Enderecos enderecos={props.data.enderecos || props.data.ultimosEnderecos} />
+                {data.limitesCreditos ?
+                    <CardWithTable title="LIMITE CRÉDITO"
+                        mdLength={6}
+                        elements={
+                            [
+                               {label: "Valor Total", value:data.limitesCreditos.valorTotal ? pattern.formatCurrency(data.limitesCreditos.valorTotal) : undefined},
+                               {label: "Total", value:data.limitesCreditos.quantidadeTotal ? data.limitesCreditos.quantidadeTotal : undefined},
+                            ]
+                        }
 
-                {data.limiteSugerido ?
-                    <CardWithTable title="LIMITE SUGERIDO"
+                        fields={
+                            [
+                                {id:"valorLimiteCredito", name:"Valor Crédito", functionToApply:(val) => {return <span>{pattern.formatCurrency(val)}</span>}},
+                                {id:"dataCalculo", name:"Cálculo"},
+                                {id:"mensagem", name:"Mensagem"},
+                            ]
+                        }
+                        rows={data.limitesCreditos.limiteCredito}
+                    />
+                : ""}
 
+
+                {data.rendasPresumidas ?
+                    <CardWithTable title="RENDA PRESUMIDA"
+                        mdLength={4}
+                        elements={
+                            [
+                               {label: "Valor Total", value:data.rendasPresumidas.valorTotal ? pattern.formatCurrency(data.rendasPresumidas.valorTotal) : undefined},
+                               {label: "Valor Mediano", value:data.rendasPresumidas.mediana ? pattern.formatCurrency(data.rendasPresumidas.mediana) : undefined},
+                               {label: "Total", value:data.rendasPresumidas.quantidadeTotal ? data.rendasPresumidas.quantidadeTotal : undefined},
+                            ]
+                        }
+
+                        fields={
+                            [
+                                {id:"descricao", name:"Descrição"},
+                                {id:"probabilidade", name:"Probabilidade", functionToApply:(val) => {return <span>{`${val}%`}</span>}},
+                            ]
+                        }
+                        rows={data.rendasPresumidas.faixasRenda}
                     />
                 : ""}
 
@@ -389,6 +424,8 @@ const CreditoViewMix = (props) => {
                         rows={data.cadastroCnpjCnaesSecundarias}
                     />
                 : ""}
+
+                <Enderecos enderecos={props.data.enderecos || props.data.ultimosEnderecos} />
 
                 <Telefones telefones={props.data.telefones || props.data.ultimosTelefonesInformados} />
         </PanelGroup>
