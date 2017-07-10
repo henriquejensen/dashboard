@@ -1,6 +1,9 @@
 import React from 'react'
 import { Route, IndexRoute } from "react-router"
 
+import { URL_LOGIN } from "./constants/constantsCompany"
+import { AUTHENTICATION } from "./constants/utils"
+
 import App from "./components/app"
 import Login from "./components/Login"
 import ChangePassword from "./containers/utils/ChangePasswordController"
@@ -38,7 +41,7 @@ export default (
     <Route path='/senha' component={ChangePassword} />
     <Route path='/novasenha' component={ResetPassword} />
 
-    <Route onEnter={requireAuth} component={App}>
+    <Route component={App}>
       <Route name="Localize" path="/" component={Localize}	/>
 
       <Route name="Localize" path="localize" component={Localize} />
@@ -76,12 +79,3 @@ export default (
 
   </Route>
 )
-
-function requireAuth(nextState, replace) {  
-  if (!localStorage.token) {
-    replace({
-      pathname: '/login',
-      state: { nextPathname: nextState.location.pathname }
-    })
-  }
-}

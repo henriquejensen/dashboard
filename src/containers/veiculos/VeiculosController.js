@@ -363,16 +363,17 @@ class VeiculosController extends Component {
 
 	renderForm = () => {
 		let type = this.props.type;
-		let isCRLVHidden = this.state.optionsSelected.indexOf("crlv") === -1 ? true : false
+		let isCRLVHidden = this.state.optionsSelected.indexOf("crlv") === -1
 
 		let isUFHidden = this.state.optionsSelected.indexOf("agregados") !== -1 || this.state.optionsSelected.indexOf("binFederal") !== -1 ||this.state.optionsSelected.indexOf("binEstadual") !== -1 ? false : true
 
-		let isLocalizaVeiculoHidden = this.state.optionsSelected.indexOf("localizaVeiculo") === -1 && (type !== "CPF" || type !== "CNPJ")
+		let isLocalizaVeiculoHidden = this.state.optionsSelected.indexOf("localizaVeiculo") === -1
 
 		return (
 			<div>
-				<Col md={!isUFHidden && (!isCRLVHidden || !isLocalizaVeiculoHidden) ? 8 :
-						isUFHidden && (!isCRLVHidden || !isLocalizaVeiculoHidden) ? 10 : 8}>
+				<Col md={isUFHidden && isCRLVHidden && isLocalizaVeiculoHidden ? 8 :
+						!isUFHidden && isCRLVHidden && isLocalizaVeiculoHidden ? 6 :
+						!isUFHidden && (!isCRLVHidden || !isLocalizaVeiculoHidden) ? 2 : 4}>
 					<MyFieldGroup
 						id={type}
 						type="text"
@@ -382,6 +383,32 @@ class VeiculosController extends Component {
 						required={!isCRLVHidden && this.state.optionsSelected.length === 1 ? false : true}
 						placeholder={"DIGITE: " + type} />
 				</Col>
+
+				{!isLocalizaVeiculoHidden ?
+					<Col md={isCRLVHidden ? 4 : 2}>
+						<MyFieldGroup
+							id="cpf"
+							type="text"
+							name="cpf"
+							value={this.state.documento}
+							onChange={(evt) => this.onChangeInput(evt.target.value, "cpf")}
+							required
+							placeholder="Digite o CPF ou CNPJ" />
+					</Col>
+				: ""}	
+
+				{!isCRLVHidden ?
+					<Col md={isLocalizaVeiculoHidden ? 4 : 2}>
+						<MyFieldGroup
+							id={type}
+							type="text"
+							name="numeroCrlv"
+							value={this.state.input.numeroCrlv}
+							onChange={(evt) => this.onChangeInput(evt.target.value, "numeroCrlv")}
+							required
+							placeholder={"DIGITE: Nº CRLV"} />
+					</Col>
+				: ""}
 
 				{!isUFHidden ?
 					<Col md={2}>
@@ -396,32 +423,6 @@ class VeiculosController extends Component {
 								return <option value={estado.sigla} key={i}>{estado.sigla}</option>
 							})}
 						</select>
-					</Col>
-				: ""}
-
-				{!isLocalizaVeiculoHidden ?
-					<Col md={isCRLVHidden ? 10 : 5}>
-						<MyFieldGroup
-							id="cpf"
-							type="text"
-							name="cpf"
-							value={this.state.documento}
-							onChange={(evt) => this.onChangeInput(evt.target.value, "cpf")}
-							required
-							placeholder="Digite o CPF ou CNPJ" />
-					</Col>
-				: ""}	
-
-				{!isCRLVHidden ?
-					<Col md={isLocalizaVeiculoHidden ? 10 : 5}>
-						<MyFieldGroup
-							id={type}
-							type="text"
-							name="numeroCrlv"
-							value={this.state.input.numeroCrlv}
-							onChange={(evt) => this.onChangeInput(evt.target.value, "numeroCrlv")}
-							required
-							placeholder={"DIGITE: Nº CRLV"} />
 					</Col>
 				: ""}
 			</div>

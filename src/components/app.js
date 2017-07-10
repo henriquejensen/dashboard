@@ -1,19 +1,24 @@
 import "./app.css";
 
-import React, { Component } from "react";
+import React, { Component } from "react"
 import Tooltip from 'react-tooltip'
-import { browserHistory } from "react-router";
-import { Col } from "react-bootstrap";
+import { bindActionCreators } from "redux"
+import { connect } from "react-redux"
+import { browserHistory } from "react-router"
+import { Col } from "react-bootstrap"
 
-import Header from "./header";
-import Sidebar from "./sidebar";
-import Login from "./Login";
+import Header from "./header"
+import Sidebar from "./sidebar"
+import Login from "./Login"
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+//Actions
+import { setAuthFromCookie } from "../actions/actionsCommon"
 
-import { LOG_OUT } from "../constants/utils";
+//Constants
 import {
+    AUTHENTICATION,
+    ERROR_401_UNAUTHORIZED,
+    LOG_OUT,
     TOOLTIP_SEARCH_BY_ADDRESS,
     TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE,
     TOOLTIP_SEARCH_BY_DOCUMENT,
@@ -26,9 +31,8 @@ import {
     TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE,
     TOOLTIP_SEE_PRODUCT_DETAILS,
     TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE
-} from "../constants/utils";
-
-import { COMPANY_LOGO, COMPANY_NAME_SHORT } from "../constants/constantsCompany";
+} from "../constants/utils"
+import { COMPANY_LOGO, COMPANY_NAME_SHORT } from "../constants/constantsCompany"
 
 class App extends Component {
   state = {
@@ -42,17 +46,21 @@ class App extends Component {
   }
 
   render() {
-      let logado = this.props.logado;
-      let active = this.state.active;
-      let message = this.props.message;
+      const {logado, message, status} = this.props
+      const active = this.state.active
+
       if(!logado) {
+        let authCookie = getUserSessionCookie()
         if(message == LOG_OUT)
-          location.reload();
+          location.reload()
+        else if(status === ERROR_401_UNAUTHORIZED)
+          return <Login />
+        else if(authCookie)
+          this.props.setAuthFromCookie(authCookie)
         else
-          return (
-            <Login />
-          )
+          return <Login />
       }
+
       return (        
         <div>
             <div className="sidebar noPrint" id={active ? {} : "menu-closed"}>
@@ -104,11 +112,23 @@ class App extends Component {
   }
 }
 
+function getUserSessionCookie() {
+  let cookiestring=RegExp(AUTHENTICATION+"[^;]+").exec(document.cookie)
+  return !!cookiestring ? cookiestring.toString().replace(/^[^=]+./,"") : null
+}
+
 function mapStateToProps(state) {
 	return {
+    status: state.auth.status,
 		logado: state.auth.logado,
     message: state.auth.msgn
 	}
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+      setAuthFromCookie
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

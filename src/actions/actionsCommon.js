@@ -1,21 +1,21 @@
 import ajax from "superagent";
 
-import { apiContentType, api } from "../api/Api";
+import { apiContentType, api, apiGet } from "../api/Api";
 
 import {
 		CHANGE_COLOR_MENU,
 		CLOSE_MESSAGE_CHANGE_PASSWORD,
+		GET_COOKIE_SESSION,
 		INFO_URL,
-		INFO_ERROR,
 		INFO_SUCCESS,
 		LOGIN_SUCCESS,
 		LOGIN_ERROR,
 		LOG_OUT,
 		LOADING,
 		AUTH_URL,
-		AUTHENTICATION,
 		REQUEST_CHANGE_PASSWORD,
 		RESET_CHANGE_PASSWORD,
+		SET_COOKIE_SESSION,
 		URL_REQUEST_CHANGE_PASSWORD,
 		URL_RESET_CHANGE_PASSWORD
 } from "../constants/utils";
@@ -53,34 +53,34 @@ export function getUserData() {
 	}
 }
 
-export function authUser(empresa, user, senha) {
+export function getCookieSession({ cliente, usuario, senha }) {
+    let data = `?empresa=${cliente}&usuario=${usuario}&senha=${senha}`
+    let url = GET_COOKIE_SESSION
+    let search = SET_COOKIE_SESSION
+
+    return (dispatch) => {
+        apiGet(dispatch, url, data, search)
+    }
+}
+
+export function authUser({ cliente, usuario, senha }) {
+	let url = AUTH_URL
+	let data = { empresa:cliente, usuario, senha }
+	let search = LOGIN_SUCCESS
 	return (dispatch) => {
-		ajax.post(AUTH_URL)
-			.type('form')
-			.send({ empresa: empresa, usuario: user, senha: senha})
-			.end(function(err, res) {
-				if (err || !res.ok) {
-					dispatch({type: LOGIN_ERROR, payload: res.body})
-				} else {
-					localStorage.setItem(AUTHENTICATION, res.body.response);
-					dispatch({type: LOGIN_SUCCESS, payload: res.body})
-				}
-			})
+		apiContentType(dispatch, url, data, search)
 	}
 }
 
 export function logOut() {
-	localStorage.removeItem(AUTHENTICATION);
 	return {
-		type: LOG_OUT,
-		payload: "logout"
+		type: LOG_OUT
 	}
 }
 
 export function loading() {
 	return {
-		type: LOADING,
-		payload: "loading"
+		type: LOADING
 	}
 }
 
@@ -99,5 +99,16 @@ export function resetChangePassword({ empresa, usuario, password, key }) {
 	let search = RESET_CHANGE_PASSWORD
 	return (dispatch) => {
 		apiContentType(dispatch, url, data, search)
+	}
+}
+
+export function setAuthFromCookie(auth) {
+	return {
+		type: LOGIN_SUCCESS,
+		payload: {
+			response: {
+				response: auth
+			}
+		}
 	}
 }

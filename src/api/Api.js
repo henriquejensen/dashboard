@@ -1,6 +1,8 @@
 import request from "superagent"
 import FileSaver from "file-saver"
 
+import { AUTHENTICATION } from "../constants/utils"
+
 import {
 		REQUEST_ERROR,
 		ERR_CONNECTION_REFUSED,
@@ -15,7 +17,7 @@ export function apiContentType(dispatch, url, data, search, parameters) {
     request.post(url)
         .send(data)
         .set('Content-Type', 'application/x-www-form-urlencoded')
-        .set('authorization', localStorage.getItem("token"))
+        .set('authorization', localStorage.getItem(AUTHENTICATION))
         .end(function(error, response) {
             onEndRequest(error, response, dispatch, search, parameters)
         })
@@ -24,7 +26,7 @@ export function apiContentType(dispatch, url, data, search, parameters) {
 export function api(dispatch, url, data, search, parameters) {
     request.post(url)
         .send(data)
-        .set({authorization: localStorage.getItem("token")})
+        .set({authorization: localStorage.getItem(AUTHENTICATION)})
         .end(function(error, response) {
             onEndRequest(error, response, dispatch, search, parameters)
         })
@@ -33,7 +35,7 @@ export function api(dispatch, url, data, search, parameters) {
 export function apiPut(dispatch, url, data, search, parameters) {
     request.put(url)
         .send(data)
-        .set({authorization: localStorage.getItem("token")})
+        .set({authorization: localStorage.getItem(AUTHENTICATION)})
         .end(function(error, response) {
             onEndRequest(error, response, dispatch, search, parameters)
         })
@@ -41,7 +43,7 @@ export function apiPut(dispatch, url, data, search, parameters) {
 
 export function apiGet(dispatch, url, data, search, parameters) {
     request.get(url+`${data}`)
-        .set({authorization: localStorage.getItem("token")})
+        .set({authorization: localStorage.getItem(AUTHENTICATION)})
         .end(function(error, response) {
             onEndRequestFunction(error, response, dispatch, search, parameters)
         })
@@ -49,7 +51,7 @@ export function apiGet(dispatch, url, data, search, parameters) {
 
 export function apiGetWithKeySession(dispatch, url, data, search, parameters) {
     request.get(url+`${data}`)
-        .set({keySession: localStorage.getItem("token")})
+        .set({keySession: localStorage.getItem(AUTHENTICATION)})
         .end(function(error, response) {
             onEndRequest(error, response, dispatch, search, parameters)
         })
@@ -58,7 +60,7 @@ export function apiGetWithKeySession(dispatch, url, data, search, parameters) {
 export function apiWithKeySession(dispatch, url, data, search, parameters) {
     request.post(url)
         .send(data)
-        .set({keySession: localStorage.getItem("token")})
+        .set({keySession: localStorage.getItem(AUTHENTICATION)})
         .end(function(error, response) {
             onEndRequest(error, response, dispatch, search, parameters)
         })
@@ -69,7 +71,7 @@ export function apiFileUpload(dispatch, url, file, data, search, parameters) {
         .post(url)
         .field(data)
         .attach(file.name, file.file)
-        .set('authorization', localStorage.getItem("token"))
+        .set('authorization', localStorage.getItem(AUTHENTICATION))
         .end(function(error, response) {
             onEndRequest(error, response, dispatch, search, parameters)
         })
@@ -79,7 +81,7 @@ export function apiFileDownload(dispatch, url, filename, search) {
     request
         .get(url)
         .responseType('blob')
-        .set('authorization', localStorage.getItem("token"))
+        .set('authorization', localStorage.getItem(AUTHENTICATION))
         .end(function(error, response) {
             try{
                 onEndRequest(error, response, dispatch, search, FileSaver.saveAs(response.body, filename))
@@ -94,7 +96,7 @@ export function apiPostFileDownload(dispatch, url, data, filename, search) {
         .post(url)
         .send(data)
         .responseType('blob')
-        .set('authorization', localStorage.getItem("token"))
+        .set('authorization', localStorage.getItem(AUTHENTICATION))
         .end(function(error, response) {
             try{
                 onEndRequest(error, response, dispatch, search, FileSaver.saveAs(response.body, filename))

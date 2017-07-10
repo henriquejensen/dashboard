@@ -28,9 +28,9 @@ import { TITLE_HEADER } from "../constants/utils";
 import menu from "./utils/common/menu.json";
 
 class MenuSuperior extends Component {
-
 	componentWillMount() {
-		this.props.getUserData()
+		if(!this.props.user.mapProdutos)
+			this.props.getUserData()
 	}
 
 	changeRoute = (route) => {
@@ -83,7 +83,8 @@ class MenuSuperior extends Component {
 
 function mapStateToProps(state) {
 	return {
-		user: state.user
+		user: state.user,
+		logado: state.auth.logado
 	}
 }
 

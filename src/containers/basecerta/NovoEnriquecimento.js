@@ -83,7 +83,6 @@ class NovoEnriquecimento extends Component {
                     <TextAreaGroup
                         id="modelosDescricao"
                         label="Modelos Descrição"
-                        required
                         name="modelosDescricao"
                         value={this.state.modelosDescricao}
                         onChange={this.onChange}

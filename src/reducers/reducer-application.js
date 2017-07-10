@@ -4,6 +4,7 @@ import {
     LOGIN_ERROR,
     LOG_OUT,
     CHANGE_COLOR_MENU,
+    CLOSE_MESSAGE_CHANGE_PASSWORD,
     AUTHENTICATION,
     LOADING,
     SUCCESS,
@@ -11,17 +12,21 @@ import {
     REQUEST_ERROR,
     REQUEST_CHANGE_PASSWORD,
     RESET_CHANGE_PASSWORD,
-    CLOSE_MESSAGE_CHANGE_PASSWORD,
+    SET_COOKIE_SESSION,
     USER_CHANGED_PASSWORD,
     USER_RESET_PASSWORD,
     USER_RESET_PASSWORD_MESSAGE,
-    USER_CHANGED_PASSWORD_MESSAGE
-} from "../constants/utils";
+    USER_CHANGED_PASSWORD_MESSAGE,
+    USER_CLIENT,
+    USER_NAME,
+    USER_PERFIL,
+    USER_PRODUCTS
+} from "../constants/utils"
 
 const getInitialState = {
     colorMenu: "#673ab7",
     loading: false,
-    logado: localStorage.getItem("token") ? true : false,
+    logado: localStorage.getItem(AUTHENTICATION) ? true : false,
     error: false,
     status: "",
     msgn: ""
@@ -30,7 +35,8 @@ const getInitialState = {
 export default function(state=getInitialState, action) {
     switch(action.type) {
         case LOGIN_SUCCESS: {
-            localStorage.setItem(AUTHENTICATION, action.payload.response);
+            let { response } = action.payload.response
+            localStorage.setItem(AUTHENTICATION, response)
             return {
                 colorMenu: state.colorMenu,
                 loading: false,
@@ -64,12 +70,13 @@ export default function(state=getInitialState, action) {
         }        
 
         case LOG_OUT: {
+            removeInfoLocalStorage()
             return {
-                colorMenu: state.colorMenu,
+                colorMenu: "",
                 loading: false,
                 logado: false,
                 error: false,
-                status: state.status,
+                status: "",
                 msgn: LOG_OUT
             }
         }
@@ -97,6 +104,21 @@ export default function(state=getInitialState, action) {
             }
         }
 
+        case SET_COOKIE_SESSION: {
+            const { CEBB1F3CE2C566A6, CEBB1F3CE2C566A62 } = action.payload.response
+            const host = location.host.replace(/.*?(?=\.)/, "")
+            document.cookie = `CEBB1F3CE2C566A6=${CEBB1F3CE2C566A6};domain=${host}`
+            document.cookie = `CEBB1F3CE2C566A62=${CEBB1F3CE2C566A62};domain=${host}`
+            return {
+                colorMenu: state.colorMenu,
+                loading: false,
+                logado: state.logado,
+                error: false,
+                status: state.status,
+                msgn: "",
+            }
+        }
+
         case CLOSE_MESSAGE_CHANGE_PASSWORD: {
             return {
                 colorMenu: state.colorMenu,
@@ -120,12 +142,13 @@ export default function(state=getInitialState, action) {
         }
 
         case ERROR_401_UNAUTHORIZED: {
-            localStorage.removeItem(AUTHENTICATION);
+            removeInfoLocalStorage()
             return {
                 colorMenu: state.colorMenu,
                 loading: false,
                 logado: false,
                 error: true,
+                status: ERROR_401_UNAUTHORIZED,
                 msgn: action.payload
             }
         }
@@ -145,4 +168,12 @@ export default function(state=getInitialState, action) {
             return state
 
     }
+}
+
+function removeInfoLocalStorage() {
+    localStorage.removeItem(AUTHENTICATION)
+    localStorage.removeItem(USER_PRODUCTS)
+    localStorage.removeItem(USER_NAME)
+    localStorage.removeItem(USER_PERFIL)
+    localStorage.removeItem(USER_CLIENT)
 }

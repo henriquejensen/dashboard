@@ -110,6 +110,7 @@ class Sidebar extends Component {
   }
 
   render() {
+      console.log("SIDEBAR", this.props)
       return (      
           <div>
             <div style={{backgroundColor: COMPANY_MAIN_COLOR}} id={this.props.activedMenu ? "menu-image-logo" : "menu-image-icon"} >

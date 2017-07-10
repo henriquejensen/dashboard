@@ -52,7 +52,7 @@ export function updateUser(usuario, tipo) {
 
 	return (dispatch) => {
 		ajax.put(url)
-			.set({keySession: localStorage.getItem("token")})
+			.set({keySession: localStorage.getItem("authorization")})
 			.end(function(error, response) {
 				if (response.body) {
 					if (response.status == 200 && !response.body.erro) {

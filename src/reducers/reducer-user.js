@@ -1,20 +1,27 @@
-import { browserHistory } from "react-router";
+import { browserHistory } from "react-router"
 
-import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser";
-import { 
-        ICON_LOCALIZE,
-        ICON_CREDITO,
-        GET_NOTIFICATIONS,
-        INFO_ERROR,
-        INFO_SUCCESS
-} from "../constants/utils";
+//Cosntants
+import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser"
+import {
+        AUTHENTICATION,
+        INFO_SUCCESS,
+        USER_CLIENT,
+        USER_NAME,
+        USER_PERFIL,
+        USER_PRODUCTS
+} from "../constants/utils"
 
-import notifications from "./data/notifications.json";
+//Data
+import notifications from "./data/notifications.json"
 
-const user = {
+let user = {
     usuario: {
-        avatar: "http://i1.wp.com/www.bombeiros.pt/classificados/oc-content/themes/osclasswizards/images/default.gif",
-    }
+        avatar: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/avatar.gif",
+    },
+    mapProdutos: localStorage.getItem(USER_PRODUCTS) ? localStorage.getItem(USER_PRODUCTS).split(",") : null,
+    usuarioNome: localStorage.getItem(USER_NAME),
+    perfilDescricao: localStorage.getItem(USER_PERFIL),
+    pessoaDescricao: localStorage.getItem(USER_CLIENT),
 }
 
 export default function (state = user, action) {
@@ -33,23 +40,27 @@ export default function (state = user, action) {
         }
 
         case USER_EDIT_DASHBOARD: {
-            let newState = Object.assign({}, state);
-            newState.gadgets = action.payload.gadgets;
-            newState.charts = action.payload.charts;
-            return newState;
+            return {
+                ...state,
+                gadgets: action.payload.gadgets,
+                charts: action.payload.charts
+            }
         }
 
         case INFO_SUCCESS: {
             let { response } = action.payload.response
-            let newState = Object.assign({}, state, response)
-            return newState
+            localStorage.setItem(USER_PRODUCTS, response.mapProdutos)
+            localStorage.setItem(USER_NAME, response.usuarioNome)
+            localStorage.setItem(USER_PERFIL, response.perfilDescricao)
+            localStorage.setItem(USER_CLIENT, response.pessoaDescricao)
+            
+            return {
+                ...state,
+                ...response
+            }
         }
-        
-        case INFO_ERROR:
-            localStorage.removeItem("token");
-            browserHistory.push("/");
-            return state;
 
+        default:
+            return state
     }
-    return state;
 } 

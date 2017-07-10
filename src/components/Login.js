@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 //Actions
-import { authUser, loading } from "../actions/actionsCommon";
+import { authUser, getCookieSession, loading } from "../actions/actionsCommon";
 
 //Components
 import MyButton from "./button/MyButton"
@@ -40,10 +40,13 @@ class Login extends Component {
     }
 
     onFormSubmit = (evt) => {
-        evt.preventDefault();
+        evt.preventDefault()
 
-        this.props.loading();
-        this.props.authUser(this.state.cliente, this.state.usuario, this.state.senha);
+        let { cliente, usuario, senha } = this.state
+
+        this.props.loading()
+        this.props.authUser({ cliente, usuario, senha })
+        this.props.getCookieSession({ cliente, usuario, senha })
     }
 
     onChange = (evt) => {
@@ -107,6 +110,7 @@ class Login extends Component {
                 <div>{this.changeroute()}</div>
             )
         }
+        
         return (
             <div className="container">
                 <Row>
@@ -153,6 +157,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ 
         authUser,
+        getCookieSession,
         loading
     }, dispatch)
 }
