@@ -41,8 +41,6 @@ class DetalhesCampanha extends Component {
 
         let { numero, status } = this.state
 
-        console.log("STATUS", status)
-
         this.props.loadingSMS()
         this.props.filterDetalhesCampanha({ numero, status, id:this.props.id })
     }

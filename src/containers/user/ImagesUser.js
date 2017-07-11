@@ -24,15 +24,12 @@ export default class ImagesUser extends Component {
 
         var form = this.refs.user.files[0];
 
-        console.log(e.target);
-
     }
 
    onSubmitFirm(e) {
         e.preventDefault();
         e.stopPropagation();
 
-        console.log("Submit Form")
     }
 
     onChangeName(evt) {
@@ -66,7 +63,7 @@ export default class ImagesUser extends Component {
                             <form method="post" encType="multipart/form-data" onSubmit={this.onSubmitUser} ref="imageUpload" name="avatar">
                                 <label className="input-file pull-right" >
                                     Alterar imagem
-                                    <input type="file" name="avatar" ref="user" accept="file_extension|image/.gif,.jpg,.png" onChange={(e) => console.log(e.target.value)} style={{display: "none"}}/>
+                                    <input type="file" name="avatar" ref="user" accept="file_extension|image/.gif,.jpg,.png" style={{display: "none"}}/>
                                 </label>
                                 
                             </form>
@@ -81,7 +78,7 @@ export default class ImagesUser extends Component {
                                     <form method="post" encType="multipart/form-data" onSubmit={this.onSubmitUser} ref="imageUpload" name="avatar">
                                         <label className="input-file" >
                                             Alterar imagem
-                                            <input type="file" name="avatar" ref="user" accept="file_extension|image/.gif,.jpg,.png" onChange={(e) => console.log(e.target.value)} style={{display: "none"}}/>
+                                            <input type="file" name="avatar" ref="user" accept="file_extension|image/.gif,.jpg,.png" style={{display: "none"}}/>
                                         </label>
                                         
                                     </form>
@@ -96,7 +93,7 @@ export default class ImagesUser extends Component {
                                     <form method="post" encType="multipart/form-data" onSubmit={this.onSubmitFirm.bind(this)} ref="imageUpload" name="avatar">
                                         <label className="input-file" >
                                             Alterar imagem
-                                            <input type="file" name="avatar" ref="user" accept="file_extension|image/.gif,.jpg,.png" onChange={(e) => console.log(e.target.value)} style={{display: "none"}}/>
+                                            <input type="file" name="avatar" ref="user" accept="file_extension|image/.gif,.jpg,.png" style={{display: "none"}}/>
                                         </label>
                                     </form>
                                 </div>

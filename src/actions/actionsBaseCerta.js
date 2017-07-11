@@ -17,7 +17,7 @@ export function getDocumentoSaidaBaseCerta(id) {
     let data = `${id}`
     let url = basecerta.URL_DOWNLOAD_SAIDA+data
     let search = basecerta.GET_DOCUMENTO_SAIDA_BASECERTA
-    let filename = COMPANY_PRODUCT_BASECERTA_LABEL + ".zip"
+    let filename = "saida-" + COMPANY_PRODUCT_BASECERTA_LABEL.toLowerCase() + ".zip"
 
     return (dispatch) => {
         apiFileDownload(dispatch, url, filename, search)
@@ -28,9 +28,10 @@ export function getDocumentoEntradaBaseCerta(id) {
     let data = `${id}`
     let url = basecerta.URL_DOWNLOAD_ENTRADA+data
     let search = basecerta.GET_DOCUMENTO_ENTRADA_BASECERTA
+    let filename = "entrada-" + COMPANY_PRODUCT_BASECERTA_LABEL.toLowerCase() + ".zip"
 
     return (dispatch) => {
-        apiFileDownload(dispatch, url, COMPANY_PRODUCT_BASECERTA_LABEL, search)
+        apiFileDownload(dispatch, url, filename, search)
     }
 }
 

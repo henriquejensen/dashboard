@@ -1,4 +1,4 @@
-export const GET_COOKIE_SESSION = "http://batman.assertivasolucoes.com.br/usuario/set-session-cookie-portal-ant"
+export const GET_COOKIE_SESSION = "https://portal.assertivasolucoes.com.br/usuario/set-session-cookie-portal-ant"
 export const AUTH_URL = "https://auth.assertivasolucoes.com.br/auth/get-key-session-user"
 export const INFO_URL = "https://auth.assertivasolucoes.com.br/info/get-info-user"
 export const URL_REQUEST_CHANGE_PASSWORD = "https://auth.assertivasolucoes.com.br/pwd/request"

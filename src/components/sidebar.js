@@ -7,10 +7,10 @@ import { connect } from "react-redux";
 
 import { changeColorMenu, changeProductType } from "../actions/actionsCommon";
 
-import { todosProdutos } from "./utils/common/produtos.js";
+import todosProdutos from "./utils/common/produtos.js";
 import CardInfoMenuUser from "./utils/CardInfoMenuUser";
 
-import { COMPANY_LOGO_INVERSE, COMPANY_MAIN_COLOR, COMPANY_NAME_SHORT, COMPANY_ICON } from "../constants/constantsCompany";
+import { COMPANY_LOGO_INVERSE, COMPANY_MAIN_COLOR, COMPANY_NAME_SHORT, COMPANY_ICON_INVERSE, COMPANY_LOGO_STYLE } from "../constants/constantsCompany";
 
 class Sidebar extends Component {
   state = {
@@ -110,11 +110,15 @@ class Sidebar extends Component {
   }
 
   render() {
-      console.log("SIDEBAR", this.props)
+      const { activedMenu, user } = this.props
       return (      
           <div>
             <div style={{backgroundColor: COMPANY_MAIN_COLOR}} id={this.props.activedMenu ? "menu-image-logo" : "menu-image-icon"} >
-						  <img src={ this.props.activedMenu ? COMPANY_LOGO_INVERSE : COMPANY_ICON } alt={"Logo da "+COMPANY_NAME_SHORT} />
+						  <img
+                src={ activedMenu ? COMPANY_LOGO_INVERSE : COMPANY_ICON_INVERSE }
+                alt={"Logo da "+COMPANY_NAME_SHORT}
+                style={activedMenu ? COMPANY_LOGO_STYLE : {}}
+              />
             </div>
 
             {this.props.activedMenu ? (

@@ -35,7 +35,7 @@ import {
     searchCreditoMixMax,
     searchCreditoMixPremium
 } from "../../actions/creditomix/actionsCreditoMix"
-import { todosProdutos } from "../../components/utils/common/produtos"
+import todosProdutos from "../../components/utils/common/produtos"
 
 const produtoInformacoes = todosProdutos[COMPANY_PRODUCT_CREDITOMIX_LABEL];
 
@@ -137,7 +137,7 @@ class CreditoMix extends Component {
 
 	onClickDocument = (documento) => {
         documento = documento.replace(/[^0-9]/g,"")
-        debugger
+        
         this.setState({
             documento,
             destaqueInputDocumento: true,
@@ -208,7 +208,6 @@ class CreditoMix extends Component {
             }
 
             default: {
-                debugger
                 //produtoInformacoes.options.cheque.map(cheque => request[cheque.id] = null) // seta todos os parametros de cheque
                 options[type.toLowerCase()].map(option => request[option.name] = option.checked) // seta todos os parametros de de options
                 request[type.toLowerCase()] = documento // seta o documento para o objeto

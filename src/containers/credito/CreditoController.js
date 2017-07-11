@@ -28,12 +28,12 @@ import {
 		searchCreditoIntermediaria,
 		searchCreditoIntermediariaPlus,
 		searchCreditoSimples
-} from "../../actions/actionsCredito";
-import { searchLocalize } from "../../actions/index";
-import { changeProductType } from "../../actions/actionsCommon";
+} from "../../actions/actionsCredito"
+import { searchLocalize } from "../../actions/index"
+import { changeProductType } from "../../actions/actionsCommon"
 
 // Constants
-import { ERR_CONNECTION_REFUSED, LOADING_GIF, REQUEST_ERROR, SUCCESS } from "../../constants/utils";
+import { ERR_CONNECTION_REFUSED, LOADING_GIF, REQUEST_ERROR, SUCCESS } from "../../constants/utils"
 import {
 	COMPLETA_CODE_PF,
 	INTERMEDIARIA_CODE_PF,
@@ -45,15 +45,17 @@ import {
 	SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO,
 
 	GET_CREDITO_COMPLETA
-} from "../../constants/constantsCredito";
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO, COMPANY_PRODUCT_CREDITO_LABEL, COMPANY_PRODUCT_LOCALIZE, LOGO_CREDITO } from "../../constants/constantsCompany";
+} from "../../constants/constantsCredito"
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO, COMPANY_PRODUCT_CREDITO_LABEL, COMPANY_PRODUCT_LOCALIZE, LOGO_CREDITO } from "../../constants/constantsCompany"
 
-import estados from "../../components/utils/common/estados.json";
-import menu from "../../components/utils/common/menu.json";
+import estados from "../../components/utils/common/estados.json"
+import todosProdutos from "../../components/utils/common/produtos.js"
 
 class Credito extends Component {
 	constructor(props) {
 		super(props)
+
+		this.produtoInformacoes = todosProdutos[COMPANY_PRODUCT_CREDITO_LABEL]
 
 		this.tiposCheque = ["Apenas Cadastro", "Digitando dados do Cheque", "Por Código de Barras (CMC-7)"]
 
@@ -396,7 +398,7 @@ class Credito extends Component {
 						logo = {LOGO_CREDITO}
 						onformSubmit = {this.onFormSubmit}
 						closeMessageError = {this.props.closeMessageErrorCredito}
-						options={menu.sidebar[4].subItems}
+						options={this.produtoInformacoes.subItems}
 						onChange={this.onChangeType}
 						type={this.props.type}
 						seeModelo = {this.props.seeModel}

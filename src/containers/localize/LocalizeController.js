@@ -36,28 +36,34 @@ import UltimasConsultas from "../../components/UltimasConsultas"
 import { LocalizeDescription } from "../../components/ProductDescription"
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO, LOGO_LOCALIZE } from "../../constants/constantsCompany"
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO, LOGO_LOCALIZE, COMPANY_PRODUCT_LOCALIZE_LABEL } from "../../constants/constantsCompany"
 import { SUCCESS, REQUEST_ERROR, ERR_CONNECTION_REFUSED } from "../../constants/utils"
 import { CPF_CODE, CNPJ_CODE, EMAIL_CODE, TELEFONE_CODE, NOME_ENDERECO_CODE } from "../../constants/constantsLocalize"
 
 import estados from "../../components/utils/common/estados.json"
-import menu from "../../components/utils/common/menu.json"
+import todosProdutos from "../../components/utils/common/produtos.js"
 
 class LocalizeController extends Component {
-	state = {
-		localizeInput: {
-			nome: "",
-			dataNascimento: "",
-			sexo: "",
-			uf: "",
-			cidade: "",
-			bairro: "",
-			complemento: "",
-			enderecoOuCep: "",
-			numeroInicial: "",
-			numeroFinal: "",
-		},
-		buscaAvancada: false
+	constructor(props) {
+		super(props)
+
+		this.produtoInformacoes = todosProdutos[COMPANY_PRODUCT_LOCALIZE_LABEL]
+
+		this.state = {
+			localizeInput: {
+				nome: "",
+				dataNascimento: "",
+				sexo: "",
+				uf: "",
+				cidade: "",
+				bairro: "",
+				complemento: "",
+				enderecoOuCep: "",
+				numeroInicial: "",
+				numeroFinal: "",
+			},
+			buscaAvancada: false
+		}
 	}
 
 	componentWillMount() {
@@ -515,7 +521,7 @@ class LocalizeController extends Component {
 						closeMessageError = {this.props.closeMessageErrorLocalize}
 						buscaAvancada={tipo == "NOME" || tipo == "ENDERECO" ? this.state.buscaAvancada : undefined}
 						hiddenBuscaAvancada={tipo == "NOME" || tipo == "ENDERECO" ? this.hiddenBuscaAvancada : undefined}
-						options={menu.sidebar[0].subItems}
+						options={this.produtoInformacoes.subItems}
 						onChange={this.onChangeType}
 						type={this.props.type}
 						seeModelo = {this.props.seeModel}

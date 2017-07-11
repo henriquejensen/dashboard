@@ -32,7 +32,7 @@ import { AGREGADOS_CODE, BDV_CODE, DECODIFICADOR_CODE, LOCALIZACAO_CODE, PROPRIE
 
 
 import estados from "../../components/utils/common/estados.json"
-import { todosProdutos } from "../../components/utils/common/produtos.js"
+import todosProdutos from "../../components/utils/common/produtos.js"
 
 class VeiculosController extends Component {
 	constructor(props) {

@@ -27,7 +27,7 @@ import Panel from "../../components/panel/Panel"
 import MyButton from "../../components/button/MyButton"
 
 //Utils
-import { todosProdutos } from "../../components/utils/common/produtos"
+import todosProdutos from "../../components/utils/common/produtos"
 
 class GridProdutos extends Component {
     constructor(props) {
@@ -55,7 +55,7 @@ class GridProdutos extends Component {
     search = () => {
         if(Object.keys(this.state.optionsSelected).length > 0) {
             this.props.closeModal();
-            browserHistory.push("/localize");
+            browserHistory.push(todosProdutos.LOCALIZE.link);
 
             this.props.loadingLocalize();
 
@@ -132,7 +132,7 @@ class GridProdutos extends Component {
                     )
                 })}
 
-                <div>
+                <Col md={12}>
                     <Col md={6}>
                         <MyButton
                             onClickButton={this.props.closeModal}
@@ -149,7 +149,7 @@ class GridProdutos extends Component {
                             myButtonText="Consultar"
                         />
                     </Col>
-                </div>
+                </Col>
             </div>
         )
     }

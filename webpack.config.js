@@ -1,7 +1,6 @@
 'use strict'
 
 //const COMPANY_ICON_INVERSE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-assertiva-negative.png";
-const COMPANY_NAME_LONG = "ASSERTIVA SOLUÇÕES EM MARKETING E CRÉDITO";
 const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
@@ -54,7 +53,6 @@ module.exports = {
 
     // cria o html a partir do template e cria o index com o bundle injetado nele dentro da pasta public
     new HtmlPlugin({
-      title: COMPANY_NAME_LONG,
       filename: join(__dirname, "public", "index.html"),
       template: join(__dirname, "html", "template.html")
     }),

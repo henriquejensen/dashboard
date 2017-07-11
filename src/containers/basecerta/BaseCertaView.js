@@ -37,6 +37,7 @@ class BaseCertaView extends Component {
 
     render() {
         let ticket = this.props.ticket
+        const { documentosEnviados=0, documentosEntregues=0 } = ticket
         return (
             <Panel title={"Ticket: " + ticket.id} >
                 <Col md={4}>
@@ -44,7 +45,7 @@ class BaseCertaView extends Component {
                 </Col>
 
                 <Col md={4}>
-                    <strong>Total entrada/saída: </strong>{ticket.documentosEntregues + "/" + ticket.documentosEnviados}
+                    <strong>Total entrada/saída: </strong>{documentosEnviados  + "/" + documentosEntregues}
                 </Col>
 
                 <Col md={4}>

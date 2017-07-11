@@ -1,13 +1,15 @@
-export const todosProdutos = {
+import * as constants from "../../../constants/constantsCompany"
+
+const todosProdutos = {
     LOCALIZE: {
-        label: "Localize",
+        label: constants.COMPANY_PRODUCT_LOCALIZE,
         id: "localize",
-        color: "#673ab7",
-        colorLight: "#D1BCF7",
-        link: "/localize",
-        image: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-localize.png",
-        imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-localize-negative.png",
-        alt: "Icone Localize",
+        color: constants.COMPANY_PRODUCT_LOCALIZE_COLOR,
+        colorLight: constants.COMPANY_PRODUCT_LOCALIZE_COLOR_LIGHT,
+        link: constants.URL_LOCALIZE,
+        image: constants.ICON_LOCALIZE,
+        imageNegative: constants.ICON_LOCALIZE_NEGATIVE,
+        alt: `Icone ${constants.COMPANY_PRODUCT_LOCALIZE}`,
         subItems: [
             {label: "CPF", id: "cpf", tipo: "pf"},
             {label: "CNPJ", id: "cnpj", tipo: "pj"},
@@ -18,14 +20,14 @@ export const todosProdutos = {
         ]
     },
     CREDITO: {
-        label: "Crédito",
+        label: constants.COMPANY_PRODUCT_CREDITO,
         id: "credito",
-        color: "#6CBA4B",
-        colorLight: "#B5DCA5",
-        link: "/credito",
-        image: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito.png",
-        imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png",
-        alt: "Icone Crédito",
+        color: constants.COMPANY_PRODUCT_CREDITO_COLOR,
+        colorLight: constants.COMPANY_PRODUCT_CREDITO_COLOR_LIGHT,
+        link: constants.URL_CREDITO,
+        image: constants.ICON_CREDITO,
+        imageNegative: constants.ICON_CREDITO_NEGATIVE,
+        alt: `Icone ${constants.COMPANY_PRODUCT_CREDITO}`,
         subItems: [
             {label: "Completa", id: "completa", tipo: "pfpj"},
             {label: "Intermediária", id: "intermediaria", tipo: "pfpj"},
@@ -36,14 +38,14 @@ export const todosProdutos = {
         ]
     },
     CREDITOMIX: {
-        label: "Crédito Mix",
+        label: constants.COMPANY_PRODUCT_CREDITOMIX,
         id: "creditomix",
-        color: "#6CBA4B",
-        colorLight: "#B5DCA5",
-        link: "/creditomix",
-        image: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito.png",
-        imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png",
-        alt: "Icone Crédito Mix",
+        color: constants.COMPANY_PRODUCT_CREDITOMIX_COLOR,
+        colorLight: constants.COMPANY_PRODUCT_CREDITOMIX_COLOR_LIGHT,
+        link: constants.URL_CREDITOMIX,
+        image: constants.ICON_CREDITOMIX,
+        imageNegative: constants.ICON_CREDITOMIX_NEGATIVE,
+        alt: `Icone ${constants.COMPANY_PRODUCT_CREDITOMIX}`,
         subItems: [
             {label: "Cred CPF", id: "cpf"},
             {label: "Cred CNPJ", id: "cnpj"},
@@ -110,28 +112,28 @@ export const todosProdutos = {
         }
     },
     BASECERTA: {
-        label: "Base Certa",
+        label: constants.COMPANY_PRODUCT_BASECERTA,
         id: "basecerta",
-        color: "#AC6240",
-        colorLight: "#BD8F79",
-        link: "/basecerta",
-        image: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-basecerta.png",
-        imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-basecerta-negative.png",
-        alt: "Icone Base Certa",
+        color: constants.COMPANY_PRODUCT_BASECERTA_COLOR,
+        colorLight: constants.COMPANY_PRODUCT_BASECERTA_COLOR_LIGHT,
+        link: constants.URL_BASECERTA,
+        image: constants.ICON_BASECERTA,
+        imageNegative: constants.ICON_BASECERTA_NEGATIVE,
+        alt: `Icone ${constants.COMPANY_PRODUCT_BASECERTA}`,
         subItems: [
             {label: "Novo Enriquecimento", id: "novoEnriquecimento", link: "/basecerta/novoenriquecimento"},
             {label: "Monitor Base Certa", id: "monitorBaseCerta", link: "/basecerta"}
         ]
     },
     SMS: {
-        label: "SMS",
+        label: constants.COMPANY_PRODUCT_SMS,
         id: "sms",
-        color: "#FF9800",
-        colorLight: "#E6C088",
-        link: "/sms",
-        image: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-sms.png",
-        imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-sms-negative.png",
-        alt: "Icone SMS",
+        color: constants.COMPANY_PRODUCT_SMS_COLOR,
+        colorLight: constants.COMPANY_PRODUCT_SMS_COLOR_LIGHT,
+        link: constants.URL_SMS,
+        image: constants.ICON_SMS,
+        imageNegative: constants.ICON_SMS_NEGATIVE,
+        alt: `Icone ${constants.COMPANY_PRODUCT_SMS}`,
         subItems: [
             {label: "Enviar SMS", id: "envioSMS", link: "/sms/enviorapido"},
             {label: "Monitor de envios", id: "envioSMS", link: "/sms"},
@@ -140,26 +142,15 @@ export const todosProdutos = {
             //{label: "Relatório", id: "relatorio", link: "/sms"}
         ]
     },
-    /*VENDAMAIS: {
-        label: "Venda+",
-        id: "vendamais",
-        color: "#2196F3",
-        colorLight: "#2196F3",
-        link: "/vendamais",
-        image: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-vendamais.png",
-        imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-vendamais-negative.png",
-        alt: "Icone Venda+",
-        subItems: []
-    },*/
     FOCOFISCAL: {
-        label: "Foco Fiscal",
+        label: constants.COMPANY_PRODUCT_FOCOFISCAL,
         id: "focofiscal",
-        link: "/focofiscal",
-        color: "#E85764",
-        colorLight: "#F59AB9",
-        image: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-focofiscal.png",
-        imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-focofiscal-negative.png",
-        alt: "Icone Foco Fiscal",
+        link: constants.URL_FOCOFISCAL,
+        color: constants.COMPANY_PRODUCT_FOCOFISCAL_COLOR,
+        colorLight: constants.COMPANY_PRODUCT_FOCOFISCAL_COLOR_LIGHT,
+        image: constants.ICON_FOCOFISCAL,
+        imageNegative: constants.ICON_FOCOFISCAL_NEGATIVE,
+        alt: `Icone ${constants.COMPANY_PRODUCT_FOCOFISCAL}`,
         subItems: [
             {label: "Receita PF", id: "receitapf", tipo: "pf"},
             {label: "Receita PJ", id: "receitapj", tipo: "pj"},
@@ -169,14 +160,14 @@ export const todosProdutos = {
             ]
     },
     VEICULOS: {
-        label: "Veículos",
+        label: constants.COMPANY_PRODUCT_VEICULOS,
         id: "veiculos",
-        color: "#607d8b",
-        colorLight: "#8CC6E2",
-        link: "/veiculos",
-        image: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-veiculos.png",
-        imageNegative: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-veiculos-negative.png",
-        alt: "Icone Veiculos",
+        color: constants.COMPANY_PRODUCT_VEICULOS_COLOR,
+        colorLight: constants.COMPANY_PRODUCT_VEICULOS_COLOR_LIGHT,
+        link: constants.URL_VEICULOS,
+        image: constants.ICON_VEICULOS,
+        imageNegative: constants.ICON_VEICULOS_NEGATIVE,
+        alt: `Icone ${constants.COMPANY_PRODUCT_VEICULOS}`,
         subItems: [
             {label: "PLACA", id: "placa"},
             {label: "CHASSI", id: "chassi"},
@@ -187,24 +178,4 @@ export const todosProdutos = {
     }
 }
 
-/**    
- *  AGREGADO VEICULAR                            "agregados": false,
-    BIN FEDERAL                                  "binFederal": false,
-    BIN FEDERAL + ROUBO E FURTO                  "binRF": false,
-    BIN ESTADUAL                                 "binEstadual": false,
-    BIN JUDICIAL RENAJUD                         "binRenajud": false,
-    CONSULTA CRLV - DOCUMENTO                    "crlv": true,
-    DECODIFICADOR DE CHASSI                      "decodificadorChassi": false,
-    DECODIFICADOR DE CHASSI - FIPE E MOLICAR     "decodificador2": false,
-    DECODIFICADOR UNION                          "decodificadorUnion": false,
-    GRAVAME - DETALHES DO FINANCIAMENTO          "gravame": false,
-    HISTÓRICO DE PROPRIETÁRIOS ANTERIORES        "proprietariosAnteriores": false,
-    INDICIO DE SINISTRO                          "indicioSinistro": false,
-    LEILAO 2                                     "leilao2": false,
-    LOCALIZADOR DE CHASSI E MOTOR                "localizaVeiculo": false,
-    LOCALIZADOR DE PLACA                         "localizaPlaca": false,
-    LOCALIZADOR DE MOTOR                         "motor": true,
-    PRECIFICADOR                                 "precificador": false,
-    RENAVAM                                      "renavam": false,
-    SINISTRO IRRECUPERÁVEL PT                    "pt": false,
-    VEICULOS OFERTADOS A LEILÃO                  "leilao": false */
+export default todosProdutos

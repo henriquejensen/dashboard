@@ -61,9 +61,11 @@ class MenuSuperior extends Component {
 								)
 							})}
 							
-							<MenuItem href={COMPANY_OLD_SITE}>
-								Voltar ao antigo portal
-							</MenuItem>
+							{COMPANY_OLD_SITE ?
+								<MenuItem href={COMPANY_OLD_SITE}>
+									Voltar ao antigo portal
+								</MenuItem>
+							: ""}
 
 							<MenuItem divider />
 							<MenuItem onClick={this.props.logOut}>

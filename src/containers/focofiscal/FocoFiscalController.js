@@ -37,7 +37,7 @@ import { LOADING_GIF } from "../../constants/utils";
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_FOCOFISCAL, COMPANY_PRODUCT_FOCOFISCAL_LABEL, LOGO_FOCOFISCAL } from "../../constants/constantsCompany";
 
 import estados from "../../components/utils/common/estados.json";
-import { todosProdutos } from "../../components/utils/common/produtos.js";
+import todosProdutos from "../../components/utils/common/produtos.js";
 
 class FocoFiscal extends Component {
 	constructor(props) {

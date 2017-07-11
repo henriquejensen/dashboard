@@ -35,8 +35,6 @@ export default class EnviarRenda extends Component {
     onFormSubmit(evt) {
         evt.preventDefault();
 
-        console.log("SEND", this.state.income);
-
         this.props.send(this.state.income);
 
     }

@@ -22,6 +22,7 @@ import {
     USER_PERFIL,
     USER_PRODUCTS
 } from "../constants/utils"
+import { GET_LAYOUTS_BASECERTA } from "../constants/constantsBaseCerta"
 
 const getInitialState = {
     colorMenu: "#673ab7",
@@ -172,6 +173,7 @@ export default function(state=getInitialState, action) {
 
 function removeInfoLocalStorage() {
     localStorage.removeItem(AUTHENTICATION)
+    localStorage.removeItem(GET_LAYOUTS_BASECERTA)
     localStorage.removeItem(USER_PRODUCTS)
     localStorage.removeItem(USER_NAME)
     localStorage.removeItem(USER_PERFIL)

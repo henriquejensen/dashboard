@@ -56,7 +56,7 @@ class Login extends Component {
     }
 
     changeroute() {
-        browserHistory.push("/localize");
+        browserHistory.push("/");
     }
 
     renderForm = () => {

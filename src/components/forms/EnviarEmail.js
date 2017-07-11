@@ -15,8 +15,6 @@ export default class EnviarEmail extends Component {
 
     onFormSubmit(evt) {
         evt.preventDefault();
-
-        console.log("ENVIANDO...", this.state.assunto, this.state.message);
     }
 
     onChange(evt) {

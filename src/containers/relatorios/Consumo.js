@@ -164,7 +164,6 @@ class Consumo extends Component {
 
     render() {
         let loading = this.props.loading
-        console.log("R12", this.props.relatoriosR12)
         return (
             <div>
                 {this.renderForm()}

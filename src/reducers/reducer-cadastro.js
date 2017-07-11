@@ -25,7 +25,6 @@ const getInitialState = {
 }
 
 export default function(state=getInitialState, action) {
-    console.log("Action", action.type, action.payload)
     switch(action.type) {
         case ADD_NEW_USER: {
             return {

@@ -269,8 +269,6 @@ class Usuario extends Component {
             {label: "Observações", form: <Observacoes onChange={this.onChange} obs={this.state.obs} />}
         ]
 
-        console.log("PROPS", this.props)
-
         return (
             <Col md={12}>
                 <Form horizontal onSubmit={this.onFormSubmit}>

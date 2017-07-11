@@ -35,6 +35,8 @@ import Consumo from "./containers/relatorios/Consumo"
 import Relatorios from "./containers/relatorios/Relatorios"
 import Cadastro from "./containers/cadastro/Cadastro"
 
+import todosProdutos from "./components/utils/common/produtos"
+
 export default (
   <Route>
     <Route path='/login' component={Login} />
@@ -44,11 +46,11 @@ export default (
     <Route component={App}>
       <Route name="Localize" path="/" component={Localize}	/>
 
-      <Route name="Localize" path="localize" component={Localize} />
+      <Route name="Localize" path={todosProdutos.LOCALIZE.link} component={Localize} />
 
       <Route name="Crédito" path="credito" component={Credito} />
 
-      <Route name="CréditoMix" path="creditomix" component={CreditoMix} />
+      <Route name="CréditoMix" path={todosProdutos.CREDITOMIX.link} component={CreditoMix} />
 
       <Route name="Foco Fiscal" path="focofiscal" component={FocoFiscal} />
       
@@ -63,7 +65,7 @@ export default (
         <Route name="Respostas" path="respostas" component={Respostas} />
       </Route>
 
-      <Route name="Veiculos" path="veiculos" component={Veiculos} />
+      <Route name="Veiculos" path={todosProdutos.VEICULOS.link} component={Veiculos} />
 
 
       <Route name="Relatórios" path="relatorios" component={Relatorios} />

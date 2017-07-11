@@ -15,8 +15,6 @@ class AtivarConsultas extends Component {
 
     onFormSubmit = (evt) => {
         evt.preventDefault();
-
-        console.log(this.state);
     }
 
     onChangeAtivado = (pos, status) => {
