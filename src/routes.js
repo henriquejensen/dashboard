@@ -48,18 +48,18 @@ export default (
 
       <Route name="Localize" path={todosProdutos.LOCALIZE.link} component={Localize} />
 
-      <Route name="Crédito" path="credito" component={Credito} />
+      <Route name="Crédito" path={todosProdutos.CREDITO.link} component={Credito} />
 
       <Route name="CréditoMix" path={todosProdutos.CREDITOMIX.link} component={CreditoMix} />
 
-      <Route name="Foco Fiscal" path="focofiscal" component={FocoFiscal} />
+      <Route name="Foco Fiscal" path={todosProdutos.FOCOFISCAL.link} component={FocoFiscal} />
       
-      <Route path="basecerta" component={BaseCertaController} >
+      <Route path={todosProdutos.BASECERTA.link} component={BaseCertaController} >
         <IndexRoute component={BaseCerta} />
         <Route name="NovoEnriquecimento" path="novoenriquecimento" component={NovoEnriquecimento} />
       </Route>
 
-      <Route path="sms" component={SMS} >
+      <Route path={todosProdutos.SMS.link} component={SMS} >
         <IndexRoute component={MonitorEnvios} />
         <Route name="EnvioRapido" path="enviorapido" component={EnvioSMS} />
         <Route name="Respostas" path="respostas" component={Respostas} />

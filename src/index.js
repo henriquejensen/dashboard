@@ -11,9 +11,9 @@ import rootReducer from './reducers'
 import routes from "./routes"
 
 //Constants
-import { COMPANY_ICON_INVERSE, COMPANY_NAME_LONG } from "./constants/constantsCompany"
+import { COMPANY_ICON, COMPANY_NAME_LONG } from "./constants/constantsCompany"
 
-document.querySelector("#favicon").href = COMPANY_ICON_INVERSE
+document.querySelector("#favicon").href = COMPANY_ICON
 document.title = COMPANY_NAME_LONG
 
 const store = createStore(rootReducer, applyMiddleware(thunk))

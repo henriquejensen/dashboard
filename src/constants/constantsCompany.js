@@ -1,15 +1,16 @@
-export const COMPANY_NAME_SHORT = "Fixa"
-export const COMPANY_NAME_LONG = "FIXA SOLUÇÕES"
-export const COMPANY_SITE_CONTACT = "http://fixasolucoes.com.br"
-export const COMPANY_EMAIL = "atendimento@fixasolucoes.com.br"
-export const COMPANY_PHONE = []
+export const COMPANY_NAME_SHORT = "Assertiva"
+export const COMPANY_NAME_LONG = "ASSERTIVA SOLUÇÕES EM MARKETING E CRÉDITO"
+export const COMPANY_OLD_SITE = "https://portal.assertivasolucoes.com.br"
+export const COMPANY_SITE_CONTACT = "http://assertivasolucoes.com.br/contato"
+export const COMPANY_EMAIL = "atendimento@assertivasolucoes.com.br"
+export const COMPANY_PHONE = ["(11) 3197 0719", "0800 878 1179"]
 
-export const COMPANY_MAIN_COLOR = "#0D6EB7"
-export const COMPANY_LOGO_STYLE = {width:142,height:51, padding:"7px 0px"}
-export const COMPANY_ICON = "https://s3.amazonaws.com/front.fixa/public/fixa/icon-fixa.png"
-export const COMPANY_ICON_INVERSE = "https://s3.amazonaws.com/front.fixa/public/fixa/icon-fixa-negative.png"
-export const COMPANY_LOGO = "https://s3.amazonaws.com/front.fixa/public/fixa/logo-fixa.png"
-export const COMPANY_LOGO_INVERSE = "https://s3.amazonaws.com/front.fixa/public/fixa/logo-fixa-negative.png"
+export const COMPANY_MAIN_COLOR = "#673ab7"
+export const COMPANY_LOGO_STYLE = {width:160,height:51}
+export const COMPANY_ICON_INVERSE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-assertiva-negative.png"
+export const COMPANY_ICON = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-assertiva.png"
+export const COMPANY_LOGO = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/assertiva-top-index.png"
+export const COMPANY_LOGO_INVERSE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/assertiva-top-index-inverse-2.png"
 
 //URL gerais
 export const URL_LOGIN = "/login"
@@ -18,15 +19,15 @@ export const URL_NOVASENHA = "/novasenha"
 export const URL_EDITAR = "/editar"
 
 // Localize
-export const URL_LOCALIZE = "/locafix"
-export const COMPANY_PRODUCT_LOCALIZE = "Loca Fix"
+export const URL_LOCALIZE = "/localize"
+export const COMPANY_PRODUCT_LOCALIZE = "Localize"
 export const COMPANY_PRODUCT_LOCALIZE_LABEL = "LOCALIZE"
-export const COMPANY_PRODUCT_LOCALIZE_COLOR = "#0D6EB7"
-export const COMPANY_PRODUCT_LOCALIZE_COLOR_LIGHT = "#B7DEEC"
-export const COMPANY_PRODUCT_LOCALIZE_URL_SEE_DETAILS = "http://fixasolucoes.com.br/LOCAFIX/"
-export const LOGO_LOCALIZE = "https://s3.amazonaws.com/front.fixa/public/fixa/logo-locafix.png"
-export const ICON_LOCALIZE_NEGATIVE = "https://s3.amazonaws.com/front.fixa/public/fixa/icon-locafix-negative.png"
-export const ICON_LOCALIZE = "https://s3.amazonaws.com/front.fixa/public/fixa/icon-locafix.png"
+export const COMPANY_PRODUCT_LOCALIZE_COLOR = "#673ab7"
+export const COMPANY_PRODUCT_LOCALIZE_COLOR_LIGHT = "#D1BCF7"
+export const COMPANY_PRODUCT_LOCALIZE_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"
+export const LOGO_LOCALIZE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-localize.png"
+export const ICON_LOCALIZE_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-localize-negative.png"
+export const ICON_LOCALIZE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-localize.png"
 
 // Crédito
 export const URL_CREDITO = "/credito"
@@ -40,15 +41,15 @@ export const ICON_CREDITO = "https://s3-us-west-2.amazonaws.com/front.assertiva/
 export const ICON_CREDITO_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png"
 
 // Crédito Mix
-export const URL_CREDITOMIX = "/credfix"
-export const COMPANY_PRODUCT_CREDITOMIX = "Crédito Fix"
+export const URL_CREDITOMIX = "/creditomix"
+export const COMPANY_PRODUCT_CREDITOMIX = "Crédito Mix"
 export const COMPANY_PRODUCT_CREDITOMIX_LABEL = "CREDITOMIX"
-export const COMPANY_PRODUCT_CREDITOMIX_COLOR = "#0D6EB7"
-export const COMPANY_PRODUCT_CREDITOMIX_COLOR_LIGHT = "#B7DEEC"
-export const COMPANY_PRODUCT_CREDITOMIX_URL_SEE_DETAILS = "http://fixasolucoes.com.br/CREDFIX/"
-export const LOGO_CREDITOMIX = "https://s3.amazonaws.com/front.fixa/public/fixa/logo-credfix.png"
-export const ICON_CREDITOMIX = "https://s3.amazonaws.com/front.fixa/public/fixa/icon-credfix.png"
-export const ICON_CREDITOMIX_NEGATIVE = "https://s3.amazonaws.com/front.fixa/public/fixa/icon-credfix-negative.png"
+export const COMPANY_PRODUCT_CREDITOMIX_COLOR = "#6CBA4B"
+export const COMPANY_PRODUCT_CREDITOMIX_COLOR_LIGHT = "#B5DCA5"
+export const COMPANY_PRODUCT_CREDITOMIX_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"
+export const LOGO_CREDITOMIX = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-creditomix.png"
+export const ICON_CREDITOMIX = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito.png"
+export const ICON_CREDITOMIX_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png"
 
 // Foco Fiscal
 export const URL_FOCOFISCAL = "/focofiscal"
@@ -64,12 +65,12 @@ export const ICON_FOCOFISCAL_NEGATIVE = "https://s3-us-west-2.amazonaws.com/fron
 // SMS
 export const URL_SMS = "/sms"
 export const COMPANY_PRODUCT_SMS = "SMS"
-export const COMPANY_PRODUCT_SMS_COLOR = "#0D6EB7"
-export const COMPANY_PRODUCT_SMS_COLOR_LIGHT = "#B7DEEC"
-export const COMPANY_PRODUCT_SMS_URL_SEE_DETAILS = "http://fixasolucoes.com.br/sms/"
-export const LOGO_SMS = "https://s3.amazonaws.com/front.fixa/public/fixa/logo-sms.png"
-export const ICON_SMS = "https://s3.amazonaws.com/front.fixa/public/fixa/icon-sms.png"
-export const ICON_SMS_NEGATIVE = "https://s3.amazonaws.com/front.fixa/public/fixa/icon-sms-negative.png"
+export const COMPANY_PRODUCT_SMS_COLOR = "#FF9800"
+export const COMPANY_PRODUCT_SMS_COLOR_LIGHT = "#E6C088"
+export const COMPANY_PRODUCT_SMS_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"
+export const LOGO_SMS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-sms.png"
+export const ICON_SMS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-sms.png"
+export const ICON_SMS_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-sms-negative.png"
 
 // Base certa
 export const URL_BASECERTA = "/basecerta"
@@ -93,12 +94,12 @@ export const ICON_VENDAMAIS = "https://s3-us-west-2.amazonaws.com/front.assertiv
 export const ICON_VENDAMAIS_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-vendamais-negative.png"
 
 // Veículos
-export const URL_VEICULOS = "/veiculofix"
-export const COMPANY_PRODUCT_VEICULOS = "Veículo Fix"
+export const URL_VEICULOS = "/veiculos"
+export const COMPANY_PRODUCT_VEICULOS = "Veículos"
 export const COMPANY_PRODUCT_VEICULOS_LABEL = "VEICULOS"
-export const COMPANY_PRODUCT_VEICULOS_COLOR = "#0D6EB7"
-export const COMPANY_PRODUCT_VEICULOS_COLOR_LIGHT = "#B7DEEC"
-export const COMPANY_PRODUCT_VEICULOS_URL_SEE_DETAILS = "http://fixasolucoes.com.br/VEICULOFIX/"
-export const LOGO_VEICULOS = "https://s3.amazonaws.com/front.fixa/public/fixa/logo-veiculofix.png"
-export const ICON_VEICULOS = "https://s3.amazonaws.com/front.fixa/public/fixa/icon-veiculofix.png"
-export const ICON_VEICULOS_NEGATIVE = "https://s3.amazonaws.com/front.fixa/public/fixa/icon-veiculofix-negative.png"
+export const COMPANY_PRODUCT_VEICULOS_COLOR = "#607d8b"
+export const COMPANY_PRODUCT_VEICULOS_COLOR_LIGHT = "#8CC6E2"
+export const COMPANY_PRODUCT_VEICULOS_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"
+export const LOGO_VEICULOS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-veiculos.png"
+export const ICON_VEICULOS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-veiculos.png"
+export const ICON_VEICULOS_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-veiculos-negative.png"

@@ -113,8 +113,13 @@ class App extends Component {
 }
 
 function getUserSessionCookie() {
-  let cookiestring=RegExp(AUTHENTICATION+"[^;]+").exec(document.cookie)
-  return !!cookiestring ? cookiestring.toString().replace(/^[^=]+./,"") : null
+  try {
+    const expression = `${AUTHENTICATION}=.(.*?).;`
+    let authorization = document.cookie.match(expression)
+    return authorization ? authorization[1].toString() : null
+  } catch(e) {
+    console.log("Falha na sessão cookie")
+  }
 }
 
 function mapStateToProps(state) {

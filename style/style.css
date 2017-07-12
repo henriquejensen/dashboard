@@ -341,10 +341,6 @@ table {
     background: #c9302c;
 }
 
-#logo-company-print img {
-    display: none;
-}
-
 .margin-top-app {
     margin-top: 52px;
 }
@@ -352,10 +348,6 @@ table {
 @media print {
     .margin-top-app {
         margin-top: 0px;
-    }
-    #logo-company-print img {
-        margin: 0 auto;
-        display: block
     }
     .panel-footer{
         display: none;

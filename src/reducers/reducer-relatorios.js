@@ -12,6 +12,7 @@ import {
 		REQUEST_ERROR,
 		SUCCESS
 } from "../constants/utils"
+import { COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO, COMPANY_PRODUCT_CREDITOMIX, COMPANY_PRODUCT_VEICULOS, COMPANY_PRODUCT_FOCOFISCAL, COMPANY_PRODUCT_BASECERTA } from "../constants/constantsCompany"
 
 const getInitialState = {
     relatorios: [],
@@ -23,11 +24,11 @@ export default function(state=getInitialState, action) {
         case constants.GET_RELATORIOS: {
             return {
                 relatorios: [
-                    {id:6, tipo:"R6", descricao:"Consultas de Localize, Crédito, Veículos e Foco Fiscal"},
+                    {id:6, tipo:"R6", descricao:`Consultas de ${COMPANY_PRODUCT_LOCALIZE}, ${COMPANY_PRODUCT_CREDITO}, ${COMPANY_PRODUCT_VEICULOS} e ${COMPANY_PRODUCT_FOCOFISCAL}`},
                     {id:7, tipo:"R7", descricao:"Envio de SMS"},
-                    {id:8, tipo:"R8", descricao:"Consumo do Base Certa"},
+                    {id:8, tipo:"R8", descricao:`Consumo do ${COMPANY_PRODUCT_BASECERTA}`},
                     {id:9, tipo:"R9", descricao:"Consumo total de todos os produtos"},
-                    {id:12, tipo:"R12", descricao:"Consultas de Localize, Crédito e Veículos em tela"}
+                    {id:12, tipo:"R12", descricao:`Consultas de ${COMPANY_PRODUCT_LOCALIZE}, ${COMPANY_PRODUCT_CREDITO} e ${COMPANY_PRODUCT_VEICULOS}`}
                 ],
                 relatoriosR12: state.relatorios,
                 status: "",
