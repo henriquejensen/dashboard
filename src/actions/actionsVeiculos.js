@@ -61,7 +61,7 @@ export function seeModel(input) {
     return {
         type: SEE_VEICULOS_MODEL,
         payload: {
-            params: {
+            parameters: {
                 tipo: "PLACA",
                 input: "111XXX"
             }

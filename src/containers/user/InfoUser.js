@@ -30,11 +30,10 @@ export default class Info extends Component {
             let reader = new FileReader()
             let formData = new FormData()
             let file = evt.target.files[0]
-            formData.append('avatar', file, file.name);
 
             reader.onloadend = () => {
                 this.setState({
-                    fileUpload: formData,
+                    file: file,
                     error: false,
                     usuarioImagem: reader.result
                 })
@@ -48,12 +47,12 @@ export default class Info extends Component {
         e.preventDefault()
 
         this.props.userEditInfo({
-            usuario: this.state.usuario ? this.state.usuario : this.props.user.usuario.usuario,
-            usuarioTelefone: this.state.usuarioTelefone ? this.state.usuarioTelefone : this.props.user.usuario.telefone,
-            usuarioEmail: this.state.usuarioEmail ? this.state.usuarioEmail : this.props.user.usuario.email2,
-            usuarioImagem: this.state.fileUpload,
-            usuarioImagemPreview: this.state.usuarioImagem ? this.state.usuarioImagem : this.props.user.usuario.avatar
-        });
+            usuarioNome: this.state.usuarioNome ? this.state.usuarioNome : this.props.user.usuarioNome,
+            usuarioTelefone: this.state.usuarioTelefone ? this.state.usuarioTelefone : this.props.user.usuarioTelefone,
+            usuarioEmail2: this.state.usuarioEmail2 ? this.state.usuarioEmail2 : this.props.user.usuarioEmail2,
+            usuarioFoto: this.state.file,
+            usuarioImagemPreview: this.state.usuarioImagem ? this.state.usuarioImagem : this.props.user.usuarioFoto
+        })
     }
 
     onChange = (evt) => {
@@ -63,32 +62,32 @@ export default class Info extends Component {
     }
 
     render() {
-        let usuario = this.state.usuario !== undefined ? this.state.usuario : this.props.user.usuario.usuario
-        let usuarioEmail = this.state.usuarioEmail !== undefined ? this.state.usuarioEmail : this.props.user.usuario.email2
-        let usuarioTelefone = this.state.usuarioTelefone !== undefined ? this.state.usuarioTelefone : this.props.user.usuario.telefone
-        let usuarioImagem = this.state.usuarioImagem !== undefined ? this.state.usuarioImagem : this.props.user.usuario.avatar
+        let usuarioNome = this.state.usuarioNome !== undefined ? this.state.usuarioNome : this.props.user.usuarioNome
+        let usuarioEmail2 = this.state.usuarioEmail2 !== undefined ? this.state.usuarioEmail2 : this.props.user.usuarioEmail2
+        let usuarioTelefone = this.state.usuarioTelefone !== undefined ? this.state.usuarioTelefone : this.props.user.usuarioTelefone
+        let usuarioFoto = this.state.usuarioFoto !== undefined ? this.state.usuarioFoto : this.props.user.usuarioFoto
         return (
             <Col md={12}>
                 <Panel title="DADOS PESSOAIS">
                     <Col md={12}>
                         <Form onSubmit={this.onSubmitForm}>
                             <MyFieldGroup
-                                id="usuario"
+                                id="usuarioNome"
                                 type="text"
                                 label="Nome completo"
-                                name="usuario"
+                                name="usuarioNome"
                                 placeholder="Digite seu nome"
-                                value={usuario}
+                                value={usuarioNome}
                                 onChange={this.onChange}
                             />
 
                             <MyFieldGroup
-                                id="usuarioEmail"
+                                id="usuarioEmail2"
                                 type="email"
                                 label="Email"
-                                name="usuarioEmail"
+                                name="usuarioEmail2"
                                 placeholder="Digite seu email"
-                                value={usuarioEmail}
+                                value={usuarioEmail2}
                                 onChange={this.onChange}
                             />
 
@@ -102,13 +101,13 @@ export default class Info extends Component {
                                 onChange={this.onChange}
                             />
 
-                            <Image src={usuarioImagem} id="menu-image-user"/>
+                            <Image src={usuarioFoto} id="menu-image-user"/>
 
                             <MyFieldGroup
-                                id="usuarioImagem"
+                                id="usuarioFoto"
                                 type="file"
                                 label={"Arquivo("+this.filesExtensionAccept+")"}
-                                name="usuarioImagem"
+                                name="usuarioFoto"
                                 message={this.state.error ? this.state.messageErrorFileUpload : ""}
                                 accept={this.filesExtensionAccept}
                                 onChange={this.onChangeFileUpload}

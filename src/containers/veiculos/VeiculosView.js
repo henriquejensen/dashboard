@@ -154,7 +154,7 @@ class VeiculosView extends Component {
         let data = this.props.data;
         return (
             <PanelGroup>
-                {data.cabecalho && data.cabecalho.flagsExecutadas ?
+                {data.cabecalho && data.cabecalho.flagsExecutadas && data.cabecalho.flagsSelecionadas ?
                     <CardWithTable title="RESUMO DA CONSULTA"
                         mdLength={12}
                         elements={

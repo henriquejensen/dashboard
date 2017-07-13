@@ -1,22 +1,23 @@
 import "./Login.css"
 
-import React, { Component } from "react";
-import ajax from "superagent";
-import { Col, Row } from "react-bootstrap";
-import { Link, browserHistory } from "react-router";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import React, { Component } from "react"
+import ajax from "superagent"
+import { Col, Row } from "react-bootstrap"
+import { Link, browserHistory } from "react-router"
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
 
 //Actions
-import { authUser, getCookieSession, loading } from "../actions/actionsCommon";
+import { authUser, getCookieSession, loading } from "../actions/actionsCommon"
+import { setUserIp } from "../actions/index"
 
 //Components
 import MyButton from "./button/MyButton"
 import { MyFieldGroup } from "./forms/CommonForms"
 
 //Constants
-import { LOADING_GIF, URL_GET_IP } from "../constants/utils";
-import { COMPANY_NAME_LONG, COMPANY_LOGO } from "../constants/constantsCompany";
+import { LOADING_GIF, URL_GET_IP } from "../constants/utils"
+import { COMPANY_NAME_LONG, COMPANY_LOGO } from "../constants/constantsCompany"
 
 class Login extends Component {
     constructor(props) {
@@ -33,9 +34,11 @@ class Login extends Component {
     componentWillMount() {
         ajax.get(URL_GET_IP)
             .then((response) => {
+                const ip = JSON.parse(response.text).IP
                 this.setState({
-                    ip: JSON.parse(response.text).IP
-                })
+                    ip: ip
+                })                
+                this.props.setUserIp(ip)
             })
     }
 
@@ -56,7 +59,7 @@ class Login extends Component {
     }
 
     changeroute() {
-        browserHistory.push("/");
+        browserHistory.push("/")
     }
 
     renderForm = () => {
@@ -157,6 +160,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ 
         authUser,
+        setUserIp,
         getCookieSession,
         loading
     }, dispatch)

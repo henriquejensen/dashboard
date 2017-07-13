@@ -1,9 +1,9 @@
-import "./header.css";
+import "./header.css"
 
-import React, { Component } from "react";
-import { browserHistory, Link } from "react-router";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import React, { Component } from "react"
+import { browserHistory, Link } from "react-router"
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
 import {
 		Col,
 		Nav,
@@ -12,34 +12,36 @@ import {
 		MenuItem,
 		Navbar,
 		Badge
-} from "react-bootstrap";
+} from "react-bootstrap"
 
 import {
 		logOut,
-		getUserData
-} from "../actions/actionsCommon";
+		getUserData,
+		getUserPhoto
+} from "../actions/actionsCommon"
 
-import Modal from "./Modal";
-import BarraBuscaRapida from "../containers/utils/BarraBuscaRapida";
+import Modal from "./Modal"
+import BarraBuscaRapida from "../containers/utils/BarraBuscaRapida"
 
-import { COMPANY_LOGO_INVERSE, COMPANY_MAIN_COLOR, COMPANY_NAME_SHORT, COMPANY_OLD_SITE } from "../constants/constantsCompany";
-import { TITLE_HEADER } from "../constants/utils";
+import { COMPANY_LOGO_INVERSE, COMPANY_MAIN_COLOR, COMPANY_NAME_SHORT, COMPANY_OLD_SITE } from "../constants/constantsCompany"
+import { TITLE_HEADER } from "../constants/utils"
 
-import menu from "./utils/common/menu.json";
+import menu from "./utils/common/menu.json"
 
 class MenuSuperior extends Component {
 	componentWillMount() {
-		if(!this.props.user.mapProdutos)
+		if(!this.props.user.mapProdutos) {
 			this.props.getUserData()
+		}
 	}
 
 	changeRoute = (route) => {
-		browserHistory.push(route);
+		browserHistory.push(route)
 	}
 
 	render() {
-		let onMenuClicked = this.props.onMenuClicked;
-		let user = this.props.user;
+		let onMenuClicked = this.props.onMenuClicked
+		let user = this.props.user
 		return (
 		<div>
 			<Navbar className="my-navbar" collapseOnSelect inverse style={{backgroundColor: COMPANY_MAIN_COLOR}}>
@@ -53,6 +55,12 @@ class MenuSuperior extends Component {
 				<Navbar.Collapse>
 					<Nav pullRight>
 						<NavDropdown title={TITLE_HEADER} id="basic-nav-dropdown">
+							{COMPANY_OLD_SITE ?
+								<MenuItem href={COMPANY_OLD_SITE+"/usuario/lista"} target="_blank">
+									Cadastro de Usuários
+								</MenuItem>
+							: ""}
+							
 							{menu.header.user.map((opt, index) => {
 								return (
 									<MenuItem key={index} onClick={() => this.changeRoute(opt.link)}>
@@ -86,14 +94,17 @@ class MenuSuperior extends Component {
 function mapStateToProps(state) {
 	return {
 		user: state.user,
-		logado: state.auth.logado
+		logado: state.auth.logado,
+		ip: state.user.ip,
+		usuarioId: state.user.usuarioId
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		logOut,
-		getUserData
+		getUserData,
+		getUserPhoto
 	}, dispatch)
 }
 
@@ -105,4 +116,4 @@ const Notification = () => {
 	)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MenuSuperior);
+export default connect(mapStateToProps, mapDispatchToProps)(MenuSuperior)

@@ -1,16 +1,17 @@
 import React, { Component } from "react"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
-import Notification from "react-notification-system"
+import { Alert, Col } from "react-bootstrap"
 
 //Actions
-import { userEditInfo, userDashboard } from "../../actions/index"
+import { closeMessageUser, loadingUserScreen, userEditInfo, userDashboard } from "../../actions/index"
 import { requestChangePassword, closeChangePasswordMessage } from "../../actions/actionsCommon"
 
 //Components
 import InfoUser from "./InfoUser"
 import ImagesUser from "./ImagesUser"
 import DashboardUser from "./DashboardUser"
+import { LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 //Constants
 import { COMPANY_NAME_SHORT } from "../../constants/constantsCompany"
@@ -22,37 +23,36 @@ class EditUser extends Component {
     }
 
     componentDidMount() {
-        document.title = EDIT_USER_PROFILE + " > " + COMPANY_NAME_SHORT;
+        document.title = EDIT_USER_PROFILE + " > " + COMPANY_NAME_SHORT
     }
 
-    userEditInfo = ({ usuario, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview }) => {
-        this._addNotification(EDIT_USER_PROFILE_SUCCESS);
-        this.props.userEditInfo({ usuario, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview });
-    }
-
-    userDashboard = (gadgets, chart) => {
-        this._addNotification("Informações do dashboard atualizadas com sucesso");
-        this.props.userDashboard(gadgets, chart);
-    }
-
-    _addNotification(message) {
-        if (this._notificationSystem) {
-                this._notificationSystem.addNotification({
-                message: message,
-                level: SUCCESS.toLocaleLowerCase()
-            });
-        }
+    userEditInfo = ({ usuarioNome, usuarioEmail2, usuarioTelefone, usuarioFoto, usuarioImagemPreview }) => {
+        this.props.loadingUserScreen()
+        this.props.userEditInfo({ usuarioNome, usuarioEmail2, usuarioTelefone, usuarioFoto, usuarioImagemPreview })
     }
 
     render() {
+        const {status, message, loading} = this.props
         return (
             <div>
+                {loading ? <LoadingScreen /> : ""}
+
+                {status ?
+                    <Col md={12}>
+                        <Alert
+                            bsStyle={status === SUCCESS ? "success" : "danger"}
+                            className="text-center"
+                            onDismiss={this.props.closeMessageUser}
+                        >
+                            {message}
+                        </Alert>
+                    </Col>
+                : ""}
+
                 <InfoUser
                     {...this.props}
                     userEditInfo={this.userEditInfo}
                 />
-
-                <Notification ref={n => this._notificationSystem = n} />
             </div>
         )
     }
@@ -60,16 +60,21 @@ class EditUser extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.user
+        user: state.user,
+        status: state.user.status,
+        message: state.user.message,
+        loading: state.user.loading
     }
 }
 
 function mapDispatchToProps(dispacth) {
     return bindActionCreators({
+        closeMessageUser,
+        closeChangePasswordMessage,
+        loadingUserScreen,
         userEditInfo,
         userDashboard,
         requestChangePassword,
-        closeChangePasswordMessage
     }, dispacth);
 }
 

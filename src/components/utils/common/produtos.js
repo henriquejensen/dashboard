@@ -56,7 +56,7 @@ const todosProdutos = {
             {label: "Completa", id: "completa"},
             {label: "IntermediáriaPlus", id: "intermediariaPlus"},
             {label: "Intermediária", id: "intermediaria"},
-            //{label: "Sintética", id: "sintetica"}
+            {label: "Sintética", id: "sintetica"}
         ],
         options: {
             /*cheque: [

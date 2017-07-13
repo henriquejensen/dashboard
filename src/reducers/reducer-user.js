@@ -1,12 +1,24 @@
 import { browserHistory } from "react-router"
 
 //Cosntants
-import { USER_EDIT_INFO, USER_EDIT_DASHBOARD } from "../constants/constantsUser"
+import * as constantsUser from "../constants/constantsUser"
 import {
         AUTHENTICATION,
+        EDIT_USER_PROFILE_SUCCESS,
+        GET_USER_PHOTO,
         INFO_SUCCESS,
+        SUCCESS,
+        ERROR,
+        ERR_CONNECTION_REFUSED,
+        ERROR_503,
+        FOTO_URL,
+        REQUEST_ERROR,
         USER_CLIENT,
         USER_NAME,
+        USER_PHOTO,
+        USER_EMAIL2,
+        USER_LOGIN,
+        USER_PHONE,
         USER_PERFIL,
         USER_PRODUCTS
 } from "../constants/utils"
@@ -15,48 +27,131 @@ import {
 import notifications from "./data/notifications.json"
 
 let user = {
-    usuario: {
-        avatar: "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/avatar.gif",
-    },
     mapProdutos: localStorage.getItem(USER_PRODUCTS) ? localStorage.getItem(USER_PRODUCTS).split(",") : null,
     usuarioNome: localStorage.getItem(USER_NAME),
+    usuarioEmail2: localStorage.getItem(USER_EMAIL2),
+    usuarioTelefone: localStorage.getItem(USER_PHONE),
+    usuarioLogin: localStorage.getItem(USER_LOGIN),
+    usuarioFoto: localStorage.getItem(USER_PHOTO) || "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/avatar.gif",
     perfilDescricao: localStorage.getItem(USER_PERFIL),
     pessoaDescricao: localStorage.getItem(USER_CLIENT),
+    ip: localStorage.getItem("ip"),
+    status: null,
+    message: null,
+    loading: false
 }
 
 export default function (state = user, action) {
     switch(action.type){
-        case USER_EDIT_INFO: {
+        case constantsUser.USER_EDIT_INFO: {
+            let { erro } = action.payload.response
             let  { usuario, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview } = action.payload.parameters
+            localStorage.setItem(USER_PHOTO, FOTO_URL + state.usuarioId + ".jpg")
             return {
                 ...state,
-                usuario: {
-                    avatar: usuarioImagemPreview ? usuarioImagemPreview : state.usuario.avatar,
-                    usuario: usuario ? usuario : state.usuario.usuario,
-                    email2: usuarioEmail ? usuarioEmail : state.usuario.email2,
-                    telefone : usuarioTelefone  ? usuarioTelefone  : state.usuario.telefone
-                }
+                usuarioNome: usuario && !erro ? usuario : state.usuarioNome,
+                usuarioFoto: usuarioImagemPreview && !erro ? usuarioImagemPreview : state.usuarioFoto,
+                usuarioEmail2: usuarioEmail && !erro ? usuarioEmail : state.email2,
+                usuarioTelefone : usuarioTelefone && !erro ? usuarioTelefone  : state.telefone,
+                status: erro ? ERROR : SUCCESS,
+                message: erro ? erro.mensagem : EDIT_USER_PROFILE_SUCCESS,
+                loading: false
             }
         }
 
-        case USER_EDIT_DASHBOARD: {
+        case constantsUser.USER_CLOSE_MESSAGE: {
+            return {
+                ...state,
+                status: "",
+                message: "",
+                loading: false
+            }
+        }
+
+        case constantsUser.LOADING_USER_SCREEN: {
+            return {
+                ...state,
+                status: "",
+                message: "",
+                loading: true
+            }
+        }
+
+        case constantsUser.USER_EDIT_DASHBOARD: {
             return {
                 ...state,
                 gadgets: action.payload.gadgets,
-                charts: action.payload.charts
+                charts: action.payload.charts,
+                status: null,
+                message: null,
+                loading: false
+            }
+        }
+
+        case constantsUser.IP_USER: {
+            localStorage.setItem("ip", action.payload)
+            return {
+                ...state,
+                ip: action.payload
+            }
+        }
+
+        case GET_USER_PHOTO: {
+            var imageUrl = action.payload
+            return {
+                ...state,
+                usuarioFoto: imageUrl !== ERROR ? imageUrl : state.usuarioFoto,
             }
         }
 
         case INFO_SUCCESS: {
             let { response } = action.payload.response
-            localStorage.setItem(USER_PRODUCTS, response.mapProdutos)
-            localStorage.setItem(USER_NAME, response.usuarioNome)
-            localStorage.setItem(USER_PERFIL, response.perfilDescricao)
-            localStorage.setItem(USER_CLIENT, response.pessoaDescricao)
+            let {
+                mapProdutos=[],
+                usuarioLogin,
+                usuarioNome="",
+                usuarioEmail2="",
+                usuarioTelefone="",
+                usuarioFoto="",
+                usuarioId,
+                perfilDescricao,
+                pessoaDescricao
+            } = response
+
+            localStorage.setItem(USER_PRODUCTS, mapProdutos)
+            localStorage.setItem(USER_LOGIN, usuarioLogin)
+            localStorage.setItem(USER_NAME, usuarioNome)
+            localStorage.setItem(USER_EMAIL2, usuarioEmail2)
+            localStorage.setItem(USER_PHONE, usuarioTelefone)
+            localStorage.setItem(USER_PHOTO, FOTO_URL + usuarioId + ".jpg")
+            localStorage.setItem(USER_PERFIL, perfilDescricao)
+            localStorage.setItem(USER_CLIENT, pessoaDescricao)
             
             return {
                 ...state,
-                ...response
+                ...response,
+                usuarioFoto: usuarioFoto ? FOTO_URL + usuarioId + ".jpg" : state.usuarioFoto,
+                status: null,
+                message: null,
+                loading: false
+            }
+        }
+
+        case ERR_CONNECTION_REFUSED: {
+            return {
+                ...state,
+                status: ERR_CONNECTION_REFUSED,
+                message: ERROR_503,
+                loading: false
+            }
+        }
+
+        case REQUEST_ERROR: {
+            return {
+                ...state,
+                message: REQUEST_ERROR,
+                loading: false,
+                status: ERROR,
             }
         }
 

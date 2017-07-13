@@ -12,6 +12,9 @@ import {
 		SUCCESS
 } from "../../constants/utils"
 import { ICON_CREDITOMIX, COMPANY_PRODUCT_CREDITOMIX_LABEL } from "../../constants/constantsCompany"
+
+//Utils
+import { patternCPF, patternCNPJ } from "../../components/utils/functions/patternDocuments"
 import model from "../data/creditomix/consultaCreditoMix.json"
 
 const getInitialState = {
@@ -30,7 +33,7 @@ export default function(state=getInitialState, action) {
             // verifica se a tab passada existe no array, se nao, entao busca a primeira tab e a retorna
             let newTabActive = state.response[action.payload] ? action.payload : state.response[Object.keys(state.response)[0]] ? state.response[Object.keys(state.response)[0]].label : ""
             return {
-                status: "changeTab",
+                status: SUCCESS,
                 message: "",
                 loading: false,
                 response: state.response,
@@ -43,7 +46,7 @@ export default function(state=getInitialState, action) {
         case constants.CHANGE_CREDITOMIX_TYPE: {
             return {
                 loading: false,
-                status: state.status,
+                status: SUCCESS,
                 message: state.message,
                 response: state.response,
                 tabActive: state.tabActive,
@@ -77,9 +80,16 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case constants.FETCH_CREDITOMIX: {          
-            let documento = action.payload.response.cadastro.documento
-            documento = documento.toString()
+        case constants.FETCH_CREDITOMIX: {
+            let { cpf, cnpj, documento } = action.payload.response.cadastro
+            if(documento)
+                documento = documento.length <= 11 ? patternCPF(documento) : patternCNPJ(documento)
+            else if(cpf) {
+                documento = patternCPF(cpf)
+            } else {
+                documento = patternCNPJ(cnpj)
+            }
+
             let newResponse = action.payload.response
             let label = action.payload.parameters.tipo + ":" + documento
 
@@ -90,7 +100,7 @@ export default function(state=getInitialState, action) {
 
             return {
                 loading: false,
-                status: state.status,
+                status: SUCCESS,
                 message: state.message,
                 response: {...state.response, [documento]:newResponse },
                 tabActive: label,

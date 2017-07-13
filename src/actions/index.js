@@ -28,9 +28,9 @@ import {
 	URL_CREDITO_SEARCH_COMPLETA,
 	URL_CREDITO_SEARCH_COMPLETA_PJ
 } from "../constants/constantsCredito"
-import { USER_EDIT_INFO, USER_EDIT_DASHBOARD, URL_EDIT_USER } from "../constants/constantsUser"
+import * as constantsUser from "../constants/constantsUser"
 
-import { apiContentType, api, apiPut } from "../api/Api"
+import { apiContentType, api, apiFileUpload, apiPut } from "../api/Api"
 
 export function getLastQueries(consulta, tipo) {
 	let url = URL_SEARCH_ULTIMAS_CONSULTAS_LOCALIZE
@@ -84,25 +84,37 @@ export function reverConsultaLocalize(entrada) {
 	}
 }
 
-export function userEditInfo({ usuario, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview }) {
-	let url = URL_EDIT_USER
-	let data = { nome: usuario, email2: usuarioEmail, telefone: usuarioTelefone }
-	let search = USER_EDIT_INFO
-
-	return (dispatch) => {
-		apiPut(dispatch, url, data, search, { usuario, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview })
+export function userEditInfo({ usuarioNome, usuarioEmail2, usuarioTelefone, usuarioFoto, usuarioImagemPreview }) {
+	let url = constantsUser.URL_EDIT_USER
+	let data = {
+		"usuario.nome":usuarioNome || "",
+		"usuario.email2":usuarioEmail2 || "",
+		"usuario.telefone":usuarioTelefone || ""
 	}
+	let search = constantsUser.USER_EDIT_INFO
+	let parameters = { usuarioNome, usuarioEmail2, usuarioTelefone, usuarioFoto, usuarioImagemPreview }
+
+    return (dispatch) => {
+        apiFileUpload(dispatch, url, {name:"foto", file:usuarioFoto}, data, search, parameters)
+    }
 }
 
 export function userDashboard(gadgets, charts) {
-	const dashboardPreferences = {
-		gadgets: gadgets,
-		charts: charts
-	}
-
 	return {
-		type: USER_EDIT_DASHBOARD,
+		type: constantsUser.USER_EDIT_DASHBOARD,
 		payload: dashboardPreferences
+	}
+}
+
+export function closeMessageUser() {
+	return {
+		type: constantsUser.USER_CLOSE_MESSAGE
+	}
+}
+
+export function loadingUserScreen() {
+	return {
+		type: constantsUser.LOADING_USER_SCREEN
 	}
 }
 
@@ -218,5 +230,12 @@ export function seeModel() {
 	return {
 		type: SEE_LOCALIZE_MODEL,
 		payload: "model"
+	}
+}
+
+export function setUserIp(ip) {
+	return {
+		type: constantsUser.IP_USER,
+		payload: ip
 	}
 }

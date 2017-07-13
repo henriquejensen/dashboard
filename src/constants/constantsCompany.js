@@ -9,8 +9,8 @@ export const COMPANY_MAIN_COLOR = "#673ab7"
 export const COMPANY_LOGO_STYLE = {width:160,height:51}
 export const COMPANY_ICON_INVERSE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-assertiva-negative.png"
 export const COMPANY_ICON = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-assertiva.png"
-export const COMPANY_LOGO = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/assertiva-top-index.png"
-export const COMPANY_LOGO_INVERSE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/assertiva-top-index-inverse-2.png"
+export const COMPANY_LOGO = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-assertiva.png"
+export const COMPANY_LOGO_INVERSE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-assertiva-negative.png"
 
 //URL gerais
 export const URL_LOGIN = "/login"

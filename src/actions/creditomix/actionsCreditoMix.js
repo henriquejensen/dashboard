@@ -62,6 +62,15 @@ export function searchCreditoMixPremium({documento, isCpfOrCnpj, cep}) {
 	}
 }
 
+export function searchCreditoMixSintetica({documento, isCpfOrCnpj}) {
+	let data = {documento}
+	let url = isCpfOrCnpj === "CPF" ? constants.URL_CREDITOMIX_SEARCH_SINTETICA_PF : constants.URL_CREDITOMIX_SEARCH_SINTETICA_PJ
+
+	return (dispatch) => {
+		api(dispatch, url, data, constants.FETCH_CREDITOMIX, {tipo:isCpfOrCnpj})
+	}
+}
+
 export function searchCreditoMixGold({documento, isCpfOrCnpj, cep}) {
 	let data = {documento, cep}
 	let url = isCpfOrCnpj === "CPF" ? constants.URL_CREDITOMIX_SEARCH_GOLD_PF : constants.URL_CREDITOMIX_SEARCH_GOLD_PJ

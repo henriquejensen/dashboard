@@ -1,18 +1,13 @@
-import React, { Component } from 'react';
-import { Col } from "react-bootstrap";
+import React, { Component } from 'react'
+import { Col } from "react-bootstrap"
 
-import Panel from "../panel/Panel";
-import Table from "../table/MyTable";
+import Panel from "../panel/Panel"
+import Table from "../table/MyTable"
 
 class CardWithTable extends Component {
     render() {
-        let title = this.props.title;
-        let fields = this.props.fields;
-        let elements = this.props.elements ? this.props.elements : [];
-        let rows = this.props.rows;
-        let hiddenRows = this.props.hiddenRows;
-        let mdLength = this.props.mdLength ? this.props.mdLength : 3;
-        let xsLength = this.props.xsLength ? this.props.xsLength : 6;
+        let { title, fields=[], elements=[], rows=[], hiddenRows, mdLength=3, xsLength=6 } = this.props
+
         return (
             <Panel title={title}>
                 {elements.length > 0 ?
@@ -26,12 +21,15 @@ class CardWithTable extends Component {
                         }
                     })
                 : ""}
-                <Col md={12}>
-                    <Table fields={fields} elements={rows} hiddenRows={hiddenRows} />
-                </Col>
+
+                {fields.length > 0 ?
+                    <Col md={12}>
+                        <Table fields={fields} elements={rows} hiddenRows={hiddenRows} />
+                    </Col>
+                : ""}
             </Panel>
-        );
+        )
     }
 }
 
-export default CardWithTable;
+export default CardWithTable

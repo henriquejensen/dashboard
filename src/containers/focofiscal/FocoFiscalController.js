@@ -36,7 +36,7 @@ import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScr
 import { LOADING_GIF } from "../../constants/utils";
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_FOCOFISCAL, COMPANY_PRODUCT_FOCOFISCAL_LABEL, LOGO_FOCOFISCAL } from "../../constants/constantsCompany";
 
-import estados from "../../components/utils/common/estados.json";
+//import estados from "../../components/utils/common/estados.json";
 import todosProdutos from "../../components/utils/common/produtos.js";
 
 class FocoFiscal extends Component {
@@ -46,11 +46,8 @@ class FocoFiscal extends Component {
 		this.produtoInformacoes = todosProdutos[COMPANY_PRODUCT_FOCOFISCAL_LABEL]
 
 		this.state = {
-			focofiscalInput: {
-				documento: "",
-				dataNascimento: "",
-				estado: ""
-			}
+			documento: "",
+			dataNascimento: ""
 		}
 	}
 
@@ -63,10 +60,8 @@ class FocoFiscal extends Component {
 	}
 
 	onChangeInput = (evt) => {
-		let newState = this.state.focofiscalInput;
-		newState[evt.target.name] = evt.target.value
 		this.setState({
-			focofiscalInput: newState
+			[evt.target.name]: evt.target.value
 		})
 	}
 
@@ -81,16 +76,15 @@ class FocoFiscal extends Component {
 	}
 
 	onFormSubmit = (evt) => {
-		evt.preventDefault();
+		evt.preventDefault()
+		this.props.loadingFocoFiscal()
 
-		this.props.loadingFocoFiscal();
-
-		let documento = this.state.focofiscalInput.documento
+		let documento = this.state.documento
 		documento = documento.replace(/[^0-9]/g, "")
 
 		switch(this.props.type) {
 			case "RECEITAPF":
-				this.props.searchByReceitaPF(documento,this.state.focofiscalInput.dataNascimento)
+				this.props.searchByReceitaPF(documento,this.state.dataNascimento)
 				break
 			case "RECEITAPJ":
 				this.props.searchByReceitaPJ(documento)
@@ -103,11 +97,8 @@ class FocoFiscal extends Component {
 		}
 		
 		this.setState({
-			focofiscalInput: {
-				documento: [],
-				dataNascimento: this.state.dataNascimento,
-				estado: this.state.estado
-			}
+			documento: "",
+			dataNascimento: ""
 		})
 	}
 
@@ -135,7 +126,7 @@ class FocoFiscal extends Component {
 										"CPF"
 									: "CNPJ"
 								}
-								value={this.state.focofiscalInput.documento}
+								value={this.state.documento}
 								name="documento"
 								onChange={this.onChangeInput}
 								required/>
@@ -148,7 +139,7 @@ class FocoFiscal extends Component {
 									type="date"
 									name="dataNascimento"
 									required
-									value={this.state.focofiscalInput.dataNascimento}
+									value={this.state.dataNascimento}
 									onChange={this.onChangeInput}
 								/>
 							</Col>

@@ -147,7 +147,10 @@ export default class UltimasConsultas extends Component {
                         {consultas.length > 0 ?
                             <Table fields={fields} >
                                 {consultas.map((consulta, index) => {
-                                    let isCpfOrCnpj = consulta.entrada.length <= 11 ? "CPF" : "CNPJ"
+                                    let isCpfOrCnpj = Number(consulta.entrada) ? 
+                                                    consulta.entrada.length <= 11 ?
+                                                        "CPF" : "CNPJ"
+                                                    : ""
                                     return (
                                         <tbody key={index}>
                                             <tr>

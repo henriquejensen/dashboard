@@ -16,7 +16,7 @@ import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScr
 
 // Constants
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITOMIX_LABEL, COMPANY_PRODUCT_CREDITOMIX, LOGO_CREDITOMIX } from "../../constants/constantsCompany";
-//import { LOGO_CREDITOMIX } from "../../constants/utils";
+import { ERR_CONNECTION_REFUSED, REQUEST_ERROR, SUCCESS } from "../../constants/utils";
 
 // Actions
 import { changeProductType } from "../../actions/actionsCommon";
@@ -33,7 +33,8 @@ import {
     searchCreditoMixIntermediaria,
     searchCreditoMixIntermediariaPlus,
     searchCreditoMixMax,
-    searchCreditoMixPremium
+    searchCreditoMixPremium,
+    searchCreditoMixSintetica
 } from "../../actions/creditomix/actionsCreditoMix"
 import todosProdutos from "../../components/utils/common/produtos"
 
@@ -58,13 +59,17 @@ const optionsNormalized = transformInCheckBoxObject(produtoInformacoes.options)
 
 class CreditoMix extends Component {
 
-    state = {
-        options: optionsNormalized,
-        isCpfOrCnpj: "CPF",
-        cepConsumidor: "",
-        documento: "",
-        showCheckboxes: true,
-        showCep: false
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            options: optionsNormalized,
+            isCpfOrCnpj: "CPF",
+            cepConsumidor: "",
+            documento: "",
+            showCheckboxes: true,
+            showCep: false
+        }
     }
 
 	componentDidMount() {
@@ -207,6 +212,11 @@ class CreditoMix extends Component {
                 break
             }
 
+            case "SINTETICA": {
+                this.props.searchCreditoMixSintetica({documento, isCpfOrCnpj})
+                break
+            }
+
             default: {
                 //produtoInformacoes.options.cheque.map(cheque => request[cheque.id] = null) // seta todos os parametros de cheque
                 options[type.toLowerCase()].map(option => request[option.name] = option.checked) // seta todos os parametros de de options
@@ -325,12 +335,13 @@ class CreditoMix extends Component {
 	}
 
     render() {
-        let type = this.props.type
-        let data = this.props.data
-        let tabActive = this.props.tabActive
-        let changeTab = this.props.changeTab
-        let loading = this.props.loading
+        const { type, data, tabActive, changeTab, status, loading } = this.props
         let values = Object.keys(data)
+
+		if(status == SUCCESS || status == ERR_CONNECTION_REFUSED || status == REQUEST_ERROR) {
+			this.scrollPage(0, 0)
+		}
+
         return (
             <div>
                 {this.form(type)}
@@ -416,7 +427,8 @@ function mapDispatchToProps(dispatch) {
         searchCreditoMixIntermediaria,
         searchCreditoMixIntermediariaPlus,
         searchCreditoMixMax,
-        searchCreditoMixPremium
+        searchCreditoMixPremium,
+        searchCreditoMixSintetica
     }, dispatch)
 }
 

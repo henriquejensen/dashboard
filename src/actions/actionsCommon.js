@@ -1,13 +1,18 @@
-import ajax from "superagent";
+import request from "superagent"
+import FileSaver from "file-saver"
 
-import { apiContentType, api, apiGet } from "../api/Api";
+import { apiContentType, api, apiGet } from "../api/Api"
 
 import {
 		CHANGE_COLOR_MENU,
 		CLOSE_MESSAGE_CHANGE_PASSWORD,
+		FOTO_URL,
 		GET_COOKIE_SESSION,
+		GET_USER_PHOTO,
+		ERROR,
 		INFO_URL,
 		INFO_SUCCESS,
+		IP_USER,
 		LOGIN_SUCCESS,
 		LOGIN_ERROR,
 		LOG_OUT,
@@ -18,9 +23,10 @@ import {
 		SET_COOKIE_SESSION,
 		URL_REQUEST_CHANGE_PASSWORD,
 		URL_RESET_CHANGE_PASSWORD
-} from "../constants/utils";
+} from "../constants/utils"
+import { AUTHENTICATION } from "../constants/utils"
 
-import { apiWithKeySession } from "../api/Api";
+import { apiWithKeySession } from "../api/Api"
 
 /* Muda o tipo do produto, ex: Localizel, tipo cpf ao clicar em cnpj muda para cnpj */
 export function changeProductType(product, type) {
@@ -44,13 +50,23 @@ export function closeChangePasswordMessage(color) {
 }
 
 export function getUserData() {
-	let url = INFO_URL;
-	let data = {};
-	let search = INFO_SUCCESS;
+	let url = INFO_URL
+	let data = {}
+	let search = INFO_SUCCESS
 
 	return (dispatch) => {
 		apiWithKeySession(dispatch, url, data, search)
 	}
+}
+
+export function getUserPhoto( userId ) {
+	let url = FOTO_URL
+	let data = `${userId}.jpg`
+	let search = GET_USER_PHOTO
+
+    return (dispatch) => {
+        apiGet(dispatch, url, data, search)
+    }
 }
 
 export function getCookieSession({ cliente, usuario, senha }) {

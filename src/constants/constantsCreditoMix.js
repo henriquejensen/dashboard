@@ -33,6 +33,8 @@ export const URL_CREDITOMIX_SEARCH_INTERMEDIARIAPLUS_PF = `https://managerprovid
 export const URL_CREDITOMIX_SEARCH_INTERMEDIARIAPLUS_PJ = `https://managerprovider.assertivasolucoes.com.br/credito/${INTERMEDIARIAPLUS_CODE_PJ}/consultar`
 export const URL_CREDITOMIX_SEARCH_INTERMEDIARIA_PF = `https://managerprovider.assertivasolucoes.com.br/credito/${INTERMEDIARIA_CODE_PF}/consultar`
 export const URL_CREDITOMIX_SEARCH_INTERMEDIARIA_PJ = `https://managerprovider.assertivasolucoes.com.br/credito/${INTERMEDIARIA_CODE_PJ}/consultar`
+export const URL_CREDITOMIX_SEARCH_SINTETICA_PF = `https://managerprovider.assertivasolucoes.com.br/credito/${SINTETICA_CODE_PF}/consultar`
+export const URL_CREDITOMIX_SEARCH_SINTETICA_PJ = `https://managerprovider.assertivasolucoes.com.br/credito/${SINTETICA_CODE_PJ}/consultar`
 
 export const SHOW_CREDITOMIX_MODEL = "SHOW_CREDITOMIX_MODEL"
 export const CHANGE_CREDITOMIX_TYPE = "CHANGE_CREDITOMIX_TYPE"

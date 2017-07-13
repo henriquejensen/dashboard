@@ -1,11 +1,11 @@
 import {
+    AUTHENTICATION,
     ERROR_401_UNAUTHORIZED,
     LOGIN_SUCCESS,
     LOGIN_ERROR,
     LOG_OUT,
     CHANGE_COLOR_MENU,
     CLOSE_MESSAGE_CHANGE_PASSWORD,
-    AUTHENTICATION,
     LOADING,
     SUCCESS,
     ERROR,
@@ -18,6 +18,10 @@ import {
     USER_RESET_PASSWORD_MESSAGE,
     USER_CHANGED_PASSWORD_MESSAGE,
     USER_CLIENT,
+    USER_EMAIL2,
+    USER_LOGIN,
+    USER_PHONE,
+    USER_PHOTO,
     USER_NAME,
     USER_PERFIL,
     USER_PRODUCTS
@@ -178,4 +182,17 @@ function removeInfoLocalStorage() {
     localStorage.removeItem(USER_NAME)
     localStorage.removeItem(USER_PERFIL)
     localStorage.removeItem(USER_CLIENT)
+    localStorage.removeItem(USER_LOGIN)
+    localStorage.removeItem(USER_EMAIL2)
+    localStorage.removeItem(USER_PHONE)
+    localStorage.removeItem(USER_PHOTO)
+
+    cleanCookie()
+}
+
+function cleanCookie() {
+    const host = location.host.replace(/.*?(?=\.)/, "")
+    document.cookie = `${AUTHENTICATION}=;domain=${host}`
+    document.cookie = `CEBB1F3CE2C566A6=;domain=${host}`
+    document.cookie = `CEBB1F3CE2C566A62=;domain=${host}`
 }

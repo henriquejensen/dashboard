@@ -41,7 +41,9 @@ const CreditoViewMix = (props) => {
                                 {label: "Nascimento", value:data.cadastro.dataNascimento ? `${data.cadastro.dataNascimento} - ${data.cadastro.idade} anos` : undefined},
                                 {label: "Sexo", value:data.cadastro.sexo ? data.cadastro.sexo : undefined},
                                 {label: "Provável óbito", value:data.cadastro.obitoProvavel ? data.cadastro.obitoProvavel : undefined},
-                                {label: "RG", value:data.cadastro.rgNumero ? data.cadastro.rgNumero + "/" + data.cadastro.rgUf : undefined},
+                                {label: "RG", value:data.cadastro.rgNumero && data.cadastro.rgUf ?
+                                    data.cadastro.rgNumero + "/" + data.cadastro.rgUf :
+                                    data.cadastro.rgNumero ? data.cadastro.rgNumero : undefined},
                                 {label: "Signo", value:data.cadastro.signo ? data.cadastro.signo : undefined},
                                 {label: "Faixa idade", value:data.cadastro.faixaIdade ? data.cadastro.faixaIdade : undefined},
                                 {label: "Data status CPF", value:data.cadastro.dataReceitaStatus ? data.cadastro.dataReceitaStatus : undefined},
@@ -53,7 +55,7 @@ const CreditoViewMix = (props) => {
                                 {label: "Gasto Estimado Faixa", value:data.cadastro.gastoEstimadoFaixa ? data.cadastro.gastoEstimadoFaixa : undefined},
                                 {label: "Índice Relacionamento Mercado", value:data.cadastro.indiceRelacionamentoMercado ? data.cadastro.indiceRelacionamentoMercado : undefined},
                                 {label: "Email", value:data.cadastro.email ? data.cadastro.email : undefined},
-                                {label: "Nome Mãe", value:data.cadastro.nomeMae ? data.cadastro.nomeMae : undefined},
+                                {label: "Nome Mãe", value:data.cadastro.maeNome ? data.cadastro.maeNome : undefined},
 
                                 //CNPJ
                                 {label: "Razão social", value:data.cadastro.razaoSocial ? data.cadastro.razaoSocial : undefined},
@@ -260,9 +262,9 @@ const CreditoViewMix = (props) => {
                                     return <ButtonSearchDocument
                                         search={props.onClickDocument}
                                         label={nome}
-                                        parameters={[data.quadroSocietario[indexRow].documento]} />}
+                                        parameters={[data.participacoesEmpresas[indexRow].documento]} />}
                                 },
-                                {id:"participacao", name:"Participação"}
+                                {id:"participacao", name:"Participação", functionToApply:(val) => <span>{val}%</span>}
                             ]
                         }
                         rows={data.participacoesEmpresas}
@@ -354,8 +356,8 @@ const CreditoViewMix = (props) => {
                             [
                                {label: "Ocorrência Mais Antiga", value:data.protestosDetalhados.ocorrenciaMaisAntiga ? data.protestosDetalhados.ocorrenciaMaisAntiga : undefined},
                                {label: "Última Ocorrência", value:data.protestosDetalhados.ocorrenciaMaisRecente ? data.protestosDetalhados.ocorrenciaMaisRecente : undefined},
-                               {label: "Quantidade", value:data.consultasAnteriores.quantidadeRegistros ? data.consultasAnteriores.quantidadeRegistros : undefined},
-                               {label: "Total", value:data.consultasAnteriores.valorTotal ? pattern.formatCurrency(data.consultasAnteriores.valorTotal) : undefined},
+                               {label: "Quantidade", value:data.protestosDetalhados.quantidadeRegistros ? data.protestosDetalhados.quantidadeRegistros : undefined},
+                               {label: "Total", value:data.protestosDetalhados.valorTotal ? pattern.formatCurrency(data.protestosDetalhados.valorTotal) : undefined},
                             ]
                         }
 

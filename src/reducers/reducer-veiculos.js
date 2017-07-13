@@ -49,7 +49,7 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case CHANGE_VEICULOS_TYPE:
+        case CHANGE_VEICULOS_TYPE: {
             return {
                 status: "changeType",
                 message: "",
@@ -59,6 +59,7 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: action.payload.toUpperCase()
             }
+        }
 
         case CLOSE_MESSAGE_ERROR_VEICULOS: {
             return {
@@ -169,7 +170,8 @@ export default function(state=getInitialState, action) {
         }
 
         case SEE_VEICULOS_MODEL: {
-            let tipo = action.payload.params.tipo
+            let tipo = action.payload.parameters.tipo
+            let tab = tipo + ":" + action.payload.parameters.input
 
             response.data = veiculos;
             response.label = tab;
