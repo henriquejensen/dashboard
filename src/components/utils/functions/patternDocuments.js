@@ -42,7 +42,7 @@ export function formatCurrency(currency) {
     /**Verifica se o browser é o IE, pois na versão 10 o Intl não é suportado */
     let isIE = /*@cc_on!@*/false || !!document.documentMode;
     if(!currency || isIE) return currency;
-    currency = parseInt(currency);
+    currency = parseFloat(currency);
     let newCurrency = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
     return newCurrency.format(currency);

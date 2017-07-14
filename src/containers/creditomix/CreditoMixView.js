@@ -9,7 +9,7 @@ import MyButton from "../../components/button/MyButton"
 import Telefones from "../../components/telefone/Telefone"
 
 //Constants
-import { TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE } from "../../constants/utils"
+import { NENHUM_REGISTRO, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE } from "../../constants/utils"
 
 // funcoes de apoio
 import * as pattern from "../../components/utils/functions/patternDocuments"
@@ -55,7 +55,8 @@ const CreditoViewMix = (props) => {
                                 {label: "Gasto Estimado Faixa", value:data.cadastro.gastoEstimadoFaixa ? data.cadastro.gastoEstimadoFaixa : undefined},
                                 {label: "Índice Relacionamento Mercado", value:data.cadastro.indiceRelacionamentoMercado ? data.cadastro.indiceRelacionamentoMercado : undefined},
                                 {label: "Email", value:data.cadastro.email ? data.cadastro.email : undefined},
-                                {label: "Nome Mãe", value:data.cadastro.maeNome ? data.cadastro.maeNome : undefined},
+                                {label: "Nome Mãe", value:data.cadastro.maeNome || data.cadastro.nomeMae ? data.cadastro.maeNome || data.cadastro.nomeMae : undefined},
+                                {label: "Alerta Identidade", value:data.cadastro.alertaIdentidade ? data.cadastro.alertaIdentidade : undefined},
 
                                 //CNPJ
                                 {label: "Razão social", value:data.cadastro.razaoSocial ? data.cadastro.razaoSocial : undefined},
@@ -121,6 +122,7 @@ const CreditoViewMix = (props) => {
                             [
                                 {id:"tipoAcao", name:"Tipo Ação"},
                                 {id:"dataAcao", name:"Data"},
+                                {id:"forum", name:"Fórum"},
                                 {id:"cidade", name:"Cidade"},
                                 {id:"vara", name:"Vara"},
                                 {id:"valor", name:"Valor", functionToApply:(val) => {return <span>{pattern.formatCurrency(val)}</span>}},
@@ -145,7 +147,6 @@ const CreditoViewMix = (props) => {
                                 {id:"agencia", name:"Agência"},
                                 {id:"banco", name:"Banco"},
                                 {id:"motivo", name:"Motivo"},
-                                {id:"origem", name:"Origem"},
                                 {id:"quantidade", name:"Quantidade"},
                                 {id:"ultimoEm", name:"Data Último"}
                             ]
@@ -174,7 +175,7 @@ const CreditoViewMix = (props) => {
                     />
                 : ""}
 
-                {data.consultasAnteriores && data.consultasAnteriores.consultas ?
+                {data.consultasAnteriores && (data.consultasAnteriores.consultasAnteriores || data.consultasAnteriores.consultas) ?
                     <CardWithTable title="CONSULTAS ANTERIORES"
                         mdLength={6}
                         elements={
@@ -187,10 +188,12 @@ const CreditoViewMix = (props) => {
                         fields={
                             [
                                 {id:"consultante", name:"Consultante"},
-                                {id:"data", name:"Data da consulta"}
+                                {id:"data", name:"Data da consulta"},
+                                {id:"cidade", name:"Cidade de Origem"},
+                                {id:"uf", name:"UF"},
                             ]
                         }
-                        rows={data.consultasAnteriores.consultas}
+                        rows={data.consultasAnteriores.consultas || data.consultasAnteriores.consultasAnteriores}
                     />
                 : ""}
 
@@ -200,27 +203,30 @@ const CreditoViewMix = (props) => {
                     />
                 : ""}
 
-                {data.limitesCreditos ?
+                {data.limiteCredito ?
                     <CardWithTable title="LIMITE CRÉDITO"
                         mdLength={6}
                         elements={
                             [
-                               {label: "Valor Total", value:data.limitesCreditos.valorTotal ? pattern.formatCurrency(data.limitesCreditos.valorTotal) : undefined},
-                               {label: "Total", value:data.limitesCreditos.quantidadeTotal ? data.limitesCreditos.quantidadeTotal : undefined},
+                                {label: "Valor Crédito", value:data.limiteCredito.valorLimiteCredito ? pattern.formatCurrency(data.limiteCredito.valorLimiteCredito) : NENHUM_REGISTRO},
+                                {label: "Cálculo", value:data.limiteCredito.dataCalculo ? data.limiteCredito.dataCalculo : NENHUM_REGISTRO},
+                                {label: "Metodologia", value:data.limiteCredito.mensagem ? `O LIMITE DE CRÉDITO SUGERIDO LEVOU EM CONSIDERAÇÃO O MOTIVO: ${data.limiteCredito.mensagem}` : undefined}
                             ]
                         }
-
-                        fields={
-                            [
-                                {id:"valorLimiteCredito", name:"Valor Crédito", functionToApply:(val) => {return <span>{pattern.formatCurrency(val)}</span>}},
-                                {id:"dataCalculo", name:"Cálculo"},
-                                {id:"mensagem", name:"Mensagem"},
-                            ]
-                        }
-                        rows={data.limitesCreditos.limiteCredito}
                     />
                 : ""}
 
+                {data.gastoEstimado ?
+                    <CardWithTable title="GASTO ESTIMADO"
+                        mdLength={12}
+                        elements={
+                            [
+                                {label: "Valor Total", value:data.gastoEstimado.valorTotal ? pattern.formatCurrency(data.gastoEstimado.valorTotal) : NENHUM_REGISTRO},
+                                {label: "Metodologia", value:data.cadastro.documento.length > 11 ? "O VALOR INFORMADO É UMA ESTIMATIVA DE GASTO ANUAL DO CNPJ CONSULTADO" : "Informa, por meio de faixa de valores em reais, a estimativa mensal com os gastos que o indivíduo consultado tem como o pagamento de energia elétrica, água, gás, telefonia, moradia, transporte, educação e saúde. É baseada nas melhores práticas e modelos estastísticos, mas pode não refletir o gasto real do indivíduo"}
+                            ]
+                        }
+                    />
+                : ""}
 
                 {data.rendasPresumidas ?
                     <CardWithTable title="RENDA PRESUMIDA"
@@ -254,6 +260,18 @@ const CreditoViewMix = (props) => {
                     />
                 : ""}
 
+                {data.faturamentoPresumido ?
+                    <CardWithTable title="FATURAMENTO PRESUMIDO"
+                        mdLength={12}
+                        elements={
+                            [
+                               {label: "Anual", value:data.faturamentoPresumido.anual ? pattern.formatCurrency(data.faturamentoPresumido.anual) : undefined},
+                               {label: "Interpretação", value:"INTERPRETAÇÃO O RESULTADO É CALCULADO POR MEIO DE TÉCNICAS ESTATISTICAS QUE UTILIZAM INFORMAÇÕES CADASTRAIS E COMPORTAMENTO DA EMPRESA"}
+                            ]
+                        }
+                    />
+                : ""}
+
                 {data.participacoesEmpresas ?
                     <CardWithTable title="PARTICIPAÇÕES EM EMPRESAS"
                         fields={
@@ -264,6 +282,7 @@ const CreditoViewMix = (props) => {
                                         label={nome}
                                         parameters={[data.participacoesEmpresas[indexRow].documento]} />}
                                 },
+                                {id:"relacao", name:"Tipo Relacionamento"},
                                 {id:"participacao", name:"Participação", functionToApply:(val) => <span>{val}%</span>}
                             ]
                         }
@@ -289,7 +308,9 @@ const CreditoViewMix = (props) => {
                                         label={nome}
                                         parameters={[data.quadroSocietario[indexRow].documento]} />}
                                 },
-                                {id:"participacao", name:"Participação"}
+                                {id:"posicao", name:"Posição"},
+                                {id:"relacao", name:"Tipo Relacionamento"},
+                                {id:"participacao", name:"Participação", functionToApply:(val) => <span>{val}%</span> }
                             ]
                         }
                         rows={data.quadroSocietario}
@@ -323,32 +344,6 @@ const CreditoViewMix = (props) => {
                     <QuadroSocialCompleto quadroSocialCompleto={data.quadroSocialCompleto} search={props.onClickDocument} />
                 : ""}
 
-                {data.spc ?
-                    <CardWithTable title="SPC"
-                        mdLength={12}
-                        elements={
-                            [
-                               {label: "Total", value:data.spc.valorTotal ? pattern.formatCurrency(data.spc.valorTotal) : undefined},
-                            ]
-                        }
-                        fields={
-                            [
-                                {id:"dataInclusao", name:"Inclusão"},
-                                {id:"dataVencimento", name:"Vencimento"},
-                                {id:"nomeAssociado", name:"Associado"},
-                                {id:"cidadeAssociado", name:"Cidade Associado"},
-                                {id:"compradorFiadorAvalista", name:"Comprador/Fiador/Avalista"},
-                                {id:"estadoAssociado", name:"Estado Associado"},
-                                {id:"contrato", name:"Contrato"},
-                                {id:"nomeEntidade", name:"Entidade"},
-                                {id:"registroInstituicaoFinanceira", name:"Registro"},
-                                {id:"valor", name:"Valor", functionToApply:(val) => {return <span>{pattern.formatCurrency(val)}</span>}},
-                            ]
-                        }
-                        rows={data.spc.listaSpc}
-                    />
-                : ""}
-
                 {data.protestosDetalhados && data.protestosDetalhados.protestosDetalhados ?
                     <CardWithTable title="PROTESTOS"
                         mdLength={3}
@@ -372,20 +367,62 @@ const CreditoViewMix = (props) => {
                         }
                         rows={data.protestosDetalhados.protestosDetalhados}
 
-                        hiddenRows={
+                        /*hiddenRows={
                             [
                                 {id:"dataVencimento", name:"Data Vencimento"},
-                                {id:"dataProtesto", name:"Data Protesto"},
                                 {id:"grupo", name:"Grupo"},
                                 {id:"informacoesAdicionais", name:"Informações"}
+                            ]
+                        }*/
+                    />
+                : ""}
+
+                {data.pendenciasFinanceiras ?
+                    <CardWithTable title="PENDÊNCIAS FINANCEIRAS"
+                        fields={
+                            [
+                                {id:"origem", name:"Origem"},
+                                {id:"dataOcorrencia", name:"Ocorrência"},
+                                {id:"contrato", name:"Contrato"},
+                                {id:"avalista", name:"Avalista"},
+                                {id:"valorPendencia", name:"Valor", functionToApply:(val) => {return <span>{pattern.formatCurrency(val)}</span>}},
+                            ]
+                        }
+                        rows={data.pendenciasFinanceiras.pendencias}
+
+                        hiddenRows={
+                            [
+                                {id:"cidade", name:"Cidade"},
+                                {id:"uf", name:"Estado"},
+                                {id:"moeda", name:"Moeda"},
+                                {id:"tituloOcorrencia", name:"Título da Ocorrência"}
                             ]
                         }
                     />
                 : ""}
 
-                {data.protestosSimples ?
-                    <CardWithTable title="PROTESTOS SIMPLES"
-
+                {data.spc ?
+                    <CardWithTable title="REGISTRO DE DÉBITOS"
+                        mdLength={12}
+                        elements={
+                            [
+                               {label: "Total", value:data.spc.valorTotal ? pattern.formatCurrency(data.spc.valorTotal) : undefined},
+                            ]
+                        }
+                        fields={
+                            [
+                                {id:"dataInclusao", name:"Inclusão"},
+                                {id:"dataVencimento", name:"Vencimento"},
+                                {id:"nomeAssociado", name:"Associado"},
+                                {id:"cidadeAssociado", name:"Cidade Associado", functionToApply:(val, indexRow) => {return <span>{val} {data.spc.listaSpc[indexRow].estadoAssociado ? "-" + data.spc.listaSpc[indexRow].estadoAssociado : ""}</span>}},
+                                {id:"compradorFiadorAvalista", name:"Comprador/Fiador/Avalista"},
+                                {id:"contrato", name:"Contrato"},
+                                {id:"nomeEntidade", name:"Praça"},
+                                {id:"registroInstituicaoFinanceira", name:"Registro"},
+                                {id:"valor", name:"Valor", functionToApply:(val) => {return <span>{pattern.formatCurrency(val)}</span>}},
+                            ]
+                        }
+                        rows={data.spc.listaSpc}
                     />
                 : ""}
 
@@ -393,24 +430,18 @@ const CreditoViewMix = (props) => {
                     <CardWithTable title="REGISTRO DE DÉBITOS"
                         fields={
                             [
-                                {id:"avalistaComprador", name:"Avalista comprador"},
-                                {id:"dataInclusao", name:"Data Inclusão"},
-                                {id:"valor", name:"Valor"}
-                            ]
-                        }
-                        rows={data.registrosDebitos.registrosDebitos}
-
-                        hiddenRows={
-                            [
-                                {id:"cidade", name:"Cidade"},
-                                {id:"dataVencimento", name:"Grupo"},
-                                {id:"telefone", name:"Telefone"},
+                                {id:"dataInclusao", name:"Inclusão"},
+                                {id:"dataVencimento", name:"Vencimento"},
+                                {id:"credor", name:"Credor"},
+                                {id:"cidade", name:"Cidade Associado", functionToApply:(val, indexRow) => {return <span>{val} {data.spc.listaSpc[indexRow].uf ? "-" + data.spc.listaSpc[indexRow].uf : ""}</span>}},
+                                {id:"avalistaComprador", name:"Comprador/Fiador/Avalista"},
                                 {id:"contrato", name:"Contrato"},
-                                {id:"situacao", name:"Situação"},
                                 {id:"praca", name:"Praça"},
-                                {id:"informacoesAdicionais", name:"Informações"}
+                                {id:"valor", name:"Valor", functionToApply:(val) => {return <span>{pattern.formatCurrency(val)}</span>}},
                             ]
                         }
+
+                        rows={data.registrosDebitos.registrosDebitos}
                     />
                 : ""}
 

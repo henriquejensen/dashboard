@@ -32,6 +32,7 @@ export default function(state=getInitialState, action) {
         case constants.CHANGE_TAB_CREDITOMIX: {
             // verifica se a tab passada existe no array, se nao, entao busca a primeira tab e a retorna
             let newTabActive = state.response[action.payload] ? action.payload : state.response[Object.keys(state.response)[0]] ? state.response[Object.keys(state.response)[0]].label : ""
+
             return {
                 status: SUCCESS,
                 message: "",
@@ -91,6 +92,7 @@ export default function(state=getInitialState, action) {
             }
 
             let newResponse = action.payload.response
+            newResponse.cadastro.documento = documento
             let label = action.payload.parameters.tipo + ":" + documento
 
             newResponse['label'] = label
@@ -102,7 +104,7 @@ export default function(state=getInitialState, action) {
                 loading: false,
                 status: SUCCESS,
                 message: state.message,
-                response: {...state.response, [documento]:newResponse },
+                response: {...state.response, [label]:newResponse },
                 tabActive: label,
                 lastQueries: state.lastQueries,
                 type: state.type,

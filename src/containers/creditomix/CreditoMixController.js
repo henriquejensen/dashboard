@@ -78,14 +78,25 @@ class CreditoMix extends Component {
 
     onChangeCheckBox = (name, index) => {
         let newOptions = JSON.parse(JSON.stringify(this.state.options))
+        let showCep = false
         // filtra no array o elemento selecionado e troca o valor deste objeto no map
         newOptions[this.props.type.toLowerCase()]
                 .filter(option => option.name === name)
                 .map(opt => opt.checked = !opt.checked)
 
+        for(let option of newOptions[this.props.type.toLowerCase()]) {
+            if(option.name === "limiteCreditoSugerido" ||
+                option.name === "rendaPresumidaSpc" ||
+                option.name === "limiteCreditoPj"  ||
+                option.name === "faturamentoPresumido"
+            ) {
+                showCep = option.checked ? option.checked : showCep
+            }
+        }
+
         this.setState({
             options: newOptions,
-            showCep: name === "limiteCreditoSugerido" ? !this.state.showCep : this.state.showCep
+            showCep: showCep
         })
     }
 
@@ -284,7 +295,11 @@ class CreditoMix extends Component {
     renderInputCommon = () => {
         let {type} = this.props
         let {isCpfOrCnpj} = this.state
-        let showCep = type === "MASTER" || type === "PREMIUM" || type === "GOLD" || (type === "MAX" && isCpfOrCnpj === "CPF")
+        let showCepByType = type === "MASTER" ||
+                      type === "PREMIUM" ||
+                      type === "GOLD" ||
+                      (type === "MAX" && isCpfOrCnpj === "CPF")
+
         return (
             <div>
                 <Col md={2}>
@@ -298,9 +313,9 @@ class CreditoMix extends Component {
                     />
                 </Col>
                 
-                {this.renderDocumentInput(showCep ? 3 : 6)}
+                {this.renderDocumentInput(showCepByType ? 3 : 6)}
 
-                {showCep ?
+                {showCepByType || this.state.showCep ?
                     this.renderCep(3)
                 : ""}
             </div>

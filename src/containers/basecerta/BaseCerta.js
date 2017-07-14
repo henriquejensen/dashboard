@@ -164,11 +164,13 @@ class BaseCerta extends Component {
   }
 
   render() {
-    let loading = this.props.loading
     let tickets = this.props.tickets || []
+    const loading = this.props.loading
+    const { ticket, layout, clienteLogin, nomeArquivo, usuario, limitar } = this.state
+    const inputFilter = { ticket, layout, clienteLogin, nomeArquivo, usuario, limitar }
 
     if(tickets.length > 0 && tickets.find(ticket => ticket.porcentagem < 100)) {
-      setTimeout(() => this.props.getTicketsBaseCerta(), 10000)
+        setTimeout(() => this.props.filterBaseCerta(inputFilter), 10000)
     }
 
     return (
