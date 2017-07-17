@@ -4,16 +4,27 @@ import {connect} from "react-redux"
 import { Alert, Col, Form } from "react-bootstrap"
 
 //Actions
-import {closeMessageErrorBaseCerta, getLayoutsBaseCerta, postNovoEnriquecimento} from "../../actions/actionsBaseCerta"
+import {
+    closeMessageErrorBaseCerta,
+    getLayoutsBaseCerta,
+    loadingBaseCerta,
+    postNovoEnriquecimento,
+    reprocessedFile
+} from "../../actions/actionsBaseCerta"
 
 //Components
 import { MyFileUpload, MyFieldGroup, SelectGroup, TextAreaGroup } from "../../components/forms/CommonForms"
 import MyButton from "../../components/button/MyButton"
+import { LoadingScreen } from "../../components/utils/ElementsAtScreen"
+
+//Constants
+import { UPLOAD_NOVO_ENRIQUECIMENTO } from "../../constants/constantsBaseCerta"
 
 class NovoEnriquecimento extends Component {
     constructor(props) {
         super(props)
 
+        this.mailDNS = location.origin + "/basecerta?ticket="
         this.filesExtensionAccept = ".csv,.rem,.zip,.txt"
 
         this.state = {
@@ -29,15 +40,18 @@ class NovoEnriquecimento extends Component {
         evt.preventDefault()
 
         if(!this.state.error) {
+            this.props.loadingBaseCerta()
+
             this.props.postNovoEnriquecimento({
                 layout: this.state.layoutBaseCertaSelected || this.props.layouts[0].value,
                 description: this.state.modelosDescricao,
                 file: this.state.fileUpload,
-                mailDNS: location.origin + "/basecerta?ticket="
+                mailDNS: this.mailDNS
             })
+
+            this.props.closeNovoEnriquecimento ? this.props.closeNovoEnriquecimento() : ""
         }
 
-        this.props.closeNovoEnriquecimento()
     }
 
     onChange = (evt) => {
@@ -63,6 +77,20 @@ class NovoEnriquecimento extends Component {
                 error: false
             })
         }
+    }
+
+    renderButtonSendDuplicateFile = () => {
+        const ticket = this.props.tickets[0].id
+        return (
+            <span>
+                Ticket <strong>{ticket}</strong> possui o mesmo conteúdo que você enviou, deseja reprocessar o conteúdo? <br/>
+                <MyButton
+                    onClickButton={() => this.props.reprocessedFile({ticket, mailDNS:this.mailDNS})}
+                    myButtonText="Confirmar o reprocessamento"
+                    myButtonClass="color-payement"
+                />
+            </span>
+        )
     }
 
     renderForm = () => {
@@ -114,15 +142,22 @@ class NovoEnriquecimento extends Component {
     }
 
     render() {
+        const { loading, status } = this.props
         return (
             <span>
-                {this.props.status ?
+                {status ?
                     <Col md={12} sm={12}> 
-                        <Alert bsStyle="success" className="text-center" onDismiss={this.props.closeMessageErrorBaseCerta}>
-                            {this.props.message}
+                        <Alert bsStyle={status === UPLOAD_NOVO_ENRIQUECIMENTO ? "danger" : "success"} className="text-center" onDismiss={this.props.closeMessageErrorBaseCerta}>
+                            {status === UPLOAD_NOVO_ENRIQUECIMENTO ?
+                                this.renderButtonSendDuplicateFile()
+                            : 
+                                this.props.message
+                            }
                         </Alert>
                     </Col>
                 :""}
+
+                {loading ? <LoadingScreen /> : ""}
 
                 {this.renderForm()}
             </span>
@@ -132,9 +167,12 @@ class NovoEnriquecimento extends Component {
 
 function mapStateToProps(state) {
     return {
+        tickets: state.basecerta.tickets,
         layouts: state.basecerta.layouts,
         message: state.basecerta.message,
-        status: state.basecerta.status
+        status: state.basecerta.status,
+        loading: state.basecerta.loading,
+        ticketReprocessed: state.basecerta.ticketReprocessed
     }
 }
 
@@ -142,7 +180,9 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         closeMessageErrorBaseCerta,
         getLayoutsBaseCerta,
-        postNovoEnriquecimento
+        loadingBaseCerta,
+        postNovoEnriquecimento,
+        reprocessedFile
     }, dispatch)
 }
 

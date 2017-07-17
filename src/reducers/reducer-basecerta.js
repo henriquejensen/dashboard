@@ -40,8 +40,7 @@ export default function(state=getInitialState, action) {
             localStorage.setItem(basecerta.GET_LAYOUTS_BASECERTA, JSON.stringify(layouts))
             
             return {
-                status:"",
-                message:"",
+                ...state,
                 tickets: state.tickets,
                 layouts: layouts.map((layout) => {return { label: layout.descricaoLayout, value: layout.idLayout }}),
                 loading: false
@@ -50,8 +49,7 @@ export default function(state=getInitialState, action) {
 
         case basecerta.GET_TICKETS_BASECERTA: {
             return {
-                status:"",
-                message:"",
+                ...state,
                 tickets: action.payload.response.response,
                 layouts: state.layouts,
                 loading: false
@@ -60,19 +58,18 @@ export default function(state=getInitialState, action) {
 
         case basecerta.LOADING_BASECERTA: {
             return {
-                status:"",
-                message:"",
-                tickets: state.response,
-                layouts: state.layouts,
+                ...state,
                 loading: true
             }
         }
 
         case basecerta.UPLOAD_NOVO_ENRIQUECIMENTO: {
+            const { response } = action.payload.response
+            const isDuplicate = response[0].idDuplicado && response[0].status == 18
             return {
-                status: SUCCESS,
+                status: isDuplicate ? basecerta.UPLOAD_NOVO_ENRIQUECIMENTO : SUCCESS,
                 message: MESSAGE_SUCCES_FILE_UPLOAD,
-                tickets: action.payload.response.response,
+                tickets: isDuplicate ? state.tickets : response,
                 layouts: state.layouts,
                 loading: false
             }

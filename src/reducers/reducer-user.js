@@ -20,6 +20,7 @@ import {
         USER_LOGIN,
         USER_PHONE,
         USER_PERFIL,
+        USER_PERFIL_ORDEM,
         USER_PRODUCTS
 } from "../constants/utils"
 
@@ -34,6 +35,7 @@ let user = {
     usuarioLogin: localStorage.getItem(USER_LOGIN),
     usuarioFoto: localStorage.getItem(USER_PHOTO) || "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/avatar.gif",
     perfilDescricao: localStorage.getItem(USER_PERFIL),
+    perfilOrdem: localStorage.getItem(USER_PERFIL_ORDEM),
     pessoaDescricao: localStorage.getItem(USER_CLIENT),
     ip: localStorage.getItem("ip"),
     status: null,
@@ -115,7 +117,8 @@ export default function (state = user, action) {
                 usuarioFoto="",
                 usuarioId,
                 perfilDescricao,
-                pessoaDescricao
+                pessoaDescricao,
+                perfilOrdem
             } = response
 
             localStorage.setItem(USER_PRODUCTS, mapProdutos)
@@ -125,6 +128,7 @@ export default function (state = user, action) {
             localStorage.setItem(USER_PHONE, usuarioTelefone)
             localStorage.setItem(USER_PHOTO, FOTO_URL + usuarioId + ".jpg")
             localStorage.setItem(USER_PERFIL, perfilDescricao)
+            localStorage.setItem(USER_PERFIL_ORDEM, perfilOrdem)
             localStorage.setItem(USER_CLIENT, pessoaDescricao)
             
             return {

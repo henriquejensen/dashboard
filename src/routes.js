@@ -13,8 +13,6 @@ import EditUser from "./containers/user/EditUser"
 import Contato from "./containers/contato"
 
 import Localize from "./containers/localize/LocalizeController"
-import Dashboard from "./containers/dashboard/Dashboard"
-import Chat from "./containers/chat/Chat"
 
 // SMS
 import SMS from "./containers/sms/SMSController"
@@ -71,10 +69,10 @@ export default (
       <Route name="Relatórios" path="relatorios" component={Relatorios} />
       <Route name="Consumo" path="consumo" component={Consumo} />
 
+      <Route name="Cadastro" path="cadastro" component={Cadastro}	/>
       <Route name="Editar" path="editar" component={EditUser}	/>
       <Route name="Contato" path="contato" component={Contato}	/>
 
-      <Route name="Chat" path="chat" component={Chat}	/>
     </Route>
 
     <Route name="Erro" path="*" component={Login} />

@@ -24,6 +24,7 @@ import {
     USER_PHOTO,
     USER_NAME,
     USER_PERFIL,
+    USER_PERFIL_ORDEM,
     USER_PRODUCTS
 } from "../constants/utils"
 import { GET_LAYOUTS_BASECERTA } from "../constants/constantsBaseCerta"
@@ -181,6 +182,7 @@ function removeInfoLocalStorage() {
     localStorage.removeItem(USER_PRODUCTS)
     localStorage.removeItem(USER_NAME)
     localStorage.removeItem(USER_PERFIL)
+    localStorage.removeItem(USER_PERFIL_ORDEM)
     localStorage.removeItem(USER_CLIENT)
     localStorage.removeItem(USER_LOGIN)
     localStorage.removeItem(USER_EMAIL2)

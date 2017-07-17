@@ -2,6 +2,7 @@ export const URL_GET_LAYOUTS_BASECERTA = "https://basecerta.assertivasolucoes.co
 export const URL_GET_TICKETS_BASECERTA = "https://basecerta.assertivasolucoes.com.br/fila"
 export const URL_UPLOAD_NOVO_ENRIQUECIMENTO = "https://basecerta.assertivasolucoes.com.br/fila"
 export const URL_FILTER_BASECERTA = "https://basecerta.assertivasolucoes.com.br/fila/filter"
+export const URL_FILE_REPROCESSED = "https://basecerta.assertivasolucoes.com.br/fila/reprocessar"
 export const URL_DOWNLOAD_ENTRADA = "https://basecerta.assertivasolucoes.com.br/fila/downloadEntrada/"
 export const URL_DOWNLOAD_SAIDA = "https://basecerta.assertivasolucoes.com.br/fila/downloadSaida/"
 

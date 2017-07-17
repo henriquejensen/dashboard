@@ -1,7 +1,7 @@
 import * as basecerta from "../constants/constantsBaseCerta"
 import { COMPANY_PRODUCT_BASECERTA_LABEL } from "../constants/constantsCompany"
 
-import { apiFileUpload, apiFileDownload, apiGet, api } from "../api/Api"
+import { apiFileUpload, apiFileDownload, apiGet, api, apiContentType } from "../api/Api"
 
 export function filterBaseCerta({ ticket="", layout="", clienteLogin="", usuario="", nomeArquivo="", numPage="", limitar="" }) {
     let data = `?ticket=${ticket}&layout=${layout}&clienteLogin=${clienteLogin}&usuario=${usuario}&nomeArquivo=${nomeArquivo}&numPage=${numPage}&numPageSize=${limitar}`
@@ -80,6 +80,16 @@ export function postNovoEnriquecimento({layout, description="", file, mailDNS}) 
 
     return (dispatch) => {
         apiFileUpload(dispatch, url, {name:"file", file:file}, data, search)
+    }
+}
+
+export function reprocessedFile({ticket, mailDNS}) {
+    let url = basecerta.URL_FILE_REPROCESSED + "/" + ticket
+    let data = {mailDNS}
+    let search = basecerta.GET_TICKETS_BASECERTA
+
+    return (dispatch) => {
+        apiContentType(dispatch, url, data, search)
     }
 }
 

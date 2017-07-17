@@ -11,6 +11,7 @@ export const USER_PHONE = "usuarioTelefone"
 export const USER_EMAIL2 = "usuarioEmail2"
 export const USER_PHOTO = "usuarioFoto"
 export const USER_PERFIL = "perfil"
+export const USER_PERFIL_ORDEM = "perfilOrdem"
 export const USER_PRODUCTS = "produtos"
 export const USER_CLIENT = "cliente"
 export const GOOGLE_MAPS_KEY = 'AIzaSyDrjaImSSsOUSh9d5KDq9RVnHKtNSI_GJI'

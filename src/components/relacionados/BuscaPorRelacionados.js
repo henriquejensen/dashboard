@@ -194,7 +194,7 @@ export default class BuscaPorRelacionados extends Component {
                                                     </td>
                                                     <td>{relacionado.dataNascimento}</td>
                                                     <td>{relacionado.pessoaRelacionada}</td>
-                                                    <td>{relacionado.cidade + " - " + relacionado.uf}</td>
+                                                    <td>{relacionado.cidade && relacionado.uf ? relacionado.cidade + " - " + relacionado.uf : relacionado.cidade ? relacionado.cidade : NENHUM_REGISTRO}</td>
                                                     <td>
                                                         {this.renderButtons(relacionado.enderecos, "enderecos", index, relacionado.documento, "home", isCpfOrCnpj)}
                                                         <span style={{paddingRight:15}}></span>

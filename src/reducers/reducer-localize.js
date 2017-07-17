@@ -201,7 +201,7 @@ export default function(state = initialState, action) {
 					status: "model",
 					message: "",
 					loading: false,
-					response: [response],
+					response: [...state.response, response],
 					tabActive: model.cadastro.cpf,
 					lastQueries: newState.lastQueries,
 					type: newState.type

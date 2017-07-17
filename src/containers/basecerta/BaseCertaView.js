@@ -42,27 +42,31 @@ class BaseCertaView extends Component {
         documentosEntregues = documentosEntregues || 0
         return (
             <Panel title={"Ticket: " + ticket.id} >
-                <Col md={4}>
-                    <strong>Solicitante: </strong>{ticket.usuario.usuario}
+                <Col md={12} style={{padding:0}}>
+                    <Col md={4}>
+                        <strong>Solicitante: </strong>{ticket.usuario.usuario}
+                    </Col>
+
+                    <Col md={4}>
+                        <strong>Total entrada/saída: </strong>{documentosEnviados  + "/" + documentosEntregues}
+                    </Col>
+
+                    <Col md={4}>
+                        <strong>Arquivo: </strong>{ticket.nomeArquivo}
+                    </Col>
                 </Col>
 
-                <Col md={4}>
-                    <strong>Total entrada/saída: </strong>{documentosEnviados  + "/" + documentosEntregues}
-                </Col>
+                <Col md={12} style={{padding:0}}>
+                    <Col md={4}>
+                        <strong>Layout: </strong>{ticket.descricaoLayout}
+                    </Col>
 
-                <Col md={4}>
-                    <strong>Arquivo: </strong>{ticket.nomeArquivo}
-                </Col>
-
-                <Col md={4}>
-                    <strong>Layout: </strong>{ticket.descricaoLayout}
-                </Col>
-
-                <Col md={4}>
-                    <strong>Início: </strong>{ticket.dataPostagem}
-                </Col>
-                <Col md={4}>
-                    <strong>Fim: </strong>{ticket.dataEntrega ? ticket.dataEntrega : IN_PROCESS }
+                    <Col md={4}>
+                        <strong>Início: </strong>{ticket.dataPostagem}
+                    </Col>
+                    <Col md={4}>
+                        <strong>Fim: </strong>{ticket.dataEntrega ? ticket.dataEntrega : IN_PROCESS }
+                    </Col>
                 </Col>
 
                 <Col md={8}>
@@ -88,11 +92,21 @@ class BaseCertaView extends Component {
                             Baixar entrada
                         </MenuItem>
 
+                        {ticket.porcentagem === 100 && this.props.perfilOrdem == 2 ?
+                            <MenuItem
+                                download
+                                onClick={() => this.props.reprocessedFile({ticket:ticket.id})}
+                                eventKey="2"
+                            >
+                                Reprocessar entrada
+                            </MenuItem>
+                        : ""}
+
                         {ticket.porcentagem === 100 && ticket.statusTela === "Processado" ?
                             <MenuItem
                                 download
                                 onClick={() => this.downloadDocument("SAIDA")}
-                                eventKey="2"
+                                eventKey="3"
                                 target="_blank"
                             >
                                 Baixar saída

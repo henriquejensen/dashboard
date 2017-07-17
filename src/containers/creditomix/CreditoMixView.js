@@ -210,7 +210,7 @@ const CreditoViewMix = (props) => {
                             [
                                 {label: "Valor Crédito", value:data.limiteCredito.valorLimiteCredito ? pattern.formatCurrency(data.limiteCredito.valorLimiteCredito) : NENHUM_REGISTRO},
                                 {label: "Cálculo", value:data.limiteCredito.dataCalculo ? data.limiteCredito.dataCalculo : NENHUM_REGISTRO},
-                                {label: "Metodologia", value:data.limiteCredito.mensagem ? `O LIMITE DE CRÉDITO SUGERIDO LEVOU EM CONSIDERAÇÃO O MOTIVO: ${data.limiteCredito.mensagem}` : undefined}
+                                {label: "Metodologia", value:data.limiteCredito.interpretacao ? data.limiteCredito.interpretacao : undefined}
                             ]
                         }
                     />
@@ -222,7 +222,7 @@ const CreditoViewMix = (props) => {
                         elements={
                             [
                                 {label: "Valor Total", value:data.gastoEstimado.valorTotal ? pattern.formatCurrency(data.gastoEstimado.valorTotal) : NENHUM_REGISTRO},
-                                {label: "Metodologia", value:data.cadastro.documento.length > 11 ? "O VALOR INFORMADO É UMA ESTIMATIVA DE GASTO ANUAL DO CNPJ CONSULTADO" : "Informa, por meio de faixa de valores em reais, a estimativa mensal com os gastos que o indivíduo consultado tem como o pagamento de energia elétrica, água, gás, telefonia, moradia, transporte, educação e saúde. É baseada nas melhores práticas e modelos estastísticos, mas pode não refletir o gasto real do indivíduo"}
+                                {label: "Metodologia", value:data.gastoEstimado.interpretacao ? data.gastoEstimado.interpretacao : undefined}
                             ]
                         }
                     />
@@ -230,12 +230,11 @@ const CreditoViewMix = (props) => {
 
                 {data.rendasPresumidas ?
                     <CardWithTable title="RENDA PRESUMIDA"
-                        mdLength={4}
+                        mdLength={6}
                         elements={
                             [
                                {label: "Valor Total", value:data.rendasPresumidas.valorTotal ? pattern.formatCurrency(data.rendasPresumidas.valorTotal) : undefined},
                                {label: "Valor Mediano", value:data.rendasPresumidas.mediana ? pattern.formatCurrency(data.rendasPresumidas.mediana) : undefined},
-                               {label: "Total", value:data.rendasPresumidas.quantidadeTotal ? data.rendasPresumidas.quantidadeTotal : undefined},
                             ]
                         }
 

@@ -10,7 +10,8 @@ import {
   getDocumentoSaidaBaseCerta,
   getDocumentoEntradaBaseCerta,
   getTicketsBaseCerta,
-  loadingBaseCerta
+  loadingBaseCerta,
+  reprocessedFile
 } from "../../actions/actionsBaseCerta";
 
 //Components
@@ -26,12 +27,14 @@ import { LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 //Constants
 import { NENHUM_REGISTRO, ADVANCED_SEARCH } from "../../constants/utils"
+import { UPLOAD_NOVO_ENRIQUECIMENTO } from "../../constants/constantsBaseCerta"
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_BASECERTA } from "../../constants/constantsCompany"
 
 class BaseCerta extends Component {
   constructor(props) {
     super(props)
 
+    this.mailDNS = "portal"
     this.state = {
       showBuscaAvancada: false,
       IsModalOpen: false
@@ -147,12 +150,41 @@ class BaseCerta extends Component {
           
           {this.props.status ?
               <Col md={12} sm={12}> 
-                  <Alert bsStyle="success" className="text-center" onDismiss={this.props.closeMessageErrorBaseCerta}>
-                      {this.props.message}
+                  <Alert bsStyle={this.props.status === UPLOAD_NOVO_ENRIQUECIMENTO ? "danger" : "success"} className="text-center" onDismiss={this.props.closeMessageErrorBaseCerta}>
+                    {this.props.status === UPLOAD_NOVO_ENRIQUECIMENTO ?
+                        this.renderButtonSendDuplicateFile()
+                    : 
+                        this.props.message
+                    }
                   </Alert>
               </Col>
           :""}
         </Panel>
+      )
+  }
+
+  postNovoEnriquecimento = () => {
+    //this.props.loadingBaseCerta()
+    this.setState({IsModalOpen: false})
+  }
+
+  reprocessedFile = (ticket, mailDNS=null) => {
+    this.props.loadingBaseCerta()
+    this.props.reprocessedFile({ticket, mailDNS:this.mailDNS})
+    this.props.closeMessageErrorBaseCerta()
+  }
+
+  renderButtonSendDuplicateFile = () => {
+      const ticket = this.props.tickets[0].id
+      return (
+          <span>
+              Ticket <strong>{ticket}</strong> possui o mesmo conteúdo que você enviou, deseja reprocessar o conteúdo? <br/>
+              <MyButton
+                  onClickButton={() => this.reprocessedFile(ticket, this.mailDNS)}
+                  myButtonText="Confirmar o reprocessamento"
+                  myButtonClass="color-payement"
+              />
+          </span>
       )
   }
 
@@ -169,9 +201,7 @@ class BaseCerta extends Component {
     const { ticket, layout, clienteLogin, nomeArquivo, usuario, limitar } = this.state
     const inputFilter = { ticket, layout, clienteLogin, nomeArquivo, usuario, limitar }
 
-    if(tickets.length > 0 && tickets.find(ticket => ticket.porcentagem < 100)) {
-        setTimeout(() => this.props.filterBaseCerta(inputFilter), 10000)
-    }
+    setTimeout(() => this.props.filterBaseCerta(inputFilter), 20000)
 
     return (
       <div>
@@ -196,6 +226,8 @@ class BaseCerta extends Component {
               <BaseCertaView
                 ticket={ticket}
                 key={ticket.id}
+                perfilOrdem={this.props.perfilOrdem}
+                reprocessedFile={this.reprocessedFile}
                 getDocumentoSaidaBaseCerta={this.props.getDocumentoSaidaBaseCerta}
                 getDocumentoEntradaBaseCerta={this.props.getDocumentoEntradaBaseCerta}
               />)
@@ -212,7 +244,7 @@ class BaseCerta extends Component {
             title={this.state.modalTitle}
         >
 
-          <NovoEnriquecimento closeNovoEnriquecimento={() => this.setState({IsModalOpen: false})} />        
+          <NovoEnriquecimento closeNovoEnriquecimento={this.postNovoEnriquecimento} />        
 
         </Modal>
 
@@ -221,9 +253,9 @@ class BaseCerta extends Component {
   }
 }
 
-
 function mapStateToProps(state) {
   return {
+    perfilOrdem: state.user.perfilOrdem,
     tickets: state.basecerta.tickets,
     message: state.basecerta.message,
     status: state.basecerta.status,
@@ -238,7 +270,8 @@ function mapDispatchToProps(dispatch) {
       getDocumentoSaidaBaseCerta,
       getDocumentoEntradaBaseCerta,
       getTicketsBaseCerta,
-      loadingBaseCerta
+      loadingBaseCerta,
+      reprocessedFile
   }, dispatch)
 }
 
