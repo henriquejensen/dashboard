@@ -95,7 +95,7 @@ class BaseCertaView extends Component {
                         {ticket.porcentagem === 100 && this.props.perfilOrdem == 2 ?
                             <MenuItem
                                 download
-                                onClick={() => this.props.reprocessedFile({ticket:ticket.id})}
+                                onClick={() => this.props.reprocessedFile(ticket.id)}
                                 eventKey="2"
                             >
                                 Reprocessar entrada

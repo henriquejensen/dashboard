@@ -119,6 +119,9 @@ class VeiculosView extends Component {
 
     mountSinistroIrrecuperavel = (sinistroIrrecuperavel) => {
         return [
+            {label: "PT", value:<span className={sinistroIrrecuperavel.ptPositivo == "Sim" ? "destaque-ativado" : "destaque-desativado"}>{sinistroIrrecuperavel.ptPositivo}</span>},
+            {label: "Tipo Registro", value:sinistroIrrecuperavel.tipoRegistro},
+            {label: "Tamanho", value:sinistroIrrecuperavel.tamanho},
             {label: "Data", value:sinistroIrrecuperavel.data},
             {label: "Descrição", value:sinistroIrrecuperavel.descricao}
         ]

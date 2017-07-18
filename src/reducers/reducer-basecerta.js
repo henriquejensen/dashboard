@@ -9,28 +9,27 @@ const getInitialState = {
     message:"",
     tickets: [],
     layouts: [],
-    loading: false
+    loading: false,
+    ticketDuplicado: null
 }
 
 export default function(state=getInitialState, action) {
     switch(action.type) {
         case basecerta.CLOSE_MESSAGE_ERROR_BASECERTA: {
             return {
+                ...state,
                 status:"",
                 message:"",
-                tickets: state.tickets,
-                layouts: state.layouts,
                 loading: false
             }
         }
 
         case basecerta.GET_DOCUMENTO_ENTRADA_BASECERTA: {
             return {
+                ...state,
                 documentoSaida: action.payload.response,
                 status: "",
                 message: "",
-                tickets: state.tickets,
-                layouts: state.layouts,
                 loading: false
             }
         }
@@ -64,12 +63,14 @@ export default function(state=getInitialState, action) {
         }
 
         case basecerta.UPLOAD_NOVO_ENRIQUECIMENTO: {
+            debugger
             const { response } = action.payload.response
             const isDuplicate = response[0].idDuplicado && response[0].status == 18
             return {
                 status: isDuplicate ? basecerta.UPLOAD_NOVO_ENRIQUECIMENTO : SUCCESS,
                 message: MESSAGE_SUCCES_FILE_UPLOAD,
                 tickets: isDuplicate ? state.tickets : response,
+                ticketDuplicado: response[0].id,
                 layouts: state.layouts,
                 loading: false
             }
@@ -77,20 +78,18 @@ export default function(state=getInitialState, action) {
 
         case REQUEST_ERROR: {
             return {
+                ...state,
                 status: REQUEST_ERROR,
                 message: action.payload.mensagem,
-                tickets: state.tickets,
-                layouts: state.layouts,
                 loading: false
             }
         }
 
         case ERR_CONNECTION_REFUSED: {
             return {
+                ...state,
                 status: ERR_CONNECTION_REFUSED,
                 message: ERROR_503,
-                tickets: state.tickets,
-                layouts: state.layouts,
                 loading: false
             }
         }

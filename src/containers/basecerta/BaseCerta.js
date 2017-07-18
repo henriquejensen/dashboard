@@ -170,12 +170,12 @@ class BaseCerta extends Component {
 
   reprocessedFile = (ticket, mailDNS=null) => {
     this.props.loadingBaseCerta()
-    this.props.reprocessedFile({ticket, mailDNS:this.mailDNS})
+    this.props.reprocessedFile({ticket, mailDNS})
     this.props.closeMessageErrorBaseCerta()
   }
 
   renderButtonSendDuplicateFile = () => {
-      const ticket = this.props.tickets[0].id
+      const ticket = this.props.ticketDuplicado
       return (
           <span>
               Ticket <strong>{ticket}</strong> possui o mesmo conteúdo que você enviou, deseja reprocessar o conteúdo? <br/>
@@ -256,6 +256,7 @@ class BaseCerta extends Component {
 function mapStateToProps(state) {
   return {
     perfilOrdem: state.user.perfilOrdem,
+    ticketDuplicado: state.basecerta.ticketDuplicado,
     tickets: state.basecerta.tickets,
     message: state.basecerta.message,
     status: state.basecerta.status,
