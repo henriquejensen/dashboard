@@ -31,13 +31,15 @@ export default class Email extends Component {
                         newEmail={this.state.newEmail}
                         sendNewEmail={this.sendNewEmail}
                     />
-                    <div className="col-md-12 col-sm-12 relacionados">
-                        <a className="moreInfo" onClick={() => this.setState({newEmail:!this.state.newEmail})}>
-                            {this.state.newEmail ?
-                                "Cancelar"
-                            : "Adicionar um novo email"}
-                        </a>
-                    </div>
+                    {/*
+                        <div className="col-md-12 col-sm-12 relacionados">
+                            <a className="moreInfo" onClick={() => this.setState({newEmail:!this.state.newEmail})}>
+                                {this.state.newEmail ?
+                                    "Cancelar"
+                                : "Adicionar um novo email"}
+                            </a>
+                        </div>
+                    */}
                 </Panel> :
                 <Panel title="EMAILS">
                     <div className="text-center"><strong>{NENHUM_REGISTRO}</strong></div>

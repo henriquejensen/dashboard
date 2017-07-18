@@ -103,3 +103,14 @@ export const COMPANY_PRODUCT_VEICULOS_URL_SEE_DETAILS = "http://assertivasolucoe
 export const LOGO_VEICULOS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-veiculos.png"
 export const ICON_VEICULOS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-veiculos.png"
 export const ICON_VEICULOS_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-veiculos-negative.png"
+
+// Monitora
+export const URL_MONITORA = "/monitora"
+export const COMPANY_PRODUCT_MONITORA = "Monitora"
+export const COMPANY_PRODUCT_MONITORA_LABEL = "MONITORA"
+export const COMPANY_PRODUCT_MONITORA_COLOR = "#AC6240"
+export const COMPANY_PRODUCT_MONITORA_COLOR_LIGHT = "#8CC6E2"
+export const COMPANY_PRODUCT_MONITORA_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/monitora"
+export const LOGO_MONITORA = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-basecerta.png"
+export const ICON_MONITORA = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-basecerta.png"
+export const ICON_MONITORA_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-basecerta-negative.png"

@@ -1,0 +1,16 @@
+#title-product {
+    text-align: center;
+    padding: 15px
+}
+
+#title-product img {
+    vertical-align: middle;
+    height: 30px
+}
+
+#title-product h1 {
+    vertical-align: middle;
+    display: inline;
+    font-weight: bold;
+    padding-left: 5px
+}

@@ -61,7 +61,7 @@ export default class Enderecos extends Component {
                                 onClickButton={this.mostrarMapa}
                                 params={[i+end.cep]}
                                 myButtonClass="noPrint my-button-circle"
-                                myButtonText={<i className={this.state.mapa && this.state.idCep == i+end.cep ? "fa fa-times-circle": "fa fa-map-o"} />}
+                                myButtonText={<i className={this.state.mapa && this.state.idCep == i+end.cep ? "fa fa-times-circle": "fa fa-map-marker"} />}
                             />
 
                             {this.props.searchEndereco ?

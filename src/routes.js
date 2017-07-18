@@ -28,6 +28,7 @@ import Credito from "./containers/credito/CreditoController"
 import CreditoMix from "./containers/creditomix/CreditoMixController"
 import Veiculos from "./containers/veiculos/VeiculosController"
 import FocoFiscal from "./containers/focofiscal/FocoFiscalController"
+import Monitora from "./containers/monitora/MonitoraController"
 
 import Consumo from "./containers/relatorios/Consumo"
 import Relatorios from "./containers/relatorios/Relatorios"
@@ -65,6 +66,7 @@ export default (
 
       <Route name="Veiculos" path={todosProdutos.VEICULOS.link} component={Veiculos} />
 
+      <Route name="Monitora" path={todosProdutos.MONITORA.link} component={Monitora} />
 
       <Route name="Relatórios" path="relatorios" component={Relatorios} />
       <Route name="Consumo" path="consumo" component={Consumo} />

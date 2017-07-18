@@ -66,185 +66,155 @@ export default function(state = initialState, action) {
 			pessoasRelacionadas: []
 		}
 
-		let newState = Object.assign({},state)
-
-		/*Verifica se existem 6 elementos */
-		if(state.response.length > 5) {
-			newState.response.shift()
-		}
-
 		switch(action.type) {
-			case CHANGE_LOCALIZE_TYPE:
+			case CHANGE_LOCALIZE_TYPE: {
 				return {
+					...state,
 					status: SUCCESS,
 					message: "",
 					loading: false,
-					response: newState.response,
-					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries,
 					type: action.payload.toUpperCase()
 				}
+			}
 
-			case CHANGE_TAB_LOCALIZE:
-				let tab = searchDocument(newState.response,action.payload);
+			case localize.CHANGE_TAB_LOCALIZE: {
+				let tab = searchDocument(state.response,action.payload)
 				tab = tab >= 0 ? tab : 0;
 
 				return {
+					...state,
 					status: "changeTab",
 					message: "",
 					loading: false,
-					response: newState.response,
-					tabActive: newState.response.length > 0 ? newState.response[tab].label : "",
-					lastQueries: newState.lastQueries,
-					type: newState.type
+					tabActive: state.response.length > 0 ? state.response[tab].label : "",
 				}
+			}
 
-			case CLOSE_LOCALIZE_MODEL:
+			case localize.CLOSE_LOCALIZE_MODEL: {
 				return {
+					...state,
 					loading: false,
-					status: "closeModel",
 					message: "",
 					response: [],
-					tabActive: "",
-					lastQueries: newState.lastQueries,
-					type: newState.type
 				}
+			}
 
-			case CLOSE_MESSAGE_ERROR_LOCALIZE:
+			case localize.CLOSE_MESSAGE_ERROR_LOCALIZE: {
 				return {
+					...state,
 					status: "",
 					message: "",
 					loading: false,
-					response: newState.response,
-					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
 				}
+			}
 
-			case CLOSE_TAB_LOCALIZE:
-				let newResponse = newState.response.concat();
+			case localize.CLOSE_TAB_LOCALIZE: {
+				let newResponse = state.response.concat();
 				newResponse.splice(action.payload, 1);
 
 				return {
-					status: "closeTab",
+					...state,
 					message: "",
 					loading: false,
 					response: newResponse,
 					tabActive: newResponse[newResponse.length-1] ? newResponse[newResponse.length-1].label : [],
-					lastQueries: newState.lastQueries,
-					type: newState.type
 				}
+			}
 
-			case ERR_CONNECTION_REFUSED:
+			case ERR_CONNECTION_REFUSED: {
 				return {
+					...state,
 					status: ERR_CONNECTION_REFUSED,
 					message: ERROR_503,
 					loading: false,
-					response: newState.response,
-					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
-				};
+				}
+			}
 
-			case GET_LOCALIZE_LAST_QUERIES: {
+			case localize.GET_LOCALIZE_LAST_QUERIES: {
 				let responseServer = action.payload.response;
 				let tipo = action.payload.parameters.tipo;
 				if(tipo == "NOMEOUENDERECO") {
-					newState.lastQueries["NOME"] = patternJsonNomeOuEndereco(responseServer.localizeUltimasConsultas, "NOME");
-					newState.lastQueries["ENDERECO"] = patternJsonNomeOuEndereco(responseServer.localizeUltimasConsultas, "ENDERECO");
+					state.lastQueries["NOME"] = patternJsonNomeOuEndereco(responseServer.localizeUltimasConsultas, "NOME");
+					state.lastQueries["ENDERECO"] = patternJsonNomeOuEndereco(responseServer.localizeUltimasConsultas, "ENDERECO");
 				} else {
-					newState.lastQueries[tipo] = responseServer.localizeUltimasConsultas;
+					state.lastQueries[tipo] = responseServer.localizeUltimasConsultas;
 				}
 
 				return {
+					...state,
 					loading: false,
 					status: LAST_QUERIES,
-					message: "",
-					response: state.response,
-					tabActive: state.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
 				}
 			}
-			case LOADING_LOCALIZE: {
+
+			case localize.LOADING_LOCALIZE: {
 				return {
+					...state,
 					status: LOADING,
-					message: "",
 					loading: true,
-					response: newState.response,
-					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
 				}
 			}
 
 			case localize.REVER_CONSULTA_LOCALIZE: {
 				return {
-					status: "",
-					message: "",
+					...state,
 					loading: false,
 					response: action.payload,
-					tabActive: state.tabActive,
-					lastQueries: state.lastQueries,
-					type: state.type
 				}
 			}
 
-			case SEE_LOCALIZE_MODEL: {
+			case localize.SEE_LOCALIZE_MODEL: {
+				const label = "Modelo Consulta"
+				const tab = isDocumentNotInArray(state.response,label)
+				
 				response.data = model
-				response.label = model.cadastro.cpf
+				response.label = label
 				response.tipo = "CPF"
 				response.icon = ICON_LOCALIZE
 				response.produto = COMPANY_PRODUCT_LOCALIZE
 
 				return {
-					status: "model",
-					message: "",
+					...state,
 					loading: false,
-					response: [...state.response, response],
-					tabActive: model.cadastro.cpf,
-					lastQueries: newState.lastQueries,
-					type: newState.type
+					response: tab ? [...state.response, response] : state.response,
+					tabActive: label,
 				}
 			}
 
-			case SEARCH_BY_CREDITO_IN_LOCALIZE: {
-				let tipo = action.payload.parameters.tipo;
-				let documento = action.payload.parameters.documento;
-				documento = tipo == "CPF" ? patternCPF(documento) : patternCNPJ(documento);
-				let responseServer = action.payload.response;
-				let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_CREDITO;
-				let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
-				let verifyIfDocumentExists = isDocumentNotInArray(state.response, label);
+			case localize.SEARCH_BY_CREDITO_IN_LOCALIZE: {
+				let { tipo, documento } = action.payload.parameters
+				documento = tipo == "CPF" ? patternCPF(documento) : patternCNPJ(documento)
+				let responseServer = action.payload.response
+				const label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_CREDITO
+				let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined
+				const verifyIfDocumentExists = isDocumentNotInArray(state.response, label)
 
 				if(verifyIfDocumentExists && cadastro) {
 					/**O documento esta vindo formatado do fornecedor
 					 * portanto estou salvando a entrada do cliente no lugar dele
-					 * pois formato este documento em todo o site
+					 * pois faço a formatação deste documento em todo o site
 					 */
-					tipo == "CPF" ? responseServer.cadastro.cpf = documento : responseServer.cadastro.cnpj = documento;
+					tipo == "CPF" ? responseServer.cadastro.cpf = documento : responseServer.cadastro.cnpj = documento
 
-					response.data = responseServer;
-					response.label = label;
-					response.tipo = tipo;
-					response.icon = ICON_CREDITO;
-					response.produto = COMPANY_PRODUCT_CREDITO;
+					response.data = responseServer
+					response.label = label
+					response.tipo = tipo
+					response.icon = ICON_CREDITO
+					response.produto = COMPANY_PRODUCT_CREDITO
 				}
 
 				return {
+					...state,
 					status: cadastro ? SUCCESS : REQUEST_ERROR,
 					message: cadastro ? "": NENHUM_REGISTRO,
 					loading: false,
 					response: verifyIfDocumentExists && cadastro ? [...state.response, response] : state.response,
 					tabActive: cadastro ? label : state.tabActive,
-					lastQueries: state.lastQueries,
-					type: state.type
 				}
 			}
 
 			case SEARCH_BY_DOCUMENT: {
-				let tipo = action.payload.parameters.tipo;
-				let documento = action.payload.parameters.documento;
+				let { tipo, documento } = action.payload.parameters
 				documento = tipo == "CPF" ? patternCPF(documento) : patternCNPJ(documento);
 				let responseServer = action.payload.response;
 				let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_LOCALIZE;
@@ -269,20 +239,19 @@ export default function(state = initialState, action) {
 				}
 
 				return {
+					...state,
 					status: cadastro ? SUCCESS : REQUEST_ERROR,
 					message: cadastro ? "": NENHUM_REGISTRO,
 					loading: false,
 					response: verifyIfDocumentExists && cadastro ? [...state.response, response] : state.response,
 					tabActive: cadastro ? label : state.tabActive,
-					lastQueries: state.lastQueries,
-					type: state.type
 				}
 			}
 
 			case SEARCH_BY_EMAIL: {
 				let responseServer = action.payload.response;
 				let labelEmail = "EMAIL: "+responseServer.cabecalho.entrada;
-				let verifyIfEmailExists = searchDocument(newState.response, labelEmail);
+				let verifyIfEmailExists = searchDocument(state.response, labelEmail);
 				
 				if(verifyIfEmailExists == -1) {
 					response.data = {
@@ -296,13 +265,11 @@ export default function(state = initialState, action) {
 				}
 
 				return {
+					...state,
 					status: SUCCESS,
-					message: "",
 					loading: false,
-					response: verifyIfEmailExists == -1 ? [...newState.response, response] : newState.response,
-					tabActive: verifyIfEmailExists == -1 ? labelEmail : newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
+					response: verifyIfEmailExists == -1 ? [...state.response, response] : state.response,
+					tabActive: verifyIfEmailExists == -1 ? labelEmail : state.tabActive,
 				}
 			}
 
@@ -312,7 +279,7 @@ export default function(state = initialState, action) {
 				let labelTelefone, verifyIfTelefoneExists;
 				if(telefones) {
 					labelTelefone = "TEL: "+responseServer.cabecalho.entrada;
-					verifyIfTelefoneExists = searchDocument(newState.response, labelTelefone);
+					verifyIfTelefoneExists = searchDocument(state.response, labelTelefone);
 					if(verifyIfTelefoneExists == -1) {
 						response.data = {
 							response: telefones,
@@ -325,20 +292,19 @@ export default function(state = initialState, action) {
 					}
 				}
 				return {
+					...state,
 					status: telefones ? SUCCESS : REQUEST_ERROR,
 					message: telefones ? "" : NENHUM_REGISTRO,
 					loading: false,
-					response: telefones && verifyIfTelefoneExists == -1 ? [...newState.response, response] : newState.response,
-					tabActive: telefones && verifyIfTelefoneExists == -1 ? labelTelefone : newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
+					response: telefones && verifyIfTelefoneExists == -1 ? [...state.response, response] : state.response,
+					tabActive: telefones && verifyIfTelefoneExists == -1 ? labelTelefone : state.tabActive,
 				}
 			}
 
 			case SEARCH_BY_NOME_ENDERECO: {
 				/*Construcao do nome da label na tab */
-				let nameLabelArray = JSON.parse(action.payload.response.cabecalho.entrada);
-				let nameLabel = [];
+				let nameLabelArray = JSON.parse(action.payload.response.cabecalho.entrada)
+				let nameLabel = []
 
 				/**IE não suporta Object.values, mas suporta Object.keys
 				 * Aqui estou verificando apenas as propriedades que possuem
@@ -349,49 +315,45 @@ export default function(state = initialState, action) {
 						nameLabel.push(nameLabelArray[keyOfNameLabelArray])
 				});
 
-				nameLabel = nameLabel.toString();
-				let tipo = action.payload.parameters.tipo.substring(0,3);
-				let label = tipo+": "+ nameLabel;
+				nameLabel = nameLabel.toString()
+				let tipo = action.payload.parameters.tipo.substring(0,3)
+				let label = tipo+": "+ nameLabel
 
-				let nomeOuEndereco = {};
-				let verifyIfNomeOrEnderecoExists = searchDocument(newState.response, label);
+				let nomeOuEndereco = {}
+				let verifyIfNomeOrEnderecoExists = searchDocument(state.response, label);
 
 				if(verifyIfNomeOrEnderecoExists == -1) {
 					nomeOuEndereco = {
 						response: action.payload.response.localizePorNomeOuEndereco,
 						cabecalho: action.payload.response.cabecalho
 					}
-					response.data = nomeOuEndereco;
-					response.label = label;
-					response.tipo = action.payload.tipo;
-					response.icon = ICON_LOCALIZE;
-					response.produto = action.payload.tipo;
+					response.data = nomeOuEndereco
+					response.label = label
+					response.tipo = action.payload.tipo
+					response.icon = ICON_LOCALIZE
+					response.produto = action.payload.tipo
 				}
 
 				return {
+					...state,
 					status: SUCCESS,
 					message: "",
 					loading: false,
-					response: verifyIfNomeOrEnderecoExists == -1 ? [...newState.response, response] : newState.response,
-					tabActive: verifyIfNomeOrEnderecoExists == -1 ? label : newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
+					response: verifyIfNomeOrEnderecoExists == -1 ? [...state.response, response] : state.response,
+					tabActive: label
 				};
 			}
 
 			case SEARCH_BY_PESSOAS_RELACIONADOS: {
 				let responseServer = action.payload.response;
 				let label = action.payload.parameters.label;
-				newState.response[searchDocument(newState.response,label)].pessoasRelacionadas = responseServer.localizePessoasRelacionadas;
+				state.response[searchDocument(state.response,label)].pessoasRelacionadas = responseServer.localizePessoasRelacionadas;
 
 				return {
+					...state,
 					status: "pessoasRelacionadas"+label,
 					message: "",
 					loading: false,
-					response: newState.response,
-					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
 				}
 			}
 
@@ -402,23 +364,19 @@ export default function(state = initialState, action) {
 				let documentoRelacionado = action.payload.parameters.documentoRelacionado;
 
 				//busca nas documentos pesquisados no localize o documento que sera inserido os telefones relacionados
-				let posPessoaTelefone = searchDocument(newState.response,documento);
+				let posPessoaTelefone = searchDocument(state.response,documento);
 				//busca a pessoa relacionado que foi clicada para mostrar os telefones
-				let posPessoaRelacionadaTelefones = searchPosPessoa(newState.response[posPessoaTelefone].pessoasRelacionadas, documentoRelacionado);
+				let posPessoaRelacionadaTelefones = searchPosPessoa(state.response[posPessoaTelefone].pessoasRelacionadas, documentoRelacionado);
 
 				//adiciona na pessoa relacionada os telefones encontrados
 				telefones.fixos = telefones.fixos ? telefones.fixos : [];
 				telefones.moveis = telefones.moveis ? telefones.moveis : [];
-				newState.response[posPessoaTelefone].pessoasRelacionadas[posPessoaRelacionadaTelefones].telefones = telefones;
+				state.response[posPessoaTelefone].pessoasRelacionadas[posPessoaRelacionadaTelefones].telefones = telefones;
 				
 				return {
-					status: "telefones",
+					...state,
 					message: "",
 					loading: false,
-					response: newState.response,
-					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
 				}
 			}
 
@@ -428,31 +386,23 @@ export default function(state = initialState, action) {
 				let documento = action.payload.parameters.documento;
 				let documentoRelacionado = action.payload.parameters.documentoRelacionado;
 
-				let posPessoaEndereco = searchDocument(newState.response,documento);
-				let posPessoaRelacionadaEndereco = searchPosPessoa(newState.response[posPessoaEndereco].pessoasRelacionadas, documentoRelacionado);
+				let posPessoaEndereco = searchDocument(state.response,documento);
+				let posPessoaRelacionadaEndereco = searchPosPessoa(state.response[posPessoaEndereco].pessoasRelacionadas, documentoRelacionado);
 
-				newState.response[posPessoaEndereco].pessoasRelacionadas[posPessoaRelacionadaEndereco].enderecos = enderecos;
+				state.response[posPessoaEndereco].pessoasRelacionadas[posPessoaRelacionadaEndereco].enderecos = enderecos;
 
 				return {
-					status: "",
-					message: "",
+					...state,
 					loading: false,
-					response: newState.response,
-					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
 				}
 			}
 
 			case REQUEST_ERROR: {
 				return {
+					...state,
 					status: REQUEST_ERROR,
 					message: action.payload.mensagem,
 					loading: false,
-					response: newState.response,
-					tabActive: newState.tabActive,
-					lastQueries: newState.lastQueries,
-					type: newState.type
 				}
 			}
 
@@ -463,21 +413,15 @@ export default function(state = initialState, action) {
 				let responseServer = action.payload.response;
 				responseServer = responseServer ? responseServer[isEnderecoOuTelefone] ? responseServer[isEnderecoOuTelefone] : [] : [];
 
-
 				if(isEnderecoOuTelefone == "phone") {
 					responseServer.fixos = responseServer.fixos ? responseServer.fixos : [];
 					responseServer.moveis = responseServer.moveis ? responseServer.moveis : [];
 				}
-				newState.lastQueries[consulta][posElemento][isEnderecoOuTelefone] = responseServer;
+				state.lastQueries[consulta][posElemento][isEnderecoOuTelefone] = responseServer;
 
 				return {
+					...state,
 					loading: false,
-					status: "",
-					message: "",
-					response: state.response,
-					tabActive: state.tabActive,
-					lastQueries: newState.lastQueries,
-					type: state.type
 				}
 			}
 
@@ -498,13 +442,8 @@ export default function(state = initialState, action) {
 				state.response[indexLabel].data.response[indexArrayElements][isEnderecoOuTelefone] = responseServer;
 
 				return {
+					...state,
 					loading: false,
-					status: "",
-					message: "",
-					response: state.response,
-					tabActive: state.tabActive,
-					lastQueries: state.lastQueries,
-					type: state.type
 				}
 			}
 		}

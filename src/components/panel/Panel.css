@@ -1,3 +1,11 @@
+.arrow-panel {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    cursor: pointer;
+    color: #424242;
+}
+
 .panel {
     border: none;
 }

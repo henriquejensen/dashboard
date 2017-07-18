@@ -175,6 +175,17 @@ const todosProdutos = {
             //{label: "CPF", id: "cpf"},
             //{label: "CNPJ", id: "cnpj"},
         ]
+    },
+    MONITORA: {
+        label: constants.COMPANY_PRODUCT_MONITORA,
+        id: "monitora",
+        color: constants.COMPANY_PRODUCT_MONITORA_COLOR,
+        colorLight: constants.COMPANY_PRODUCT_MONITORA_COLOR_LIGHT,
+        link: constants.URL_MONITORA,
+        image: constants.ICON_MONITORA,
+        imageNegative: constants.ICON_MONITORA_NEGATIVE,
+        alt: `Icone ${constants.COMPANY_PRODUCT_MONITORA}`,
+        subItems: []
     }
 }
 

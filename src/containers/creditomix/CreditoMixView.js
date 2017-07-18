@@ -432,7 +432,7 @@ const CreditoViewMix = (props) => {
                                 {id:"dataInclusao", name:"Inclusão"},
                                 {id:"dataVencimento", name:"Vencimento"},
                                 {id:"credor", name:"Credor"},
-                                {id:"cidade", name:"Cidade Associado", functionToApply:(val, indexRow) => {return <span>{val} {data.spc.listaSpc[indexRow].uf ? "-" + data.spc.listaSpc[indexRow].uf : ""}</span>}},
+                                {id:"cidade", name:"Cidade Associado", functionToApply:(val, indexRow) => {return <span>{val} {data.registrosDebitos.registrosDebitos[indexRow].uf ? "-" + data.registrosDebitos.registrosDebitos[indexRow].uf : ""}</span>}},
                                 {id:"avalistaComprador", name:"Comprador/Fiador/Avalista"},
                                 {id:"contrato", name:"Contrato"},
                                 {id:"praca", name:"Praça"},

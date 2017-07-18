@@ -316,6 +316,7 @@ class LocalizeController extends Component {
 						className="form-control"
 						type="text"
 						name="cidade"
+						required={(this.state.localizeInput.uf || this.state.localizeInput.bairro)}
 						value={this.state.localizeInput.cidade}
 						onChange={this.onChangeInput}
 						placeholder="Digite o nome da cidade (sem abreviação)"
@@ -434,6 +435,7 @@ class LocalizeController extends Component {
 						className="form-control"
 						type="text"
 						name="cidade"
+						required={(this.state.localizeInput.uf || this.state.localizeInput.bairro)}
 						onChange={this.onChangeInput}
 						value={this.state.localizeInput.cidade}
 						placeholder="Digite o nome da cidade (sem abreviação)"
@@ -575,7 +577,6 @@ class LocalizeController extends Component {
 					<Tabs id="uncontrolled-tab-example"
 						activeKey={this.props.tabActive}
 						onSelect={(key) => {this.props.changeTab(key)}}
-						
 					>
 						{this.props.datas.map((data, index) => {
 							return (
