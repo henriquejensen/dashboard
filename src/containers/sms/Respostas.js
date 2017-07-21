@@ -1,19 +1,20 @@
-import React, {Component} from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
-import { Button, Col, Form } from "react-bootstrap";
+import React, {Component} from "react"
+import moment from "moment"
+import { connect } from "react-redux"
+import { bindActionCreators } from 'redux'
+import { Button, Col, Form } from "react-bootstrap"
 
 //Actions
-import { filterResponstasSMS, getRespostasSMS } from "../../actions/actionsSMS";
+import { filterResponstasSMS, getRespostasSMS } from "../../actions/actionsSMS"
 
 //Components
 import EnviarSMS from "./EnvioSMS"
 import Panel from "../../components/panel/Panel"
-import Filtro from "../../components/Filtro";
-import Modal from "../../components/Modal";
-import Table from "../../components/table/Table";
+import Filtro from "../../components/Filtro"
+import Modal from "../../components/Modal"
+import Table from "../../components/table/Table"
 import CardWithTable from "../../components/card/CardWithTable"
-import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
+import { DateField, MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
 
 class Respostas extends Component {
     constructor(props) {
@@ -21,7 +22,10 @@ class Respostas extends Component {
 
       this.state = {
         showBuscaAvancada: false,
-        IsModalOpen: false
+        IsModalOpen: false,
+        dataInicio: moment(),
+        dataFim: moment(),
+        changeData: false
       }
     }
 
@@ -44,9 +48,15 @@ class Respostas extends Component {
     onFormSubmit = (evt) => {
       evt.preventDefault()
 
-      let { id=null, campanha=null, dataInicio=null, dataFim=null, cliente=null, usuario=null } = this.state
+      let { id=null, campanha=null, dataInicio, dataFim, cliente=null, usuario=null, changeData } = this.state
+      dataInicio = changeData ? moment(this.state.dataInicio).format("YYYY-MM-DD") : null
+      dataFim = changeData ? moment(this.state.dataFim).format("YYYY-MM-DD") : null
 
       this.props.filterResponstasSMS({ id, campanha, dataInicio, dataFim, cliente, usuario })
+
+      this.setState({
+        changeData: false
+      })
     }
 
     closeModal = () => {
@@ -89,21 +99,21 @@ class Respostas extends Component {
                 {this.state.showBuscaAvancada ?
                   <span>
                     <Col md={3}>
-                        <MyFieldGroup
-                          id="smsDataInicio"
-                          label="Data Início"
-                          type="date"
-                          name="dataInicio"
-                          onChange={this.onChange} />
+                        <DateField
+                            label="Data Início"
+                            placeholder="Data inicial"
+                            startDate={this.state.dataInicio}
+                            onChange={(date) => this.setState({dataInicio: date, changeData: true})}
+                        />
                     </Col>
 
                     <Col md={3}>
-                        <MyFieldGroup
-                          id="smsDataFim"
-                          label="Data Fim"
-                          type="date"
-                          name="dataFim"
-                          onChange={this.onChange} />
+                        <DateField
+                            label="Data Fim"
+                            placeholder="Data final"
+                            startDate={this.state.dataFim}
+                            onChange={(date) => this.setState({dataFim: date, changeData: true})}
+                        />
                     </Col>
 
                     <Col md={4}>

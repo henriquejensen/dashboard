@@ -13,6 +13,7 @@ export const USER_PHOTO = "usuarioFoto"
 export const USER_PERFIL = "perfil"
 export const USER_PERFIL_ORDEM = "perfilOrdem"
 export const USER_PRODUCTS = "produtos"
+export const USER_CONSULTS = "consultas"
 export const USER_CLIENT = "cliente"
 export const GOOGLE_MAPS_KEY = 'AIzaSyDrjaImSSsOUSh9d5KDq9RVnHKtNSI_GJI'
 export const GOOGLE_MAPS_URL = "https://maps.googleapis.com/maps/api/geocode/json?address="

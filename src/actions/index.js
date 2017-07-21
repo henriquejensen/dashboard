@@ -190,7 +190,6 @@ export function searchEnderecosTelefonesUltimasConsultas(tipo, consulta, posElem
  * o documento da pessoa a ser buscada
  */
 export function searchEnderecosTelefonesResultadosBusca(searchByCpfOuCnpj, indexLabel, indexArrayElements, isEnderecoOuTelefone, documento) {
-
 	let data = {cpf:documento}
 	let url = URL_SEARCH_CPF
 	let search = SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA

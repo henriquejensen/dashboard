@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col, Tabs, Tab} from "react-bootstrap";
+import React, { Component } from "react"
+import moment from "moment"
+import { bindActionCreators } from "redux"
+import { connect } from "react-redux"
+import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col, Tabs, Tab} from "react-bootstrap"
 
 //Actions
 import {
@@ -15,39 +16,51 @@ import {
 		searchByReceitaPF,
 		searchByReceitaPJ,
 		searchByReceitaPJSintegra
-} from "../../actions/actionsFocoFiscal";
+} from "../../actions/actionsFocoFiscal"
 import {
 		changeProductType,
 		changeMenu
-} from "../../actions/actionsCommon";
+} from "../../actions/actionsCommon"
 
 //Components
 
-import FocoFiscalView from "./FocoFiscalView";
-import MyForm from "../../components/forms/Form";
-import Panel from "../../components/panel/Panel";
-import Titletab from "../../components/utils/Titletab";
-import UltimasConsultas from "../../components/UltimasConsultas";
-import { MyFieldGroup } from "../../components/forms/CommonForms"
-import { FocoFiscalDescription } from "../../components/ProductDescription";
-import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
+import FocoFiscalView from "./FocoFiscalView"
+import MyForm from "../../components/forms/Form"
+import Panel from "../../components/panel/Panel"
+import Titletab from "../../components/utils/Titletab"
+import UltimasConsultas from "../../components/UltimasConsultas"
+import { DateField, MyFieldGroup } from "../../components/forms/CommonForms"
+import { FocoFiscalDescription } from "../../components/ProductDescription"
+import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 //Constants
-import { LOADING_GIF } from "../../constants/utils";
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_FOCOFISCAL, COMPANY_PRODUCT_FOCOFISCAL_LABEL, LOGO_FOCOFISCAL } from "../../constants/constantsCompany";
+import { LOADING_GIF } from "../../constants/utils"
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_FOCOFISCAL, COMPANY_PRODUCT_FOCOFISCAL_LABEL, LOGO_FOCOFISCAL } from "../../constants/constantsCompany"
 
-//import estados from "../../components/utils/common/estados.json";
-import todosProdutos from "../../components/utils/common/produtos.js";
+import produtos from "../../utils/produtos.js"
 
 class FocoFiscal extends Component {
 	constructor(props) {
 		super(props);
 
-		this.produtoInformacoes = todosProdutos[COMPANY_PRODUCT_FOCOFISCAL_LABEL]
+		this.consultasAtivas = this.props.consultasAtivas ? this.props.consultasAtivas[COMPANY_PRODUCT_FOCOFISCAL_LABEL] : undefined
+		this.consultas = produtos[COMPANY_PRODUCT_FOCOFISCAL_LABEL].consultas
+		this.produtoInformacoes = []
+
+		if(this.consultasAtivas) {
+			this.consultas.forEach(consulta => {
+				if(this.consultasAtivas[consulta.modulo]) {
+					this.produtoInformacoes.push(
+						{id:consulta.modulo, label:this.consultasAtivas[consulta.modulo].labelFront}
+					)
+				}
+			})
+		}
 
 		this.state = {
 			documento: "",
-			dataNascimento: ""
+			dataNascimento: moment(),
+			changeDataNascimento: false
 		}
 	}
 
@@ -80,25 +93,23 @@ class FocoFiscal extends Component {
 		this.props.loadingFocoFiscal()
 
 		let documento = this.state.documento
+		const type = this.props.type
 		documento = documento.replace(/[^0-9]/g, "")
 
-		switch(this.props.type) {
-			case "RECEITAPF":
-				this.props.searchByReceitaPF(documento,this.state.dataNascimento)
-				break
-			case "RECEITAPJ":
-				this.props.searchByReceitaPJ(documento)
-				break
-			case "PJSINTEGRA":
-				this.props.searchByReceitaPJSintegra(documento)
-				break
-			default:
-				this.props.searchByFocoFiscalSimplesNacional(documento)
+		if(type.match("RECEITAPF")) {
+			let dataNascimento = this.state.changeDataNascimento ? moment(this.state.dataNascimento).format("YYYY-MM-DD") : null
+			this.props.searchByReceitaPF(documento,dataNascimento)
 		}
-		
+		else if(type.match("RECEITAPJ"))
+			this.props.searchByReceitaPJ(documento)
+		else if(type.match("PJSINTEGRA"))
+			this.props.searchByReceitaPJSintegra(documento)
+		else
+			this.props.searchByFocoFiscalSimplesNacional(documento)
+
 		this.setState({
 			documento: "",
-			dataNascimento: ""
+			changeDataNascimento: false
 		})
 	}
 
@@ -110,7 +121,7 @@ class FocoFiscal extends Component {
 						logo = {LOGO_FOCOFISCAL}
 						onformSubmit = {this.onFormSubmit}
 						closeMessageError = {this.props.closeMessageErrorFocoFiscal}
-						options={this.produtoInformacoes.subItems}
+						options={this.produtoInformacoes}
 						onChange={this.onChangeType}
 						type={this.props.type}
 						seeModelo = {this.props.seeModel}
@@ -118,11 +129,11 @@ class FocoFiscal extends Component {
 						message = {this.props.message}
 						lastQueries = {this.props.lastQueries[this.props.type]}
 					>
-						<Col md={tipo == "RECEITAPF" ? 6 : 8}>
+						<Col md={tipo.match("RECEITAPF") ? 6 : 8}>
 							<MyFieldGroup
 								type="text"
 								placeholder={
-									this.props.type == "RECEITAPF" ?
+									this.props.type.match("RECEITAPF") ?
 										"CPF"
 									: "CNPJ"
 								}
@@ -132,15 +143,13 @@ class FocoFiscal extends Component {
 								required/>
 						</Col>
 
-						{tipo == "RECEITAPF" ?
+						{tipo.match("RECEITAPF") ?
 							<Col md={2}>
-								<MyFieldGroup
-									id="dataNascimento"
-									type="date"
-									name="dataNascimento"
+								<DateField
 									required
-									value={this.state.dataNascimento}
-									onChange={this.onChangeInput}
+									placeholder="Data nascimento"
+									startDate={this.state.dataNascimento}
+									onChange={(date) => this.setState({dataNascimento: date, changeDataNascimento:true})}
 								/>
 							</Col>
 						: ""}
@@ -171,7 +180,8 @@ class FocoFiscal extends Component {
 						<FocoFiscalDescription />
 						<div style={{marginBottom:15}} />
                         <UltimasConsultas
-                            consultas={this.props.lastQueries[type]}
+							consultas={this.props.lastQueries[type]}
+							produtoInformacoes={this.produtoInformacoes}
                             type={type}
                             search={this.researchUltimasConsultas}
 						/>
@@ -222,7 +232,8 @@ function mapStateToProps(state) {
 		loading: state.focofiscal.loading,
 		tabActive: state.focofiscal.tabActive,
 		lastQueries: state.focofiscal.lastQueries,
-		type: state.focofiscal.type
+		type: state.focofiscal.type,
+		consultasAtivas: state.user.consultasAtivas
 	}
 }
 

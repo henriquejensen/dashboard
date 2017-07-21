@@ -1,9 +1,10 @@
 import React, { Component } from "react"
 
-import Panel from "../panel/Panel";
-import LayoutTelefone from "./layoutTelefone";
+import Panel from "../panel/Panel"
+import LayoutTelefone from "./layoutTelefone"
+import MyButton from "../button/MyButton"
 
-import { NENHUM_REGISTRO } from "../../constants/utils";
+import { TOOLTIP_SEE_MORE_INFO_MESSAGE, TOOLTIP_SEE_LESS_INFO_MESSAGE, NENHUM_REGISTRO } from "../../constants/utils"
 
 export default class Telefone extends Component {
     state = {
@@ -29,18 +30,19 @@ export default class Telefone extends Component {
                         moveis={moveis}
                         newPhone={this.state.newPhone}
                         sendNewPhone={this.sendNewPhone}/>
-                    <div className="col-md-12 col-sm-12 relacionados">
+                    <div className="col-md-12 col-sm-12 relacionados" style={{textAlign:"right"}}>
                         {/*<a className="moreInfo" onClick={() => this.setState({newPhone:!this.state.newPhone})}>
                             {this.state.newPhone ?
                                 "Cancelar"
                             : "Adicionar um novo telefone"}
                         </a>*/}
-                        {fixos.length > 4 || moveis.length > 4 ? 
-                            <a data-tip data-for="moreInfo" onClick={() => this.setState({showMoreTel: !this.state.showMoreTel})}>
-                                {this.state.showMoreTel ?
-                                    <i className="fa fa-minus pull-right moreInfo" />
-                                : <i className="fa fa-plus pull-right moreInfo" />}
-                            </a>
+                        {fixos.length > 4 || moveis.length > 4 ?
+                            <MyButton
+                                tooltip={this.state.showMoreTel ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}
+                                onClickButton={() => this.setState({showMoreTel: !this.state.showMoreTel})}
+                                myButtonClass="my-button-circle"
+                                myButtonText={this.state.showMoreTel ? <i className="fa fa-minus" aria-hidden="true"></i> : <i className="fa fa-plus" aria-hidden="true"></i>}
+                            />
                         : ""}
                     </div>
                 </Panel>

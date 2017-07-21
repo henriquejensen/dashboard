@@ -14,6 +14,7 @@ import {
         FOTO_URL,
         REQUEST_ERROR,
         USER_CLIENT,
+        USER_CONSULTS,
         USER_NAME,
         USER_PHOTO,
         USER_EMAIL2,
@@ -33,10 +34,11 @@ let user = {
     usuarioEmail2: localStorage.getItem(USER_EMAIL2),
     usuarioTelefone: localStorage.getItem(USER_PHONE),
     usuarioLogin: localStorage.getItem(USER_LOGIN),
-    usuarioFoto: localStorage.getItem(USER_PHOTO) || "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/avatar.gif",
+    usuarioFoto: localStorage.getItem(USER_PHOTO),
     perfilDescricao: localStorage.getItem(USER_PERFIL),
     perfilOrdem: localStorage.getItem(USER_PERFIL_ORDEM),
     pessoaDescricao: localStorage.getItem(USER_CLIENT),
+    consultasAtivas: JSON.parse(localStorage.getItem(USER_CONSULTS)),
     ip: localStorage.getItem("ip"),
     status: null,
     message: null,
@@ -109,6 +111,7 @@ export default function (state = user, action) {
         case INFO_SUCCESS: {
             let { response } = action.payload.response
             let {
+                consultasAtivas={},
                 mapProdutos=[],
                 usuarioLogin,
                 usuarioNome="",
@@ -121,12 +124,49 @@ export default function (state = user, action) {
                 perfilOrdem
             } = response
 
+            if(consultasAtivas["8"]) {
+                consultasAtivas["8"].NOVOENRIQUECIMENTO = {
+                    labelFront: "Novo Enriquecimento",
+                    link: "/basecerta/novoenriquecimento"
+                }
+                consultasAtivas["8"].MONITORBASECERTA = {
+                    labelFront: "Monitor Base Certa",
+                    link: "/basecerta"
+                }
+            }
+            if(consultasAtivas["9"]) {
+                consultasAtivas["9"].ENVIARSMS = {
+                    labelFront: "Enviar SMS",
+                    link: "/sms/enviorapido"
+                }
+                consultasAtivas["9"].MONITORENVIOS = {
+                    labelFront: "Monitor de envios",
+                    link: "/sms"
+                }
+                consultasAtivas["9"].RESPOSTAS = {
+                    labelFront: "Respostas",
+                    link: "/sms/respostas"
+                }
+            }
+            if(consultasAtivas["3"]) {
+                consultasAtivas["3"].PLACA = {
+                    labelFront: "PLACA"
+                }
+                consultasAtivas["3"].CHASSI = {
+                    labelFront: "CHASSI"
+                }
+                consultasAtivas["3"].NUMEROMOTOR = {
+                    labelFront: "Nº MOTOR"
+                }
+            }
+
+            localStorage.setItem(USER_CONSULTS, JSON.stringify(consultasAtivas))
             localStorage.setItem(USER_PRODUCTS, mapProdutos)
             localStorage.setItem(USER_LOGIN, usuarioLogin)
             localStorage.setItem(USER_NAME, usuarioNome)
             localStorage.setItem(USER_EMAIL2, usuarioEmail2)
             localStorage.setItem(USER_PHONE, usuarioTelefone)
-            localStorage.setItem(USER_PHOTO, FOTO_URL + usuarioId + ".jpg")
+            localStorage.setItem(USER_PHOTO, usuarioFoto ? FOTO_URL + usuarioId + ".jpg" : "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/avatar.gif")
             localStorage.setItem(USER_PERFIL, perfilDescricao)
             localStorage.setItem(USER_PERFIL_ORDEM, perfilOrdem)
             localStorage.setItem(USER_CLIENT, pessoaDescricao)

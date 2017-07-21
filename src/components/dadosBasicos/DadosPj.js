@@ -32,7 +32,7 @@ export default class Cadastro extends Component{
                 <Col md={6} xs={6}>
                     <strong>Situação CNPJ: </strong>
                     {this.props.dados.receitaStatus ? 
-                        <span className={this.props.dados.receitaStatus == "Ativa" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.receitaStatus}</span>
+                        <span className={this.props.dados.receitaStatus.toUpperCase() == "ATIVA" ? "destaque-ativado" : "destaque-desativado "}>{this.props.dados.receitaStatus}</span>
                         : NENHUM_REGISTRO
                     }
                 </Col>

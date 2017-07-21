@@ -24,7 +24,7 @@ const FocoFiscalView = (props) => {
                             //Dados documento PF
                             {label: "Documento", value:data.cadastro.cpf ? pattern.patternCPF(data.cadastro.cpf) : undefined},
                             {label: "Nome", value:data.cadastro.nome ? data.cadastro.nome : undefined},
-                            {label: "Nascimento", value:data.cadastro.dataNascimento ? data.cadastro.dataNascimento + " " + data.cadastro.idade + " anos" : undefined},
+                            {label: "Nascimento", value:data.cadastro.dataNascimento && data.cadastro.idade ? data.cadastro.dataNascimento + " " + data.cadastro.idade + " anos" : data.cadastro.dataNascimento ? data.cadastro.dataNascimento : undefined},
                             {label: "Ano Óbito", value:data.cadastro.anoObito ? data.cadastro.anoObito : undefined},
                             {label: "Mensagem Óbito", value:data.cadastro.mensagemObito ? data.cadastro.mensagemObito : undefined},
 
@@ -36,7 +36,7 @@ const FocoFiscalView = (props) => {
                             {label: "Nome Fantasia", value:data.cadastro.nomeFantasia ? data.cadastro.nomeFantasia : undefined},
                             {label: "Ente Federativo Responsável", value:data.cadastro.enteFederativoResponsavel ? data.cadastro.enteFederativoResponsavel : undefined},
                             {label: "Endereço eletrõnico", value:data.cadastro.enderecoEletronico ? data.cadastro.enderecoEletronico : undefined},
-                            {label: "Matriz Filial", value:data.cadastro.matrizFilial ? data.cadastro.matrizFilial : undefined},
+                            {label: "Matriz/Filial", value:data.cadastro.matrizFilial ? data.cadastro.matrizFilial : undefined},
                             {label: "Capital Social", value:data.cadastro.capitalSocial ? data.cadastro.capitalSocial : undefined},
                             {label: "Porte Empresa", value:data.cadastro.porteEmpresa ? data.cadastro.porteEmpresa : undefined},
                             {label: "Natureza Jurídica", value:data.cadastro.naturezaJuridica ? data.cadastro.naturezaJuridica.codigo : undefined},

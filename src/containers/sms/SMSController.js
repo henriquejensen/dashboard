@@ -14,8 +14,8 @@ class SMS extends Component {
                 {this.props.children}
 
             </div>
-        );
+        )
     }
 }
 
-export default SMS;
+export default SMS

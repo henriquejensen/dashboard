@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 
 import { changeColorMenu, changeProductType } from "../actions/actionsCommon";
 
-import todosProdutos from "./utils/common/produtos.js";
+import produtos from "../utils/produtos.js";
 import CardInfoMenuUser from "./utils/CardInfoMenuUser";
 
 import { COMPANY_LOGO_INVERSE, COMPANY_MAIN_COLOR, COMPANY_NAME_SHORT, COMPANY_ICON_INVERSE, COMPANY_LOGO_STYLE } from "../constants/constantsCompany";
@@ -51,59 +51,64 @@ class Sidebar extends Component {
 
   renderMenu() {
     let produtosCliente = this.props.produtosCliente ? this.patternProdutosName(this.props.produtosCliente) : [];
-    let keysProdutos = Object.keys(todosProdutos); // retira os nomes dos produtos do objeto, ex: [Localize, Credito]
-    let handleChangeColor = this.props.changeColorMenu;
-    let menuOpened = this.state.menuOpened;
-    let activedMenu = this.props.activedMenu; // se false o sidebar esta contraido(default para mobile)
+    let keysProdutos = Object.keys(produtos) // retira os nomes dos produtos do objeto, ex: [Localize, Credito]
+    let handleChangeColor = this.props.changeColorMenu
+    let menuOpened = this.state.menuOpened
+    let activedMenu = this.props.activedMenu // se false o sidebar esta contraido(default para mobile)
+    const {consultasAtivas} = this.props.user
     return (
         <div id="sidebar">
           <ul className="sidebar-nav">
-
-            { keysProdutos.map((produto, index) => {
-              if(produtosCliente.indexOf(produto) >= 0) {
-                let opt = todosProdutos[produto];
+            {consultasAtivas ? keysProdutos.map((key, index) => {
+              if(consultasAtivas[key]) {
+                const produto = produtos[key]
+                const consultaAtiva = consultasAtivas[key]
+                                  
                 return (
-                  <li key={index} onClick={() => {handleChangeColor(opt.color)}}>
+                  <li key={index} onClick={() => {handleChangeColor(produto.color)}}>
                       <Link
-                        to={opt.link}
-                        onClick={() => this.activeMenuDropdown(opt.id)}
-                        activeStyle={{backgroundColor: opt.color}}
+                        to={produto.link}
+                        onClick={() => this.activeMenuDropdown(produto.id)}
+                        activeStyle={{backgroundColor: produto.color}}
                       >
                         {activedMenu ?
-                          <img src={menuOpened == opt.id ? opt.imageNegative : opt.image} className="sub-icon" alt={opt.alt}/>
+                          <img src={menuOpened == produto.id ? produto.imageNegative : produto.image} className="sub-icon" alt={produto.alt}/>
                         : ""}
 
-                        {opt.label}
+                        {produto.label}
 
                         {!activedMenu ?
                           <img
-                            src={opt.image}
+                            src={produto.image}
                             className="sub-icon sub-icon-open-menu"
-                            alt={opt.alt}/>
+                            alt={produto.alt}/>
                         : ""}
                       </Link>
 
-                      <ul className={menuOpened == opt.id && activedMenu ? "sidebar-item-dropdown" : "display-none"}
-                      style={{backgroundColor:opt.colorLight}}>
-                        {opt.subItems.map((subOpt, j) => {
-                          return (
-                              <li
-                                onClick={(evt) => this.onClickMenu(evt, opt.color, opt.id, subOpt.id)}
-                                style={this.state.subItemActived === (opt.id + subOpt.id) ? {backgroundColor: "rgba(255,255,255,0.3)"} : {}}
-                                key={j}
-                              >
-                                <Link to={subOpt.link}>
-                                  {subOpt.label}
-                                </Link>
-                              </li>
-                          )
-                        })}                    
-                      </ul>
+                      {menuOpened == produto.id && activedMenu && consultaAtiva ?
+                        <ul className="sidebar-item-dropdown" style={{backgroundColor:produto.colorLight}}>
+                          {produto.consultas.map((consulta, j) => {
+                            const modulo = consultaAtiva[consulta.modulo] ? consulta.modulo : consulta.modulo2
+                            
+                            if(consultaAtiva[modulo])
+                              return (
+                                  <li
+                                    onClick={(evt) => this.onClickMenu(evt, produto.color, produto.id, modulo)}
+                                    style={this.state.subItemActived === (produto.id + modulo) ? {backgroundColor: "rgba(255,255,255,0.3)"} : {}}
+                                    key={j}
+                                  >
+                                    <Link to={consultaAtiva[modulo].link}>
+                                      {consultaAtiva[modulo].labelFront}
+                                    </Link>
+                                  </li>
+                              )
+                          })}                    
+                        </ul>
+                      : ""}
                   </li>
                 )
               }
-            })}
-                          
+            }) : ""}
           </ul>
         </div>
     )

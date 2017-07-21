@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col, Tabs, Tab} from "react-bootstrap";
+import React, { Component } from "react"
+import moment from "moment"
+import { bindActionCreators } from "redux"
+import { connect } from "react-redux"
+import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col, Tabs, Tab} from "react-bootstrap"
 
-import CreditoView from "./CreditoView";
-import LocalizeView from "../localize/LocalizeView";
-import MyForm from "../../components/forms/Form";
-import Titletab from "../../components/utils/Titletab";
-import Panel from "../../components/panel/Panel";
-import UltimasConsultas from "../../components/UltimasConsultas";
-import { MyFieldGroup } from "../../components/forms/CommonForms"
-import { LocalizeDescription } from "../../components/ProductDescription";
-import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen";
+import CreditoView from "./CreditoView"
+import LocalizeView from "../localize/LocalizeView"
+import MyForm from "../../components/forms/Form"
+import Titletab from "../../components/utils/Titletab"
+import Panel from "../../components/panel/Panel"
+import UltimasConsultas from "../../components/UltimasConsultas"
+import { DateField, MyFieldGroup } from "../../components/forms/CommonForms"
+import { LocalizeDescription } from "../../components/ProductDescription"
+import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 // Actions
 import {
@@ -49,22 +50,35 @@ import {
 import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO, COMPANY_PRODUCT_CREDITO_LABEL, COMPANY_PRODUCT_LOCALIZE, LOGO_CREDITO } from "../../constants/constantsCompany"
 
 import estados from "../../components/utils/common/estados.json"
-import todosProdutos from "../../components/utils/common/produtos.js"
+import produtos from "../../utils/produtos.js"
 
 class Credito extends Component {
 	constructor(props) {
 		super(props)
 
-		this.produtoInformacoes = todosProdutos[COMPANY_PRODUCT_CREDITO_LABEL]
+		this.consultasAtivas = this.props.consultasAtivas ? this.props.consultasAtivas[COMPANY_PRODUCT_CREDITO_LABEL] : undefined
+		this.consultas = produtos[COMPANY_PRODUCT_CREDITO_LABEL].consultas
+		this.produtoInformacoes = []
+
+		if(this.consultasAtivas) {
+			this.consultas.forEach(consulta => {
+				const modulo = this.consultasAtivas[consulta.modulo] ? consulta.modulo : consulta.modulo2
+				if(this.consultasAtivas[modulo]) {
+					this.produtoInformacoes.push(
+						{id:modulo, label:this.consultasAtivas[modulo].labelFront}
+					)
+				}
+			})
+		}
 
 		this.tiposCheque = ["Apenas Cadastro", "Digitando dados do Cheque", "Por Código de Barras (CMC-7)"]
 
 		this.state = {
-			tipo: "",
 			tipoCheque: "Apenas Cadastro",
+			changeDataNascimento: false,
 			creditoInput: {
 				documento: null,
-				dataNascimento: null,
+				dataNascimento: moment(),
 				expressTipo: "CPF",
 				uf: null,
 				banco: null,
@@ -75,7 +89,7 @@ class Credito extends Component {
 				digitoChequeInicial: null,
 				CMC7: null,
 				folhas: null,
-				servico: [],
+				servico: null,
 				cadastral: true,
 				receitaFederal: false,
 				ccf: false,
@@ -89,13 +103,14 @@ class Credito extends Component {
 		document.title = COMPANY_PRODUCT_CREDITO + " > " + COMPANY_NAME_SHORT;
 		this.props.loadingCredito();
 		
-		this.props.getLastQueries(COMPLETA_CODE_PF, "COMPLETA");
-		this.props.getLastQueries(INTERMEDIARIA_CODE_PF, "INTERMEDIARIA");
-		this.props.getLastQueries(INTERMEDIARIA_PLUS_CODE_PF, "INTERMEDIARIAPLUS");
-		this.props.getLastQueries(SIMPLES_CODE, "SIMPLES");
-		this.props.getLastQueries(CHEQUE_CODE_PF, "CHEQUE");
-		this.props.getLastQueries(EXPRESS_CODE_PF, "EXPRESS");
-		
+		if(this.consultasAtivas) {
+			this.consultasAtivas.SEGAM || this.consultasAtivas.PACC ? this.props.getLastQueries(COMPLETA_CODE_PF, "COMPLETA") : ""
+			this.consultasAtivas.SEARCHCREDITOINTERMEDIARIAPF || this.consultasAtivas.SEARCHCREDITOINTERMEDIARIAPJ ? this.props.getLastQueries(INTERMEDIARIA_CODE_PF, "INTERMEDIARIA") : ""
+			this.consultasAtivas.SEARCHINTERMEDIARIAPLUSPF || this.consultasAtivas.SEARCHINTERMEDIARIAPLUSPJ ? this.props.getLastQueries(INTERMEDIARIA_PLUS_CODE_PF, "INTERMEDIARIAPLUS") : ""
+			this.consultasAtivas.SEARCHCDLSIMPLES ? this.props.getLastQueries(SIMPLES_CODE, "SIMPLES") : ""
+			this.consultasAtivas["Cheque PF"] || this.consultasAtivas["Cheque PJ"] ? this.props.getLastQueries(CHEQUE_CODE_PF, "CHEQUE") : ""
+			this.consultasAtivas.SEARCHCREDITOEXPRESSPF || this.consultasAtivas.SEARCHCREDITOEXPRESSPJ ? this.props.getLastQueries(EXPRESS_CODE_PF, "EXPRESS") : ""
+		}
 	}
 
 	renderChequeObject = () => {
@@ -160,53 +175,38 @@ class Credito extends Component {
 
 	switchCaseCreditoOptions = (type, creditoInput) => {
 		let documento = creditoInput.documento.replace(/[^0-9]/g,"")
-		switch (type) {
-			case "CHEQUE": {
-				let cheque = this.renderChequeObject()
-				cheque.documento = documento
-				cheque.tipo = creditoInput.documento.length > 11 ? "pj" : "pf"
+		if(type.match("INTERMEDIARIAPLUS"))
+			this.props.searchCreditoIntermediariaPlus(documento, creditoInput.estado)
+		else if(type.match("INTERMEDIARIA"))
+			this.props.searchCreditoIntermediaria(documento, creditoInput.estado)
+		else if(type.match("SIMPLES"))
+			this.props.searchCreditoSimples(documento)
+		else if(type.match("EXPRESS")) {
+			let requestExpress = {}
+			requestExpress["receitaFederal"] = creditoInput.receitaFederal
+			requestExpress["ccf"] = creditoInput.ccf
+			requestExpress["protestoPublico"] = creditoInput.protestoPublico
+			requestExpress["cadastral"] = creditoInput.cadastral
 
-				this.props.searchCreditoCheque(cheque, cheque.tipo === "pf" ? "CPF" : "CNPJ");
-				break
+			if(creditoInput.expressTipo === "CPF") {
+				requestExpress["cpf"] = documento
+				requestExpress["dataNascimento"] = creditoInput.dataNascimento
+			} else {
+				requestExpress["cnpj"] = documento
+				requestExpress["uf"] = creditoInput.estado
+				requestExpress["sintegra"] = creditoInput.sintegra
 			}
-		
-			case "INTERMEDIARIA":
-				this.props.searchCreditoIntermediaria(documento, creditoInput.estado);
-				break;
-
-			case "INTERMEDIARIAPLUS":
-				this.props.searchCreditoIntermediariaPlus(documento, creditoInput.estado);
-				break;
-
-			case "EXPRESS":
-				let requestExpress = {}
-				requestExpress["receitaFederal"] = creditoInput.receitaFederal
-				requestExpress["ccf"] = creditoInput.ccf
-				requestExpress["protestoPublico"] = creditoInput.protestoPublico
-				requestExpress["cadastral"] = creditoInput.cadastral
-
-				if(creditoInput.expressTipo === "CPF") {
-					requestExpress["cpf"] = documento
-					requestExpress["dataNascimento"] = creditoInput.dataNascimento
-				} else {
-					requestExpress["cnpj"] = documento
-					requestExpress["uf"] = creditoInput.estado
-					requestExpress["sintegra"] = creditoInput.sintegra
-				}
-				this.props.searchCreditoExpress(requestExpress, documento, creditoInput.expressTipo)
-				break
-
-			case "SIMPLES":
-				this.props.searchCreditoSimples(documento);
-				break;
-
-			case "COMPLETA":
-				this.searchCreditoCompleta(documento);
-				break;
-
-			default:
-				break;
+			this.props.searchCreditoExpress(requestExpress, documento, creditoInput.expressTipo)
 		}
+		else if(type.match("EXPRESS")) {
+			let cheque = this.renderChequeObject()
+			cheque.documento = documento
+			cheque.tipo = creditoInput.documento.length > 11 ? "pj" : "pf"
+
+			this.props.searchCreditoCheque(cheque, cheque.tipo === "pf" ? "CPF" : "CNPJ")
+		}
+		else
+			this.searchCreditoCompleta(documento)
 	}
 
 	onFormSubmit = (evt) => {
@@ -216,7 +216,33 @@ class Credito extends Component {
 
 		let { creditoInput } = this.state
 
+		if(this.state.changeDataNascimento)
+			creditoInput.dataNascimento = moment(this.state.creditoInput.dataNascimento).format("YYYY-MM-DD")
+
 		this.switchCaseCreditoOptions(this.props.type, creditoInput)
+
+		this.setState({
+			creditoInput: {
+				documento: "",
+				dataNascimento: null,
+				expressTipo: "CPF",
+				uf: null,
+				banco: null,
+				agência: null,
+				conta: null,
+				digitoConta: null,
+				chequeInicial: null,
+				digitoChequeInicial: null,
+				CMC7: null,
+				folhas: null,
+				servico: null,
+				cadastral: true,
+				receitaFederal: false,
+				ccf: false,
+				protestoPublico: false,
+				sintegra: false
+			}
+		})
 	}
 
 	renderUF = () => {
@@ -246,7 +272,7 @@ class Credito extends Component {
 						className="form-control"
 						type="text"
 						placeholder={
-							this.props.type == "SIMPLES" ?
+							this.props.type == "SEARCHCDLSIMPLES" ?
 								"CPF"
 							: "CPF ou CNPJ"
 						}
@@ -295,14 +321,14 @@ class Credito extends Component {
 
 				{showDataNascimento ? 
 					<Col md={2}>
-						<MyFieldGroup
-							id="dataNascimento"
-							type="date"
-							name="dataNascimento"
-							value={this.state.creditoInput.dataNascimento}
-							onChange={this.onChangeInput}
-							placeholder="Data nascimento"
+						<DateField
 							required
+							placeholder="Data nascimento"
+							startDate={this.state.creditoInput.dataNascimento}
+							onChange={(date) => this.setState({
+								creditoInput:{...this.state.creditoInput, dataNascimento:date},
+								changeDataNascimento:true
+							})}
 						/>
 					</Col>
 				: ""}
@@ -398,7 +424,7 @@ class Credito extends Component {
 						logo = {LOGO_CREDITO}
 						onformSubmit = {this.onFormSubmit}
 						closeMessageError = {this.props.closeMessageErrorCredito}
-						options={this.produtoInformacoes.subItems}
+						options={this.produtoInformacoes}
 						onChange={this.onChangeType}
 						type={this.props.type}
 						seeModelo = {this.props.seeModel}
@@ -406,10 +432,11 @@ class Credito extends Component {
 						message = {this.props.message}
 					>
 						{tipo ?
-							tipo == "INTERMEDIARIA" || tipo == "INTERMEDIARIAPLUS" ?
+							tipo.startsWith("SEARCHCREDITOINTERMEDIARIA")
+							|| tipo.startsWith("SEARCHINTERMEDIARIAPLUS") ?
 								this.renderForm(true)
 							:
-								tipo == "EXPRESS" ?
+								tipo.startsWith("SEARCHCREDITOEXPRESS") ?
 									this.renderFormExpress()
 								: this.renderForm(false)
 							: this.renderForm(false)
@@ -422,14 +449,15 @@ class Credito extends Component {
 	}
 
 	render() {
-		let status = this.props.status;
-		let type = this.props.type;
-		let loading = this.props.loading;
-		let datas = this.props.datas;
-		let tabActive = this.props.tabActive;
-		let changeTab = this.props.changeTab;
+		let status = this.props.status
+		let type = this.props.type
+		let loading = this.props.loading
+		let datas = this.props.datas
+		let tabActive = this.props.tabActive
+		let changeTab = this.props.changeTab
+
 		if(status == SUCCESS || status == ERR_CONNECTION_REFUSED || status == REQUEST_ERROR) {
-			window.scrollTo(0, 0);
+			window.scrollTo(0, 0)
 		}
 		return (
 			<div>
@@ -444,7 +472,8 @@ class Credito extends Component {
 						<LocalizeDescription />
 						<div style={{marginBottom:15}} />
                         <UltimasConsultas
-                            consultas={this.props.lastQueries[this.props.type]}
+							consultas={this.props.lastQueries[this.props.type]}
+							produtoInformacoes={this.produtoInformacoes}
                             type={this.props.type}
                             search={this.researchUltimasConsultas} />
 					</span>
@@ -504,7 +533,8 @@ function mapStateToProps(state) {
 		loading: state.credito.loading,
 		tabActive: state.credito.tabActive,
 		lastQueries: state.credito.lastQueries,
-		type: state.credito.type
+		type: state.credito.type,
+		consultasAtivas: state.user.consultasAtivas
 	}
 }
 

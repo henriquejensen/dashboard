@@ -1,5 +1,8 @@
-import React from "react";
-import { Form, FormGroup, Col, FormControl, Label, ControlLabel, Button, Radio, Checkbox, HelpBlock } from "react-bootstrap";
+import React from "react"
+import DatePicker from 'react-datepicker'
+import { Form, FormGroup, Col, FormControl, Label, ControlLabel, Button, Radio, Checkbox, HelpBlock } from "react-bootstrap"
+
+import 'react-datepicker/dist/react-datepicker.css'
 
 export const MyFieldGroup = (props) => {
     let { id, bsSize, label, required, type, error, name, accept, value, placeholder, onChange, message, inputStyle } = props
@@ -168,5 +171,24 @@ export const MyCheckboxGroup = (props) => {
                 })}
 
         </FormGroup>
+    )
+}
+
+export const DateField = (props) => {
+    const { id, bsSize, label, required, placeholder, onChange, startDate } = props
+    return (
+        <FormGroup controlId={id} style={{marginLeft:0, marginRight:0}} bsSize={bsSize} >
+            {label ? <ControlLabel>{label}</ControlLabel> : ""}
+            <DatePicker
+                required
+                className="form-control"
+                placeholderText={placeholder}
+                selected={startDate}
+                dateFormat="DD/MM/YYYY"
+                locale="pt-br"
+                onChange={onChange}
+            />
+        </FormGroup>
+        
     )
 }

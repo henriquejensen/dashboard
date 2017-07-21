@@ -120,6 +120,7 @@ export default class UltimasConsultas extends Component {
     render() {
         let consultas = this.props.consultas ? this.props.consultas : []
         let handleSearchPerson = this.props.search
+        const produtoInformacoes = this.props.produtoInformacoes
         let fields = ["Tipo", "Entrada", "Data/Hora", ""]
         return (
                 <Panel title={title}>
@@ -151,49 +152,51 @@ export default class UltimasConsultas extends Component {
                                                     consulta.entrada.length <= 11 ?
                                                         "CPF" : "CNPJ"
                                                     : ""
-                                    return (
-                                        <tbody key={index}>
-                                            <tr>
-                                                <td>{this.props.type}</td>
-                                                <td>
-                                                    <MyButton
-                                                        tooltip={TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE}
-                                                        onClickButton={handleSearchPerson}
-                                                        params={[consulta.entrada, isCpfOrCnpj]}
-                                                        label={isCpfOrCnpj === "CPF" ? patternCPF(consulta.entrada) : isCpfOrCnpj === "CNPJ" ? patternCNPJ(consulta.entrada) : consulta.entrada}
-                                                    />
-                                                </td>
-                                                <td>{new Date(consulta.dataHora).toLocaleString()}</td>
-                                                <td>
-                                                    {this.props.searchEnderecosTelefonesUltimasConsultas ?
-                                                        <span>
-                                                            {this.renderButtons(consulta.enderecos, "enderecos", index, consulta.entrada, "home")}
-                                                            <span style={{paddingRight:15}}></span>
-                                                            {this.renderButtons(consulta.telefones, "telefones", index, consulta.entrada, "phone")}
-                                                        </span>
+                                    let produto = produtoInformacoes.find(prod => prod.id === this.props.type)
+                                    if(produto)
+                                        return (
+                                            <tbody key={index}>
+                                                <tr>
+                                                    <td>{produto.label}</td>
+                                                    <td>
+                                                        <MyButton
+                                                            tooltip={TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE}
+                                                            onClickButton={handleSearchPerson}
+                                                            params={[consulta.entrada, isCpfOrCnpj]}
+                                                            label={isCpfOrCnpj === "CPF" ? patternCPF(consulta.entrada) : isCpfOrCnpj === "CNPJ" ? patternCNPJ(consulta.entrada) : consulta.entrada}
+                                                        />
+                                                    </td>
+                                                    <td>{new Date(consulta.dataHora).toLocaleString()}</td>
+                                                    <td>
+                                                        {this.props.searchEnderecosTelefonesUltimasConsultas ?
+                                                            <span>
+                                                                {this.renderButtons(consulta.enderecos, "enderecos", index, consulta.entrada, "home")}
+                                                                <span style={{paddingRight:15}}></span>
+                                                                {this.renderButtons(consulta.telefones, "telefones", index, consulta.entrada, "phone")}
+                                                            </span>
+                                                        : ""}
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    {consulta.enderecos && this.state.buttonsClicked.home[index] ?
+                                                        <td colSpan={4}>
+                                                            <Col md={12}>
+                                                                <Endereco enderecos={consulta.enderecos} />
+                                                            </Col>
+                                                        </td>
                                                     : ""}
-                                                </td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                {consulta.enderecos && this.state.buttonsClicked.home[index] ?
-                                                    <td colSpan={4}>
-                                                        <Col md={12}>
-                                                            <Endereco enderecos={consulta.enderecos} />
-                                                        </Col>
-                                                    </td>
-                                                : ""}
-                                            </tr>
-                                            
-                                            <tr>
-                                                {consulta.telefones && this.state.buttonsClicked.phone[index]? 
-                                                    <td colSpan={4} style={{padding:0}}>
-                                                        <Telefone fixos={consulta.telefones.fixos} moveis={consulta.telefones.moveis} />
-                                                    </td>
-                                                : ""}
-                                            </tr>                                       
-                                        </tbody>
-                                    )
+                                                </tr>
+                                                
+                                                <tr>
+                                                    {consulta.telefones && this.state.buttonsClicked.phone[index]? 
+                                                        <td colSpan={4} style={{padding:0}}>
+                                                            <Telefone fixos={consulta.telefones.fixos} moveis={consulta.telefones.moveis} />
+                                                        </td>
+                                                    : ""}
+                                                </tr>                                       
+                                            </tbody>
+                                        )
                                 })}                   
                             </Table>
                         :

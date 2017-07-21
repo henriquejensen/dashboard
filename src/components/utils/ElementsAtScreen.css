@@ -2,7 +2,7 @@
     position: fixed;
     font-size: 31px;
     right: 8px;
-    bottom: 2px;
+    bottom: 30px;
     z-index: 100;
     cursor: pointer;
 }

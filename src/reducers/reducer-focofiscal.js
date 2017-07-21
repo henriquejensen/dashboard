@@ -79,16 +79,19 @@ export default function(state=getInitialState, action) {
 
         case focofiscal.FETCH_FOCOFISCAL: {
             let responseIsNull = !action.payload.response.cadastro
-            let documento, newResponse
+            let documento, newResponse, label
 
             if(!responseIsNull) {
-                documento = action.payload.response.cadastro.cpf ? action.payload.response.cadastro.cpf : action.payload.response.cadastro.cnpj
+                const { cpf, cnpj } = action.payload.response.cadastro
+                const tipo = cpf ? "CPF" : "CNPJ"
+                documento = cpf ? cpf : cnpj
                 documento = documento.toString()
+                label = tipo + ":" + documento
                 newResponse = action.payload.response
 
-                newResponse['label'] = documento;
-                newResponse['tipo'] = action.payload.parameters.tipo;
-                newResponse['icon'] = ICON_FOCOFISCAL;
+                newResponse['label'] = label
+                newResponse['tipo'] = action.payload.parameters.tipo
+                newResponse['icon'] = ICON_FOCOFISCAL
                 newResponse['produto'] = COMPANY_PRODUCT_FOCOFISCAL_LABEL
             }
 
@@ -96,8 +99,8 @@ export default function(state=getInitialState, action) {
                 loading: false,
                 status: !responseIsNull ? "" : REQUEST_ERROR,
                 message: !responseIsNull ? "" : NENHUM_REGISTRO,
-                response: !responseIsNull ? {...state.response, [documento]:newResponse } : state.response,
-                tabActive: !responseIsNull ? documento : state.tabActive,
+                response: !responseIsNull ? {...state.response, [label]:newResponse } : state.response,
+                tabActive: !responseIsNull ? label : state.tabActive,
                 lastQueries: state.lastQueries,
                 type: state.type
             }

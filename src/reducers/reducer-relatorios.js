@@ -23,6 +23,7 @@ export default function(state=getInitialState, action) {
     switch(action.type) {
         case constants.GET_RELATORIOS: {
             return {
+                ...state,
                 relatorios: [
                     {id:6, tipo:"R6", descricao:`Consultas de ${COMPANY_PRODUCT_LOCALIZE}, ${COMPANY_PRODUCT_CREDITO}, ${COMPANY_PRODUCT_VEICULOS} e ${COMPANY_PRODUCT_FOCOFISCAL}`},
                     {id:7, tipo:"R7", descricao:"Envio de SMS"},
@@ -30,9 +31,6 @@ export default function(state=getInitialState, action) {
                     {id:9, tipo:"R9", descricao:"Consumo total de todos os produtos"},
                     {id:12, tipo:"R12", descricao:`Consultas de ${COMPANY_PRODUCT_LOCALIZE}, ${COMPANY_PRODUCT_CREDITO} e ${COMPANY_PRODUCT_VEICULOS}`}
                 ],
-                relatoriosR12: state.relatorios,
-                status: "",
-                message: "",
                 loading: false
             }
         }
@@ -48,42 +46,45 @@ export default function(state=getInitialState, action) {
         }
 
         case constants.FILTER_RELATORIO_R12: {
-            return {
-                relatorios: state.relatorios,
-                relatoriosR12: JSON.parse(action.payload.response.response),
-                status: "",
-                message: "",
-                loading: false
+            try {
+                const { response } = action.payload.response
+                return {
+                    ...state,
+                    relatoriosR12: response ? response : [],
+                    loading: false
+                }
+            } catch(e) {
+                return {
+                    ...state,
+                    loading: false
+                }
             }
         }
 
         case constants.LOADING_RELATORIO: {
             return {
-                relatorios: state.relatorios,
-                relatoriosR12: state.relatorios,
-                status: "",
-                message: "",
+                ...state,
                 loading: true
             }
         }
 
-        case ERR_CONNECTION_REFUSED:
+        case ERR_CONNECTION_REFUSED: {
             return {
-                relatorios: state.relatorios,
-                relatoriosR12: state.relatorios,
+                ...state,
                 status: ERR_CONNECTION_REFUSED,
                 message: ERROR_503,
                 loading: false
             }
+        }
 
-        case REQUEST_ERROR:
+        case REQUEST_ERROR: {
             return {
-                relatorios: state.relatorios,
-                relatoriosR12: state.relatorios,
+                ...state,
                 status: REQUEST_ERROR,
                 message: action.payload.mensagem,
                 loading: false
-            }   
+            }
+        }
     }
 
     return state;

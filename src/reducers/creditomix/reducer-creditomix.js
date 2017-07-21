@@ -125,8 +125,9 @@ export default function(state=getInitialState, action) {
 
         case constants.SHOW_CREDITOMIX_MODEL: {
             let newResponse = model
+            const label = "Modelo Consulta"
 
-            newResponse['label'] = "model"
+            newResponse['label'] = label
             newResponse['tipo'] = "CPF"
             newResponse['icon'] = ICON_CREDITOMIX
             newResponse['produto'] = COMPANY_PRODUCT_CREDITOMIX_LABEL
@@ -135,8 +136,8 @@ export default function(state=getInitialState, action) {
                 loading: false,
                 status: "",
                 message: "",
-                response: {...state.response, ["model"]:newResponse },
-                tabActive: "model",
+                response: {...state.response, [label]:newResponse },
+                tabActive: label,
                 lastQueries: state.lastQueries,
                 type: state.type,
              }

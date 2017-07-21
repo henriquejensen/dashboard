@@ -18,6 +18,7 @@ import {
     USER_RESET_PASSWORD_MESSAGE,
     USER_CHANGED_PASSWORD_MESSAGE,
     USER_CLIENT,
+    USER_CONSULTS,
     USER_EMAIL2,
     USER_LOGIN,
     USER_PHONE,
@@ -179,6 +180,7 @@ export default function(state=getInitialState, action) {
 function removeInfoLocalStorage() {
     localStorage.removeItem(AUTHENTICATION)
     localStorage.removeItem(GET_LAYOUTS_BASECERTA)
+    localStorage.removeItem(USER_CONSULTS)
     localStorage.removeItem(USER_PRODUCTS)
     localStorage.removeItem(USER_NAME)
     localStorage.removeItem(USER_PERFIL)

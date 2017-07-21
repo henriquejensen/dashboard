@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import moment from "moment"
 import { Col, Form } from "react-bootstrap"
 
 //Components
-import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
+import { DateField, MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
 import MyButton from "../../components/button/MyButton"
 
 class Filtro extends Component {
@@ -59,8 +60,8 @@ class Filtro extends Component {
             usuario : null,
             campanha : null,
             resultado : null,
-            dataIni : null,
-            dataFim : null,
+            dataIni : moment(),
+            dataFim : moment(),
             idPessoaPai : null,
             idPessoa : null,
             idGrupo : null,
@@ -73,7 +74,12 @@ class Filtro extends Component {
     onFormSubmit = (evt) => {
         evt.preventDefault()
 
-        let filters = { ...this.state, idRelatorio:this.props.relatorio.id }
+        const filters = {
+            ...this.state,
+            idRelatorio:this.props.relatorio.id,
+            dataIni: moment(this.state.dataIni).format("YYYY-MM-DD"),
+            dataFim: moment(this.state.dataFim).format("YYYY-MM-DD")
+        }
 
         this.props.filterRelatorio(filters)
     }
@@ -111,24 +117,22 @@ class Filtro extends Component {
                 : ""}
 
                 <Col md={3}>
-                    <MyFieldGroup
-                        id="dataIni"
-                        label="Data Início"
-                        type="date"
-                        name="dataIni"
+                    <DateField
                         required
-                        value={this.state.dataIni}
-                        onChange={this.onChange} />
+                        label="Ínicio*"
+                        placeholder="Data inicial"
+                        startDate={this.state.dataIni}
+                        onChange={(date) => this.setState({dataIni: date})}
+                    />
                 </Col>
+
                 <Col md={3}>
-                    <MyFieldGroup
-                        id="dataFim"
-                        label="Data Final"
-                        type="date"
-                        name="dataFim"
+                    <DateField
                         required
-                        value={this.state.dataFim}
-                        onChange={this.onChange}
+                        label="Fim*"
+                        placeholder="Data final"
+                        startDate={this.state.dataFim}
+                        onChange={(date) => this.setState({dataFim: date})}
                     />
                 </Col>
 

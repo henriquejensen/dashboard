@@ -1,30 +1,34 @@
-import React, {Component} from "react";
-import Notification from "react-notification-system";
-import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
-import { Button, Col, Form } from "react-bootstrap";
+import React, {Component} from "react"
+import moment from "moment"
+import Notification from "react-notification-system"
+import { connect } from "react-redux"
+import { bindActionCreators } from 'redux'
+import { Button, Col, Form } from "react-bootstrap"
 
 // Actions
-import { filterCampanhasSMS, getCampanhasSMS, loadingSMS } from "../../actions/actionsSMS";
+import { filterCampanhasSMS, getCampanhasSMS, loadingSMS } from "../../actions/actionsSMS"
 
 // Components
 import MonitorEnviosView from "./MonitorEnviosView"
 import PanelGroup from "../../components/panel/PanelGroup"
 import Panel from "../../components/panel/Panel"
 import Table from "../../components/table/Table"
-import { LoadingScreen } from "../../components/utils/ElementsAtScreen";
-import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
+import { LoadingScreen } from "../../components/utils/ElementsAtScreen"
+import { DateField, MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
 
 // Constants
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_SMS } from "../../constants/constantsCompany";
-import { MESSAGE_SUCCESS_SMS, NENHUM_REGISTRO, SUCCESS } from "../../constants/utils";
+import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_SMS } from "../../constants/constantsCompany"
+import { MESSAGE_SUCCESS_SMS, NENHUM_REGISTRO, SUCCESS } from "../../constants/utils"
 
 class MonitorEnvios extends Component {
     constructor(props) {
       super(props);
 
       this.state = {
-        showBuscaAvancada: false
+        showBuscaAvancada: false,
+        dataInicio: moment(),
+        dataFim: moment(),
+        changeData: false
       }
     }
 
@@ -49,10 +53,16 @@ class MonitorEnvios extends Component {
     onFormSubmit = (evt) => {
       evt.preventDefault()
 
-      let { id=null, campanha=null, dataInicio=null, dataFim=null, cliente=null, usuario=null, limitar=null } = this.state
+      let { id=null, campanha=null, dataInicio, dataFim, cliente=null, usuario=null, limitar=null, changeData } = this.state
+      dataInicio = changeData ? moment(this.state.dataInicio).format("YYYY-MM-DD") : null
+      dataFim = changeData ? moment(this.state.dataFim).format("YYYY-MM-DD") : null
 
       this.props.loadingSMS()
       this.props.filterCampanhasSMS({ id, campanha, dataInicio, dataFim, cliente, usuario, limitar })
+
+      this.setState({
+        changeData: false
+      })
     }
 
     renderForm = () => {
@@ -102,21 +112,21 @@ class MonitorEnvios extends Component {
                 {this.state.showBuscaAvancada ?
                   <span>
                     <Col md={3}>
-                        <MyFieldGroup
-                          id="smsDataInicio"
-                          label="Data Início"
-                          type="date"
-                          name="dataInicio"
-                          onChange={this.onChange} />
+                        <DateField
+                            label="Data Início"
+                            placeholder="Data inicial"
+                            startDate={this.state.dataInicio}
+                            onChange={(date) => this.setState({dataInicio: date, changeData: true})}
+                        />
                     </Col>
 
                     <Col md={3}>
-                        <MyFieldGroup
-                          id="smsDataFim"
-                          label="Data Fim"
-                          type="date"
-                          name="dataFim"
-                          onChange={this.onChange} />
+                        <DateField
+                            label="Data Fim"
+                            placeholder="Data final"
+                            startDate={this.state.dataFim}
+                            onChange={(date) => this.setState({dataFim: date, changeData:true})}
+                        />
                     </Col>
 
                     <Col md={4}>

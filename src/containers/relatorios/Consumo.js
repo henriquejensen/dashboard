@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import moment from "moment"
 import { Link } from "react-router"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
@@ -12,7 +13,7 @@ import { reverConsultaLocalize } from "../../actions/index"
 import Panel from "../../components/panel/Panel"
 import CardWithTable from "../../components/card/CardWithTable"
 import MyButton from "../../components/button/MyButton"
-import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
+import { DateField, MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
 import { LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 //Constants
@@ -31,8 +32,8 @@ class Consumo extends Component {
             usuario : null,
             campanha : null,
             resultado : null,
-            dataIni : null,
-            dataFim : null,
+            dataIni : moment(),
+            dataFim : moment(),
             idPessoaPai : null,
             idPessoa : null,
             idGrupo : null,
@@ -66,7 +67,12 @@ class Consumo extends Component {
     onFormSubmit = (evt) => {
         evt.preventDefault()
 
-        let filters = { ...this.state, idRelatorio:12 }
+        let filters = {
+            ...this.state,
+            idRelatorio:12,
+            dataIni: moment(this.state.dataIni).format("YYYY-MM-DD"),
+            dataFim: moment(this.state.dataFim).format("YYYY-MM-DD")
+        }
 
         this.props.loadingRelatorio()
         this.props.filterRelatorioR12(filters)
@@ -96,23 +102,22 @@ class Consumo extends Component {
                 </Col>
 
                 <Col md={3}>
-                    <MyFieldGroup
-                        id="dataIni"
-                        label="Data Início"
-                        type="date"
-                        name="dataIni"
+                    <DateField
                         required
-                        onChange={this.onChange} />
+                        label="Ínicio do consumo*"
+                        placeholder="Data inicial"
+                        startDate={this.state.dataIni}
+                        onChange={(date) => this.setState({dataIni: date})}
+                    />
                 </Col>
 
                 <Col md={3}>
-                    <MyFieldGroup
-                        id="dataFim"
-                        label="Data Fim"
-                        type="date"
-                        name="dataFim"
+                    <DateField
                         required
-                        onChange={this.onChange}
+                        label="Fim do consumo*"
+                        placeholder="Data final"
+                        startDate={this.state.dataFim}
+                        onChange={(date) => this.setState({dataFim: date})}
                     />
                 </Col>
 
@@ -125,6 +130,7 @@ class Consumo extends Component {
                         onChange={this.onChange}
                     />
                 </Col>
+
                 <Col md={3}>
                     <MyFieldGroup
                         id="grupo"
@@ -134,6 +140,7 @@ class Consumo extends Component {
                         onChange={this.onChange}
                     />
                 </Col>
+
                 <Col md={3}>
                     <SelectGroup
                         id="resultado"
@@ -178,10 +185,10 @@ class Consumo extends Component {
                             {id:"data", name:"Data"},
                             {id:"usuario", name:"Usuario"},
                             {id:"produto", name:"Consulta"},
-                            {id:"dado", name:"Entrada", functionToApply:(val) => {return <span>{val.substring(0,15)}</span>}},
+                            {id:"dado", name:"Entrada", functionToApply:(val) => {return <span>{val ? val.substring(0,15) : val}</span>}},
                             {id:"resultado", name:"Status"},
                             {id:"via", name:"Rever", functionToApply:(val, indexRow) => {
-                                if(val == "API")
+                                if(val === "API")
                                     return this.onClickReverConsulta(this.props.relatoriosR12[indexRow].produto,val)
 
                                 return <span></span>

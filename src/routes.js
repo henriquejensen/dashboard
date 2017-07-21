@@ -30,6 +30,8 @@ import Veiculos from "./containers/veiculos/VeiculosController"
 import FocoFiscal from "./containers/focofiscal/FocoFiscalController"
 import Monitora from "./containers/monitora/MonitoraController"
 
+import Contador from "./containers/utils/Contador"
+
 import Consumo from "./containers/relatorios/Consumo"
 import Relatorios from "./containers/relatorios/Relatorios"
 import Cadastro from "./containers/cadastro/Cadastro"
@@ -41,6 +43,7 @@ export default (
     <Route path='/login' component={Login} />
     <Route path='/senha' component={ChangePassword} />
     <Route path='/novasenha' component={ResetPassword} />
+    <Route path='/adeusmineiro' component={Contador} />
 
     <Route component={App}>
       <Route name="Localize" path="/" component={Localize}	/>

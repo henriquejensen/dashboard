@@ -10,11 +10,10 @@ export default class Panel extends Component {
     }
 
     render() {
-        let footer = this.props.footer;
-        let titleColor = this.props.titleColor
+        const { footerStyle, footer, titleColor, title } = this.props
         return (
             <div className="panel panel-default">
-                {this.props.title ? 
+                {title ? 
                     <div
                         className={titleColor ? "panel-heading my-panel-heading-inner" : "panel-heading my-panel-heading"} 
                         onClick={() => this.setState({show:!this.state.show})}
@@ -36,7 +35,7 @@ export default class Panel extends Component {
                             <span>Esconder/Mostrar Informações</span>
                         </Tooltip>
 
-                        {this.props.title}
+                        {title}
                     </div>
                 : ""}
 
@@ -45,7 +44,9 @@ export default class Panel extends Component {
                 </div>
 
                 {footer ? 
-                    <div className={this.state.show ? "panel-footer" : "display-none"}>{footer}</div>
+                    <div className={this.state.show ? "panel-footer" : "display-none"} style={footerStyle}>
+                        {footer}
+                    </div>
                 : ""}
             </div>
         )

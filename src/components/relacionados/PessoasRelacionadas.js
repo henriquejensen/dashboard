@@ -1,3 +1,5 @@
+import "./PessoasRelacionadas.css"
+
 import React, { Component } from "react";
 import { Col } from "react-bootstrap";
 
@@ -76,9 +78,14 @@ export default class PessoasRelacionadas extends Component {
 
     renderFooterPanel = () => {
         return (
-            <div className="text-center moreInfo" onClick={() => this.searchPessoasRelacionadas(this.props.documento, this.props.label)}>
-                Ver mais pessoas relacionadas
-            </div>
+            <MyButton
+                tooltip="VER MAIS PESSOAS RELACIONADAS"
+                onClickButton={this.searchPessoasRelacionadas}
+                params={[this.props.documento, this.props.label]}
+                myButtonClass="my-button-pessoas-relacionadas color-payement"
+                //myButtonStyle={this.state.buttonsClicked[icon][documento] ? "danger" : "info"}
+                myButtonText="Ver mais pessoas relacionadas"
+            />
         )
     }
 
@@ -94,6 +101,7 @@ export default class PessoasRelacionadas extends Component {
         return (
             <Panel
                 title={title}
+                footerStyle={{textAlign:"right"}}
                 footer={this.state.showMessageSeeMore ? this.renderFooterPanel() : ""}
                 >
                 <Col md={12}>

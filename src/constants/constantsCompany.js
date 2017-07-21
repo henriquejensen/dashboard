@@ -21,7 +21,7 @@ export const URL_EDITAR = "/editar"
 // Localize
 export const URL_LOCALIZE = "/localize"
 export const COMPANY_PRODUCT_LOCALIZE = "Localize"
-export const COMPANY_PRODUCT_LOCALIZE_LABEL = "LOCALIZE"
+export const COMPANY_PRODUCT_LOCALIZE_LABEL = "1"
 export const COMPANY_PRODUCT_LOCALIZE_COLOR = "#673ab7"
 export const COMPANY_PRODUCT_LOCALIZE_COLOR_LIGHT = "#D1BCF7"
 export const COMPANY_PRODUCT_LOCALIZE_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"
@@ -32,7 +32,7 @@ export const ICON_LOCALIZE = "https://s3-us-west-2.amazonaws.com/front.assertiva
 // Crédito
 export const URL_CREDITO = "/credito"
 export const COMPANY_PRODUCT_CREDITO = "Credito"
-export const COMPANY_PRODUCT_CREDITO_LABEL = "CREDITO"
+export const COMPANY_PRODUCT_CREDITO_LABEL = "2"
 export const COMPANY_PRODUCT_CREDITO_COLOR = "#6CBA4B"
 export const COMPANY_PRODUCT_CREDITO_COLOR_LIGHT = "#B5DCA5"
 export const COMPANY_PRODUCT_CREDITO_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"
@@ -43,7 +43,7 @@ export const ICON_CREDITO_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.a
 // Crédito Mix
 export const URL_CREDITOMIX = "/creditomix"
 export const COMPANY_PRODUCT_CREDITOMIX = "Crédito Mix"
-export const COMPANY_PRODUCT_CREDITOMIX_LABEL = "CREDITOMIX"
+export const COMPANY_PRODUCT_CREDITOMIX_LABEL = "7"
 export const COMPANY_PRODUCT_CREDITOMIX_COLOR = "#6CBA4B"
 export const COMPANY_PRODUCT_CREDITOMIX_COLOR_LIGHT = "#B5DCA5"
 export const COMPANY_PRODUCT_CREDITOMIX_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"
@@ -54,7 +54,7 @@ export const ICON_CREDITOMIX_NEGATIVE = "https://s3-us-west-2.amazonaws.com/fron
 // Foco Fiscal
 export const URL_FOCOFISCAL = "/focofiscal"
 export const COMPANY_PRODUCT_FOCOFISCAL = "Foco Fiscal"
-export const COMPANY_PRODUCT_FOCOFISCAL_LABEL = "FOCOFISCAL"
+export const COMPANY_PRODUCT_FOCOFISCAL_LABEL = "4"
 export const COMPANY_PRODUCT_FOCOFISCAL_COLOR = "#E85764"
 export const COMPANY_PRODUCT_FOCOFISCAL_COLOR_LIGHT = "#F59AB9"
 export const COMPANY_PRODUCT_FOCOFISCAL_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"

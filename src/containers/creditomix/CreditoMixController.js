@@ -36,13 +36,13 @@ import {
     searchCreditoMixPremium,
     searchCreditoMixSintetica
 } from "../../actions/creditomix/actionsCreditoMix"
-import todosProdutos from "../../components/utils/common/produtos"
+import produtos from "../../utils/produtos.js"
 
-const produtoInformacoes = todosProdutos[COMPANY_PRODUCT_CREDITOMIX_LABEL];
+const produtoInformacoes = produtos[COMPANY_PRODUCT_CREDITOMIX_LABEL];
 
 function transformInCheckBoxObject (options) {
     let newOptionsObject = {}
-    for(let key of ["cpf", "cnpj"]) {
+    for(let key of ["CPF", "CNPJ"]) {
         newOptionsObject[key] = options[key].map((opt) => {
             return {
                 inline: false,
@@ -58,9 +58,23 @@ function transformInCheckBoxObject (options) {
 const optionsNormalized = transformInCheckBoxObject(produtoInformacoes.options)
 
 class CreditoMix extends Component {
-
     constructor(props) {
         super(props)
+
+		this.consultasAtivas = this.props.consultasAtivas ? this.props.consultasAtivas[COMPANY_PRODUCT_CREDITOMIX_LABEL] : undefined
+		this.consultas = produtos[COMPANY_PRODUCT_CREDITOMIX_LABEL].consultas
+		this.produtoInformacoes = []
+
+        if(this.consultasAtivas) {
+            this.consultas.forEach(consulta => {
+                const modulo = this.consultasAtivas[consulta.modulo] ? consulta.modulo : consulta.modulo2
+                if(this.consultasAtivas && this.consultasAtivas[modulo]) {
+                    this.produtoInformacoes.push(
+                        {id:modulo, label:this.consultasAtivas[modulo].labelFront}
+                    )
+                }
+            })
+        }
 
         this.state = {
             options: optionsNormalized,
@@ -79,12 +93,13 @@ class CreditoMix extends Component {
     onChangeCheckBox = (name, index) => {
         let newOptions = JSON.parse(JSON.stringify(this.state.options))
         let showCep = false
+        const tipo = this.props.type === "SPCBRPF" ? "CPF" : "CNPJ"
         // filtra no array o elemento selecionado e troca o valor deste objeto no map
-        newOptions[this.props.type.toLowerCase()]
+        newOptions[tipo]
                 .filter(option => option.name === name)
                 .map(opt => opt.checked = !opt.checked)
 
-        for(let option of newOptions[this.props.type.toLowerCase()]) {
+        for(let option of newOptions[tipo]) {
             if(option.name === "limiteCreditoSugerido" ||
                 option.name === "rendaPresumidaSpc" ||
                 option.name === "limiteCreditoPj"  ||
@@ -103,7 +118,7 @@ class CreditoMix extends Component {
 	renderCheckboxes = () => {
 		let options = this.state.options
 		let showCheckboxes = this.state.showCheckboxes
-		let type = this.props.type.toLowerCase()
+		let type = this.props.type === "SPCBRPF" ? "CPF" : "CNPJ"
 
 		if(showCheckboxes) {
 			return (
@@ -187,56 +202,30 @@ class CreditoMix extends Component {
 
         this.props.loadingCreditoMix()
 
-        switch (type) {
-            case "MASTER": {
-                this.props.searchCreditoMixMaster({documento, isCpfOrCnpj, cep:cepConsumidor})
-                break
-            }
+        if(type.match("MASTER"))
+            this.props.searchCreditoMixMaster({documento, isCpfOrCnpj, cep:cepConsumidor})
+        else if(type.match("PREMIUM"))
+            this.props.searchCreditoMixPremium({documento, isCpfOrCnpj, cep:cepConsumidor})
+        else if(type.match("GOLD"))
+            this.props.searchCreditoMixGold({documento, isCpfOrCnpj, cep:cepConsumidor})
+        else if(type.match("MAX"))
+            this.props.searchCreditoMixMax({documento, isCpfOrCnpj, cep:cepConsumidor})
+        else if(type.match("COMPLETA"))
+            this.props.searchCreditoMixCompleta({documento, isCpfOrCnpj})
+        else if(type.match("INTERMEDIARIAPLUS"))
+            this.props.searchCreditoMixIntermediariaPlus({documento, isCpfOrCnpj})
+        else if(type.match("INTERMEDIARIA"))
+            this.props.searchCreditoMixIntermediaria({documento, isCpfOrCnpj})
+        else if(type.match("SINTETICA"))
+            this.props.searchCreditoMixSintetica({documento, isCpfOrCnpj})
+        else {
+            const tipo = this.props.type === "SPCBRPF" ? "CPF" : "CNPJ"
+            //produtoInformacoes.options.cheque.map(cheque => request[cheque.id] = null) // seta todos os parametros de cheque
+            options[tipo].map(option => request[option.name] = option.checked) // seta todos os parametros de de options
+            request[tipo.toLowerCase()] = documento // seta o documento para o objeto
+            cepConsumidor ? request["cepConsumidor"] = cepConsumidor.replace(/[^0-9]/g,"") : "" // seta o cep para o objeto
 
-            case "PREMIUM": {
-                this.props.searchCreditoMixPremium({documento, isCpfOrCnpj, cep:cepConsumidor})
-                break
-            }
-
-            case "GOLD": {
-                this.props.searchCreditoMixGold({documento, isCpfOrCnpj, cep:cepConsumidor})
-                break
-            }
-
-            case "MAX": {
-                this.props.searchCreditoMixMax({documento, isCpfOrCnpj, cep:cepConsumidor})
-                break
-            }
-
-            case "COMPLETA": {
-                this.props.searchCreditoMixCompleta({documento, isCpfOrCnpj})
-                break
-            }
-
-            case "INTERMEDIARIAPLUS": {
-                this.props.searchCreditoMixIntermediariaPlus({documento, isCpfOrCnpj})
-                break
-            }
-
-            case "INTERMEDIARIA": {
-                this.props.searchCreditoMixIntermediaria({documento, isCpfOrCnpj})
-                break
-            }
-
-            case "SINTETICA": {
-                this.props.searchCreditoMixSintetica({documento, isCpfOrCnpj})
-                break
-            }
-
-            default: {
-                //produtoInformacoes.options.cheque.map(cheque => request[cheque.id] = null) // seta todos os parametros de cheque
-                options[type.toLowerCase()].map(option => request[option.name] = option.checked) // seta todos os parametros de de options
-                request[type.toLowerCase()] = documento // seta o documento para o objeto
-                cepConsumidor ? request["cepConsumidor"] = cepConsumidor.replace(/[^0-9]/g,"") : "" // seta o cep para o objeto
-
-                this.props.searchCreditoMix(request, type)
-                break
-            }
+            this.props.searchCreditoMix(request, tipo)
         }
 
         this.setState({
@@ -295,10 +284,10 @@ class CreditoMix extends Component {
     renderInputCommon = () => {
         let {type} = this.props
         let {isCpfOrCnpj} = this.state
-        let showCepByType = type === "MASTER" ||
-                      type === "PREMIUM" ||
-                      type === "GOLD" ||
-                      (type === "MAX" && isCpfOrCnpj === "CPF")
+        let showCepByType = type.match("MASTER") ||
+                      type.match("PREMIUM") ||
+                      type.match("GOLD") ||
+                      (type.match("MAX") && isCpfOrCnpj === "CPF")
 
         return (
             <div>
@@ -330,16 +319,16 @@ class CreditoMix extends Component {
 						logo = {LOGO_CREDITOMIX}
 						onformSubmit = {this.onformSubmit}
 						closeMessageError = {this.props.closeMessageErrorCreditoMix}
-						options={produtoInformacoes.subItems}
+						options={this.produtoInformacoes}
 						onChange={this.onChangeType}
 						type={this.props.type}
 						seeModelo = {this.props.showCreditoMixModel}
 						status = {this.props.status}
 						message = {this.props.message}
-                        moreInfoToShow={this.props.type === "CPF" || this.props.type === "CNPJ" ? this.renderCheckboxes(this.state.options) : ""}
+                        moreInfoToShow={this.props.type === "SPCBRPF" || this.props.type === "SPCBRPJ" ? this.renderCheckboxes(this.state.options) : ""}
 					>
 
-                        {this.props.type === "CPF" || this.props.type === "CNPJ" ?
+                        {this.props.type === "SPCBRPF" || this.props.type === "SPCBRPJ" ?
 						    this.renderInput()
                         :   this.renderInputCommon()}
 						
@@ -355,8 +344,8 @@ class CreditoMix extends Component {
 
 		if(status == SUCCESS || status == ERR_CONNECTION_REFUSED || status == REQUEST_ERROR) {
 			this.scrollPage(0, 0)
-		}
-
+        }
+        
         return (
             <div>
                 {this.form(type)}
@@ -371,6 +360,7 @@ class CreditoMix extends Component {
 						<div style={{marginBottom:15}} />
                         <UltimasConsultas
                             consultas={this.props.lastQueries[type]}
+                            produtoInformacoes={this.produtoInformacoes}
                             type={type}
                             search={this.researchUltimasConsultas}
                         />
@@ -423,7 +413,8 @@ function mapStateToProps(state) {
 		message: state.creditomix.message,
         tabActive: state.creditomix.tabActive,
         lastQueries: state.creditomix.lastQueries,
-        loading: state.creditomix.loading
+        loading: state.creditomix.loading,
+        consultasAtivas: state.user.consultasAtivas
     }
 }
 

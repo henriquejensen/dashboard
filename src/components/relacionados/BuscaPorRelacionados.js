@@ -151,7 +151,7 @@ export default class BuscaPorRelacionados extends Component {
                             {this.props.headerBody}
                         </Col>
 
-                        {rows.length > 0 ?
+                        {/*rows.length > 0 ?
                             <Col md={6}>
                                 <strong>Busca em lote por:</strong>
                                 {" "}
@@ -169,7 +169,7 @@ export default class BuscaPorRelacionados extends Component {
                                     myButtonText={<i className='fa fa-phone'/>}
                                 />
                             </Col>
-                        : ""}
+                        : ""*/}
                     </div>
 
                     <Col md={12}>
