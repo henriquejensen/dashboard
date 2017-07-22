@@ -94,18 +94,21 @@ class LocalizeController extends Component {
 	}
 
 	researchUltimasConsultas = (entrada) => {
-		this.props.loadingLocalize();
+		this.props.loadingLocalize()
 
-		if(this.props.type == "SEARCHPF" || this.props.type == "SEARCHPJ")
-			this.props.searchLocalize(entrada, this.props.type);
+		if(this.props.type == "SEARCHPF" || this.props.type == "SEARCHPJ") {
+			const isCpfOrCnpj = this.props.type === "SEARCHPF" ? "CPF" : "CNPJ"
+			this.props.searchLocalize(entrada, isCpfOrCnpj)
+		}
 		else if(this.props.type == "SEARCHPHONE")
 			this.props.searchLocalizeByTelefone(entrada);
-		else if(this.props.type == "EMAIL")
+		else if(this.props.type.match("EMAIL"))
 			this.props.searchLocalizeByEmail(entrada);
 		else {
 			let nomeEndereco = {
 				...this.state.localizeInput,
-				...JSON.parse(entrada)
+				dataNascimento: "",
+				...entrada
 			}
 
 			this.props.searchLocalizeByNomeEndereco(nomeEndereco, this.props.type, this.props.type);
@@ -138,9 +141,8 @@ class LocalizeController extends Component {
 	}
 
 	searchLocalize = (doc, tipo) => {
-		debugger
-		this.props.loadingLocalize();
-		this.props.searchLocalize(doc, tipo);
+		this.props.loadingLocalize()
+		this.props.searchLocalize(doc, tipo)
 	}
 
 	searchLocalizeByNomeEndereco = (data, tipo, label) => {
@@ -149,10 +151,10 @@ class LocalizeController extends Component {
 	}
 
 	onFormSubmit = (evt) => {
-		evt.preventDefault();
+		evt.preventDefault()
 
-		this.props.loadingLocalize();
-		let type = this.props.type;
+		this.props.loadingLocalize()
+		let type = this.props.type
 
 		if(type === "SEARCHPF" || type === "SEARCHPJ") {
 			let documento = this.state.documento ? this.state.documento : "DOCUMENTO";
@@ -285,7 +287,7 @@ class LocalizeController extends Component {
 	renderFormNomeEndereco = () => {
 		return (
 			<span>
-				<Col md={10}>
+				<Col md={4}>
 					<input
 						className="form-control"
 						type="text"
@@ -295,6 +297,32 @@ class LocalizeController extends Component {
 						placeholder="Endereço ou CEP"
 						required={this.state.localizeInput.nome ? false : true}
 					/>
+				</Col>
+
+				<Col md={4}>
+					<input
+						className="form-control"
+						type="text"
+						name="cidade"
+						required={(this.state.localizeInput.uf || this.state.localizeInput.bairro)}
+						value={this.state.localizeInput.cidade}
+						onChange={this.onChangeInput}
+						placeholder="Digite o nome da cidade (sem abreviação)"
+					/>
+				</Col>
+
+				<Col md={2}>
+					<select
+						className="form-control"
+						name="uf"
+						onChange={this.onChangeInput}
+						value={this.state.localizeInput.uf}
+					>
+						<option value="">Selecione UF</option>
+						{estados.estados.map((estado,i) => {
+							return <option value={estado.sigla} key={i}>{estado.sigla}</option>
+						})}
+					</select>
 				</Col>
 
 				<Col md={this.state.buscaAvancada ? 8 : 6}>
@@ -308,7 +336,7 @@ class LocalizeController extends Component {
 					/>
 				</Col>
 
-				<Col md={2}>
+				<Col md={2} style={{marginBottom:0}}>
 					<DateField
 						placeholder="Data nascimento"
 						startDate={this.state.localizeInput.dataNascimento}
@@ -333,32 +361,8 @@ class LocalizeController extends Component {
 				</Col>
 
 				{this.state.buscaAvancada ?
-					<span>
-						<Col md={2}>
-							<select
-								className="form-control"
-								name="uf"
-								onChange={this.onChangeInput}
-								value={this.state.localizeInput.uf}
-							>
-								<option value="">Selecione UF</option>
-								{estados.estados.map((estado,i) => {
-									return <option value={estado.sigla} key={i}>{estado.sigla}</option>
-								})}
-							</select>
-						</Col>
-						<Col md={5}>
-							<input
-								className="form-control"
-								type="text"
-								name="cidade"
-								required={(this.state.localizeInput.uf || this.state.localizeInput.bairro)}
-								value={this.state.localizeInput.cidade}
-								onChange={this.onChangeInput}
-								placeholder="Digite o nome da cidade (sem abreviação)"
-							/>
-						</Col>
-						<Col md={5}>
+					<div>
+						<Col md={4}>
 							<input
 								className="form-control"
 								type="text"
@@ -369,7 +373,7 @@ class LocalizeController extends Component {
 							/>
 						</Col>
 
-						<Col md={6}>
+						<Col md={2}>
 							<input
 								className="form-control"
 								type="text"
@@ -399,7 +403,7 @@ class LocalizeController extends Component {
 								placeholder="Nº final"
 							/>
 						</Col>
-					</span>
+					</div>
 				: ""}
 			</span>
 		)

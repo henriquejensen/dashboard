@@ -148,12 +148,10 @@ export default class UltimasConsultas extends Component {
                         {consultas.length > 0 ?
                             <Table fields={fields} >
                                 {consultas.map((consulta, index) => {
-                                    let isCpfOrCnpj = Number(consulta.entrada) ? 
-                                                    consulta.entrada.length <= 11 ?
-                                                        "CPF" : "CNPJ"
-                                                    : ""
                                     let produto = produtoInformacoes.find(prod => prod.id === this.props.type)
-                                    if(produto)
+                                    let isCpfOrCnpj = produto.label === "CPF" ? "CPF"
+                                        : produto.label === "CNPJ" ? "CNPJ" : ""
+                                    if(produto) {
                                         return (
                                             <tbody key={index}>
                                                 <tr>
@@ -163,7 +161,15 @@ export default class UltimasConsultas extends Component {
                                                             tooltip={TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE}
                                                             onClickButton={handleSearchPerson}
                                                             params={[consulta.entrada, isCpfOrCnpj]}
-                                                            label={isCpfOrCnpj === "CPF" ? patternCPF(consulta.entrada) : isCpfOrCnpj === "CNPJ" ? patternCNPJ(consulta.entrada) : consulta.entrada}
+                                                            label={isCpfOrCnpj === "CPF" ? patternCPF(consulta.entrada)
+                                                                        : isCpfOrCnpj === "CNPJ" ? patternCNPJ(consulta.entrada)
+                                                                        : typeof(consulta.entrada) === "string" ? consulta.entrada
+                                                                        : Object.keys(consulta.entrada).map(val => {
+                                                                            if(consulta.entrada[val])
+                                                                                 return consulta.entrada[val]+ ", "
+                                                                            return
+                                                                        })
+                                                            }
                                                         />
                                                     </td>
                                                     <td>{new Date(consulta.dataHora).toLocaleString()}</td>
@@ -197,6 +203,7 @@ export default class UltimasConsultas extends Component {
                                                 </tr>                                       
                                             </tbody>
                                         )
+                                    }
                                 })}                   
                             </Table>
                         :

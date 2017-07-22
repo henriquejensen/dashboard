@@ -130,12 +130,16 @@ export default function(state = initialState, action) {
 				}
 			}
 
-			case localize.GET_LOCALIZE_LAST_QUERIES: {
-				let responseServer = action.payload.response;
-				let tipo = action.payload.parameters.tipo;
-				if(tipo == "NOMEOUENDERECO") {
-					state.lastQueries["NOME"] = patternJsonNomeOuEndereco(responseServer.localizeUltimasConsultas, "NOME");
-					state.lastQueries["ENDERECO"] = patternJsonNomeOuEndereco(responseServer.localizeUltimasConsultas, "ENDERECO");
+			case localize.GET_LOCALIZE_LAST_QUERIES: {				
+				let responseServer = action.payload.response
+				let tipo = action.payload.parameters.tipo
+				if(tipo.match("SEARCH-ADDRESS-OR-NAME")) {
+					state.lastQueries[tipo] = responseServer.localizeUltimasConsultas.map(val => {
+						return{
+							dataHora: val.dataHora,
+							entrada: JSON.parse(val.entrada)
+						}
+					})
 				} else {
 					state.lastQueries[tipo] = responseServer.localizeUltimasConsultas;
 				}

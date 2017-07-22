@@ -221,7 +221,7 @@ export function searchLocalizeByNomeEndereco(inputLocalize, tipo, labelToTab) {
 	let data = inputLocalize
 	let search = SEARCH_BY_NOME_ENDERECO
 	return (dispatch) => {
-		api(dispatch, url, data, search, {tipo: tipo, label: labelToTab})
+		api(dispatch, url, data, search, {tipo: tipo, label: "NOME|END"})
 	}
 }
 
