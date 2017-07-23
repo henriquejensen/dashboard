@@ -14,7 +14,8 @@ import Sidebar from "./sidebar"
 import Login from "./Login"
 
 //Actions
-import { setAuthFromCookie } from "../actions/actionsCommon"
+import { authUser, getCookieSession, getUserData, setAuthFromCookie } from "../actions/actionsCommon"
+import { loadingUserScreen, setUserIp } from "../actions/index"
 
 //Constants
 import {
@@ -37,14 +38,30 @@ import {
 import { COMPANY_LOGO, COMPANY_NAME_SHORT } from "../constants/constantsCompany"
 
 class App extends Component {
-  state = {
-    active: screen.width > 768 ? true : false
-  }
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      active: screen.width > 768 ? true : false
+    }
+  }    
+  
+	componentWillMount() {
+    console.log("APP WILL MOUNT", this)
+		if(this.props.user.token) {
+			this.props.getUserData()
+		}
+	}
 
 	onMenuClicked = () => {
     this.setState({
       active: !this.state.active
     })
+  }
+
+  authUser = ({ cliente, usuario, senha }) => {
+    this.props.loadingUserScreen()
+    this.props.authUser({ cliente, usuario, senha })
   }
 
   setFeedBack() {
@@ -68,23 +85,24 @@ class App extends Component {
   }
 
   render() {
-      const {logado, message, status} = this.props
+      console.log("APP", this)
+      const {message, status, user } = this.props
       const active = this.state.active
+      const authCookie = getUserSessionCookie()
 
-      if(!logado) {
-        let authCookie = getUserSessionCookie()
-        if(message == LOG_OUT) {
-          location.replace("/")
-        }
-        else if(status === ERROR_401_UNAUTHORIZED)
-          return <Login />
-        else if(authCookie)
-          this.props.setAuthFromCookie(authCookie)
-        else
-          return <Login />
+      if(!user.token) {
+        /*if(authCookie)
+          this.props.setAuthFromCookie(authCookie)*/
+        return <Login
+          authUser={this.authUser}
+          getCookieSession={this.props.getCookieSession}
+          loading={this.props.user.loading}
+          setUserIp={this.props.setUserIp}
+        />
       }
 
-      if(logado) {
+      if(!user.logado && user.token) {
+        this.props.getUserData()
         this.setFeedBack()
         this.setChat()
       }
@@ -142,7 +160,7 @@ class App extends Component {
 
 function getUserSessionCookie() {
   try {
-    const expression = `${AUTHENTICATION}=.(.*?).;`
+    const expression = `authorization=.(.*?).;`
     let authorization = document.cookie.match(expression)
     return authorization ? authorization[1].toString() : null
   } catch(e) {
@@ -152,16 +170,21 @@ function getUserSessionCookie() {
 
 function mapStateToProps(state) {
 	return {
+    user: state.user,
     status: state.auth.status,
-		logado: state.auth.logado,
     message: state.auth.msgn
 	}
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+      authUser,
+      getUserData,
+      getCookieSession,
+      loadingUserScreen,
+      setUserIp,
       setAuthFromCookie
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App)

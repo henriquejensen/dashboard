@@ -13,10 +13,7 @@ import {
 		INFO_URL,
 		INFO_SUCCESS,
 		IP_USER,
-		LOGIN_SUCCESS,
-		LOGIN_ERROR,
 		LOG_OUT,
-		LOADING,
 		AUTH_URL,
 		REQUEST_CHANGE_PASSWORD,
 		RESET_CHANGE_PASSWORD,
@@ -24,7 +21,7 @@ import {
 		URL_REQUEST_CHANGE_PASSWORD,
 		URL_RESET_CHANGE_PASSWORD
 } from "../constants/utils"
-import { AUTHENTICATION } from "../constants/utils"
+import * as constantsUser from "../constants/constantsUser"
 
 import { apiWithKeySession } from "../api/Api"
 
@@ -82,7 +79,8 @@ export function getCookieSession({ cliente, usuario, senha }) {
 export function authUser({ cliente, usuario, senha }) {
 	let url = AUTH_URL
 	let data = { empresa:cliente, usuario, senha }
-	let search = LOGIN_SUCCESS
+	let search = constantsUser.GET_USER_TOKEN
+
 	return (dispatch) => {
 		apiContentType(dispatch, url, data, search)
 	}
@@ -91,12 +89,6 @@ export function authUser({ cliente, usuario, senha }) {
 export function logOut() {
 	return {
 		type: LOG_OUT
-	}
-}
-
-export function loading() {
-	return {
-		type: LOADING
 	}
 }
 
@@ -120,7 +112,7 @@ export function resetChangePassword({ empresa, usuario, password, key }) {
 
 export function setAuthFromCookie(auth) {
 	return {
-		type: LOGIN_SUCCESS,
+		type: constantsUser.GET_USER_TOKEN,
 		payload: {
 			response: {
 				response: auth

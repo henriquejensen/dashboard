@@ -1,17 +1,21 @@
+import moment from "moment"
 import { browserHistory } from "react-router"
 
 //Cosntants
 import * as constantsUser from "../constants/constantsUser"
 import {
         AUTHENTICATION,
+        ERROR_401_UNAUTHORIZED,
         EDIT_USER_PROFILE_SUCCESS,
         GET_USER_PHOTO,
+        GET_LAYOUTS_BASECERTA,
         INFO_SUCCESS,
         SUCCESS,
         ERROR,
         ERR_CONNECTION_REFUSED,
         ERROR_503,
         FOTO_URL,
+        LOG_OUT,
         REQUEST_ERROR,
         USER_CLIENT,
         USER_CONSULTS,
@@ -29,6 +33,8 @@ import {
 import notifications from "./data/notifications.json"
 
 let user = {
+    token: localStorage.getItem(AUTHENTICATION) ? true : false,
+    logado: localStorage.getItem(USER_PRODUCTS) ? true : false,
     mapProdutos: localStorage.getItem(USER_PRODUCTS) ? localStorage.getItem(USER_PRODUCTS).split(",") : null,
     usuarioNome: localStorage.getItem(USER_NAME),
     usuarioEmail2: localStorage.getItem(USER_EMAIL2),
@@ -46,7 +52,18 @@ let user = {
 }
 
 export default function (state = user, action) {
+    console.log("ACTION-REDUCER", action.type, action, state)
     switch(action.type){
+        case constantsUser.GET_USER_TOKEN: {
+            const { response } = action.payload.response
+
+            localStorage.setItem(AUTHENTICATION, response)
+            return {
+                ...state,
+                token: true
+            }
+        }
+
         case constantsUser.USER_EDIT_INFO: {
             let { erro } = action.payload.response
             let  { usuario, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview } = action.payload.parameters
@@ -170,11 +187,13 @@ export default function (state = user, action) {
             localStorage.setItem(USER_PERFIL, perfilDescricao)
             localStorage.setItem(USER_PERFIL_ORDEM, perfilOrdem)
             localStorage.setItem(USER_CLIENT, pessoaDescricao)
+            localStorage.setItem("DIA", moment().date())
             
             return {
                 ...state,
                 ...response,
                 usuarioFoto: usuarioFoto ? FOTO_URL + usuarioId + ".jpg" : state.usuarioFoto,
+                logado: true,
                 status: null,
                 message: null,
                 loading: false
@@ -190,6 +209,24 @@ export default function (state = user, action) {
             }
         }
 
+        case ERROR_401_UNAUTHORIZED: {
+            removeInfoLocalStorage()
+            return {
+                ...state,
+                token: false,
+                logado: false,
+            }
+        }
+
+        case LOG_OUT: {
+            removeInfoLocalStorage()
+            return {
+                ...state,
+                token: false,
+                logado: false
+            }
+        }
+
         case REQUEST_ERROR: {
             return {
                 ...state,
@@ -202,4 +239,28 @@ export default function (state = user, action) {
         default:
             return state
     }
-} 
+}
+
+function removeInfoLocalStorage() {
+    localStorage.removeItem(AUTHENTICATION)
+    localStorage.removeItem(GET_LAYOUTS_BASECERTA)
+    localStorage.removeItem(USER_CONSULTS)
+    localStorage.removeItem(USER_PRODUCTS)
+    localStorage.removeItem(USER_NAME)
+    localStorage.removeItem(USER_PERFIL)
+    localStorage.removeItem(USER_PERFIL_ORDEM)
+    localStorage.removeItem(USER_CLIENT)
+    localStorage.removeItem(USER_LOGIN)
+    localStorage.removeItem(USER_EMAIL2)
+    localStorage.removeItem(USER_PHONE)
+    localStorage.removeItem(USER_PHOTO)
+
+    cleanCookie()
+}
+
+function cleanCookie() {
+    const host = location.host.replace(/.*?(?=\.)/, "")
+    document.cookie = `${AUTHENTICATION}=;domain=${host}`
+    document.cookie = `CEBB1F3CE2C566A6=;domain=${host}`
+    document.cookie = `CEBB1F3CE2C566A62=;domain=${host}`
+}

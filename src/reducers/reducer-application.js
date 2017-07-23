@@ -1,12 +1,9 @@
 import {
     AUTHENTICATION,
     ERROR_401_UNAUTHORIZED,
-    LOGIN_SUCCESS,
-    LOGIN_ERROR,
     LOG_OUT,
     CHANGE_COLOR_MENU,
     CLOSE_MESSAGE_CHANGE_PASSWORD,
-    LOADING,
     SUCCESS,
     ERROR,
     REQUEST_ERROR,
@@ -41,53 +38,6 @@ const getInitialState = {
 
 export default function(state=getInitialState, action) {
     switch(action.type) {
-        case LOGIN_SUCCESS: {
-            let { response } = action.payload.response
-            localStorage.setItem(AUTHENTICATION, response)
-            return {
-                colorMenu: state.colorMenu,
-                loading: false,
-                logado: true,
-                error: false,
-                status: state.status,
-                msgn: "logado",
-            }
-        }
-
-        case LOGIN_ERROR: {
-            return {
-                colorMenu: state.colorMenu,
-                loading: false,
-                logado: false,
-                error: true,
-                status: state.status,
-                msgn: action.payload.erro.mensagem
-            }
-        }
-
-        case LOADING: {
-            return {
-                colorMenu: state.colorMenu,
-                loading: true,
-                logado: state.logado,
-                error: false,
-                status: state.status,
-                msgn: state.msgn
-            }
-        }        
-
-        case LOG_OUT: {
-            removeInfoLocalStorage()
-            return {
-                colorMenu: "",
-                loading: false,
-                logado: false,
-                error: false,
-                status: "",
-                msgn: LOG_OUT
-            }
-        }
-
         case REQUEST_CHANGE_PASSWORD: {
             let { response } = action.payload.response
             return {
@@ -148,18 +98,6 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case ERROR_401_UNAUTHORIZED: {
-            removeInfoLocalStorage()
-            return {
-                colorMenu: state.colorMenu,
-                loading: false,
-                logado: false,
-                error: true,
-                status: ERROR_401_UNAUTHORIZED,
-                msgn: action.payload
-            }
-        }
-
         case REQUEST_ERROR: {
             return {
                 colorMenu: state.colorMenu,
@@ -175,28 +113,4 @@ export default function(state=getInitialState, action) {
             return state
 
     }
-}
-
-function removeInfoLocalStorage() {
-    localStorage.removeItem(AUTHENTICATION)
-    localStorage.removeItem(GET_LAYOUTS_BASECERTA)
-    localStorage.removeItem(USER_CONSULTS)
-    localStorage.removeItem(USER_PRODUCTS)
-    localStorage.removeItem(USER_NAME)
-    localStorage.removeItem(USER_PERFIL)
-    localStorage.removeItem(USER_PERFIL_ORDEM)
-    localStorage.removeItem(USER_CLIENT)
-    localStorage.removeItem(USER_LOGIN)
-    localStorage.removeItem(USER_EMAIL2)
-    localStorage.removeItem(USER_PHONE)
-    localStorage.removeItem(USER_PHOTO)
-
-    cleanCookie()
-}
-
-function cleanCookie() {
-    const host = location.host.replace(/.*?(?=\.)/, "")
-    document.cookie = `${AUTHENTICATION}=;domain=${host}`
-    document.cookie = `CEBB1F3CE2C566A6=;domain=${host}`
-    document.cookie = `CEBB1F3CE2C566A62=;domain=${host}`
 }

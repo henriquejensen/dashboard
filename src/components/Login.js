@@ -3,17 +3,12 @@ import "./Login.css"
 import React, { Component } from "react"
 import ajax from "superagent"
 import { Col, Row } from "react-bootstrap"
-import { Link, browserHistory } from "react-router"
-import { connect } from "react-redux"
-import { bindActionCreators } from "redux"
-
-//Actions
-import { authUser, getCookieSession, loading } from "../actions/actionsCommon"
-import { setUserIp } from "../actions/index"
+import { Link } from "react-router"
 
 //Components
 import MyButton from "./button/MyButton"
 import { MyFieldGroup } from "./forms/CommonForms"
+import { LoadingScreen } from "./utils/ElementsAtScreen"
 
 //Constants
 import { LOADING_GIF, URL_GET_IP } from "../constants/utils"
@@ -47,7 +42,6 @@ class Login extends Component {
 
         let { cliente, usuario, senha } = this.state
 
-        this.props.loading()
         this.props.authUser({ cliente, usuario, senha })
         this.props.getCookieSession({ cliente, usuario, senha })
     }
@@ -56,10 +50,6 @@ class Login extends Component {
         this.setState({
             [evt.target.name]: evt.target.value
         })
-    }
-
-    changeroute() {
-        browserHistory.push("/")
     }
 
     renderForm = () => {
@@ -107,13 +97,7 @@ class Login extends Component {
         )
     }
 
-    render() {
-        if(this.props.auth.logado) {
-            return (
-                <div>{this.changeroute()}</div>
-            )
-        }
-        
+    render() {        
         return (
             <div className="container">
                 <Row>
@@ -123,10 +107,10 @@ class Login extends Component {
                             Identifique-se para acessar nossos serviços
                         </h3>
 
-                        {this.props.auth.loading ? <div className="imgSearching"><img src={LOADING_GIF} /></div> : ""}
+                        {this.props.loading ? <LoadingScreen /> : ""}
 
-                        {this.props.auth.error ? 
-                            <div className="alert alert-danger text-center" role="alert">{this.props.auth.msgn}</div> : ""}
+                        {/*this.props.auth.error ? 
+                            <div className="alert alert-danger text-center" role="alert">{this.props.auth.msgn}</div> : ""*/}
 
                         <div className="account-wall">
                             <Col md={12} className="text-center">
@@ -151,19 +135,4 @@ class Login extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        auth: state.auth
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ 
-        authUser,
-        setUserIp,
-        getCookieSession,
-        loading
-    }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login

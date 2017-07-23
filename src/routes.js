@@ -40,7 +40,7 @@ import todosProdutos from "./components/utils/common/produtos"
 
 export default (
   <Route>
-    <Route path='/login' component={Login} />
+    <Route path='/login' component={App} />
     <Route path='/senha' component={ChangePassword} />
     <Route path='/novasenha' component={ResetPassword} />
     <Route path='/adeusmineiro' component={Contador} />

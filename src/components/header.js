@@ -17,7 +17,6 @@ import {
 import {
 		logOut,
 		getUserData,
-		getUserPhoto
 } from "../actions/actionsCommon"
 
 import Modal from "./Modal"
@@ -29,12 +28,6 @@ import { TITLE_HEADER } from "../constants/utils"
 import menu from "./utils/common/menu.json"
 
 class MenuSuperior extends Component {
-	componentWillMount() {
-		if(!this.props.user.mapProdutos) {
-			this.props.getUserData()
-		}
-	}
-
 	changeRoute = (route) => {
 		browserHistory.push(route)
 	}
@@ -56,7 +49,7 @@ class MenuSuperior extends Component {
 					<Nav pullRight>
 						<NavDropdown title={TITLE_HEADER} id="basic-nav-dropdown">
 							{COMPANY_OLD_SITE ?
-								<MenuItem href={COMPANY_OLD_SITE+"/usuario/lista"} target="_blank">
+								<MenuItem href="cadastro">
 									Cadastro de Usuários
 								</MenuItem>
 							: ""}
@@ -104,7 +97,6 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		logOut,
 		getUserData,
-		getUserPhoto
 	}, dispatch)
 }
 
