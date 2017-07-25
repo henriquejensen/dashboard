@@ -1,7 +1,9 @@
 import * as constants from "../constants/constantsRelatorios"
 import { TI } from "../constants/utils"
 
-import { api, apiPostFileDownload } from "../api/Api"
+import { api, apiContentType, apiPostFileDownload } from "../api/Api"
+
+import { reverConsultaLocalize } from "./index"
 
 export function getRelatorios() {
     return {
@@ -33,5 +35,15 @@ export function filterRelatorioR12(filters) {
 export function loadingRelatorio () {
     return {
         type: constants.LOADING_RELATORIO
+    }
+}
+
+export function reverConsulta({protocolo, modulo, idProduto}) {
+    let url = constants.URL_REVER_CONSULTA
+    let search = "REVER_CONSULTA_" + idProduto
+    let data = {protocolo, produto:idProduto, modulo}
+
+    return (dispatch) => {
+        apiContentType(dispatch, url, data, search, {modulo})
     }
 }

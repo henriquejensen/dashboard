@@ -77,13 +77,6 @@ export function loadingLocalize() {
 	}
 }
 
-export function reverConsultaLocalize(entrada) {
-	return {
-		type: localize.REVER_CONSULTA_LOCALIZE,
-		payload: entrada
-	}
-}
-
 export function userEditInfo({ usuarioNome, usuarioEmail2, usuarioTelefone, usuarioFoto, usuarioImagemPreview }) {
 	let url = constantsUser.URL_EDIT_USER
 	let data = {

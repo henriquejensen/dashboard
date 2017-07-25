@@ -124,7 +124,7 @@ export default class UltimasConsultas extends Component {
         let fields = ["Tipo", "Entrada", "Data/Hora", ""]
         return (
                 <Panel title={title}>
-                    {this.props.searchEnderecosTelefonesUltimasConsultas ? 
+                    {/*this.props.searchEnderecosTelefonesUltimasConsultas ? 
                         <Col md={12}>
                             <strong>Busca em lote por:</strong>
                             {" "}
@@ -142,7 +142,7 @@ export default class UltimasConsultas extends Component {
                                 myButtonText={<i className='fa fa-phone'/>}
                             />
                         </Col>
-                    : ""}
+                    : ""*/}
 
                     <Col md={12}>
                         {consultas.length > 0 ?

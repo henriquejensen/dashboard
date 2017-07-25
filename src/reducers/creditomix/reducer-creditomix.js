@@ -1,6 +1,6 @@
 import * as constants from "../../constants/constantsCreditoMix"
 import {
-        CHANGE_CREDITO_TYPE,
+        CHANGE_CREDITOMIX_TYPE,
 		CHANGE_TAB,
 		CLOSE_TAB,
 		ERR_CONNECTION_REFUSED,
@@ -44,7 +44,7 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case constants.CHANGE_CREDITOMIX_TYPE: {
+        case CHANGE_CREDITOMIX_TYPE: {
             return {
                 loading: false,
                 status: SUCCESS,
@@ -141,6 +141,29 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: state.type,
              }
+        }
+
+        case constants.REVER_CONSULTA_CREDITOMIX: {
+            let newResponse
+            let  responseServer = action.payload.response.response
+            let { cabecalho } = responseServer
+            const { modulo } = action.payload.parameters
+            const tipo=cabecalho.entrada.length <= 11 ? "CPF" : "CNPJ"
+            const label=tipo + ":" + (tipo === "CPF" ? patternCPF(cabecalho.entrada) : patternCNPJ(cabecalho.entrada)) + "REVER-CONSULTA"
+
+            newResponse = responseServer
+            newResponse.label = label
+            newResponse.tipo = tipo
+            newResponse.icon = ICON_CREDITOMIX
+            newResponse.produto = COMPANY_PRODUCT_CREDITOMIX_LABEL
+            newResponse.reverConsulta = true //Boolean para identificar a rever consulta
+
+            return {
+                ...state,
+                loading: false,
+                response: {...state.response, [label]:newResponse },
+                tabActive: label
+            }
         }
 
         case REQUEST_ERROR: {

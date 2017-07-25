@@ -47,7 +47,6 @@ class App extends Component {
   }    
   
 	componentWillMount() {
-    console.log("APP WILL MOUNT", this)
 		if(this.props.user.token) {
 			this.props.getUserData()
 		}
@@ -85,18 +84,16 @@ class App extends Component {
   }
 
   render() {
-      console.log("APP", this)
       const {message, status, user } = this.props
       const active = this.state.active
-      const authCookie = getUserSessionCookie()
+      console.log("TESTE", user)
 
       if(!user.token) {
-        /*if(authCookie)
-          this.props.setAuthFromCookie(authCookie)*/
         return <Login
+          user={user}
           authUser={this.authUser}
           getCookieSession={this.props.getCookieSession}
-          loading={this.props.user.loading}
+          loading={user.loading}
           setUserIp={this.props.setUserIp}
         />
       }
@@ -155,16 +152,6 @@ class App extends Component {
 
         </div>
       )
-  }
-}
-
-function getUserSessionCookie() {
-  try {
-    const expression = `authorization=.(.*?).;`
-    let authorization = document.cookie.match(expression)
-    return authorization ? authorization[1].toString() : null
-  } catch(e) {
-    console.log("Falha na sessão cookie")
   }
 }
 

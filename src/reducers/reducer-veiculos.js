@@ -1,18 +1,10 @@
-import {
-    CHANGE_TAB_VEICULOS,
-    CLOSE_MESSAGE_ERROR_VEICULOS,
-    CLOSE_TAB_VEICULOS,
-    GET_VEICULOS,
-    GET_VEICULOS_LAST_QUERIES,
-    LOADING_VEICULOS,
-    SEE_VEICULOS_MODEL
-} from "../constants/constantsVeiculos";
+import * as constantsVeiculos from "../constants/constantsVeiculos"
 
-import { COMPANY_PRODUCT_VEICULOS, ICON_VEICULOS } from "../constants/constantsCompany";
+import { COMPANY_PRODUCT_VEICULOS, ICON_VEICULOS } from "../constants/constantsCompany"
 import { CHANGE_VEICULOS_TYPE, CLOSE_TAB, ERR_CONNECTION_REFUSED, ERROR_503, LOADING, REQUEST_ERROR } from "../constants/utils";
 
-import veiculos from "./data/veiculos/veiculosPoucosDados.json";
-import lastQueries from "./data/lastQueries.json";
+import veiculos from "./data/veiculos/veiculosPoucosDados.json"
+import lastQueries from "./data/lastQueries.json"
 
 const getInitialState = {
     loading: false,
@@ -34,7 +26,7 @@ export default function(state=getInitialState, action) {
     }
 
     switch(action.type) {
-        case CHANGE_TAB_VEICULOS: {
+        case constantsVeiculos.CHANGE_TAB_VEICULOS: {
             let tab = findLabelInArray(state.response,action.payload);
             tab = tab >= 0 ? tab : 0;
 
@@ -61,7 +53,7 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case CLOSE_MESSAGE_ERROR_VEICULOS: {
+        case constantsVeiculos.CLOSE_MESSAGE_ERROR_VEICULOS: {
             return {
                 status: "",
                 message: "",
@@ -73,7 +65,7 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case CLOSE_TAB_VEICULOS: {
+        case constantsVeiculos.CLOSE_TAB_VEICULOS: {
             let newResponse = state.response.concat();
             newResponse.splice(action.payload, 1);
 
@@ -100,7 +92,7 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case GET_VEICULOS: {
+        case constantsVeiculos.GET_VEICULOS: {
             let tipo = action.payload.parameters.tipoInput
             let tab = tipo + ":" + action.payload.parameters.input
             let responseServer = action.payload.response
@@ -123,17 +115,14 @@ export default function(state=getInitialState, action) {
             }
 
             return {
+                ...state,
                 loading: false,
-                status: "model",
-                message: "",
                 response: pos === -1 ? [...state.response, response] : newStateResponse,
-                tabActive: tab,
-                lastQueries: state.lastQueries,
-                type: state.type
+                tabActive: tab
             }
         }
         
-        case GET_VEICULOS_LAST_QUERIES: {
+        case constantsVeiculos.GET_VEICULOS_LAST_QUERIES: {
             return {
                 loading: false,
                 status: "lastQueries",
@@ -145,7 +134,7 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case LOADING_VEICULOS: {
+        case constantsVeiculos.LOADING_VEICULOS: {
             return {
                 loading: true,
                 status: LOADING,
@@ -169,7 +158,34 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case SEE_VEICULOS_MODEL: {
+        case constantsVeiculos.REVER_CONSULTA_VEICULOS: {
+            let  responseServer = action.payload.response.response
+            let { entrada } = responseServer.cabecalho
+            entrada = JSON.parse(entrada)
+            const { modulo } = action.payload.parameters
+            let tipo, valor
+            [tipo,valor] = entrada.chassi ? ["CHASSI", entrada.chassi]
+                           : entrada.numeroMotor ? ["N°MOTOR", entrada.numeroMotor]
+                           : ["PLACA", entrada.placa]
+
+            const label=tipo + ":" + valor +  + "REVER-CONSULTA"
+            responseServer.reverConsulta = true //Boolean para identificar a rever consulta
+
+            response.data = responseServer
+            response.label = label
+            response.tipo = tipo
+            response.icon = ICON_VEICULOS
+            response.produto = COMPANY_PRODUCT_VEICULOS
+
+            return {
+                ...state,
+                loading: false,
+                response: [...state.response, response],
+                tabActive: label,
+            }
+        }
+
+        case constantsVeiculos.SEE_VEICULOS_MODEL: {
             let tipo = action.payload.parameters.tipo
             let tab = tipo + ":" + action.payload.parameters.input
 

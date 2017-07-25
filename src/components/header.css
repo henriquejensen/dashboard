@@ -2,3 +2,7 @@
     border: 0px;
     border-radius: 0
 }
+
+.my-navbar .container {
+    width: 100%
+}

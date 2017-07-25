@@ -39,10 +39,9 @@ class Sidebar extends Component {
   }
 
   onClickMenu = (evt, color, product, type ) => {
-    evt.preventDefault();
-
-    this.props.changeColorMenu(color);
-    this.props.changeProductType(product, type);
+    evt.preventDefault()
+    this.props.changeColorMenu(color)
+    this.props.changeProductType(product, type)
 
     this.setState({
       subItemActived: product + type
@@ -50,7 +49,7 @@ class Sidebar extends Component {
   }
 
   renderMenu() {
-    let produtosCliente = this.props.produtosCliente ? this.patternProdutosName(this.props.produtosCliente) : [];
+    let produtosCliente = this.props.produtosCliente ? this.patternProdutosName(this.props.produtosCliente) : []
     let keysProdutos = Object.keys(produtos) // retira os nomes dos produtos do objeto, ex: [Localize, Credito]
     let handleChangeColor = this.props.changeColorMenu
     let menuOpened = this.state.menuOpened
@@ -89,7 +88,6 @@ class Sidebar extends Component {
                         <ul className="sidebar-item-dropdown" style={{backgroundColor:produto.colorLight}}>
                           {produto.consultas.map((consulta, j) => {
                             const modulo = consultaAtiva[consulta.modulo] ? consulta.modulo : consulta.modulo2
-                            
                             if(consultaAtiva[modulo])
                               return (
                                   <li
@@ -97,7 +95,7 @@ class Sidebar extends Component {
                                     style={this.state.subItemActived === (produto.id + modulo) ? {backgroundColor: "rgba(255,255,255,0.3)"} : {}}
                                     key={j}
                                   >
-                                    <Link to={consultaAtiva[modulo].link}>
+                                    <Link to={consulta.link}>
                                       {consultaAtiva[modulo].labelFront}
                                     </Link>
                                   </li>

@@ -1,18 +1,20 @@
-import * as focofiscal from "../constants/constantsFocoFiscal";
-
+import * as focofiscal from "../constants/constantsFocoFiscal"
 import {
     CHANGE_FOCOFISCAL_TYPE,
     ERR_CONNECTION_REFUSED,
     ERROR_503,
     NENHUM_REGISTRO,
     REQUEST_ERROR
-} from "../constants/utils";
+} from "../constants/utils"
+import { COMPANY_PRODUCT_FOCOFISCAL_LABEL, ICON_FOCOFISCAL } from "../constants/constantsCompany"
 
-import { COMPANY_PRODUCT_FOCOFISCAL_LABEL, ICON_FOCOFISCAL } from "../constants/constantsCompany";
-
+//Data
 import focoFiscalPF from "./data/focofiscal/responsePF.json"
 import focoFiscalPJ from "./data/focofiscal/responsePJ.json"
 import lastQueries from "./data/lastQueries.json"
+
+//Utils
+import { patternCPF, patternCNPJ } from "../components/utils/functions/patternDocuments"
 
 const getInitialState = {
     loading: false,
@@ -40,7 +42,7 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case focofiscal.CHANGE_FOCOFISCAL_TYPE: {
+        case CHANGE_FOCOFISCAL_TYPE: {
             return {
                 status: "changeType",
                 message: "",
@@ -96,13 +98,12 @@ export default function(state=getInitialState, action) {
             }
 
             return {
+                ...state,
                 loading: false,
                 status: !responseIsNull ? "" : REQUEST_ERROR,
                 message: !responseIsNull ? "" : NENHUM_REGISTRO,
                 response: !responseIsNull ? {...state.response, [label]:newResponse } : state.response,
                 tabActive: !responseIsNull ? label : state.tabActive,
-                lastQueries: state.lastQueries,
-                type: state.type
             }
         }
 
@@ -163,6 +164,29 @@ export default function(state=getInitialState, action) {
                 tabActive: state.tabActive,
                 lastQueries: state.lastQueries,
                 type: state.type
+            }
+        }
+
+        case focofiscal.REVER_CONSULTA_FOCOFISCAL: {
+            let newResponse
+            let  responseServer = action.payload.response.response
+            let { cabecalho } = responseServer
+            const { modulo } = action.payload.parameters
+            const tipo=cabecalho.entrada.length <= 11 ? "CPF" : "CNPJ"
+            const label=tipo + ":" + (tipo === "CPF" ? patternCPF(cabecalho.entrada) : patternCNPJ(cabecalho.entrada)) + "REVER-CONSULTA"
+
+            newResponse = responseServer
+            newResponse.label = label
+            newResponse.tipo = tipo
+            newResponse.icon = ICON_FOCOFISCAL
+            newResponse.produto = COMPANY_PRODUCT_FOCOFISCAL_LABEL
+            newResponse.reverConsulta = true //Boolean para identificar a rever consulta
+
+            return {
+                ...state,
+                loading: false,
+                response: {...state.response, [label]:newResponse },
+                tabActive: label
             }
         }
 

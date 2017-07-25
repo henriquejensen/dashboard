@@ -6,8 +6,7 @@ import { bindActionCreators } from "redux"
 import { Col, Form } from "react-bootstrap"
 
 //Actions
-import { filterRelatorioR12, loadingRelatorio } from "../../actions/actionsRelatorios"
-import { reverConsultaLocalize } from "../../actions/index"
+import { filterRelatorioR12, loadingRelatorio, reverConsulta } from "../../actions/actionsRelatorios"
 
 // Components
 import Panel from "../../components/panel/Panel"
@@ -25,6 +24,8 @@ class Consumo extends Component {
     constructor(props) {
         super(props)
 
+        this.quantityElementsPattern = 30
+
         this.state = {
             pessoaDescricao : null,    
             pessoaNome : null,
@@ -39,7 +40,8 @@ class Consumo extends Component {
             idGrupo : null,
             idUsuario : null,
             delimitador : null,
-            tipoRelatorio : null
+            tipoRelatorio : null,
+            quantityShown: this.quantityElementsPattern
         }
     }
 
@@ -53,14 +55,16 @@ class Consumo extends Component {
         })
     }
 
-    onClickReverConsulta = (produto, entrada) => {
-        /*switch (produto) {
-            case COMPANY_PRODUCT_LOCALIZE_LABEL:
-                this.props.reverConsultaLocalize(entrada)
-                break
-        }*/
+    onClickReverConsulta = ({protocolo, produto, modulo, idProduto}) => {
+        let prod = produto.replace(/\+/g,"MAIS") // VENDA+ -> VENDAMAIS
+        prod = prod.replace(/[^a-zA-Z]/g,"") // BASE CERTA -> BASECERTA
         return (
-            <Link to={`/${produto}`}>Rever</Link>
+            <Link
+                to={`/${prod.toLowerCase()}`}
+                onClick={() => this.props.reverConsulta({protocolo, modulo, idProduto})}
+            >
+                Rever
+            </Link>
         )
     }
 
@@ -82,43 +86,45 @@ class Consumo extends Component {
         return (
           <Panel>
             <Form onSubmit={this.onFormSubmit}>
-                <Col md={3}>
-                    <MyFieldGroup
-                      id="usuario"
-                      label="Usuario"
-                      type="text"
-                      name="usuario"
-                      onChange={this.onChange} />
-                </Col>
-
-                <Col md={3}>
-                    <MyFieldGroup
-                        id="pessoaDescricao"
-                        label="Razão social"
+                <Col md={12} style={{margin:0, padding:0}}>
+                    <Col md={3}>
+                        <MyFieldGroup
+                        id="usuario"
+                        label="Usuario"
                         type="text"
-                        name="pessoaDescricao"
-                        onChange={this.onChange}
-                    />
-                </Col>
+                        name="usuario"
+                        onChange={this.onChange} />
+                    </Col>
 
-                <Col md={3}>
-                    <DateField
-                        required
-                        label="Ínicio do consumo*"
-                        placeholder="Data inicial"
-                        startDate={this.state.dataIni}
-                        onChange={(date) => this.setState({dataIni: date})}
-                    />
-                </Col>
+                    <Col md={3}>
+                        <MyFieldGroup
+                            id="pessoaDescricao"
+                            label="Razão social"
+                            type="text"
+                            name="pessoaDescricao"
+                            onChange={this.onChange}
+                        />
+                    </Col>
 
-                <Col md={3}>
-                    <DateField
-                        required
-                        label="Fim do consumo*"
-                        placeholder="Data final"
-                        startDate={this.state.dataFim}
-                        onChange={(date) => this.setState({dataFim: date})}
-                    />
+                    <Col md={3}>
+                        <DateField
+                            required
+                            label="Ínicio do consumo*"
+                            placeholder="Data inicial"
+                            startDate={this.state.dataIni}
+                            onChange={(date) => this.setState({dataIni: date})}
+                        />
+                    </Col>
+
+                    <Col md={3}>
+                        <DateField
+                            required
+                            label="Fim do consumo*"
+                            placeholder="Data final"
+                            startDate={this.state.dataFim}
+                            onChange={(date) => this.setState({dataFim: date})}
+                        />
+                    </Col>
                 </Col>
 
                 <Col md={3}>
@@ -180,6 +186,13 @@ class Consumo extends Component {
                 <div style={{marginBottom:15}} />
 
                 <CardWithTable title="RESULTADOS DA PESQUISA"
+                    mdLength={12}
+                    elements={
+                        [
+                            {label: "Quantidade de registros", value:this.props.relatoriosR12.length}
+                        ]
+                    } 
+
                     fields={
                         [
                             {id:"data", name:"Data"},
@@ -187,16 +200,30 @@ class Consumo extends Component {
                             {id:"produto", name:"Consulta"},
                             {id:"dado", name:"Entrada", functionToApply:(val) => {return <span>{val ? val.substring(0,15) : val}</span>}},
                             {id:"resultado", name:"Status"},
-                            {id:"via", name:"Rever", functionToApply:(val, indexRow) => {
-                                if(val === "API")
-                                    return this.onClickReverConsulta(this.props.relatoriosR12[indexRow].produto,val)
+                            {id:"via", name:"Rever", functionToApply:(via, indexRow) => {
+                                if(via === "NEW_API" && this.props.relatoriosR12[indexRow])
+                                    return this.onClickReverConsulta({
+                                        produto: this.props.relatoriosR12[indexRow].produto,
+                                        protocolo: this.props.relatoriosR12[indexRow].protocolo,
+                                        modulo: this.props.relatoriosR12[indexRow].modulo,
+                                        idProduto: this.props.relatoriosR12[indexRow].idProduto
+                                    })
 
                                 return <span></span>
                             }}
                         ]
                     }
-                    rows={this.props.relatoriosR12}
+                    rows={this.props.relatoriosR12.slice(0,this.state.quantityShown)}
                 />
+
+                {this.props.relatoriosR12.length > 0 && this.state.quantityShown <= this.props.relatoriosR12.length ?
+                    <MyButton
+                        myButtonStyle="default"
+                        onClickButton={() => this.setState({quantityShown: this.state.quantityShown + this.quantityElementsPattern})}
+                        myButtonText="Mostrar mais registros"
+                        myButtonClass="btn-block text-center"
+                    />
+                : ""}
             </div>
         )
     }
@@ -213,7 +240,7 @@ function mapDispatchProps(dispatch) {
     return bindActionCreators({
         filterRelatorioR12,
         loadingRelatorio,
-        reverConsultaLocalize
+        reverConsulta
     }, dispatch)
 }
 

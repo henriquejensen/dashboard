@@ -8,6 +8,7 @@ import { Alert, Col, Tabs, Tab} from "react-bootstrap"
 import Panel from "../../components/panel/Panel"
 import MyForm from "../../components/forms/Form"
 import CreditoMixView from "./CreditoMixView"
+import ReverConsultaMessage from "../../components/utils/ReverConsulta"
 import Titletab from "../../components/utils/Titletab"
 import UltimasConsultas from "../../components/UltimasConsultas"
 import { MyFieldGroup, MyCheckboxGroup, SelectGroup } from "../../components/forms/CommonForms"
@@ -381,13 +382,17 @@ class CreditoMix extends Component {
                                     eventKey={data[dataKey].label} 
 									title={
 										<Titletab
-											icon={data[dataKey].icon}
-											label={data[dataKey].label}
+                                            icon={data[dataKey].icon}
+											label={data[dataKey].label.length > 20 ? data[dataKey].label.substring(0,20)+"..." : data[dataKey].label}
 											close={() => this.props.closeTab(dataKey)}
 										/>
 									}
 									key={dataKey}
-								>
+                                >
+                                    {data[dataKey].reverConsulta ?
+                                        <ReverConsultaMessage />
+                                    :""}
+
 									{data[dataKey].produto == COMPANY_PRODUCT_CREDITOMIX_LABEL ?
 										<CreditoMixView
                                             data={data[dataKey]}

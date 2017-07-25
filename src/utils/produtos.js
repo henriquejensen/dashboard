@@ -3,7 +3,7 @@ import * as constants from "../constants/constantsCompany"
 const produtos = {
     1: {
         label: constants.COMPANY_PRODUCT_LOCALIZE,
-        id: "localize",
+        id: 1,
         color: constants.COMPANY_PRODUCT_LOCALIZE_COLOR,
         colorLight: constants.COMPANY_PRODUCT_LOCALIZE_COLOR_LIGHT,
         link: constants.URL_LOCALIZE,
@@ -11,16 +11,16 @@ const produtos = {
         imageNegative: constants.ICON_LOCALIZE_NEGATIVE,
         alt: `Icone ${constants.COMPANY_PRODUCT_LOCALIZE}`,
         consultas: [
-            {modulo:"SEARCHPF"},
-            {modulo:"SEARCHPJ"},
-            {modulo:"SEARCH-ADDRESS-OR-NAME"},
-            {modulo:"SEARCHEMAIL"},
-            {modulo:"SEARCHPHONE"}
+            {modulo:"SEARCHPF", link:constants.URL_LOCALIZE},
+            {modulo:"SEARCHPJ", link:constants.URL_LOCALIZE},
+            {modulo:"SEARCH-ADDRESS-OR-NAME", link:constants.URL_LOCALIZE},
+            {modulo:"SEARCHEMAIL", link:constants.URL_LOCALIZE},
+            {modulo:"SEARCHPHONE", link:constants.URL_LOCALIZE}
         ]
     },
     2: {
         label: constants.COMPANY_PRODUCT_CREDITO,
-        id: "credito",
+        id: 2,
         color: constants.COMPANY_PRODUCT_CREDITO_COLOR,
         colorLight: constants.COMPANY_PRODUCT_CREDITO_COLOR_LIGHT,
         link: constants.URL_CREDITO,
@@ -28,17 +28,17 @@ const produtos = {
         imageNegative: constants.ICON_CREDITO_NEGATIVE,
         alt: `Icone ${constants.COMPANY_PRODUCT_CREDITO}`,
         consultas: [
-            {modulo:"SEGAM", modulo2:"PACC"},
-            {modulo:"SEARCHCREDITOINTERMEDIARIAPF", modulo2:"SEARCHCREDITOINTERMEDIARIAPJ"},
-            {modulo:"SEARCHINTERMEDIARIAPLUSPF", modulo2:"SEARCHINTERMEDIARIAPLUSPJ"},
-            {modulo:"SEARCHCDLSIMPLES"},
-            {modulo:"Cheque PF", modulo2:"Cheque PJ"},
-            {modulo:"SEARCHCREDITOEXPRESSPF", modulo2:"SEARCHCREDITOEXPRESSPJ"},
+            {modulo:"SEGAM", modulo2:"PACC", link:constants.URL_CREDITO},
+            {modulo:"SEARCHCREDITOINTERMEDIARIAPF", modulo2:"SEARCHCREDITOINTERMEDIARIAPJ", link:constants.URL_CREDITO},
+            {modulo:"SEARCHINTERMEDIARIAPLUSPF", modulo2:"SEARCHINTERMEDIARIAPLUSPJ", link:constants.URL_CREDITO},
+            {modulo:"SEARCHCDLSIMPLES", link:constants.URL_CREDITO},
+            {modulo:"Cheque PF", modulo2:"Cheque PJ", link:constants.URL_CREDITO},
+            {modulo:"SEARCHCREDITOEXPRESSPF", modulo2:"SEARCHCREDITOEXPRESSPJ", link:constants.URL_CREDITO},
         ]
     },
     7: {
         label: constants.COMPANY_PRODUCT_CREDITOMIX,
-        id: "creditomix",
+        id: 7,
         color: constants.COMPANY_PRODUCT_CREDITOMIX_COLOR,
         colorLight: constants.COMPANY_PRODUCT_CREDITOMIX_COLOR_LIGHT,
         link: constants.URL_CREDITOMIX,
@@ -46,16 +46,16 @@ const produtos = {
         imageNegative: constants.ICON_CREDITOMIX_NEGATIVE,
         alt: `Icone ${constants.COMPANY_PRODUCT_CREDITOMIX}`,
         consultas: [
-            {modulo:"SPCBRPF"},
-            {modulo2:"SPCBRPJ"},
-            {modulo:"SEARCHCREDITOMIXMASTERPF", modulo2:"SEARCHCREDITOMIXMASTERPJ"},
-            {modulo:"SEARCHCREDITOMIXPREMIUMPF", modulo2:"SEARCHCREDITOMIXPREMIUMPJ"},
-            {modulo:"SEARCHCREDITOMIXGOLDPF", modulo2:"SEARCHCREDITOMIXGOLDPJ"},
-            {modulo:"SEARCHCREDITOMIXMAXPF", modulo2:"SEARCHCREDITOMIXMAXPJ"},
-            {modulo:"SEARCHCREDITOMIXCOMPLETAPF", modulo2:"SEARCHCREDITOMIXCOMPLETAPJ"},
-            {modulo:"SEARCHCREDITOMIXINTERMEDIARIAPF", modulo2:"SEARCHCREDITOMIXINTERMEDIARIAPJ"},
-            {modulo:"SEARCHCREDITOMIXINTERMEDIARIAPLUSPF", modulo2:"SEARCHCREDITOMIXINTERMEDIARIAPLUSPJ"},
-            {modulo:"SEARCHCREDITOMIXSINTETICAPF", modulo2:"SEARCHCREDITOMIXSINTETICAPJ"},
+            {modulo:"SPCBRPF", link:constants.URL_CREDITOMIX},
+            {modulo2:"SPCBRPJ", link:constants.URL_CREDITOMIX},
+            {modulo:"SEARCHCREDITOMIXMASTERPF", modulo2:"SEARCHCREDITOMIXMASTERPJ", link:constants.URL_CREDITOMIX},
+            {modulo:"SEARCHCREDITOMIXPREMIUMPF", modulo2:"SEARCHCREDITOMIXPREMIUMPJ", link:constants.URL_CREDITOMIX},
+            {modulo:"SEARCHCREDITOMIXGOLDPF", modulo2:"SEARCHCREDITOMIXGOLDPJ", link:constants.URL_CREDITOMIX},
+            {modulo:"SEARCHCREDITOMIXMAXPF", modulo2:"SEARCHCREDITOMIXMAXPJ", link:constants.URL_CREDITOMIX},
+            {modulo:"SEARCHCREDITOMIXCOMPLETAPF", modulo2:"SEARCHCREDITOMIXCOMPLETAPJ", link:constants.URL_CREDITOMIX},
+            {modulo:"SEARCHCREDITOMIXINTERMEDIARIAPF", modulo2:"SEARCHCREDITOMIXINTERMEDIARIAPJ", link:constants.URL_CREDITOMIX},
+            {modulo:"SEARCHCREDITOMIXINTERMEDIARIAPLUSPF", modulo2:"SEARCHCREDITOMIXINTERMEDIARIAPLUSPJ", link:constants.URL_CREDITOMIX},
+            {modulo:"SEARCHCREDITOMIXSINTETICAPF", modulo2:"SEARCHCREDITOMIXSINTETICAPJ", link:constants.URL_CREDITOMIX},
         ],
         options: {
             /*cheque: [
@@ -112,7 +112,7 @@ const produtos = {
     },
     8: {
         label: constants.COMPANY_PRODUCT_BASECERTA,
-        id: "basecerta",
+        id: 8,
         color: constants.COMPANY_PRODUCT_BASECERTA_COLOR,
         colorLight: constants.COMPANY_PRODUCT_BASECERTA_COLOR_LIGHT,
         link: constants.URL_BASECERTA,
@@ -120,13 +120,13 @@ const produtos = {
         imageNegative: constants.ICON_BASECERTA_NEGATIVE,
         alt: `Icone ${constants.COMPANY_PRODUCT_BASECERTA}`,
         consultas: [
-            {modulo: "NOVOENRIQUECIMENTO"},
-            {modulo: "MONITORBASECERTA"}
+            {modulo: "NOVOENRIQUECIMENTO", link: `${constants.URL_BASECERTA}/novoenriquecimento`},
+            {modulo: "MONITORBASECERTA", link: `${constants.URL_BASECERTA}`}
         ]
     },
     9: {
         label: constants.COMPANY_PRODUCT_SMS,
-        id: "sms",
+        id: 9,
         color: constants.COMPANY_PRODUCT_SMS_COLOR,
         colorLight: constants.COMPANY_PRODUCT_SMS_COLOR_LIGHT,
         link: constants.URL_SMS,
@@ -134,16 +134,16 @@ const produtos = {
         imageNegative: constants.ICON_SMS_NEGATIVE,
         alt: `Icone ${constants.COMPANY_PRODUCT_SMS}`,
         consultas: [
-            {modulo: "ENVIARSMS"},
-            {modulo: "MONITORENVIOS"},
+            {modulo: "ENVIARSMS", link: `${constants.URL_SMS}/enviorapido`},
+            {modulo: "MONITORENVIOS", link: `${constants.URL_SMS}`},
             //{label: "Centro de Custo", id: "centroCusto", link: "/sms/centrocusto"},
-            {modulo: "RESPOSTAS"}
+            {modulo: "RESPOSTAS", link: `${constants.URL_SMS}/respostas`},
             //{label: "Relatório", id: "relatorio", link: "/sms"}
         ]
     },
     4: {
         label: constants.COMPANY_PRODUCT_FOCOFISCAL,
-        id: "focofiscal",
+        id: 4,
         link: constants.URL_FOCOFISCAL,
         color: constants.COMPANY_PRODUCT_FOCOFISCAL_COLOR,
         colorLight: constants.COMPANY_PRODUCT_FOCOFISCAL_COLOR_LIGHT,
@@ -151,15 +151,15 @@ const produtos = {
         imageNegative: constants.ICON_FOCOFISCAL_NEGATIVE,
         alt: `Icone ${constants.COMPANY_PRODUCT_FOCOFISCAL}`,
         consultas: [
-            {modulo:"SEARCHEASYCHECKRECEITAPF"},
-            {modulo:"SEARCHEASYCHECKRECEITAPJ"},
-            {modulo:"SEARCHEASYCHECKRECEITAPJSINTEGRA"},
-            {modulo:"SEARCHEASYCHECKSIMPLESNACIONAL"}
+            {modulo:"SEARCHEASYCHECKRECEITAPF", link:constants.URL_FOCOFISCAL},
+            {modulo:"SEARCHEASYCHECKRECEITAPJ", link:constants.URL_FOCOFISCAL},
+            {modulo:"SEARCHEASYCHECKRECEITAPJSINTEGRA", link:constants.URL_FOCOFISCAL},
+            {modulo:"SEARCHEASYCHECKSIMPLESNACIONAL", link:constants.URL_FOCOFISCAL},
         ]
     },
     3: {
         label: constants.COMPANY_PRODUCT_VEICULOS,
-        id: "veiculos",
+        id: 3,
         color: constants.COMPANY_PRODUCT_VEICULOS_COLOR,
         colorLight: constants.COMPANY_PRODUCT_VEICULOS_COLOR_LIGHT,
         link: constants.URL_VEICULOS,
@@ -167,9 +167,9 @@ const produtos = {
         imageNegative: constants.ICON_VEICULOS_NEGATIVE,
         alt: `Icone ${constants.COMPANY_PRODUCT_VEICULOS}`,
         consultas: [
-            {modulo:"PLACA"},
-            {modulo:"CHASSI"},
-            {modulo:"NUMEROMOTOR"}
+            {modulo:"PLACA", link:constants.URL_VEICULOS},
+            {modulo:"CHASSI", link:constants.URL_VEICULOS},
+            {modulo:"NUMEROMOTOR", link:constants.URL_VEICULOS},
         ]
     },
     /*MONITORA: {

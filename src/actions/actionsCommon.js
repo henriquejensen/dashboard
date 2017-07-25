@@ -28,7 +28,7 @@ import { apiWithKeySession } from "../api/Api"
 /* Muda o tipo do produto, ex: Localizel, tipo cpf ao clicar em cnpj muda para cnpj */
 export function changeProductType(product, type) {
 	return {
-		type: "CHANGE_" + product.toUpperCase() + "_TYPE",
+		type: "CHANGE_" + product + "_TYPE",
 		payload: type
 	}
 }

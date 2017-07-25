@@ -33,7 +33,7 @@ import {
 import notifications from "./data/notifications.json"
 
 let user = {
-    token: localStorage.getItem(AUTHENTICATION) ? true : false,
+    token: getUserToken(),
     logado: localStorage.getItem(USER_PRODUCTS) ? true : false,
     mapProdutos: localStorage.getItem(USER_PRODUCTS) ? localStorage.getItem(USER_PRODUCTS).split(",") : null,
     usuarioNome: localStorage.getItem(USER_NAME),
@@ -141,10 +141,19 @@ export default function (state = user, action) {
                 perfilOrdem
             } = response
 
+            /*if(consultasAtivas) {
+                removeInfoLocalStorage()
+                return {
+                    ...state,
+                    loading: false,
+                    logado: false,
+                    message: ERR_CONNECTION_REFUSED
+                }
+            }*/
+
             if(consultasAtivas["8"]) {
                 consultasAtivas["8"].NOVOENRIQUECIMENTO = {
-                    labelFront: "Novo Enriquecimento",
-                    link: "/basecerta/novoenriquecimento"
+                    labelFront: "Novo Enriquecimento",                    
                 }
                 consultasAtivas["8"].MONITORBASECERTA = {
                     labelFront: "Monitor Base Certa",
@@ -153,16 +162,13 @@ export default function (state = user, action) {
             }
             if(consultasAtivas["9"]) {
                 consultasAtivas["9"].ENVIARSMS = {
-                    labelFront: "Enviar SMS",
-                    link: "/sms/enviorapido"
+                    labelFront: "Enviar SMS"
                 }
                 consultasAtivas["9"].MONITORENVIOS = {
-                    labelFront: "Monitor de envios",
-                    link: "/sms"
+                    labelFront: "Monitor de envios"
                 }
                 consultasAtivas["9"].RESPOSTAS = {
-                    labelFront: "Respostas",
-                    link: "/sms/respostas"
+                    labelFront: "Respostas"
                 }
             }
             if(consultasAtivas["3"]) {
@@ -238,6 +244,25 @@ export default function (state = user, action) {
 
         default:
             return state
+    }
+}
+
+function getUserToken() {
+    const token = localStorage.getItem(AUTHENTICATION)
+
+    if(token)
+        return true
+
+    try {
+        const expression = `${AUTHENTICATION}=.(.*?).($|;)`
+        const authorization = document.cookie.match(expression)
+        if(authorization) {
+            localStorage.setItem(AUTHENTICATION, authorization[1].toString())
+            return true
+        }
+    } catch(e) {
+        console.log("Falha na sessão cookie")
+        return false
     }
 }
 

@@ -10,6 +10,7 @@ import MyForm from "../../components/forms/Form"
 import Titletab from "../../components/utils/Titletab"
 import Panel from "../../components/panel/Panel"
 import UltimasConsultas from "../../components/UltimasConsultas"
+import ReverConsultaMessage from "../../components/utils/ReverConsulta"
 import { DateField, MyFieldGroup } from "../../components/forms/CommonForms"
 import { LocalizeDescription } from "../../components/ProductDescription"
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen"
@@ -223,10 +224,10 @@ class Credito extends Component {
 
 		this.setState({
 			creditoInput: {
+				...this.state.creditoInput,
 				documento: "",
 				dataNascimento: null,
 				expressTipo: "CPF",
-				uf: null,
 				banco: null,
 				agência: null,
 				conta: null,
@@ -499,6 +500,10 @@ class Credito extends Component {
 									}
 									key={index}
 								>
+									{data.data.reverConsulta ?
+										<ReverConsultaMessage />
+									:""}
+
 									{data.produto == COMPANY_PRODUCT_CREDITO ?
 										<CreditoView
 											data={data.data}

@@ -59,12 +59,13 @@ class Login extends Component {
                     type="text"
                     id="cliente"
                     name="cliente"
-                    label="Cliente"
-                    placeholder="Digite o cliente"
+                    label="Login Empresa"
+                    placeholder="Digite o login da sua empresa"
                     required
                     value={this.state.cliente}
                     onChange={this.onChange}
                 />
+
                 <MyFieldGroup
                     type="text"
                     id="usuario"
@@ -97,7 +98,7 @@ class Login extends Component {
         )
     }
 
-    render() {        
+    render() {
         return (
             <div className="container">
                 <Row>
@@ -107,10 +108,10 @@ class Login extends Component {
                             Identifique-se para acessar nossos serviços
                         </h3>
 
-                        {this.props.loading ? <LoadingScreen /> : ""}
+                        {this.props.user && this.props.user.loading ? <LoadingScreen /> : ""}
 
-                        {/*this.props.auth.error ? 
-                            <div className="alert alert-danger text-center" role="alert">{this.props.auth.msgn}</div> : ""*/}
+                        {this.props.error ? 
+                            <div className="alert alert-danger text-center" role="alert">{this.props.user.message}</div> : ""}
 
                         <div className="account-wall">
                             <Col md={12} className="text-center">

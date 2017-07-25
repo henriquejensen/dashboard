@@ -1,16 +1,4 @@
-import {
-    CLOSE_CREDITO_MODEL,
-    CLOSE_MESSAGE_ERROR_CREDITO,
-    CLOSE_TAB_CREDITO,
-    CHANGE_TAB_CREDITO,
-    GET_CREDITO_COMPLETA,
-    GET_CREDITO_LAST_QUERIES,
-    LOADING_CREDITO,
-    SEARCH_BY_LOCALIZE_CPF_IN_CREDITO,
-    SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO,
-    SEARCH_BY_LOCALIZE_CPF,
-    SEE_CREDITO_MODEL    
-} from "../constants/constantsCredito";
+import * as constantsCredito from "../constants/constantsCredito"
 
 import {
         CHANGE_CREDITO_TYPE,
@@ -24,20 +12,20 @@ import {
 		NENHUM_REGISTRO,
 		REQUEST_ERROR,
 		SUCCESS
-} from "../constants/utils";
+} from "../constants/utils"
 
 import {
     COMPANY_PRODUCT_CREDITO,
     COMPANY_PRODUCT_LOCALIZE,
     ICON_CREDITO,
     ICON_LOCALIZE
-} from "../constants/constantsCompany";
+} from "../constants/constantsCompany"
 
-import { patternCPF, patternCNPJ } from "../components/utils/functions/patternDocuments";
+import { patternCPF, patternCNPJ } from "../components/utils/functions/patternDocuments"
 
-import model from "./data/credito/consultaCPF.json";
-import modelCNPJ from "./data/credito/consultaCNPJ.json";
-import lastQueries from "./data/lastQueries.json";
+import model from "./data/credito/consultaCPF.json"
+import modelCNPJ from "./data/credito/consultaCNPJ.json"
+import lastQueries from "./data/lastQueries.json"
 
 const getInitialState = {
     loading: false,
@@ -60,7 +48,7 @@ export default function(state=getInitialState, action) {
     };
 
     switch(action.type) {
-        case CHANGE_CREDITO_TYPE:
+        case CHANGE_CREDITO_TYPE: {
             return {
                 status: SUCCESS,
                 message: "",
@@ -70,8 +58,9 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: action.payload.toUpperCase()
             }
+        }
 
-        case CHANGE_TAB_CREDITO: {
+        case constantsCredito.CHANGE_TAB_CREDITO: {
             // quando se fecha a tab esta funcao é chamada, por isso se faz a verificacao
             let tab = findLabelInArray(state.response,action.payload);
             tab = tab >= 0 ? tab : 0;
@@ -87,7 +76,7 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case CLOSE_CREDITO_MODEL:
+        case constantsCredito.CLOSE_CREDITO_MODEL: {
             return {
                 status: "closeModel",
                 message: "",
@@ -97,8 +86,9 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: state.type
             }
+        }
 
-        case CLOSE_MESSAGE_ERROR_CREDITO:
+        case constantsCredito.CLOSE_MESSAGE_ERROR_CREDITO: {
             return {
                 status: "",
                 message: "",
@@ -108,8 +98,9 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: state.type
             }
+        }
 
-        case CLOSE_TAB_CREDITO:
+        case constantsCredito.CLOSE_TAB_CREDITO: {
             let newResponse = state.response.concat();
             newResponse.splice(action.payload, 1);
 
@@ -122,7 +113,7 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: state.type
             }
-            
+        }            
 
         case ERR_CONNECTION_REFUSED: {
             return {
@@ -136,7 +127,7 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case GET_CREDITO_COMPLETA: {
+        case constantsCredito.GET_CREDITO_COMPLETA: {
             let tipo = action.payload.parameters.tipo
             let documento = action.payload.parameters.documento
             documento = tipo == "CPF" ? patternCPF(documento) : patternCNPJ(documento)
@@ -150,27 +141,26 @@ export default function(state=getInitialState, action) {
                  * portanto estou salvando a entrada do cliente no lugar dele
                  * pois formato este documento em todo o site
                  */
-                tipo == "CPF" ? responseServer.cadastro.cpf = documento : responseServer.cadastro.cnpj = documento;
+                tipo == "CPF" ? responseServer.cadastro.cpf = documento : responseServer.cadastro.cnpj = documento
 
-                response.data = responseServer;
-                response.label = label;
-                response.tipo = tipo;
-                response.icon = ICON_CREDITO;
-                response.produto = COMPANY_PRODUCT_CREDITO;
+                response.data = responseServer
+                response.label = label
+                response.tipo = tipo
+                response.icon = ICON_CREDITO
+                response.produto = COMPANY_PRODUCT_CREDITO
             }
 
             return {
+                ...state,
                 status: cadastro ? SUCCESS : REQUEST_ERROR,
                 message: cadastro ? "": NENHUM_REGISTRO,
                 loading: false,
                 response: verifyIfDocumentExists && cadastro ? [...state.response, response] : state.response,
                 tabActive: cadastro ? label : state.tabActive,
-                lastQueries: state.lastQueries,
-                type: state.type
             }
         }
         
-        case GET_CREDITO_LAST_QUERIES: {
+        case constantsCredito.GET_CREDITO_LAST_QUERIES: {
             // tipo > { COMPLETA, INTERMEDIARIA ...}
             let tipoConsulta = action.payload.parameters.tipo
             let responseServer = action.payload.response.creditoUltimasConsultas
@@ -186,7 +176,7 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case LOADING_CREDITO:
+        case constantsCredito.LOADING_CREDITO: {
             return {
                 loading: true,
                 status: "loading",
@@ -196,8 +186,9 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: state.type
             }
+        }
 
-        case REQUEST_ERROR:
+        case REQUEST_ERROR: {
             return {
                 loading: false,
                 status: REQUEST_ERROR,
@@ -207,8 +198,33 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: state.type
             }
+        }
+
+        case constantsCredito.REVER_CONSULTA_CREDITO: {
+            let  responseServer = action.payload.response.response
+            const { cabecalho } = responseServer
+            const { modulo } = action.payload.parameters
+            const tipo=cabecalho.entrada.length <= 11 ? "CPF" : "CNPJ"
+            const label=tipo + ":" + (tipo === "CPF" ? patternCPF(cabecalho.entrada) : patternCNPJ(cabecalho.entrada)) + "REVER-CONSULTA"
+            responseServer.reverConsulta = true //Boolean para identificar a rever consulta
+
+            response.data = responseServer
+            response.label = label
+            response.tipo = tipo
+            response.icon = ICON_CREDITO
+            response.produto = COMPANY_PRODUCT_CREDITO
+
+            return {
+                ...state,
+                status: SUCCESS,
+                message: "",
+                loading: false,
+                response: [...state.response, response],
+                tabActive: label,
+            }
+        }
         
-        case SEARCH_BY_LOCALIZE_CPF_IN_CREDITO: {
+        case constantsCredito.SEARCH_BY_LOCALIZE_CPF_IN_CREDITO: {
             let responseServer = action.payload;
             let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
             let verifyIfCPFExists = isDocumentNotInArray(state.response, cadastro.cpf);
@@ -239,7 +255,8 @@ export default function(state=getInitialState, action) {
                 type: state.type
             }
         }
-        case SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO: {
+
+        case constantsCredito.SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO: {
             let responseServer = action.payload;
             let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
             let verifyIfCNPJExists = isDocumentNotInArray(state.response, cadastro.cnpj);
@@ -263,19 +280,20 @@ export default function(state=getInitialState, action) {
                 type: state.type
             }
         }
-        case SEE_CREDITO_MODEL:
-            let responseCNPJ = {};
-            response.data = model;
-            response.label = model.cadastro.cpf;
-            response.tipo = "CPF";
-            response.icon = ICON_CREDITO;
-            response.produto = COMPANY_PRODUCT_CREDITO;
 
-            responseCNPJ.data = modelCNPJ;
-            responseCNPJ.label = modelCNPJ.cadastro.cnpj;
-            responseCNPJ.tipo = "CNPJ";
-            responseCNPJ.icon = ICON_CREDITO;
-            responseCNPJ.produto = COMPANY_PRODUCT_CREDITO;
+        case constantsCredito.SEE_CREDITO_MODEL: {
+            let responseCNPJ = {}
+            response.data = model
+            response.label = model.cadastro.cpf
+            response.tipo = "CPF"
+            response.icon = ICON_CREDITO
+            response.produto = COMPANY_PRODUCT_CREDITO
+
+            responseCNPJ.data = modelCNPJ
+            responseCNPJ.label = modelCNPJ.cadastro.cnpj
+            responseCNPJ.tipo = "CNPJ"
+            responseCNPJ.icon = ICON_CREDITO
+            responseCNPJ.produto = COMPANY_PRODUCT_CREDITO
 
             return {
                 loading: false,
@@ -286,6 +304,7 @@ export default function(state=getInitialState, action) {
                 lastQueries: state.lastQueries,
                 type: state.type
             }
+        }
     }
 
     return state;

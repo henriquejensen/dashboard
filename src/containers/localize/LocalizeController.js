@@ -35,6 +35,7 @@ import MyForm from "../../components/forms/Form"
 import Titletab from "../../components/utils/Titletab"
 import Panel from "../../components/panel/Panel"
 import UltimasConsultas from "../../components/UltimasConsultas"
+import ReverConsultaMessage from "../../components/utils/ReverConsulta"
 import { LocalizeDescription } from "../../components/ProductDescription"
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen"
 import { DateField } from "../../components/forms/CommonForms"
@@ -210,7 +211,7 @@ class LocalizeController extends Component {
 	}
 
 	onChangeType = (evt) => {
-		this.props.changeProductType("localize", evt.target.value)
+		this.props.changeProductType(COMPANY_PRODUCT_LOCALIZE, evt.target.value)
 	}
 
 	onChange = (evt) => {
@@ -492,6 +493,11 @@ class LocalizeController extends Component {
 									}
 									key={index}
 								>
+
+									{data.data.reverConsulta ? 
+										<ReverConsultaMessage />
+									:""}
+
 									{/*Verifica se o produto pesquisado é localize, pois pode ser gerado abas de outros produtos no Localize*/}
 									{data.produto == COMPANY_PRODUCT_LOCALIZE ?
 										<LocalizeView

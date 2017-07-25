@@ -13,7 +13,7 @@ export const COMPANY_LOGO = "https://s3-us-west-2.amazonaws.com/front.assertiva/
 export const COMPANY_LOGO_INVERSE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-assertiva-negative.png"
 
 //URL gerais
-export const URL_LOGIN = "/login"
+export const URL_LOGIN = "/"
 export const URL_SENHA= "/senha"
 export const URL_NOVASENHA = "/novasenha"
 export const URL_EDITAR = "/editar"
@@ -96,7 +96,7 @@ export const ICON_VENDAMAIS_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front
 // Veículos
 export const URL_VEICULOS = "/veiculos"
 export const COMPANY_PRODUCT_VEICULOS = "Veículos"
-export const COMPANY_PRODUCT_VEICULOS_LABEL = "VEICULOS"
+export const COMPANY_PRODUCT_VEICULOS_LABEL = 3
 export const COMPANY_PRODUCT_VEICULOS_COLOR = "#607d8b"
 export const COMPANY_PRODUCT_VEICULOS_COLOR_LIGHT = "#8CC6E2"
 export const COMPANY_PRODUCT_VEICULOS_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"

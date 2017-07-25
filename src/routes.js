@@ -80,7 +80,7 @@ export default (
 
     </Route>
 
-    <Route name="Erro" path="*" component={Login} />
+    <Route name="Erro" path="*" component={App} />
 
   </Route>
 )

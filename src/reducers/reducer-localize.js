@@ -1,23 +1,3 @@
-import {
-		CHANGE_TAB_LOCALIZE,
-		CLOSE_LOCALIZE_MODEL,
-		CLOSE_MESSAGE_ERROR_LOCALIZE,
-		CLOSE_TAB_LOCALIZE,
-		GET_LOCALIZE_LAST_QUERIES,
-		LOADING_LOCALIZE,
-		SEARCH_BY_DOCUMENT,
-		SEARCH_BY_TELEFONE,
-		SEARCH_BY_EMAIL,
-		SEARCH_BY_NOME_ENDERECO,
-		SEARCH_BY_PESSOAS_RELACIONADOS,
-		SEARCH_BY_TELEFONES_RELACIONADOS,
-		SEARCH_BY_ENDERECOS_RELACIONADOS,
-		SEARCH_BY_EMAILS_RELACIONADOS,
-		SEARCH_BY_CREDITO_IN_LOCALIZE,
-		SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS,
-		SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA,
-		SEE_LOCALIZE_MODEL,
-} from "../constants/constantsLocalize"
 import * as localize from "../constants/constantsLocalize"
 import {
 		CHANGE_LOCALIZE_TYPE,
@@ -160,10 +140,65 @@ export default function(state = initialState, action) {
 			}
 
 			case localize.REVER_CONSULTA_LOCALIZE: {
+				let  responseServer = action.payload.response.response
+				const { cabecalho } = responseServer
+				const { modulo } = action.payload.parameters
+				let tipo=modulo, dataToResponse = {}, label, produto=modulo
+				responseServer.reverConsulta = true //Boolean para identificar a rever consulta
+
+				switch(modulo) {
+					case localize.MODULO_NOME_ENDERECO: {
+						let nameLabelArray = JSON.parse(cabecalho.entrada)
+						let nameLabel = []
+						Object.keys(nameLabelArray).forEach((keyOfNameLabelArray) => {
+							if(nameLabelArray[keyOfNameLabelArray])
+								nameLabel.push(nameLabelArray[keyOfNameLabelArray])
+						})
+						label = "REV" + ":" + nameLabel.toString() + "-" + COMPANY_PRODUCT_LOCALIZE
+						dataToResponse = {
+							response: responseServer.localizePorNomeOuEndereco,
+							cabecalho: cabecalho,
+							reverConsulta: true
+						}
+						break
+					}
+					case localize.MODULO_TELEFONE: {
+						dataToResponse = {
+							response: responseServer.localizePorTelefone,
+							cabecalho: cabecalho,
+							reverConsulta: true
+						}
+						label = "REV" + ":" + cabecalho.entrada
+						break
+					}
+					case localize.MODULO_EMAIL: {
+						dataToResponse = {
+							response: responseServer.localizePorEmail,
+							cabecalho: cabecalho,
+							reverConsulta: true
+						}
+						label = "EMAIL" + ":" + cabecalho.entrada
+						break
+					}
+					default: {
+						produto = COMPANY_PRODUCT_LOCALIZE
+						tipo = cabecalho.entrada.length <= 11 ? "CPF" : "CNPJ"
+						label = tipo + ":" + (tipo === "CPF" ? patternCPF(cabecalho.entrada) : patternCNPJ(cabecalho.entrada))
+						dataToResponse = responseServer
+					}
+				}
+
+				response.data = dataToResponse
+				response.label = label
+				response.tipo = tipo
+				response.icon = ICON_LOCALIZE
+				response.produto = produto
+				
 				return {
 					...state,
 					loading: false,
-					response: action.payload,
+					response: [...state.response, response],
+					tabActive: label
 				}
 			}
 
@@ -217,21 +252,21 @@ export default function(state = initialState, action) {
 				}
 			}
 
-			case SEARCH_BY_DOCUMENT: {
+			case localize.SEARCH_BY_DOCUMENT: {
 				let { tipo, documento } = action.payload.parameters
-				documento = tipo == "CPF" ? patternCPF(documento) : patternCNPJ(documento);
-				let responseServer = action.payload.response;
-				let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_LOCALIZE;
-				let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined;
-				let verifyIfDocumentExists = isDocumentNotInArray(state.response, label);
+				documento = tipo == "CPF" ? patternCPF(documento) : patternCNPJ(documento)
+				let responseServer = action.payload.response
+				let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_LOCALIZE
+				let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined
+				let verifyIfDocumentExists = isDocumentNotInArray(state.response, label)
 
 				/*Verifica se o documento foi encontrado ou não (-1 não foi encontrado)*/
 				if(verifyIfDocumentExists && cadastro) {
-					response.data = responseServer;
+					response.data = responseServer
 					response.label = label
-					response.tipo = tipo;
-					response.icon = ICON_LOCALIZE;
-					response.produto = COMPANY_PRODUCT_LOCALIZE;
+					response.tipo = tipo
+					response.icon = ICON_LOCALIZE
+					response.produto = COMPANY_PRODUCT_LOCALIZE
 
 					if(cadastro.maeNome) {
 						response.pessoasRelacionadas[0] = {
@@ -252,7 +287,7 @@ export default function(state = initialState, action) {
 				}
 			}
 
-			case SEARCH_BY_EMAIL: {
+			case localize.SEARCH_BY_EMAIL: {
 				let responseServer = action.payload.response;
 				let labelEmail = "EMAIL: "+responseServer.cabecalho.entrada;
 				let verifyIfEmailExists = searchDocument(state.response, labelEmail);
@@ -277,7 +312,7 @@ export default function(state = initialState, action) {
 				}
 			}
 
-			case SEARCH_BY_TELEFONE: {
+			case localize.SEARCH_BY_TELEFONE: {
 				let responseServer = action.payload.response;
 				let telefones = responseServer.localizePorTelefone;
 				let labelTelefone, verifyIfTelefoneExists;
@@ -305,7 +340,7 @@ export default function(state = initialState, action) {
 				}
 			}
 
-			case SEARCH_BY_NOME_ENDERECO: {
+			case localize.SEARCH_BY_NOME_ENDERECO: {
 				/*Construcao do nome da label na tab */
 				let nameLabelArray = JSON.parse(action.payload.response.cabecalho.entrada)
 				let nameLabel = []
@@ -317,7 +352,7 @@ export default function(state = initialState, action) {
 				Object.keys(nameLabelArray).forEach((keyOfNameLabelArray) => {
 					if(nameLabelArray[keyOfNameLabelArray])
 						nameLabel.push(nameLabelArray[keyOfNameLabelArray])
-				});
+				})
 
 				nameLabel = nameLabel.toString()
 				let tipo = action.payload.parameters.tipo.substring(0,3)
@@ -348,7 +383,7 @@ export default function(state = initialState, action) {
 				};
 			}
 
-			case SEARCH_BY_PESSOAS_RELACIONADOS: {
+			case localize.SEARCH_BY_PESSOAS_RELACIONADOS: {
 				let responseServer = action.payload.response;
 				let label = action.payload.parameters.label;
 				state.response[searchDocument(state.response,label)].pessoasRelacionadas = responseServer.localizePessoasRelacionadas;
@@ -361,7 +396,7 @@ export default function(state = initialState, action) {
 				}
 			}
 
-			case SEARCH_BY_TELEFONES_RELACIONADOS: {
+			case localize.SEARCH_BY_TELEFONES_RELACIONADOS: {
 				let responseServer = action.payload.response;
 				let telefones = responseServer.telefones ? responseServer.telefones : {};
 				let documento = action.payload.parameters.documento;
@@ -384,7 +419,7 @@ export default function(state = initialState, action) {
 				}
 			}
 
-			case SEARCH_BY_ENDERECOS_RELACIONADOS: {
+			case localize.SEARCH_BY_ENDERECOS_RELACIONADOS: {
 				let responseServer = action.payload.response;
 				let enderecos = responseServer.enderecos ? responseServer.enderecos : [];
 				let documento = action.payload.parameters.documento;
@@ -410,7 +445,7 @@ export default function(state = initialState, action) {
 				}
 			}
 
-			case SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS: {
+			case localize.SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS: {
 				let consulta = action.payload.parameters.consulta;
 				let isEnderecoOuTelefone = action.payload.parameters.tipo;
 				let posElemento = action.payload.parameters.posElemento;
@@ -429,7 +464,7 @@ export default function(state = initialState, action) {
 				}
 			}
 
-			case SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA: {
+			case localize.SEARCH_BY_ENDERECOS_TELEFONES_RESULTADOS_BUSCA: {
 				let indexLabel = action.payload.parameters.indexLabel;
 				let indexArrayElements = action.payload.parameters.indexArrayElements;
 				let isEnderecoOuTelefone = action.payload.parameters.isEnderecoOuTelefone;

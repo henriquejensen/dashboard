@@ -11,12 +11,11 @@ export const URL_FOCOFISCAL_SEARCH_RECEITA_PF = `https://managerprovider.asserti
 export const URL_FOCOFISCAL_SEARCH_RECEITA_PJ = `https://managerprovider.assertivasolucoes.com.br/focofiscal/${CODE_RECEITA_PJ}/consultar`
 export const URL_FOCOFISCAL_SEARCH_RECEITA_PJ_SINTEGRA = `https://managerprovider.assertivasolucoes.com.br/focofiscal/${CODE_RECEITA_PJ_SINTEGRA}/consultar`
 
-
+export const REVER_CONSULTA_FOCOFISCAL = "REVER_CONSULTA_4"
 export const SEE_FOCOFISCAL_MODEL = "SEE_FOCOFISCAL_MODEL"
 export const CLOSE_MESSAGE_ERROR_FOCOFISCAL = "CLOSE_MESSAGE_ERROR_FOCOFISCAL"
 export const LOADING_FOCOFISCAL = "LOADING_FOCOFISCAL"
 export const CHANGE_TAB_FOCOFISCAL = "CHANGE_TAB_FOCOFISCAL"
-export const CHANGE_FOCOFISCAL_TYPE = "CHANGE_FOCOFISCAL_TYPE"
 export const CLOSE_TAB_FOCOFISCAL = "CLOSE_TAB_FOCOFISCAL"
 
 export const FETCH_FOCOFISCAL = "FETCH_FOCOFISCAL"

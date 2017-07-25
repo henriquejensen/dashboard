@@ -72,14 +72,14 @@ module.exports = {
       filename: 'vendor.bundle.js'
     }),
 
-    new CompressionPlugin({
+    /*new CompressionPlugin({
       // https://webpack.js.org/plugins/compression-webpack-plugin/#components/sidebar/sidebar.jsx
       asset: "[path].gz[query]",
       algorithm: "gzip",
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
       minRatio: 0.8
-    }),
+    }),*/
 
     new webpack.optimize.UglifyJsPlugin({
       mangle: true,
@@ -99,4 +99,4 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.css']
   }
-};
+}

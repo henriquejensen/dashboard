@@ -94,46 +94,48 @@ class Filtro extends Component {
         let tipo = this.props.relatorio.tipo
         return (
             <Form onSubmit={this.onFormSubmit}>
-                <Col md={3}>
-                    <SelectGroup
-                        id="separador"
-                        type="select"
-                        name="separador"
-                        label="Separador"
-                        options={this.separadorOpcoes}
-                    />
-                </Col>
-                
-                {tipo === "R6" || tipo === "R7" ?
+                <Col md={12} style={{margin:0, padding:0}}>
                     <Col md={3}>
                         <SelectGroup
-                            id="tipoRelatorio"
+                            id="separador"
                             type="select"
-                            name="tipoRelatorio"
-                            label="Tipo do relatório"
-                            options={this.relatorioOpcoes[tipo]}
+                            name="separador"
+                            label="Separador"
+                            options={this.separadorOpcoes}
                         />
                     </Col>
-                : ""}
+                    
+                    {tipo === "R6" || tipo === "R7" ?
+                        <Col md={3}>
+                            <SelectGroup
+                                id="tipoRelatorio"
+                                type="select"
+                                name="tipoRelatorio"
+                                label="Tipo do relatório"
+                                options={this.relatorioOpcoes[tipo]}
+                            />
+                        </Col>
+                    : ""}
 
-                <Col md={3}>
-                    <DateField
-                        required
-                        label="Ínicio*"
-                        placeholder="Data inicial"
-                        startDate={this.state.dataIni}
-                        onChange={(date) => this.setState({dataIni: date})}
-                    />
-                </Col>
+                    <Col md={3}>
+                        <DateField
+                            required
+                            label="Ínicio*"
+                            placeholder="Data inicial"
+                            startDate={this.state.dataIni}
+                            onChange={(date) => this.setState({dataIni: date})}
+                        />
+                    </Col>
 
-                <Col md={3}>
-                    <DateField
-                        required
-                        label="Fim*"
-                        placeholder="Data final"
-                        startDate={this.state.dataFim}
-                        onChange={(date) => this.setState({dataFim: date})}
-                    />
+                    <Col md={3}>
+                        <DateField
+                            required
+                            label="Fim*"
+                            placeholder="Data final"
+                            startDate={this.state.dataFim}
+                            onChange={(date) => this.setState({dataFim: date})}
+                        />
+                    </Col>
                 </Col>
 
                 <Col md={6}>

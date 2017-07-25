@@ -9,6 +9,7 @@ import MyForm from "../../components/forms/Form"
 import UltimasConsultas from "../../components/UltimasConsultas"
 import Titletab from "../../components/utils/Titletab"
 import Panel from "../../components/panel/Panel"
+import ReverConsultaMessage from "../../components/utils/ReverConsulta"
 import { VeiculoslDescription } from "../../components/ProductDescription"
 import { MyFieldGroup, MyCheckboxGroup } from "../../components/forms/CommonForms"
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen"
@@ -38,7 +39,7 @@ class VeiculosController extends Component {
 	constructor(props) {
 		super(props)
 
-		this.produtoInformacoes = todosProdutos[COMPANY_PRODUCT_VEICULOS_LABEL]
+		this.produtoInformacoes = todosProdutos["VEICULOS"]
 		this.quantidadeCheckboxPorCol = 5 //Quantidade de checkbox que terao em cada col do bootstrap
 
 		this.state = {
@@ -478,6 +479,11 @@ class VeiculosController extends Component {
 										}
 										key={index}
 									>
+										
+										{data.data.reverConsulta ?
+											<ReverConsultaMessage />
+										:""}										
+
 										<VeiculosView
 											data={data.data}
 											tipo={data.tipo}
