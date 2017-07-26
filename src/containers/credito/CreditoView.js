@@ -174,7 +174,7 @@ export default class CreditoView extends Component {
                 <Enderecos enderecos={this.props.data.enderecos ? this.props.data.enderecos : this.props.data.ultimosEnderecos } />
 
                 {this.props.tipo == "CNPJ" ?
-                    <CadastroCnpjCnaesSecundarias cnpjCnaesSecundarias={this.props.data.cadastroCnpjCnaesSecundarias} index={this.props.index} />
+                    <CadastroCnpjCnaesSecundarias cnpjCnaesSecundarias={this.props.data.cadastro.cnaesSecundarias} index={this.props.index} />
                 : ""}
                 <Protocolo info={this.props.data.cabecalho} />
             </PanelGroup>

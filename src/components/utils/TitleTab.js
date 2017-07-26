@@ -1,8 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 
-import { LOGO_CREDITO, ICON_CREDITO } from "../../constants/constantsCredito";
-
-import { patternCPF, patternCNPJ } from "./functions/patternDocuments";
+import { patternCPF, patternCNPJ } from "./functions/patternDocuments"
 
 export default class Titletab extends Component {
     render() {

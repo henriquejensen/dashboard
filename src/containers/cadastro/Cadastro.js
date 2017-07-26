@@ -452,6 +452,7 @@ class Cadastro extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log("STATA", state.user)
 	return {
         pessoaVO: {
             descricao: state.user.pessoaDescricao,

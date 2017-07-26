@@ -110,7 +110,7 @@ class Login extends Component {
 
                         {this.props.user && this.props.user.loading ? <LoadingScreen /> : ""}
 
-                        {this.props.error ? 
+                        {this.props.user.error ? 
                             <div className="alert alert-danger text-center" role="alert">{this.props.user.message}</div> : ""}
 
                         <div className="account-wall">

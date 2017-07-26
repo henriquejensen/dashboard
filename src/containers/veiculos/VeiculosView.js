@@ -112,13 +112,6 @@ class VeiculosView extends Component {
 
     mountSinistroIrrecuperavel = (sinistroIrrecuperavel) => {
         return [
-            {label: "Data", value:sinistroIrrecuperavel.data},
-            {label: "Descrição", value:sinistroIrrecuperavel.descricao}
-        ]
-    }
-
-    mountSinistroIrrecuperavel = (sinistroIrrecuperavel) => {
-        return [
             {label: "PT", value:<span className={sinistroIrrecuperavel.ptPositivo == "Sim" ? "destaque-ativado" : "destaque-desativado"}>{sinistroIrrecuperavel.ptPositivo}</span>},
             {label: "Tipo Registro", value:sinistroIrrecuperavel.tipoRegistro},
             {label: "Tamanho", value:sinistroIrrecuperavel.tamanho},
@@ -130,8 +123,8 @@ class VeiculosView extends Component {
     mountTabelaFipe = (tabelaFipe) => {
         return [
             {label: "Código FIPE", value:tabelaFipe.codigoFipe},
-            {label: "Preço FIPE", value:pattern.formatCurrency(tabelaFipe.precoFipe)},
-            {label: "Preço médio", value:pattern.formatCurrency(tabelaFipe.precoMedio)},
+            {label: "Preço FIPE", value:`R$ ${tabelaFipe.precoFipe}`},
+            {label: "Preço médio", value:`R$ ${tabelaFipe.precoMedio}`},
         ]
     }
 
@@ -227,7 +220,7 @@ class VeiculosView extends Component {
                     />
                 : ""}
 
-                {/*data.cadastro && data.cadastro.movimentacao ?
+                {data.cadastro && data.cadastro.movimentacao ?
                     <CardWithTable title="MOVIMENTAÇÃO"
                         mdLength={3}
                         elements={
@@ -253,7 +246,7 @@ class VeiculosView extends Component {
                             ]
                         }
                     />
-                : ""*/}
+                : ""}
 
                 {data.comunicacaoVenda ?
                     <CardWithTable title="COMUNICAÇÃO DE VENDA"

@@ -60,7 +60,8 @@ export default function (state = user, action) {
             localStorage.setItem(AUTHENTICATION, response)
             return {
                 ...state,
-                token: true
+                token: true,
+                error: false,
             }
         }
 
@@ -113,7 +114,8 @@ export default function (state = user, action) {
             localStorage.setItem("ip", action.payload)
             return {
                 ...state,
-                ip: action.payload
+                ip: action.payload,
+                error: false,
             }
         }
 
@@ -201,7 +203,7 @@ export default function (state = user, action) {
                 usuarioFoto: usuarioFoto ? FOTO_URL + usuarioId + ".jpg" : state.usuarioFoto,
                 logado: true,
                 status: null,
-                message: null,
+                error: false,
                 loading: false
             }
         }
@@ -221,6 +223,9 @@ export default function (state = user, action) {
                 ...state,
                 token: false,
                 logado: false,
+                loading: false,
+                error: true,
+                message: action.payload.mensagem ? action.payload.mensagem : state.message
             }
         }
 
@@ -236,7 +241,8 @@ export default function (state = user, action) {
         case REQUEST_ERROR: {
             return {
                 ...state,
-                message: REQUEST_ERROR,
+                error: true,
+                message: action.payload.mensagem,
                 loading: false,
                 status: ERROR,
             }
@@ -248,9 +254,10 @@ export default function (state = user, action) {
 }
 
 function getUserToken() {
-    const token = localStorage.getItem(AUTHENTICATION)
+    const token = localStorage.getItem(AUTHENTICATION) 
+    const dayofToken = localStorage.getItem("DIA") 
 
-    if(token)
+    if(token && dayofToken == moment().date())
         return true
 
     try {
@@ -262,8 +269,9 @@ function getUserToken() {
         }
     } catch(e) {
         console.log("Falha na sessão cookie")
-        return false
     }
+    removeInfoLocalStorage()
+    return false
 }
 
 function removeInfoLocalStorage() {

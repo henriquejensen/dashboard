@@ -82,7 +82,7 @@ const produtos = {
                 {id: "alertaIdentidade", label: "Alerta de Identidade"},
                 {id: "spcObito", label: "Alerta de Óbito"},
                 {id: "acao", label: "Ação"},
-                {id: "gastoEstimadoPF", label: "Gasto Estimado PF"},
+                {id: "gastoEstimadoPf", label: "Gasto Estimado"},
                 {id: "indiceRelacionamentoMercadoPF", label: "Índice Relacionamento Mercado PF"},
                 {id: "limiteCreditoSugerido", label: "Limite de Crédito Sugerido"},
                 {id: "participacaoEmpresa", label: "Participações em Empresas"},

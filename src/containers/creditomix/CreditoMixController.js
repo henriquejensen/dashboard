@@ -9,7 +9,7 @@ import Panel from "../../components/panel/Panel"
 import MyForm from "../../components/forms/Form"
 import CreditoMixView from "./CreditoMixView"
 import ReverConsultaMessage from "../../components/utils/ReverConsulta"
-import Titletab from "../../components/utils/Titletab"
+import Titletab from "../../components/utils/TitleTab"
 import UltimasConsultas from "../../components/UltimasConsultas"
 import { MyFieldGroup, MyCheckboxGroup, SelectGroup } from "../../components/forms/CommonForms"
 import { LocalizeDescription } from "../../components/ProductDescription"
@@ -305,7 +305,9 @@ class CreditoMix extends Component {
                 
                 {this.renderDocumentInput(showCepByType ? 3 : 6)}
 
-                {showCepByType || this.state.showCep ?
+                {!type.match("COMPLETA")
+                 && !type.match("INTERMEDIARIA")
+                 && !type.match("SINTETICA") && (showCepByType || this.state.showCep) ?
                     this.renderCep(3)
                 : ""}
             </div>

@@ -7,7 +7,7 @@ import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col, 
 import CreditoView from "./CreditoView"
 import LocalizeView from "../localize/LocalizeView"
 import MyForm from "../../components/forms/Form"
-import Titletab from "../../components/utils/Titletab"
+import Titletab from "../../components/utils/TitleTab"
 import Panel from "../../components/panel/Panel"
 import UltimasConsultas from "../../components/UltimasConsultas"
 import ReverConsultaMessage from "../../components/utils/ReverConsulta"

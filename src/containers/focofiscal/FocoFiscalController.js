@@ -27,7 +27,7 @@ import FocoFiscalView from "./FocoFiscalView"
 import MyForm from "../../components/forms/Form"
 import Panel from "../../components/panel/Panel"
 import ReverConsultaMessage from "../../components/utils/ReverConsulta"
-import Titletab from "../../components/utils/Titletab"
+import Titletab from "../../components/utils/TitleTab"
 import UltimasConsultas from "../../components/UltimasConsultas"
 import { DateField, MyFieldGroup } from "../../components/forms/CommonForms"
 import { FocoFiscalDescription } from "../../components/ProductDescription"
@@ -59,8 +59,7 @@ class FocoFiscal extends Component {
 
 		this.state = {
 			documento: "",
-			dataNascimento: moment(),
-			changeDataNascimento: false
+			dataNascimento: moment()
 		}
 	}
 
@@ -97,19 +96,18 @@ class FocoFiscal extends Component {
 		documento = documento.replace(/[^0-9]/g, "")
 
 		if(type.match("RECEITAPF")) {
-			let dataNascimento = this.state.changeDataNascimento ? moment(this.state.dataNascimento).format("YYYY-MM-DD") : null
+			let dataNascimento = moment(this.state.dataNascimento).format("YYYY-MM-DD")
 			this.props.searchByReceitaPF(documento,dataNascimento)
 		}
-		else if(type.match("RECEITAPJ"))
-			this.props.searchByReceitaPJ(documento)
 		else if(type.match("PJSINTEGRA"))
 			this.props.searchByReceitaPJSintegra(documento)
+		else if(type.match("RECEITAPJ"))
+			this.props.searchByReceitaPJ(documento)
 		else
 			this.props.searchByFocoFiscalSimplesNacional(documento)
 
 		this.setState({
-			documento: "",
-			changeDataNascimento: false
+			documento: ""
 		})
 	}
 
@@ -149,7 +147,7 @@ class FocoFiscal extends Component {
 									required
 									placeholder="Data nascimento"
 									startDate={this.state.dataNascimento}
-									onChange={(date) => this.setState({dataNascimento: date, changeDataNascimento:true})}
+									onChange={(date) => this.setState({dataNascimento: date})}
 								/>
 							</Col>
 						: ""}

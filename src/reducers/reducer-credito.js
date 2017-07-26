@@ -128,11 +128,10 @@ export default function(state=getInitialState, action) {
         }
 
         case constantsCredito.GET_CREDITO_COMPLETA: {
-            let tipo = action.payload.parameters.tipo
-            let documento = action.payload.parameters.documento
+            let { tipo, documento, requestExpress } = action.payload.parameters
             documento = tipo == "CPF" ? patternCPF(documento) : patternCNPJ(documento)
             let responseServer = action.payload.response
-            let label = tipo + ":" + documento + "-" + COMPANY_PRODUCT_CREDITO
+            let label = tipo + ":" + documento + "-" + (requestExpress ? JSON.stringify(requestExpress) : "")
             let cadastro = responseServer && responseServer.cadastro ? responseServer.cadastro : undefined
             let verifyIfDocumentExists = isDocumentNotInArray(state.response, label)
 
@@ -200,7 +199,7 @@ export default function(state=getInitialState, action) {
             }
         }
 
-        case constantsCredito.REVER_CONSULTA_CREDITO: {
+        case constantsCredito.REVER_CONSULTA_CREDITO: {            
             let  responseServer = action.payload.response.response
             const { cabecalho } = responseServer
             const { modulo } = action.payload.parameters

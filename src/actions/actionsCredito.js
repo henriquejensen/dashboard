@@ -140,10 +140,10 @@ export function searchCreditoSimples(documento) {
 
 export function searchCreditoExpress(requestExpress, documento, tipo) {
 	let url = tipo === "CPF" ? URL_CREDITO_SEARCH_EXPRESS_PF : URL_CREDITO_SEARCH_EXPRESS_PJ
-	let data = requestExpress;
+	let data = requestExpress
 
 	return (dispatch) => {
-		api(dispatch, url, data, GET_CREDITO_COMPLETA, {tipo, documento})
+		api(dispatch, url, data, GET_CREDITO_COMPLETA, {tipo, documento, requestExpress})
 	}
 }
 

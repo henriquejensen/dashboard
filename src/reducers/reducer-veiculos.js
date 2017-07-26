@@ -93,18 +93,18 @@ export default function(state=getInitialState, action) {
         }
 
         case constantsVeiculos.GET_VEICULOS: {
-            let tipo = action.payload.parameters.tipoInput
-            let tab = tipo + ":" + action.payload.parameters.input
+            let { tipo, flagsSelected } = action.payload.parameters
             let responseServer = action.payload.response
+            let label = tipo + ":" + action.payload.parameters.input + " - " + flagsSelected.toString()
             //Procura no array de pesquisados se ja existe
-            let pos = searchLabel(state.response, tab)
+            let pos = searchLabel(state.response, label)
             //let newState = state.response.concat()
             let newStateResponse = state.response.concat()
 
-            responseServer.cabecalho.flagsSelecionadas = action.payload.parameters.flagsSelected
+            responseServer.cabecalho.flagsSelecionadas = flagsSelected
 
             response.data = responseServer
-            response.label = tab
+            response.label = label
             response.tipo = tipo
             response.icon = ICON_VEICULOS
             response.produto = COMPANY_PRODUCT_VEICULOS
@@ -118,7 +118,7 @@ export default function(state=getInitialState, action) {
                 ...state,
                 loading: false,
                 response: pos === -1 ? [...state.response, response] : newStateResponse,
-                tabActive: tab
+                tabActive: label
             }
         }
         

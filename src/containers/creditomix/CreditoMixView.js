@@ -34,7 +34,8 @@ const CreditoViewMix = (props) => {
                         mdLength={6}
                         elements={
                             [
-                                {label: "Documento", value:data.cadastro.documento ? data.cadastro.documento.length === 11 ? pattern.patternCPF(data.cadastro.documento) : pattern.patternCNPJ(data.cadastro.documento) : undefined},
+                                {label: "Documento", value:data.cadastro.cpf ? pattern.patternCPF(data.cadastro.cpf) : undefined},
+                                {label: "Documento", value:data.cadastro.cnpj ? pattern.patternCNPJ(data.cadastro.cnpj) : undefined},
                                 {label: "Status Documento", value:data.cadastro.receitaStatus ? 
                                     <span className={data.cadastro.receitaStatus == "ATIVA" || data.cadastro.receitaStatus == "REGULAR" ? "destaque-ativado" : "destaque-desativado"}>{data.cadastro.receitaStatus}</span> : undefined},
                                 {label: "Nome", value:data.cadastro.nome ? data.cadastro.nome : undefined},
@@ -46,18 +47,15 @@ const CreditoViewMix = (props) => {
                                     data.cadastro.rgNumero ? data.cadastro.rgNumero : undefined},
                                 {label: "Signo", value:data.cadastro.signo ? data.cadastro.signo : undefined},
                                 {label: "Faixa idade", value:data.cadastro.faixaIdade ? data.cadastro.faixaIdade : undefined},
-                                {label: "Data status CPF", value:data.cadastro.dataReceitaStatus ? data.cadastro.dataReceitaStatus : undefined},
+                                {label: "Receita Status", value:data.cadastro.dataReceitaStatus ? data.cadastro.dataReceitaStatus : undefined},
                                 {label: "Titulo de eleitor", value:data.cadastro.numeroTituloEleitor ? data.cadastro.numeroTituloEleitor : undefined},
                                 {label: "Estado civil", value:data.cadastro.estadoCivil ? data.cadastro.estadoCivil : undefined},
                                 {label: "Grau de instrução", value:data.cadastro.grauInstrucao ? data.cadastro.grauInstrucao : undefined},
                                 {label: "Email", value:data.cadastro.email ? data.cadastro.email : undefined},
-                                {label: "Gasto Estimado Valor", value:data.cadastro.gastoEstimadoValor ? data.cadastro.gastoEstimadoValor : undefined},
-                                {label: "Gasto Estimado Faixa", value:data.cadastro.gastoEstimadoFaixa ? data.cadastro.gastoEstimadoFaixa : undefined},
                                 {label: "Índice Relacionamento Mercado", value:data.cadastro.indiceRelacionamentoMercado ? data.cadastro.indiceRelacionamentoMercado : undefined},
                                 {label: "Email", value:data.cadastro.email ? data.cadastro.email : undefined},
                                 {label: "Nome Mãe", value:data.cadastro.maeNome || data.cadastro.nomeMae ? data.cadastro.maeNome || data.cadastro.nomeMae : undefined},
-                                {label: "Alerta Identidade", value:data.cadastro.alertaIdentidade ? data.cadastro.alertaIdentidade : undefined},
-
+                                {label: "Alerta Identidade", value:data.cadastro.alertaIdentidade ? <span className="destaque-ativado">{data.cadastro.alertaIdentidade}</span> : undefined},
                                 //CNPJ
                                 {label: "Razão social", value:data.cadastro.razaoSocial ? data.cadastro.razaoSocial : undefined},
                                 {label: "Quantidade de funcionários", value:data.cadastro.quantidadeFuncionarios ? data.cadastro.quantidadeFuncionarios : undefined},
@@ -102,17 +100,33 @@ const CreditoViewMix = (props) => {
                     />
                 : ""}
 
-                {data.score ?
-                    <CardWithTable title="SCORE"
-                        mdLength={3}
-                        elements={
+                {data.gastoEstimado ?
+                    <CardWithTable title="GASTO ESTIMADO"
+                        mdLength={6}
+                        elements= {
                             [
-                               {label: "Classe", value:data.score.classe ? data.score.classe : undefined},
-                               {label: "Pontos", value:data.score.pontos ? data.score.pontos : undefined},
-                               {label: "Período", value:data.score.periodo ? data.score.periodo : undefined},
-                               {label: "Descrição", value:data.score.descricao ? data.score.descricao : undefined},
+                                {label: "Valor Total", value:data.gastoEstimado.valorTotal ? pattern.formatCurrency(data.gastoEstimado.valorTotal) : undefined},
+                                {label: "Faixa", value:data.gastoEstimado.faixaValor ? data.gastoEstimado.faixaValor : undefined},
+                                {label: "Interpretação", value:data.gastoEstimado.interpretacao ? data.gastoEstimado.interpretacao : undefined},
+                                {label: "Quantidade", value:data.gastoEstimado.quantidade ? data.gastoEstimado.quantidade : undefined},
+                                {label: "Mensagem", value:data.gastoEstimado.mensagem ? data.gastoEstimado.mensagem : undefined},
                             ]
                         }
+                    />
+                : ""}
+
+                {data.scores ?
+                    <CardWithTable title="SCORE"
+                        fields={
+                            [
+                                {id:"classe", name:"Classe"},
+                                {id:"descricao", name:"Descrição"},
+                                {id:"periodo", name:"Período"},
+                                {id:"pontos", name:"Pontos"},
+                                {id:"tipo", name:"Tipo"},
+                            ]
+                        }
+                        rows={data.scores}
                     />
                 : ""}
 
@@ -216,6 +230,19 @@ const CreditoViewMix = (props) => {
                     />
                 : ""}
 
+                {data.limiteSugerido ?
+                    <CardWithTable title="LIMITE SUGERIDO"
+                        mdLength={6}
+                        elements={
+                            [
+                                {label: "Limite Sugerido", value:data.limiteSugerido.limiteCreditoSugerido ? pattern.formatCurrency(data.limiteSugerido.limiteCreditoSugerido) : NENHUM_REGISTRO},
+                                {label: "Interpretação", value:data.limiteSugerido.interpretacao ? data.limiteSugerido.interpretacao : NENHUM_REGISTRO},
+                                {label: "Mais Informações", value:data.limiteSugerido.maisInformacoes ? data.limiteSugerido.maisInformacoes : undefined}
+                            ]
+                        }
+                    />
+                : ""}
+
                 {data.gastoEstimado ?
                     <CardWithTable title="GASTO ESTIMADO"
                         mdLength={12}
@@ -248,23 +275,12 @@ const CreditoViewMix = (props) => {
                     />
                 : ""}
 
-                {data.outrasGrafias ?
-                    <CardWithTable title="OUTRAS GRAFIAS"
-                        fields={
-                            [
-                                {id:"nome", name:"Grafia"},
-                            ]
-                        }
-                        rows={data.outrasGrafias}
-                    />
-                : ""}
-
                 {data.faturamentoPresumido ?
                     <CardWithTable title="FATURAMENTO PRESUMIDO"
                         mdLength={12}
                         elements={
                             [
-                               {label: "Anual", value:data.faturamentoPresumido.anual ? pattern.formatCurrency(data.faturamentoPresumido.anual) : undefined},
+                               {label: "Anual", value:data.faturamentoPresumido.anual ? pattern.formatCurrency(data.faturamentoPresumido.anual) : NENHUM_REGISTRO},
                                {label: "Interpretação", value:"INTERPRETAÇÃO O RESULTADO É CALCULADO POR MEIO DE TÉCNICAS ESTATISTICAS QUE UTILIZAM INFORMAÇÕES CADASTRAIS E COMPORTAMENTO DA EMPRESA"}
                             ]
                         }
@@ -460,6 +476,17 @@ const CreditoViewMix = (props) => {
                 <Enderecos enderecos={props.data.enderecos || props.data.ultimosEnderecos} />
 
                 <Telefones telefones={props.data.telefones || props.data.ultimosTelefonesInformados} />
+
+                {data.outrasGrafias ?
+                    <CardWithTable title="OUTRAS GRAFIAS"
+                        fields={
+                            [
+                                {id:"nome", name:"Grafia"},
+                            ]
+                        }
+                        rows={data.outrasGrafias}
+                    />
+                : ""}
         </PanelGroup>
     );
 };

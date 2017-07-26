@@ -15,7 +15,7 @@ class CardWithTable extends Component {
                         if(element.value) {
                             return (
                                 <Col md={mdLength} xs={xsLength} key={index}>
-                                    <strong>{element.label}: </strong> {element.value}
+                                    {element.label ? <strong>{element.label}: </strong> : ""} {element.value}
                                 </Col>
                             )
                         }

@@ -69,7 +69,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity,
-      filename: 'vendor.bundle.js'
+      filename: '[hash].vendor.bundle.js'
     }),
 
     /*new CompressionPlugin({

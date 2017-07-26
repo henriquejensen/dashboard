@@ -32,7 +32,7 @@ import Protocolo from "../../components/protocolo/Protocolo"
 import LocalizeView from "./LocalizeView"
 import CreditoView from "../credito/CreditoView"
 import MyForm from "../../components/forms/Form"
-import Titletab from "../../components/utils/Titletab"
+import Titletab from "../../components/utils/TitleTab"
 import Panel from "../../components/panel/Panel"
 import UltimasConsultas from "../../components/UltimasConsultas"
 import ReverConsultaMessage from "../../components/utils/ReverConsulta"
@@ -211,7 +211,7 @@ class LocalizeController extends Component {
 	}
 
 	onChangeType = (evt) => {
-		this.props.changeProductType(COMPANY_PRODUCT_LOCALIZE, evt.target.value)
+		this.props.changeProductType(COMPANY_PRODUCT_LOCALIZE_LABEL, evt.target.value)
 	}
 
 	onChange = (evt) => {

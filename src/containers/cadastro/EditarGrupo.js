@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import { Tabs, Tab, Col, Button, Form } from "react-bootstrap";
+import React, { Component } from "react"
+import moment from "moment"
+import { Tabs, Tab, Col, Button, Form } from "react-bootstrap"
 
-import { MyFieldGroup, SelectGroup, TextAreaGroup, CheckboxGroup } from "../../components/forms/CommonForms";
-import Table from "../../components/table/Table";
+import { DateField, MyFieldGroup, SelectGroup, TextAreaGroup, CheckboxGroup } from "../../components/forms/CommonForms"
+import Table from "../../components/table/Table"
 
 const Cliente = (props) => {
     return (
@@ -33,32 +34,35 @@ const Cliente = (props) => {
 const DadosBasicos = (props) => {
     return (
         <span>
-            <Col md={4}>
-                <MyFieldGroup
-                    id="descricao"
-                    type="text"
-                    label="Nome do grupo"
-                    name="descricao"
-                    value={props.descricao}
-                    onChange={props.onChange} />
-            </Col>
+            <Col md={12} style={{margin:0, padding:0}}>
+                <Col md={4}>
+                    <MyFieldGroup
+                        id="descricao"
+                        type="text"
+                        label="Nome do grupo"
+                        name="descricao"
+                        value={props.descricao}
+                        onChange={props.onChange} />
+                </Col>
 
-            <Col md={4}>
-                <MyFieldGroup
-                    id="dataInicio"
-                    type="date"
-                    label="Início do consumo"
-                    name="dataInicio"
-                    onChange={props.onChange} />
-            </Col>
+                <Col md={4}>
+                    <DateField
+                        required
+                        label="Ínicio do consumo"
+                        placeholder="Início do consumo"
+                        startDate={props.dataInicioText}
+                        onChange={(date) => props.onChangeDataConsumo(date, "dataInicioText")}
+                    />
+                </Col>
 
-            <Col md={4}>
-                <MyFieldGroup
-                    id="dataFim"
-                    type="date"
-                    label="Fim do consumo"
-                    name="dataFim"
-                    onChange={props.onChange} />
+                <Col md={4}>
+                    <DateField
+                        label="Fim do consumo"
+                        placeholder="Fim do consumo"
+                        startDate={props.dataFinalText}
+                        onChange={(date) => props.onChangeDataConsumo(date, "dataFinalText")}
+                    />
+                </Col>
             </Col>
 
             <Col md={4}>
@@ -67,16 +71,17 @@ const DadosBasicos = (props) => {
                     type="select"
                     label="Bloqueado"
                     name="statusBloqueado"
-                    options={["SIM", "NAO"]}
+                    value={props.statusBloqueado}
+                    options={["SIM", "NÃO"]}
                     onChange={props.onChange} />
             </Col>
 
             <Col md={4}>
                 <SelectGroup
-                    id="tipoGrupo"
+                    id="tipo"
                     type="select"
-                    label="Status ativo"
-                    name="tipoGrupo"
+                    label="Tipo"
+                    name="tipo"
                     value={props.status}
                     options={["CLIENTE", "FUNCIONARIO", "TESTE", "OUTROS"]}
                     onChange={props.onChange} />
@@ -89,7 +94,7 @@ const DadosBasicos = (props) => {
                     label="Acesso a WebService"
                     name="acessoWS"
                     value={props.webService}
-                    options={["SIM", "NAO"]}
+                    options={["SIM", "NÃO"]}
                     onChange={props.onChange} />
             </Col>
 
@@ -110,18 +115,18 @@ const DadosBasicos = (props) => {
 const Horario = (props) => {
     return (
         <span>
-            <Col md={props.bloquearHorario == "SIM" ? 4 : 12}>
+            <Col md={props.statusAccessTime == "SIM" ? 4 : 12}>
                 <SelectGroup
-                    id="bloquearHorario"
+                    id="statusAccessTime"
                     type="select"
                     label="Bloquear por horário?"
-                    name="bloquearHorario"
-                    value={props.bloquearHorario}
+                    name="statusAccessTime"
+                    value={props.statusAccessTime}
                     options={["SIM", "NÃO"]}
                     onChange={props.onChange} />
             </Col>
 
-            {props.bloquearHorario == "SIM" ?
+            {props.statusAccessTime == "SIM" ?
                 <span>
                     <Col md={4}>
                         <MyFieldGroup
@@ -274,15 +279,28 @@ export default class EditarGrupo extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {}
+        this.dataInicio = this.props.grupoInfo.dataInicioText ?
+                this.props.grupoInfo.dataInicioText.split("/").reverse().join("-") : undefined
+        this.dataFinal = this.props.grupoInfo.dataFinalText ?
+                this.props.grupoInfo.dataFinalText.split("/").reverse().join("-") : undefined
+
+        this.state = {
+            ...this.props.grupoInfo,
+            dataInicioText: moment(this.dataInicio),
+            dataFinalText: moment(this.dataFinal),
+        }
     }
     
     onFormSubmit = (evt) => {
         evt.preventDefault();
 
-        let { grupoInfo } = this.props
+        let grupo = {
+            ...this.state,
+            dataInicio: moment(this.state.dataInicioText).format("YYYY-MM-DD"),
+            dataFinal: this.changeDataConsumo ? moment(this.state.dataFinalText).format("YYYY-MM-DD") : null
+        }
 
-        this.props.editGroup({ ...grupoInfo, ...this.state })
+        this.props.editGroup({ ...grupo })
         this.props.cancel()
     }
 
@@ -291,34 +309,80 @@ export default class EditarGrupo extends Component {
             [evt.target.name]: evt.target.value
         })
     }
+
+    onChangeDataConsumo = (date, name) => {
+        this.setState({
+            [name]: date,
+            changeDataConsumo: true
+        })
+    }
     
     render() {
-        const grupo = this.props.grupoInfo;
+        const grupo = this.state
         const editar = [
-            {label: "Cliente", form: <Cliente onChange={this.onChange} razaoSocial={grupo.pessoaVO.razaoSocial} login={grupo.pessoaVO.descricao} />},
-            {label: "Dados Básicos", form: <DadosBasicos onChange={this.onChange} descricao={grupo.descricao} inicioConsumo={grupo.dataInicio} fimConsumo={grupo.dataFinal} statusBloqueado={grupo.statusBloqueado} status={grupo.statusAtivo} webService={grupo.wsStatus}
-            ips={grupo.ipAcesso}/>},
+            {
+                label: "Cliente",
+                form: <Cliente
+                        onChange={this.onChange}
+                        razaoSocial={grupo.pessoaVO.razaoSocial}
+                        login={grupo.pessoaVO.descricao}
+                    />
+            },
+            {
+                label: "Dados Básicos",
+                form: <DadosBasicos
+                        onChange={this.onChange}
+                        onChangeDataConsumo={this.onChangeDataConsumo}
+                        descricao={grupo.descricao}
+                        dataInicioText={grupo.dataInicioText}
+                        dataFinalText={grupo.dataFinalText}
+                        statusBloqueado={grupo.statusBloqueado}
+                        status={grupo.tipo}
+                        webService={grupo.wsStatus}
+                        ips={grupo.ipAcesso}
+                    />
+            },  
             {
                 label: "Horário",
                 form: <Horario
                         onChange={this.onChange}
-                        bloquearHorario={grupo.statusAccessTime}
+                        statusAccessTime={grupo.statusAccessTime}
                         horarioInicio={grupo.dataInicio}
                         horarioFim={grupo.dataFinal}
                         dias={[grupo.accessTimeSeg, grupo.accessTimeTer, grupo.accessTimeQua, grupo.accessTimeQui, grupo.accessTimeSex, grupo.accessTimeSab, grupo.accessTimeDom]} />
             },
-            {label: "Limitação total", form: <LimitacaoTotal onChange={this.onChange} limite={grupo.limiteValor} periodoLimitacao={grupo.periodoLimitacao} tipoLimitacao={grupo.tipoLimitacao} />},
-            {label: "Limitação por produto", form: <LimitacaoProduto onChange={this.onChange} produtos={[
-                {label:"Localize", quantidade:grupo.localizeLimiteValor, tipoLimitacao:grupo.localizeTipoLimitacao, periodoLimitacao:grupo.localizePeriodoLimitacao},
-                {label:"SMS", quantidade:grupo.smsLimiteValor, tipoLimitacao:grupo.smsTipoLimitacao, periodoLimitacao:grupo.smsPeriodoLimitacao},
-                {label:"Crédito", quantidade:grupo.creditoLimiteValor, tipoLimitacao:grupo.creditoTipoLimitacao, periodoLimitacao:grupo.creditoPeriodoLimitacao},
-                {label:"Foco Fiscal", quantidade:grupo.focofiscalLimiteValor, tipoLimitacao:grupo.focofiscalTipoLimitacao, periodoLimitacao:grupo.focofiscalPeriodoLimitacao},
-                {label:"Base Certa", quantidade:grupo.bcLimiteValor, tipoLimitacao:grupo.bcTipoLimitacao, periodoLimitacao:grupo.bcPeriodoLimitacao},
-                {label:"Venda+", quantidade:grupo.vendaMaisLimiteValor, tipoLimitacao:grupo.vendaMaisTipoLimitacao, periodoLimitacao:grupo.vendaMaisPeriodoLimitacao},
-                {label:"Consig+", quantidade:grupo.consigLimiteValor, tipoLimitacao:grupo.consigTipoLimitacao, periodoLimitacao:grupo.consigPeriodoLimitacao},
-                {label:"Veículos", quantidade:grupo.veiculosLimiteValor, tipoLimitacao:grupo.veiculosTipoLimitacao, periodoLimitacao:grupo.veiculosPeriodoLimitacao}
-            ]} />},
-            {label: "Observações", form: <Observacoes onChange={this.onChange} obs={grupo.obs} />}
+            {
+                label: "Limitação total",
+                form: <LimitacaoTotal
+                        onChange={this.onChange}
+                        limite={grupo.limiteValor}
+                        periodoLimitacao={grupo.periodoLimitacao}
+                        tipoLimitacao={grupo.tipoLimitacao}
+                        />
+            },
+            {
+                label: "Limitação por produto",
+                form: <LimitacaoProduto
+                        onChange={this.onChange}
+                        produtos={[
+                            {label:"Localize", quantidade:grupo.localizeLimiteValor, tipoLimitacao:grupo.localizeTipoLimitacao, periodoLimitacao:grupo.localizePeriodoLimitacao},
+                            {label:"SMS", quantidade:grupo.smsLimiteValor, tipoLimitacao:grupo.smsTipoLimitacao, periodoLimitacao:grupo.smsPeriodoLimitacao},
+                            {label:"Crédito", quantidade:grupo.creditoLimiteValor, tipoLimitacao:grupo.creditoTipoLimitacao, periodoLimitacao:grupo.creditoPeriodoLimitacao},
+                            {label:"Foco Fiscal", quantidade:grupo.focofiscalLimiteValor, tipoLimitacao:grupo.focofiscalTipoLimitacao, periodoLimitacao:grupo.focofiscalPeriodoLimitacao},
+                            {label:"Base Certa", quantidade:grupo.bcLimiteValor, tipoLimitacao:grupo.bcTipoLimitacao, periodoLimitacao:grupo.bcPeriodoLimitacao},
+                            {label:"Venda+", quantidade:grupo.vendaMaisLimiteValor, tipoLimitacao:grupo.vendaMaisTipoLimitacao, periodoLimitacao:grupo.vendaMaisPeriodoLimitacao},
+                            {label:"Consig+", quantidade:grupo.consigLimiteValor, tipoLimitacao:grupo.consigTipoLimitacao, periodoLimitacao:grupo.consigPeriodoLimitacao},
+                            {label:"Veículos", quantidade:grupo.veiculosLimiteValor, tipoLimitacao:grupo.veiculosTipoLimitacao, periodoLimitacao:grupo.veiculosPeriodoLimitacao}
+                        ]}
+                    />
+            },
+            {
+                label: "Observações",
+                form: <Observacoes
+                        onChange={this.onChange}
+                        obs={grupo.obs}
+                     />
+            }
         ]
 
         return (

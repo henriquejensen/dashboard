@@ -47,13 +47,13 @@ export function loadingVeiculos() {
     }
 }
 
-export function searchByVeiculos(tipoInput, input, dataToSend, flagsSelected) {
+export function searchByVeiculos(tipo, input, dataToSend, flagsSelected) {
     let url = URL_VEICULOS_SEARCH;
     let data = dataToSend;
     let search = GET_VEICULOS;
 
     return (dispatch) => {
-        api(dispatch, url, data, search, {tipoInput, input, flagsSelected})
+        api(dispatch, url, data, search, {tipo, input, flagsSelected})
     }
 }
 

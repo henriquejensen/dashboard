@@ -127,7 +127,7 @@ function onEndRequest(error, response, dispatch, search, parameters) {
         } /*else if(response.status === 400) {
             dispatch({type: "ERROR_400_UNAUTHORIZED", payload: "ERROR_400_UNAUTHORIZED_MESSAGE"})
         }*/ else if(response.status === 401) {
-            dispatch({type: ERROR_401_UNAUTHORIZED, payload: ERROR_401_UNAUTHORIZED_MESSAGE})
+            dispatch({type: ERROR_401_UNAUTHORIZED, payload: response.body.erro || ERROR_401_UNAUTHORIZED_MESSAGE})
         } else {
             dispatch({
                 type: REQUEST_ERROR,

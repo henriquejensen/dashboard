@@ -83,6 +83,7 @@ export default function(state=getInitialState, action) {
 
         case constants.FETCH_CREDITOMIX: {
             let { cpf, cnpj, documento } = action.payload.response.cadastro
+            const { tipo } = action.payload.parameters
             if(documento)
                 documento = documento.length <= 11 ? patternCPF(documento) : patternCNPJ(documento)
             else if(cpf) {
@@ -93,10 +94,10 @@ export default function(state=getInitialState, action) {
 
             let newResponse = action.payload.response
             newResponse.cadastro.documento = documento
-            let label = action.payload.parameters.tipo + ":" + documento
+            let label = tipo + ":" + documento + " - " + newResponse.cabecalho.entrada
 
             newResponse['label'] = label
-            newResponse['tipo'] = action.payload.parameters.tipo
+            newResponse['tipo'] = tipo
             newResponse['icon'] = ICON_CREDITOMIX
             newResponse['produto'] = COMPANY_PRODUCT_CREDITOMIX_LABEL
 

@@ -20,7 +20,6 @@ import { loadingUserScreen, setUserIp } from "../actions/index"
 //Constants
 import {
     AUTHENTICATION,
-    ERROR_401_UNAUTHORIZED,
     LOG_OUT,
     TOOLTIP_SEARCH_BY_ADDRESS,
     TOOLTIP_SEARCH_BY_ADDRESS_MESSAGE,

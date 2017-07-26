@@ -75,6 +75,7 @@ export function closeMessageError() {
 }
 
 export function editGroup(grupo) {
+	debugger
 	let url = cadastro.URL_UPDATE_GRUPO
 	let search = cadastro.GET_GROUPS_CADASTRO
 	let data = grupo

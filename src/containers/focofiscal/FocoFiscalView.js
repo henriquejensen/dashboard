@@ -35,9 +35,9 @@ const FocoFiscalView = (props) => {
                             {label: "Razão Social", value:data.cadastro.razaoSocial ? data.cadastro.razaoSocial : undefined},
                             {label: "Nome Fantasia", value:data.cadastro.nomeFantasia ? data.cadastro.nomeFantasia : undefined},
                             {label: "Ente Federativo Responsável", value:data.cadastro.enteFederativoResponsavel ? data.cadastro.enteFederativoResponsavel : undefined},
-                            {label: "Endereço eletrõnico", value:data.cadastro.enderecoEletronico ? data.cadastro.enderecoEletronico : undefined},
+                            {label: "Email", value:data.cadastro.enderecoEletronico ? <a href={`mailto:${data.cadastro.enderecoEletronico}`}>{data.cadastro.enderecoEletronico}</a> : undefined},
                             {label: "Matriz/Filial", value:data.cadastro.matrizFilial ? data.cadastro.matrizFilial : undefined},
-                            {label: "Capital Social", value:data.cadastro.capitalSocial ? data.cadastro.capitalSocial : undefined},
+                            {label: "Capital Social", value:data.cadastro.capitalSocial ? pattern.formatCurrency(data.cadastro.capitalSocial) : undefined},
                             {label: "Porte Empresa", value:data.cadastro.porteEmpresa ? data.cadastro.porteEmpresa : undefined},
                             {label: "Natureza Jurídica", value:data.cadastro.naturezaJuridica ? data.cadastro.naturezaJuridica.codigo : undefined},
                             {label: "Natureza Descrição", value:data.cadastro.naturezaJuridica ? data.cadastro.naturezaJuridica.descricao : undefined}
@@ -52,7 +52,7 @@ const FocoFiscalView = (props) => {
                     elements={
                         [
                             {label: "CNAE Principal", value:data.cadastro.cnaePrincipal.codigo ? data.cadastro.cnaePrincipal.codigo : undefined},
-                            {label: "CNAE Descrição", value:data.cadastro.cnaePrincipal.descricao ? data.cadastro.cnaePrincipal.descricao : undefined}
+                            {label: "CNAE Principal Descrição", value:data.cadastro.cnaePrincipal.descricao ? data.cadastro.cnaePrincipal.descricao : undefined}
                         ]
                     }
                     fields={
@@ -70,11 +70,12 @@ const FocoFiscalView = (props) => {
                     mdLength={6}
                     elements={
                         [
-                            {label: "Código Comprovante", value:data.situacaoReceita.codigoComprovante ? data.situacaoReceita.codigoComprovante : undefined},
+                            {label: "Situação Cadastral Receita", value:data.situacaoReceita.dataSituacaoCadastral ? data.situacaoReceita.dataSituacaoCadastral : undefined},
                             {label: "Data Emissão", value:data.situacaoReceita.dataEmissao ? data.situacaoReceita.dataEmissao : undefined},
-                            {label: "Data Inscrição", value:data.situacaoReceita.dataInscricao ? data.situacaoReceita.dataInscricao : undefined},
-                            {label: "Digito Verificador", value:data.situacaoReceita.digitoVerificador ? data.situacaoReceita.digitoVerificador : undefined},
-                            {label: "Situação", value:data.situacaoReceita.situacao ? data.situacaoReceita.situacao : undefined}
+                            {label: "Situação Cadastral", value:data.situacaoReceita.situacaoCadastral ? 
+                                <span className={data.situacaoReceita.situacaoCadastral == "ATIVA" || data.situacaoReceita.situacaoCadastral == "REGULAR" ? "destaque-ativado" : "destaque-desativado"}>{data.situacaoReceita.situacaoCadastral}</span> : undefined},
+                            {label: "Situação Especial", value:data.situacaoReceita.dataSituacaoEspecial ? data.situacaoReceita.dataSituacaoEspecial : undefined},
+                            {label: "Código Comprovante", value:data.situacaoReceita.codigoComprovante ? data.situacaoReceita.codigoComprovante : undefined},
                         ]
                     }
                 />
@@ -85,8 +86,8 @@ const FocoFiscalView = (props) => {
                     mdLength={6}
                     elements={
                         [
-                            {label: "Código Comprovante", value:data.situacaoSintegra.situacaoContribuinte ? data.situacaoSintegra.situacaoContribuinte : undefined},
-                            {label: "Situação", value:data.situacaoSintegra.substituicaoTributaria ? data.situacaoSintegra.substituicaoTributariaReceita : undefined}
+                            {label: "Situação Contribuinte", value:data.situacaoSintegra.situacaoContribuinte ? data.situacaoSintegra.situacaoContribuinte : undefined},
+                            {label: "Substituição Tributária", value:data.situacaoSintegra.substituicaoTributaria ? data.situacaoSintegra.substituicaoTributaria : undefined}
                         ]
                     }
                 />
@@ -97,13 +98,13 @@ const FocoFiscalView = (props) => {
                     mdLength={6}
                     elements={
                         [
-                            {label: "Situação no Simples Nacional", value:data.simplesNacional.optanteSimples.situacao ? data.simplesNacional.optanteSimples.situacao : undefined},
-                            {label: "Situação no SIMEI", value:data.simplesNacional.optanteSimei.situacao ? data.simplesNacional.optanteSimei.situacao : undefined},
-                            {label: "Simples Nacional em Períodos Anteriores", value:data.simplesNacional.optanteSimples.periodoAnterior ? data.simplesNacional.optanteSimples.periodoAnterior : undefined},
-                            {label: "SIMEI em Períodos Anteriores", value:data.simplesNacional.optanteSimei.periodosAnteriores ? data.simplesNacional.optanteSimei.periodosAnteriores : undefined},
-                            {label: "Agendamentos no Simples Nacional", value:data.simplesNacional.optanteSimples.agendamento ? data.simplesNacional.optanteSimples.agendamento : undefined},
-                            {label: "Eventos Futuros no Simples Nacional:", value:data.simplesNacional.optanteSimples.eventosFuturos ? data.simplesNacional.optanteSimples.eventosFuturos : undefined},
-                            {label: "Eventos Futuros no SIMEI", value:data.simplesNacional.optanteSimei.eventosFuturos ? data.simplesNacional.optanteSimei.eventosFuturos : undefined}
+                            {label: "", value:data.simplesNacional.optanteSimples.situacao ? data.simplesNacional.optanteSimples.situacao : undefined},
+                            {label: "", value:data.simplesNacional.optanteSimei.situacao ? data.simplesNacional.optanteSimei.situacao : undefined},
+                            {label: "", value:data.simplesNacional.optanteSimples.periodoAnterior ? data.simplesNacional.optanteSimples.periodoAnterior : undefined},
+                            {label: "", value:data.simplesNacional.optanteSimei.periodosAnteriores ? data.simplesNacional.optanteSimei.periodosAnteriores : undefined},
+                            {label: "", value:data.simplesNacional.optanteSimples.agendamento ? data.simplesNacional.optanteSimples.agendamento : undefined},
+                            {label: "", value:data.simplesNacional.optanteSimples.eventosFuturos ? data.simplesNacional.optanteSimples.eventosFuturos : undefined},
+                            {label: "", value:data.simplesNacional.optanteSimei.eventosFuturos ? data.simplesNacional.optanteSimei.eventosFuturos : undefined}
                         ]
                     }
                 />

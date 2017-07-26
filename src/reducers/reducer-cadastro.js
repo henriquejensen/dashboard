@@ -7,12 +7,10 @@ import {
     GET_GROUPS_CADASTRO,
     GET_CONSULTAS_GRUPO,
     LOADING_CADASTRO
-} from "../constants/constantsCadastro";
-import { ERR_CONNECTION_REFUSED, ERR_CONNECTION_REFUSED_MESSAGE, REQUEST_ERROR } from "../constants/utils";
+} from "../constants/constantsCadastro"
+import { ERR_CONNECTION_REFUSED, ERR_CONNECTION_REFUSED_MESSAGE, REQUEST_ERROR } from "../constants/utils"
 
-//import groups from "./data/cadastro/grupos.json";
-import consultas from "./data/cadastro/consultas.json";
-//import permissoesUser from "./data/cadastro/permissoesUser.json";
+import consultas from "./data/cadastro/consultas.json"
 
 const getInitialState = {
     grupos: [],
@@ -27,11 +25,10 @@ const getInitialState = {
 export default function(state=getInitialState, action) {
     switch(action.type) {
         case ADD_NEW_USER: {
+            const { response } = action.payload.response
             return {
-                grupos: state.grupos,
-                users: state.users,
-                consultas: state.consultas,
-                permissoes: state.permissoes,
+                ...state,
+                users: response,
                 loading: false,
                 error: false,
                 message: ADD_NEW_USER,
