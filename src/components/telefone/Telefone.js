@@ -19,8 +19,9 @@ export default class Telefone extends Component {
     }
 
     render() {
-        let fixos = this.props.telefones ? this.props.telefones.fixos ? this.props.telefones.fixos : [] : "";
-        let moveis = this.props.telefones ? this.props.telefones.moveis ? this.props.telefones.moveis : [] : "";
+        const {telefones} = this.props
+        const fixos = telefones ? telefones.fixos ? telefones.fixos : [] : ""
+        const moveis = telefones ? telefones.moveis ? telefones.moveis : [] : ""
         return (
             this.props.telefones ?
                 <Panel title="TELEFONES" qtdTotal={[{icon:"fa fa-phone", qtd:fixos.length},{icon:"fa fa-mobile", qtd:moveis.length}]}>

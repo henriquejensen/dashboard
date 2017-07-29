@@ -7,8 +7,9 @@ import { Form, FormGroup, FormControl, InputGroup, ControlLabel, Checkbox, Col, 
 import CreditoView from "./CreditoView"
 import LocalizeView from "../localize/LocalizeView"
 import MyForm from "../../components/forms/Form"
-import Titletab from "../../components/utils/TitleTab"
 import Panel from "../../components/panel/Panel"
+import TitleProduct from "../../components/utils/TitleProduct"
+import Titletab from "../../components/utils/TitleTab"
 import UltimasConsultas from "../../components/UltimasConsultas"
 import ReverConsultaMessage from "../../components/utils/ReverConsulta"
 import { DateField, MyFieldGroup } from "../../components/forms/CommonForms"
@@ -45,10 +46,16 @@ import {
 	SIMPLES_CODE,
 	SEARCH_BY_LOCALIZE_CPF_IN_CREDITO,
 	SEARCH_BY_LOCALIZE_CNPJ_IN_CREDITO,
-
 	GET_CREDITO_COMPLETA
 } from "../../constants/constantsCredito"
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITO, COMPANY_PRODUCT_CREDITO_LABEL, COMPANY_PRODUCT_LOCALIZE, LOGO_CREDITO } from "../../constants/constantsCompany"
+import {
+	COMPANY_NAME_SHORT,
+	COMPANY_PRODUCT_CREDITO,
+	COMPANY_PRODUCT_CREDITO_LABEL,
+	COMPANY_PRODUCT_CREDITO_COLOR,
+	COMPANY_PRODUCT_LOCALIZE,
+	ICON_CREDITO,
+} from "../../constants/constantsCompany"
 
 import estados from "../../components/utils/common/estados.json"
 import produtos from "../../utils/produtos.js"
@@ -420,9 +427,13 @@ class Credito extends Component {
 	form = (tipo) => {
 		return (
 			<Panel>
+				<TitleProduct
+					icon={ICON_CREDITO}
+					title={this.consultasAtivas.produtoDescricao}
+					color={COMPANY_PRODUCT_CREDITO_COLOR}
+				/>
 				<Col md={12}>
 					<MyForm
-						logo = {LOGO_CREDITO}
 						onformSubmit = {this.onFormSubmit}
 						closeMessageError = {this.props.closeMessageErrorCredito}
 						options={this.produtoInformacoes}

@@ -1,21 +1,13 @@
 import React, { Component } from 'react'
-import { Col } from "react-bootstrap"
 
-import { LOGO_BASECERTA } from "../../constants/constantsCompany"
+const BaseCertaController = (props) => {
+    return (
+        <div>
 
-class BaseCertaController extends Component {
-    render() {
-        return (
-            <div>
-                <Col md={12} sm={12} className="text-center">
-                    <img src={LOGO_BASECERTA} className="logo-produto" />
-                </Col>
+            {props.children}
 
-                {this.props.children}
-
-            </div>
-        );
-    }
+        </div>
+    )
 }
 
-export default BaseCertaController;
+export default BaseCertaController

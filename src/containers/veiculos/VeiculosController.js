@@ -7,9 +7,10 @@ import { Alert, Col, Form, FormGroup, Tabs, Tab, } from "react-bootstrap"
 import VeiculosView from "./VeiculosView"
 import MyForm from "../../components/forms/Form"
 import UltimasConsultas from "../../components/UltimasConsultas"
-import Titletab from "../../components/utils/TitleTab"
 import Panel from "../../components/panel/Panel"
 import ReverConsultaMessage from "../../components/utils/ReverConsulta"
+import TitleProduct from "../../components/utils/TitleProduct"
+import Titletab from "../../components/utils/TitleTab"
 import { VeiculoslDescription } from "../../components/ProductDescription"
 import { MyFieldGroup, MyCheckboxGroup } from "../../components/forms/CommonForms"
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen"
@@ -28,7 +29,14 @@ import { changeProductType } from "../../actions/actionsCommon"
 
 //Constants
 import { LOADING_GIF, TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE, TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE, TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE } from "../../constants/utils"
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_VEICULOS, COMPANY_PRODUCT_VEICULOS_LABEL, LOGO_VEICULOS } from "../../constants/constantsCompany"
+import {
+	COMPANY_NAME_SHORT,
+	COMPANY_PRODUCT_VEICULOS,
+	COMPANY_PRODUCT_VEICULOS_LABEL,
+	COMPANY_PRODUCT_VEICULOS_COLOR,
+	ICON_VEICULOS,
+	LOGO_VEICULOS
+} from "../../constants/constantsCompany"
 import { AGREGADOS_CODE, BDV_CODE, DECODIFICADOR_CODE, LOCALIZACAO_CODE, PROPRIETARIOS_CODE, LEILAO_CODE, SINISTRO_CODE } from "../../constants/constantsVeiculos"
 
 
@@ -39,6 +47,7 @@ class VeiculosController extends Component {
 	constructor(props) {
 		super(props)
 
+		this.consultasAtivas = this.props.consultasAtivas[COMPANY_PRODUCT_VEICULOS_LABEL]
 		this.produtoInformacoes = todosProdutos["VEICULOS"]
 		this.quantidadeCheckboxPorCol = 5 //Quantidade de checkbox que terao em cada col do bootstrap
 
@@ -339,9 +348,13 @@ class VeiculosController extends Component {
 	form = (tipo) => {
 		return (
 			<Panel>
+				<TitleProduct
+					icon={ICON_VEICULOS}
+					title={this.consultasAtivas.produtoDescricao}
+					color={COMPANY_PRODUCT_VEICULOS_COLOR}
+				/>
 				<Col md={12}>
 					<MyForm
-						logo = {LOGO_VEICULOS}
 						onformSubmit = {this.onFormSubmit}
 						closeMessageError = {this.props.closeMessageErrorVeiculos}
 						options={this.produtoInformacoes.subItems}
@@ -509,7 +522,8 @@ function mapStateToProps(state) {
 		loading: state.veiculos.loading,
 		tabActive: state.veiculos.tabActive,
 		lastQueries: state.veiculos.lastQueries,
-		type: state.veiculos.type
+		type: state.veiculos.type,
+		consultasAtivas: state.user.consultasAtivas
 	}
 }
 

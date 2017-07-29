@@ -67,14 +67,14 @@ class Sidebar extends Component {
                   <li key={index} onClick={() => {handleChangeColor(produto.color)}}>
                       <Link
                         to={produto.link}
-                        onClick={() => this.activeMenuDropdown(produto.id)}
+                        onClick={() => this.activeMenuDropdown(key)}
                         activeStyle={{backgroundColor: produto.color}}
                       >
                         {activedMenu ?
-                          <img src={menuOpened == produto.id ? produto.imageNegative : produto.image} className="sub-icon" alt={produto.alt}/>
+                          <img src={menuOpened == key ? produto.imageNegative : produto.image} className="sub-icon" alt={produto.alt}/>
                         : ""}
 
-                        {produto.label}
+                        {consultasAtivas[key].produtoDescricao}
 
                         {!activedMenu ?
                           <img

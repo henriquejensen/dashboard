@@ -13,17 +13,25 @@ import MonitorEnviosView from "./MonitorEnviosView"
 import PanelGroup from "../../components/panel/PanelGroup"
 import Panel from "../../components/panel/Panel"
 import Table from "../../components/table/Table"
+import TitleProduct from "../../components/utils/TitleProduct"
 import { LoadingScreen } from "../../components/utils/ElementsAtScreen"
 import { DateField, MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
 
 // Constants
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_SMS } from "../../constants/constantsCompany"
 import { MESSAGE_SUCCESS_SMS, NENHUM_REGISTRO, SUCCESS } from "../../constants/utils"
+import {
+    COMPANY_NAME_SHORT,
+    COMPANY_PRODUCT_SMS,
+    COMPANY_PRODUCT_SMS_COLOR,
+    COMPANY_PRODUCT_SMS_LABEL,
+    ICON_SMS
+} from "../../constants/constantsCompany"
 
 class MonitorEnvios extends Component {
     constructor(props) {
-      super(props);
+      super(props)
 
+      this.consultasAtivas = this.props.consultasAtivas[COMPANY_PRODUCT_SMS_LABEL]
       this.state = {
         showBuscaAvancada: false,
         dataInicio: moment(),
@@ -157,6 +165,12 @@ class MonitorEnvios extends Component {
     render() {
       return (
         <div>
+          <TitleProduct
+              icon={ICON_SMS}
+              title={this.consultasAtivas.produtoDescricao}
+              color={COMPANY_PRODUCT_SMS_COLOR}
+          />
+
           {this.renderForm()}
 
           {this.props.loading ? <LoadingScreen /> : ""}
@@ -186,7 +200,8 @@ class MonitorEnvios extends Component {
 function mapStateToProps(state) {
   return {
     campanhas: state.sms.campanhas,
-    loading: state.sms.loading
+    loading: state.sms.loading,
+    consultasAtivas: state.user.consultasAtivas
   }
 }
 

@@ -134,7 +134,7 @@ const produtos = {
         imageNegative: constants.ICON_SMS_NEGATIVE,
         alt: `Icone ${constants.COMPANY_PRODUCT_SMS}`,
         consultas: [
-            {modulo: "ENVIARSMS", link: `${constants.URL_SMS}/enviorapido`},
+            {modulo: "SMSUNIT", modulo2: "SMSLONGCODE", link: `${constants.URL_SMS}/enviorapido`},
             {modulo: "MONITORENVIOS", link: `${constants.URL_SMS}`},
             //{label: "Centro de Custo", id: "centroCusto", link: "/sms/centrocusto"},
             {modulo: "RESPOSTAS", link: `${constants.URL_SMS}/respostas`},
@@ -170,6 +170,25 @@ const produtos = {
             {modulo:"PLACA", link:constants.URL_VEICULOS},
             {modulo:"CHASSI", link:constants.URL_VEICULOS},
             {modulo:"NUMEROMOTOR", link:constants.URL_VEICULOS},
+        ]
+    },
+    6: {
+        label: constants.COMPANY_PRODUCT_CREDITOMAIS,
+        id: 6,
+        color: constants.COMPANY_PRODUCT_CREDITOMAIS_COLOR,
+        colorLight: constants.COMPANY_PRODUCT_CREDITOMAIS_COLOR_LIGHT,
+        link: constants.URL_CREDITOMAIS,
+        image: constants.ICON_CREDITOMAIS,
+        imageNegative: constants.ICON_CREDITOMAIS_NEGATIVE,
+        alt: `Icone ${constants.COMPANY_PRODUCT_CREDITOMAIS}`,
+        consultas: [
+            {modulo:"CREDITO-MAIS-SIMPLES-PF", modulo2:"CREDITO-MAIS-SIMPLES-PJ", link:constants.URL_CREDITOMAIS},
+            {modulo:"CREDITO-MAIS-ANALITICA-PF", modulo2:"CREDITO-MAIS-ANALITICA-PJ", link:constants.URL_CREDITOMAIS},
+            {modulo:"CREDITO-MAIS-CHEQUE-ANALITICA-PF", modulo2:"CREDITO-MAIS-CHEQUE-ANALITICA-PJ", link:constants.URL_CREDITOMAIS},
+            {modulo:"CREDITO-MAIS-CORPORATE-PJ", link:constants.URL_CREDITOMAIS},
+            {modulo:"CREDITO-MAIS-GOLD-PF", modulo2:"CREDITO-MAIS-GOLD-PJ", link:constants.URL_CREDITOMAIS},
+            {modulo:"CREDITO-MAIS-PLUS-PF", modulo2:"CREDITO-MAIS-PLUS-PJ", link:constants.URL_CREDITOMAIS},
+            {modulo:"CREDITO-MAIS-SO-CHEQUE-PF", modulo2:"CREDITO-MAIS-SO-CHEQUE-PJ", link:constants.URL_CREDITOMAIS},
         ]
     },
     /*MONITORA: {

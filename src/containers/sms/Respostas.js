@@ -13,13 +13,24 @@ import Panel from "../../components/panel/Panel"
 import Filtro from "../../components/Filtro"
 import Modal from "../../components/Modal"
 import Table from "../../components/table/Table"
+import TitleProduct from "../../components/utils/TitleProduct"
 import CardWithTable from "../../components/card/CardWithTable"
 import { DateField, MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
+
+//Constants
+import {
+    COMPANY_NAME_SHORT,
+    COMPANY_PRODUCT_SMS,
+    COMPANY_PRODUCT_SMS_COLOR,
+    COMPANY_PRODUCT_SMS_LABEL,
+    ICON_SMS
+} from "../../constants/constantsCompany"
 
 class Respostas extends Component {
     constructor(props) {
       super(props);
 
+      this.consultasAtivas = this.props.consultasAtivas[COMPANY_PRODUCT_SMS_LABEL]
       this.state = {
         showBuscaAvancada: false,
         IsModalOpen: false,
@@ -147,6 +158,12 @@ class Respostas extends Component {
       const { respostas } = this.props
       return (
         <span>
+          <TitleProduct
+              icon={ICON_SMS}
+              title={this.consultasAtivas.produtoDescricao}
+              color={COMPANY_PRODUCT_SMS_COLOR}
+          />
+
           {this.renderForm()}
 
           <div style={{marginBottom:15}} />
@@ -188,7 +205,8 @@ class Respostas extends Component {
 
 function mapStateToProps(state) {
   return {
-    respostas: state.sms.respostas
+    respostas: state.sms.respostas,
+    consultasAtivas: state.user.consultasAtivas
   }
 }
 

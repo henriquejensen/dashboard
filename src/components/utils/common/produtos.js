@@ -111,6 +111,28 @@ const todosProdutos = {
             ]
         }
     },
+    CREDITOMAIS: {
+        label: constants.COMPANY_PRODUCT_CREDITOMAIS,
+        id: "creditomais",
+        color: constants.COMPANY_PRODUCT_CREDITOMAIS_COLOR,
+        colorLight: constants.COMPANY_PRODUCT_CREDITOMAIS_COLOR_LIGHT,
+        link: constants.URL_CREDITOMAIS,
+        image: constants.ICON_CREDITOMAIS,
+        imageNegative: constants.ICON_CREDITOMAIS_NEGATIVE,
+        alt: `Icone ${constants.COMPANY_PRODUCT_CREDITOMAIS}`,
+        subItems: [
+            {label: "Cred CPF", id: "cpf"},
+            {label: "Cred CNPJ", id: "cnpj"},
+            {label: "Master", id: "master"},
+            {label: "Premium", id: "premium"},
+            {label: "Gold", id: "gold"},
+            {label: "Max", id: "max"},
+            {label: "Completa", id: "completa"},
+            {label: "IntermediáriaPlus", id: "intermediariaPlus"},
+            {label: "Intermediária", id: "intermediaria"},
+            {label: "Sintética", id: "sintetica"}
+        ],
+    },
     BASECERTA: {
         label: constants.COMPANY_PRODUCT_BASECERTA,
         id: "basecerta",

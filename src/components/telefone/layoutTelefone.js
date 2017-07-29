@@ -64,15 +64,16 @@ export default class LayoutTelefone extends Component{
     }
 
     render() {
+        const {fixos, newPhone, moveis, showMoreTel, showSendSMS} = this.props
         return (
                 <div>
                     <Col md={6} xs={6}>
                         <Table>
                             <tbody>
-                                {this.props.fixos && this.props.fixos.length > 0 ?
-                                    this.props.fixos.map((tel,i) => {
+                                {fixos && fixos.length > 0 ?
+                                    fixos.map((tel,i) => {
                                         return (
-                                            <tr key={i} className={i > 3 ? (this.props.showMoreTel ? "" : "display-none") : ""} >
+                                            <tr key={i} className={i > 3 ? (showMoreTel ? "" : "display-none") : ""} >
                                                 <td>
                                                     <i className="fa fa-phone" />{" "}
                                                     {formatPhone(tel.telefone)}
@@ -113,7 +114,7 @@ export default class LayoutTelefone extends Component{
                                     })
                                 : <tr><td colSpan={6} className="text-center"><strong>{NENHUM_REGISTRO + " de telefone fixo"}</strong></td></tr>}
 
-                                {this.props.newPhone ?
+                                {newPhone ?
                                     <tr>
                                         <td>
                                             <Form inline onSubmit={this.sendNewPhone}>
@@ -141,14 +142,14 @@ export default class LayoutTelefone extends Component{
                     <Col md={6} xs={6}>
                         <Table>
                             <tbody>
-                                {this.props.moveis && this.props.moveis.length > 0 ?
-                                    this.props.moveis.map((tel,i) => {
+                                {moveis && moveis.length > 0 ?
+                                    moveis.map((tel,i) => {
                                         return (
                                             <tr
                                                 key={i}
-                                                className={this.props.showMoreTel !== undefined ?
+                                                className={showMoreTel !== undefined ?
                                                     (i > 3 ? 
-                                                        (this.props.showMoreTel ? "" : "display-none")
+                                                        (showMoreTel ? "" : "display-none")
                                                     : "")
                                                 : ""}>
                                                 <td>
@@ -208,7 +209,7 @@ export default class LayoutTelefone extends Component{
                                     })
                                 : <tr><td colSpan={9}className="text-center"><strong>{NENHUM_REGISTRO + " de telefone móvel"}</strong></td></tr>}
 
-                               {this.props.newPhone ?
+                               {newPhone ?
                                     <tr>
                                         <td>
                                             <Form inline>
@@ -268,7 +269,6 @@ export default class LayoutTelefone extends Component{
                     <Modal
                         IsModalOpen={this.state.IsModalOpen}
                         closeModal={this.closeModal}
-                        title="Envio de SMS"
                     >
                         <EnviarSMS
                             cancel={this.closeModal} 

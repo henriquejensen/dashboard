@@ -27,6 +27,7 @@ import FocoFiscalView from "./FocoFiscalView"
 import MyForm from "../../components/forms/Form"
 import Panel from "../../components/panel/Panel"
 import ReverConsultaMessage from "../../components/utils/ReverConsulta"
+import TitleProduct from "../../components/utils/TitleProduct"
 import Titletab from "../../components/utils/TitleTab"
 import UltimasConsultas from "../../components/UltimasConsultas"
 import { DateField, MyFieldGroup } from "../../components/forms/CommonForms"
@@ -35,7 +36,14 @@ import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScr
 
 //Constants
 import { LOADING_GIF } from "../../constants/utils"
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_FOCOFISCAL, COMPANY_PRODUCT_FOCOFISCAL_LABEL, LOGO_FOCOFISCAL } from "../../constants/constantsCompany"
+import {
+	COMPANY_NAME_SHORT,
+	COMPANY_PRODUCT_FOCOFISCAL,
+	COMPANY_PRODUCT_FOCOFISCAL_LABEL,
+	COMPANY_PRODUCT_FOCOFISCAL_COLOR,
+	ICON_FOCOFISCAL,
+	LOGO_FOCOFISCAL
+} from "../../constants/constantsCompany"
 
 import produtos from "../../utils/produtos.js"
 
@@ -114,9 +122,13 @@ class FocoFiscal extends Component {
 	form = (tipo) => {
 		return (
 			<Panel>
+				<TitleProduct
+					icon={ICON_FOCOFISCAL}
+					title={this.consultasAtivas.produtoDescricao}
+					color={COMPANY_PRODUCT_FOCOFISCAL_COLOR}
+				/>
 				<Col md={12}>
 					<MyForm
-						logo = {LOGO_FOCOFISCAL}
 						onformSubmit = {this.onFormSubmit}
 						closeMessageError = {this.props.closeMessageErrorFocoFiscal}
 						options={this.produtoInformacoes}

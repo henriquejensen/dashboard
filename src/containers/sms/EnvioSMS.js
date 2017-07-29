@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux"
 
 // Components
 import MyButton from "../../components/button/MyButton"
+import TitleProduct from "../../components/utils/TitleProduct"
 import { MyFieldGroup, RadioGroupGeneric, SelectGroup, TextAreaGroup } from "../../components/forms/CommonForms";
 
 // Actions
@@ -14,20 +15,36 @@ import { closeSMSMessage, loadingSMS, sendSMSRapido } from "../../actions/action
 // Constants
 import { SUCCESS } from "../../constants/utils"
 import { MESSAGE_SUCCESS_SMS, MESSAGE_ERROR_SMS } from "../../constants/constantsSMS"
+import {
+    COMPANY_NAME_SHORT,
+    COMPANY_PRODUCT_SMS,
+    COMPANY_PRODUCT_SMS_COLOR,
+    COMPANY_PRODUCT_SMS_LABEL,
+    ICON_SMS
+} from "../../constants/constantsCompany"
 
 export class EnviarSMS extends Component {
     constructor(props) {
         super(props)
 
+        this.consultasAtivas = this.props.consultasAtivas[COMPANY_PRODUCT_SMS_LABEL]
         this.maximoCaracteres = 160
         this.maximoCaracteresCarta = 864
 
+        this.tipoRotaCurto = [
+            {checked: true, info:"Curto"},
+            {checked: false, info:"Flash"}
+        ]
+        this.tipoRotaLongo = [
+            {checked: false, info:"Longo"},
+            {checked: false, info:"Carta"}
+        ]
+        this.tipoRota = []
+        this.consultasAtivas.SMSUNIT ? this.tipoRota.push(...this.tipoRotaCurto) : ""
+        this.consultasAtivas.SMSLONGCODE ? this.tipoRota.push(...this.tipoRotaLongo) : ""
         this.state = {
             tipoRotaSMS: [
-                {checked: true, info:"Curto"},
-                {checked: false, info:"Flash"},
-                {checked: false, info:"Longo"},
-                {checked: false, info:"Carta"}
+                ...this.tipoRota
             ],
             nome: null,
             rota: "1", // 1 curto 2 longo
@@ -183,7 +200,26 @@ export class EnviarSMS extends Component {
                     </Col>
                 : ""}
 
-                {this.renderForm()}
+                <TitleProduct
+                    icon={ICON_SMS}
+                    title={this.consultasAtivas.produtoDescricao}
+                    color={COMPANY_PRODUCT_SMS_COLOR}
+                />
+
+                {this.consultasAtivas.SMSLONGCODE || this.consultasAtivas.SMSUNIT ?
+                    this.renderForm()
+                :
+                    <Col md={12} sm={12}> 
+                        <Alert
+                            bsStyle="info"
+                            className="text-center"
+                            role="alert"
+                        >
+                            <p>Quer conhecer mais sobre o produto <strong>SMS</strong>? </p>
+                            <p>Entre em contato com os nossos representantes</p>
+                        </Alert>
+                    </Col>
+                }
 
             </span>
         )
@@ -193,7 +229,8 @@ export class EnviarSMS extends Component {
 function mapStateToProps(state) {
     return {
         message: state.sms.message,
-        status: state.sms.status
+        status: state.sms.status,
+        consultasAtivas: state.user.consultasAtivas
     }
 }
 

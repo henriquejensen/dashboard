@@ -26,6 +26,7 @@ import BaseCerta from "./containers/basecerta/BaseCerta"
 import NovoEnriquecimento from "./containers/basecerta/NovoEnriquecimento"
 import Credito from "./containers/credito/CreditoController"
 import CreditoMix from "./containers/creditomix/CreditoMixController"
+import CreditoMais from "./containers/creditomais/CreditoMaisController"
 import Veiculos from "./containers/veiculos/VeiculosController"
 import FocoFiscal from "./containers/focofiscal/FocoFiscalController"
 import Monitora from "./containers/monitora/MonitoraController"
@@ -53,6 +54,8 @@ export default (
       <Route name="Crédito" path={todosProdutos.CREDITO.link} component={Credito} />
 
       <Route name="CréditoMix" path={todosProdutos.CREDITOMIX.link} component={CreditoMix} />
+
+      <Route name="CréditoMais" path={todosProdutos.CREDITOMAIS.link} component={CreditoMais} />
 
       <Route name="Foco Fiscal" path={todosProdutos.FOCOFISCAL.link} component={FocoFiscal} />
       

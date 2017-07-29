@@ -15,15 +15,24 @@ import {
 //Components
 import { MyFileUpload, MyFieldGroup, SelectGroup, TextAreaGroup } from "../../components/forms/CommonForms"
 import MyButton from "../../components/button/MyButton"
+import TitleProduct from "../../components/utils/TitleProduct"
 import { LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 //Constants
 import { UPLOAD_NOVO_ENRIQUECIMENTO } from "../../constants/constantsBaseCerta"
+import {
+    COMPANY_NAME_SHORT,
+    COMPANY_PRODUCT_BASECERTA,
+    COMPANY_PRODUCT_BASECERTA_COLOR,
+    COMPANY_PRODUCT_BASECERTA_LABEL,
+    ICON_BASECERTA
+} from "../../constants/constantsCompany"
 
 class NovoEnriquecimento extends Component {
     constructor(props) {
         super(props)
 
+        this.consultasAtivas = this.props.consultasAtivas[COMPANY_PRODUCT_BASECERTA_LABEL]
         this.mailDNS = location.origin + "/basecerta?ticket="
         this.filesExtensionAccept = ".csv,.rem,.zip,.txt"
 
@@ -159,6 +168,12 @@ class NovoEnriquecimento extends Component {
 
                 {loading ? <LoadingScreen /> : ""}
 
+                <TitleProduct
+                    icon={ICON_BASECERTA}
+                    title={this.consultasAtivas.produtoDescricao}
+                    color={COMPANY_PRODUCT_BASECERTA_COLOR}
+                />
+
                 {this.renderForm()}
             </span>
         );
@@ -173,7 +188,8 @@ function mapStateToProps(state) {
         message: state.basecerta.message,
         status: state.basecerta.status,
         loading: state.basecerta.loading,
-        ticketReprocessed: state.basecerta.ticketReprocessed
+        ticketReprocessed: state.basecerta.ticketReprocessed,
+        consultasAtivas: state.user.consultasAtivas
     }
 }
 

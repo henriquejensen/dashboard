@@ -1,5 +1,5 @@
 import * as constants from "../../constants/constantsCreditoMix"
-import { api } from "../../api/Api";
+import { api } from "../../api/Api"
 
 export function changeTab(index) {
 	return {
@@ -20,7 +20,6 @@ export function closeMessageErrorCreditoMix() {
         type: constants.CLOSE_MESSAGE_ERROR_CREDITOMIX
     }
 }
-
 
 export function loadingCreditoMix() {
     return {

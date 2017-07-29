@@ -9,6 +9,7 @@ import Panel from "../../components/panel/Panel"
 import MyForm from "../../components/forms/Form"
 import CreditoMixView from "./CreditoMixView"
 import ReverConsultaMessage from "../../components/utils/ReverConsulta"
+import TitleProduct from "../../components/utils/TitleProduct"
 import Titletab from "../../components/utils/TitleTab"
 import UltimasConsultas from "../../components/UltimasConsultas"
 import { MyFieldGroup, MyCheckboxGroup, SelectGroup } from "../../components/forms/CommonForms"
@@ -16,11 +17,18 @@ import { LocalizeDescription } from "../../components/ProductDescription"
 import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 // Constants
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_CREDITOMIX_LABEL, COMPANY_PRODUCT_CREDITOMIX, LOGO_CREDITOMIX } from "../../constants/constantsCompany";
-import { ERR_CONNECTION_REFUSED, REQUEST_ERROR, SUCCESS } from "../../constants/utils";
+import {
+    COMPANY_NAME_SHORT,
+    COMPANY_PRODUCT_CREDITOMIX_LABEL,
+    COMPANY_PRODUCT_CREDITOMIX,
+    COMPANY_PRODUCT_CREDITOMIX_COLOR,
+    ICON_CREDITO,
+    LOGO_CREDITOMIX
+} from "../../constants/constantsCompany"
+import { ERR_CONNECTION_REFUSED, REQUEST_ERROR, SUCCESS } from "../../constants/utils"
 
 // Actions
-import { changeProductType } from "../../actions/actionsCommon";
+import { changeProductType } from "../../actions/actionsCommon"
 import {
     changeTab,
     closeTab,
@@ -316,10 +324,14 @@ class CreditoMix extends Component {
 
 	form = (tipo) => {
 		return (
-			<Panel>
+            <Panel>
+				<TitleProduct
+					icon={ICON_CREDITO}
+					title={this.consultasAtivas.produtoDescricao}
+					color={COMPANY_PRODUCT_CREDITOMIX_COLOR}
+				/>
 				<Col md={12}>
 					<MyForm
-						logo = {LOGO_CREDITOMIX}
 						onformSubmit = {this.onformSubmit}
 						closeMessageError = {this.props.closeMessageErrorCreditoMix}
 						options={this.produtoInformacoes}
@@ -343,7 +355,7 @@ class CreditoMix extends Component {
 
     render() {
         const { type, data, tabActive, changeTab, status, loading } = this.props
-        let values = Object.keys(data)
+        const values = Object.keys(data)
 
 		if(status == SUCCESS || status == ERR_CONNECTION_REFUSED || status == REQUEST_ERROR) {
 			this.scrollPage(0, 0)
@@ -413,6 +425,7 @@ class CreditoMix extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log("STATE ###", state.user)
     return {
         data: state.creditomix.response,
         type: state.creditomix.type,

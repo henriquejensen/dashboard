@@ -1,21 +1,13 @@
 import React, { Component } from 'react'
-import { Col } from "react-bootstrap"
 
-import { LOGO_SMS } from "../../constants/constantsCompany"
+const SMS = (props) => {
+    return (
+        <div>
 
-class SMS extends Component {
-    render() {
-        return (
-            <div>
-                <Col md={12} sm={12} className="text-center">
-                    <img src={LOGO_SMS} className="logo-produto" />
-                </Col>
+            {props.children}
 
-                {this.props.children}
-
-            </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default SMS

@@ -143,16 +143,6 @@ export default function (state = user, action) {
                 perfilOrdem
             } = response
 
-            /*if(consultasAtivas) {
-                removeInfoLocalStorage()
-                return {
-                    ...state,
-                    loading: false,
-                    logado: false,
-                    message: ERR_CONNECTION_REFUSED
-                }
-            }*/
-
             if(consultasAtivas["8"]) {
                 consultasAtivas["8"].NOVOENRIQUECIMENTO = {
                     labelFront: "Novo Enriquecimento",                    
@@ -163,9 +153,6 @@ export default function (state = user, action) {
                 }
             }
             if(consultasAtivas["9"]) {
-                consultasAtivas["9"].ENVIARSMS = {
-                    labelFront: "Enviar SMS"
-                }
                 consultasAtivas["9"].MONITORENVIOS = {
                     labelFront: "Monitor de envios"
                 }
@@ -234,7 +221,8 @@ export default function (state = user, action) {
             return {
                 ...state,
                 token: false,
-                logado: false
+                logado: false,
+                loading: false
             }
         }
 
@@ -257,7 +245,12 @@ function getUserToken() {
     const token = localStorage.getItem(AUTHENTICATION) 
     const dayofToken = localStorage.getItem("DIA") 
 
-    if(token && dayofToken == moment().date())
+    if(dayofToken != moment().date()) {
+        removeInfoLocalStorage()
+        return false
+    }
+
+    if(token)
         return true
 
     try {

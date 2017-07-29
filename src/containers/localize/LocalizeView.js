@@ -18,9 +18,7 @@ import PanelGroup from "../../components/panel/PanelGroup"
 
 export default class LocalizeView extends Component {
     render() {
-        let tipo = this.props.tipo;
-        let data = this.props.data;
-        let label = this.props.label;
+        const {tipo, data, label} = this.props
 
         return (
             <PanelGroup>
@@ -33,7 +31,7 @@ export default class LocalizeView extends Component {
                             cnpjCnaesSecundarias={data.cadastroCnpjCnaesSecundarias}/>
                     : ""}
 
-                <Telefones telefones={data.telefones}/>
+                <Telefones telefones={data.telefones} />
 
                 <Enderecos
                     enderecos={data.enderecos}

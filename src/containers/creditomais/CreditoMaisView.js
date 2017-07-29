@@ -3,9 +3,9 @@ import React from 'react'
 // Components
 import PanelGroup from "../../components/panel/PanelGroup"
 import CardWithTable from "../../components/card/CardWithTable"
-import QuadroSocialCompleto from "../../components/sociedades/QuadroSocialCompleto"
 import Enderecos from "../../components/endereco/Endereco"
 import MyButton from "../../components/button/MyButton"
+import QuadroSocialCompleto from "../../components/sociedades/QuadroSocialCompleto"
 import Telefones from "../../components/telefone/Telefone"
 
 //Constants
@@ -25,8 +25,8 @@ const ButtonSearchDocument = (props) => {
     )
 }
 
-const CreditoViewMix = (props) => {
-    let data = props.data
+const CreditoMaisView = (props) => {
+    const data = props.data
     return (
         <PanelGroup>
             {data.cadastro ?
@@ -171,6 +171,7 @@ const CreditoViewMix = (props) => {
 
             {data.concedidos ?
                 <CardWithTable title="CONCEDIDOS"
+                    
                 />
             : ""}
 
@@ -212,6 +213,7 @@ const CreditoViewMix = (props) => {
 
             {data.emails ?
                 <CardWithTable title="EMAILS"
+
                 />
             : ""}
 
@@ -337,21 +339,6 @@ const CreditoViewMix = (props) => {
                     }
                 />
             : ""}
-
-            {/*
-                Serrano pediu para retirar pois as informacoes nao sao tão diferentes dos outros quadros
-                data.quadroAdministrativo ?
-                <CardWithTable title="QUADRO ADMINISTRATIVO"
-                    fields={
-                        [
-                            {id:"nome", name:"Nome"},
-                            {id:"cargo", name:"Cargo"},
-                            {id:"vinculo", name:"Vínculo"}
-                        ]
-                    }
-                    rows={data.quadroAdministrativo}
-                />
-            : ""*/}
 
             {data.quadroSocialCompleto ?
                 <QuadroSocialCompleto quadroSocialCompleto={data.quadroSocialCompleto} search={props.onClickDocument} />
@@ -489,4 +476,4 @@ const CreditoViewMix = (props) => {
     )
 }
 
-export default CreditoViewMix
+export default CreditoMaisView

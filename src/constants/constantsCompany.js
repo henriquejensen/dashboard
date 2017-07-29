@@ -51,6 +51,17 @@ export const LOGO_CREDITOMIX = "https://s3-us-west-2.amazonaws.com/front.asserti
 export const ICON_CREDITOMIX = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito.png"
 export const ICON_CREDITOMIX_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png"
 
+// Crédito Mais
+export const URL_CREDITOMAIS = "/creditomais"
+export const COMPANY_PRODUCT_CREDITOMAIS = "Crédito+"
+export const COMPANY_PRODUCT_CREDITOMAIS_LABEL = "6"
+export const COMPANY_PRODUCT_CREDITOMAIS_COLOR = "#6CBA4B"
+export const COMPANY_PRODUCT_CREDITOMAIS_COLOR_LIGHT = "#B5DCA5"
+export const COMPANY_PRODUCT_CREDITOMAIS_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"
+export const LOGO_CREDITOMAIS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-creditomix.png"
+export const ICON_CREDITOMAIS = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito.png"
+export const ICON_CREDITOMAIS_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-credito-negative.png"
+
 // Foco Fiscal
 export const URL_FOCOFISCAL = "/focofiscal"
 export const COMPANY_PRODUCT_FOCOFISCAL = "Foco Fiscal"
@@ -65,6 +76,7 @@ export const ICON_FOCOFISCAL_NEGATIVE = "https://s3-us-west-2.amazonaws.com/fron
 // SMS
 export const URL_SMS = "/sms"
 export const COMPANY_PRODUCT_SMS = "SMS"
+export const COMPANY_PRODUCT_SMS_LABEL = "9"
 export const COMPANY_PRODUCT_SMS_COLOR = "#FF9800"
 export const COMPANY_PRODUCT_SMS_COLOR_LIGHT = "#E6C088"
 export const COMPANY_PRODUCT_SMS_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"
@@ -75,7 +87,7 @@ export const ICON_SMS_NEGATIVE = "https://s3-us-west-2.amazonaws.com/front.asser
 // Base certa
 export const URL_BASECERTA = "/basecerta"
 export const COMPANY_PRODUCT_BASECERTA = "Base Certa"
-export const COMPANY_PRODUCT_BASECERTA_LABEL = "BASECERTA"
+export const COMPANY_PRODUCT_BASECERTA_LABEL = "8"
 export const COMPANY_PRODUCT_BASECERTA_COLOR = "#AC6240"
 export const COMPANY_PRODUCT_BASECERTA_COLOR_LIGHT = "#BD8F79"
 export const COMPANY_PRODUCT_BASECERTA_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"

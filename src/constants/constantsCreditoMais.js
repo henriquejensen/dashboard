@@ -1,0 +1,35 @@
+export const CODE_SIMPLES_PF = "5104"
+export const CODE_SIMPLES_PJ = "5105"
+export const CODE_ANALITICA_PF = "5102"
+export const CODE_ANALITICA_PJ = "5103"
+export const CODE_PLUS_PF = "5100"
+export const CODE_PLUS_PJ = "5101"
+export const CODE_GOLD_PF = "5098"
+export const CODE_GOLD_PJ = "5099"
+export const CODE_SOCHEQUE_PF = "5108"
+export const CODE_SOCHEQUE_PJ = "5109"
+export const CODE_CHEQUEANALITICA_PF = "5106"
+export const CODE_CHEQUEANALITICA_PJ = "5107"
+export const CODE_CORPORATE = "5097"
+
+export const URL_CREDITOMAIS_SIMPLES_PF = `https://managerprovider.assertivasolucoes.com.br/credito-mais/${CODE_SIMPLES_PF}/consultar`
+export const URL_CREDITOMAIS_SIMPLES_PJ = `https://managerprovider.assertivasolucoes.com.br/credito-mais/${CODE_SIMPLES_PJ}/consultar`
+export const URL_CREDITOMAIS_ANALITICA_PF = `https://managerprovider.assertivasolucoes.com.br/credito-mais/${CODE_ANALITICA_PF}/consultar`
+export const URL_CREDITOMAIS_ANALITICA_PJ = `https://managerprovider.assertivasolucoes.com.br/credito-mais/${CODE_ANALITICA_PJ}/consultar`
+export const URL_CREDITOMAIS_PLUS_PF = `https://managerprovider.assertivasolucoes.com.br/credito-mais/${CODE_PLUS_PF}/consultar`
+export const URL_CREDITOMAIS_PLUS_PJ = `https://managerprovider.assertivasolucoes.com.br/credito-mais/${CODE_PLUS_PJ}/consultar`
+export const URL_CREDITOMAIS_GOLD_PF = `https://managerprovider.assertivasolucoes.com.br/credito-mais/${CODE_GOLD_PF}/consultar`
+export const URL_CREDITOMAIS_GOLD_PJ = `https://managerprovider.assertivasolucoes.com.br/credito-mais/${CODE_GOLD_PJ}/consultar`
+export const URL_CREDITOMAIS_SOCHEQUE_PF = `https://managerprovider.assertivasolucoes.com.br/credito-mais/${CODE_SOCHEQUE_PF}/consultar`
+export const URL_CREDITOMAIS_SOCHEQUE_PJ = `https://managerprovider.assertivasolucoes.com.br/credito-mais/${CODE_SOCHEQUE_PJ}/consultar`
+export const URL_CREDITOMAIS_CHEQUEANALITICA_PF = `https://managerprovider.assertivasolucoes.com.br/credito-mais/${CODE_CHEQUEANALITICA_PF}/consultar`
+export const URL_CREDITOMAIS_CHEQUEANALITICA_PJ = `https://managerprovider.assertivasolucoes.com.br/credito-mais/${CODE_CHEQUEANALITICA_PJ}/consultar`
+export const URL_CREDITOMAIS_CORPORATE = `https://managerprovider.assertivasolucoes.com.br/credito-mais/${CODE_CORPORATE}/consultar`
+
+export const CHANGE_TAB_CREDITOMAIS = "CHANGE_TAB_CREDITOMAIS"
+export const CLOSE_TAB_CREDITOMAIS = "CLOSE_TAB_CREDITOMAIS"
+export const CLOSE_MESSAGE_ERROR_CREDITOMAIS = "CLOSE_MESSAGE_ERROR_CREDITOMAIS"
+export const FETCH_CREDITOMAIS = "FETCH_CREDITOMAIS"
+export const LOADING_CREDITOMAIS = "LOADING_CREDITOMAIS"
+export const REVER_CONSULTA_CREDITOMAIS = "REVER_CONSULTA_6"
+export const SHOW_CREDITOMAIS_MODEL = "SHOW_CREDITOMAIS_MODEL"

@@ -34,9 +34,11 @@ export default class Form extends Component {
     render() {
 		return (
             <Row className="noPrint my-container-form-product">
-                <Col md={12} sm={12} className="text-center">
-                    <img src={this.props.logo} />
-                </Col>
+                {this.props.logo ?
+                    <Col md={12} sm={12} className="text-center">
+                        <img src={this.props.logo} />
+                    </Col>
+                : ""}
                 
                 <span id="input-fields">
                     <form onSubmit={this.props.onformSubmit}>

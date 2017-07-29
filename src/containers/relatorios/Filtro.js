@@ -102,6 +102,7 @@ class Filtro extends Component {
                             name="separador"
                             label="Separador"
                             options={this.separadorOpcoes}
+                            onChange={this.onChange}
                         />
                     </Col>
                     
@@ -113,6 +114,7 @@ class Filtro extends Component {
                                 name="tipoRelatorio"
                                 label="Tipo do relatório"
                                 options={this.relatorioOpcoes[tipo]}
+                                onChange={this.onChange}
                             />
                         </Col>
                     : ""}
@@ -149,6 +151,7 @@ class Filtro extends Component {
                         onChange={this.onChange}
                     />
                 </Col>
+
                 <Col md={6}>
                     <MyFieldGroup
                         id="pessoaNome"
@@ -207,6 +210,7 @@ class Filtro extends Component {
                             name="resultado"
                             label="Resultado"
                             options={this.resultadoOpcoes[tipo]}
+                            onChange={this.onChange}
                         />
                     </Col>
                 : ""}

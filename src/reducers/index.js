@@ -13,11 +13,13 @@ import veiculos from "./reducer-veiculos"
 import vendamais from "./reducer-vendamais"
 import basecerta from "./reducer-basecerta"
 import creditomix from "./creditomix/reducer-creditomix"
+import creditomais from "./creditomais/reducer-creditomais"
 
 const rootReducer = combineReducers({
   localize,
   credito,
   creditomix,
+  creditomais,
   focofiscal,
   user,
   sms,

@@ -1,9 +1,8 @@
 import React, { Component } from "react"
 import moment from "moment"
-import Tooltip from 'react-tooltip'
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
-import { ControlLabel, Checkbox, Col, Tabs, Tab, Form, FormGroup, FormControl, InputGroup } from "react-bootstrap"
+import { Col, Tabs, Tab } from "react-bootstrap"
 
 //Actions
 import { changeProductType } from "../../actions/actionsCommon"
@@ -32,8 +31,9 @@ import Protocolo from "../../components/protocolo/Protocolo"
 import LocalizeView from "./LocalizeView"
 import CreditoView from "../credito/CreditoView"
 import MyForm from "../../components/forms/Form"
-import Titletab from "../../components/utils/TitleTab"
 import Panel from "../../components/panel/Panel"
+import TitleProduct from "../../components/utils/TitleProduct"
+import Titletab from "../../components/utils/TitleTab"
 import UltimasConsultas from "../../components/UltimasConsultas"
 import ReverConsultaMessage from "../../components/utils/ReverConsulta"
 import { LocalizeDescription } from "../../components/ProductDescription"
@@ -41,7 +41,15 @@ import { PrintScreen, LoadingScreen } from "../../components/utils/ElementsAtScr
 import { DateField } from "../../components/forms/CommonForms"
 
 //Constants
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_LOCALIZE, COMPANY_PRODUCT_CREDITO, LOGO_LOCALIZE, COMPANY_PRODUCT_LOCALIZE_LABEL } from "../../constants/constantsCompany"
+import {
+	COMPANY_NAME_SHORT,
+	COMPANY_PRODUCT_LOCALIZE,
+	COMPANY_PRODUCT_LOCALIZE_COLOR,
+	COMPANY_PRODUCT_LOCALIZE_LABEL,
+	COMPANY_PRODUCT_CREDITO,
+	ICON_LOCALIZE,
+	LOGO_LOCALIZE,
+} from "../../constants/constantsCompany"
 import { SUCCESS, REQUEST_ERROR, ERR_CONNECTION_REFUSED } from "../../constants/utils"
 import { CPF_CODE, CNPJ_CODE, EMAIL_CODE, TELEFONE_CODE, NOME_ENDERECO_CODE } from "../../constants/constantsLocalize"
 
@@ -418,9 +426,13 @@ class LocalizeController extends Component {
 	form = (tipo) => {
 		return (
 			<Panel>
+				<TitleProduct
+					icon={ICON_LOCALIZE}
+					title={this.consultasAtivas.produtoDescricao}
+					color={COMPANY_PRODUCT_LOCALIZE_COLOR}
+				/>
 				<Col md={12}>
 					<MyForm
-						logo = {LOGO_LOCALIZE}
 						onformSubmit = {this.onFormSubmit}
 						closeMessageError = {this.props.closeMessageErrorLocalize}
 						buscaAvancada={tipo == "SEARCH-ADDRESS-OR-NAME" ? this.state.buscaAvancada : undefined}
@@ -572,7 +584,7 @@ function mapDispatchToProps(dispatch) {
 			changeTab,
 			closeMessageErrorLocalize
 		},
-		dispatch);
+		dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LocalizeController);
+export default connect(mapStateToProps, mapDispatchToProps)(LocalizeController)

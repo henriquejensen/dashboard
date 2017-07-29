@@ -22,18 +22,26 @@ import PanelGroup from "../../components/panel/PanelGroup"
 import BaseCertaView from "./BaseCertaView"
 import NovoEnriquecimento from "./NovoEnriquecimento"
 import MyButton from "../../components/button/MyButton"
+import TitleProduct from "../../components/utils/TitleProduct"
 import { MyFieldGroup, SelectGroup } from "../../components/forms/CommonForms"
 import { LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 //Constants
 import { NENHUM_REGISTRO, ADVANCED_SEARCH } from "../../constants/utils"
 import { UPLOAD_NOVO_ENRIQUECIMENTO } from "../../constants/constantsBaseCerta"
-import { COMPANY_NAME_SHORT, COMPANY_PRODUCT_BASECERTA } from "../../constants/constantsCompany"
+import {
+    COMPANY_NAME_SHORT,
+    COMPANY_PRODUCT_BASECERTA,
+    COMPANY_PRODUCT_BASECERTA_COLOR,
+    COMPANY_PRODUCT_BASECERTA_LABEL,
+    ICON_BASECERTA
+} from "../../constants/constantsCompany"
 
 class BaseCerta extends Component {
   constructor(props) {
     super(props)
 
+    this.consultasAtivas = this.props.consultasAtivas[COMPANY_PRODUCT_BASECERTA_LABEL]
     this.mailDNS = "portal"
     this.state = {
       showBuscaAvancada: false,
@@ -77,6 +85,20 @@ class BaseCerta extends Component {
   renderForm = () => {
       return (
         <Panel>
+          <TitleProduct
+            icon={ICON_BASECERTA}
+            title={this.consultasAtivas.produtoDescricao}
+            color={COMPANY_PRODUCT_BASECERTA_COLOR}
+          />
+
+          <Col md={12} sm={12} className="text-center">
+            <MyButton
+                onClickButton={this.openModal}
+                myButtonText="Novo enriquecimento"
+                myButtonClass="pull-right color-payement"
+            />
+          </Col>
+          
           <Form onSubmit={this.onFormSubmit} >
               <Col md={this.state.showBuscaAvancada ? 4 : 8}>
                   <MyFieldGroup
@@ -188,10 +210,9 @@ class BaseCerta extends Component {
       )
   }
 
-  openModal = (text) => {
+  openModal = () => {
     this.setState({
-      modalTitle: text,
-      IsModalOpen: true
+      IsModalOpen: !this.state.IsModalOpen
     })
   }
 
@@ -205,15 +226,6 @@ class BaseCerta extends Component {
 
     return (
       <div>
-        <Col md={12} sm={12} className="text-center">
-          <MyButton
-              onClickButton={this.openModal}
-              params={["Novo enriquecimento"]}
-              myButtonText="Novo enriquecimento"
-              myButtonClass="pull-right color-payement"
-          />
-        </Col>
-
         {this.renderForm()}
 
         {loading ? <LoadingScreen /> : ""}
@@ -240,8 +252,7 @@ class BaseCerta extends Component {
         
         <Modal
             IsModalOpen={this.state.IsModalOpen}
-            closeModal={() => this.setState({IsModalOpen: false})}
-            title={this.state.modalTitle}
+            closeModal={this.openModal}
         >
 
           <NovoEnriquecimento closeNovoEnriquecimento={this.postNovoEnriquecimento} />        
@@ -260,7 +271,8 @@ function mapStateToProps(state) {
     tickets: state.basecerta.tickets,
     message: state.basecerta.message,
     status: state.basecerta.status,
-    loading: state.basecerta.loading
+    loading: state.basecerta.loading,
+    consultasAtivas: state.user.consultasAtivas
   }
 }
 
