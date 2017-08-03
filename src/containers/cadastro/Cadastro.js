@@ -256,8 +256,7 @@ class Cadastro extends Component {
                                             style={{borderRadius:5}}
                                             className="fa fa-circle-thin"
                                             id={group.statusBloqueado == "SIM" ? "userDeactivated" : "userActivated"}
-                                            aria-hidden="true">
-                                        </i>
+                                            aria-hidden="true" />
                                         {" - " + group.id}  
                                     </td>
                                     <td>{group.descricao}</td>
@@ -452,7 +451,6 @@ class Cadastro extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log("STATA", state.user)
 	return {
         pessoaVO: {
             descricao: state.user.pessoaDescricao,

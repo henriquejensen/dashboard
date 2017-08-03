@@ -74,9 +74,9 @@ class MenuSuperior extends Component {
 							</MenuItem>
 						</NavDropdown>
 					</Nav>
-					<Navbar.Form pullRight>
+					{/*<Navbar.Form pullRight>
 						<BarraBuscaRapida />
-					</Navbar.Form>
+					</Navbar.Form>*/}
 				</Navbar.Collapse>
 			</Navbar>
 		</div>

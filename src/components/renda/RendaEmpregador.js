@@ -65,7 +65,7 @@ export default class RendaEmpregador extends Component {
         let handleShowMoreInfo = this.handleShowMoreInfo;
         let isCpfOrCnpj = "CNPJ";
         let IsModalOpen = this.state.IsModalOpen;
-        let fields = ["Empregador", "Setor", "Data Referência", "#"];
+        let fields = ["Empregador", "Setor", "#"];
         let showMoreInfo = this.state.showMoreInfo;
         return (
             <Panel title={title} qtdTotal={[{icon:"fa fa-money", qtd:rendas.length}]}>
@@ -86,7 +86,6 @@ export default class RendaEmpregador extends Component {
                                                 />
                                             </td>
                                             <td>{renda.setorEmpregador}</td>
-                                            <td>{formatDate(renda.rendaDataRef)}</td>
                                             <td>
                                                 <MyButton
                                                     tooltip={showMoreInfo[indexArray] ? TOOLTIP_SEE_LESS_INFO_MESSAGE : TOOLTIP_SEE_MORE_INFO_MESSAGE}

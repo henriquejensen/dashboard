@@ -132,17 +132,19 @@ export default class BuscaPorRelacionados extends Component {
     }
 
     render() {
-        let rows = this.state.rows;
-        let handleSearchPerson = this.props.searchPerson;
-        let handleSortElements = this.handleSortElements;
+        let rows = this.state.rows
+        let handleSearchPerson = this.props.searchPerson
+        let handleSortElements = this.handleSortElements
         let fields= [
             {id:"tipo", name:"Tipo"},
             {id:"nome", name:"Nome", sortable:true},
             {id:"dataNascimento", name:"Nasc.", sortable:true},
             {id:"pessoaRelacionada", name:"Pessoa Relacionada", sortable:true},
             {id:"cidade", name:"Cidade - UF", sortable:true},
-            {id:"btn", name:"#"}
-        ];
+            {id:"numero", name:"Número", sortable:true},
+            {id:"complemento", name:"Complemento"},
+            {id:"btn", name:""}
+        ]
         return (
                 <Panel title={title}>
                     <div style={{paddingTop:5}}>
@@ -195,10 +197,14 @@ export default class BuscaPorRelacionados extends Component {
                                                     <td>{relacionado.dataNascimento}</td>
                                                     <td>{relacionado.pessoaRelacionada}</td>
                                                     <td>{relacionado.cidade && relacionado.uf ? relacionado.cidade + " - " + relacionado.uf : relacionado.cidade ? relacionado.cidade : NENHUM_REGISTRO}</td>
+                                                    <td>{relacionado.numero}</td>
+                                                    <td>{relacionado.complemento}</td>
                                                     <td>
-                                                        {this.renderButtons(relacionado.enderecos, "enderecos", index, relacionado.documento, "home", isCpfOrCnpj)}
-                                                        <span style={{paddingRight:15}}></span>
-                                                        {this.renderButtons(relacionado.telefones, "telefones", index, relacionado.documento, "phone", isCpfOrCnpj)}
+                                                        <Col md={12} style={{minWidth:110}}>
+                                                            {this.renderButtons(relacionado.enderecos, "enderecos", index, relacionado.documento, "home", isCpfOrCnpj)}
+                                                            <span style={{paddingRight:15}}></span>
+                                                            {this.renderButtons(relacionado.telefones, "telefones", index, relacionado.documento, "phone", isCpfOrCnpj)}
+                                                        </Col>
                                                     </td>
                                                 </tr>
 

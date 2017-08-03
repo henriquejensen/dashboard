@@ -20,12 +20,8 @@ export default class MyTable extends Component {
     }
 
     render() {
-        let fields = this.props.fields ? this.props.fields : [];
-        let title = this.props.title;
-        let rows = this.props.elements;
-        let hiddenRows = this.props.hiddenRows;
-        let handleSortElements = this.props.handleSortElements;
-        let showMoreInfo = this.state.showMoreInfo;
+        const { fields=[], title, elements, hiddenRows, handleSortElements } = this.props
+        let showMoreInfo = this.state.showMoreInfo
         return (
             <div>
                 {title ? <h4>{title}</h4> : ""}
@@ -51,9 +47,9 @@ export default class MyTable extends Component {
                         </tr>
                     </thead>
 
-                    {rows ?
-                        rows.length > 0 ?
-                            rows.map((row, indexRow) => {
+                    {elements ?
+                        elements.length > 0 ?
+                            elements.map((row, indexRow) => {
                                 return (
                                     <tbody key={indexRow}>
                                         <tr>
@@ -62,7 +58,7 @@ export default class MyTable extends Component {
                                                     return <td key={field.id}>{field.functionToApply(row[field.id], indexRow)}</td>
                                                 }
 
-                                                return <td key={field.id}>{row[field.id] ? row[field.id] : "-"}</td>
+                                                return <td key={field.id}>{row[field.id] !== undefined || row[field.id] !== null ? row[field.id] : "-"}</td>
                                             })}
 
                                             {hiddenRows ?

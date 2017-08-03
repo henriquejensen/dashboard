@@ -425,7 +425,6 @@ class CreditoMix extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log("STATE ###", state.user)
     return {
         data: state.creditomix.response,
         type: state.creditomix.type,

@@ -39,7 +39,6 @@ import {
 } from "../../constants/constantsCompany"
 import { AGREGADOS_CODE, BDV_CODE, DECODIFICADOR_CODE, LOCALIZACAO_CODE, PROPRIETARIOS_CODE, LEILAO_CODE, SINISTRO_CODE } from "../../constants/constantsVeiculos"
 
-
 import estados from "../../components/utils/common/estados.json"
 import todosProdutos from "../../components/utils/common/produtos.js"
 
@@ -211,28 +210,28 @@ class VeiculosController extends Component {
 		let options = this.state.options.concat()
 		let optionsSelected = this.state.optionsSelected.concat()
 		let input = Object.assign({}, this.state.input)
-		let pos = 0;
+		let pos = 0
 
 		for(let i=index; i<options.length; i+=this.quantidadeCheckboxPorCol) {
 			if(options[i].name == name) {
-				pos = i;
-				i = options.length;
+				pos = i
+				i = options.length
 			}
 		}
 
-		options[pos].checked = !options[pos].checked;
+		options[pos].checked = !options[pos].checked
 
-		let posArrayOptionsSelected = optionsSelected.indexOf(options[pos].name);
+		let posArrayOptionsSelected = optionsSelected.indexOf(options[pos].name)
 		if(posArrayOptionsSelected === -1) {
-			input[options[pos].name] = true;
-			optionsSelected.push(options[pos].name);
+			input[options[pos].name] = true
+			optionsSelected.push(options[pos].name)
 		}
 		else {
-			input[options[pos].name] = false;
-			optionsSelected.splice(posArrayOptionsSelected, 1);
+			input[options[pos].name] = false
+			optionsSelected.splice(posArrayOptionsSelected, 1)
 		}
 
-		this.setState({options, optionsSelected, input});
+		this.setState({options, optionsSelected, input})
 	}
 	
 	onChangeType = (evt) => {

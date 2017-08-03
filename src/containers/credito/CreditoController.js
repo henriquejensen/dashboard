@@ -64,20 +64,18 @@ class Credito extends Component {
 	constructor(props) {
 		super(props)
 
-		this.consultasAtivas = this.props.consultasAtivas ? this.props.consultasAtivas[COMPANY_PRODUCT_CREDITO_LABEL] : undefined
+		this.consultasAtivas = this.props.consultasAtivas ? this.props.consultasAtivas[COMPANY_PRODUCT_CREDITO_LABEL] : {}
 		this.consultas = produtos[COMPANY_PRODUCT_CREDITO_LABEL].consultas
 		this.produtoInformacoes = []
 
-		if(this.consultasAtivas) {
-			this.consultas.forEach(consulta => {
-				const modulo = this.consultasAtivas[consulta.modulo] ? consulta.modulo : consulta.modulo2
-				if(this.consultasAtivas[modulo]) {
-					this.produtoInformacoes.push(
-						{id:modulo, label:this.consultasAtivas[modulo].labelFront}
-					)
-				}
-			})
-		}
+		this.consultas.forEach(consulta => {
+			const modulo = this.consultasAtivas[consulta.modulo] ? consulta.modulo : consulta.modulo2
+			if(this.consultasAtivas[modulo]) {
+				this.produtoInformacoes.push(
+					{id:modulo, label:this.consultasAtivas[modulo].labelFront}
+				)
+			}
+		})
 
 		this.tiposCheque = ["Apenas Cadastro", "Digitando dados do Cheque", "Por Código de Barras (CMC-7)"]
 

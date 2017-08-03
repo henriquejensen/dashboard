@@ -12,6 +12,7 @@ import relatorios from "./reducer-relatorios"
 import veiculos from "./reducer-veiculos"
 import vendamais from "./reducer-vendamais"
 import basecerta from "./reducer-basecerta"
+import monitora from "./reducer-monitora"
 import creditomix from "./creditomix/reducer-creditomix"
 import creditomais from "./creditomais/reducer-creditomais"
 
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   creditomais,
   focofiscal,
   user,
+  monitora,
   sms,
   auth,
   cadastro,

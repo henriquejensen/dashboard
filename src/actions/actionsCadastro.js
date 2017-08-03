@@ -48,7 +48,7 @@ export function updateUser(usuario, tipo) {
 		+"&usuario.tipoLimitacao="+usuario.tipoLimitacao
 		+"&usuario.periodoLimitacao"+usuario.periodoLimitacao
 		+"&usuario.limiteValorString="+parseInt(usuario.limiteValorString)
-		+"&usuario.obs="+usuario.obs;
+		+"&usuario.obs="+usuario.obs
 
 	return (dispatch) => {
 		ajax.put(url)
