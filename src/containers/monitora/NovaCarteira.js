@@ -13,9 +13,10 @@ class NovaCarteira extends Component {
         tipoConsultaPf = tipoConsultaPf ? tipoConsultaPf : {}
         tipoConsultaPj = tipoConsultaPj ? tipoConsultaPj : {}
         this.state = {
-            ...this.props.carteira,
             frequenciaConsulta: "7",
             tipoCarteira: "CPF",
+            descricao: "",
+            ...this.props.carteira,
             options: {
                 CPF: [
                     {name:"acao", text:"Ação", checked:tipoConsultaPf.acao ? true : false},                            
@@ -50,7 +51,8 @@ class NovaCarteira extends Component {
 
     onChangeCheckbox = (name,index) => {
         let newCheckbox = [...this.state.options[this.state.tipoCarteira]]
-        newCheckbox.filter(elem => elem.name === name).checked = true
+        let element = newCheckbox.find(elem => elem.name === name)
+        element ? element.checked = !element.checked : ""
 
         this.setState({
             options: {
@@ -64,9 +66,7 @@ class NovaCarteira extends Component {
         evt.preventDefault()
 
         const requestNovaCarteira = {
-            nome: this.state.nome,
-            descricao: this.state.descricao,
-            frequenciaConsulta: this.state.frequenciaConsulta,
+            ...this.state,
             tipoConsultaPj: this.state.tipoCarteira === "CNPJ" ?
                 this.state.options.CNPJ.reduce((result, item) => {
                     result[item.name] = item.checked || false
@@ -156,9 +156,10 @@ class NovaCarteira extends Component {
                     <SelectGroup label="Status"
                         name="status"
                         options={[
-                            {value:"ativo", label:"ATIVO"},
+                            {value:"ATIVO", label:"ATIVO"},
                             {value:"INATIVO", label:"INATIVO"}
                         ]}
+                        value={this.state.status}
                         onChange={this.onChange}
                         required
                     />

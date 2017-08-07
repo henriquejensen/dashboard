@@ -42,7 +42,7 @@ export const SelectGroup = (props) => {
                 onChange={onChange}
             >
                 {options.map((opt, index) => {
-                    return <option key={index} selected={value == opt} value={opt.value ? opt.value : opt}>{opt.label ? opt.label : opt}</option>
+                    return <option key={index} selected={value == opt || value == opt.value} value={opt.value ? opt.value : opt}>{opt.label ? opt.label : opt}</option>
                 })}
             </FormControl>
         </FormGroup>

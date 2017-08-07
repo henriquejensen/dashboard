@@ -30,6 +30,7 @@ import CreditoMais from "./containers/creditomais/CreditoMaisController"
 import Veiculos from "./containers/veiculos/VeiculosController"
 import FocoFiscal from "./containers/focofiscal/FocoFiscalController"
 import Monitora from "./containers/monitora/MonitoraController"
+import DocumentoView from "./containers/monitora/DocumentoView"
 
 import Contador from "./containers/utils/Contador"
 
@@ -73,6 +74,7 @@ export default (
       <Route name="Veiculos" path={todosProdutos.VEICULOS.link} component={Veiculos} />
 
       <Route name="Monitora" path={todosProdutos.MONITORA.link} component={Monitora} />
+      <Route name="DocumentoView" path={`${todosProdutos.MONITORA.link}/:documento`} component={DocumentoView} />
 
       <Route name="Relatórios" path="relatorios" component={Relatorios} />
       <Route name="Consumo" path="consumo" component={Consumo} />

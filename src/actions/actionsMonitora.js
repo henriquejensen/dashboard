@@ -2,30 +2,6 @@ import * as constantsMonitora from "../constants/constantsMonitora"
 import request from "superagent"
 import { apiContentType, apiGet } from "../api/Api"
 
-export function editarCarteira({id}) {
-    const url = constantsMonitora.URL_EDITAR_CARTEIRA
-    const data = ""
-    const search = constantsMonitora.EDITAR_CARTEIRA_MONITORA
-
-    return (dispatch) => {
-        request.get(url)
-            .set({Authorization: "hashdebug"})
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-            .end(function(error, response) {
-                if (response) {
-                    if(response.status === 200) {
-                        dispatch({
-                            type: search,
-                            payload: {
-                                response: response.body
-                            }
-                        })
-                    }
-                }
-            })
-    }
-}
-
 export function getCarteiras() {
     const url = constantsMonitora.URL_CARREGAR_CARTEIRAS
     const search = constantsMonitora.GET_CARTEIRAS_MONITORA
@@ -56,7 +32,6 @@ export function getDocumentos() {
 }
 
 export function getDocumentosCarteira(idCarteira, carteiraNome, tipo) {
-    debugger
     const idTipo = tipo == "CPF" ? 1 : 2
     const url = constantsMonitora.URL_CARREGAR_DOCUMENTOS_CARTEIRA
     const search = constantsMonitora.GET_DOCUMENTOS_CARTEIRA_MONITORA
@@ -89,17 +64,31 @@ export function loadingMonitora() {
 }
 
 export function novoDocumento({idCarteira, documento, cep}) {
-    return {
-        type: constantsMonitora.NOVO_DOCUMENTO_MONITORA,
-        payload: {
-            parameters: {idCarteira, documento, cep}
-        }
+    const url = constantsMonitora.URL_ADICIONAR_DOCUMENTO_CARTEIRA
+    const search = constantsMonitora.NOVO_DOCUMENTO_MONITORA
+
+    return (dispatch) => {
+        request.post(url)
+            .send({idCarteira, documento, cep})
+            .set({Authorization: "hashdebug"})
+            .end(function(error, response) {
+                if (response) {
+                    if(response.status === 200) {
+                        dispatch({
+                            type: search,
+                            payload: {
+                                response: response.body,
+                                parameters: {idCarteira, documento, cep}
+                            }
+                        })
+                    }
+                }
+            })
     }
 }
 
 export function novaCarteira(carteira) {
-    debugger
-    const url = constantsMonitora.URL_ADICIONAR_CARTEIRA
+    const url = carteira.id ? constantsMonitora.URL_EDITAR_CARTEIRA : constantsMonitora.URL_ADICIONAR_CARTEIRA
     const search = constantsMonitora.NOVA_CARTEIRA_MONITORA
 
     return (dispatch) => {

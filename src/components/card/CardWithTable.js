@@ -6,7 +6,10 @@ import Table from "../table/MyTable"
 
 class CardWithTable extends Component {
     render() {
-        let { title, fields=[], elements=[], rows=[], hiddenRows, mdLength=3, xsLength=6 } = this.props
+        let { title, fields, elements, rows, hiddenRows, mdLength=3, xsLength=6 } = this.props
+        fields = fields ? fields : []
+        elements = elements ? elements : []
+        rows = rows ? rows : []
 
         return (
             <Panel title={title}>

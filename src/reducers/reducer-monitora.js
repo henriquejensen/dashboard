@@ -21,7 +21,6 @@ const getInitialState = {
 export default function(state=getInitialState, action) {
     switch(action.type) {
         case constantsMonitora.NOVA_CARTEIRA_MONITORA: {
-            debugger
             const { carteiras } = action.payload.response
             return {
                 ...state,
@@ -42,7 +41,7 @@ export default function(state=getInitialState, action) {
         case constantsMonitora.GET_DOCUMENTOS_MONITORA: {
             return {
                 ...state,
-                documentos: [
+                /*documentos: [
                     {
                         idCarteira: 1,
                         id: 1,
@@ -61,14 +60,16 @@ export default function(state=getInitialState, action) {
                         nome: "",
                         status: "ATIVO"
                     }
-                ],
+                ],*/
+                documentos:[],
                 carteiraNome: null,
                 id: null
             }
         }
 
         case constantsMonitora.GET_DOCUMENTOS_CARTEIRA_MONITORA: {
-            const { documentos } = action.payload.response
+            const { documentosPf, documentosPj } = action.payload.response
+            const documentos = documentosPf && documentosPf.length > 0 || documentosPj
             const { carteiraNome, idCarteira } = action.payload.parameters
             return {
                 ...state,

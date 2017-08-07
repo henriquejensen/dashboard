@@ -128,6 +128,7 @@ export default function (state = user, action) {
         }
 
         case INFO_SUCCESS: {
+            const avatar_url = "https://s3-us-west-2.amazonaws.com/front.images/avatar.gif"
             let { response } = action.payload.response
             let {
                 consultasAtivas={},
@@ -136,7 +137,7 @@ export default function (state = user, action) {
                 usuarioNome="",
                 usuarioEmail2="",
                 usuarioTelefone="",
-                usuarioFoto="",
+                usuarioFoto,
                 usuarioId,
                 perfilDescricao,
                 pessoaDescricao,
@@ -178,7 +179,7 @@ export default function (state = user, action) {
             localStorage.setItem(USER_NAME, usuarioNome)
             localStorage.setItem(USER_EMAIL2, usuarioEmail2)
             localStorage.setItem(USER_PHONE, usuarioTelefone)
-            localStorage.setItem(USER_PHOTO, usuarioFoto ? FOTO_URL + usuarioId + ".jpg" : "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/avatar.gif")
+            localStorage.setItem(USER_PHOTO, usuarioFoto ? FOTO_URL + usuarioId + ".jpg" : avatar_url)
             localStorage.setItem(USER_PERFIL, perfilDescricao)
             localStorage.setItem(USER_PERFIL_ORDEM, perfilOrdem)
             localStorage.setItem(USER_CLIENT, pessoaDescricao)
@@ -187,7 +188,7 @@ export default function (state = user, action) {
             return {
                 ...state,
                 ...response,
-                usuarioFoto: usuarioFoto ? FOTO_URL + usuarioId + ".jpg" : state.usuarioFoto,
+                usuarioFoto: usuarioFoto ? FOTO_URL + usuarioId + ".jpg" : avatar_url,
                 logado: true,
                 status: null,
                 error: false,

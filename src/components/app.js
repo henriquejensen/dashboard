@@ -34,7 +34,7 @@ import {
     TOOLTIP_SEE_PRODUCT_DETAILS,
     TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE
 } from "../constants/utils"
-import { COMPANY_LOGO, COMPANY_NAME_SHORT } from "../constants/constantsCompany"
+import { SHOW_CHAT, COMPANY_LOGO, COMPANY_NAME_SHORT } from "../constants/constantsCompany"
 
 class App extends Component {
   constructor(props) {
@@ -85,7 +85,11 @@ class App extends Component {
       const {message, status, user } = this.props
       const active = this.state.active
 
-      if(!user.token) {
+      if(!user.token || !user.logado) {
+        if(!user.logado && user.token) {
+          this.props.getUserData()
+        }
+
         return (
           <Login
             user={user}
@@ -96,16 +100,11 @@ class App extends Component {
           />
         )
       }
-
-      if(!user.logado && user.token) {
-        this.props.getUserData()
-        return
-      }
       
-      this.setFeedBack()
-      this.setChat()
-
-      console.log("THIS", this)
+      if(SHOW_CHAT) {
+        this.setFeedBack()
+        this.setChat()
+      }
 
       return (        
         <div>

@@ -115,7 +115,7 @@ class Login extends Component {
 
                         <div className="account-wall">
                             <Col md={12} className="text-center">
-                                <img src={COMPANY_LOGO} alt={COMPANY_NAME_LONG} height="50" width="170" />
+                                <img src={COMPANY_LOGO} alt={COMPANY_NAME_LONG} width="260" style={{paddingBottom:7}} />
                             </Col>
 
                             {this.renderForm()}

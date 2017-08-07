@@ -10,6 +10,7 @@ class NovaDocumento extends Component {
         super(props)
 
         this.state = {
+            cep: "",
             idCarteira: typeof(this.props.carteira) === "object" ? this.props.carteira[0].id : this.props.carteira,
             carteiras: typeof(this.props.carteira) === "object" ? this.props.carteira.map(carteira => {
                 return {
