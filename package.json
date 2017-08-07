@@ -6,7 +6,7 @@
   "repository": "https://github.com/henriquejensen/dashboard.git",
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.config.js",
-    "build": "webpack -p && npm run build:run",
+    "build": "webpack -p",
     "build:run": "node server.js",
     "deploy": "aws s3 sync public s3://front.assertiva && npm run deploy:style && npm run deploy:invalidation",
     "deploy:style": "aws s3 sync style s3://front.assertiva/style",
