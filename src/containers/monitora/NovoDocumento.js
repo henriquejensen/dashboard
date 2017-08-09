@@ -29,7 +29,6 @@ class NovaDocumento extends Component {
 
     onFormSubmit = (evt) => {
         evt.preventDefault()
-        debugger
         const { documento, cep, idCarteira } = this.state
         this.props.novoDocumento({idCarteira, documento, cep})
     }

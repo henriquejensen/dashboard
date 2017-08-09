@@ -17,7 +17,7 @@ export function apiContentType(dispatch, url, data, search, parameters) {
     request.post(url)
         .send(data)
         .set('Content-Type', 'application/x-www-form-urlencoded')
-        .set('authorization', localStorage.getItem(AUTHENTICATION))
+        .set('Authorization', localStorage.getItem(AUTHENTICATION))
         .end(function(error, response) {
             onEndRequest(error, response, dispatch, search, parameters)
         })

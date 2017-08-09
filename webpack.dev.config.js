@@ -1,6 +1,5 @@
 'use strict'
 
-//const COMPANY_ICON_INVERSE = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-assertiva-negative.png";
 const webpack = require('webpack');
 const { join }  = require("path");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;

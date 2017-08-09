@@ -3,9 +3,6 @@ export const CODE_RECEITA_PJ = 5073
 export const CODE_RECEITA_PJ_SINTEGRA = 5076
 export const CODE_SIMPLES_NACIONAL = 5074
 
-export const LOGO_FOCOFISCAL = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/logo-focofiscal.png"
-export const ICON_FOCOFISCAL = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/assertiva/icon-focofiscal-new.png"
-
 export const URL_FOCOFISCAL_SEARCH_SIMPLES_NACIONAL = `https://managerprovider.assertivasolucoes.com.br/focofiscal/${CODE_SIMPLES_NACIONAL}/consultar`
 export const URL_FOCOFISCAL_SEARCH_RECEITA_PF = `https://managerprovider.assertivasolucoes.com.br/focofiscal/${CODE_RECEITA_PF}/consultar`
 export const URL_FOCOFISCAL_SEARCH_RECEITA_PJ = `https://managerprovider.assertivasolucoes.com.br/focofiscal/${CODE_RECEITA_PJ}/consultar`

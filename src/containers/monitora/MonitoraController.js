@@ -12,17 +12,18 @@ import Panel from "../../components/panel/Panel"
 import Table from "../../components/table/MyTable"
 import TitleProduct from "../../components/utils/TitleProduct"
 import MonitoraView from "./MonitoraView"
+import { LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 //Actions
 import {
-    getDocumentosCarteira,
-    getCarteiras,
     getDocumentos,
+    getCarteiras,
     loadingMonitora,
     novoDocumento,
     novaCarteira,
     removerCarteira,
-    removerDocumento
+    removerDocumento,
+    verDocumentoDetalhes
 } from "../../actions/actionsMonitora"
 
 //Constants
@@ -42,7 +43,7 @@ class Monitora extends Component {
 
     componentWillMount() {
         this.props.getCarteiras()
-        this.props.getDocumentos()
+        this.props.getDocumentos(0)
     }
 
     openModal = (carteira={}, tipo="", callbackCarteira) => {
@@ -89,6 +90,7 @@ class Monitora extends Component {
     }
 
     deletar = (callback, parameters) => {
+        this.props.loadingMonitora()
         callback(parameters)
         this.setState({
             IsModalOpen: false
@@ -96,17 +98,19 @@ class Monitora extends Component {
     }
 
     novoDocumento = (...parameters) => {
+        this.props.loadingMonitora()
         this.props.novoDocumento(...parameters)
         this.openModal()
     }
 
     novaCarteira = (...parameters) => {
+        this.props.loadingMonitora()
         this.props.novaCarteira(...parameters)
         this.openModal()
     }
 
     render() {
-        const {carteiras, carteiraNome, documentos, getDocumentosCarteira, removerCarteira, removerDocumento} = this.props
+        const {carteiras, carteiraNome, documentos, getDocumentos, loading, removerCarteira, removerDocumento, verDocumentoDetalhes} = this.props
         return (
             <span>
                 <Panel>
@@ -117,6 +121,8 @@ class Monitora extends Component {
                     />
                 </Panel>
 
+                {loading ? <LoadingScreen /> : ""}
+
                 <div style={{marginBottom:15}} />
 
                 <MonitoraView
@@ -126,9 +132,10 @@ class Monitora extends Component {
                     documentos={documentos}
                     carteiras={carteiras}
                     carteiraNome={carteiraNome}
-                    removerDocumento={removerDocumento}
-                    removerCarteira={removerCarteira}
-                    getDocumentosCarteira={getDocumentosCarteira}
+                    verDocumentoDetalhes={(...parameters) => {this.props.loadingMonitora(); verDocumentoDetalhes(...parameters)}}
+                    removerDocumento={(...parameters) => {this.props.loadingMonitora(); removerDocumento(...parameters)}}
+                    removerCarteira={(...parameters) => {this.props.loadingMonitora(); removerCarteira(...parameters)}}
+                    getDocumentos={(...parameters) => {this.props.loadingMonitora(); getDocumentos(...parameters)}}
                     openModal={this.openModal}
                     openModalDeletar={this.openModalDeletar}
                 />
@@ -159,19 +166,20 @@ function mapStateToProps(state) {
         carteiras: state.monitora.carteiras,
         documentos: state.monitora.documentos,
         carteiraNome: state.monitora.carteiraNome,
+        loading: state.monitora.loading
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-        getDocumentosCarteira,
-        getCarteiras,
         getDocumentos,
+        getCarteiras,
         loadingMonitora,
         novoDocumento,
         novaCarteira,
         removerCarteira,
-        removerDocumento
+        removerDocumento,
+        verDocumentoDetalhes
     },
     dispatch)
 }

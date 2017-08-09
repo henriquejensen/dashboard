@@ -157,7 +157,7 @@ export default class SMSRapido extends Component {
                 </Col>
 
                 <Col md={5}>
-                    <div style={{width:"220px", height:"400px", backgroundImage:"url(https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/phone.png)", backgroundSize:"cover"}}>
+                    <div style={{width:"220px", height:"400px", backgroundImage:"url(https://s3.amazonaws.com/front.images/utils/phone.png)", backgroundSize:"cover"}}>
                         <span style={{position:"absolute", top:75, fontSize:9, marginLeft:42, marginRight:55}}>{this.state.conteudoSMS}</span>
                     </div>
                 </Col>

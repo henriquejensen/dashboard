@@ -97,8 +97,8 @@ export const ERROR_401_UNAUTHORIZED = "ERROR_401_UNAUTHORIZED"
 export const ERROR_401_UNAUTHORIZED_MESSAGE = "Por favor, realize a sua identificação para acessar o sistema"
 
 /**Imagens utilizadas no portal */
-export const URL_IMAGES_S3 = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/"
+export const URL_IMAGES_S3 = "https://s3.amazonaws.com/front.images/utils"
 
-export const IMAGE_ANY_TOKEN = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/warning.png"
-export const LOADING_GIF = "https://s3-us-west-2.amazonaws.com/front.assertiva/public/images/loading.gif"
+export const IMAGE_ANY_TOKEN = `${URL_IMAGES_S3}/warning.png`
+export const LOADING_GIF = `${URL_IMAGES_S3}/loading.gif`
 

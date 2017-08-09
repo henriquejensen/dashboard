@@ -15,16 +15,25 @@ import {
 
 const getInitialState = {
     carteiras: [],
-    documentos: []
+    documentos: [],
+    loading: true
 }
 
 export default function(state=getInitialState, action) {
     switch(action.type) {
+        case constantsMonitora.LOADING_MONITORA: {
+            return {
+                ...state,
+                loading: true
+            }       
+        }
+
         case constantsMonitora.NOVA_CARTEIRA_MONITORA: {
             const { carteiras } = action.payload.response
             return {
                 ...state,
                 carteiras: carteiras,
+                loading: false
             }       
         }
 
@@ -34,48 +43,32 @@ export default function(state=getInitialState, action) {
                 ...state,
                 carteiras: carteiras,
                 carteira: null,
-                id: null
-            }
-        }
-        
-        case constantsMonitora.GET_DOCUMENTOS_MONITORA: {
-            return {
-                ...state,
-                /*documentos: [
-                    {
-                        idCarteira: 1,
-                        id: 1,
-                        codigoTipo: 1,
-                        documento: "28918913842",
-                        cep: "",
-                        nome: "",
-                        status: "INATIVO"
-                    },
-                    {
-                        idCarteira: 1,
-                        id: 2,
-                        codigoTipo: 1,
-                        documento: "12345678910",
-                        cep: "",
-                        nome: "",
-                        status: "ATIVO"
-                    }
-                ],*/
-                documentos:[],
-                carteiraNome: null,
-                id: null
+                id: null,
+                loading: false
             }
         }
 
+        case constantsMonitora.VISUALIZAR_DOCUMENTOS_CARTEIRA_MONITORA: {
+            const { documentosPf, documentosPj } = action.payload.response
+            const documentos = documentosPf && documentosPf.length > 0 ? documentosPf : documentosPj
+            const { carteiraNome, idCarteira } = action.payload.parameters
+            return {
+                ...state,
+                documentosDetalhes: documentos,
+                loading: false
+            }
+        }
+        
         case constantsMonitora.GET_DOCUMENTOS_CARTEIRA_MONITORA: {
             const { documentosPf, documentosPj } = action.payload.response
-            const documentos = documentosPf && documentosPf.length > 0 || documentosPj
+            const documentos = documentosPf && documentosPf.length > 0 ? documentosPf : documentosPj
             const { carteiraNome, idCarteira } = action.payload.parameters
             return {
                 ...state,
                 documentos: documentos,
                 carteiraNome: carteiraNome,
-                id: idCarteira
+                id: idCarteira,
+                loading: false
             }
         }
 
@@ -96,6 +89,7 @@ export default function(state=getInitialState, action) {
                     }
                 ],
                 id: idCarteira,
+                loading: false
             }
         }
     }

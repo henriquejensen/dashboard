@@ -1,5 +1,6 @@
 import React from "react"
 import { Col } from "react-bootstrap"
+import { Link } from "react-router"
 
 //Components
 import MyButton from "../../components/button/MyButton"
@@ -21,7 +22,7 @@ const renderCardDocumentos = props => {
                 />
             </Col>
             <Col md={12} >
-                <Panel title={`Documentos ` + (props.carteiraNome ? props.carteiraNome : "")}>
+                <Panel title={props.carteiraNome ? `Documentos ` + props.carteiraNome : "Últimos Documentos Atualizados"}>
                     {props.documentos.length > 0 ?
                         <Table
                             fields={[
@@ -32,13 +33,15 @@ const renderCardDocumentos = props => {
                                 {id:"id", name:"Ações", functionToApply:(idDocumento, index) => {
                                     return (
                                         <div>
-                                            <MyButton
-                                                tooltip="Visualizar documento"
-                                                myButtonStyle="default"
-                                                myButtonClass="mybutton-mini-carteira"
-                                                myButtonSize="xsmall"
-                                                myButtonText={<i className="fa fa-eye" />}
-                                            />
+                                            <Link to={`monitora/${props.documentos[index].documento}`} onClick={() => props.verDocumentoDetalhes({idCarteira:props.documentos[index].idCarteira, idDocumento})}>
+                                                <MyButton
+                                                    tooltip="Visualizar documento"
+                                                    myButtonStyle="default"
+                                                    myButtonClass="mybutton-mini-carteira"
+                                                    myButtonSize="xsmall"
+                                                    myButtonText={<i className="fa fa-eye" />}
+                                                />
+                                            </Link>
                                             {'   '}
                                             <MyButton
                                                 tooltip="Deletar documento"
@@ -59,6 +62,16 @@ const renderCardDocumentos = props => {
                         <div className="text-center">{NENHUM_REGISTRO}</div>
                     }
                 </Panel>
+                <div style={{marginBottom:15}} />
+            </Col>
+
+            <Col md={12} className="text-center" style={{marginBottom:15}}>
+                <MyButton tooltip="Ver os últimos documentos atualizados"
+                    onClickButton={props.getDocumentos}
+                    params={[0]}
+                    myButtonClass="btn-block"
+                    myButtonText="Últimos Documentos"
+                />
             </Col>
         </Col>
     )
@@ -101,7 +114,7 @@ const renderCardCarteira = props => {
                                             />
                                             {'   '}
                                             <MyButton tooltip="Visualizar documentos"
-                                                onClickButton={props.getDocumentosCarteira}
+                                                onClickButton={props.getDocumentos}
                                                 params={[val, props.carteiras[index].nome, tipo]}
                                                 myButtonStyle="default"
                                                 myButtonClass="mybutton-mini-carteira"

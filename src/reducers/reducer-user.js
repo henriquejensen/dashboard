@@ -128,7 +128,7 @@ export default function (state = user, action) {
         }
 
         case INFO_SUCCESS: {
-            const avatar_url = "https://s3-us-west-2.amazonaws.com/front.images/avatar.gif"
+            const avatar_url = "https://s3.amazonaws.com/front.images/utils/avatar.gif"
             let { response } = action.payload.response
             let {
                 consultasAtivas={},

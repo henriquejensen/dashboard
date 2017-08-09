@@ -63,7 +63,6 @@ export default function(state=getInitialState, action) {
         }
 
         case basecerta.UPLOAD_NOVO_ENRIQUECIMENTO: {
-            debugger
             const { response } = action.payload.response
             const isDuplicate = response[0].idDuplicado && response[0].status == 18
             return {
