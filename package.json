@@ -8,11 +8,7 @@
     "start": "webpack-dev-server --config webpack.dev.config.js",
     "build": "webpack -p",
     "build:run": "node server.js",
-<<<<<<< HEAD
     "deploy": "aws s3 sync public s3://front.assertiva --delete --cache-control 'public, max-age=14400' && npm run deploy:invalidation",
-=======
-    "deploy": "aws s3 sync public s3://front.assertiva --cache-control 'public, max-age=14400' && npm run deploy:invalidation",
->>>>>>> 00c00a1575b0f66c0be4b9cb1a2de0e46bfe1ec2
     "deploy:style": "aws s3 sync style s3://front.utils/style",
     "deploy:invalidation": "aws cloudfront create-invalidation --distribution-id EGO3V7A2E1X5N --paths '/*'",
     "test": "jest --coverage",
