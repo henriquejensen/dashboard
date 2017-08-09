@@ -50,11 +50,11 @@ class CreditoMaisController extends Component {
     constructor(props) {
         super(props)
 
-		this.consultasAtivas = this.props.consultasAtivas ? this.props.consultasAtivas[COMPANY_PRODUCT_CREDITOMAIS_LABEL] : undefined
+		this.consultasAtivas = this.props.consultasAtivas && this.props.consultasAtivas[COMPANY_PRODUCT_CREDITOMAIS_LABEL] ? this.props.consultasAtivas[COMPANY_PRODUCT_CREDITOMAIS_LABEL] : {}
 		this.consultas = produtos[COMPANY_PRODUCT_CREDITOMAIS_LABEL].consultas
 		this.produtoInformacoes = []
 
-        if(this.consultasAtivas) {
+        if(this.props.consultasAtivas && this.props.consultasAtivas[COMPANY_PRODUCT_CREDITOMAIS_LABEL]) {
             this.consultas.forEach(consulta => {
                 const modulo = this.consultasAtivas[consulta.modulo] ? consulta.modulo : consulta.modulo2
                 if(this.consultasAtivas && this.consultasAtivas[modulo]) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
-import { Col } from "react-bootstrap"
+import { Alert, Col } from "react-bootstrap"
 
 //Components
 import Modal from "../../components/Modal"
@@ -16,6 +16,7 @@ import { LoadingScreen } from "../../components/utils/ElementsAtScreen"
 
 //Actions
 import {
+    closeMessageMonitora,
     getDocumentos,
     getCarteiras,
     loadingMonitora,
@@ -110,7 +111,19 @@ class Monitora extends Component {
     }
 
     render() {
-        const {carteiras, carteiraNome, documentos, getDocumentos, loading, removerCarteira, removerDocumento, verDocumentoDetalhes} = this.props
+        const {
+            carteiras,
+            carteiraNome,
+            documentos,
+            error,
+            getDocumentos,
+            loading,
+            message,
+            removerCarteira,
+            removerDocumento,
+            verDocumentoDetalhes
+        } = this.props
+
         return (
             <span>
                 <Panel>
@@ -119,6 +132,15 @@ class Monitora extends Component {
                         title={COMPANY_PRODUCT_MONITORA}
                         color={COMPANY_PRODUCT_MONITORA_COLOR}
                     />
+
+                    {error ?
+                        <Col md={12} sm={12}> 
+                            <Alert bsStyle="danger" className="text-center" onDismiss={this.props.closeMessageMonitora}>
+                                {message}
+                            </Alert>
+                        </Col>
+                    : ""}                 
+
                 </Panel>
 
                 {loading ? <LoadingScreen /> : ""}
@@ -166,12 +188,15 @@ function mapStateToProps(state) {
         carteiras: state.monitora.carteiras,
         documentos: state.monitora.documentos,
         carteiraNome: state.monitora.carteiraNome,
-        loading: state.monitora.loading
+        loading: state.monitora.loading,
+        error: state.monitora.error,
+        message: state.monitora.message
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
+        closeMessageMonitora,
         getDocumentos,
         getCarteiras,
         loadingMonitora,

@@ -28,170 +28,157 @@ const getInitialState = {
 }
 
 export default function(state=getInitialState, action) {
-    switch (action.type) {
-        case constants.CHANGE_TAB_CREDITOMIX: {
-            // verifica se a tab passada existe no array, se nao, entao busca a primeira tab e a retorna
-            let newTabActive = state.response[action.payload] ? action.payload : state.response[Object.keys(state.response)[0]] ? state.response[Object.keys(state.response)[0]].label : ""
+    try {
+        switch (action.type) {
+            case constants.CHANGE_TAB_CREDITOMIX: {
+                // verifica se a tab passada existe no array, se nao, entao busca a primeira tab e a retorna
+                let newTabActive = state.response[action.payload] ? action.payload : state.response[Object.keys(state.response)[0]] ? state.response[Object.keys(state.response)[0]].label : ""
 
-            return {
-                status: SUCCESS,
-                message: "",
-                loading: false,
-                response: state.response,
-                tabActive: newTabActive,
-                lastQueries: state.lastQueries,
-                type: state.type
-            }
-        }
-
-        case CHANGE_CREDITOMIX_TYPE: {
-            return {
-                loading: false,
-                status: SUCCESS,
-                message: state.message,
-                response: state.response,
-                tabActive: state.tabActive,
-                lastQueries: state.lastQueries,
-                type: action.payload.toUpperCase()
-             }
-        }
-
-        case constants.CLOSE_TAB_CREDITOMIX: {
-            delete state.response[action.payload]
-            return {
-                status: "closeTab",
-                message: "",
-                loading: false,
-                response: { ...state.response },
-                tabActive: state.tabActive,
-                lastQueries: state.lastQueries,
-                type: state.type
-            }
-        }
-
-        case constants.CLOSE_MESSAGE_ERROR_CREDITOMIX: {
-            return {
-                status: "",
-                message: "",
-                loading: false,
-                response: state.response,
-                tabActive: state.tabActive,
-                lastQueries: state.lastQueries,
-                type: state.type
-            }
-        }
-
-        case constants.FETCH_CREDITOMIX: {
-            let { cpf, cnpj, documento } = action.payload.response.cadastro
-            const { tipo } = action.payload.parameters
-            if(documento)
-                documento = documento.length <= 11 ? patternCPF(documento) : patternCNPJ(documento)
-            else if(cpf) {
-                documento = patternCPF(cpf)
-            } else {
-                documento = patternCNPJ(cnpj)
+                return {
+                    status: SUCCESS,
+                    message: "",
+                    loading: false,
+                    response: state.response,
+                    tabActive: newTabActive,
+                    lastQueries: state.lastQueries,
+                    type: state.type
+                }
             }
 
-            let newResponse = action.payload.response
-            newResponse.cadastro.documento = documento
-            let label = tipo + ":" + documento + " - " + newResponse.cabecalho.entrada
-
-            newResponse['label'] = label
-            newResponse['tipo'] = tipo
-            newResponse['icon'] = ICON_CREDITOMIX
-            newResponse['produto'] = COMPANY_PRODUCT_CREDITOMIX_LABEL
-
-            return {
-                loading: false,
-                status: SUCCESS,
-                message: state.message,
-                response: {...state.response, [label]:newResponse },
-                tabActive: label,
-                lastQueries: state.lastQueries,
-                type: state.type,
-             }
-        }
-
-        case constants.LOADING_CREDITO_MIX: {
-            return {
-                status: "loading",
-                message: "",
-                loading: true,
-                response: state.response,
-                tabActive: state.tabActive,
-                lastQueries: state.lastQueries,
-                type: state.type
-            }  
-        }
-
-        case constants.SHOW_CREDITOMIX_MODEL: {
-            let newResponse = model
-            const label = "Modelo Consulta"
-
-            newResponse['label'] = label
-            newResponse['tipo'] = "CPF"
-            newResponse['icon'] = ICON_CREDITOMIX
-            newResponse['produto'] = COMPANY_PRODUCT_CREDITOMIX_LABEL
-
-            return {
-                loading: false,
-                status: "",
-                message: "",
-                response: {...state.response, [label]:newResponse },
-                tabActive: label,
-                lastQueries: state.lastQueries,
-                type: state.type,
-             }
-        }
-
-        case constants.REVER_CONSULTA_CREDITOMIX: {
-            let newResponse
-            let  responseServer = action.payload.response.response
-            let { cabecalho } = responseServer
-            const { modulo } = action.payload.parameters
-            const tipo=cabecalho.entrada.length <= 11 ? "CPF" : "CNPJ"
-            const label=tipo + ":" + (tipo === "CPF" ? patternCPF(cabecalho.entrada) : patternCNPJ(cabecalho.entrada)) + "REVER-CONSULTA"
-
-            newResponse = responseServer
-            newResponse.label = label
-            newResponse.tipo = tipo
-            newResponse.icon = ICON_CREDITOMIX
-            newResponse.produto = COMPANY_PRODUCT_CREDITOMIX_LABEL
-            newResponse.reverConsulta = true //Boolean para identificar a rever consulta
-
-            return {
-                ...state,
-                loading: false,
-                response: {...state.response, [label]:newResponse },
-                tabActive: label
+            case CHANGE_CREDITOMIX_TYPE: {
+                return {
+                    loading: false,
+                    status: SUCCESS,
+                    message: state.message,
+                    response: state.response,
+                    tabActive: state.tabActive,
+                    lastQueries: state.lastQueries,
+                    type: action.payload.toUpperCase()
+                }
             }
-        }
 
-        case REQUEST_ERROR: {
-            return {
-                loading: false,
-                status: REQUEST_ERROR,
-                message: action.payload.mensagem,
-                response: state.response,
-                tabActive: state.tabActive,
-                lastQueries: state.lastQueries,
-                type: state.type
+            case constants.CLOSE_TAB_CREDITOMIX: {
+                delete state.response[action.payload]
+                return {
+                    status: "closeTab",
+                    message: "",
+                    loading: false,
+                    response: { ...state.response },
+                    tabActive: state.tabActive,
+                    lastQueries: state.lastQueries,
+                    type: state.type
+                }
             }
-        }
 
-        case ERR_CONNECTION_REFUSED: {
-            return {
-                status: ERR_CONNECTION_REFUSED,
-                message: ERROR_503,
-                loading: false,
-                response: state.response,
-                tabActive: state.tabActive,
-                lastQueries: state.lastQueries,
-                type: state.type
+            case constants.CLOSE_MESSAGE_ERROR_CREDITOMIX: {
+                return {
+                    status: "",
+                    message: "",
+                    loading: false,
+                    response: state.response,
+                    tabActive: state.tabActive,
+                    lastQueries: state.lastQueries,
+                    type: state.type
+                }
             }
-        }
 
-        default:
-            return state
+            case constants.FETCH_CREDITOMIX: {
+                let { cpf, cnpj, documento } = action.payload.response.cadastro
+                const { tipo } = action.payload.parameters
+                if(documento)
+                    documento = documento.length <= 11 ? patternCPF(documento) : patternCNPJ(documento)
+                else if(cpf) {
+                    documento = patternCPF(cpf)
+                } else {
+                    documento = patternCNPJ(cnpj)
+                }
+
+                let newResponse = action.payload.response
+                newResponse.cadastro.documento = documento
+                let label = tipo + ":" + documento + " - " + newResponse.cabecalho.entrada
+
+                newResponse['label'] = label
+                newResponse['tipo'] = tipo
+                newResponse['icon'] = ICON_CREDITOMIX
+                newResponse['produto'] = COMPANY_PRODUCT_CREDITOMIX_LABEL
+
+                return {
+                    loading: false,
+                    status: SUCCESS,
+                    message: state.message,
+                    response: {...state.response, [label]:newResponse },
+                    tabActive: label,
+                    lastQueries: state.lastQueries,
+                    type: state.type,
+                }
+            }
+
+            case constants.LOADING_CREDITO_MIX: {
+                return {
+                    status: "loading",
+                    message: "",
+                    loading: true,
+                    response: state.response,
+                    tabActive: state.tabActive,
+                    lastQueries: state.lastQueries,
+                    type: state.type
+                }  
+            }
+
+            case constants.SHOW_CREDITOMIX_MODEL: {
+                let newResponse = model
+                const label = "Modelo Consulta"
+
+                newResponse['label'] = label
+                newResponse['tipo'] = "CPF"
+                newResponse['icon'] = ICON_CREDITOMIX
+                newResponse['produto'] = COMPANY_PRODUCT_CREDITOMIX_LABEL
+
+                return {
+                    loading: false,
+                    status: "",
+                    message: "",
+                    response: {...state.response, [label]:newResponse },
+                    tabActive: label,
+                    lastQueries: state.lastQueries,
+                    type: state.type,
+                }
+            }
+
+            case constants.REVER_CONSULTA_CREDITOMIX: {
+                let newResponse
+                let  responseServer = action.payload.response.response
+                let { cabecalho } = responseServer
+                const { modulo } = action.payload.parameters
+                const tipo=cabecalho.entrada.length <= 11 ? "CPF" : "CNPJ"
+                const label=tipo + ":" + (tipo === "CPF" ? patternCPF(cabecalho.entrada) : patternCNPJ(cabecalho.entrada)) + "REVER-CONSULTA"
+
+                newResponse = responseServer
+                newResponse.label = label
+                newResponse.tipo = tipo
+                newResponse.icon = ICON_CREDITOMIX
+                newResponse.produto = COMPANY_PRODUCT_CREDITOMIX_LABEL
+                newResponse.reverConsulta = true //Boolean para identificar a rever consulta
+
+                return {
+                    ...state,
+                    loading: false,
+                    response: {...state.response, [label]:newResponse },
+                    tabActive: label
+                }
+            }
+
+            default:
+                return state
+        }
+    } catch (e) {
+        const { error, status } = action.payload
+        return {
+            ...state,
+            loading: false,
+            status: ERR_CONNECTION_REFUSED,
+            message: error,
+        }
     }
+
 }

@@ -23,129 +23,118 @@ const getInitialState = {
 }
 
 export default function(state=getInitialState, action) {
-    switch(action.type) {
-        case ADD_NEW_USER: {
-            const { response } = action.payload.response
-            return {
-                ...state,
-                users: response,
-                loading: false,
-                error: false,
-                message: ADD_NEW_USER,
+    try {
+        switch(action.type) {
+            case ADD_NEW_USER: {
+                const { response } = action.payload.response
+                return {
+                    ...state,
+                    users: response,
+                    loading: false,
+                    error: false,
+                    message: ADD_NEW_USER,
+                }
             }
-        }
 
-        case CLOSE_MESSAGE_ERROR: {
-            return {
-                grupos: state.grupos,
-                users: state.users,
-                consultas: state.consultas,
-                permissoes: state.permissoes,
-                loading: false,
-                error: false,
-                message: "close message",
+            case CLOSE_MESSAGE_ERROR: {
+                return {
+                    grupos: state.grupos,
+                    users: state.users,
+                    consultas: state.consultas,
+                    permissoes: state.permissoes,
+                    loading: false,
+                    error: false,
+                    message: "close message",
+                }
             }
-        }
 
-        case ERR_CONNECTION_REFUSED: {
-            return {
-                grupos: state.grupos,
-                users: state.users,
-                consultas: state.consultas,
-                permissoes: state.permissoes,
-                loading: false,
-                error: true,
-                message: ERR_CONNECTION_REFUSED_MESSAGE,
+            case GET_GROUPS_CADASTRO: {
+                return {
+                    grupos: action.payload.response.response,
+                    users: state.users,
+                    consultas: state.consultas,
+                    permissoes: state.permissoes,
+                    loading: false,
+                    error: false,
+                    message: "groups",
+                }
             }
-        }
 
-        case GET_GROUPS_CADASTRO: {
-            return {
-                grupos: action.payload.response.response,
-                users: state.users,
-                consultas: state.consultas,
-                permissoes: state.permissoes,
-                loading: false,
-                error: false,
-                message: "groups",
+            case GET_USERS_CADASTRO: {
+                return {
+                    grupos: state.grupos,
+                    users: action.payload.response.response,
+                    consultas: state.consultas,
+                    permissoes: state.permissoes,
+                    loading: false,
+                    error: false,
+                    message: "users",
+                }
             }
-        }
 
-        case GET_USERS_CADASTRO: {
-            return {
-                grupos: state.grupos,
-                users: action.payload.response.response,
-                consultas: state.consultas,
-                permissoes: state.permissoes,
-                loading: false,
-                error: false,
-                message: "users",
+            case GET_USERS_BY_GROUP_ID: {
+                return {
+                    grupos: state.grupos,
+                    users: action.payload.response.response,
+                    consultas: state.consultas,
+                    permissoes: state.permissoes,
+                    loading: false,
+                    error: false,
+                    message: "usersGroup",
+                }
             }
-        }
+                
+            case GET_CONSULTAS_GRUPO: {
+                let responseConsultas = getConsultaByIdGrupo(consultas.consultas, action.payload);
+                return {
+                    grupos: state.grupos,
+                    users: state.users,
+                    consultas: responseConsultas.consultas,
+                    permissoes: state.permissoes,
+                    loading: false,
+                    error: false,
+                    message: "users",
+                }
+            }
 
-        case GET_USERS_BY_GROUP_ID: {
-            return {
-                grupos: state.grupos,
-                users: action.payload.response.response,
-                consultas: state.consultas,
-                permissoes: state.permissoes,
-                loading: false,
-                error: false,
-                message: "usersGroup",
+            case GET_PERMISSOES_USER: {
+                return {
+                    grupos: state.grupos,
+                    users: state.users,
+                    consultas: state.consultas,
+                    permissoes: action.payload.response.response,
+                    loading: false,
+                    error: false,
+                    message: "users",
+                }
             }
-        }
-            
-        case GET_CONSULTAS_GRUPO: {
-            let responseConsultas = getConsultaByIdGrupo(consultas.consultas, action.payload);
-            return {
-                grupos: state.grupos,
-                users: state.users,
-                consultas: responseConsultas.consultas,
-                permissoes: state.permissoes,
-                loading: false,
-                error: false,
-                message: "users",
-            }
-        }
 
-        case GET_PERMISSOES_USER: {
-            return {
-                grupos: state.grupos,
-                users: state.users,
-                consultas: state.consultas,
-                permissoes: action.payload.response.response,
-                loading: false,
-                error: false,
-                message: "users",
+            case LOADING_CADASTRO: {
+                return {
+                    grupos: state.grupos,
+                    users: state.users,
+                    consultas: state.consultas,
+                    permissoes: state.permissoes,
+                    loading: true,
+                    error: false,
+                    message: "loading",
+                }
             }
-        }
 
-        case LOADING_CADASTRO: {
-            return {
-                grupos: state.grupos,
-                users: state.users,
-                consultas: state.consultas,
-                permissoes: state.permissoes,
-                loading: true,
-                error: false,
-                message: "loading",
-            }
-        }
+            default:
+                return state
+        }   
 
-        case REQUEST_ERROR: {
-            return {
-                grupos: state.grupos,
-                users: state.users,
-                consultas: state.consultas,
-                permissoes: state.permissoes,
-                loading: false,
-                error: true,
-                message: action.payload.mensagem,
-            }
-        }
+    } catch (e) {
+		const { error, status } = action.payload
+		return {
+			...state,
+			loading: false,
+			error: true,
+			status: ERR_CONNECTION_REFUSED,
+			message: error,
+		}
     }
-
-    return state;
 }
 
 function getPermissoesByIdUser(permissoesList, id) {

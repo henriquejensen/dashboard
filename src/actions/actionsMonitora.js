@@ -2,6 +2,12 @@ import * as constantsMonitora from "../constants/constantsMonitora"
 import request from "superagent"
 import { apiContentType, apiGet, api } from "../api/Api"
 
+export function closeMessageMonitora() {
+    return {
+        type: constantsMonitora.CLOSE_MESSAGE_MONITORA
+    }
+}
+
 export function getCarteiras() {
     const url = constantsMonitora.URL_CARREGAR_CARTEIRAS
     const search = constantsMonitora.GET_CARTEIRAS_MONITORA
@@ -41,7 +47,7 @@ export function loadingMonitora() {
 export function novoDocumento({idCarteira, documento, cep}) {
     const url = constantsMonitora.URL_ADICIONAR_DOCUMENTO_CARTEIRA
     const data = {idCarteira, documento, cep}
-    const search = constantsMonitora.NOVO_DOCUMENTO_MONITORA
+    const search = constantsMonitora.GET_DOCUMENTOS_CARTEIRA_MONITORA
 
     return (dispatch) => {
         apiContentType(dispatch, url, data, search, {idCarteira, documento, cep})

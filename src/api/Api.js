@@ -130,12 +130,13 @@ function onEndRequest(error, response, dispatch, search, parameters) {
             dispatch({type: ERROR_401_UNAUTHORIZED, payload: response.body.erro || ERROR_401_UNAUTHORIZED_MESSAGE})
         } else {
             dispatch({
-                type: REQUEST_ERROR,
-                payload: {mensagem: response.body && response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
-            });
+                type: search,
+                payload: {error: response.body && response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO,
+                status: response.status}
+            })
         }
     } else {
-        dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+        dispatch({type: search, payload: {error}})
     }
 }
 
@@ -156,11 +157,11 @@ function onEndRequestFunction(error, response, dispatch, search, parameters) {
             dispatch({type: ERROR_401_UNAUTHORIZED, payload: ERROR_401_UNAUTHORIZED_MESSAGE})
         } else {
             dispatch({
-                type: REQUEST_ERROR,
-                payload: {mensagem: response.body && response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO}
+                type: search,
+                payload: {error: response.body && response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO, status: response.status}
             });
         }
     } else {
-        dispatch({type: ERR_CONNECTION_REFUSED, payload: error})
+        dispatch({type: search, payload: {error}})
     }
 }

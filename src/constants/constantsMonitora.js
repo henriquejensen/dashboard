@@ -9,6 +9,7 @@ export const URL_REMOVER_DOCUMENTO_CARTEIRA = "http://monitoraapi-prod.sa-east-1
 export const URL_ALTERAR_STATUS_DOCUMENTO_CARTEIRA = "http://monitoraapi-prod.sa-east-1.elasticbeanstalk.com/monitoraapi/alterarstatusdocumento"
 export const URL_DETALHES_DOCUMENTO_CARTEIRA = "http://monitoraapi-prod.sa-east-1.elasticbeanstalk.com/monitoraapi/carregarDocumento"
 
+export const CLOSE_MESSAGE_MONITORA = "CLOSE_MESSAGE_MONITORA"
 export const EDITAR_CARTEIRA_MONITORA = "GET_CARTEIRAS_MONITORA"
 export const GET_CARTEIRAS_MONITORA = "GET_CARTEIRAS_MONITORA"
 export const GET_DOCUMENTOS_MONITORA = "GET_DOCUMENTOS_MONITORA"

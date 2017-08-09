@@ -49,21 +49,22 @@ import produtos from "../../utils/produtos.js"
 
 class FocoFiscal extends Component {
 	constructor(props) {
-		super(props);
+		super(props)
 
-		this.consultasAtivas = this.props.consultasAtivas ? this.props.consultasAtivas[COMPANY_PRODUCT_FOCOFISCAL_LABEL] : undefined
+		this.consultasAtivas = this.props.consultasAtivas && this.props.consultasAtivas[COMPANY_PRODUCT_FOCOFISCAL_LABEL] ? this.props.consultasAtivas[COMPANY_PRODUCT_FOCOFISCAL_LABEL] : {}
 		this.consultas = produtos[COMPANY_PRODUCT_FOCOFISCAL_LABEL].consultas
 		this.produtoInformacoes = []
 
-		if(this.consultasAtivas) {
-			this.consultas.forEach(consulta => {
-				if(this.consultasAtivas[consulta.modulo]) {
-					this.produtoInformacoes.push(
-						{id:consulta.modulo, label:this.consultasAtivas[consulta.modulo].labelFront}
-					)
-				}
-			})
-		}
+        if(this.props.consultasAtivas && this.props.consultasAtivas[COMPANY_PRODUCT_FOCOFISCAL_LABEL]) {
+            this.consultas.forEach(consulta => {
+                const modulo = this.consultasAtivas[consulta.modulo] ? consulta.modulo : consulta.modulo2
+                if(this.consultasAtivas && this.consultasAtivas[modulo]) {
+                    this.produtoInformacoes.push(
+                        {id:modulo, label:this.consultasAtivas[modulo].labelFront}
+                    )
+                }
+            })
+        }
 
 		this.state = {
 			documento: "",

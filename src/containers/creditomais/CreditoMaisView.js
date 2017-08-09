@@ -5,6 +5,7 @@ import PanelGroup from "../../components/panel/PanelGroup"
 import CardWithTable from "../../components/card/CardWithTable"
 import Enderecos from "../../components/endereco/Endereco"
 import MyButton from "../../components/button/MyButton"
+import Protocolo from "../../components/protocolo/Protocolo"
 import QuadroSocialCompleto from "../../components/sociedades/QuadroSocialCompleto"
 import Telefones from "../../components/telefone/Telefone"
 
@@ -474,6 +475,8 @@ const CreditoMaisView = (props) => {
                 if(data[key])
                     return renderCard({[key]:data[key]}, key, props)
             })}
+            
+            <Protocolo info={data.cabecalho}/>
         </PanelGroup>
     )
 }

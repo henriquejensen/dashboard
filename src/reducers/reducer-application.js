@@ -36,80 +36,80 @@ const getInitialState = {
 }
 
 export default function(state=getInitialState, action) {
-    switch(action.type) {
-        case REQUEST_CHANGE_PASSWORD: {
-            let { response } = action.payload.response
-            return {
-                colorMenu: state.colorMenu,
-                loading: false,
-                logado: false,
-                error: false,
-                status: SUCCESS,
-                msgn: USER_CHANGED_PASSWORD_MESSAGE + " " + response
+    try {
+        switch(action.type) {
+            case REQUEST_CHANGE_PASSWORD: {
+                let { response } = action.payload.response
+                return {
+                    colorMenu: state.colorMenu,
+                    loading: false,
+                    logado: false,
+                    error: false,
+                    status: SUCCESS,
+                    msgn: USER_CHANGED_PASSWORD_MESSAGE + " " + response
+                }
             }
-        }
 
-        case RESET_CHANGE_PASSWORD: {
-            return {
-                colorMenu: state.colorMenu,
-                loading: false,
-                logado: false,
-                error: false,
-                status: SUCCESS,
-                msgn: USER_RESET_PASSWORD_MESSAGE
+            case RESET_CHANGE_PASSWORD: {
+                return {
+                    colorMenu: state.colorMenu,
+                    loading: false,
+                    logado: false,
+                    error: false,
+                    status: SUCCESS,
+                    msgn: USER_RESET_PASSWORD_MESSAGE
+                }
             }
-        }
 
-        case SET_COOKIE_SESSION: {
-            const { CEBB1F3CE2C566A6, CEBB1F3CE2C566A62 } = action.payload.response
-            const host = location.host.replace(/.*?(?=\.)/, "")
-            document.cookie = `CEBB1F3CE2C566A6=${CEBB1F3CE2C566A6};domain=${host}`
-            document.cookie = `CEBB1F3CE2C566A62=${CEBB1F3CE2C566A62};domain=${host}`
-            return {
-                colorMenu: state.colorMenu,
-                loading: false,
-                logado: state.logado,
-                error: false,
-                status: state.status,
-                msgn: "",
+            case SET_COOKIE_SESSION: {
+                const { CEBB1F3CE2C566A6, CEBB1F3CE2C566A62 } = action.payload.response
+                const host = location.host.replace(/.*?(?=\.)/, "")
+                document.cookie = `CEBB1F3CE2C566A6=${CEBB1F3CE2C566A6};domain=${host}`
+                document.cookie = `CEBB1F3CE2C566A62=${CEBB1F3CE2C566A62};domain=${host}`
+                return {
+                    colorMenu: state.colorMenu,
+                    loading: false,
+                    logado: state.logado,
+                    error: false,
+                    status: state.status,
+                    msgn: "",
+                }
             }
-        }
 
-        case CLOSE_MESSAGE_CHANGE_PASSWORD: {
-            return {
-                colorMenu: state.colorMenu,
-                loading: false,
-                logado: false,
-                error: false,
-                status: "",
-                msgn: ""
+            case CLOSE_MESSAGE_CHANGE_PASSWORD: {
+                return {
+                    colorMenu: state.colorMenu,
+                    loading: false,
+                    logado: false,
+                    error: false,
+                    status: "",
+                    msgn: ""
+                }
             }
-        }
-        
-        case CHANGE_COLOR_MENU: {
-            return {
-                colorMenu: action.payload,
-                loading: false,
-                logado: state.logado,
-                error: false,
-                status: state.status,
-                msgn: state.msgn
+            
+            case CHANGE_COLOR_MENU: {
+                return {
+                    colorMenu: action.payload,
+                    loading: false,
+                    logado: state.logado,
+                    error: false,
+                    status: state.status,
+                    msgn: state.msgn
+                }
             }
+
+            default:
+                return state
+
         }
-
-        case REQUEST_ERROR: {
-            return {
-                colorMenu: state.colorMenu,
-                loading: false,
-                logado: true,
-                error: false,
-                status: ERROR,
-                msgn: action.payload.mensagem
-            }
-        }
-
-        default:
-            return state
-
+    } catch (e) {
+		const { error, status } = action.payload
+		return {
+			...state,
+			loading: false,
+			error: true,
+			status: ERR_CONNECTION_REFUSED,
+			message: error,
+		}
     }
 }

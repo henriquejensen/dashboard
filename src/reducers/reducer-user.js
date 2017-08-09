@@ -53,193 +53,185 @@ let user = {
 
 export default function (state = user, action) {
     console.log("ACTION-REDUCER", action.type, action, state)
-    switch(action.type){
-        case constantsUser.GET_USER_TOKEN: {
-            const { response } = action.payload.response
+    try {
+        switch(action.type){
+            case constantsUser.GET_USER_TOKEN: {
+                const { response } = action.payload.response
 
-            localStorage.setItem(AUTHENTICATION, response)
-            return {
-                ...state,
-                token: true,
-                error: false,
-            }
-        }
-
-        case constantsUser.USER_EDIT_INFO: {
-            let { erro } = action.payload.response
-            let  { usuario, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview } = action.payload.parameters
-            localStorage.setItem(USER_PHOTO, FOTO_URL + state.usuarioId + ".jpg")
-            return {
-                ...state,
-                usuarioNome: usuario && !erro ? usuario : state.usuarioNome,
-                usuarioFoto: usuarioImagemPreview && !erro ? usuarioImagemPreview : state.usuarioFoto,
-                usuarioEmail2: usuarioEmail && !erro ? usuarioEmail : state.email2,
-                usuarioTelefone : usuarioTelefone && !erro ? usuarioTelefone  : state.telefone,
-                status: erro ? ERROR : SUCCESS,
-                message: erro ? erro.mensagem : EDIT_USER_PROFILE_SUCCESS,
-                loading: false
-            }
-        }
-
-        case constantsUser.USER_CLOSE_MESSAGE: {
-            return {
-                ...state,
-                status: "",
-                message: "",
-                loading: false
-            }
-        }
-
-        case constantsUser.LOADING_USER_SCREEN: {
-            return {
-                ...state,
-                status: "",
-                message: "",
-                loading: true
-            }
-        }
-
-        case constantsUser.USER_EDIT_DASHBOARD: {
-            return {
-                ...state,
-                gadgets: action.payload.gadgets,
-                charts: action.payload.charts,
-                status: null,
-                message: null,
-                loading: false
-            }
-        }
-
-        case constantsUser.IP_USER: {
-            localStorage.setItem("ip", action.payload)
-            return {
-                ...state,
-                ip: action.payload,
-                error: false,
-            }
-        }
-
-        case GET_USER_PHOTO: {
-            var imageUrl = action.payload
-            return {
-                ...state,
-                usuarioFoto: imageUrl !== ERROR ? imageUrl : state.usuarioFoto,
-            }
-        }
-
-        case INFO_SUCCESS: {
-            const avatar_url = "https://s3.amazonaws.com/front.images/utils/avatar.gif"
-            let { response } = action.payload.response
-            let {
-                consultasAtivas={},
-                mapProdutos=[],
-                usuarioLogin,
-                usuarioNome="",
-                usuarioEmail2="",
-                usuarioTelefone="",
-                usuarioFoto,
-                usuarioId,
-                perfilDescricao,
-                pessoaDescricao,
-                perfilOrdem
-            } = response
-
-            if(consultasAtivas["8"]) {
-                consultasAtivas["8"].NOVOENRIQUECIMENTO = {
-                    labelFront: "Novo Enriquecimento",                    
-                }
-                consultasAtivas["8"].MONITORBASECERTA = {
-                    labelFront: "Monitor Base Certa",
-                    link: "/basecerta"
-                }
-            }
-            if(consultasAtivas["9"]) {
-                consultasAtivas["9"].MONITORENVIOS = {
-                    labelFront: "Monitor de envios"
-                }
-                consultasAtivas["9"].RESPOSTAS = {
-                    labelFront: "Respostas"
-                }
-            }
-            if(consultasAtivas["3"]) {
-                consultasAtivas["3"].PLACA = {
-                    labelFront: "PLACA"
-                }
-                consultasAtivas["3"].CHASSI = {
-                    labelFront: "CHASSI"
-                }
-                consultasAtivas["3"].NUMEROMOTOR = {
-                    labelFront: "Nº MOTOR"
+                localStorage.setItem(AUTHENTICATION, response)
+                return {
+                    ...state,
+                    token: true,
+                    error: false,
                 }
             }
 
-            localStorage.setItem(USER_CONSULTS, JSON.stringify(consultasAtivas))
-            localStorage.setItem(USER_PRODUCTS, mapProdutos)
-            localStorage.setItem(USER_LOGIN, usuarioLogin)
-            localStorage.setItem(USER_NAME, usuarioNome)
-            localStorage.setItem(USER_EMAIL2, usuarioEmail2)
-            localStorage.setItem(USER_PHONE, usuarioTelefone)
-            localStorage.setItem(USER_PHOTO, usuarioFoto ? FOTO_URL + usuarioId + ".jpg" : avatar_url)
-            localStorage.setItem(USER_PERFIL, perfilDescricao)
-            localStorage.setItem(USER_PERFIL_ORDEM, perfilOrdem)
-            localStorage.setItem(USER_CLIENT, pessoaDescricao)
-            localStorage.setItem("DIA", moment().date())
-            
-            return {
-                ...state,
-                ...response,
-                usuarioFoto: usuarioFoto ? FOTO_URL + usuarioId + ".jpg" : avatar_url,
-                logado: true,
-                status: null,
-                error: false,
-                loading: false
+            case constantsUser.USER_EDIT_INFO: {
+                let { erro } = action.payload.response
+                let  { usuario, usuarioEmail, usuarioTelefone, usuarioImagem, usuarioImagemPreview } = action.payload.parameters
+                localStorage.setItem(USER_PHOTO, FOTO_URL + state.usuarioId + ".jpg")
+                return {
+                    ...state,
+                    usuarioNome: usuario && !erro ? usuario : state.usuarioNome,
+                    usuarioFoto: usuarioImagemPreview && !erro ? usuarioImagemPreview : state.usuarioFoto,
+                    usuarioEmail2: usuarioEmail && !erro ? usuarioEmail : state.email2,
+                    usuarioTelefone : usuarioTelefone && !erro ? usuarioTelefone  : state.telefone,
+                    status: erro ? ERROR : SUCCESS,
+                    message: erro ? erro.mensagem : EDIT_USER_PROFILE_SUCCESS,
+                    loading: false
+                }
             }
-        }
 
-        case ERR_CONNECTION_REFUSED: {
-            return {
-                ...state,
-                status: ERR_CONNECTION_REFUSED,
-                message: ERROR_503,
-                loading: false
+            case constantsUser.USER_CLOSE_MESSAGE: {
+                return {
+                    ...state,
+                    status: "",
+                    message: "",
+                    loading: false
+                }
             }
-        }
 
-        case ERROR_401_UNAUTHORIZED: {
-            removeInfoLocalStorage()
-            return {
-                ...state,
-                token: false,
-                logado: false,
-                loading: false,
-                error: true,
-                message: action.payload.mensagem ? action.payload.mensagem : state.message
+            case constantsUser.LOADING_USER_SCREEN: {
+                return {
+                    ...state,
+                    status: "",
+                    message: "",
+                    loading: true
+                }
             }
-        }
 
-        case LOG_OUT: {
-            removeInfoLocalStorage()
-            return {
-                ...state,
-                token: false,
-                logado: false,
-                loading: false
+            case constantsUser.USER_EDIT_DASHBOARD: {
+                return {
+                    ...state,
+                    gadgets: action.payload.gadgets,
+                    charts: action.payload.charts,
+                    status: null,
+                    message: null,
+                    loading: false
+                }
             }
-        }
 
-        case REQUEST_ERROR: {
-            return {
-                ...state,
-                error: true,
-                message: action.payload.mensagem,
-                loading: false,
-                status: ERROR,
+            case constantsUser.IP_USER: {
+                localStorage.setItem("ip", action.payload)
+                return {
+                    ...state,
+                    ip: action.payload,
+                    error: false,
+                }
             }
-        }
 
-        default:
-            return state
-    }
+            case GET_USER_PHOTO: {
+                var imageUrl = action.payload
+                return {
+                    ...state,
+                    usuarioFoto: imageUrl !== ERROR ? imageUrl : state.usuarioFoto,
+                }
+            }
+
+            case INFO_SUCCESS: {
+                const avatar_url = "https://s3.amazonaws.com/front.images/utils/avatar.gif"
+                let { response } = action.payload.response
+                let {
+                    consultasAtivas={},
+                    mapProdutos=[],
+                    usuarioLogin,
+                    usuarioNome="",
+                    usuarioEmail2="",
+                    usuarioTelefone="",
+                    usuarioFoto,
+                    usuarioId,
+                    perfilDescricao,
+                    pessoaDescricao,
+                    perfilOrdem
+                } = response
+
+                if(consultasAtivas["8"]) {
+                    consultasAtivas["8"].NOVOENRIQUECIMENTO = {
+                        labelFront: "Novo Enriquecimento",                    
+                    }
+                    consultasAtivas["8"].MONITORBASECERTA = {
+                        labelFront: "Monitor Base Certa",
+                        link: "/basecerta"
+                    }
+                }
+                if(consultasAtivas["9"]) {
+                    consultasAtivas["9"].MONITORENVIOS = {
+                        labelFront: "Monitor de envios"
+                    }
+                    consultasAtivas["9"].RESPOSTAS = {
+                        labelFront: "Respostas"
+                    }
+                }
+                if(consultasAtivas["3"]) {
+                    consultasAtivas["3"].PLACA = {
+                        labelFront: "PLACA"
+                    }
+                    consultasAtivas["3"].CHASSI = {
+                        labelFront: "CHASSI"
+                    }
+                    consultasAtivas["3"].NUMEROMOTOR = {
+                        labelFront: "Nº MOTOR"
+                    }
+                }
+
+                localStorage.setItem(USER_CONSULTS, JSON.stringify(consultasAtivas))
+                localStorage.setItem(USER_PRODUCTS, mapProdutos)
+                localStorage.setItem(USER_LOGIN, usuarioLogin)
+                localStorage.setItem(USER_NAME, usuarioNome)
+                localStorage.setItem(USER_EMAIL2, usuarioEmail2)
+                localStorage.setItem(USER_PHONE, usuarioTelefone)
+                localStorage.setItem(USER_PHOTO, usuarioFoto ? FOTO_URL + usuarioId + ".jpg" : avatar_url)
+                localStorage.setItem(USER_PERFIL, perfilDescricao)
+                localStorage.setItem(USER_PERFIL_ORDEM, perfilOrdem)
+                localStorage.setItem(USER_CLIENT, pessoaDescricao)
+                localStorage.setItem("DIA", moment().date())
+                
+                return {
+                    ...state,
+                    ...response,
+                    usuarioFoto: usuarioFoto ? FOTO_URL + usuarioId + ".jpg" : avatar_url,
+                    logado: true,
+                    status: null,
+                    error: false,
+                    loading: false
+                }
+            }
+
+            case ERROR_401_UNAUTHORIZED: {
+                removeInfoLocalStorage()
+                return {
+                    ...state,
+                    token: false,
+                    logado: false,
+                    loading: false,
+                    error: true,
+                    message: action.payload.mensagem ? action.payload.mensagem : state.message
+                }
+            }
+
+            case LOG_OUT: {
+                removeInfoLocalStorage()
+                return {
+                    ...state,
+                    token: false,
+                    logado: false,
+                    loading: false
+                }
+            }
+
+            default:
+                return state
+        }
+    } catch (e) {
+		const { error, status } = action.payload
+		return {
+			...state,
+			loading: false,
+			error: true,
+			status: ERR_CONNECTION_REFUSED,
+			message: error,
+		}
+    } 
 }
 
 function getUserToken() {

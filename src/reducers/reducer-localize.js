@@ -46,6 +46,7 @@ export default function(state = initialState, action) {
 			pessoasRelacionadas: []
 		}
 
+	try {
 		switch(action.type) {
 			case CHANGE_LOCALIZE_TYPE: {
 				return {
@@ -98,15 +99,6 @@ export default function(state = initialState, action) {
 					loading: false,
 					response: newResponse,
 					tabActive: newResponse[newResponse.length-1] ? newResponse[newResponse.length-1].label : [],
-				}
-			}
-
-			case ERR_CONNECTION_REFUSED: {
-				return {
-					...state,
-					status: ERR_CONNECTION_REFUSED,
-					message: ERROR_503,
-					loading: false,
 				}
 			}
 
@@ -436,15 +428,6 @@ export default function(state = initialState, action) {
 				}
 			}
 
-			case REQUEST_ERROR: {
-				return {
-					...state,
-					status: REQUEST_ERROR,
-					message: action.payload.mensagem,
-					loading: false,
-				}
-			}
-
 			case localize.SEARCH_BY_ENDERECOS_TELEFONES_ULTIMAS_CONSULTAS: {
 				let consulta = action.payload.parameters.consulta;
 				let isEnderecoOuTelefone = action.payload.parameters.tipo;
@@ -485,20 +468,31 @@ export default function(state = initialState, action) {
 					loading: false,
 				}
 			}
-		}
 
-	return state;
+			default:
+				return state
+		}
+	} catch (e) {
+		const { error, status } = action.payload
+		return {
+			...state,
+			loading: false,
+			error: true,
+			status: ERR_CONNECTION_REFUSED,
+			message: error,
+		}
+    }
 }
 
 //Busca no array das pessoas pesquisadas o documento passado
 function isDocumentNotInArray(list, doc) {
 	for(let i=0; i<list.length; i++) {
 		if(doc == list[i].label) {
-			return false;
+			return false
 		}
 	}
 
-	return true;
+	return true
 }
 
 /* Nome e endereco é retornado como json no cabecalho, esta funcao faz o parse neste
@@ -522,19 +516,19 @@ function patternJsonNomeOuEndereco(list, tipo) {
 function searchDocument(list, doc) {
 	for(let i=0; i<list.length; i++) {
 		if(doc == list[i].label) {
-			return i;
+			return i
 		}
 	}
 
-	return -1;
+	return -1
 }
 
 function searchPosPessoa(listPeople, doc) {
 	for(let i=0; i<listPeople.length; i++) {
 		if(doc == listPeople[i].documento) {
-			return i;
+			return i
 		}
 	}
 
-	return 0;
+	return 0
 }

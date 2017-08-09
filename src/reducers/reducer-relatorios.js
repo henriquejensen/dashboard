@@ -20,72 +20,68 @@ const getInitialState = {
 }
 
 export default function(state=getInitialState, action) {
-    switch(action.type) {
-        case constants.GET_RELATORIOS: {
-            return {
-                ...state,
-                relatorios: [
-                    {id:6, tipo:"R6", descricao:`Consultas de ${COMPANY_PRODUCT_LOCALIZE}, ${COMPANY_PRODUCT_CREDITO}, ${COMPANY_PRODUCT_VEICULOS} e ${COMPANY_PRODUCT_FOCOFISCAL}`},
-                    {id:7, tipo:"R7", descricao:"Envio de SMS"},
-                    {id:8, tipo:"R8", descricao:`Consumo do ${COMPANY_PRODUCT_BASECERTA}`},
-                    {id:9, tipo:"R9", descricao:"Consumo total de todos os produtos"},
-                    {id:12, tipo:"R12", descricao:`Consultas de ${COMPANY_PRODUCT_LOCALIZE}, ${COMPANY_PRODUCT_CREDITO} e ${COMPANY_PRODUCT_VEICULOS}`}
-                ],
-                loading: false
-            }
-        }
-
-        case constants.FILTER_RELATORIO: {
-            return {
-                relatorios: state.relatorios,
-                relatoriosR12: state.relatorios,
-                status: "",
-                message: "",
-                loading: false
-            }
-        }
-
-        case constants.FILTER_RELATORIO_R12: {
-            try {
-                const { response } = action.payload.response
+    try {
+        switch(action.type) {
+            case constants.GET_RELATORIOS: {
                 return {
                     ...state,
-                    relatoriosR12: response ? response : [],
-                    loading: false
-                }
-            } catch(e) {
-                return {
-                    ...state,
+                    relatorios: [
+                        {id:6, tipo:"R6", descricao:`Consultas de ${COMPANY_PRODUCT_LOCALIZE}, ${COMPANY_PRODUCT_CREDITO}, ${COMPANY_PRODUCT_VEICULOS} e ${COMPANY_PRODUCT_FOCOFISCAL}`},
+                        {id:7, tipo:"R7", descricao:"Envio de SMS"},
+                        {id:8, tipo:"R8", descricao:`Consumo do ${COMPANY_PRODUCT_BASECERTA}`},
+                        {id:9, tipo:"R9", descricao:"Consumo total de todos os produtos"},
+                        {id:12, tipo:"R12", descricao:`Consultas de ${COMPANY_PRODUCT_LOCALIZE}, ${COMPANY_PRODUCT_CREDITO} e ${COMPANY_PRODUCT_VEICULOS}`}
+                    ],
                     loading: false
                 }
             }
-        }
 
-        case constants.LOADING_RELATORIO: {
-            return {
-                ...state,
-                loading: true
+            case constants.FILTER_RELATORIO: {
+                return {
+                    relatorios: state.relatorios,
+                    relatoriosR12: state.relatorios,
+                    status: "",
+                    message: "",
+                    loading: false
+                }
             }
-        }
 
-        case ERR_CONNECTION_REFUSED: {
-            return {
-                ...state,
-                status: ERR_CONNECTION_REFUSED,
-                message: ERROR_503,
-                loading: false
+            case constants.FILTER_RELATORIO_R12: {
+                try {
+                    const { response } = action.payload.response
+                    return {
+                        ...state,
+                        relatoriosR12: response ? response : [],
+                        loading: false
+                    }
+                } catch(e) {
+                    return {
+                        ...state,
+                        loading: false
+                    }
+                }
             }
-        }
 
-        case REQUEST_ERROR: {
-            return {
-                ...state,
-                status: REQUEST_ERROR,
-                message: action.payload.mensagem,
-                loading: false
+            case constants.LOADING_RELATORIO: {
+                return {
+                    ...state,
+                    loading: true
+                }
             }
+
+            default:
+                return state
         }
-    }
+    } catch (e) {
+		const { error, status } = action.payload
+		return {
+			...state,
+			loading: false,
+			error: true,
+			status: ERR_CONNECTION_REFUSED,
+			message: error,
+		}
+    } 
 
     return state;
 }

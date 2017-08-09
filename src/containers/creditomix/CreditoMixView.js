@@ -6,6 +6,7 @@ import CardWithTable from "../../components/card/CardWithTable"
 import QuadroSocialCompleto from "../../components/sociedades/QuadroSocialCompleto"
 import Enderecos from "../../components/endereco/Endereco"
 import MyButton from "../../components/button/MyButton"
+import Protocolo from "../../components/protocolo/Protocolo"
 import Telefones from "../../components/telefone/Telefone"
 
 //Constants
@@ -485,6 +486,8 @@ const CreditoViewMix = (props) => {
                     rows={data.outrasGrafias}
                 />
             : ""}
+
+            <Protocolo info={data.cabecalho}/>
         </PanelGroup>
     )
 }
