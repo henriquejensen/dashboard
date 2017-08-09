@@ -19,6 +19,7 @@ pipelines:
             - npm install      
             - npm run build
             - apt-get update && apt-get install -y awscli
+            - aws configure set preview.cloudfront true
             - npm run deploy
     master: #deploy no ambiente de producao
       - step:
@@ -26,4 +27,5 @@ pipelines:
             - npm install      
             - npm run build
             - apt-get update && apt-get install -y awscli
+            - aws configure set preview.cloudfront true
             - npm run deploy
