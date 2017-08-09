@@ -199,7 +199,7 @@ export default class LayoutTelefone extends Component{
                                                     return (
                                                         <td className="noPrint">
                                                             <a data-tip data-for={tag}>
-                                                                <img src={URL_IMAGES_S3 + tag + ".png"} className="sub-icon-tel"/>
+                                                                <img src={`${URL_IMAGES_S3}/${tag}.png`} className="sub-icon-tel"/>
                                                             </a>
                                                         </td>
                                                     )
