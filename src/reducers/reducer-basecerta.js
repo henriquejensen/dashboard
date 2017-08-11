@@ -1,8 +1,8 @@
 //Constants
-import * as basecerta from "../constants/constantsBaseCerta";
-import { ERR_CONNECTION_REFUSED, ERROR_503, MESSAGE_SUCCES_FILE_UPLOAD, REQUEST_ERROR, SUCCESS } from "../constants/utils";
+import * as basecerta from "../constants/constantsBaseCerta"
+import { ERR_CONNECTION_REFUSED, ERR_CONNECTION_REFUSED_MESSAGE, ERROR_503, MESSAGE_SUCCES_FILE_UPLOAD, REQUEST_ERROR, SUCCESS } from "../constants/utils"
 
-import tickets from "./data/basecerta/tickets.json";
+import tickets from "./data/basecerta/tickets.json"
 
 const getInitialState = {
     status:"",
@@ -86,7 +86,7 @@ export default function(state=getInitialState, action) {
 			loading: false,
 			error: true,
 			status: ERR_CONNECTION_REFUSED,
-			message: error,
+			message: error || ERR_CONNECTION_REFUSED_MESSAGE,
 		}
     }
 }

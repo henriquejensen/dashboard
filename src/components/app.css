@@ -52,6 +52,10 @@
     margin-right: 15px;
 }
 
+.ReactTable .rt-noData {
+    padding: 0
+}
+
 @media print {
     #logo-company-print img {
         margin: 0 auto;

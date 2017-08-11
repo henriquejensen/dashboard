@@ -2,6 +2,7 @@ import * as focofiscal from "../constants/constantsFocoFiscal"
 import {
     CHANGE_FOCOFISCAL_TYPE,
     ERR_CONNECTION_REFUSED,
+    ERR_CONNECTION_REFUSED_MESSAGE,
     ERROR_503,
     NENHUM_REGISTRO,
     REQUEST_ERROR
@@ -189,7 +190,7 @@ export default function(state=getInitialState, action) {
 			loading: false,
 			error: true,
 			status: ERR_CONNECTION_REFUSED,
-			message: error,
+			message: error || ERR_CONNECTION_REFUSED_MESSAGE,
 		}
     }
 }

@@ -10,7 +10,7 @@
     "build:run": "node server.js",
     "deploy": "aws s3 sync public s3://front.assertiva --delete --cache-control 'public, max-age=14400' && npm run deploy:invalidation",
     "deploy:style": "aws s3 sync style s3://front.utils/style",
-    "deploy:invalidation": "aws cloudfront create-invalidation --distribution-id EGO3V7A2E1X5N --paths '/*'",
+    "deploy:invalidation": "aws cloudfront create-invalidation --distribution-id EGO3V7A2E1X5N --paths /*",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "test:update": "jest -u"
@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "antd": "^2.12.5",
+    "babel-plugin-import": "^1.3.1",
     "babel-polyfill": "^6.23.0",
     "chart.js": "^2.4.0",
     "express": "^4.14.0",
@@ -67,6 +68,7 @@
     "react-notification-system": "^0.2.11",
     "react-redux": "^4.0.0",
     "react-router": "^2.0.1",
+    "react-table": "^6.5.3",
     "react-tooltip": "^3.2.2",
     "redux": "^3.0.4",
     "redux-promise": "^0.5.3",

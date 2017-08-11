@@ -17,6 +17,7 @@ import {
 const getInitialState = {
     carteiras: [],
     documentos: [],
+    documentosDetalhes: [],
     loading: true
 }
 
@@ -26,7 +27,8 @@ export default function(state=getInitialState, action) {
             case constantsMonitora.LOADING_MONITORA: {
                 return {
                     ...state,
-                    loading: true
+                    loading: true,
+                    error: false
                 }       
             }
 
@@ -51,21 +53,28 @@ export default function(state=getInitialState, action) {
             }
 
             case constantsMonitora.VISUALIZAR_DOCUMENTOS_CARTEIRA_MONITORA: {
-                const { documentosPf, documentosPj } = action.payload.response
-                const documentos = documentosPf && documentosPf.length > 0 ? documentosPf : documentosPj
-                const { carteiraNome, idCarteira } = action.payload.parameters
+                const { documentoPf, documentoPj } = action.payload.response
+                const documentos = documentoPf && documentoPf.length > 0 ? documentoPf : documentoPj
 
                 return {
                     ...state,
+                    showDocumentosDetalhes: true,
                     documentosDetalhes: documentos,
                     loading: false
+                }
+            }
+
+            case constantsMonitora.SHOW_DOCUMENTOS_DETALHES: {
+                return {
+                    ...state,
+                    showDocumentosDetalhes: false,
                 }
             }
             
             case constantsMonitora.GET_DOCUMENTOS_CARTEIRA_MONITORA: {
                 const { documentosPf, documentosPj } = action.payload.response
                 const documentos = documentosPf && documentosPf.length > 0 ? documentosPf : documentosPj
-                const { carteiraNome, idCarteira } = action.payload.parameters
+                const { carteiraNome, idCarteira } = action.payload.parameters ? action.payload.parameters : {}
 
                 return {
                     ...state,
@@ -74,6 +83,10 @@ export default function(state=getInitialState, action) {
                     id: idCarteira || null,
                     loading: false
                 }
+            }
+
+            case constantsMonitora.GET_DOCUMENTOS_DETALHES_MONITORA: {
+                return state
             }
 
             case constantsMonitora.CLOSE_MESSAGE_MONITORA: {
@@ -94,7 +107,7 @@ export default function(state=getInitialState, action) {
             loading: false,
             error: true,
             status: ERR_CONNECTION_REFUSED,
-            message: error,
+            message: error || ERR_CONNECTION_REFUSED_MESSAGE,
         }
     }
 }

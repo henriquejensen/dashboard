@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Table } from 'antd'
-
-//Actions
-import {
-    verDocumentoDetalhes
-} from "../../actions/actionsMonitora"
+import ReactTable from 'react-table'
 
 //Components
 import Panel from "../../components/panel/Panel"
@@ -16,46 +11,44 @@ export class DocumentoView extends Component {
     constructor(props) {
         super(props)
 
-        this.columns = [
-            {
-                title: 'Ações',
-                dataIndex: 'acoes',
-                key: 'acoes'
-            },
-           {
-                title: 'Cheques Sem Fundo',
-                dataIndex: 'chequesSemFundo',
-                key: 'chequesSemFundo'
-            },
-           {
-                title: 'Débitos',
-                dataIndex: 'debitos',
-                key: 'debitos'
-            }
-        ]
         this.state = {}
     }
 
-    componentWillMount() {
-        this.props.verDocumentoDetalhes
-    }
-
     render() {
-        const { documentos } = this.props
+        let { documentos=[] } = this.props
         return (
             <div>
-                <Table columns={this.columns} dataSource={documentos} />
+                <ReactTable
+                    data={documentos}
+                    noDataText="Nenhum registro encontrado"
+                    showPagination={false}
+                    pageSize={documentos.length}
+                    columns={[
+                        {Header: 'Nome', accessor: "nome"},
+                        {Header: 'Ações', accessor: "acoes"},
+                        {Header: 'Cheques S/ Fundo', accessor: "chequesSemFundo"},
+                        {Header: 'Débitos', accessor: "debitos"},
+                        {Header: 'Gasto', accessor: "gastoEstimado"},
+                        {Header: 'Limite Sugerido', accessor: "limiteSugerido"},
+                        {Header: 'Participação empresas', accessor: "participacaoEmpresas"},
+                        {Header: 'Protestos', accessor: "protestos"},
+                        {Header: 'Renda', accessor: "rendaPresumida"},
+                        {Header: 'Score 3 meses', accessor: "score3Meses"},
+                        {Header: 'Score 12 meses', accessor: "score12Meses"},
+                        {Header: 'Telefones', accessor: "telefones"},
+                        {Header: 'Endereços', accessor: "enderecos"},
+                    ]}
+                />
             </div>
         )
     }
 }
 
-const mapStateToProps = (state) => ({
-    documentos: state.monitora.documentosDetalhes
-})
+function mapStateToProps(state) {
+    console.log("STAT", state.monitora)
+    return {
+        documentos: state.monitora
+    }
+}
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-    verDocumentoDetalhes
-}, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToProps)(DocumentoView)
+export default connect(mapStateToProps, null)(DocumentoView)

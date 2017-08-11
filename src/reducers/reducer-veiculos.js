@@ -1,7 +1,7 @@
 import * as constantsVeiculos from "../constants/constantsVeiculos"
 
 import { COMPANY_PRODUCT_VEICULOS, ICON_VEICULOS } from "../constants/constantsCompany"
-import { CHANGE_VEICULOS_TYPE, CLOSE_TAB, ERR_CONNECTION_REFUSED, ERROR_503, LOADING, REQUEST_ERROR } from "../constants/utils";
+import { CHANGE_VEICULOS_TYPE, CLOSE_TAB, ERR_CONNECTION_REFUSED, ERR_CONNECTION_REFUSED_MESSAGE, ERROR_503, LOADING, REQUEST_ERROR } from "../constants/utils";
 
 import veiculos from "./data/veiculos/veiculosPoucosDados.json"
 import lastQueries from "./data/lastQueries.json"
@@ -193,7 +193,7 @@ export default function(state=getInitialState, action) {
 			loading: false,
 			error: true,
 			status: ERR_CONNECTION_REFUSED,
-			message: error,
+			message: error || ERR_CONNECTION_REFUSED_MESSAGE,
 		}
     }
 

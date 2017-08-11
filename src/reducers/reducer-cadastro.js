@@ -132,7 +132,7 @@ export default function(state=getInitialState, action) {
 			loading: false,
 			error: true,
 			status: ERR_CONNECTION_REFUSED,
-			message: error,
+			message: error || ERR_CONNECTION_REFUSED_MESSAGE,
 		}
     }
 }

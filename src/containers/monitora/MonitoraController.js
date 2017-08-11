@@ -24,7 +24,8 @@ import {
     novaCarteira,
     removerCarteira,
     removerDocumento,
-    verDocumentoDetalhes
+    verDocumentoDetalhes,
+    voltarTelaPrincipal
 } from "../../actions/actionsMonitora"
 
 //Constants
@@ -44,7 +45,7 @@ class Monitora extends Component {
 
     componentWillMount() {
         this.props.getCarteiras()
-        this.props.getDocumentos(0)
+        //this.props.getDocumentos(0)
     }
 
     openModal = (carteira={}, tipo="", callbackCarteira) => {
@@ -115,13 +116,16 @@ class Monitora extends Component {
             carteiras,
             carteiraNome,
             documentos,
+            documentosDetalhes,
             error,
             getDocumentos,
             loading,
             message,
             removerCarteira,
             removerDocumento,
-            verDocumentoDetalhes
+            showDocumentosDetalhes,
+            verDocumentoDetalhes,
+            voltarTelaPrincipal
         } = this.props
 
         return (
@@ -152,8 +156,11 @@ class Monitora extends Component {
                     NOVA_CARTEIRA={this.NOVA_CARTEIRA}
                     DELETAR={this.DELETAR}
                     documentos={documentos}
+                    documentosDetalhes={documentosDetalhes}
+                    showDocumentosDetalhes={showDocumentosDetalhes}
                     carteiras={carteiras}
                     carteiraNome={carteiraNome}
+                    voltarTelaPrincipal={voltarTelaPrincipal}
                     verDocumentoDetalhes={(...parameters) => {this.props.loadingMonitora(); verDocumentoDetalhes(...parameters)}}
                     removerDocumento={(...parameters) => {this.props.loadingMonitora(); removerDocumento(...parameters)}}
                     removerCarteira={(...parameters) => {this.props.loadingMonitora(); removerCarteira(...parameters)}}
@@ -185,12 +192,7 @@ class Monitora extends Component {
 
 function mapStateToProps(state) {
 	return {
-        carteiras: state.monitora.carteiras,
-        documentos: state.monitora.documentos,
-        carteiraNome: state.monitora.carteiraNome,
-        loading: state.monitora.loading,
-        error: state.monitora.error,
-        message: state.monitora.message
+        ...state.monitora
 	}
 }
 
@@ -204,7 +206,8 @@ function mapDispatchToProps(dispatch) {
         novaCarteira,
         removerCarteira,
         removerDocumento,
-        verDocumentoDetalhes
+        verDocumentoDetalhes,
+        voltarTelaPrincipal
     },
     dispatch)
 }

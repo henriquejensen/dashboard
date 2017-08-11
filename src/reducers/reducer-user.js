@@ -13,6 +13,7 @@ import {
         SUCCESS,
         ERROR,
         ERR_CONNECTION_REFUSED,
+        ERR_CONNECTION_REFUSED_MESSAGE,
         ERROR_503,
         FOTO_URL,
         LOG_OUT,
@@ -229,7 +230,7 @@ export default function (state = user, action) {
 			loading: false,
 			error: true,
 			status: ERR_CONNECTION_REFUSED,
-			message: error,
+			message: error || ERR_CONNECTION_REFUSED_MESSAGE,
 		}
     } 
 }

@@ -5,6 +5,8 @@ import {
     CLOSE_MESSAGE_CHANGE_PASSWORD,
     SUCCESS,
     ERROR,
+    ERR_CONNECTION_REFUSED,
+    ERR_CONNECTION_REFUSED_MESSAGE,
     REQUEST_ERROR,
     REQUEST_CHANGE_PASSWORD,
     RESET_CHANGE_PASSWORD,
@@ -109,7 +111,7 @@ export default function(state=getInitialState, action) {
 			loading: false,
 			error: true,
 			status: ERR_CONNECTION_REFUSED,
-			message: error,
+			message: error || ERR_CONNECTION_REFUSED_MESSAGE,
 		}
     }
 }

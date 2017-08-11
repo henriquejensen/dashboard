@@ -3,7 +3,8 @@ import {
         CHANGE_CREDITOMIX_TYPE,
 		CHANGE_TAB,
 		CLOSE_TAB,
-		ERR_CONNECTION_REFUSED,
+        ERR_CONNECTION_REFUSED,
+        ERR_CONNECTION_REFUSED_MESSAGE,
         ERROR_503,
 		LAST_QUERIES,
 		LOADING,
@@ -177,7 +178,7 @@ export default function(state=getInitialState, action) {
             ...state,
             loading: false,
             status: ERR_CONNECTION_REFUSED,
-            message: error,
+            message: error || ERR_CONNECTION_REFUSED_MESSAGE,
         }
     }
 

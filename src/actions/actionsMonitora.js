@@ -28,13 +28,19 @@ export function getDocumentos(idCarteira, carteiraNome, tipo) {
     }
 }
 
+export function voltarTelaPrincipal() {
+    return {
+        type: constantsMonitora.SHOW_DOCUMENTOS_DETALHES
+    }
+}
+
 export function verDocumentoDetalhes({idCarteira, idDocumento}) {
     const url = constantsMonitora.URL_DETALHES_DOCUMENTO_CARTEIRA
     const data = {idCarteira, idDocumento}
     const search = constantsMonitora.VISUALIZAR_DOCUMENTOS_CARTEIRA_MONITORA
 
     return (dispatch) => {
-        apiContentType(dispatch, url, data, search)
+        apiContentType(dispatch, url, data, search, {url})
     }
 }
 
@@ -75,11 +81,10 @@ export function removerCarteira(idCarteira) {
     }
 }
 
-export function removerDocumento(idDocumento, documento) {
-    const idTipo = documento.length > 11 ? 2 : 1
+export function removerDocumento({idDocumento, idCarteira, status}) {
     const url = constantsMonitora.URL_REMOVER_DOCUMENTO_CARTEIRA
-    const data = {idDocumento, idTipo}
-    const search = constantsMonitora.GET_DOCUMENTOS_MONITORA
+    const data = {idDocumento, idCarteira, status}
+    const search = constantsMonitora.GET_DOCUMENTOS_CARTEIRA_MONITORA
 
     return (dispatch) => {
         apiContentType(dispatch, url, data, search)

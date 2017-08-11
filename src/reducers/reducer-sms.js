@@ -1,9 +1,5 @@
 import * as sms from "../constants/constantsSMS"
-import { SUCCESS } from "../constants/utils"
-
-import campanhasSMS from "./data/sms/campanhas.json"
-import respostas from "./data/sms/respostas.json"
-import campanha from "./data/sms/campanhaDetalhes.json"
+import { ERR_CONNECTION_REFUSED, ERR_CONNECTION_REFUSED_MESSAGE, ERROR_503, MESSAGE_SUCCES_FILE_UPLOAD, REQUEST_ERROR, SUCCESS } from "../constants/utils"
 
 const initialState = {
 	status: "",
@@ -137,7 +133,7 @@ export default function(state = initialState, action) {
 			loading: false,
 			error: true,
 			status: ERR_CONNECTION_REFUSED,
-			message: error,
+			message: error || ERR_CONNECTION_REFUSED_MESSAGE,
 		}
     }
 }
