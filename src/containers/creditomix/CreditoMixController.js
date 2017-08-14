@@ -22,7 +22,7 @@ import {
     COMPANY_PRODUCT_CREDITOMIX_LABEL,
     COMPANY_PRODUCT_CREDITOMIX,
     COMPANY_PRODUCT_CREDITOMIX_COLOR,
-    ICON_CREDITO,
+    ICON_CREDITOMIX,
     LOGO_CREDITOMIX
 } from "../../constants/constantsCompany"
 import { ERR_CONNECTION_REFUSED, REQUEST_ERROR, SUCCESS } from "../../constants/utils"
@@ -326,7 +326,7 @@ class CreditoMix extends Component {
 		return (
             <Panel>
 				<TitleProduct
-					icon={ICON_CREDITO}
+					icon={ICON_CREDITOMIX}
 					title={this.consultasAtivas.produtoDescricao}
 					color={COMPANY_PRODUCT_CREDITOMIX_COLOR}
 				/>

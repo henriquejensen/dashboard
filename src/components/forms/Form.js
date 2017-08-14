@@ -10,8 +10,7 @@ import {
     TOOLTIP_SEARCH_BY_DOCUMENT_MESSAGE,
     TOOLTIP_SEE_PRODUCT_MODEL_MESSAGE,
     TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE
-} from "../../constants/utils";
-import { COMPANY_PRODUCT_LOCALIZE_URL_SEE_DETAILS } from "../../constants/constantsCompany";
+} from "../../constants/utils"
 
 export default class Form extends Component {
 

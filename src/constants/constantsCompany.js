@@ -108,7 +108,7 @@ export const ICON_VENDAMAIS_NEGATIVE = "https://s3.amazonaws.com/front.images/as
 // Veículos
 export const URL_VEICULOS = "/veiculos"
 export const COMPANY_PRODUCT_VEICULOS = "Veículos"
-export const COMPANY_PRODUCT_VEICULOS_LABEL = 3
+export const COMPANY_PRODUCT_VEICULOS_LABEL = "3"
 export const COMPANY_PRODUCT_VEICULOS_COLOR = "#607d8b"
 export const COMPANY_PRODUCT_VEICULOS_COLOR_LIGHT = "#8CC6E2"
 export const COMPANY_PRODUCT_VEICULOS_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/localize"
