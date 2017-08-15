@@ -13,7 +13,7 @@ pipelines:
         script: 
            - npm install
   branches:
-    develop: #deploy no bucket front.assertiva
+    develop: #deploy no bucket front.assertiva - DESENVOLVIMENTO
       - step:
           script:            
             - npm install -g yarn
@@ -24,7 +24,7 @@ pipelines:
             - aws configure set preview.cloudfront true
             - aws s3 sync public s3://front.assertiva --delete --cache-control 'public, max-age=14400'
             - aws cloudfront create-invalidation  --distribution-id EGO3V7A2E1X5N --paths /*
-    master: #deploy no bucket front.assertiva
+    master: #deploy no bucket app.assertiva - PRODUÇÂO
       - step:
           script:       
             - npm install -g yarn
