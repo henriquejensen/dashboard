@@ -1,5 +1,5 @@
 export const COMPANY_NAME_SHORT = "Assertiva"
-export const COMPANY_NAME_LONG = "ASSERTIVA SOLUÇÕES"
+export const COMPANY_NAME_LONG = "Assertiva Soluções"
 export const COMPANY_OLD_SITE = "https://portal.assertivasolucoes.com.br"
 export const COMPANY_SITE_CONTACT = "http://assertivasolucoes.com.br/contato"
 export const COMPANY_EMAIL = "atendimento@assertivasolucoes.com.br"
@@ -119,7 +119,7 @@ export const ICON_VEICULOS_NEGATIVE = "https://s3.amazonaws.com/front.images/ass
 // Monitora
 export const URL_MONITORA = "/monitora"
 export const COMPANY_PRODUCT_MONITORA = "Monitora"
-export const COMPANY_PRODUCT_MONITORA_LABEL = "MONITORA"
+export const COMPANY_PRODUCT_MONITORA_LABEL = "12"
 export const COMPANY_PRODUCT_MONITORA_COLOR = "#AC6240"
 export const COMPANY_PRODUCT_MONITORA_COLOR_LIGHT = "#8CC6E2"
 export const COMPANY_PRODUCT_MONITORA_URL_SEE_DETAILS = "http://assertivasolucoes.com.br/servicos/monitora"

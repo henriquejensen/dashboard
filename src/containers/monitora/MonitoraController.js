@@ -171,8 +171,7 @@ class Monitora extends Component {
 
                 <Modal
                     IsModalOpen={this.state.IsModalOpen}
-                    closeModal={() => this.setState({IsModalOpen: false})}
-                >
+                    closeModal={() => this.setState({IsModalOpen: false})} >
                     {this.state.tipo === this.NOVO_DOCUMENTO ?
                         <NovoDocumento
                             carteira={this.state.carteira}

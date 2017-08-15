@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import moment from "moment"
-import { Tabs, Tab, Col, Button, Form } from "react-bootstrap"
+import { Checkbox, Tabs, Tab, Col, Button, Form } from "react-bootstrap"
 
-import { DateField, MyFieldGroup, SelectGroup, TextAreaGroup, CheckboxGroup } from "../../components/forms/CommonForms"
+import { DateField, MyFieldGroup, SelectGroup, TextAreaGroup } from "../../components/forms/CommonForms"
 import Table from "../../components/table/Table"
 
 const Cliente = (props) => {
@@ -130,33 +130,54 @@ const Horario = (props) => {
                 <span>
                     <Col md={4}>
                         <MyFieldGroup
-                            id="acessarDas"
+                            id="horaIniAccessTime"
+                            required
                             type="time"
                             label="Acessar das 00:00"
-                            name="acessarDas"
-                            value={props.horarioInicio}
+                            name="horaIniAccessTime"
+                            value={props.horaIniAccessTime}
                             onChange={props.onChange} />
                     </Col>
 
                     <Col md={4}>
                         <MyFieldGroup
-                            id="acessarAte"
+                            id="horaFimAccessTime"
+                            required
                             type="time"
                             label="Acessar até às 00:00"
-                            name="acessarAte"
-                            value={props.horarioFim}
+                            name="horaFimAccessTime"
+                            value={props.horaFimAccessTime}
                             onChange={props.onChange} />
                     </Col>
 
-                    <Col md={12}>
-                        <CheckboxGroup
-                            id="diasAcesso"
-                            label="Selecionar os dias que poderá acessar"
-                            center={true}
-                            inline={true}
-                            values={props.dias}
-                            options={["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"]}
-                            onChange={props.onChange} />
+                    <Col md={12} className="text-center" style={{padding:0}}>
+                        <p>Selecionar os dias de acesso: </p>
+                        <Checkbox name="accessTimeDom" checked={props.accessTimeDom === "SIM"} onChange={props.onChangeLimiteHorario} inline >
+                            DOM
+                        </Checkbox>
+
+                        <Checkbox name="accessTimeSeg" checked={props.accessTimeSeg === "SIM"} onChange={props.onChangeLimiteHorario} inline >
+                            SEG
+                        </Checkbox>
+                    
+                        <Checkbox name="accessTimeTer" checked={props.accessTimeTer === "SIM"} onChange={props.onChangeLimiteHorario} inline >
+                            TER
+                        </Checkbox>
+                    
+                    
+                        <Checkbox name="accessTimeQua" checked={props.accessTimeQua === "SIM"} onChange={props.onChangeLimiteHorario} inline >
+                            QUA
+                        </Checkbox>
+                    
+                    
+                        <Checkbox name="accessTimeQui" checked={props.accessTimeQui === "SIM"} onChange={props.onChangeLimiteHorario} inline >
+                            QUI
+                        </Checkbox>
+                    
+                    
+                        <Checkbox name="accessTimeSex" checked={props.accessTimeSex === "SIM"} onChange={props.onChangeLimiteHorario} inline >
+                            SEX
+                        </Checkbox>
                     </Col>
                 </span>
             : ""}
@@ -310,6 +331,13 @@ export default class EditarGrupo extends Component {
         })
     }
 
+    onChangeLimiteHorario = (evt) => {
+        const name = evt.target.name
+        this.setState({
+            [name]: this.state[name] === "SIM" ? "NÃO" : "SIM" 
+        })
+    }
+
     onChangeDataConsumo = (date, name) => {
         this.setState({
             [name]: date,
@@ -346,10 +374,17 @@ export default class EditarGrupo extends Component {
                 label: "Horário",
                 form: <Horario
                         onChange={this.onChange}
+                        onChangeLimiteHorario={this.onChangeLimiteHorario}
                         statusAccessTime={grupo.statusAccessTime}
-                        horarioInicio={grupo.dataInicio}
-                        horarioFim={grupo.dataFinal}
-                        dias={[grupo.accessTimeSeg, grupo.accessTimeTer, grupo.accessTimeQua, grupo.accessTimeQui, grupo.accessTimeSex, grupo.accessTimeSab, grupo.accessTimeDom]} />
+                        horaIniAccessTime={grupo.horaIniAccessTime}
+                        horaFimAccessTime={grupo.horaFimAccessTime}
+                        accessTimeDom={grupo.accessTimeDom}
+                        accessTimeSeg={grupo.accessTimeSeg}
+                        accessTimeTer={grupo.accessTimeTer}
+                        accessTimeQua={grupo.accessTimeQua}
+                        accessTimeQui={grupo.accessTimeQui}
+                        accessTimeSex={grupo.accessTimeSex}
+                        accessTimeSab={grupo.accessTimeSab} />
             },
             {
                 label: "Limitação total",

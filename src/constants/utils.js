@@ -91,7 +91,7 @@ export const TOOLTIP_SEE_PRODUCT_DETAILS = 'TOOLTIP_SEE_PRODUCT_DETAILS'
 export const TOOLTIP_SEE_PRODUCT_DETAILS_MESSAGE = 'Ver detalhes do produto'
 export const TOOLTIP_SEE_MAP_MESSAGE = 'Visualizar endereço no mapa'
 
-export const ERROR_500_MESSAGE = "Erro ao executar a operação"
+export const ERROR_500_MESSAGE = "Erro ao executar a operação, contate o suporte caso isto ocorra novamente"
 export const ERROR_400_UNAUTHORIZED = "ERROR_400_UNAUTHORIZED"
 export const ERROR_400_UNAUTHORIZED_MESSAGE = "Houve algum problema com a aplicação, por favor atualize a página, se não for resolvido contate o suporte para informações"
 export const ERROR_401_UNAUTHORIZED = "ERROR_401_UNAUTHORIZED"

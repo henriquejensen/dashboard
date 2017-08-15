@@ -1,7 +1,7 @@
 import request from "superagent"
 import FileSaver from "file-saver"
 
-import { AUTHENTICATION } from "../constants/utils"
+import { AUTHENTICATION, ERR_CONNECTION_REFUSED_MESSAGE } from "../constants/utils"
 
 import {
 		REQUEST_ERROR,
@@ -127,21 +127,23 @@ function onEndRequest(error, response, dispatch, search, parameters) {
         } /*else if(response.status === 400) {
             dispatch({type: "ERROR_400_UNAUTHORIZED", payload: "ERROR_400_UNAUTHORIZED_MESSAGE"})
         }*/ else if(response.status === 401) {
-            dispatch({type: ERROR_401_UNAUTHORIZED, payload: response.body.erro || ERROR_401_UNAUTHORIZED_MESSAGE})
+            dispatch({type: ERROR_401_UNAUTHORIZED, payload: ERROR_401_UNAUTHORIZED_MESSAGE})
         } else {
             dispatch({
                 type: search,
-                payload: {error: response.body && response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO,
-                status: response.status}
+                payload: {error: error ?
+                        typeof(error) === 'string' ? error
+                        : error.mensagem ? erro.mensagem : NENHUM_REGISTRO : NENHUM_REGISTRO}
             })
         }
     } else {
-        dispatch({type: search, payload: {error}})
+        dispatch({type: search, payload: {error: typeof(error) === 'string' ? error : ERR_CONNECTION_REFUSED_MESSAGE}})
     }
 }
 
 //Funcao que não verifica se existe um body, apenas o retorno 200
 function onEndRequestFunction(error, response, dispatch, search, parameters) {
+    const teste = "teste"
     if (response) {
         if(response.status === 200) {
             dispatch({
@@ -158,10 +160,12 @@ function onEndRequestFunction(error, response, dispatch, search, parameters) {
         } else {
             dispatch({
                 type: search,
-                payload: {error: response.body && response.body.erro ? response.body.erro.mensagem : NENHUM_REGISTRO, status: response.status}
-            });
+                payload: {error: error ?
+                        typeof(error) === 'string' ? error
+                        : error.mensagem ? erro.mensagem : NENHUM_REGISTRO : NENHUM_REGISTRO}
+            })
         }
     } else {
-        dispatch({type: search, payload: {error}})
+        dispatch({type: search, payload: {error: typeof(error) === 'string' ? error : ERR_CONNECTION_REFUSED_MESSAGE}})
     }
 }

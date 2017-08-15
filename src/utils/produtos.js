@@ -191,7 +191,7 @@ const produtos = {
             {modulo:"CREDITO-MAIS-SO-CHEQUE-PF", modulo2:"CREDITO-MAIS-SO-CHEQUE-PJ", link:constants.URL_CREDITOMAIS},
         ]
     },
-    /*MONITORA: {
+    12: {
         label: constants.COMPANY_PRODUCT_MONITORA,
         id: "monitora",
         color: constants.COMPANY_PRODUCT_MONITORA_COLOR,
@@ -201,7 +201,7 @@ const produtos = {
         imageNegative: constants.ICON_MONITORA_NEGATIVE,
         alt: `Icone ${constants.COMPANY_PRODUCT_MONITORA}`,
         consultas: []
-    }*/
+    }
 }
 
 export default produtos
