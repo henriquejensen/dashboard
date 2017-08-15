@@ -28,7 +28,6 @@ pipelines:
             - yarn 
             - yarn run build
             - apt-get update
-            - apt-get install -y python-pip
-            - pip install --upgrade --user awscli
+            - apt-get install -y awscli=1.11.93
             - aws configure set preview.cloudfront true
-            - npm run deploy
+            - yarn run deploy
