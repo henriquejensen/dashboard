@@ -10,7 +10,7 @@
     "build:run": "node server.js",
     "deploy": "aws s3 sync public s3://front.assertiva --delete --cache-control 'public, max-age=14400' && npm run deploy:invalidation",
     "deploy:style": "aws s3 sync style s3://front.utils/style",
-    "deploy:invalidation": "aws cloudfront create-invalidation --distribution-id EGO3V7A2E1X5N --paths /index.html",
+    "deploy:invalidation": "aws cloudfront create-invalidation  --distribution-id EGO3V7A2E1X5N --paths /*",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "test:update": "jest -u"
